@@ -1,21 +1,18 @@
+import { CoreModule } from '@app/core';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-
-const appRoutes: Routes = [];
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    ),
-    BrowserModule
+    AppRoutingModule,
+    BrowserModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
