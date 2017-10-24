@@ -1,10 +1,8 @@
-import { LoginComponent } from '@app/login';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from '@app/shared';
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];
