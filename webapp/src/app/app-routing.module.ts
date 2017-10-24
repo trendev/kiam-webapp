@@ -1,14 +1,16 @@
+import { LoginComponent } from '@app/login';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent, SharedModule } from '@app/shared';
+import { PageNotFoundComponent } from '@app/shared';
 
 export const routes: Routes = [
+    { path: 'login', component: LoginComponent },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
     imports: [
-        SharedModule,
         RouterModule.forRoot(
             routes,
             { enableTracing: true } // <-- debugging purposes only
