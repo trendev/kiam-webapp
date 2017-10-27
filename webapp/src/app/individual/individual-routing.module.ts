@@ -1,7 +1,13 @@
+import { IndividualDashboardComponent } from './individual-dashboard/individual-dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: IndividualDashboardComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -1,7 +1,13 @@
+import { ProfessionalDashboardComponent } from './professional-dashboard/professional-dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: ProfessionalDashboardComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

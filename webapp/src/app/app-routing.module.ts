@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { PageNotFoundComponent } from '@app/shared';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
+    {
+        path: 'professional',
+        loadChildren: 'app/professional/professional.module#ProfessionalModule'
+    },
+    {
+        path: 'individual',
+        loadChildren: 'app/individual/individual.module#IndividualModule'
+    },
     { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -11,7 +19,10 @@ export const routes: Routes = [
     imports: [
         RouterModule.forRoot(
             routes,
-            { enableTracing: true } // <-- debugging purposes only
+            {
+                enableTracing: true, // <-- debugging purposes only
+                // preloadingStrategy: PreloadAllModules
+            }
         )],
     exports: [RouterModule]
 })
