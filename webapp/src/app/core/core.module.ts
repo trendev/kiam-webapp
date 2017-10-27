@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 @NgModule({
   imports: [
@@ -8,6 +9,7 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
     HttpClientModule,
     HttpClientXsrfModule
   ],
-  declarations: []
+  declarations: [],
+  providers: [AuthService]
 })
 export class CoreModule { }
