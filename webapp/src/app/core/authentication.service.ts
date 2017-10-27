@@ -16,7 +16,8 @@ export class AuthenticationService {
   }
 
   logout(): void {
-
+    console.warn('you have called AuthenticationService#logout');
+    console.warn(`baseUrl = ${this.baseUrl}`);
   }
 
   constructor(private http: HttpClient) { }
