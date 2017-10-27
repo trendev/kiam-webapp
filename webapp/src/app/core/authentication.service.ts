@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class AuthService {
+export class AuthenticationService {
 
   isLoggedIn = false;
   redirectUrl: string;
