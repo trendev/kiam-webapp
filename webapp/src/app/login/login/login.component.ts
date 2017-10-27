@@ -9,9 +9,10 @@ import { AuthenticationService } from '@app/core';
 export class LoginComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService) { }
-  
-    ngOnInit() {
-      this.authenticationService.logout();
-    }
+
+  ngOnInit() {
+    const sub = this.authenticationService.login('julien.sie@gmail.com', 'Qsec0fr@3').subscribe();
+    // sub.unsubscribe();
+  }
 
 }
