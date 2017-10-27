@@ -23,15 +23,25 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.post<any>(`${environment.api}/j_security_check?j_username=${username}&j_password=${password}`,
+    return this.http.post<any>(`${environment.api}/Authentication/login?username=${username}&password=${password}`,
       null,
       { observe: 'response', withCredentials: true })
       .map(resp => {
         console.log(resp);
-        return true;
+        console.warn('now we will get the profile');
+        return resp;
       })
+      .switchMap(r => this.http.get<any>(`${environment.api}/Authentication/profile`,
+        { observe: 'response', withCredentials: true })
+        .map(resp2 => true)
+        .catch(e => {
+          console.warn('we have an error in the GET!!!');
+          console.error(e);
+          return Observable.of(false);
+        })
+      )
       .catch(e => {
-        console.warn('we have an error !!!');
+        console.warn('we have an error in the POST!!!');
         console.error(e);
         return Observable.of(false);
       });
