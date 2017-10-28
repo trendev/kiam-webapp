@@ -11,8 +11,12 @@ export class LoginComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    const sub = this.authenticationService.login('julien.sie@gmail.com', 'Qsec0fr@3').subscribe();
-    // sub.unsubscribe();
+    this.authenticationService.login('comptandye@gmail.com', 'MeyQzGwl4O').subscribe();
+  }
+
+  logout() {
+    console.warn('LoginComponent#logout()');
+    this.authenticationService.logout().subscribe();
   }
 
 }

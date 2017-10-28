@@ -36,7 +36,19 @@ export class AuthenticationService {
       });
   }
 
-  logout(): void {
+  logout(): Observable<boolean> {
+    return this.http.post<any>(`${environment.api}/Authentication/logout`,
+      null,
+      { observe: 'response', withCredentials: true })
+      .map(resp => {
+        console.log(resp);
+        return true;
+      })
+      .catch(e => {
+        console.warn('Catched ERROR in the PUT!!!');
+        console.error(e);
+        return Observable.of(false);
+      });
   }
 
 }
