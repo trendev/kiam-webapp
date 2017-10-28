@@ -27,20 +27,10 @@ export class AuthenticationService {
       { observe: 'response', withCredentials: true })
       .map(resp => {
         console.log(resp);
-        console.warn('now we will get the profile');
-        return resp;
+        return true;
       })
-      .switchMap(r => this.http.get<any>(`${environment.api}/Authentication/profile`,
-        { observe: 'response', withCredentials: true })
-        .map(resp2 => true)
-        .catch(e => {
-          console.warn('we have an error in the GET!!!');
-          console.error(e);
-          return Observable.of(false);
-        })
-      )
       .catch(e => {
-        console.warn('we have an error in the POST!!!');
+        console.warn('Catched ERROR in the GET!!!');
         console.error(e);
         return Observable.of(false);
       });
