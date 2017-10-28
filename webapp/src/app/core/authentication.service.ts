@@ -23,8 +23,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.post<any>(`${environment.api}/Authentication/login?username=${username}&password=${password}`,
-      null,
+    return this.http.get<any>(`${environment.api}/Authentication/login?username=${username}&password=${password}`,
       { observe: 'response', withCredentials: true })
       .map(resp => {
         console.log(resp);
