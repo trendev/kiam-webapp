@@ -5,3 +5,6 @@ export * from './social-network-accounts.model';
 export * from './customer-details.model';
 export * from './collective-group.model';
 export * from './business.model';
+export * from './expense.model';
+export * from './payment-mode.model';
+export * from './payment.model';

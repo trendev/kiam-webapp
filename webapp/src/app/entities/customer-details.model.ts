@@ -7,6 +7,7 @@ export class CustomerDetails {
     birthdate: any;
     sex: any;
     picturePath: string;
+    comments: string[];
 
     constructor(values: Object = {}) {
         Object.assign(this, values);
