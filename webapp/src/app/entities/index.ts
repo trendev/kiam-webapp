@@ -8,3 +8,6 @@ export * from './business.model';
 export * from './expense.model';
 export * from './payment-mode.model';
 export * from './payment.model';
+export * from './offering.model';
+export * from './service.model';
+export * from './pack.model';
