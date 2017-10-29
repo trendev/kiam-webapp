@@ -1,8 +1,8 @@
 import { Business } from './business.model';
 
 export class OfferingType {
-    public static SERVICE = 'service';
-    public static PACK = 'pack';
+    public static readonly SERVICE = 'service';
+    public static readonly PACK = 'pack';
 }
 
 export abstract class Offering {
