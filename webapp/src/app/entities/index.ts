@@ -12,3 +12,5 @@ export * from './offering.model';
 export * from './service.model';
 export * from './pack.model';
 export * from './purchased-offering.model';
+export * from './bill.model';
+export * from './collective-group-bill.model';

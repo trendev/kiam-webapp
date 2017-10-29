@@ -1,4 +1,4 @@
-import { Offering } from '@app/entities';
+import { Offering } from './offering.model';
 
 export class PurchasedOffering {
     id: number;
