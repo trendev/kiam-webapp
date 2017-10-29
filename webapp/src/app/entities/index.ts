@@ -15,3 +15,4 @@ export * from './purchased-offering.model';
 export * from './bill.model';
 export * from './collective-group-bill.model';
 export * from './client-bill.model';
+export * from './individual-bill.mode';
