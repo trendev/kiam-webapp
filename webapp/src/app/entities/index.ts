@@ -17,3 +17,4 @@ export * from './collective-group-bill.model';
 export * from './client-bill.model';
 export * from './individual-bill.mode';
 export * from './user-account.model';
+export * from './administrator.model';
