@@ -20,3 +20,4 @@ export * from './user-account.model';
 export * from './administrator.model';
 export * from './customer.model';
 export * from './individual.model';
+export * from './professional.model';
