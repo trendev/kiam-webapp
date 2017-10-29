@@ -11,3 +11,4 @@ export * from './payment.model';
 export * from './offering.model';
 export * from './service.model';
 export * from './pack.model';
+export * from './purchased-offering.model';
