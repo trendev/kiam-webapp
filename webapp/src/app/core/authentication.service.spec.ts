@@ -61,7 +61,7 @@ describe('AuthService', () => {
       expect(service.user).toBeTruthy();
       expect(service.user.cltype).toBe(UserAccountType.PROFESSIONAL);
       expect(service.isLoggedIn).toBe(true);
-      // expect(service.user instanceof UserAccount).toBe(true, 'wrong type');
+      expect(service.user instanceof Object).toBe(true, 'service.user instanceof Object');
     });
   })));
 

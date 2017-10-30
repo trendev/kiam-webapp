@@ -70,10 +70,10 @@ export class AuthenticationService {
 
   profile(): Observable<UserAccount> {
     return this.http.get<UserAccount>(`${this.api}/profile`,
-      { observe: 'response', withCredentials: true })
+      { withCredentials: true })
       .retry(3)
-      .map(resp => {
-        this.user = resp.body;
+      .map(user => {
+        this.user = user;
         this._isLoggedIn = true;
         return this.user;
       })
