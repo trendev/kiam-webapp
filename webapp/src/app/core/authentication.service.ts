@@ -1,3 +1,4 @@
+import { Administrator, Individual, Professional, UserAccount } from '@app/entities';
 import { environment } from '@env/environment';
 
 import { Injectable } from '@angular/core';
@@ -15,62 +16,66 @@ import 'rxjs/add/observable/throw'; // will handle TypeError: Observable_1.Obser
 @Injectable()
 export class AuthenticationService {
 
-  isLoggedIn = false;
   redirectUrl: string;
+  private _isLoggedIn = false;
+  user: UserAccount;
 
-  api = `${environment.api}/Authentication`;
+  readonly api = `${environment.api}/Authentication`;
 
   constructor(private http: HttpClient) { }
 
+  reset() {
+    this.user = undefined;
+    this._isLoggedIn = false;
+  }
+
   login(username: string, password: string): Observable<boolean> {
-    return this.http.get<any>(`${environment.api}/Authentication/login?username=${username}&password=${password}`,
-      { observe: 'response', withCredentials: true })
-      .map(resp => {
-        console.log(resp);
+    return this.http.get<UserAccount>(`${this.api}/login?username=${username}&password=${password}`,
+      { withCredentials: true })
+      .map(user => {
+        this.user = user;
+        this._isLoggedIn = true;
         return true;
       })
       .catch(e => {
-        console.warn('Catched ERROR in the GET!!!');
+        console.error('Caught an ERROR in AuthenticationService#login!!!');
         console.error(e);
+        this.reset();
         return Observable.of(false);
       });
   }
 
   logout(): Observable<boolean> {
-    return this.http.post<any>(`${environment.api}/Authentication/logout`,
+    this.reset();
+    return this.http.post<any>(`${this.api}/logout`,
       null,
       { observe: 'response', withCredentials: true })
       .map(resp => {
-        console.log(resp);
         return true;
       })
       .catch(e => {
-        console.warn('Catched ERROR in the PUT!!!');
+        console.error('Caught an ERROR in AuthenticationService#logout!!!');
         console.error(e);
         return Observable.of(false);
       });
   }
 
+  profile(): Observable<UserAccount> {
+    return this.http.get<UserAccount>(`${this.api}/profile`,
+      { withCredentials: true })
+      .map(user => {
+        this.user = user;
+        this._isLoggedIn = true;
+        return user;
+      })
+      .catch(e => {
+        this.reset();
+        return Observable.of(null);
+      });
+  }
+
+  get isLoggedIn(): boolean {
+    return this._isLoggedIn;
+  }
+
 }
-/**
- const api = environment.api;
-
-    this.http.get<any>(api + '/api/Professional', { observe: 'response', withCredentials: true })
-      .map(resp => console.log(resp))
-      .catch(e => {
-        console.error(e);
-        return Observable.of([]);
-      })
-      .subscribe();
-
-    // tslint:disable-next-line:max-line-length
-    this.http.put<any>(api + '/api/Professional/vanessa.gay@gmail.com/insertToUserGroup/Individual',
-    null,
-    { observe: 'response', withCredentials: true })
-      .map(resp => console.log(resp))
-      .catch(e => {
-        console.error(e);
-        return Observable.of([]);
-      })
-      .subscribe();
- */

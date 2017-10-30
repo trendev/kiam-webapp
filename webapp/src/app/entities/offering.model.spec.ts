@@ -19,7 +19,7 @@ describe('Offering', () => {
         expect(service).toBeTruthy();
         expect(service.cltype).toBe(OfferingType.SERVICE);
         expect(service.hidden).toBeFalsy();
-        console.log(service.toString());
+        // console.log(service.toString());
     });
 
     it('should create a Pack with a Service', () => {
@@ -51,6 +51,6 @@ describe('Offering', () => {
         expect(pack).toBeTruthy();
         expect(pack.cltype).toBe(OfferingType.PACK);
         expect(pack.hidden).toBeFalsy();
-        console.log(pack.toString());
+        // console.log(pack.toString());
     });
 });
