@@ -2,7 +2,7 @@ import { Administrator, Individual, Professional, UserAccount } from '@app/entit
 import { environment } from '@env/environment';
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -11,6 +11,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/observable/throw'; // will handle TypeError: Observable_1.Observable.throw is not a function
+import 'rxjs/add/operator/retry';
 
 
 @Injectable()
@@ -30,8 +31,14 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.get<UserAccount>(`${this.api}/login?username=${username}&password=${password}`,
-      { withCredentials: true })
+    return this.http.get<UserAccount>(`${this.api}/login`,
+      {
+        params: new HttpParams()
+          .set('username', username)
+          .set('password', password),
+        withCredentials: true
+      })
+      .retry(3)
       .map(user => {
         this.user = user;
         this._isLoggedIn = true;
@@ -50,6 +57,7 @@ export class AuthenticationService {
     return this.http.post<any>(`${this.api}/logout`,
       null,
       { observe: 'response', withCredentials: true })
+      .retry(3)
       .map(resp => {
         return true;
       })
@@ -62,11 +70,12 @@ export class AuthenticationService {
 
   profile(): Observable<UserAccount> {
     return this.http.get<UserAccount>(`${this.api}/profile`,
-      { withCredentials: true })
-      .map(user => {
-        this.user = user;
+      { observe: 'response', withCredentials: true })
+      .retry(3)
+      .map(resp => {
+        this.user = resp.body;
         this._isLoggedIn = true;
-        return user;
+        return this.user;
       })
       .catch(e => {
         this.reset();

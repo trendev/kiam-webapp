@@ -1,4 +1,11 @@
-import { UserAccountType } from './../entities/user-account.model';
+import {
+  Administrator,
+  Individual,
+  Professional,
+  UserAccount,
+  UserAccountType,
+  CustomerDetails
+} from '@app/entities';
 import { environment } from '@env/environment';
 import { CoreModule } from '@app/core';
 import { TestBed, inject, async } from '@angular/core/testing';
@@ -43,6 +50,18 @@ describe('AuthService', () => {
       expect(service.user).toBeTruthy();
       expect(service.user.cltype).toBe(UserAccountType.PROFESSIONAL);
       expect(service.isLoggedIn).toBe(true);
+    });
+  })));
+
+  it('should get an updated profile of ' + username, async(inject([AuthenticationService], (service: AuthenticationService) => {
+    expect(service).toBeTruthy();
+    subscription = service.profile().subscribe(p => {
+      expect(p).toBeTruthy();
+      expect(p.cltype).toBe(UserAccountType.PROFESSIONAL);
+      expect(service.user).toBeTruthy();
+      expect(service.user.cltype).toBe(UserAccountType.PROFESSIONAL);
+      expect(service.isLoggedIn).toBe(true);
+      // expect(service.user instanceof UserAccount).toBe(true, 'wrong type');
     });
   })));
 
