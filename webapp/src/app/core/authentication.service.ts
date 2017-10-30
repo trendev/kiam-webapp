@@ -25,6 +25,10 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
+  get isLoggedIn(): boolean {
+    return this._isLoggedIn;
+  }
+
   reset() {
     this.user = undefined;
     this._isLoggedIn = false;
@@ -83,8 +87,20 @@ export class AuthenticationService {
       });
   }
 
-  get isLoggedIn(): boolean {
-    return this._isLoggedIn;
+  password(size?: number): Observable<string> {
+    const s = size || 10;
+    return this.http.get(`${this.api}/password`,
+      {
+        params: new HttpParams()
+          .set('size', s + ''),
+        withCredentials: true,
+        responseType: 'text'
+      })
+      .retry(3)
+      .catch(e => {
+        this.reset();
+        return Observable.of('');
+      });
   }
 
 }

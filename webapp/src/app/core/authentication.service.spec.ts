@@ -65,6 +65,14 @@ describe('AuthService', () => {
     });
   })));
 
+  it('should get a password', async(inject([AuthenticationService], (service: AuthenticationService) => {
+    expect(service).toBeTruthy();
+    const size = 100;
+    subscription = service.password(size).subscribe(pwd => {
+      expect(pwd.length).toBe(size);
+    });
+  })));
+
   it('should logout ' + username, async(inject([AuthenticationService], (service: AuthenticationService) => {
     expect(service).toBeTruthy();
     subscription = service.logout().subscribe(result => {
