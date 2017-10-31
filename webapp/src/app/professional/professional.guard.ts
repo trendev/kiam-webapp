@@ -13,6 +13,19 @@ export class ProfessionalGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authenticationService.user && this.authenticationService.user.cltype === UserAccountType.PROFESSIONAL;
+    const url: string = state.url;
+    return this.checkLogin(url);
+  }
+
+  checkLogin(url: string): boolean {
+    if (this.authenticationService.isLoggedIn
+      && this.authenticationService.user
+      && this.authenticationService.user.cltype === UserAccountType.PROFESSIONAL) {
+      return true;
+    } else {
+      this.authenticationService.redirectUrl = url;
+      this.router.navigate(['/login']);
+      return false;
+    }
   }
 }
