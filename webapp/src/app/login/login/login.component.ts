@@ -1,3 +1,4 @@
+import { UserAccountType } from './../../entities/user-account.model';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';
@@ -26,15 +27,15 @@ export class LoginComponent implements OnInit {
       auth => {
         let redirect: string;
         switch (this.authenticationService.user.cltype) {
-          case 'Professional':
+          case UserAccountType.PROFESSIONAL:
             redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/professional';
             this.router.navigate([redirect]);
             break;
-          case 'Individual':
+          case UserAccountType.INDIVIDUAL:
             redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/individual';
             this.router.navigate([redirect]);
             break;
-          case 'Administrator':
+          case UserAccountType.ADMINISTRATOR:
             this.errmsg =
               `Administrator ${this.authenticationService.user.email} is logged in`
               + ` but cannot access to Administration Console from this form: use the Backdoor instead !`;
