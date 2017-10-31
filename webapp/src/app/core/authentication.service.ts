@@ -50,8 +50,7 @@ export class AuthenticationService {
         return true;
       })
       .catch(e => {
-        console.error('Caught an ERROR in AuthenticationService#login!!!');
-        console.error(e);
+        this.errorHandler.handle(e);
         this.reset();
         return Observable.of(false);
       });
@@ -67,8 +66,7 @@ export class AuthenticationService {
         return true;
       })
       .catch(e => {
-        console.error('Caught an ERROR in AuthenticationService#logout!!!');
-        console.error(e);
+        this.errorHandler.handle(e);
         return Observable.of(false);
       });
   }
@@ -100,7 +98,7 @@ export class AuthenticationService {
       .retry(3)
       .catch(e => {
         this.reset();
-        return Observable.of('');
+        return this.errorHandler.handle(e);
       });
   }
 
