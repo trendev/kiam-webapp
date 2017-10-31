@@ -1,3 +1,5 @@
+import { AuthenticationService } from '@app/core';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfessionalDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService,
+    private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.authenticationService.logout()
+      .subscribe(
+      user => this.router.navigate(['/login']),
+      err => this.router.navigate(['/login'])
+      );
   }
 
 }

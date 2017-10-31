@@ -55,7 +55,7 @@ export class AuthenticationService {
   }
 
   logout(): Observable<string> {
-    const username = this.user.email;
+    const username = this.user ? this.user.email : '';
     this.reset();
     return this.http.post<any>(`${this.api}/logout`,
       null,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService, ErrorHandlerService } from '@app/core';
+import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   logoutmsg: string;
 
   constructor(private authenticationService: AuthenticationService,
-    private errorHandler: ErrorHandlerService,
     private router: Router) { }
 
   ngOnInit() {
