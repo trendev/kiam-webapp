@@ -3,23 +3,28 @@
 </h1>
 <div>
   <form (ngSubmit)="login()" #loginForm="ngForm">
+    <span *ngIf="message">{{message}}</span>
     <div>
-      <span *ngIf="message">{{message}}</span>
+      <table role="presentation">
+        <tr>
+          <td>Utilisateur: </td>
+          <td>
+            <input type="text" id="username" required [(ngModel)]="username" name="username">
+          </td>
+        </tr>
+        <tr>
+          <td>Mot de passe: </td>
+          <td>
+            <input type="password" id="password" required [(ngModel)]="password" name="password">
+          </td>
+        </tr>
+      </table>
     </div>
-    <table role="presentation">
-      <tr>
-        <td>Utilisateur: </td>
-        <td>
-          <input type="text" id="username" required [(ngModel)]="username" name="username">
-        </td>
-      </tr>
-      <tr>
-        <td>Mot de passe: </td>
-        <td>
-          <input type="password" id="password" required [(ngModel)]="password" name="password">
-        </td>
-      </tr>
-    </table>
-    <button type="submit" [disabled]="!loginForm.form.valid">Se connecter</button>
+    <div>
+      <button type="submit" [disabled]="!loginForm.form.valid">Connexion</button>
+    </div>
+    <div>
+      <a routerLink="/register">Ouvrir un nouveau compte</a>
+    </div>
   </form>
 </div>
