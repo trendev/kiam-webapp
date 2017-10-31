@@ -12,8 +12,7 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
-  errmsg: string;
-  logoutmsg: string;
+  message: string;
 
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
@@ -36,7 +35,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate([redirect]);
             break;
           case UserAccountType.ADMINISTRATOR:
-            this.errmsg =
+            this.message =
               `Administrator ${this.authenticationService.user.email} is logged in`
               + ` but cannot access to Administration Console from this form: use the Backdoor instead !`;
             break;
@@ -45,7 +44,7 @@ export class LoginComponent implements OnInit {
             break;
         }
       },
-      e => this.errmsg = 'Authentification incorrecte : Vérifier vos paramètres d\'authentication ou la connexion au serveur'
+      e => this.message = 'Authentification incorrecte : vérifier vos paramètres d\'authentication ou la connexion au serveur'
       );
   }
 
