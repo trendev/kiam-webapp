@@ -22,10 +22,10 @@ export class ErrorHandlerService {
     } else { // HttpErrorResponse
       if (err.error instanceof Error) {
         this.errmsg =
-          `Une erreur est survenue sur votre navigateur ou sur le réseau: ${err.error.message}`;
+          `A client-side or network error occurred: ${err.error.message}`;
       } else {
         this.errmsg =
-          `Une erreur de traitement est survenue sur le serveur: ${err.status} - ${err.statusText || ''} ${err.message} `;
+          `The backend returned an unsuccessful response code: ${err.status} - ${err.statusText || ''} ${err.message} `;
         this.errmsg += JSON.stringify(err.error) || '';
       }
     }

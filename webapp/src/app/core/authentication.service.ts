@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './error-handler.service';
 import { Administrator, Individual, Professional, UserAccount } from '@app/entities';
 import { environment } from '@env/environment';
 
@@ -23,7 +24,7 @@ export class AuthenticationService {
 
   readonly api = `${environment.api}/Authentication`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
   get isLoggedIn(): boolean {
     return this._isLoggedIn;
@@ -83,7 +84,7 @@ export class AuthenticationService {
       })
       .catch(e => {
         this.reset();
-        return Observable.of(null);
+        return this.errorHandler.handle(e);
       });
   }
 
