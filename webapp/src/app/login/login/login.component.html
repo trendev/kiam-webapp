@@ -1,12 +1,25 @@
 <h1>
-  Bienvenue sur la page d'authentification
+  Bienvenue sur la page d'authentification de comptandye
 </h1>
 <div>
-  <nav>
-    <a routerLink="/professional" routerLinkActive="active">Professional</a>
-    <a routerLink="/individual" routerLinkActive="active">Individual</a>
-  </nav>
-</div>
-<div>
-  <button type="button" (click)="logout()">LOGOUT</button>
+  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <div>
+      <span *ngIf="errmsg">{{errmsg}}</span>
+    </div>
+    <table role="presentation">
+      <tr>
+        <td>Utilisateur: </td>
+        <td>
+          <input type="text" id="username" required [(ngModel)]="username" name="username">
+        </td>
+      </tr>
+      <tr>
+        <td>Mot de passe: </td>
+        <td>
+          <input type="password" id="password" required [(ngModel)]="password" name="password">
+        </td>
+      </tr>
+    </table>
+    <button type="submit" [disabled]="!loginForm.form.valid">Se connecter</button>
+  </form>
 </div>

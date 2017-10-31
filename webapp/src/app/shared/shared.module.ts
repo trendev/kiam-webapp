@@ -12,7 +12,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   declarations: [PageNotFoundComponent],
-  exports: [PageNotFoundComponent]
+  exports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    PageNotFoundComponent]
 })
 
 export class SharedModule { }

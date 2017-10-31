@@ -43,31 +43,28 @@ export class AuthenticationService {
           .set('password', password),
         withCredentials: true
       })
-      .retry(3)
       .map(user => {
         this.user = user;
         this._isLoggedIn = true;
         return true;
       })
       .catch(e => {
-        this.errorHandler.handle(e);
         this.reset();
-        return Observable.of(false);
+        return this.errorHandler.handle(e);
       });
   }
 
-  logout(): Observable<boolean> {
+  logout(): Observable<string> {
+    const username = this.user.email;
     this.reset();
     return this.http.post<any>(`${this.api}/logout`,
       null,
       { observe: 'response', withCredentials: true })
-      .retry(3)
       .map(resp => {
-        return true;
+        return username;
       })
       .catch(e => {
-        this.errorHandler.handle(e);
-        return Observable.of(false);
+        return this.errorHandler.handle(e);
       });
   }
 
