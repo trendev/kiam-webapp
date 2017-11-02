@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
             break;
         }
       },
-      e => this.message = 'Identification incorrecte : vérifier vos identifiants ou la connexion au serveur'
+      e => this.message = 'Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur'
       );
   }
 
