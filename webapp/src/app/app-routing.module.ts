@@ -12,6 +12,10 @@ export const routes: Routes = [
         path: 'individual',
         loadChildren: 'app/individual/individual.module#IndividualModule'
     },
+    {
+        path: 'administrator',
+        loadChildren: 'app/administrator/administrator.module#AdministratorModule'
+    },
     { path: '**', component: PageNotFoundComponent }
 ];
 

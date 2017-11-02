@@ -40,9 +40,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate([redirect]);
             break;
           case UserAccountType.ADMINISTRATOR:
-            this.message =
-              `Administrator ${this.authenticationService.user.email} is logged in`
-              + ` but cannot access to Administration Console from this form: use the Backdoor instead !`;
+            redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/administrator';
+            this.router.navigate([redirect]);
             break;
           default:
             console.error(this.authenticationService.user.cltype + ' is not a supported type of UserAccount');
