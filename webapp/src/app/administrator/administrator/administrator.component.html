@@ -1,5 +1,10 @@
 <p>
     Welcome
-    <strong>{{admin.username || admin.email}}</strong>.
+    <strong>{{admin.username || admin.email}}</strong>. <a href='{{admin_url}}'>Admin Console (JSF)</a>
 </p>
-<a href='{{admin_url}}'>Admin Console (JSF)</a>
+
+<p>
+        <code>
+                {{admin|json}}
+        </code>
+</p>

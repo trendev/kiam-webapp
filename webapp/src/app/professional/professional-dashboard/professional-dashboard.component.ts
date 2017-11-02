@@ -1,3 +1,4 @@
+import { Professional } from '@app/entities';
 import { environment } from '@env/environment';
 import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';
@@ -12,10 +13,13 @@ export class ProfessionalDashboardComponent implements OnInit {
 
   title = `${environment.title}`;
 
+  professional: Professional;
+
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
 
   ngOnInit() {
+    this.professional = new Professional(this.authenticationService.user);
   }
 
   get isLoggedIn(): boolean {
