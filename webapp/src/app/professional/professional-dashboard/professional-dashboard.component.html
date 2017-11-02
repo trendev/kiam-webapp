@@ -3,15 +3,15 @@
   <span class="glue"></span>
   <div *ngIf="isLoggedIn">
     <button type="button" mat-icon-button color="warm" [disabled]="true">
-      <mat-icon aria-label="Settings">settings</mat-icon>
+      <mat-icon aria-label="Configuration">settings</mat-icon>
     </button>
     <button type="button" (click)="logout()" mat-icon-button color="warm">
-      <mat-icon aria-label="Logout">power_settings_new</mat-icon>
+      <mat-icon aria-label="Déconnexion" matTooltip="Déconnexion">power_settings_new</mat-icon>
     </button>
   </div>
 </mat-toolbar>
 <div>
   <p>
-    professional-dashboard works!
+    Tableau de bord - Professionnel
   </p>
 </div>

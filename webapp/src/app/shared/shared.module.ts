@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-import { MatToolbarModule, MatButtonModule, MatIconModule} from '@angular/material';
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatIconModule,
+  MatTooltipModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -12,7 +17,8 @@ import { MatToolbarModule, MatButtonModule, MatIconModule} from '@angular/materi
     ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   declarations: [PageNotFoundComponent],
   exports: [
@@ -22,7 +28,8 @@ import { MatToolbarModule, MatButtonModule, MatIconModule} from '@angular/materi
     PageNotFoundComponent,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 
