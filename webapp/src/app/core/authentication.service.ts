@@ -71,7 +71,6 @@ export class AuthenticationService {
   profile(): Observable<UserAccount> {
     return this.http.get<UserAccount>(`${this.api}/profile`,
       { withCredentials: true })
-      .retry(3)
       .map(user => {
         this.user = user;
         this._isLoggedIn = true;
