@@ -1,3 +1,4 @@
+import { UserAccount } from '@app/entities';
 import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
@@ -10,12 +11,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Comptandye';
 
+  user: UserAccount;
+
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
 
-    get isLoggedIn(): boolean {
-      return this.authenticationService.isLoggedIn;
-    }
+  get isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn;
+  }
 
   logout() {
     this.authenticationService.logout()
