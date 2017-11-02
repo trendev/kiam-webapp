@@ -9,10 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfessionalDashboardComponent implements OnInit {
 
+  title = 'Comptandye';
+
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
 
   ngOnInit() {
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn;
+  }
+
+  logout() {
+    this.authenticationService.logout()
+      .subscribe(
+      user => this.router.navigate(['/login']),
+      err => this.router.navigate(['/login'])
+      );
   }
 
 }

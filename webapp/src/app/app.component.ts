@@ -9,22 +9,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Comptandye';
-
-  user: UserAccount;
-
-  constructor(private authenticationService: AuthenticationService,
-    private router: Router) { }
-
-  get isLoggedIn(): boolean {
-    return this.authenticationService.isLoggedIn;
-  }
-
-  logout() {
-    this.authenticationService.logout()
-      .subscribe(
-      user => this.router.navigate(['/login']),
-      err => this.router.navigate(['/login'])
-      );
-  }
+  constructor() { }
 }

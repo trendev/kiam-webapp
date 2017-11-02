@@ -1,13 +1,1 @@
-<mat-toolbar class="mat-elevation-z2" color="primary" role="header" aria-label="toolbar">
-  <span class="toolbar_title">{{title}}</span>
-  <span class="glue"></span>
-  <div *ngIf="isLoggedIn">
-    <button type="button" mat-icon-button color="warm">
-      <mat-icon aria-label="Settings">settings</mat-icon>
-    </button>
-    <button type="button" (click)="logout()" mat-icon-button color="warm">
-      <mat-icon aria-label="Logout">power_settings_new</mat-icon>
-    </button>
-  </div>
-</mat-toolbar>
 <router-outlet></router-outlet>
