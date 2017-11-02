@@ -1,7 +1,15 @@
-h1 {
-    background-color: lightblue;
+.login-card{
+    display: flex;
+    flex-flow: row wrap;
+    width: 400px;
+    margin-bottom: 8px;
 }
 
-div {
-    margin-bottom: 8px;
+.login-card > * {
+    flex: 1 100%;
+  }
+
+.login-actions {
+    display: flex;
+    flex-direction: column;
 }

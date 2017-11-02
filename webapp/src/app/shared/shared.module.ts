@@ -7,7 +7,10 @@ import {
   MatToolbarModule,
   MatButtonModule,
   MatIconModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule,
 } from '@angular/material';
 
 @NgModule({
@@ -18,7 +21,10 @@ import {
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   declarations: [PageNotFoundComponent],
   exports: [
@@ -29,7 +35,10 @@ import {
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule
   ]
 })
 
