@@ -17,15 +17,19 @@ export class ProfessionalGuard implements CanActivate {
     return this.checkLogin(url);
   }
 
-  checkLogin(url: string): boolean {
+  checkLogin(url: string): Observable<boolean> {
     if (this.authenticationService.isLoggedIn
       && this.authenticationService.user
       && this.authenticationService.user.cltype === UserAccountType.PROFESSIONAL) {
-      return true;
+      return Observable.of(true);
     } else {
-      this.authenticationService.redirectUrl = url;
-      this.router.navigate(['/login']);
-      return false;
+      return this.authenticationService.profile()
+        .map(u => true)
+        .catch(e => {
+          this.authenticationService.redirectUrl = url;
+          this.router.navigate(['/login']);
+          return Observable.of(false);
+        });
     }
   }
 }
