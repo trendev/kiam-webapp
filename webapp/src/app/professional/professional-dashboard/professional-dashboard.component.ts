@@ -1,3 +1,4 @@
+import { environment } from '@env/environment';
 import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfessionalDashboardComponent implements OnInit {
 
-  title = 'Comptandye';
+  title = `${environment.title}`;
 
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }

@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  api: '/api'
+  api: '/api',
+  title: 'Comptandye'
 };

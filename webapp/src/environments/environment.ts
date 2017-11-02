@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  api: 'https://localhost:8181/comptandye/api'
+  api: 'https://localhost:8181/comptandye/api',
+  title: 'Comptandye'
 };
