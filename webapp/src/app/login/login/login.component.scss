@@ -1,13 +1,17 @@
 .login-card{
-    display: flex;
-    flex-flow: row wrap;
     width: 400px;
     margin-bottom: 8px;
 }
 
-.login-card > * {
+.login-items
+{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.login-items > * {
     flex: 1 100%;
-  }
+}
 
 .login-actions {
     display: flex;

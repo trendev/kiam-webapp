@@ -1,5 +1,5 @@
-<div class="login-card">
-  <mat-card>
+<div>
+  <mat-card class="login-card">
     <mat-card-header>
       <mat-card-title>Comptandye</mat-card-title>
       <mat-card-subtitle>Une identification est requise pour pouvoir utiliser Comptandye</mat-card-subtitle>
@@ -7,13 +7,13 @@
     <mat-card-content>
       <form (ngSubmit)="login()" #loginForm="ngForm">
         <span *ngIf="message">{{message}}</span>
-        <div class="login-card">
-            <mat-form-field>
-                <input matInput placeholder="Email" [(ngModel)]="username" name="username" required>
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput placeholder="Mot de passe" [(ngModel)]="password" name="password" required>
-              </mat-form-field>
+        <div class="login-items">
+          <mat-form-field>
+            <input matInput placeholder="Email" [(ngModel)]="username" name="username" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Mot de passe" [(ngModel)]="password" name="password" required>
+          </mat-form-field>
         </div>
         <mat-card-actions>
           <div class="login-actions">
