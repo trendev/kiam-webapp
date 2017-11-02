@@ -1,3 +1,5 @@
+import { Administrator } from '@app/entities';
+import { AuthenticationService } from '@app/core';
 import { environment } from '@env/environment';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,9 +12,12 @@ export class AdministratorComponent implements OnInit {
 
   readonly admin_url = `${environment.base_url}/admin/index.xhtml`;
 
-  constructor() { }
+  admin: Administrator;
+
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.admin = new Administrator(this.authenticationService.user);
   }
 
 }

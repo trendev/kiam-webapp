@@ -13,7 +13,6 @@ export abstract class UserAccount {
     uuid: string;
     registrationDate: number;
     blocked: boolean;
-    lastAccessedTime: number;
 
     constructor(values: Object = {}) {
         Object.assign(this, values);
