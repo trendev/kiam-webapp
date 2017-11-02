@@ -7,8 +7,15 @@
     align-items: center; 
 }
 
+@media all and (max-device-width : 600px) {
+    .container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+  }
+
 .login-card {
-    width: 300px;
     margin: auto;
 }
 
