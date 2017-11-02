@@ -2,7 +2,7 @@
   <span class="toolbar_title">{{title}}</span>
   <span class="glue"></span>
   <div *ngIf="isLoggedIn">
-    <button type="button" mat-icon-button color="warm">
+    <button type="button" mat-icon-button color="warm" [disabled]="true">
       <mat-icon aria-label="Settings">settings</mat-icon>
     </button>
     <button type="button" (click)="logout()" mat-icon-button color="warm">
