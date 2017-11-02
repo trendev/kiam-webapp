@@ -6,7 +6,6 @@
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="login()" #loginForm="ngForm">
-        <span *ngIf="message">{{message}}</span>
         <div class="login-items">
           <mat-form-field>
             <input matInput placeholder="Email" [(ngModel)]="username" name="username" required>
@@ -14,6 +13,7 @@
           <mat-form-field>
             <input matInput placeholder="Mot de passe" [(ngModel)]="password" name="password" required>
           </mat-form-field>
+          <mat-error *ngIf="message">{{message}}</mat-error>
         </div>
         <mat-card-actions>
           <div class="login-actions">

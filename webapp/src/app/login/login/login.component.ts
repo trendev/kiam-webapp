@@ -18,8 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
 
-  readonly title = `${environment.title}`;
-  readonly subtitle = `Une identification est requise pour pouvoir utiliser ${this.title}`;
+  readonly main_title = `${environment.title}`;
+  readonly title = `Identification à ${this.main_title}`;
+  readonly subtitle = `Une identification est requise pour pouvoir utiliser les services sécurisés de ${this.main_title}`;
 
   ngOnInit() {
   }
