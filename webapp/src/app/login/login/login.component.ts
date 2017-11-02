@@ -1,4 +1,5 @@
-import { UserAccountType } from './../../entities/user-account.model';
+import { environment } from '@env/environment';
+import { UserAccountType } from '@app/entities/user-account.model';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';
@@ -16,6 +17,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
+
+  readonly title = `${environment.title}`;
+  readonly subtitle = `Une identification est requise pour pouvoir utiliser ${this.title}`;
 
   ngOnInit() {
   }
@@ -44,7 +48,7 @@ export class LoginComponent implements OnInit {
             break;
         }
       },
-      e => this.message = 'Authentification incorrecte : vérifier vos paramètres d\'authentication ou la connexion au serveur'
+      e => this.message = 'Identification incorrecte : vérifier vos identifiants ou la connexion au serveur'
       );
   }
 

@@ -1,8 +1,8 @@
-<div>
+<div class="container">
   <mat-card class="login-card">
     <mat-card-header>
-      <mat-card-title>Comptandye</mat-card-title>
-      <mat-card-subtitle>Une identification est requise pour pouvoir utiliser Comptandye</mat-card-subtitle>
+      <mat-card-title>{{title}}</mat-card-title>
+      <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <form (ngSubmit)="login()" #loginForm="ngForm">
