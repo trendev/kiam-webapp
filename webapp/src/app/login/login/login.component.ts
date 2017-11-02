@@ -25,11 +25,11 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-
-    this.user = this.authenticationService.user;
-    if (this.user) {
-
-    }
+    this.authenticationService.profile()
+    .subscribe(
+      u => this.redirect(),
+      e => console.log('Login required : no authenticated user yet')
+    );
   }
 
   private redirect() {
