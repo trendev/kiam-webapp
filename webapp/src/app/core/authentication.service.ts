@@ -47,16 +47,15 @@ export class AuthenticationService {
       });
   }
 
-  logout() {
+  logout(): Observable<boolean> {
     const username = this.user ? this.user.email : '';
     this.reset();
 
-    this.http.post<any>(`${this.api}/logout`,
+    return this.http.post<any>(`${this.api}/logout`,
       null,
       { observe: 'response', withCredentials: true })
-      .subscribe(
-      resp => { },
-      e => this.errorHandler.handle(e));
+      .map(resp => true)
+      .catch(e => this.errorHandler.handle(e));
   }
 
   profile(): Observable<UserAccount> {

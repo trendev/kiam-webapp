@@ -25,8 +25,9 @@ export class ProfessionalDashboardComponent implements OnInit {
   }
 
   logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
+    this.authenticationService.logout().subscribe(
+      v => this.router.navigate(['/login']),
+      e => this.router.navigate(['/login']));
   }
 
 }
