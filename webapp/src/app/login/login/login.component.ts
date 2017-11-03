@@ -11,15 +11,17 @@ import { DispatcherService } from '@app/login/dispatcher.service';
 })
 export class LoginComponent implements OnInit {
 
-  readonly main_title = `${environment.title}`;
-  readonly title = `Identification à ${this.main_title}`;
-  readonly subtitle = `Une identification est requise pour pouvoir utiliser les services sécurisés de ${this.main_title}`;
-
   username: string;
   password: string;
   message: string;
 
   user: UserAccount;
+
+  readonly main_title = `${environment.title}`;
+  readonly title = `Identification à ${this.main_title}`;
+  readonly subtitle = `Une identification est requise pour pouvoir utiliser les services sécurisés de ${this.main_title}`;
+
+  hide = true;
 
   constructor(private authenticationService: AuthenticationService,
     private dispatcher: DispatcherService) { }
