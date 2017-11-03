@@ -9,14 +9,18 @@ import { UserAccountType } from '@app/entities';
 })
 export class UnsupportedUserTypeComponent implements OnInit {
 
+  msg: string;
+
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     if (this.authenticationService.user) {
       console.error(`You are not authenticated with a supported UserAccount: ${this.authenticationService.user.cltype}` +
         ` should be ${UserAccountType.PROFESSIONAL} or ${UserAccountType.INDIVIDUAL} or ${UserAccountType.ADMINISTRATOR}`);
+      this.msg = 'Attention, vous êtes connecté avec un profil utilisateur non supporté !';
+      this.msg += ` ${this.authenticationService.user.cltype} devrait être: `;
+      this.msg += `${UserAccountType.PROFESSIONAL} ou ${UserAccountType.INDIVIDUAL} ou ${UserAccountType.ADMINISTRATOR}`;
     }
-
   }
 
 }
