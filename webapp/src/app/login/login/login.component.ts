@@ -2,7 +2,7 @@ import { environment } from '@env/environment';
 import { UserAccountType, UserAccount } from '@app/entities';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
-import { Router } from '@angular/router';
+import { DispatcherService } from '@app/login/dispatcher.service';
 
 @Component({
   selector: 'app-login',
@@ -22,41 +22,20 @@ export class LoginComponent implements OnInit {
   user: UserAccount;
 
   constructor(private authenticationService: AuthenticationService,
-    private router: Router) { }
+    private dispatcher: DispatcherService) { }
 
   ngOnInit() {
     this.authenticationService.profile()
-    .subscribe(
-      u => this.redirect(),
+      .subscribe(
+      u => this.dispatcher.redirect(),
       e => console.warn('Login required : no authenticated user yet')
-    );
-  }
-
-  private redirect() {
-    let redirect: string;
-    switch (this.authenticationService.user.cltype) {
-      case UserAccountType.PROFESSIONAL:
-        redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/professional';
-        this.router.navigate([redirect]);
-        break;
-      case UserAccountType.INDIVIDUAL:
-        redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/individual';
-        this.router.navigate([redirect]);
-        break;
-      case UserAccountType.ADMINISTRATOR:
-        redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/administrator';
-        this.router.navigate([redirect]);
-        break;
-      default:
-        console.error(this.authenticationService.user.cltype + ' is not a supported type of UserAccount');
-        break;
-    }
+      );
   }
 
   login() {
     this.authenticationService.login(this.username, this.password)
       .subscribe(
-      r => this.redirect(),
+      r => this.dispatcher.redirect(),
       e => this.message = 'Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur'
       );
   }
