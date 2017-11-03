@@ -1,10 +1,16 @@
-<p>
-        Welcome
-        <strong>{{admin.username || admin.email}}</strong>. Click here to continue on the
-        <a href='{{admin_url}}'>Administration Console (JSF)</a>
+<app-main-toolbar>
+        <div *ngIf="isLoggedIn">
+                <button type="button" mat-icon-button color="warm" [disabled]="true">
+                        <mat-icon aria-label="Configuration">settings</mat-icon>
+                </button>
+                <button type="button" (click)="logout()" mat-icon-button color="warm">
+                        <mat-icon aria-label="Déconnexion" matTooltip="Déconnexion">power_settings_new</mat-icon>
+                </button>
+        </div>
+</app-main-toolbar>
+<p>Welcome {{admin.email}}. Click here to continue on the
+        <a href="{{adminUrl}}">Administration Console (JSF)</a>
 </p>
 <p>
-        <code>
-                {{admin|json}}
-        </code>
+        <code>{{admin|json}}</code>
 </p>

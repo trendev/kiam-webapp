@@ -1,3 +1,4 @@
+import { SharedModule } from '@app/shared';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,7 +8,7 @@ import { AdministratorGuard } from './administrator.guard';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     AdministratorRoutingModule
   ],
   declarations: [AdministratorComponent],
