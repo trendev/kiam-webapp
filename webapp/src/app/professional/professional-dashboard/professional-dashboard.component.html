@@ -1,6 +1,4 @@
-<mat-toolbar class="mat-elevation-z2" color="primary" role="header" aria-label="toolbar">
-  <span class="toolbar_title">{{title}}</span>
-  <span class="glue"></span>
+<app-main-toolbar>
   <div *ngIf="isLoggedIn">
     <button type="button" mat-icon-button color="warm" [disabled]="true">
       <mat-icon aria-label="Configuration">settings</mat-icon>
@@ -9,7 +7,7 @@
       <mat-icon aria-label="Déconnexion" matTooltip="Déconnexion">power_settings_new</mat-icon>
     </button>
   </div>
-</mat-toolbar>
+</app-main-toolbar>
 <div>
   <p>
     Tableau de bord - Professionnel

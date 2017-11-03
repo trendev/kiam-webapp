@@ -11,8 +11,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfessionalDashboardComponent implements OnInit {
 
-  title = `${environment.title}`;
-
   professional: Professional;
 
   constructor(private authenticationService: AuthenticationService,
