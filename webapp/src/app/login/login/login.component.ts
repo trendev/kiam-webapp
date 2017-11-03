@@ -25,11 +25,6 @@ export class LoginComponent implements OnInit {
     private dispatcher: DispatcherService) { }
 
   ngOnInit() {
-    this.authenticationService.profile()
-      .subscribe(
-      u => this.dispatcher.redirect(),
-      e => console.warn('Login required : no authenticated user yet')
-      );
   }
 
   login() {

@@ -24,7 +24,14 @@ export class ProfessionalGuard implements CanActivate {
       return Observable.of(true);
     } else {
       return this.authenticationService.profile()
-        .map(u => true)
+        .map(u => {
+          if (u.cltype === UserAccountType.PROFESSIONAL) {
+            return true;
+          } else {
+            console.error(`You are not authenticated as a ${UserAccountType.PROFESSIONAL}`);
+            return false;
+          }
+        })
         .catch(e => {
           this.authenticationService.redirectUrl = url;
           this.router.navigate(['/login']);

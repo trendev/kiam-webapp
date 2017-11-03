@@ -26,7 +26,8 @@ export class DispatcherService {
           this.router.navigate([redirect]);
           return true;
         default:
-          console.error(this.authenticationService.user.cltype + ' is not a supported type of UserAccount');
+          console.error(`You are not authenticated with a supported UserAccount: ${this.authenticationService.user.cltype}` +
+            ` should be ${UserAccountType.PROFESSIONAL} or ${UserAccountType.INDIVIDUAL} or ${UserAccountType.ADMINISTRATOR}`);
           return false;
       }
     }
