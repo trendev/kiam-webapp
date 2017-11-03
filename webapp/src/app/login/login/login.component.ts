@@ -3,6 +3,7 @@ import { UserAccountType, UserAccount } from '@app/entities';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { DispatcherService } from '@app/login/dispatcher.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,9 +25,14 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   constructor(private authenticationService: AuthenticationService,
-    private dispatcher: DispatcherService) { }
+    private dispatcher: DispatcherService,
+    private router: Router) { }
 
   ngOnInit() {
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn;
   }
 
   login() {
@@ -43,7 +49,7 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  get isLoggedIn(): boolean {
-    return this.authenticationService.isLoggedIn;
+  register() {
+    this.router.navigate(['/register']);
   }
 }
