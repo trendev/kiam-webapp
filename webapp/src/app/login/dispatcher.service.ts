@@ -9,25 +9,25 @@ export class DispatcherService {
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
 
-  redirect() {
+  redirect(): boolean {
     let redirect: string;
     if (this.authenticationService.user) {
       switch (this.authenticationService.user.cltype) {
         case UserAccountType.PROFESSIONAL:
           redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/professional';
           this.router.navigate([redirect]);
-          break;
+          return true;
         case UserAccountType.INDIVIDUAL:
           redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/individual';
           this.router.navigate([redirect]);
-          break;
+          return true;
         case UserAccountType.ADMINISTRATOR:
           redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/administrator';
           this.router.navigate([redirect]);
-          break;
+          return true;
         default:
           console.error(this.authenticationService.user.cltype + ' is not a supported type of UserAccount');
-          break;
+          return false;
       }
     }
   }
