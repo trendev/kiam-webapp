@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.profile()
     .subscribe(
       u => this.redirect(),
-      e => console.log('Login required : no authenticated user yet')
+      e => console.warn('Login required : no authenticated user yet')
     );
   }
 

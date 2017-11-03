@@ -3,7 +3,11 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { PageNotFoundComponent } from '@app/shared';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    {
+        path: '',
+        redirectTo: '/login',
+        pathMatch: 'full',
+    },
     {
         path: 'professional',
         loadChildren: 'app/professional/professional.module#ProfessionalModule'
