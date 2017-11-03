@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { LoginGuard } from './login.guard';
 import { DispatcherService } from './dispatcher.service';
+import { UnsupportedUserTypeComponent } from './unsupported-user-type/unsupported-user-type.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { DispatcherService } from './dispatcher.service';
     SharedModule,
     LoginRoutingModule
   ],
-  declarations: [LoginComponent, RegisterFormComponent],
+  declarations: [LoginComponent, RegisterFormComponent, UnsupportedUserTypeComponent],
   exports: [LoginComponent, RegisterFormComponent],
   providers: [LoginGuard, DispatcherService]
 })

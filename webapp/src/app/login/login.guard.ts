@@ -19,11 +19,16 @@ export class LoginGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authenticationService.profile()
-      .map(
-      u => this.dispatcher.redirect())
-      .catch(
-      e => Observable.of(true)
-      );
+
+    if (this.authenticationService.user) {
+      return Observable.of(this.dispatcher.redirect());
+    } else {
+      return this.authenticationService.profile()
+        .map(
+        u => this.dispatcher.redirect())
+        .catch(
+        e => Observable.of(true)
+        );
+    }
   }
 }

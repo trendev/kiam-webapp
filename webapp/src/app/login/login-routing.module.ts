@@ -1,3 +1,4 @@
+import { UnsupportedUserTypeComponent } from './unsupported-user-type/unsupported-user-type.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,8 @@ import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
-  { path: 'register', component: RegisterFormComponent }
+  { path: 'register', component: RegisterFormComponent },
+  { path: 'unsupported-user-type', component: UnsupportedUserTypeComponent }
 ];
 
 @NgModule({

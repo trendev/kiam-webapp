@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';
@@ -11,26 +12,24 @@ export class DispatcherService {
 
   redirect(): boolean {
     let redirect: string;
+
     if (this.authenticationService.user) {
       switch (this.authenticationService.user.cltype) {
         case UserAccountType.PROFESSIONAL:
           redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/professional';
-          this.router.navigate([redirect]);
-          return true;
+          break;
         case UserAccountType.INDIVIDUAL:
           redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/individual';
-          this.router.navigate([redirect]);
-          return true;
+          break;
         case UserAccountType.ADMINISTRATOR:
           redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/administrator';
-          this.router.navigate([redirect]);
-          return true;
+          break;
         default:
-          console.error(`You are not authenticated with a supported UserAccount: ${this.authenticationService.user.cltype}` +
-            ` should be ${UserAccountType.PROFESSIONAL} or ${UserAccountType.INDIVIDUAL} or ${UserAccountType.ADMINISTRATOR}`);
-          return false;
+          redirect = '/unsupported-user-type';
+          break;
       }
+      this.router.navigate([redirect]);
     }
+    return false;
   }
-
 }
