@@ -33,7 +33,13 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.username, this.password)
       .subscribe(
       r => this.dispatcher.redirect(),
-      e => this.message = 'Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur'
+      e => {
+        if (e.match(/Blocked/)) {
+          this.message = `Identification impossible : votre compte à été bloqué`;
+        } else {
+          this.message = `Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur`;
+        }
+      }
       );
   }
 
