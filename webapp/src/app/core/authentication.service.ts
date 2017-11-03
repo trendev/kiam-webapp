@@ -6,14 +6,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/observable/throw'; // will handle TypeError: Observable_1.Observable.throw is not a function
 import 'rxjs/add/operator/retry';
-
 
 @Injectable()
 export class AuthenticationService {

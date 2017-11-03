@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AdministratorGuard implements CanActivate {
+
   constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   canActivate(
@@ -16,15 +17,27 @@ export class AdministratorGuard implements CanActivate {
     return this.checkLogin(url);
   }
 
-  checkLogin(url: string): boolean {
+  checkLogin(url: string): Observable<boolean> {
     if (this.authenticationService.isLoggedIn
       && this.authenticationService.user
       && this.authenticationService.user.cltype === UserAccountType.ADMINISTRATOR) {
-      return true;
+      return Observable.of(true);
     } else {
-      this.authenticationService.redirectUrl = url;
-      this.router.navigate(['/login']);
-      return false;
+      return this.authenticationService.profile()
+        .map(u => {
+          if (u.cltype === UserAccountType.ADMINISTRATOR) {
+            return true;
+          } else {
+            console.warn(`You are not authenticated as a ${UserAccountType.ADMINISTRATOR}`);
+            this.router.navigate(['/login']);
+            return false;
+          }
+        })
+        .catch(e => {
+          this.authenticationService.redirectUrl = url;
+          this.router.navigate(['/login']);
+          return Observable.of(false);
+        });
     }
   }
 }

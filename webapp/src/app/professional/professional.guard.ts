@@ -28,7 +28,8 @@ export class ProfessionalGuard implements CanActivate {
           if (u.cltype === UserAccountType.PROFESSIONAL) {
             return true;
           } else {
-            console.error(`You are not authenticated as a ${UserAccountType.PROFESSIONAL}`);
+            console.warn(`You are not authenticated as a ${UserAccountType.PROFESSIONAL}`);
+            this.router.navigate(['/login']);
             return false;
           }
         })
