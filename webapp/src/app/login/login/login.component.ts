@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.message = `Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur`;
         }
-      }
-      );
+      });
   }
 
   register() {
