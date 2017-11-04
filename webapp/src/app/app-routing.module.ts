@@ -29,7 +29,8 @@ export const routes: Routes = [
             routes,
             {
                 // enableTracing: true, // <-- debugging purposes only
-                preloadingStrategy: PreloadAllModules
+                preloadingStrategy: PreloadAllModules,
+                useHash: true
             }
         )],
     exports: [RouterModule]
