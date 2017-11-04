@@ -9,10 +9,10 @@
       <form (ngSubmit)="login()" #loginForm="ngForm">
         <div class="login-items">
           <mat-form-field [hideRequiredMarker]="true">
-            <input matInput autocomplete="off" placeholder="Email" [(ngModel)]="username" name="username" required>
+            <input matInput autocomplete="nope" placeholder="Email" [(ngModel)]="username" name="username" required type="email">
           </mat-form-field>
           <mat-form-field [hideRequiredMarker]="true">
-            <input matInput autocomplete="off" placeholder="Mot de passe" [(ngModel)]="password" name="password" required [type]="hide ? 'password' : 'text'">
+            <input matInput autocomplete="nope" placeholder="Mot de passe" [(ngModel)]="password" name="password" required [type]="hide ? 'password' : 'text'">
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
           <mat-error *ngIf="message">{{message}}</mat-error>
