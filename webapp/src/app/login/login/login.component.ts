@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { environment } from '@env/environment';
 import { UserAccountType, UserAccount } from '@app/entities';
 import { Component, OnInit } from '@angular/core';
@@ -10,13 +11,16 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
-  username: string;
-  password: string;
+  private username: string;
+  private password: string;
   message: string;
 
   user: UserAccount;
+
+  loginForm: FormGroup;
 
   readonly main_title = `${environment.title}`;
   readonly title = `Identification à ${this.main_title}`;
@@ -26,9 +30,26 @@ export class LoginComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
     private dispatcher: DispatcherService,
-    private router: Router) { }
+    private router: Router,
+    private fb: FormBuilder) {
+
+    if (typeof (Storage) !== 'undefined') {
+      this.username = localStorage.getItem('username');
+      this.password = localStorage.getItem('password');
+    }
+
+    this.createForm();
+  }
 
   ngOnInit() {
+    this.loginForm.valueChanges.forEach(v => console.log(v));
+  }
+
+  createForm() {
+    this.loginForm = this.fb.group({
+      username: this.username || '',
+      password: this.password || ''
+    });
   }
 
   get isLoggedIn(): boolean {
@@ -36,14 +57,24 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.username = this.loginForm.get('username').value;
+    this.password = this.loginForm.get('password').value;
+
     this.authenticationService.login(this.username, this.password)
       .subscribe(
-      r => this.dispatcher.redirect(),
+      r => {
+        if (typeof (Storage) !== 'undefined') {
+          localStorage.setItem('username', this.username);
+          localStorage.setItem('password', this.password);
+        }
+        this.dispatcher.redirect();
+      },
       e => {
         if (e.match(/Blocked/)) {
           this.message = `Identification impossible : votre compte à été bloqué`;
         } else {
           this.message = `Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur`;
+          this.message += ` [${this.username}]/[${this.password}]`;
         }
       });
   }
