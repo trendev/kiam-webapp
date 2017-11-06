@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   readonly subtitle = `Une identification est requise pour pouvoir utiliser les services sécurisés de ${this.main_title}`;
 
   hide = true;
+  rememberMe = true;
 
   constructor(private authenticationService: AuthenticationService,
     private dispatcher: DispatcherService,

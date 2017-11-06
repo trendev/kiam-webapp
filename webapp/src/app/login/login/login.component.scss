@@ -32,5 +32,10 @@
 
 .login-actions {
     display: flex;
+    margin: 4px;
     flex-direction: column;
+}
+
+.login-actions > * {
+    margin: 4px;
 }
