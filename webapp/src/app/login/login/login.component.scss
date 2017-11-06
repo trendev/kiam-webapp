@@ -1,5 +1,6 @@
 .container {
     position: absolute;
+    top: 64px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -9,6 +10,7 @@
 @media all and (max-device-width : 600px) {
     .container {
         position: relative;
+        top: 56px;
         display: flex;
         justify-content: center;
     }
