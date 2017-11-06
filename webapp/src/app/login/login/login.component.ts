@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   readonly subtitle = `Une identification est requise pour pouvoir utiliser les services sécurisés de ${this.main_title}`;
 
   hide = true;
-  rememberMe = true;
+  private _rememberMe = true;
 
   constructor(private authenticationService: AuthenticationService,
     private dispatcher: DispatcherService,
@@ -57,6 +57,20 @@ export class LoginComponent implements OnInit {
     return this.authenticationService.isLoggedIn;
   }
 
+  get rememberMe(): boolean {
+    return this._rememberMe;
+  }
+
+  set rememberMe(value: boolean) {
+    if (!value) {
+      this.loginForm.reset({
+        username: '',
+        password: ''
+      });
+    }
+    this._rememberMe = value;
+  }
+
   login() {
     this.username = this.loginForm.get('username').value;
     this.password = this.loginForm.get('password').value;
@@ -64,7 +78,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.username, this.password)
       .subscribe(
       r => {
-        if (typeof (Storage) !== 'undefined') {
+        if (typeof (Storage) !== 'undefined' && this._rememberMe) {
           localStorage.setItem('username', this.username);
           localStorage.setItem('password', this.password);
         }
