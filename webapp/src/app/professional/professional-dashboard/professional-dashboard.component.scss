@@ -1,0 +1,19 @@
+p {
+    margin: 0;
+}
+
+.dashboard {
+    position: relative;
+    top: 64px;
+    left: 0px;
+    width: 100%  !important;
+}
+
+@media all and (max-device-width : 600px) {
+    .dashboard {
+        position: relative;
+        top: 56px;
+        left: 0px;
+        width: 100%  !important;
+    }
+}
