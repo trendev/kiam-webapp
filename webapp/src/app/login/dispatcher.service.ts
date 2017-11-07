@@ -10,6 +10,7 @@ export class DispatcherService {
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
 
+  // controls and dispatches the user using its profile
   redirect(): boolean {
     let redirect: string;
 
@@ -25,6 +26,7 @@ export class DispatcherService {
           redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/administrator';
           break;
         default:
+          // should never occurs
           redirect = '/unsupported-user-type';
           break;
       }
