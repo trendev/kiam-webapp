@@ -7,14 +7,14 @@
         <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-
         <div class="login-items">
           <mat-form-field [hideRequiredMarker]="true">
-            <input matInput type="email" autocomplete="off" placeholder="Email" name="username" [(ngModel)]="credentials.username" #username="ngModel" required>
+            <input matInput type="text" autocomplete="off" placeholder="Email" name="username" [(ngModel)]="credentials.username" #username="ngModel"
+              required>
           </mat-form-field>
           <mat-form-field [hideRequiredMarker]="true">
-            <input matInput [type]="hide ? 'password' : 'text'" autocomplete="off" placeholder="Mot de passe" name="password" [(ngModel)]="credentials.password" #password="ngModel"
-              required>
+            <input matInput [type]="hide ? 'password' : 'text'" autocomplete="off" placeholder="Mot de passe" name="password" [(ngModel)]="credentials.password"
+              #password="ngModel" required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
           <mat-error *ngIf="message">{{message}}</mat-error>
