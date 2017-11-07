@@ -9,6 +9,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { LoginGuard } from './login.guard';
 import { DispatcherService } from './dispatcher.service';
 import { UnsupportedUserTypeComponent } from './unsupported-user-type/unsupported-user-type.component';
+import { CredentialsManagerService } from './credentials-manager.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { UnsupportedUserTypeComponent } from './unsupported-user-type/unsupporte
   ],
   declarations: [LoginComponent, RegisterFormComponent, UnsupportedUserTypeComponent],
   exports: [LoginComponent, RegisterFormComponent],
-  providers: [LoginGuard, DispatcherService]
+  providers: [LoginGuard, DispatcherService, CredentialsManagerService]
 })
 export class LoginModule { }

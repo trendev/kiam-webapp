@@ -3,7 +3,9 @@ import { UserAccountType, UserAccount } from '@app/entities';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { DispatcherService } from '@app/login/dispatcher.service';
+import { CredentialsManagerService } from '@app/login/credentials-manager.service';
 import { Router } from '@angular/router';
+import { Credentials } from '@app/login/credentials.model';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +15,8 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-  private username: string;
-  private password: string;
+  credentials: Credentials;
+
   message: string;
 
   user: UserAccount;
@@ -24,24 +26,24 @@ export class LoginComponent implements OnInit {
   readonly subtitle = `Une identification est requise pour pouvoir utiliser les services sécurisés de ${this.main_title}`;
 
   hide = true;
-  private _rememberMe: boolean;
 
   constructor(private authenticationService: AuthenticationService,
     private dispatcher: DispatcherService,
-    private router: Router) {
+    private router: Router,
+    private credentialsManagerService: CredentialsManagerService) {
 
+    this.credentials = new Credentials();
+
+    if (typeof (Storage) !== 'undefined' && localStorage.getItem('rememberMe')) {
+      this.credentials = new Credentials({
+        username: localStorage.getItem('username'),
+        password: localStorage.getItem('password'),
+        rememberMe: true
+      });
+    }
   }
 
   ngOnInit() {
-    if (typeof (Storage) !== 'undefined') {
-      if (localStorage.getItem('rememberMe')) {
-        this._rememberMe = true;
-        this.username = localStorage.getItem('username');
-        this.password = localStorage.getItem('password');
-      } else {
-        this._rememberMe = false;
-      }
-    }
   }
 
   get isLoggedIn(): boolean {
@@ -49,32 +51,32 @@ export class LoginComponent implements OnInit {
   }
 
   get rememberMe(): boolean {
-    return this._rememberMe;
+    return this.credentials.rememberMe;
   }
 
   set rememberMe(value: boolean) {
     if (!value) {
+      localStorage.removeItem('rememberMe');
       localStorage.removeItem('username');
       localStorage.removeItem('password');
     }
-    this._rememberMe = value;
+    this.credentials.rememberMe = value;
   }
 
   login() {
-    this.authenticationService.login(this.username, this.password)
+    this.authenticationService.login(this.credentials.username, this.credentials.password)
       .subscribe(
       r => {
         if (typeof (Storage) !== 'undefined') {
-          if (this._rememberMe) {
+          if (this.credentials.rememberMe) {
             localStorage.setItem('rememberMe', 'true');
-            localStorage.setItem('username', this.username);
-            localStorage.setItem('password', this.password);
+            localStorage.setItem('username', this.credentials.username);
+            localStorage.setItem('password', this.credentials.password);
           } else {
             localStorage.removeItem('rememberMe');
             localStorage.removeItem('username');
             localStorage.removeItem('password');
           }
-
         }
         this.dispatcher.redirect();
       },
@@ -83,7 +85,7 @@ export class LoginComponent implements OnInit {
           this.message = `Identification impossible : votre compte à été bloqué`;
         } else {
           this.message = `Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur`;
-          this.message += ` [${this.username}]/[${this.password}]`;
+          this.message += ` [${this.credentials.username}]/[${this.credentials.password}]`;
         }
       });
   }
