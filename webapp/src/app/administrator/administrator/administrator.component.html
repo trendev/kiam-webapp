@@ -9,10 +9,12 @@
         </div>
 </app-main-toolbar>
 <div class="container">
-        <p>Welcome {{admin.email}}. Click here to continue on the
-                <a href="{{adminUrl}}">Administration Console (JSF)</a>
-        </p>
-        <p>
-                <code>{{admin|json}}</code>
-        </p>
+        <mat-card>
+                <p>Welcome {{admin.email}}. Click here to continue on the
+                        <a href="{{adminUrl}}">Administration Console (JSF)</a>
+                </p>
+                <p>
+                        <code>{{admin|json}}</code>
+                </p>
+        </mat-card>
 </div>
