@@ -1,10 +1,9 @@
 import { environment } from '@env/environment';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { DispatcherService } from '@app/login/dispatcher.service';
-import { CredentialsManagerService } from '@app/login/credentials-manager.service';
+import { CredentialsManagerService, Credentials } from '@app/login/credentials-manager.service';
 import { Router } from '@angular/router';
-import { Credentials } from '@app/login/credentials.model';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +11,7 @@ import { Credentials } from '@app/login/credentials.model';
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   credentials: Credentials;
 
@@ -30,18 +29,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private credentialsManagerService: CredentialsManagerService) {
 
-    this.credentials = new Credentials();
-
-    if (typeof (Storage) !== 'undefined' && localStorage.getItem('rememberMe')) {
-      this.credentials = new Credentials({
-        username: localStorage.getItem('username'),
-        password: localStorage.getItem('password'),
-        rememberMe: true
-      });
-    }
-  }
-
-  ngOnInit() {
+    this.credentials = this.credentialsManagerService.credentials;
   }
 
   get isLoggedIn(): boolean {
@@ -54,9 +42,7 @@ export class LoginComponent implements OnInit {
 
   set rememberMe(value: boolean) {
     if (!value) {
-      localStorage.removeItem('rememberMe');
-      localStorage.removeItem('username');
-      localStorage.removeItem('password');
+      this.credentialsManagerService.clear();
     }
     this.credentials.rememberMe = value;
   }
@@ -65,17 +51,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.credentials.username, this.credentials.password)
       .subscribe(
       r => {
-        if (typeof (Storage) !== 'undefined') {
-          if (this.credentials.rememberMe) {
-            localStorage.setItem('rememberMe', 'true');
-            localStorage.setItem('username', this.credentials.username);
-            localStorage.setItem('password', this.credentials.password);
-          } else {
-            localStorage.removeItem('rememberMe');
-            localStorage.removeItem('username');
-            localStorage.removeItem('password');
-          }
-        }
+        this.credentialsManagerService.save(this.credentials);
         this.dispatcher.redirect();
       },
       e => {
@@ -83,7 +59,6 @@ export class LoginComponent implements OnInit {
           this.message = `Identification impossible : votre compte à été bloqué`;
         } else {
           this.message = `Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur`;
-          this.message += ` [${this.credentials.username}]/[${this.credentials.password}]`;
         }
       });
   }
