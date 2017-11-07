@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   readonly subtitle = `Une identification est requise pour pouvoir utiliser les services sécurisés de ${this.main_title}`;
 
   hide = true;
-  private _rememberMe = true;
+  private _rememberMe: boolean;
 
   constructor(private authenticationService: AuthenticationService,
     private dispatcher: DispatcherService,
@@ -33,9 +33,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (typeof (Storage) !== 'undefined' && this._rememberMe) {
-      this.username = localStorage.getItem('username');
-      this.password = localStorage.getItem('password');
+    if (typeof (Storage) !== 'undefined') {
+      if (localStorage.getItem('rememberMe')) {
+        this._rememberMe = true;
+        this.username = localStorage.getItem('username');
+        this.password = localStorage.getItem('password');
+      } else {
+        this._rememberMe = false;
+      }
     }
   }
 
@@ -61,9 +66,11 @@ export class LoginComponent implements OnInit {
       r => {
         if (typeof (Storage) !== 'undefined') {
           if (this._rememberMe) {
+            localStorage.setItem('rememberMe', 'true');
             localStorage.setItem('username', this.username);
             localStorage.setItem('password', this.password);
           } else {
+            localStorage.removeItem('rememberMe');
             localStorage.removeItem('username');
             localStorage.removeItem('password');
           }
