@@ -34,16 +34,14 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder) {
 
-    if (typeof (Storage) !== 'undefined') {
-      this.username = localStorage.getItem('username');
-      this.password = localStorage.getItem('password');
-    }
-
     this.createForm();
   }
 
   ngOnInit() {
-    this.loginForm.valueChanges.forEach(v => console.log(v));
+    if (typeof (Storage) !== 'undefined' && this._rememberMe) {
+      this.username = localStorage.getItem('username');
+      this.password = localStorage.getItem('password');
+    }
   }
 
   createForm() {
@@ -63,10 +61,8 @@ export class LoginComponent implements OnInit {
 
   set rememberMe(value: boolean) {
     if (!value) {
-      this.loginForm.reset({
-        username: '',
-        password: ''
-      });
+      localStorage.removeItem('username');
+      localStorage.removeItem('password');
     }
     this._rememberMe = value;
   }
@@ -78,9 +74,15 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.username, this.password)
       .subscribe(
       r => {
-        if (typeof (Storage) !== 'undefined' && this._rememberMe) {
-          localStorage.setItem('username', this.username);
-          localStorage.setItem('password', this.password);
+        if (typeof (Storage) !== 'undefined') {
+          if (this._rememberMe) {
+            localStorage.setItem('username', this.username);
+            localStorage.setItem('password', this.password);
+          } else {
+            localStorage.removeItem('username');
+            localStorage.removeItem('password');
+          }
+
         }
         this.dispatcher.redirect();
       },
