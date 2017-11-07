@@ -19,18 +19,19 @@ export class ErrorHandlerService {
   handle(err: HttpErrorResponse | Error): ErrorObservable {
     if (err instanceof Error) {
       this.errmsg = err.message;
+      console.error('ErrorHandlerService#handle => ' + this.errmsg);
     } else { // HttpErrorResponse
       if (err.error instanceof Error) {
         this.errmsg =
           `A client-side or network error occurred: ${err.error.message}`;
+          console.error('ErrorHandlerService#handle => ' + this.errmsg);
       } else {
         this.errmsg =
           `The backend returned an unsuccessful response code: ${err.status} - ${err.statusText || ''} ${err.message} `;
         this.errmsg += JSON.stringify(err.error) || '';
+        console.warn('ErrorHandlerService#handle => ' + this.errmsg);
       }
     }
-
-    console.error('ErrorHandlerService#handle => ' + this.errmsg);
     return Observable.throw(this.errmsg);
   }
 
