@@ -26,7 +26,7 @@ export class DispatcherService {
           redirect = this.authenticationService.redirectUrl ? this.authenticationService.redirectUrl : '/administrator';
           break;
         default:
-          // should never occurs
+          // should not occur
           redirect = '/unsupported-user-type';
           break;
       }

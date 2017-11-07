@@ -13,6 +13,7 @@ export class AuthenticationService {
 
   redirectUrl: string;
   private _isLoggedIn = false;
+  isLoggedOut: boolean;
   user: UserAccount;
 
   readonly api = `${environment.api}/Authentication`;
@@ -48,9 +49,8 @@ export class AuthenticationService {
   }
 
   logout(): Observable<boolean> {
-    const username = this.user ? this.user.email : '';
     this.reset();
-
+    this.isLoggedOut = true;
     return this.http.post<any>(`${this.api}/logout`,
       null,
       { observe: 'response', withCredentials: true })

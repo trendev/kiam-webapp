@@ -20,9 +20,10 @@ export class LoginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    // controls is the user is already authenticated on the webapp
-    if (this.authenticationService.user) {
-      return Observable.of(this.dispatcher.redirect());
+    // controls is the user is the request comes from a logout
+    if (this.authenticationService.isLoggedOut) {
+      this.authenticationService.isLoggedOut = false; // reset the logout flag
+      return Observable.of(true);
     } else {
       // controls if the user is already authenticated on the server
       return this.authenticationService.profile()
