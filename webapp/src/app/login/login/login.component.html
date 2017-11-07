@@ -6,13 +6,13 @@
       <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <form (ngSubmit)="login()" [formGroup]="loginForm">
+      <form (ngSubmit)="login()" #loginForm="ngForm">
         <div class="login-items">
           <mat-form-field [hideRequiredMarker]="true">
-            <input matInput type="email" autocomplete="off" placeholder="Email" formControlName="username" required>
+            <input matInput type="email" autocomplete="off" placeholder="Email" name="username" [(ngModel)]="username" required>
           </mat-form-field>
           <mat-form-field [hideRequiredMarker]="true">
-            <input matInput [type]="hide ? 'password' : 'text'" autocomplete="off" placeholder="Mot de passe" formControlName="password"
+            <input matInput [type]="hide ? 'password' : 'text'" autocomplete="off" placeholder="Mot de passe" name="password" [(ngModel)]="password"
               required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
@@ -21,7 +21,7 @@
         <mat-card-actions>
           <div class="login-actions">
             
-            <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid">Identification</button>
+            <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.form.valid || !username || !password">Identification</button>
             <button type="button" mat-button routerLink="/register">Inscription</button>
           </div>
         </mat-card-actions>

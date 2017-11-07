@@ -1,4 +1,3 @@
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { environment } from '@env/environment';
 import { UserAccountType, UserAccount } from '@app/entities';
 import { Component, OnInit } from '@angular/core';
@@ -20,8 +19,6 @@ export class LoginComponent implements OnInit {
 
   user: UserAccount;
 
-  loginForm: FormGroup;
-
   readonly main_title = `${environment.title}`;
   readonly title = `Identification à ${this.main_title}`;
   readonly subtitle = `Une identification est requise pour pouvoir utiliser les services sécurisés de ${this.main_title}`;
@@ -31,10 +28,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
     private dispatcher: DispatcherService,
-    private router: Router,
-    private fb: FormBuilder) {
+    private router: Router) {
 
-    this.createForm();
   }
 
   ngOnInit() {
@@ -42,13 +37,6 @@ export class LoginComponent implements OnInit {
       this.username = localStorage.getItem('username');
       this.password = localStorage.getItem('password');
     }
-  }
-
-  createForm() {
-    this.loginForm = this.fb.group({
-      username: this.username || '',
-      password: this.password || ''
-    });
   }
 
   get isLoggedIn(): boolean {
@@ -68,9 +56,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.username = this.loginForm.get('username').value;
-    this.password = this.loginForm.get('password').value;
-
     this.authenticationService.login(this.username, this.password)
       .subscribe(
       r => {
