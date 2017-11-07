@@ -1,5 +1,4 @@
 import { environment } from '@env/environment';
-import { UserAccountType, UserAccount } from '@app/entities';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { DispatcherService } from '@app/login/dispatcher.service';
@@ -19,12 +18,11 @@ export class LoginComponent implements OnInit {
 
   message: string;
 
-  user: UserAccount;
-
   readonly main_title = `${environment.title}`;
   readonly title = `Identification à ${this.main_title}`;
   readonly subtitle = `Une identification est requise pour pouvoir utiliser les services sécurisés de ${this.main_title}`;
 
+  // hide/show password
   hide = true;
 
   constructor(private authenticationService: AuthenticationService,
