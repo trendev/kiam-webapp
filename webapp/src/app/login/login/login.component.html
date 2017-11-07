@@ -1,12 +1,13 @@
 <app-main-toolbar></app-main-toolbar>
 <div class="container">
   <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title>{{title}}</mat-card-title>
-      <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <form (ngSubmit)="login()" #loginForm="ngForm">
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <mat-card-header>
+        <mat-card-title>{{title}}</mat-card-title>
+        <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+
         <div class="login-items">
           <mat-form-field [hideRequiredMarker]="true">
             <input matInput type="email" autocomplete="off" placeholder="Email" name="username" [(ngModel)]="username" required>
@@ -18,15 +19,14 @@
           </mat-form-field>
           <mat-error *ngIf="message">{{message}}</mat-error>
         </div>
-        <mat-card-actions>
-          <div class="login-actions">
-            
-            <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.form.valid || !username || !password">Identification</button>
-            <button type="button" mat-button routerLink="/register">Inscription</button>
-          </div>
-        </mat-card-actions>
-      </form>
-    </mat-card-content>
-    <mat-checkbox [(ngModel)]="rememberMe" style="font-size: 0.9em">Conserver mes identifiants</mat-checkbox>
+        <mat-checkbox [(ngModel)]="rememberMe" name="rememberMe" style="font-size: 0.9em">Conserver mes identifiants</mat-checkbox>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="login-actions">
+          <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.form.valid || !username || !password">Identification</button>
+          <button type="button" mat-button routerLink="/register">Inscription</button>
+        </div>
+      </mat-card-actions>
+    </form>
   </mat-card>
 </div>
