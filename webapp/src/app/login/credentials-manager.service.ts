@@ -4,17 +4,26 @@ import * as CryptoJS from 'crypto-js';
 @Injectable()
 export class CredentialsManagerService {
 
-  readonly p = 'qsecofr';
+  readonly p = 'Acta exteriora indicant interiora secreta.';
 
   constructor() { }
 
   get credentials(): Credentials {
-    if (typeof (Storage) !== 'undefined' && localStorage.c) {
+    if (typeof (Storage) !== 'undefined' && localStorage.c && localStorage.d) {
+      try {
 
-      const bytes  = CryptoJS.AES.decrypt(localStorage.c, this.p);
-      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        let bytes = CryptoJS.AES.decrypt(localStorage.d, this.p);
+        const d = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        bytes = CryptoJS.AES.decrypt(localStorage.c, this.p + d);
+        const c = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        return new Credentials(c);
 
-      return new Credentials(decryptedData);
+      } catch (Error) {
+        console.error('Nulla certior custodia innocentia.');
+        localStorage.removeItem('c');
+        localStorage.removeItem('d');
+        return new Credentials();
+      }
     } else {
       return new Credentials();
     }
@@ -23,13 +32,14 @@ export class CredentialsManagerService {
   clear() {
     if (typeof (Storage) !== 'undefined') {
       localStorage.clear();
-      // localStorage.removeItem('credentials');
     }
   }
 
   save(credentials: Credentials) {
     if (credentials.rememberMe) {
-      localStorage.c = CryptoJS.AES.encrypt(JSON.stringify(credentials), this.p);
+      const d = new Date().getTime();
+      localStorage.d = CryptoJS.AES.encrypt(d + '', this.p);
+      localStorage.c = CryptoJS.AES.encrypt(JSON.stringify(credentials), this.p + d);
     }
   }
 
