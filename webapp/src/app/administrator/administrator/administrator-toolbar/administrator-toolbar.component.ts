@@ -15,10 +15,6 @@ export class AdministratorToolbarComponent {
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
 
-    get isLoggedIn(): boolean {
-      return this.authenticationService.isLoggedIn;
-    }
-  
     logout() {
       this.authenticationService.logout().subscribe(
         v => this.router.navigate(['/login']),
