@@ -7,6 +7,7 @@ import { environment } from '@env/environment';
   styleUrls: ['./login-toolbar.component.scss']
 })
 export class LoginToolbarComponent {
+
   title = `${environment.title}`;
 
   constructor() { }

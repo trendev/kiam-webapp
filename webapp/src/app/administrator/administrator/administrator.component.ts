@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Administrator } from '@app/entities';
 import { AuthenticationService } from '@app/core';
 import { environment } from '@env/environment';
@@ -15,21 +14,10 @@ export class AdministratorComponent implements OnInit {
 
   admin: Administrator;
 
-  constructor(private authenticationService: AuthenticationService,
-    private router: Router) { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.admin = new Administrator(this.authenticationService.user);
-  }
-
-  get isLoggedIn(): boolean {
-    return this.authenticationService.isLoggedIn;
-  }
-
-  logout() {
-    this.authenticationService.logout().subscribe(
-      v => this.router.navigate(['/login']),
-      e => this.router.navigate(['/login']));
   }
 
 }
