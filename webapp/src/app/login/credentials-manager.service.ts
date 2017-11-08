@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable()
 export class CredentialsManagerService {
 
+  readonly p = 'qsecofr';
+
   constructor() { }
 
   get credentials(): Credentials {
-    if (typeof (Storage) !== 'undefined' && localStorage.credentials) {
-      return new Credentials(JSON.parse(localStorage.credentials));
+    if (typeof (Storage) !== 'undefined' && localStorage.c) {
+
+      const bytes  = CryptoJS.AES.decrypt(localStorage.c, this.p);
+      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
+      return new Credentials(decryptedData);
     } else {
       return new Credentials();
     }
@@ -22,7 +29,7 @@ export class CredentialsManagerService {
 
   save(credentials: Credentials) {
     if (credentials.rememberMe) {
-      localStorage.credentials = JSON.stringify(credentials);
+      localStorage.c = CryptoJS.AES.encrypt(JSON.stringify(credentials), this.p);
     }
   }
 
