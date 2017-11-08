@@ -6,12 +6,8 @@ export class CredentialsManagerService {
   constructor() { }
 
   get credentials(): Credentials {
-    if (typeof (Storage) !== 'undefined' && localStorage.getItem('rememberMe')) {
-      return new Credentials({
-        username: localStorage.getItem('username'),
-        password: localStorage.getItem('password'),
-        rememberMe: true
-      });
+    if (typeof (Storage) !== 'undefined' && localStorage.credentials) {
+      return new Credentials(JSON.parse(localStorage.credentials));
     } else {
       return new Credentials();
     }
@@ -19,17 +15,14 @@ export class CredentialsManagerService {
 
   clear() {
     if (typeof (Storage) !== 'undefined') {
-      localStorage.removeItem('rememberMe');
-      localStorage.removeItem('username');
-      localStorage.removeItem('password');
+      localStorage.clear();
+      // localStorage.removeItem('credentials');
     }
   }
 
   save(credentials: Credentials) {
     if (credentials.rememberMe) {
-      localStorage.setItem('rememberMe', 'true');
-      localStorage.setItem('username', credentials.username);
-      localStorage.setItem('password', credentials.password);
+      localStorage.credentials = JSON.stringify(credentials);
     }
   }
 
