@@ -10,6 +10,7 @@ import { LoginGuard } from './login.guard';
 import { DispatcherService } from './dispatcher.service';
 import { UnsupportedUserTypeComponent } from './unsupported-user-type/unsupported-user-type.component';
 import { CredentialsManagerService } from './credentials-manager.service';
+import { LoginToolbarComponent } from './login/login-toolbar/login-toolbar.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { CredentialsManagerService } from './credentials-manager.service';
     SharedModule,
     LoginRoutingModule
   ],
-  declarations: [LoginComponent, RegisterFormComponent, UnsupportedUserTypeComponent],
+  declarations: [LoginComponent, RegisterFormComponent, UnsupportedUserTypeComponent, LoginToolbarComponent],
   exports: [LoginComponent, RegisterFormComponent],
   providers: [LoginGuard, DispatcherService, CredentialsManagerService]
 })
