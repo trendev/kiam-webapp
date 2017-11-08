@@ -1,0 +1,11 @@
+<mat-toolbar class="fixed-header mat-elevation-z2" color="primary" role="header" aria-label="toolbar">
+    <mat-toolbar-row class="toolbar_row">
+        <button type="button" mat-icon-button color="warm" [disabled]="true">
+            <mat-icon aria-label="Configuration">more_vert</mat-icon>
+        </button>
+        <span class="toolbar_title">{{title}}</span>
+        <button type="button" (click)="logout()" mat-icon-button color="warm">
+            <mat-icon aria-label="Déconnexion" matTooltip="Déconnexion">power_settings_new</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>

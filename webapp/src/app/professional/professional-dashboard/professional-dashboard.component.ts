@@ -20,14 +20,4 @@ export class ProfessionalDashboardComponent implements OnInit {
     this.professional = new Professional(this.authenticationService.user);
   }
 
-  get isLoggedIn(): boolean {
-    return this.authenticationService.isLoggedIn;
-  }
-
-  logout() {
-    this.authenticationService.logout().subscribe(
-      v => this.router.navigate(['/login']),
-      e => this.router.navigate(['/login']));
-  }
-
 }
