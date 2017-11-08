@@ -13,7 +13,6 @@ import {
 } from '@angular/material';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 
 @NgModule({
   imports: [
@@ -29,7 +28,7 @@ import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
     MatFormFieldModule,
     MatCheckboxModule
   ],
-  declarations: [PageNotFoundComponent, MainToolbarComponent],
+  declarations: [PageNotFoundComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -42,7 +41,6 @@ import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MainToolbarComponent,
     MatCheckboxModule
   ]
 })
