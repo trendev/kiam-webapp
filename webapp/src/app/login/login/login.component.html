@@ -1,4 +1,8 @@
-<app-main-toolbar></app-main-toolbar>
+<mat-toolbar class="fixed-header mat-elevation-z2" color="primary" role="header" aria-label="toolbar">
+  <mat-toolbar-row class="toolbar_row">
+    <span class="toolbar_title">{{main_title}}</span>
+  </mat-toolbar-row>
+</mat-toolbar>
 <div class="container">
   <mat-card class="login-card">
     <form (ngSubmit)="login()" #loginForm="ngForm">
