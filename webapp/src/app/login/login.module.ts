@@ -11,6 +11,7 @@ import { DispatcherService } from './dispatcher.service';
 import { UnsupportedUserTypeComponent } from './unsupported-user-type/unsupported-user-type.component';
 import { CredentialsManagerService } from './credentials-manager.service';
 import { LoginToolbarComponent } from './login/login-toolbar/login-toolbar.component';
+import { LoginCardComponent } from './login/login-card/login-card.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { LoginToolbarComponent } from './login/login-toolbar/login-toolbar.compo
     SharedModule,
     LoginRoutingModule
   ],
-  declarations: [LoginComponent, RegisterFormComponent, UnsupportedUserTypeComponent, LoginToolbarComponent],
+  declarations: [LoginComponent, RegisterFormComponent, UnsupportedUserTypeComponent, LoginToolbarComponent, LoginCardComponent],
   exports: [LoginComponent, RegisterFormComponent],
   providers: [LoginGuard, DispatcherService, CredentialsManagerService]
 })

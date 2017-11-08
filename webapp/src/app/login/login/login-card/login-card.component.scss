@@ -1,0 +1,38 @@
+.container {
+    position: absolute;
+    top: 64px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+@media all and (max-device-width : 600px) {
+    .container {
+        position: relative;
+        top: 56px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.login-card {
+    width: 250px;
+    margin-top: 20px;
+}
+
+.login-items {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.login-items > * {
+    flex: 1 100%;
+}
+
+.login-actions {
+    display: flex;
+    flex-direction: column;
+}
+
+
