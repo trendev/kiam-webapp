@@ -1,17 +1,18 @@
 <app-professional-toolbar>
-  <button type="button" mat-icon-button color="warm" (click)="hide = !hide">
+  <button type="button" mat-icon-button color="warm" (click)="sidenav.toggle()">
     <mat-icon aria-label="Configuration">menu</mat-icon>
   </button>
 </app-professional-toolbar>
 <div class="dashboard">
   <mat-sidenav-container>
-    <mat-sidenav>
+    <mat-sidenav #sidenav mode="push" class="sidenav">
+      <nav>
+          Accueil
+      </nav>
     </mat-sidenav>
-    <div>
-      <p>
-        Tableau de bord - Professionnel
-      </p>
-      <code>{{professional|json}}</code>
-    </div>
+    <p>Tableau de bord</p>
+    <p>
+      <code>{{professional | json}}</code>
+    </p>
   </mat-sidenav-container>
 </div>

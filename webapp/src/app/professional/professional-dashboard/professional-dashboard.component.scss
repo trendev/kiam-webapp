@@ -2,14 +2,18 @@
     position: relative;
     top: 64px;
     left: 0px;
-    width: 100%  !important;
+    width: 100% !important;
+    height: 100% !important; 
+}
+
+.sidenav { // do not need to specify height 100%
+    position: fixed;
+    top: 64px;
+    left: 0px;
 }
 
 @media all and (max-device-width : 600px) {
-    .dashboard {
-        position: relative;
+    .dashboard, .sidenav {
         top: 56px;
-        left: 0px;
-        width: 100%  !important;
     }
 }
