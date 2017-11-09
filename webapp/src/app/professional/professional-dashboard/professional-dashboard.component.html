@@ -1,13 +1,15 @@
 <app-professional-toolbar>
-    <button type="button" mat-icon-button color="warm" (click)="hide = !hide">
-        <mat-icon aria-label="Configuration">menu</mat-icon>
-    </button>
+  <button type="button" mat-icon-button color="warm" (click)="hide = !hide">
+    <mat-icon aria-label="Configuration">menu</mat-icon>
+  </button>
 </app-professional-toolbar>
 <div class="dashboard">
-  <p>
-    Tableau de bord - Professionnel
-  </p>
-  <code>
-    {{professional|json}}
-  </code>
+  <mat-sidenav-container>
+    <mat-sidenav>
+    </mat-sidenav>
+    <p>
+      Tableau de bord - Professionnel
+    </p>
+    <code>{{professional|json}}</code>
+  </mat-sidenav-container>
 </div>
