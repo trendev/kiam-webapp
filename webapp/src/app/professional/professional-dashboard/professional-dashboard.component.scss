@@ -1,3 +1,5 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber';
+
 .dashboard {
     position: relative;
     top: 64px;
@@ -12,8 +14,16 @@
     left: 0px;
 }
 
+.mat-list-item {
+    text-decoration: none;
+}
+
 .active {
     background-color: lightcoral;
+}
+
+.mat-list-item:hover{
+    background-color: magenta;
 }
 
 @media all and (max-device-width : 600px) {

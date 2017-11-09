@@ -14,11 +14,11 @@ export class ProfessionalDashboardComponent implements OnInit {
   professional: Professional;
 
   links: Link[] = [
-    { name: 'Accueil', url: '/individual' },
+    { name: 'Accueil', url: '/professional' },
     { name: 'Clients', url: '/' },
     { name: 'Factures', url: '/' },
     { name: 'Dépenses', url: '/' },
-    { name: 'Compte', url: '/professional' },
+    { name: 'Compte', url: '/' },
     { name: 'Catégories', url: '/' },
     { name: 'Groupes', url: '/' }
   ];
