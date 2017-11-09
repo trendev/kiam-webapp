@@ -30,7 +30,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatFormFieldModule,
     MatCheckboxModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
   ],
   declarations: [PageNotFoundComponent],
   exports: [
