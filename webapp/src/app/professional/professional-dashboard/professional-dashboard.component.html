@@ -7,7 +7,11 @@
   <mat-sidenav-container>
     <mat-sidenav #sidenav mode="push" class="sidenav">
       <nav>
-          Accueil
+          <mat-nav-list>
+            <mat-list-item>
+                <button type="button" mat-button routerLink="/register">Inscription</button>
+            </mat-list-item>
+          </mat-nav-list>
       </nav>
     </mat-sidenav>
     <p>Tableau de bord</p>
