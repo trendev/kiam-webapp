@@ -12,6 +12,10 @@
     left: 0px;
 }
 
+.active {
+    background-color: lightcoral;
+}
+
 @media all and (max-device-width : 600px) {
     .dashboard, .sidenav {
         top: 56px;
