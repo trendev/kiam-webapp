@@ -18,9 +18,9 @@ export class ProfessionalDashboardComponent implements OnInit {
     { name: 'Clients', url: '/' },
     { name: 'Factures', url: '/' },
     { name: 'Dépenses', url: '/' },
-    { name: 'Compte', url: '/' },
     { name: 'Catégories', url: '/' },
-    { name: 'Groupes', url: '/' }
+    { name: 'Groupes', url: '/' },
+    { name: 'Profil', url: '/' }
   ];
 
   constructor(private authenticationService: AuthenticationService,
