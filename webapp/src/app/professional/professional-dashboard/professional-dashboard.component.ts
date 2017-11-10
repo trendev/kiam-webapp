@@ -13,7 +13,7 @@ export class ProfessionalDashboardComponent implements OnInit {
 
   professional: Professional;
 
-  links: Link[] = [
+  links: LinkItem[] = [
     { name: 'Accueil', url: '/professional' },
     { name: 'Clients', url: '/' },
     { name: 'Factures', url: '/' },
@@ -32,7 +32,7 @@ export class ProfessionalDashboardComponent implements OnInit {
 
 }
 
-interface Link {
+interface LinkItem {
   name: string;
   url: string;
 }
