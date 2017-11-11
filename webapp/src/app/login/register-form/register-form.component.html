@@ -2,18 +2,18 @@
   <mat-card class="login-card">
     <mat-card-title>Pour le moment, l'inscription n'est pas encore automatisée.</mat-card-title>
     <mat-card-content>
-      <p>Vous pouvez vous inscrire en utilisant notre
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7NOWmYCR_KxvT5_eT2C-YMOO8uHVvIQi-CUJwOoaJWBCEVg/viewform?hl=fr">formulaire Google en ligne</a>.
-        <br/>
-        <br/>
-        <em>A noter toutefois qu'en fonction de la configuration de votre navigateur web ou de votre périphérique, certains éléments
-          du formulaire peuvent apparaître en anglais.</em>
-      </p>
-
+      <p>Vous pouvez vous inscrire en utilisant notre formulaire Google en ligne.</p>
+      <em>A noter toutefois qu'en fonction de la configuration de votre navigateur web ou de votre périphérique, certains éléments
+        du formulaire peuvent apparaître en anglais.</em>
       <p>A très bientôt et profitez en pour nous suivre sur twitter
         <strong>@comptandye</strong>
       </p>
     </mat-card-content>
-    <a routerLink="/login">Identification</a>
+    <mat-card-actions>
+      <div class="login-actions">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7NOWmYCR_KxvT5_eT2C-YMOO8uHVvIQi-CUJwOoaJWBCEVg/viewform?hl=fr" mat-raised-button color="primary">Formulaire Google en ligne</a>
+        <button type="button" mat-button routerLink="/login">Accueil</button>
+      </div>
+    </mat-card-actions>
   </mat-card>
 </div>
