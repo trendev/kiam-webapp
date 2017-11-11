@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthenticationService } from '@app/core';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
@@ -6,27 +8,17 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
   styleUrls: ['./register-form.component.scss']
 })
 
-export class RegisterFormComponent implements OnInit, AfterViewInit {
+export class RegisterFormComponent implements OnInit {
 
-  constructor() {
+  constructor(private authenticationService: AuthenticationService,
+    private router: Router) {
   }
 
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
-    !function (d, s, id) {
-      var js: any,
-        fjs = d.getElementsByTagName(s)[0],
-        p = 'https';
-      if (!d.getElementById(id)) {
-        js = d.createElement(s);
-        js.id = id;
-        js.src = p + "://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }
-    }
-      (document, "script", "twitter-wjs");
+  backToLogin() {
+    this.router.navigate(['/login'], this.authenticationService.loginRequired);
   }
 
 }

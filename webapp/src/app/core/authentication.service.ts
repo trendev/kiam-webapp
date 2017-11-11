@@ -93,3 +93,7 @@ export class AuthenticationService {
   }
 
 }
+
+// export const loginRequired: NavigationExtras = {
+//   queryParams: { 'login-required': true }
+// };
