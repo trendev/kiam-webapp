@@ -4,17 +4,22 @@ import { environment } from '@env/environment';
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { NavigationExtras } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/retry';
+
 
 @Injectable()
 export class AuthenticationService {
 
   redirectUrl: string;
   private _isLoggedIn = false;
-  isLoggedOut: boolean;
   user: UserAccount;
+
+  readonly loginRequired: NavigationExtras = {
+    queryParams: { 'login-required': true }
+  };
 
   readonly api = `${environment.api}/Authentication`;
 
@@ -50,7 +55,6 @@ export class AuthenticationService {
 
   logout(): Observable<boolean> {
     this.reset();
-    this.isLoggedOut = true;
     return this.http.post<any>(`${this.api}/logout`,
       null,
       { observe: 'response', withCredentials: true })

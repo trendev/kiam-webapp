@@ -30,6 +30,8 @@ export class DispatcherService {
           redirect = '/unsupported-user-type';
           break;
       }
+      // reset the redirectUrl
+      this.authenticationService.redirectUrl = undefined;
       this.router.navigate([redirect]);
     }
     return false;

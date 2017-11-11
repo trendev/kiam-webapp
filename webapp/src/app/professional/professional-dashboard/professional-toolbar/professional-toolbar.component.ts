@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from '@app/core';
 import { environment } from '@env/environment';
 import { Component } from '@angular/core';
@@ -16,9 +16,10 @@ export class ProfessionalToolbarComponent {
     private router: Router) { }
 
   logout() {
+
     this.authenticationService.logout().subscribe(
-      v => this.router.navigate(['/login']),
-      e => this.router.navigate(['/login']));
+      v => this.router.navigate(['/login'], this.authenticationService.loginRequired),
+      e => this.router.navigate(['/login'], this.authenticationService.loginRequired));
   }
 
 }

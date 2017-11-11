@@ -20,9 +20,14 @@ export class LoginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    // controls is the user is the request comes from a logout
-    if (this.authenticationService.isLoggedOut) {
-      this.authenticationService.isLoggedOut = false; // reset the logout flag
+    const loginRequired: boolean = next.queryParamMap.get('login-required') ? true : false;
+    console.error(`login-required=[${loginRequired}] & state.url=[${state.url}]`);
+
+    /**
+     * controls the origin of the request : activates the login interface if it's a redirection
+     * or if a login is required (navigation from a logout or from a register page for ex).
+     */
+    if (loginRequired || this.authenticationService.redirectUrl) {
       return Observable.of(true);
     } else {
       // controls if the user is already authenticated on the server
