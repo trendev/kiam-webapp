@@ -19,16 +19,3 @@
         top: 56px;
     }
 }
-
-.mat-list-item {
-    &:hover {
-        background-color: #b0bec5; //should be the accent color of the default theme
-    }
-    &:focus {
-        background-color: #c2185b; //should be the primary color of the default theme
-    }
-}
-
-.mat-nav-list {
-    padding: 0;
-}
