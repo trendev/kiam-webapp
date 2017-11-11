@@ -16,7 +16,6 @@ export class ProfessionalToolbarComponent {
     private router: Router) { }
 
   logout() {
-
     this.authenticationService.logout().subscribe(
       v => this.router.navigate(['/login'], this.authenticationService.loginRequired),
       e => this.router.navigate(['/login'], this.authenticationService.loginRequired));
