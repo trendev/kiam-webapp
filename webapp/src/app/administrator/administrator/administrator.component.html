@@ -1,8 +1,12 @@
 <app-administrator-toolbar></app-administrator-toolbar>
 <div class="container">
     <mat-card>
-        <p>Welcome {{admin.email}}. Click here to continue on the
-            <a href="{{adminUrl}}">Administration Console (JSF)</a>
-        </p>
+        <mat-card-title>Welcome Administrator {{admin.email}}.</mat-card-title>
+        <mat-card-content>
+            <p>You will now leave the web application interface and access to the Administrator Console...</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <a href="{{adminUrl}}" mat-raised-button color="primary">Admin Console (JSF)</a>
+        </mat-card-actions>
     </mat-card>
 </div>
