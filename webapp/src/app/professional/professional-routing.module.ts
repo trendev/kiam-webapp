@@ -31,6 +31,14 @@ const routes: Routes = [
         path: 'categories',
         loadChildren: 'app/professional/categories/categories.module#CategoriesModule'
       },
+      {
+        path: 'groups',
+        loadChildren: 'app/professional/groups/groups.module#GroupsModule'
+      },
+      {
+        path: 'profile',
+        loadChildren: 'app/professional/profile/profile.module#ProfileModule'
+      },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]
