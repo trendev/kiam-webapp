@@ -11,7 +11,7 @@ import { WelcomeModule } from './welcome/welcome.module';
 @NgModule({
   imports: [
     SharedModule,
-    // WelcomeModule,
+    // WelcomeModule, // must be imported before ProfessionalRoutingModule or the module's routes won't be caught
     ProfessionalRoutingModule,
   ],
   declarations: [ProfessionalDashboardComponent, ProfessionalToolbarComponent],
