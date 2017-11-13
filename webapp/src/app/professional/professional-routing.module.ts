@@ -23,6 +23,10 @@ const routes: Routes = [
         path: 'bills',
         loadChildren: 'app/professional/bills/bills.module#BillsModule'
       },
+      {
+        path: 'expenses',
+        loadChildren: 'app/professional/expenses/expenses.module#ExpensesModule'
+      },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]
