@@ -11,8 +11,8 @@ import { WelcomeModule } from './welcome/welcome.module';
 @NgModule({
   imports: [
     SharedModule,
+    // WelcomeModule,
     ProfessionalRoutingModule,
-    // WelcomeModule
   ],
   declarations: [ProfessionalDashboardComponent, ProfessionalToolbarComponent],
   providers: [ProfessionalGuard]
