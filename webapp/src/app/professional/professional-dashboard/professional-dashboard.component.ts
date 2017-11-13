@@ -14,13 +14,13 @@ export class ProfessionalDashboardComponent implements OnInit {
   professional: Professional;
 
   links: LinkItem[] = [
-    { name: 'Accueil', url: '/professional' },
-    { name: 'Clients', url: '/' },
-    { name: 'Factures', url: '/' },
-    { name: 'Dépenses', url: '/' },
-    { name: 'Catégories', url: '/' },
-    { name: 'Groupes', url: '/' },
-    { name: 'Profil', url: '/' }
+    { name: 'Accueil', url: 'welcome' },
+    { name: 'Clients', url: '.' },
+    { name: 'Factures', url: '.' },
+    { name: 'Dépenses', url: '.' },
+    { name: 'Catégories', url: '.' },
+    { name: 'Groupes', url: '.' },
+    { name: 'Profil', url: '.' }
   ];
 
   constructor(private authenticationService: AuthenticationService,
