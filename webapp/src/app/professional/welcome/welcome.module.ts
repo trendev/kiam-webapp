@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { WelcomeRoutingModule } from './welcome-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { SharedModule } from '@app/shared';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     WelcomeRoutingModule
   ],
   declarations: [WelcomeComponent]

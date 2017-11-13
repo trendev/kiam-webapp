@@ -2,7 +2,7 @@ import { WelcomeComponent } from './welcome/welcome/welcome.component';
 import { ProfessionalGuard } from './professional.guard';
 import { ProfessionalDashboardComponent } from './professional-dashboard/professional-dashboard.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { PageNotFoundComponent } from '@app/shared';
 
 const routes: Routes = [
@@ -10,10 +10,12 @@ const routes: Routes = [
     path: '',
     component: ProfessionalDashboardComponent,
     canActivate: [ProfessionalGuard],
+    canActivateChild: [ProfessionalGuard],
     children: [
       {
         path: 'welcome',
         loadChildren: 'app/professional/welcome/welcome.module#WelcomeModule'
+
       },
       {
         path: 'clients',
@@ -39,7 +41,7 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: 'app/professional/profile/profile.module#ProfileModule'
       },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]
   }
