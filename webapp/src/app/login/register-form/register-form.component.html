@@ -15,7 +15,7 @@
         <div class="login-actions">
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7NOWmYCR_KxvT5_eT2C-YMOO8uHVvIQi-CUJwOoaJWBCEVg/viewform?hl=fr" mat-raised-button
             color="primary">Formulaire Google en ligne</a>
-          <button type="button" mat-button (click)="backToLogin()">Accueil</button>
+          <button type="button" mat-button [routerLink]="['/login']" [queryParams]="{'login-required': 'true'}">Accueil</button>
         </div>
       </mat-card-actions>
     </form>

@@ -10,15 +10,10 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 export class RegisterFormComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService,
-    private router: Router) {
+  constructor() {
   }
 
   ngOnInit() {
-  }
-
-  backToLogin() {
-    this.router.navigate(['/login'], this.authenticationService.loginRequired);
   }
 
 }

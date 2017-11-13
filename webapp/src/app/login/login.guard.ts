@@ -21,7 +21,7 @@ export class LoginGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     const loginRequired: boolean = next.queryParamMap.get('login-required') ? true : false;
-    console.error(`login-required=[${loginRequired}] & state.url=[${state.url}]`);
+    // console.error(`login-required=[${loginRequired}] & state.url=[${state.url}]`);
 
     /**
      * controls the origin of the request : activates the login interface if it's a redirection
