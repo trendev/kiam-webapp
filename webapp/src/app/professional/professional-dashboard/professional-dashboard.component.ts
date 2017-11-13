@@ -16,11 +16,11 @@ export class ProfessionalDashboardComponent implements OnInit {
   links: LinkItem[] = [
     { name: 'Accueil', url: 'welcome' },
     { name: 'Clients', url: 'clients' },
-    { name: 'Factures', url: '.' },
-    { name: 'Dépenses', url: '.' },
-    { name: 'Catégories', url: '.' },
-    { name: 'Groupes', url: '.' },
-    { name: 'Profil', url: '.' }
+    { name: 'Factures', url: 'bills' },
+    { name: 'Dépenses', url: 'expenses' },
+    { name: 'Catégories', url: 'categories' },
+    { name: 'Groupes', url: 'groups' },
+    { name: 'Profil', url: 'profile' }
   ];
 
   constructor(private authenticationService: AuthenticationService,

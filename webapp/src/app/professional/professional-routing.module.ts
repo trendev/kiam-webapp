@@ -19,6 +19,10 @@ const routes: Routes = [
         path: 'clients',
         loadChildren: 'app/professional/clients/clients.module#ClientsModule'
       },
+      {
+        path: 'bills',
+        loadChildren: 'app/professional/bills/bills.module#BillsModule'
+      },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]
