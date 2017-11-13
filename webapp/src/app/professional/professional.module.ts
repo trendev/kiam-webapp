@@ -12,7 +12,7 @@ import { WelcomeModule } from './welcome/welcome.module';
   imports: [
     SharedModule,
     ProfessionalRoutingModule,
-    WelcomeModule
+    // WelcomeModule
   ],
   declarations: [ProfessionalDashboardComponent, ProfessionalToolbarComponent],
   providers: [ProfessionalGuard]
