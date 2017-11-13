@@ -15,7 +15,7 @@ export class ProfessionalDashboardComponent implements OnInit {
 
   links: LinkItem[] = [
     { name: 'Accueil', url: 'welcome' },
-    { name: 'Clients', url: '.' },
+    { name: 'Clients', url: 'clients' },
     { name: 'Factures', url: '.' },
     { name: 'Dépenses', url: '.' },
     { name: 'Catégories', url: '.' },
