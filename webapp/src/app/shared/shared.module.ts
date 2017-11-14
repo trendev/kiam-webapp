@@ -12,7 +12,8 @@ import {
   MatCheckboxModule,
   MatSidenavModule,
   MatListModule,
-  MatChipsModule
+  MatChipsModule,
+  MatExpansionModule
 } from '@angular/material';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -32,7 +33,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatCheckboxModule,
     MatSidenavModule,
     MatListModule,
-    MatChipsModule
+    MatChipsModule,
+    MatExpansionModule
   ],
   declarations: [PageNotFoundComponent],
   exports: [
@@ -50,7 +52,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatCheckboxModule,
     MatSidenavModule,
     MatListModule,
-    MatChipsModule
+    MatChipsModule,
+    MatExpansionModule
   ]
 })
 
