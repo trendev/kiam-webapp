@@ -1,38 +1,24 @@
 <div class="container">
   <mat-card>
     <form (ngSubmit)="save()" #profileForm="ngForm">
-      <mat-card-header>
-        <mat-card-title>{{pro.email}}</mat-card-title>
-      </mat-card-header>
+      <mat-card-title>{{pro.email}}</mat-card-title>
       <mat-card-content>
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Identifiant" value="{{pro.uuid}}" disabled>
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Date d'inscription" value="{{pro.registrationDate | date:'full':'':'fr'}}" disabled>
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Mot de passe" value="{{pro.password}}">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Nom d'utilisateur" value="{{pro.username}}">
-        </mat-form-field>
+        <h3>Informations relatives à votre compte</h3>
+        <section class="account">
+          <mat-form-field>
+            <input matInput placeholder="Identifiant" value="{{pro.uuid}}" disabled>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Date d'inscription" value="{{pro.registrationDate | date:'full':'':'fr'}}" disabled>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Nom d'utilisateur" value="{{pro.username}}">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Mot de passe" value="{{pro.password}}">
+          </mat-form-field>
+        </section>
       </mat-card-content>
     </form>
   </mat-card>
-  <mat-card>
-    <mat-card-content>
-      <p>un truc à côté c'est sympa aussi</p>
-    </mat-card-content>
-  </mat-card>
-  <mat-card>
-      <mat-card-content>
-        <p>un truc à côté c'est sympa aussi 2</p>
-      </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-content>
-          <p>un truc à côté c'est sympa aussi 3</p>
-        </mat-card-content>
-      </mat-card>
 </div>
