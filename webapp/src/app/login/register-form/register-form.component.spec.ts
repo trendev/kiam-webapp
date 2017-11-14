@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterFormComponent } from './register-form.component';
+import { SharedModule } from '@app/shared';
+import { LoginModule } from '@app/login';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('RegisterFormComponent', () => {
   let component: RegisterFormComponent;
@@ -8,9 +12,12 @@ describe('RegisterFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterFormComponent ]
+      imports: [SharedModule, LoginModule, AppRoutingModule],
+      providers: [
+        { provide: APP_BASE_HREF, useValue : '/' }
+    ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
