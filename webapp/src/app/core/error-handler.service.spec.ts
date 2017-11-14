@@ -46,7 +46,7 @@ describe('ErrorHandlerService', () => {
     }
   })));
 
-  it('should handle a HttpErrorResponse - 403 Forbidden', async(inject([
+  it('should handle a HttpErrorResponse - 401 - Unauthorized', async(inject([
     ErrorHandlerService,
     AuthenticationService
   ], (errsrv: ErrorHandlerService, authsrv: AuthenticationService) => {
@@ -54,9 +54,9 @@ describe('ErrorHandlerService', () => {
     subscription = authsrv.profile().subscribe(
       data => expect(data).toBeUndefined('authsrv.profile() should fail and return no data'),
       error => {
-        expect(error).toContain('403', 'should contain 403 Forbidden');
+        expect(error).toContain('401 - Unauthorized', 'should contain 401 - Unauthorized');
         expect(errsrv.errmsg).toBeDefined();
-        expect(errsrv.errmsg).toContain('403', 'should contain 403 Forbidden');
+        expect(errsrv.errmsg).toContain('401 - Unauthorized', 'should contain 401 - Unauthorized');
       }
     );
   })));
