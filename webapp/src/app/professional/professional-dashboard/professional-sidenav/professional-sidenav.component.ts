@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-professional-sidenav',
@@ -7,14 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfessionalSidenavComponent implements OnInit {
 
+  @Input() email: string;
+
   links: LinkItem[] = [
-    { name: 'Accueil', url: 'welcome' },
-    { name: 'Clients', url: 'clients' },
-    { name: 'Factures', url: 'bills' },
-    { name: 'Dépenses', url: 'expenses' },
-    { name: 'Catégories', url: 'categories' },
-    { name: 'Groupes', url: 'groups' },
-    { name: 'Profil', url: 'profile' }
+    { name: 'Accueil', url: 'welcome', icon: 'home' },
+    { name: 'Référentiel client', url: 'clients', icon: 'perm_contact_calendar' },
+    { name: 'Groupes / Collectivités', url: 'groups', icon: 'group' },
+    { name: 'Facturier', url: 'bills', icon: 'receipt' },
+    { name: 'Dépenses', url: 'expenses', icon: 'trending_down' },
+    { name: 'Catégories', url: 'categories', icon: 'group_work' },
+    { name: 'Offres / Catalogues', url: 'offerings', icon: 'local_offer' },
   ];
 
   constructor() { }
@@ -27,4 +29,5 @@ export class ProfessionalSidenavComponent implements OnInit {
 interface LinkItem {
   name: string;
   url: string;
+  icon: string;
 }
