@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileComponent } from './profile.component';
+import { SharedModule } from '@app/shared';
+import { CoreModule, AuthenticationService } from '@app/core';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { APP_BASE_HREF } from '@angular/common';
+import { AppModule } from '@app/app.module';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -8,9 +13,13 @@ describe('ProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent ]
+      imports: [SharedModule, CoreModule, AppRoutingModule, AppModule],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/' },
+        AuthenticationService],
+      declarations: [ProfileComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
