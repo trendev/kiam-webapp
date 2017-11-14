@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { ErrorHandlerService } from './error-handler.service';
+import { BusinessService } from './business.service';
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import { ErrorHandlerService } from './error-handler.service';
     HttpClientXsrfModule
   ],
   declarations: [],
-  providers: [AuthenticationService, ErrorHandlerService]
+  providers: [AuthenticationService, ErrorHandlerService, BusinessService]
 })
 export class CoreModule {
   /* make sure CoreModule is imported only by one NgModule the AppModule */
