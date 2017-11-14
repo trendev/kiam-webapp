@@ -1,0 +1,5 @@
+<mat-nav-list *ngFor="let l of links">
+  <!-- fake the default sidenav selection on opening -->
+  <!-- <a href="#" style="height: 0px;"></a> -->
+  <a mat-list-item routerLink="{{l.url}}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{l.name}}</a>
+</mat-nav-list>

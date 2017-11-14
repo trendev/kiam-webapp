@@ -13,16 +13,6 @@ export class ProfessionalDashboardComponent implements OnInit {
 
   professional: Professional;
 
-  links: LinkItem[] = [
-    { name: 'Accueil', url: 'welcome' },
-    { name: 'Clients', url: 'clients' },
-    { name: 'Factures', url: 'bills' },
-    { name: 'Dépenses', url: 'expenses' },
-    { name: 'Catégories', url: 'categories' },
-    { name: 'Groupes', url: 'groups' },
-    { name: 'Profil', url: 'profile' }
-  ];
-
   constructor(private authenticationService: AuthenticationService,
     private router: Router) { }
 
@@ -30,9 +20,4 @@ export class ProfessionalDashboardComponent implements OnInit {
     this.professional = new Professional(this.authenticationService.user);
   }
 
-}
-
-interface LinkItem {
-  name: string;
-  url: string;
 }

@@ -6,11 +6,7 @@
 <div class="dashboard">
   <mat-sidenav-container>
     <mat-sidenav #sidenav mode="push" class="sidenav">
-      <mat-nav-list *ngFor="let l of links">
-        <!-- fake the default sidenav selection on opening -->
-        <!-- <a href="#" style="height: 0px;"></a> -->
-        <a mat-list-item routerLink="{{l.url}}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{l.name}}</a>
-      </mat-nav-list>
+    <app-professional-sidenav></app-professional-sidenav>
     </mat-sidenav>
     <router-outlet></router-outlet>
   </mat-sidenav-container>
