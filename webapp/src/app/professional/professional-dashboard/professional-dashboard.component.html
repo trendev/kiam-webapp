@@ -6,7 +6,7 @@
 <div class="dashboard">
   <mat-sidenav-container>
     <mat-sidenav #sidenav mode="push" class="sidenav">
-      <app-professional-sidenav [email]="professional.email"></app-professional-sidenav>
+      <app-professional-sidenav [email]="professional.email" [sidenav]="sidenav"></app-professional-sidenav>
     </mat-sidenav>
     <router-outlet></router-outlet>
   </mat-sidenav-container>

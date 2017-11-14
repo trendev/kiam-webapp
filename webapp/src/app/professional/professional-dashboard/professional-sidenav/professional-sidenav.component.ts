@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-professional-sidenav',
@@ -8,6 +9,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProfessionalSidenavComponent implements OnInit {
 
   @Input() email: string;
+
+  @Input() sidenav: MatSidenav;
 
   links: LinkItem[] = [
     { name: 'Accueil', url: 'welcome', icon: 'home' },
