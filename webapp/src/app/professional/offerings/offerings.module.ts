@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { OfferingsRoutingModule } from './offerings-routing.module';
+import { SharedModule } from '@app/shared';
+import { OfferingsComponent } from './offerings/offerings.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    SharedModule,
+    OfferingsRoutingModule
   ],
-  declarations: []
+  declarations: [OfferingsComponent]
 })
 export class OfferingsModule { }
