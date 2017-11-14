@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginToolbarComponent } from './login-toolbar.component';
+import { SharedModule } from '@app/shared';
+import { CoreModule } from '@app/core';
 
 describe('LoginToolbarComponent', () => {
   let component: LoginToolbarComponent;
@@ -8,9 +10,12 @@ describe('LoginToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginToolbarComponent ]
+      imports: [
+        SharedModule, CoreModule
+      ],
+      declarations: [LoginToolbarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
