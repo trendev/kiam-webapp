@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdministratorToolbarComponent } from './administrator-toolbar.component';
+import { SharedModule } from '@app/shared';
+import { AuthenticationService, CoreModule } from '@app/core';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('AdministratorToolbarComponent', () => {
   let component: AdministratorToolbarComponent;
@@ -8,9 +12,17 @@ describe('AdministratorToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdministratorToolbarComponent ]
+      imports: [
+        SharedModule,
+        CoreModule,
+        AppRoutingModule
+      ],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/' },
+        AuthenticationService],
+      declarations: [AdministratorToolbarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
