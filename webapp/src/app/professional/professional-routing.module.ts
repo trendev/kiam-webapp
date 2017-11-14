@@ -41,6 +41,10 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: 'app/professional/profile/profile.module#ProfileModule'
       },
+      {
+        path: 'offerings',
+        loadChildren: 'app/professional/offerings/offerings.module#OfferingsModule'
+      },
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]
