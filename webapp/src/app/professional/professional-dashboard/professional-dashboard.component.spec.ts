@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfessionalDashboardComponent } from './professional-dashboard.component';
+import { SharedModule } from '@app/shared';
+import { ProfessionalModule } from '@app/professional/professional.module';
+import { AuthenticationService, CoreModule } from '@app/core';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { APP_BASE_HREF } from '@angular/common';
+import { AppModule } from '@app/app.module';
 
 describe('ProfessionalDashboardComponent', () => {
   let component: ProfessionalDashboardComponent;
@@ -8,9 +14,12 @@ describe('ProfessionalDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfessionalDashboardComponent ]
+      imports: [SharedModule, CoreModule, ProfessionalModule, AppRoutingModule, AppModule],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/' },
+        AuthenticationService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
