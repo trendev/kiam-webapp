@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfessionalSidenavComponent } from './professional-sidenav.component';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { SharedModule } from '@app/shared';
+import { CoreModule } from '@app/core';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('ProfessionalSidenavComponent', () => {
   let component: ProfessionalSidenavComponent;
@@ -8,9 +12,13 @@ describe('ProfessionalSidenavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfessionalSidenavComponent ]
+      imports: [SharedModule, CoreModule, AppRoutingModule],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/' }
+      ],
+      declarations: [ProfessionalSidenavComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
