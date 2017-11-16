@@ -17,6 +17,7 @@ import {
 } from '@angular/material';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AccountInfoComponent } from './account-info/account-info.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatChipsModule,
     MatExpansionModule
   ],
-  declarations: [PageNotFoundComponent],
+  declarations: [PageNotFoundComponent, AccountInfoComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -53,7 +54,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatSidenavModule,
     MatListModule,
     MatChipsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    AccountInfoComponent
   ]
 })
 

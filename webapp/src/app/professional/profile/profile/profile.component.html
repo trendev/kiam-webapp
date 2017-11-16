@@ -1,29 +1,19 @@
 <div class="container">
   <mat-card>
-    <form (ngSubmit)="save()" [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="save()" novalidate>
       <mat-card-title>{{pro.email}}</mat-card-title>
       <mat-card-content>
         <mat-accordion multi="false">
-          
+
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Informations relatives au compte
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <section class="account">
-              <mat-form-field>
-                <input matInput placeholder="Identifiant" value="{{pro.uuid}}" disabled>
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput placeholder="Date d'inscription" value="{{pro.registrationDate | date:'full':'':'fr'}}" disabled>
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput placeholder="Nom d'utilisateur" value="{{pro.username}}">
-              </mat-form-field>
-            </section>
+            <app-account-info></app-account-info>
           </mat-expansion-panel>
-          
+
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -32,7 +22,7 @@
             </mat-expansion-panel-header>
             <!-- content here -->
           </mat-expansion-panel>
-          
+
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -41,7 +31,7 @@
             </mat-expansion-panel-header>
             <!-- content here -->
           </mat-expansion-panel>
-          
+
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -79,6 +69,7 @@
           </mat-expansion-panel>
 
         </mat-accordion>
+        <pre>{{form.value | json}}</pre>
       </mat-card-content>
     </form>
   </mat-card>
