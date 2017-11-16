@@ -20,6 +20,7 @@ import {
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AccountInfoComponent } from './account-info/account-info.component';
+import { RegistrationDateComponent } from './registration-date/registration-date.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ import { AccountInfoComponent } from './account-info/account-info.component';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  declarations: [PageNotFoundComponent, AccountInfoComponent],
+  declarations: [PageNotFoundComponent, AccountInfoComponent, RegistrationDateComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -61,7 +62,8 @@ import { AccountInfoComponent } from './account-info/account-info.component';
     MatExpansionModule,
     AccountInfoComponent,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    RegistrationDateComponent
   ]
 })
 

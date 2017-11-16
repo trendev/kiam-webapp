@@ -2,14 +2,7 @@
   <mat-form-field>
     <input matInput placeholder="Identifiant" formControlName="uuid">
   </mat-form-field>
-  <mat-form-field>
-    <!-- value="{{pro.registrationDate | date:'full':'':'fr'}}" -->
-    <input matInput placeholder="Date d'inscription" formControlName="registrationDate">
-    <!--  Date Picker
-    <input matInput [matDatepicker]="picker" placeholder="Date d'inscription" formControlName="registrationDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker> -->
-  </mat-form-field>
+  <app-registration-date formControlName="registrationDate"></app-registration-date>
   <mat-form-field>
     <input matInput placeholder="Nom d'utilisateur" formControlName="username">
   </mat-form-field>
