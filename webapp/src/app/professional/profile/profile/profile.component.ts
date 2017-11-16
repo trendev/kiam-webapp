@@ -1,6 +1,7 @@
 import { AuthenticationService } from '@app/core';
 import { Component, OnInit } from '@angular/core';
 import { Professional } from '@app/entities';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +11,11 @@ import { Professional } from '@app/entities';
 export class ProfileComponent implements OnInit {
 
   pro: Professional;
+  form: FormGroup;
 
   constructor(private authenticationService: AuthenticationService) {
     this.pro = new Professional(this.authenticationService.user);
+    this.form = new FormGroup({});
   }
 
   ngOnInit() {

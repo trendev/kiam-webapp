@@ -1,6 +1,6 @@
 <div class="container">
   <mat-card>
-    <form (ngSubmit)="save()" #profileForm="ngForm">
+    <form (ngSubmit)="save()" [formGroup]="form">
       <mat-card-title>{{pro.email}}</mat-card-title>
       <mat-card-content>
         <mat-accordion multi="false">
