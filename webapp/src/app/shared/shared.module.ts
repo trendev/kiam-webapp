@@ -13,7 +13,9 @@ import {
   MatSidenavModule,
   MatListModule,
   MatChipsModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 } from '@angular/material';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -35,7 +37,9 @@ import { AccountInfoComponent } from './account-info/account-info.component';
     MatSidenavModule,
     MatListModule,
     MatChipsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [PageNotFoundComponent, AccountInfoComponent],
   exports: [
@@ -55,7 +59,9 @@ import { AccountInfoComponent } from './account-info/account-info.component';
     MatListModule,
     MatChipsModule,
     MatExpansionModule,
-    AccountInfoComponent
+    AccountInfoComponent,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 
