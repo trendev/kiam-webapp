@@ -24,4 +24,11 @@
   <mat-form-field>
     <input matInput placeholder="Photo de profil" formControlName="picturePath">
   </mat-form-field>
+  <div formArrayName="comments">
+    <div *ngFor="let comment of comments.controls; let i=index">
+      <mat-form-field>
+        <input matInput placeholder="Commentaire #{{i+1}}" formControlName="{{i}}">
+      </mat-form-field>
+    </div>
+  </div>
 </section>

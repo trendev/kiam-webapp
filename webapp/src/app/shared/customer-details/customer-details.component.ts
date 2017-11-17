@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import { ControlContainer, FormGroupDirective, FormGroup, FormArray } from '@angular/forms';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
@@ -19,9 +19,23 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ]
 })
-export class CustomerDetailsComponent {
+export class CustomerDetailsComponent implements OnInit {
 
-  constructor(parent: FormGroupDirective) { }
+  form: FormGroup;
 
+  constructor(private parent: FormGroupDirective) {
+  }
+
+  ngOnInit() {
+    if (this.parent.form === null) {
+      throw new Error(`parent: FormGroupDirective should not be null in CustomerDetailsComponent#init()`);
+    }
+    this.form = this.parent.form;
+    console.log(this.form.get('customerDetails').get('comments'));
+  }
+
+  get comments(): FormArray{
+    return this.form.get('customerDetails').get('comments') as FormArray;
+  }
 
 }
