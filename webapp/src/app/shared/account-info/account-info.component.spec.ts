@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountInfoComponent } from './account-info.component';
+import { SharedModule } from '@app/shared';
+import { CoreModule } from '@app/core';
 
 describe('AccountInfoComponent', () => {
   let component: AccountInfoComponent;
@@ -8,9 +10,9 @@ describe('AccountInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountInfoComponent ]
+      imports: [SharedModule, CoreModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

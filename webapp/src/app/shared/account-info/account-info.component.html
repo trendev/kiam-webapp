@@ -2,7 +2,7 @@
   <mat-form-field>
     <input matInput placeholder="Identifiant" formControlName="uuid">
   </mat-form-field>
-  <app-registration-date formControlName="registrationDate"></app-registration-date>
+  <app-registration-date formControlName="registrationDate" #registrationDate ngModel="registrationDate"></app-registration-date>
   <mat-form-field>
     <input matInput placeholder="Nom d'utilisateur" formControlName="username">
   </mat-form-field>

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistrationDateComponent } from './registration-date.component';
+import { SharedModule } from '@app/shared';
 
 describe('RegistrationDateComponent', () => {
   let component: RegistrationDateComponent;
@@ -8,7 +9,9 @@ describe('RegistrationDateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegistrationDateComponent ]
+      imports: [
+        SharedModule
+      ]
     })
     .compileComponents();
   }));

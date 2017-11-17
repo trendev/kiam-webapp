@@ -1,10 +1,10 @@
 import { Component, OnInit, Self } from '@angular/core';
-import { NgControl, ControlValueAccessor, Validators } from '@angular/forms';
+import { NgControl, ControlValueAccessor, Validators, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-registration-date',
   templateUrl: './registration-date.component.html',
-  styleUrls: ['./registration-date.component.scss'],
+  styleUrls: ['./registration-date.component.scss']
 })
 export class RegistrationDateComponent implements ControlValueAccessor, OnInit {
 
