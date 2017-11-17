@@ -11,4 +11,9 @@
     <mat-form-field>
       <input matInput placeholder="Téléphone" formControlName="phone">
     </mat-form-field>
+    <mat-form-field>
+        <input matInput [matDatepicker]="dp" formControlName="birthdate" placeholder="Date de naissance">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
   </section>
