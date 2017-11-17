@@ -2,7 +2,11 @@
   <mat-form-field>
     <input matInput placeholder="Identifiant" formControlName="uuid">
   </mat-form-field>
-  <app-registration-date formControlName="registrationDate" #registrationDate ngModel="registrationDate"></app-registration-date>
+  <mat-form-field>
+    <input matInput [matDatepicker]="dp" formControlName="registrationDate" placeholder="Date d'inscription">
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp></mat-datepicker>
+  </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Nom d'utilisateur" formControlName="username">
   </mat-form-field>
