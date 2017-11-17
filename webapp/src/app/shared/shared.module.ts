@@ -15,7 +15,8 @@ import {
   MatChipsModule,
   MatExpansionModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatRadioModule
 } from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
@@ -43,7 +44,8 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatRadioModule
   ],
   declarations: [PageNotFoundComponent, AccountInfoComponent, AddressComponent, CustomerDetailsComponent],
   exports: [
@@ -68,6 +70,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     MatNativeDateModule,
     MatMomentDateModule,
     AddressComponent,
+    MatRadioModule,
     CustomerDetailsComponent
   ]
 })

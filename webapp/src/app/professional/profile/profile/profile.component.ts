@@ -43,7 +43,7 @@ export class ProfileComponent {
           Validators.required]
         ],
         birthdate: new Date(this.pro.customerDetails.birthdate),
-        genre: this.pro.customerDetails.sex,
+        sex: this.pro.customerDetails.sex,
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
         comments: this.fb.array(this.pro.customerDetails.comments)
       })

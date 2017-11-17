@@ -1,19 +1,27 @@
 <section formGroupName="customerDetails" class="customer-details">
-    <mat-form-field>
-      <input matInput placeholder="Nom" formControlName="lastName">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Prénom" formControlName="firstName">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Surnom" formControlName="nickname">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Téléphone" formControlName="phone">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput [matDatepicker]="dp" formControlName="birthdate" placeholder="Date de naissance">
-        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker #dp></mat-datepicker>
-      </mat-form-field>
-  </section>
+  <mat-form-field>
+    <input matInput placeholder="Nom" formControlName="lastName">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Prénom" formControlName="firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Surnom" formControlName="nickname">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Téléphone" formControlName="phone">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="dp" formControlName="birthdate" placeholder="Date de naissance">
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp></mat-datepicker>
+  </mat-form-field>
+  <span>Genre:</span>
+  <mat-radio-group name="genre" formControlName="sex">
+    <mat-radio-button value="M">Homme</mat-radio-button>
+    <mat-radio-button value="F">Femme</mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field>
+    <input matInput placeholder="Photo de profil" formControlName="picturePath">
+  </mat-form-field>
+</section>
