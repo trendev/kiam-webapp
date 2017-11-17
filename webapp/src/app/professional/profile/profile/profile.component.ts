@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
 
   pro: Professional;
   form: any;
@@ -23,9 +23,6 @@ export class ProfileComponent implements OnInit {
         username: [this.pro.username, Validators.required]
       })
     });
-  }
-
-  ngOnInit() {
   }
 
   save() {
