@@ -16,11 +16,22 @@ export class ProfileComponent {
   constructor(private authenticationService: AuthenticationService,
     private fb: FormBuilder) {
     this.pro = new Professional(this.authenticationService.user);
+    this.createForm();
+  }
+
+  createForm() {
     this.form = this.fb.group({
       accountInfo: this.fb.group({
         uuid: new FormControl({ value: this.pro.uuid, disabled: true }),
         registrationDate: new FormControl({ value: new Date(this.pro.registrationDate), disabled: true }),
         username: [this.pro.username, Validators.required]
+      }),
+      address: this.fb.group({
+        street: [this.pro.address.street, Validators.required],
+        optional: [this.pro.address.optional, Validators.required],
+        postalCode: [this.pro.address.postalCode, Validators.required],
+        city: [this.pro.address.city, Validators.required],
+        country: new FormControl({ value: this.pro.address.country, disabled: true })
       })
     });
   }
