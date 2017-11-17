@@ -31,7 +31,6 @@ export class CustomerDetailsComponent implements OnInit {
       throw new Error(`parent: FormGroupDirective should not be null in CustomerDetailsComponent#init()`);
     }
     this.form = this.parent.form;
-    console.log(this.form.get('customerDetails').get('comments'));
   }
 
   get comments(): FormArray {
