@@ -28,7 +28,7 @@ export class ProfileComponent {
       }),
       address: this.fb.group({
         street: [this.pro.address.street, Validators.required],
-        optional: [this.pro.address.optional, Validators.required],
+        optional: this.pro.address.optional,
         postalCode: [this.pro.address.postalCode, Validators.required],
         city: [this.pro.address.city, Validators.required],
         country: new FormControl({ value: this.pro.address.country, disabled: true })
