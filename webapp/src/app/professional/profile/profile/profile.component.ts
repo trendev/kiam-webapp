@@ -33,7 +33,7 @@ export class ProfileComponent {
         city: [this.pro.address.city, Validators.required],
         country: new FormControl({ value: this.pro.address.country, disabled: true })
       }),
-      headDetails: this.fb.group({
+      customerDetails: this.fb.group({
         firstName: [this.pro.customerDetails.firstName, Validators.required],
         lastName: [this.pro.customerDetails.lastName, Validators.required],
         nickname: this.pro.customerDetails.nickname,

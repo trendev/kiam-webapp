@@ -22,6 +22,7 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { AddressComponent } from './address/address.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 @NgModule({
   imports: [
@@ -44,7 +45,7 @@ import { AddressComponent } from './address/address.component';
     MatNativeDateModule,
     MatMomentDateModule
   ],
-  declarations: [PageNotFoundComponent, AccountInfoComponent, AddressComponent],
+  declarations: [PageNotFoundComponent, AccountInfoComponent, AddressComponent, CustomerDetailsComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -66,7 +67,8 @@ import { AddressComponent } from './address/address.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
-    AddressComponent
+    AddressComponent,
+    CustomerDetailsComponent
   ]
 })
 
