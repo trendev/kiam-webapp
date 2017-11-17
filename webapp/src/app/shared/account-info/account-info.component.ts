@@ -1,6 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, FormControl, Form } from '@angular/forms';
-import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material';
+import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+
+export const REGISTRATION_DATE_FORMATS = {
+  parse: {
+    dateInput: 'LL LTS',
+  },
+  display: {
+    dateInput: 'LL LTS',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL LTS',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-account-info',
@@ -14,7 +27,8 @@ import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } fro
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
-    { provide: DateAdapter, useClass: NativeDateAdapter, deps: [MAT_DATE_LOCALE] }
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: REGISTRATION_DATE_FORMATS },
   ]
 })
 export class AccountInfoComponent implements OnInit {
