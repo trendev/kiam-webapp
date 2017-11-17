@@ -4,8 +4,8 @@ export class CustomerDetails {
     lastName: string;
     nickname: string;
     phone: string;
-    birthdate: any;
-    sex: any;
+    birthdate: number;
+    sex: string;
     picturePath: string;
     comments: string[];
 

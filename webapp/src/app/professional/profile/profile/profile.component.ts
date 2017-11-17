@@ -32,6 +32,20 @@ export class ProfileComponent {
         postalCode: [this.pro.address.postalCode, Validators.required],
         city: [this.pro.address.city, Validators.required],
         country: new FormControl({ value: this.pro.address.country, disabled: true })
+      }),
+      headDetails: this.fb.group({
+        firstName: [this.pro.customerDetails.firstName, Validators.required],
+        lastName: [this.pro.customerDetails.lastName, Validators.required],
+        nickname: this.pro.customerDetails.nickname,
+        phone: [this.pro.customerDetails.phone, [
+          Validators.minLength(10),
+          Validators.maxLength(14),
+          Validators.required]
+        ],
+        birthdate: new Date(this.pro.customerDetails.birthdate),
+        genre: this.pro.customerDetails.sex,
+        picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
+        comments: this.fb.array(this.pro.customerDetails.comments)
       })
     });
   }
