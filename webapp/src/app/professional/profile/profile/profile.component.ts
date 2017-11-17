@@ -19,7 +19,8 @@ export class ProfileComponent implements OnInit {
     this.form = this.fb.group({
       accountInfo: this.fb.group({
         uuid: new FormControl({ value: this.pro.uuid, disabled: true }),
-        registrationDate: new FormControl({ value: new Date(this.pro.registrationDate), disabled: true }),
+        // { value: new Date(this.pro.registrationDate), disabled: true }
+        registrationDate: new FormControl(new Date(this.pro.registrationDate)),
         username: [this.pro.username, Validators.required]
       })
     });
