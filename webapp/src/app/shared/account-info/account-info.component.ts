@@ -5,12 +5,12 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
 
 export const REGISTRATION_DATE_FORMATS = {
   parse: {
-    dateInput: 'LL LTS',
+    dateInput: 'LLL',
   },
   display: {
-    dateInput: 'LL LTS',
+    dateInput: 'LLL',
     monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL LTS',
+    dateA11yLabel: 'LLL',
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
