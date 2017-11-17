@@ -2,3 +2,19 @@
     display: flex;
     flex-direction: column;
 }
+
+.full-width {
+    width: 100%;
+}
+
+.comments-button {
+    display: flex;
+}
+
+.fill-space {
+    flex: 1 1 auto;
+}
+
+.half-size {
+    transform: scale(0.7);
+}

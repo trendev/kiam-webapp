@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlContainer, FormGroupDirective, FormGroup, FormArray } from '@angular/forms';
+import { ControlContainer, FormGroupDirective, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
@@ -34,8 +34,30 @@ export class CustomerDetailsComponent implements OnInit {
     console.log(this.form.get('customerDetails').get('comments'));
   }
 
-  get comments(): FormArray{
+  get comments(): FormArray {
     return this.form.get('customerDetails').get('comments') as FormArray;
+  }
+
+  removeComment(i: number) {
+    this.comments.removeAt(i);
+  }
+
+  newComment() {
+    this.comments.push(new FormControl());
+  }
+
+  removeAllComments() {
+    while (this.comments.length) {
+      this.comments.removeAt(0);
+    }
+  }
+
+  isLastComment(i: number): boolean {
+    return (this.comments.length - 1) === i;
+  }
+
+  isEmpty(): boolean {
+    return this.comments.length === 0;
   }
 
 }
