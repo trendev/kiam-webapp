@@ -1,4 +1,3 @@
-import { Business } from './../../../entities/business.model';
 import { AuthenticationService } from '@app/core';
 import { Component, OnInit } from '@angular/core';
 import { Professional } from '@app/entities';
@@ -10,7 +9,7 @@ import { BusinessService } from '@app/core/business.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
   pro: Professional;
   form: FormGroup;
@@ -50,7 +49,7 @@ export class ProfileComponent {
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
         comments: this.fb.array(this.pro.customerDetails.comments)
       }),
-      businesses: this.fb.group({}),
+      businesses: this.fb.array([]),
       paymentModes: this.fb.group({}),
       companyInformation: this.fb.group({
         website: this.pro.website,
@@ -69,15 +68,20 @@ export class ProfileComponent {
 
     this.businessService.businesses.subscribe(
       businesses => {
-        const businessesFG = this.form.get('businesses') as FormGroup;
+        const businessesFA = this.form.get('businesses') as FormArray;
         businesses.forEach(b =>
-          businessesFG.addControl(b.designation,
-            new FormControl(this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1)));
+          businessesFA.push(this.fb.group({
+            designation: b.designation,
+            value: this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1
+          })));
       },
       // TODO: handle this (check the status code, etc)
       e => console.error('Impossible de charger les activités depuis le serveur')
     );
 
+  }
+
+  ngOnInit() {
   }
 
   save() {
