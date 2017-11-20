@@ -17,11 +17,13 @@
     <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
     <mat-datepicker #dp></mat-datepicker>
   </mat-form-field>
-  <span>Genre:</span>
-  <mat-radio-group name="genre" formControlName="sex">
-    <mat-radio-button value="M">Homme</mat-radio-button>
-    <mat-radio-button value="F">Femme</mat-radio-button>
-  </mat-radio-group>
+  <section class="genre">
+    <label for="sex">Genre:</label>
+    <mat-radio-group name="sex" id="sex" formControlName="sex">
+      <mat-radio-button value="M">Homme</mat-radio-button>
+      <mat-radio-button value="F">Femme</mat-radio-button>
+    </mat-radio-group>
+  </section>
   <mat-form-field>
     <input matInput placeholder="Photo de profil" formControlName="picturePath">
   </mat-form-field>

@@ -4,8 +4,8 @@
     <form [formGroup]="form" (ngSubmit)="save()" novalidate>
       <mat-card-title>{{pro.email}}</mat-card-title>
       <mat-card-content>
-        <!-- <pre>{{form.value | json}}</pre> -->
-        <mat-accordion multi="true">
+        <pre>{{form.value | json}}</pre>
+        <mat-accordion multi="false">
 
           <mat-expansion-panel>
             <mat-expansion-panel-header>
