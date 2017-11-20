@@ -1,7 +1,9 @@
+import { Business } from './../../../entities/business.model';
 import { AuthenticationService } from '@app/core';
 import { Component, OnInit } from '@angular/core';
 import { Professional } from '@app/entities';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { BusinessService } from '@app/core/business.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,9 +13,10 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 export class ProfileComponent {
 
   pro: Professional;
-  form: any;
+  form: FormGroup;
 
   constructor(private authenticationService: AuthenticationService,
+    private businessService: BusinessService,
     private fb: FormBuilder) {
     this.pro = new Professional(this.authenticationService.user);
     this.createForm();
@@ -46,8 +49,35 @@ export class ProfileComponent {
         sex: this.pro.customerDetails.sex,
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
         comments: this.fb.array(this.pro.customerDetails.comments)
+      }),
+      businesses: this.fb.group({}),
+      paymentModes: this.fb.group({}),
+      companyInformation: this.fb.group({
+        website: this.pro.website,
+        companyName: this.pro.companyName,
+        companyID: this.pro.companyID,
+        VATcode: this.pro.VATcode,
+        creationDate: new Date(this.pro.creationDate)
+      }),
+      socialNetworkAccounts: this.fb.group({
+        facebook: this.pro.socialNetworkAccounts.facebook,
+        twitter: this.pro.socialNetworkAccounts.twitter,
+        instagram: this.pro.socialNetworkAccounts.instagram,
+        pinterest: this.pro.socialNetworkAccounts.pinterest
       })
     });
+
+    this.businessService.businesses.subscribe(
+      businesses => {
+        const businessesFG = this.form.get('businesses') as FormGroup;
+        businesses.forEach(b =>
+          businessesFG.addControl(b.designation,
+            new FormControl(this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1)));
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de charger les activités depuis le serveur')
+    );
+
   }
 
   save() {
