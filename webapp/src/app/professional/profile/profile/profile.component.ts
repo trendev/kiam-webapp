@@ -1,8 +1,7 @@
-import { AuthenticationService } from '@app/core';
+import { AuthenticationService, BusinessService } from '@app/core';
 import { Component, OnInit } from '@angular/core';
 import { Professional } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-import { BusinessService } from '@app/core/business.service';
 
 @Component({
   selector: 'app-profile',
