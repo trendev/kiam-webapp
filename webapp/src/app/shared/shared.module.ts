@@ -18,12 +18,13 @@ import {
   MatNativeDateModule,
   MatRadioModule
 } from '@angular/material';
-import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { AddressComponent } from './address/address.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { BusinessComponent } from './business/business.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,12 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     MatMomentDateModule,
     MatRadioModule
   ],
-  declarations: [PageNotFoundComponent, AccountInfoComponent, AddressComponent, CustomerDetailsComponent],
+  declarations: [
+    PageNotFoundComponent,
+    AccountInfoComponent,
+    AddressComponent,
+    CustomerDetailsComponent,
+    BusinessComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -71,7 +77,8 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     MatMomentDateModule,
     AddressComponent,
     MatRadioModule,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    BusinessComponent
   ]
 })
 
