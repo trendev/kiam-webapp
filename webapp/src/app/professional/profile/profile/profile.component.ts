@@ -1,4 +1,4 @@
-import { AuthenticationService, BusinessService } from '@app/core';
+import { AuthenticationService, BusinessService, PaymentModeService } from '@app/core';
 import { Component, OnInit } from '@angular/core';
 import { Professional } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService,
     private businessService: BusinessService,
+    private paymentModeService: PaymentModeService,
     private fb: FormBuilder) {
     this.pro = new Professional(this.authenticationService.user);
     this.createForm();
