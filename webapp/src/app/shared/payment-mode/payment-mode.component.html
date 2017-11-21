@@ -1,0 +1,5 @@
+<section formGroupName="paymentModes">
+  <div *ngFor="let pm of paymentModes.controls; let i=index" [formGroupName]="i">
+    <mat-checkbox formControlName="value">{{pm.get('name').value}}</mat-checkbox>
+  </div>
+</section>

@@ -25,6 +25,7 @@ import { AccountInfoComponent } from './account-info/account-info.component';
 import { AddressComponent } from './address/address.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { BusinessComponent } from './business/business.component';
+import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { BusinessComponent } from './business/business.component';
     AccountInfoComponent,
     AddressComponent,
     CustomerDetailsComponent,
-    BusinessComponent],
+    BusinessComponent,
+    PaymentModeComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -78,7 +80,8 @@ import { BusinessComponent } from './business/business.component';
     AddressComponent,
     MatRadioModule,
     CustomerDetailsComponent,
-    BusinessComponent
+    BusinessComponent,
+    PaymentModeComponent
   ]
 })
 
