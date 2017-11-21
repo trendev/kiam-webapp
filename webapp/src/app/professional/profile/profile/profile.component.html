@@ -74,12 +74,14 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button type="button" mat-mini-fab color="primary" (click)="reset()">
-          <mat-icon aria-label="Annuler les modification">undo</mat-icon>
-        </button>
-        <button type="submit" mat-mini-fab color="primary">
-          <mat-icon aria-label="Sauvegarder">done</mat-icon>
-        </button>
+        <div class="button-container">
+          <button type="button" mat-mini-fab color="primary" (click)="reset()">
+            <mat-icon aria-label="Annuler les modification">undo</mat-icon>
+          </button>
+          <button type="submit" mat-mini-fab color="primary">
+            <mat-icon aria-label="Sauvegarder">done</mat-icon>
+          </button>
+        </div>
       </mat-card-actions>
     </form>
   </mat-card>
