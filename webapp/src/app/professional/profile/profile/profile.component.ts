@@ -123,7 +123,6 @@ export class ProfileComponent {
   // this.pro.customerDetails.birthdate = value.customerDetails.birthdate.valueOf();
   prepareSave(): Professional {
     const value = this.form.getRawValue();
-    console.log(value);
 
     const pro = new Professional({
       username: value.accountInfo.username || undefined,
