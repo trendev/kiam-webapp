@@ -98,7 +98,10 @@ export class ProfileComponent implements OnInit {
   }
 
   save() {
-    console.log('save requested...');
-    // TODO : implements
+    console.log(`save()`);
+  }
+
+  reset() {
+    console.log(`reset()`);
   }
 }
