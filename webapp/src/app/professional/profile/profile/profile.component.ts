@@ -103,6 +103,8 @@ export class ProfileComponent implements OnInit {
   }
 
   revert() {
+    const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
+    customerDetailsFG.setControl('comments', this.fb.array(this.pro.customerDetails.comments));
     this.form.reset(this.createForm().value);
   }
 }
