@@ -1,0 +1,19 @@
+<section formGroupName="companyInformation" class="company-information">
+  <mat-form-field>
+    <input matInput placeholder="Site web" formControlName="website">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Dénomination" formControlName="companyName">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Identifiant de la société (SIRET)" formControlName="companyID">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Numéro de TVA" formControlName="VATcode">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="dp" formControlName="creationDate" placeholder="Date d'immatriculation">
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp></mat-datepicker>
+  </mat-form-field>
+</section>
