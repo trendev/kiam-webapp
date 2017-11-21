@@ -5,7 +5,7 @@
       <mat-card-title>{{pro.email}}</mat-card-title>
 
       <mat-card-content>
-        <pre>{{form.value | json}}</pre>
+        <pre>{{form.getRawValue() | json}}</pre>
         <mat-accordion multi="false">
 
           <mat-expansion-panel>
