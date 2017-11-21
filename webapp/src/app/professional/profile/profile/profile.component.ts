@@ -1,14 +1,15 @@
 import { AuthenticationService, BusinessService, PaymentModeService } from '@app/core';
-import { Component, OnInit } from '@angular/core';
-import { Professional } from '@app/entities';
+import { Component } from '@angular/core';
+import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
 
   pro: Professional;
   form: FormGroup;
@@ -95,13 +96,6 @@ export class ProfileComponent implements OnInit {
     return fg;
   }
 
-  ngOnInit() {
-  }
-
-  save() {
-    console.log(`save()`);
-  }
-
   revert() {
     // rebuilds the controls of the comments group if they have been modified/removed
     const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
@@ -111,4 +105,74 @@ export class ProfileComponent implements OnInit {
     this.form.reset(this.createForm().getRawValue());
 
   }
+
+  save() {
+    const pro = this.prepareSave();
+
+    // saves the non-mutable fields
+    pro.email = this.pro.email;
+    pro.cltype = this.pro.cltype;
+    // ignores password
+    pro.uuid = this.pro.uuid;
+    pro.registrationDate = this.pro.registrationDate;
+    pro.blocked = this.pro.blocked;
+
+    // TODO: override this.pro with the PUT request response
+    this.pro = pro;
+  }
+  // this.pro.customerDetails.birthdate = value.customerDetails.birthdate.valueOf();
+  prepareSave(): Professional {
+    const value = this.form.getRawValue();
+    console.log(value);
+
+    const pro = new Professional({
+      username: value.accountInfo.username || undefined,
+      website: value.companyInformation.website || undefined,
+      companyName: value.companyInformation.companyName || undefined,
+      companyID: value.companyInformation.companyID || undefined,
+      VATcode: value.companyInformation.VATcode || undefined,
+      creationDate: value.companyInformation.creationDate.valueOf() || undefined,
+      address: {
+        street: value.address.street || undefined,
+        optional: value.address.optional || undefined,
+        postalCode: value.address.postalCode || undefined,
+        city: value.address.city || undefined,
+        country: value.address.country || undefined
+      },
+      customerDetails: {
+        firstName: value.customerDetails.firstName || undefined,
+        lastName: value.customerDetails.lastName || undefined,
+        nickname: value.customerDetails.nickname || undefined,
+        phone: value.customerDetails.phone || undefined,
+        birthdate: value.customerDetails.birthdate.valueOf() || undefined,
+        sex: value.customerDetails.sex || undefined,
+        picturePath: value.customerDetails.picturePath || undefined,
+        comments: value.customerDetails.comments || undefined
+      },
+      socialNetworkAccounts: {
+        facebook: value.socialNetworkAccounts.facebook || undefined,
+        twitter: value.socialNetworkAccounts.twitter || undefined,
+        instagram: value.socialNetworkAccounts.instagram || undefined,
+        pinterest: value.socialNetworkAccounts.pinterest || undefined
+      },
+      businesses: this.extract('businesses',
+        fg => new Business({
+          designation: fg.value.designation
+        })
+      ),
+      paymentModes: this.extract('paymentModes',
+        fg => new PaymentMode({
+          name: fg.value.name
+        })
+      )
+    });
+
+    return pro;
+  }
+
+  extract(faName: string, mapperFn: (fg: FormGroup) => any) {
+    const fa = this.form.get(faName) as FormArray;
+    return fa.controls.filter(fg => fg.value.value).map(mapperFn);
+  }
+
 }
