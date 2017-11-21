@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
         comments: this.fb.array(this.pro.customerDetails.comments)
       }),
       businesses: this.fb.array([]),
-      paymentModes: this.fb.group({}),
+      paymentModes: this.fb.array([]),
       companyInformation: this.fb.group({
         website: this.pro.website,
         companyName: this.pro.companyName,
@@ -73,6 +73,19 @@ export class ProfileComponent implements OnInit {
           businessesFA.push(this.fb.group({
             designation: b.designation,
             value: this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1
+          })));
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de charger les activités depuis le serveur')
+    );
+
+    this.paymentModeService.paymentModes.subscribe(
+      paymentModes => {
+        const paymentModesFA = this.form.get('paymentModes') as FormArray;
+        paymentModes.forEach(pm =>
+          paymentModesFA.push(this.fb.group({
+            name: pm.name,
+            value: this.pro.paymentModes.findIndex(_pm => _pm.name === pm.name) !== -1
           })));
       },
       // TODO: handle this (check the status code, etc)
