@@ -92,9 +92,6 @@ export class ProfileComponent implements OnInit {
       e => console.error('Impossible de charger les activités depuis le serveur')
     );
 
-
-    console.warn(fg.value);
-
     return fg;
   }
 
