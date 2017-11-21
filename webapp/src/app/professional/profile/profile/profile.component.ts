@@ -18,11 +18,11 @@ export class ProfileComponent implements OnInit {
     private paymentModeService: PaymentModeService,
     private fb: FormBuilder) {
     this.pro = new Professional(this.authenticationService.user);
-    this.createForm();
+    this.form = this.createForm();
   }
 
-  createForm() {
-    this.form = this.fb.group({
+  createForm(): FormGroup {
+    const fg = this.fb.group({
       accountInfo: this.fb.group({
         uuid: new FormControl({ value: this.pro.uuid, disabled: true }),
         registrationDate: new FormControl({ value: new Date(this.pro.registrationDate), disabled: true }),
@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
 
     this.businessService.businesses.subscribe(
       businesses => {
-        const businessesFA = this.form.get('businesses') as FormArray;
+        const businessesFA = fg.get('businesses') as FormArray;
         businesses.forEach(b =>
           businessesFA.push(this.fb.group({
             designation: b.designation,
@@ -81,7 +81,7 @@ export class ProfileComponent implements OnInit {
 
     this.paymentModeService.paymentModes.subscribe(
       paymentModes => {
-        const paymentModesFA = this.form.get('paymentModes') as FormArray;
+        const paymentModesFA = fg.get('paymentModes') as FormArray;
         paymentModes.forEach(pm =>
           paymentModesFA.push(this.fb.group({
             name: pm.name,
@@ -92,6 +92,7 @@ export class ProfileComponent implements OnInit {
       e => console.error('Impossible de charger les activités depuis le serveur')
     );
 
+    return fg;
   }
 
   ngOnInit() {
@@ -101,7 +102,7 @@ export class ProfileComponent implements OnInit {
     console.log(`save()`);
   }
 
-  reset() {
-    console.log(`reset()`);
+  revert() {
+    this.form.reset(this.createForm().value);
   }
 }

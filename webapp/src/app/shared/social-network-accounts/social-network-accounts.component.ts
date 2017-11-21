@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-social-network-accounts',
@@ -16,7 +16,6 @@ export class SocialNetworkAccountsComponent implements OnInit {
 
   constructor(private parent: FormGroupDirective) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
