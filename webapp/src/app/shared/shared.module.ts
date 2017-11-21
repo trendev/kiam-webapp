@@ -28,6 +28,7 @@ import { BusinessComponent } from './business/business.component';
 import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { CompanyInformationComponent } from './company-information/company-information.component';
 import { SocialNetworkAccountsComponent } from './social-network-accounts/social-network-accounts.component';
+import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
 
 @NgModule({
   imports: [
@@ -59,7 +60,8 @@ import { SocialNetworkAccountsComponent } from './social-network-accounts/social
     BusinessComponent,
     PaymentModeComponent,
     CompanyInformationComponent,
-    SocialNetworkAccountsComponent],
+    SocialNetworkAccountsComponent,
+    LoremIpsumComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -87,7 +89,8 @@ import { SocialNetworkAccountsComponent } from './social-network-accounts/social
     BusinessComponent,
     PaymentModeComponent,
     CompanyInformationComponent,
-    SocialNetworkAccountsComponent
+    SocialNetworkAccountsComponent,
+    LoremIpsumComponent
   ]
 })
 
