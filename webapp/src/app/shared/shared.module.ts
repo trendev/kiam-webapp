@@ -27,6 +27,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 import { BusinessComponent } from './business/business.component';
 import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { CompanyInformationComponent } from './company-information/company-information.component';
+import { SocialNetworkAccountsComponent } from './social-network-accounts/social-network-accounts.component';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { CompanyInformationComponent } from './company-information/company-infor
     CustomerDetailsComponent,
     BusinessComponent,
     PaymentModeComponent,
-    CompanyInformationComponent],
+    CompanyInformationComponent,
+    SocialNetworkAccountsComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -84,7 +86,8 @@ import { CompanyInformationComponent } from './company-information/company-infor
     CustomerDetailsComponent,
     BusinessComponent,
     PaymentModeComponent,
-    CompanyInformationComponent
+    CompanyInformationComponent,
+    SocialNetworkAccountsComponent
   ]
 })
 
