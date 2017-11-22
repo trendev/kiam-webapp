@@ -196,7 +196,7 @@ export class ProfileComponent {
         this.revert(); // reset the controls (pristine, untouched...)
       },
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder les modifications du profile')
+      e => console.error('Impossible de rafraîchir le profil à partir du serveur')
     );
   }
 }
