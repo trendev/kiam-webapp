@@ -24,11 +24,13 @@ export class ChangePasswordComponent {
     this.form = this.fb.group({
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(10)
+        Validators.minLength(10),
+        Validators.pattern('[^\\s]+$')// no white space
       ]),
       confirmation: new FormControl('', [
         Validators.required,
-        Validators.minLength(10)
+        Validators.minLength(10),
+        Validators.pattern('[^\\s]+$')// no white space
       ])
     });
   }
