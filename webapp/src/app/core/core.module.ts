@@ -5,6 +5,7 @@ import { AuthenticationService } from './authentication.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { BusinessService } from './business.service';
 import { PaymentModeService } from './payment-mode.service';
+import { ProfessionalService } from './professional.service';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { PaymentModeService } from './payment-mode.service';
     AuthenticationService,
     ErrorHandlerService,
     BusinessService,
-    PaymentModeService]
+    PaymentModeService,
+    ProfessionalService]
 })
 export class CoreModule {
   /* make sure CoreModule is imported only by one NgModule the AppModule */

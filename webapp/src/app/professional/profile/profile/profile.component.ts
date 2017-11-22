@@ -1,4 +1,9 @@
-import { AuthenticationService, BusinessService, PaymentModeService } from '@app/core';
+import {
+  AuthenticationService,
+  BusinessService,
+  PaymentModeService,
+  ProfessionalService
+} from '@app/core';
 import { Component } from '@angular/core';
 import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
@@ -17,6 +22,7 @@ export class ProfileComponent {
   constructor(private authenticationService: AuthenticationService,
     private businessService: BusinessService,
     private paymentModeService: PaymentModeService,
+    private professionalService: ProfessionalService,
     private fb: FormBuilder) {
     this.pro = new Professional(this.authenticationService.user);
     this.form = this.createForm();
@@ -56,7 +62,7 @@ export class ProfileComponent {
         website: this.pro.website,
         companyName: this.pro.companyName,
         companyID: this.pro.companyID,
-        VATcode: this.pro.VATcode,
+        vatcode: this.pro.vatcode,
         creationDate: new Date(this.pro.creationDate)
       }),
       socialNetworkAccounts: this.fb.group({
@@ -117,19 +123,27 @@ export class ProfileComponent {
     pro.registrationDate = this.pro.registrationDate;
     pro.blocked = this.pro.blocked;
 
-    // TODO: override this.pro with the PUT request response
-    this.pro = pro;
+    this.professionalService.put(pro).subscribe(
+      _pro => {
+        this.pro = _pro;
+        this.authenticationService.user = _pro;
+        this.revert(); // reset the controls (pristine, untouched...)
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de sauvegarder les modifications du profile')
+    );
   }
-  // this.pro.customerDetails.birthdate = value.customerDetails.birthdate.valueOf();
+
   prepareSave(): Professional {
     const value = this.form.getRawValue();
 
     const pro = new Professional({
+      password: undefined,
       username: value.accountInfo.username || undefined,
       website: value.companyInformation.website || undefined,
       companyName: value.companyInformation.companyName || undefined,
       companyID: value.companyInformation.companyID || undefined,
-      VATcode: value.companyInformation.VATcode || undefined,
+      vatcode: value.companyInformation.vatcode || undefined,
       creationDate: value.companyInformation.creationDate.valueOf() || undefined,
       address: {
         street: value.address.street || undefined,
@@ -174,4 +188,15 @@ export class ProfileComponent {
     return fa.controls.filter(fg => fg.value.value).map(mapperFn);
   }
 
+  refresh() {
+    this.professionalService.profile().subscribe(
+      _pro => {
+        this.pro = _pro;
+        this.authenticationService.user = _pro;
+        this.revert(); // reset the controls (pristine, untouched...)
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de sauvegarder les modifications du profile')
+    );
+  }
 }

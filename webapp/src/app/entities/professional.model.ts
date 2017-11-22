@@ -8,7 +8,7 @@ export class Professional extends Customer {
     website: string;
     companyName: string;
     companyID: string;
-    VATcode: string;
+    vatcode: string;
     creationDate: number;
     businesses: Business[];
     paymentModes: PaymentMode[];
