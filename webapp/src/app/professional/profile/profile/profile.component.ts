@@ -154,12 +154,12 @@ export class ProfileComponent {
         instagram: value.socialNetworkAccounts.instagram || undefined,
         pinterest: value.socialNetworkAccounts.pinterest || undefined
       },
-      businesses: this.extract('businesses',
+      businesses: this.extractArrayFromControl('businesses',
         fg => new Business({
           designation: fg.value.designation
         })
       ),
-      paymentModes: this.extract('paymentModes',
+      paymentModes: this.extractArrayFromControl('paymentModes',
         fg => new PaymentMode({
           name: fg.value.name
         })
@@ -169,7 +169,7 @@ export class ProfileComponent {
     return pro;
   }
 
-  extract(faName: string, mapperFn: (fg: FormGroup) => any) {
+  private extractArrayFromControl(faName: string, mapperFn: (fg: FormGroup) => any) {
     const fa = this.form.get(faName) as FormArray;
     return fa.controls.filter(fg => fg.value.value).map(mapperFn);
   }
