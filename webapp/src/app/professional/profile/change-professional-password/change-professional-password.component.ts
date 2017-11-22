@@ -13,6 +13,7 @@ export class ChangeProfessionalPasswordComponent implements OnInit {
   }
 
   save(password: string) {
+    // TODO : use authenticationService#newPassword()
     console.warn(`cool now we can save the password ${password}`);
   }
 
