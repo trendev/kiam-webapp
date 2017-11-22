@@ -21,6 +21,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+    // TODO : checks for each modification of the field confirmation if confirmation === password
   }
 
   createForm() {
