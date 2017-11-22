@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss']
 })
-export class ChangePasswordComponent {
+export class ChangePasswordComponent implements OnInit {
 
   form: FormGroup;
 
@@ -18,6 +18,9 @@ export class ChangePasswordComponent {
     private authenticationService: AuthenticationService,
     private fb: FormBuilder) {
     this.createForm();
+  }
+
+  ngOnInit() {
   }
 
   createForm() {
