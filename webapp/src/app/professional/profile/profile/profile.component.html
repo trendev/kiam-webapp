@@ -5,7 +5,7 @@
       <mat-card-title>{{pro.email}}</mat-card-title>
 
       <mat-card-content>
-        <!-- <pre>{{form.getRawValue() | json}}</pre> -->
+
         <mat-accordion multi="false">
 
           <mat-expansion-panel>
@@ -88,7 +88,13 @@
         </div>
 
       </mat-card-actions>
+      
+      <mat-divider></mat-divider>
 
+      <button mat-button routerLink="/professional/profile/change-password">
+        <mat-icon aria-label="Changement de mot de passe">arrow_forward</mat-icon>
+        Changement de mot de passe
+      </button>
     </form>
   </mat-card>
 </div>

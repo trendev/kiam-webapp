@@ -29,6 +29,7 @@ import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { CompanyInformationComponent } from './company-information/company-information.component';
 import { SocialNetworkAccountsComponent } from './social-network-accounts/social-network-accounts.component';
 import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   imports: [
@@ -61,7 +62,8 @@ import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
     PaymentModeComponent,
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,
-    LoremIpsumComponent],
+    LoremIpsumComponent,
+    ChangePasswordComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -90,7 +92,8 @@ import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
     PaymentModeComponent,
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,
-    LoremIpsumComponent
+    LoremIpsumComponent,
+    ChangePasswordComponent
   ]
 })
 

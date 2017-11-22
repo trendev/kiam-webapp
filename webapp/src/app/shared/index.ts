@@ -8,4 +8,4 @@ export * from './company-information/company-information.component';
 export * from './social-network-accounts/social-network-accounts.component';
 export * from './lorem-ipsum/lorem-ipsum.component';
 export * from './payment-mode/payment-mode.component';
-
+export * from './change-password/change-password.component';
