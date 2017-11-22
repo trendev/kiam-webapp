@@ -12,8 +12,8 @@ export class ChangeProfessionalPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  save() {
-    console.warn(`cool now we can save the password`);
+  save(password: string) {
+    console.warn(`cool now we can save the password ${password}`);
   }
 
 }

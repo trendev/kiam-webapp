@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,9 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class ChangePasswordComponent {
 
   form: FormGroup;
+
+  @Output()
+  newpwd: EventEmitter<string> = new EventEmitter();
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -32,7 +35,12 @@ export class ChangePasswordComponent {
   }
 
   save() {
-
+    const value = this.form.value;
+    if (value.password === value.confirmation) {
+      this.newpwd.emit(value.password);
+    } else {
+      console.warn('Les mots de passse ne sont pas identiques...');
+    }
   }
 
   revert() {
