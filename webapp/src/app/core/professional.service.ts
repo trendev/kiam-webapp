@@ -1,7 +1,7 @@
 import { ErrorHandlerService } from './error-handler.service';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Professional } from '@app/entities';
 import { Observable } from 'rxjs/Observable';
 
@@ -12,9 +12,10 @@ export class ProfessionalService {
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
-  profile(): Observable<Professional> {
+  profile(refresh?: boolean): Observable<Professional> {
     return this.http.get<Professional>(`${this.api}/profile`,
       {
+        params: new HttpParams().set('refresh', refresh ? 'true' : 'false'),
         withCredentials: true
       })
       .map(pro => new Professional(pro))
