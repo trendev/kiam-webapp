@@ -1,7 +1,8 @@
+import { ChangeProfessionalPasswordComponent } from './change-professional-password/change-professional-password.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent, ChangePasswordComponent } from '@app/shared';
+import { PageNotFoundComponent } from '@app/shared';
 
 const routes: Routes = [
   {
@@ -10,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'change-password',
-    component: ChangePasswordComponent
+    component: ChangeProfessionalPasswordComponent
   },
   { path: '**', component: PageNotFoundComponent }
 ];

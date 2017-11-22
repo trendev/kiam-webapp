@@ -1,10 +1,11 @@
 <mat-nav-list>
   <a mat-list-item href="#" style="height: 0px;"></a>
-  <a mat-list-item routerLink="profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="sidenav.close()">
+  <a mat-list-item routerLink="profile" routerLinkActive="active" (click)="sidenav.close()">
     <mat-icon matListIcon>account_circle</mat-icon>{{email}}</a>
   <mat-divider></mat-divider>
   <div *ngFor="let l of links">
-    <a mat-list-item routerLink="{{l.url}}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="sidenav.close()">
+    <a mat-list-item routerLink="{{l.url}}" routerLinkActive="active" (click)="sidenav.close()">
       <mat-icon matListIcon>{{l.icon}}</mat-icon>{{l.name}}</a>
   </div>
 </mat-nav-list>
+<!-- [routerLinkActiveOptions]="{ exact: true }"  -->
