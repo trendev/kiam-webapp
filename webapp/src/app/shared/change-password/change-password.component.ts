@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@app/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -13,7 +14,9 @@ export class ChangePasswordComponent {
   @Output()
   newpwd: EventEmitter<string> = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private fb: FormBuilder) {
     this.createForm();
   }
 
@@ -31,7 +34,16 @@ export class ChangePasswordComponent {
   }
 
   generate() {
-
+    this.authenticationService.password().subscribe(
+      pwd => {
+        this.form.get('password').setValue(pwd, { emitEvent: true });
+        this.form.get('password').markAsDirty();
+        this.form.get('confirmation').setValue(pwd, { emitEvent: true });
+        this.form.get('confirmation').markAsDirty();
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de générer un mot de passe depuis le serveur')
+    );
   }
 
   save() {
