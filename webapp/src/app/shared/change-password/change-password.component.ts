@@ -27,4 +27,16 @@ export class ChangePasswordComponent {
     });
   }
 
+  generate() {
+
+  }
+
+  save() {
+
+  }
+
+  revert() {
+    this.form.reset();
+  }
+
 }
