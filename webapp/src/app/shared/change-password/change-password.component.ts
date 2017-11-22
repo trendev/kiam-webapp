@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class ChangePasswordComponent implements OnInit {
 
+  hide: boolean;
+
   form: FormGroup;
 
   @Output()
