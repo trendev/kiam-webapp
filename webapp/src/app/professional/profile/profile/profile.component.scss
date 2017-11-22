@@ -15,3 +15,12 @@ mat-card {
         width: 100%;
     }
 }
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-container>* {
+    margin: 5px;
+}

@@ -1,11 +1,11 @@
 <div class="container">
-  <pre>{{pro | json}}</pre>
+  <!-- <pre>{{pro | json}}</pre> -->
   <mat-card>
     <form [formGroup]="form" (ngSubmit)="save()" novalidate>
       <mat-card-title>{{pro.email}}</mat-card-title>
 
       <mat-card-content>
-        <pre>{{form.getRawValue() | json}}</pre>
+        <!-- <pre>{{form.getRawValue() | json}}</pre> -->
         <mat-accordion multi="false">
 
           <mat-expansion-panel>
@@ -75,12 +75,15 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button type="button" mat-mini-fab (click)="revert()">
-          <mat-icon aria-label="Annuler les modification">undo</mat-icon>
-        </button>
-        <button type="submit" mat-mini-fab>
-          <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
-        </button>
+        <div class="button-container">
+          <button type="button" mat-mini-fab (click)="revert()">
+            <mat-icon aria-label="Annuler les modification">undo</mat-icon>
+          </button>
+          <button type="submit" mat-mini-fab>
+            <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
+          </button>
+        </div>
+
       </mat-card-actions>
 
     </form>
