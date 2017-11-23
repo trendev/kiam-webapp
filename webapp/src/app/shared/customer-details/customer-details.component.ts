@@ -39,16 +39,22 @@ export class CustomerDetailsComponent implements OnInit {
 
   removeComment(i: number) {
     this.comments.removeAt(i);
+    this.form.markAsDirty();
+    this.form.markAsTouched();
   }
 
   newComment() {
     this.comments.push(new FormControl());
+    this.form.markAsDirty();
+    this.form.markAsTouched();
   }
 
   removeAllComments() {
     while (this.comments.length) {
       this.comments.removeAt(0);
     }
+    this.form.markAsDirty();
+    this.form.markAsTouched();
   }
 
   isLastComment(i: number): boolean {
