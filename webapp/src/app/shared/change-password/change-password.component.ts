@@ -40,7 +40,7 @@ export class ChangePasswordComponent implements OnInit {
       ])
     },
       {
-        validator: validPassword()
+        validator: passwordMatchValidator()
       });
   }
 
@@ -72,7 +72,7 @@ export class ChangePasswordComponent implements OnInit {
 
 }
 
-export function validPassword(): ValidatorFn {
+export function passwordMatchValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } => {
     return (control.get('password').value !== control.get('confirmation').value) ? { invalidPassword: true } : null;
   };
