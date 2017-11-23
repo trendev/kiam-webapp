@@ -73,7 +73,7 @@
 
         </mat-accordion>
       </mat-card-content>
-
+      <mat-error *ngIf="form.invalid">Certains champs ne sont pas valides !</mat-error>
       <mat-card-actions>
         <div class="button-container">
           <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
