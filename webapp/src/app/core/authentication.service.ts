@@ -92,6 +92,23 @@ export class AuthenticationService {
       });
   }
 
+  newPassword(password: string): Observable<string> {
+
+    const payload = {
+      newpassword: password
+    };
+
+    return this.http.put<PasswordResponse>(`${this.api}/new-password`,
+      payload,
+      { withCredentials: true })
+      .map(resp => resp.password)
+      .catch(e => this.errorHandler.handle(e));
+  }
+
+}
+
+interface PasswordResponse {
+  password: string;
 }
 
 // export const loginRequired: NavigationExtras = {
