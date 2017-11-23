@@ -33,13 +33,12 @@ export const REGISTRATION_DATE_FORMATS = {
 })
 export class AccountInfoComponent implements OnInit {
 
-  form: FormGroup;
+  accountInfo: FormGroup;
 
   constructor(private parent: FormGroupDirective) {
   }
 
   ngOnInit() {
-    this.form = this.parent.form;
-    console.log(this.form);
+    this.accountInfo = this.parent.form.get('accountInfo') as FormGroup;
   }
 }
