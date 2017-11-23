@@ -1,6 +1,6 @@
 import { AuthenticationService } from '@app/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-change-password',
@@ -38,7 +38,10 @@ export class ChangePasswordComponent implements OnInit {
         Validators.minLength(10),
         Validators.pattern('[^\\s]+$')// no white space
       ])
-    });
+    },
+      {
+        validator: validPassword()
+      });
   }
 
   generate() {
@@ -67,4 +70,10 @@ export class ChangePasswordComponent implements OnInit {
     this.form.reset();
   }
 
+}
+
+export function validPassword(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } => {
+    return (control.get('password').value !== control.get('confirmation').value) ? { invalidPassword: true } : null;
+  };
 }
