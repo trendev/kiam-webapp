@@ -79,16 +79,16 @@
           <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modification">undo</mat-icon>
           </button>
-          <button type="button" mat-mini-fab (click)="save()" [disabled]="form.pristine || form.invalid">
-            <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
-          </button>
-          <button type="button" mat-mini-fab color="primary" (click)="refresh()">
+          <button type="button" mat-mini-fab (click)="refresh()">
             <mat-icon aria-label="Rafraîchir avec les données du serveur">import_export</mat-icon>
+          </button>
+          <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+            <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
           </button>
         </div>
 
       </mat-card-actions>
-      
+
       <mat-divider></mat-divider>
 
       <button mat-button routerLink="./change-password" routerLinkActive="active">
