@@ -14,8 +14,11 @@ export class ChangeProfessionalPasswordComponent implements OnInit {
   }
 
   save(password: string) {
-    // TODO : use authenticationService#newPassword()
-    console.warn(`cool now we can save the password ${password}`);
+    this.authenticationService.newPassword(password).subscribe(
+      pwd => this.authenticationService.user.password = pwd,
+      // TODO : handle the error
+      e => console.error(`Une erreur est survenue lors de la modification du mot de passe sur le serveur`)
+    );
   }
 
 }
