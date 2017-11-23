@@ -33,7 +33,11 @@ export class ProfileComponent {
       accountInfo: this.fb.group({
         uuid: new FormControl({ value: this.pro.uuid, disabled: true }),
         registrationDate: new FormControl({ value: new Date(this.pro.registrationDate), disabled: true }),
-        username: [this.pro.username, Validators.required]
+        username: new FormControl(this.pro.username, [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.pattern('[^\\s]+$')
+        ])
       }),
       address: this.fb.group({
         street: [this.pro.address.street, Validators.required],
