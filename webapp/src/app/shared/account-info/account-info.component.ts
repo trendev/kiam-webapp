@@ -31,10 +31,15 @@ export const REGISTRATION_DATE_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: REGISTRATION_DATE_FORMATS },
   ]
 })
-export class AccountInfoComponent {
+export class AccountInfoComponent implements OnInit {
 
-  constructor(parent: FormGroupDirective) {
+  form: FormGroup;
+
+  constructor(private parent: FormGroupDirective) {
   }
 
-
+  ngOnInit() {
+    this.form = this.parent.form;
+    console.log(this.form);
+  }
 }

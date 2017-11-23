@@ -10,4 +10,13 @@
   <mat-form-field>
     <input matInput placeholder="Nom d'utilisateur" formControlName="username">
   </mat-form-field>
+  <mat-error *ngIf="form.get('accountInfo').get('username').hasError('required')">
+    Le nom d'utilisateur doit être renseigné.
+  </mat-error>
+  <mat-error *ngIf="form.get('accountInfo').get('username').hasError('pattern')">
+    Le nom d'utilisateur ne doit pas contenir de caractères d'espacement (espace, tabulation...).
+  </mat-error>
+  <mat-error *ngIf="form.get('accountInfo').get('username').hasError('maxlength')">
+    Le nom d'utilisateur ne doit pas contenir plus de 20 caractères.
+  </mat-error>
 </section>
