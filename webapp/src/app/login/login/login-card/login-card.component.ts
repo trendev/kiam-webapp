@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class LoginCardComponent {
   credentials: Credentials;
 
-  message: string;
+  errors: any = {};
 
   readonly main_title = `${environment.title}`;
   readonly title = `Identification à ${this.main_title}`;
@@ -46,6 +46,7 @@ export class LoginCardComponent {
   }
 
   login() {
+    this.errors = {};
     this.authenticationService.login(this.credentials.username, this.credentials.password)
       .subscribe(
       r => {
@@ -54,9 +55,9 @@ export class LoginCardComponent {
       },
       e => {
         if (e.match(/Blocked/)) {
-          this.message = `Identification impossible : votre compte à été bloqué`;
+          this.errors.blocked = `User has been blocked`;
         } else {
-          this.message = `Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur`;
+          this.errors.unauthorized = `Unauthorized or network issues or server down`;
         }
       });
   }
