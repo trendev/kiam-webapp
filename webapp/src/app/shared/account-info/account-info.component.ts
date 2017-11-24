@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, FormControl, Form } from '@angular/forms';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
@@ -31,14 +31,9 @@ export const REGISTRATION_DATE_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: REGISTRATION_DATE_FORMATS },
   ]
 })
-export class AccountInfoComponent implements OnInit {
+export class AccountInfoComponent {
 
-  accountInfo: FormGroup;
 
   constructor(private parent: FormGroupDirective) {
-  }
-
-  ngOnInit() {
-    this.accountInfo = this.parent.form.get('accountInfo') as FormGroup;
   }
 }
