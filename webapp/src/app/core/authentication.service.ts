@@ -76,12 +76,11 @@ export class AuthenticationService {
       });
   }
 
-  password(size?: number): Observable<string> {
-    const s = size || 10;
+  password(size: number = 10): Observable<string> {
     return this.http.get(`${this.api}/password`,
       {
         params: new HttpParams()
-          .set('size', s + ''),
+          .set('size', size + ''),
         withCredentials: true,
         responseType: 'text'
       })
