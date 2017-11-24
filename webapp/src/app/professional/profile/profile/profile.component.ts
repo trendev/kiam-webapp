@@ -193,7 +193,7 @@ export class ProfileComponent {
   }
 
   refresh() {
-    this.professionalService.profile(true).subscribe(
+    this.professionalService.profile().subscribe(
       _pro => {
         this.pro = _pro;
         this.authenticationService.user = _pro;
