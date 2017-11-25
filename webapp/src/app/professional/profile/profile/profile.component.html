@@ -14,7 +14,7 @@
                 Informations relatives au compte
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-account-info></app-account-info>
+            <app-account-info [errorAggregator]="errorAggregator"></app-account-info>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
@@ -73,7 +73,7 @@
 
         </mat-accordion>
       </mat-card-content>
-      <mat-error *ngIf="form.invalid">Certains champs ne sont pas valides !</mat-error>
+      <ng-container #errorAggregator></ng-container>
       <mat-card-actions>
         <div class="button-container">
           <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">

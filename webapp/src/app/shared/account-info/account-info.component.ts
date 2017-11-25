@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, Input } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, FormControl, Form } from '@angular/forms';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
@@ -36,6 +36,7 @@ export class AccountInfoComponent implements OnInit {
   form: FormGroup;
   @ViewChild('errorsTemplate') errorsTemplate;
   @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
+  @Input() errorAggregator: any;
 
   constructor(private parent: FormGroupDirective) {
   }
@@ -43,7 +44,10 @@ export class AccountInfoComponent implements OnInit {
   ngOnInit() {
     this.form = this.parent.form;
     this.form.valueChanges.forEach(_ => {
-      if (this.form.invalid && this.errorsTemplate && this.errorContainer) {
+      if (this.form.invalid
+        && this.errorsTemplate
+        && this.errorContainer
+        && this.errorAggregator) {
         this.errorContainer.clear();
         this.errorContainer.createEmbeddedView(this.errorsTemplate);
       }

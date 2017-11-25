@@ -4,7 +4,7 @@ import {
   PaymentModeService,
   ProfessionalService
 } from '@app/core';
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef, ViewChild } from '@angular/core';
 import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { Moment } from 'moment';
@@ -18,6 +18,8 @@ export class ProfileComponent {
 
   pro: Professional;
   form: FormGroup;
+
+  @ViewChild('errorAggregator', { read: ViewContainerRef }) errorAggregator;
 
   constructor(private authenticationService: AuthenticationService,
     private businessService: BusinessService,
