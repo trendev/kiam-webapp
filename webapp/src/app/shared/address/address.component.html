@@ -16,8 +16,14 @@
   </mat-form-field>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>
+    <mat-error *ngIf="form.get('address').get('postalCode').hasError('required')">
+      Le code postal doit être renseigné.
+    </mat-error>
     <mat-error *ngIf="form.get('address').get('street').hasError('required')">
       Le nom de la rue doit être renseigné.
+    </mat-error>
+    <mat-error *ngIf="form.get('address').get('city').hasError('required')">
+      Le nom de la ville doit être renseigné.
     </mat-error>
   </ng-template>
 </section>
