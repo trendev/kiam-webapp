@@ -30,6 +30,7 @@ import { CompanyInformationComponent } from './company-information/company-infor
 import { SocialNetworkAccountsComponent } from './social-network-accounts/social-network-accounts.component';
 import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ErrorAggregatorDirective } from './error-aggregator.directive';
 
 @NgModule({
   imports: [
@@ -63,7 +64,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,
     LoremIpsumComponent,
-    ChangePasswordComponent],
+    ChangePasswordComponent,
+    ErrorAggregatorDirective],
   exports: [
     CommonModule,
     FormsModule,
@@ -93,7 +95,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,
     LoremIpsumComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ErrorAggregatorDirective
   ]
 })
 
