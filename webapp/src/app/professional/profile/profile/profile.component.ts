@@ -75,16 +75,29 @@ export class ProfileComponent implements OnInit {
         country: new FormControl({ value: this.pro.address.country, disabled: true })
       }),
       customerDetails: this.fb.group({
-        firstName: [this.pro.customerDetails.firstName, Validators.required],
-        lastName: [this.pro.customerDetails.lastName, Validators.required],
-        nickname: this.pro.customerDetails.nickname,
-        phone: [this.pro.customerDetails.phone, [
+        firstName: new FormControl(this.pro.customerDetails.firstName, [
+          Validators.required,
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(50)
+        ]),
+        lastName: new FormControl(this.pro.customerDetails.lastName, [
+          Validators.required,
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(50)
+        ]),
+        nickname: new FormControl(this.pro.customerDetails.nickname, [
+          Validators.required,
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(50)
+        ]),
+        // TODO : Validators
+        phone: new FormControl(this.pro.customerDetails.phone, [
           Validators.minLength(10),
           Validators.maxLength(14),
           Validators.required]
-        ],
-        birthdate: new Date(this.pro.customerDetails.birthdate),
-        sex: this.pro.customerDetails.sex,
+        ),
+        birthdate: new FormControl(new Date(this.pro.customerDetails.birthdate), []),
+        sex: new FormControl(this.pro.customerDetails.sex, []),
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
         comments: this.fb.array(this.pro.customerDetails.comments)
       }),

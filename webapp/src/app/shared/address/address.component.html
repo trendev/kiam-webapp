@@ -20,13 +20,13 @@
       Le nom de la rue doit être renseigné.
     </mat-error>
     <mat-error *ngIf="form.get('address').get('street').hasError('blankStringForbidden')">
-      Le nom de la rue ne doit pas contenir que des caractères d'espacement.
+      Le nom de la rue ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
     </mat-error>
     <mat-error *ngIf="form.get('address').get('street').hasError('maxlength')">
       Le nom de la rue ne doit pas excéder 100 caractères: il en contient actuellement {{form.get('address').get('street').errors.maxlength.actualLength}}.
     </mat-error>
     <mat-error *ngIf="form.get('address').get('optional').hasError('blankStringForbidden')">
-      Le complément d'adresse ne doit pas contenir que des caractères d'espacement.
+      Le complément d'adresse ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
     </mat-error>
     <mat-error *ngIf="form.get('address').get('optional').hasError('maxlength')">
       Le complément d'adresse ne doit pas excéder 100 caractères: il en contient actuellement {{form.get('address').get('optional').errors.maxlength.actualLength}}.
@@ -44,7 +44,7 @@
       Le nom de la ville doit être renseigné.
     </mat-error>
     <mat-error *ngIf="form.get('address').get('city').hasError('blankStringForbidden')">
-      Le nom de la ville ne doit pas contenir de caractères d'espacement.
+      Le nom de la ville ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
     </mat-error>
     <mat-error *ngIf="form.get('address').get('city').hasError('maxlength')">
       Le nom de la ville ne doit pas excéder 75 caractères: il en contient actuellement {{form.get('address').get('city').errors.maxlength.actualLength}}.

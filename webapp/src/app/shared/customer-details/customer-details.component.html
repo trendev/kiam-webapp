@@ -45,4 +45,34 @@
       </mat-form-field>
     </div>
   </div>
+  <ng-container #errorContainer></ng-container>
+  <ng-template #errorsTemplate>
+    <mat-error *ngIf="form.get('customerDetails').get('firstName').hasError('required')">
+      Le prénom doit être renseigné.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('firstName').hasError('blankStringForbidden')">
+      Le prénom ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('firstName').hasError('maxlength')">
+      Le prénom ne doit pas excéder 50 caractères: il en contient actuellement {{form.get('customerDetails').get('firstName').errors.maxlength.actualLength}}.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('lastName').hasError('required')">
+      Le nom doit être renseigné.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('lastName').hasError('blankStringForbidden')">
+      Le nom ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('lastName').hasError('maxlength')">
+      Le nom ne doit pas excéder 50 caractères: il en contient actuellement {{form.get('customerDetails').get('lastName').errors.maxlength.actualLength}}.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('nickname').hasError('required')">
+      Le surnom doit être renseigné.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('nickname').hasError('blankStringForbidden')">
+      Le surnom ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('nickname').hasError('maxlength')">
+      Le surnom ne doit pas excéder 50 caractères: il en contient actuellement {{form.get('customerDetails').get('nickname').errors.maxlength.actualLength}}.
+    </mat-error>
+  </ng-template>
 </section>
