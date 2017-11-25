@@ -54,7 +54,8 @@ export class ProfileComponent implements OnInit {
       address: this.fb.group({
         street: new FormControl(this.pro.address.street, [
           Validators.required,
-          CustomValidators.blankStringForbidden
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(100),
         ]),
         optional: new FormControl(this.pro.address.optional),
         postalCode: new FormControl(this.pro.address.postalCode, Validators.required),

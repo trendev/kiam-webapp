@@ -7,7 +7,7 @@ export class CustomValidators {
     }
 
     static blankStringForbidden(control: AbstractControl): ValidationErrors | null {
-        return /^(\S+\s*)+$/.test(control.value)
+        return /^(\S+\s*)*$/.test(control.value)
             ? null : { 'blankStringForbidden': { value: control.value } };
     }
 }
