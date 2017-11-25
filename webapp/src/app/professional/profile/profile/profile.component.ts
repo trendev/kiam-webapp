@@ -55,10 +55,18 @@ export class ProfileComponent implements OnInit {
         street: new FormControl(this.pro.address.street, [
           Validators.required,
           CustomValidators.blankStringForbidden,
-          Validators.maxLength(100),
+          Validators.maxLength(100)
         ]),
-        optional: new FormControl(this.pro.address.optional),
-        postalCode: new FormControl(this.pro.address.postalCode, Validators.required),
+        optional: new FormControl(this.pro.address.optional, [
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(100)
+        ]),
+        postalCode: new FormControl(this.pro.address.postalCode, [
+          Validators.required,
+          CustomValidators.whiteSpaceForbidden,
+          Validators.maxLength(5),
+          Validators.minLength(5)
+        ]),
         city: new FormControl(this.pro.address.city, Validators.required),
         country: new FormControl({ value: this.pro.address.country, disabled: true })
       }),
