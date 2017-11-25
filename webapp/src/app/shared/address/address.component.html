@@ -25,8 +25,8 @@
     <mat-error *ngIf="form.get('address').get('city').hasError('required')">
       Le nom de la ville doit être renseigné.
     </mat-error>
-    <mat-error *ngIf="form.get('address').get('street').hasError('pattern')">
-      Le nom de la rue ne peut être constitué exclusivement de caractères d'espacement.
+    <mat-error *ngIf="form.get('address').get('street').hasError('blankStringForbidden')">
+      Le nom de la rue ne doit pas contenir que des caractères d'espacement.
     </mat-error>
   </ng-template>
 </section>
