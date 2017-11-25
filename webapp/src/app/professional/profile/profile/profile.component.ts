@@ -51,10 +51,12 @@ export class ProfileComponent implements OnInit {
         ])
       }),
       address: this.fb.group({
-        street: [this.pro.address.street, Validators.required],
-        optional: this.pro.address.optional,
-        postalCode: [this.pro.address.postalCode, Validators.required],
-        city: [this.pro.address.city, Validators.required],
+        street: new FormControl(this.pro.address.street, [
+          Validators.required,
+        ]),
+        optional: new FormControl(this.pro.address.optional),
+        postalCode: new FormControl(this.pro.address.postalCode, Validators.required),
+        city: new FormControl(this.pro.address.city, Validators.required),
         country: new FormControl({ value: this.pro.address.country, disabled: true })
       }),
       customerDetails: this.fb.group({

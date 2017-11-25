@@ -1,8 +1,8 @@
-import { ErrorAggregatorDirective } from './../error-aggregator.directive';
 import { Component, OnInit, ViewChild, ViewContainerRef, Input } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, FormControl, Form } from '@angular/forms';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { ErrorAggregatorDirective } from './../error-aggregator.directive';
 
 export const REGISTRATION_DATE_FORMATS = {
   parse: {
