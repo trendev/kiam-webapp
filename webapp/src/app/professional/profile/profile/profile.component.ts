@@ -47,12 +47,13 @@ export class ProfileComponent implements OnInit {
         username: new FormControl(this.pro.username, [
           Validators.required,
           Validators.maxLength(20),
-          Validators.pattern('[^\\s]+$')
+          Validators.pattern(/^\S*$/)
         ])
       }),
       address: this.fb.group({
         street: new FormControl(this.pro.address.street, [
           Validators.required,
+          Validators.pattern(/^(\S+\s*)+$/)
         ]),
         optional: new FormControl(this.pro.address.optional),
         postalCode: new FormControl(this.pro.address.postalCode, Validators.required),
