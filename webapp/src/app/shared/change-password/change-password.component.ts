@@ -61,6 +61,14 @@ export class ChangePasswordComponent implements OnInit {
     const value = this.form.value;
     if (value.password === value.confirmation) {
       this.newpwd.emit(value.password);
+
+      // resets the form with the current password/confirmation
+      const password = value.password;
+      const confirmation = value.confirmation;
+      this.form.reset({
+        password: password,
+        confirmation: confirmation
+      });
     } else {
       console.warn('Les mots de passse ne sont pas identiques...');
     }
