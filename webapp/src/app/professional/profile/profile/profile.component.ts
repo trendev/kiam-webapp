@@ -67,7 +67,11 @@ export class ProfileComponent implements OnInit {
           Validators.maxLength(5),
           Validators.minLength(5)
         ]),
-        city: new FormControl(this.pro.address.city, Validators.required),
+        city: new FormControl(this.pro.address.city, [
+          Validators.required,
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(75)
+        ]),
         country: new FormControl({ value: this.pro.address.country, disabled: true })
       }),
       customerDetails: this.fb.group({
