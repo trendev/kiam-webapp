@@ -15,7 +15,7 @@
     <mat-error *ngIf="form.get('accountInfo').get('username').hasError('required')">
       Le nom d'utilisateur doit être renseigné.
     </mat-error>
-    <mat-error *ngIf="form.get('accountInfo').get('username').hasError('pattern')">
+    <mat-error *ngIf="form.get('accountInfo').get('username').hasError('whiteSpaceForbidden')">
       Le nom d'utilisateur ne doit pas contenir de caractères d'espacement (espace, tabulation...).
     </mat-error>
     <mat-error *ngIf="form.get('accountInfo').get('username').hasError('maxlength')">

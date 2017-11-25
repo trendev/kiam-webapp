@@ -1,3 +1,4 @@
+import { CustomValidators } from './../../../shared/CustomValidators';
 import {
   AuthenticationService,
   BusinessService,
@@ -47,7 +48,7 @@ export class ProfileComponent implements OnInit {
         username: new FormControl(this.pro.username, [
           Validators.required,
           Validators.maxLength(20),
-          Validators.pattern(/^\S*$/)
+          CustomValidators.whiteSpaceForbidden
         ])
       }),
       address: this.fb.group({

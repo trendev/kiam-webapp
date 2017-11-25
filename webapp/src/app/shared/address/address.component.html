@@ -27,7 +27,6 @@
     </mat-error>
     <mat-error *ngIf="form.get('address').get('street').hasError('pattern')">
       Le nom de la rue ne peut être constitué exclusivement de caractères d'espacement.
-      {{form.get('address').get('street').errors | json}}
     </mat-error>
   </ng-template>
 </section>
