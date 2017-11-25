@@ -4,22 +4,23 @@ import {
   PaymentModeService,
   ProfessionalService
 } from '@app/core';
-import { Component, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, ViewContainerRef, ViewChild, OnInit } from '@angular/core';
 import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { Moment } from 'moment';
+import { ErrorAggregatorDirective } from '@app/shared';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
   pro: Professional;
   form: FormGroup;
 
-  @ViewChild('errorAggregator', { read: ViewContainerRef }) errorAggregator;
+  @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private authenticationService: AuthenticationService,
     private businessService: BusinessService,
@@ -28,6 +29,14 @@ export class ProfileComponent {
     private fb: FormBuilder) {
     this.pro = new Professional(this.authenticationService.user);
     this.form = this.createForm();
+  }
+
+  ngOnInit() {
+    this.form.valueChanges.forEach(_ => {
+      if (this.form.invalid && this.errorAggregator) {
+        this.errorAggregator.viewContainerRef.clear();
+      }
+    });
   }
 
   createForm(): FormGroup {

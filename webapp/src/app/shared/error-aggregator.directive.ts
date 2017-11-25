@@ -1,10 +1,10 @@
-import { Directive } from '@angular/core';
+import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[appErrorAggregator]'
 })
 export class ErrorAggregatorDirective {
 
-  constructor() { }
+  constructor(public viewContainerRef: ViewContainerRef) { }
 
 }
