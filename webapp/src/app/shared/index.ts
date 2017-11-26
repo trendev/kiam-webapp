@@ -10,3 +10,4 @@ export * from './lorem-ipsum/lorem-ipsum.component';
 export * from './payment-mode/payment-mode.component';
 export * from './change-password/change-password.component';
 export * from './error-aggregator.directive';
+export * from './custom-validators';

@@ -74,5 +74,11 @@
     <mat-error *ngIf="form.get('customerDetails').get('nickname').hasError('maxlength')">
       Le surnom ne doit pas excéder 50 caractères: il en contient actuellement {{form.get('customerDetails').get('nickname').errors.maxlength.actualLength}}.
     </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('phone').hasError('required')">
+      Le numéro de téléphone doit être renseigné.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('phone').hasError('phoneNumber')">
+      Le numéro de téléphone doit être dans un format valide (+33153732200, 0153732200...)
+    </mat-error>
   </ng-template>
 </section>

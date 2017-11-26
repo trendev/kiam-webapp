@@ -1,4 +1,3 @@
-import { CustomValidators } from './../../../shared/CustomValidators';
 import {
   AuthenticationService,
   BusinessService,
@@ -9,7 +8,7 @@ import { Component, ViewContainerRef, ViewChild, OnInit } from '@angular/core';
 import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { Moment } from 'moment';
-import { ErrorAggregatorDirective } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
 
 @Component({
   selector: 'app-profile',
@@ -90,12 +89,12 @@ export class ProfileComponent implements OnInit {
           CustomValidators.blankStringForbidden,
           Validators.maxLength(50)
         ]),
-        // TODO : Validators
         phone: new FormControl(this.pro.customerDetails.phone, [
-          Validators.minLength(10),
-          Validators.maxLength(14),
-          Validators.required]
+          Validators.required,
+          CustomValidators.phoneNumber
+          ]
         ),
+        // TODO : Validators
         birthdate: new FormControl(new Date(this.pro.customerDetails.birthdate), []),
         sex: new FormControl(this.pro.customerDetails.sex, []),
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
