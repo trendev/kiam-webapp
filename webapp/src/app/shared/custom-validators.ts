@@ -18,16 +18,17 @@ export class CustomValidators {
     }
 
     static past(control: AbstractControl): ValidationErrors | null {
-
-        console.log(`date:${control.value instanceof Date}`);
-        console.log(`moment:${moment.isMoment(control.value)}`);
-
-        return /^(((00|\+)\d{2})|0)\d{9}$/.test(control.value)
+        return moment(control.value).isBefore(moment())
             ? null : { 'past': { value: control.value } };
     }
 
+    static adultOnly(control: AbstractControl): ValidationErrors | null {
+        return moment(control.value).isBefore(moment().subtract(18, 'years'))
+            ? null : { 'adultOnly': { value: control.value } };
+    }
+
     static future(control: AbstractControl): ValidationErrors | null {
-        return /^(((00|\+)\d{2})|0)\d{9}$/.test(control.value)
+        return moment(control.value).isAfter(moment())
             ? null : { 'future': { value: control.value } };
     }
 }

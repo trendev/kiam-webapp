@@ -92,15 +92,15 @@ export class ProfileComponent implements OnInit {
         phone: new FormControl(this.pro.customerDetails.phone, [
           Validators.required,
           CustomValidators.phoneNumber
-          ]
+        ]
         ),
         birthdate: new FormControl(moment(this.pro.customerDetails.birthdate), [
           Validators.required,
-          CustomValidators.past
+          CustomValidators.adultOnly
         ]),
-        // TODO : Validators
-        sex: new FormControl(this.pro.customerDetails.sex, []),
+        sex: this.pro.customerDetails.sex,
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
+        // TODO : Validators
         comments: this.fb.array(this.pro.customerDetails.comments)
       }),
       businesses: this.fb.array([]),
