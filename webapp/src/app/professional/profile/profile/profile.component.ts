@@ -7,7 +7,7 @@ import {
 import { Component, ViewContainerRef, ViewChild, OnInit } from '@angular/core';
 import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-import { Moment } from 'moment';
+import * as moment from 'moment';
 import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
 
 @Component({
@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
     const fg = this.fb.group({
       accountInfo: this.fb.group({
         uuid: new FormControl({ value: this.pro.uuid, disabled: true }),
-        registrationDate: new FormControl({ value: new Date(this.pro.registrationDate), disabled: true }),
+        registrationDate: new FormControl({ value: moment(this.pro.registrationDate), disabled: true }),
         username: new FormControl(this.pro.username, [
           Validators.required,
           Validators.maxLength(20),
@@ -94,8 +94,11 @@ export class ProfileComponent implements OnInit {
           CustomValidators.phoneNumber
           ]
         ),
+        birthdate: new FormControl(moment(this.pro.customerDetails.birthdate), [
+          Validators.required,
+          CustomValidators.past
+        ]),
         // TODO : Validators
-        birthdate: new FormControl(new Date(this.pro.customerDetails.birthdate), []),
         sex: new FormControl(this.pro.customerDetails.sex, []),
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
         comments: this.fb.array(this.pro.customerDetails.comments)
@@ -107,7 +110,7 @@ export class ProfileComponent implements OnInit {
         companyName: this.pro.companyName,
         companyID: this.pro.companyID,
         vatcode: this.pro.vatcode,
-        creationDate: new Date(this.pro.creationDate)
+        creationDate: moment(this.pro.creationDate)
       }),
       socialNetworkAccounts: this.fb.group({
         facebook: this.pro.socialNetworkAccounts.facebook,
