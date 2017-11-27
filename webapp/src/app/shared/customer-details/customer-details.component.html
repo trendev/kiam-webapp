@@ -86,5 +86,6 @@
     <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('adultOnly')">
       La date de naissance du chef d'entreprise doit correspondre à celle d'un individu de plus de 18 ans.
     </mat-error>
+    <p>{{form.get('customerDetails').get('comments').errors | json}}</p>
   </ng-template>
 </section>

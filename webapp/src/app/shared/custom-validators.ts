@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { ValidatorFn, AbstractControl, ValidationErrors, FormArray } from '@angular/forms';
 
 export class CustomValidators {
     static whiteSpaceForbidden(control: AbstractControl): ValidationErrors | null {
@@ -10,6 +10,20 @@ export class CustomValidators {
     static blankStringForbidden(control: AbstractControl): ValidationErrors | null {
         return /^(\S+\s*)*$/.test(control.value)
             ? null : { 'blankStringForbidden': { value: control.value } };
+    }
+
+    static validComments(control: FormArray): ValidationErrors | null {
+        const errors = [];
+        for (let i = 0; i < control.length; i++) {
+            if (CustomValidators.blankStringForbidden(control.at(i))
+                || !control.at(i).value) {
+                errors.push(i + 1);
+            }
+        }
+
+        return !errors.length
+            ? null : { 'validComments': { value: errors } };
+
     }
 
     static phoneNumber(control: AbstractControl): ValidationErrors | null {
