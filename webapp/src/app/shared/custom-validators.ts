@@ -14,6 +14,7 @@ export class CustomValidators {
 
     static validComments(control: FormArray): ValidationErrors | null {
         const errors = [];
+
         for (let i = 0; i < control.length; i++) {
             if (CustomValidators.blankStringForbidden(control.at(i))
                 || !control.at(i).value) {
