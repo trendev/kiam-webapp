@@ -39,7 +39,7 @@
     </div>
     <div *ngFor="let comment of comments.controls; let i=index">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Description / Commentaire #{{i+1}}" formControlName="{{i}}">
+        <input matInput placeholder="Commentaire #{{i+1}}" formControlName="{{i}}">
         <mat-icon *ngIf="isLastComment(i)" (click)="newComment()" matSuffix>add_circle_outline</mat-icon>
         <mat-icon (click)="removeComment(i)" matSuffix>remove_circle_outline</mat-icon>
       </mat-form-field>
@@ -86,6 +86,10 @@
     <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('adultOnly')">
       La date de naissance du chef d'entreprise doit correspondre à celle d'un individu de plus de 18 ans.
     </mat-error>
-    <p>{{form.get('customerDetails').get('comments').errors | json}}</p>
+    <div *ngIf="form.get('customerDetails').get('comments').hasError('validComments')">
+      <mat-error *ngFor="let i of form.get('customerDetails').get('comments').errors.validComments.value">
+        Le commentaire #{{i}} doit être renseigné et ne doit pas être constitué uniquement de caractères d'espacement.
+      </mat-error>
+    </div>
   </ng-template>
 </section>
