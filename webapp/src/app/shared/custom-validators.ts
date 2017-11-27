@@ -18,6 +18,7 @@ export class CustomValidators {
             if (CustomValidators.blankStringForbidden(control.at(i))
                 || !control.at(i).value) {
                 errors.push(i + 1);
+                control.at(i).setErrors({ 'validComments': { value: control.at(i).value } });
             }
         }
 
