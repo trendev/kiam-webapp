@@ -100,11 +100,11 @@ export class ProfileComponent implements OnInit {
         ]),
         sex: this.pro.customerDetails.sex,
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
-        // TODO : Validators
         comments: this.fb.array(this.pro.customerDetails.comments, CustomValidators.validComments)
       }),
       businesses: this.fb.array([]),
       paymentModes: this.fb.array([]),
+      // TODO : Validators
       companyInformation: this.fb.group({
         website: this.pro.website,
         companyName: this.pro.companyName,
