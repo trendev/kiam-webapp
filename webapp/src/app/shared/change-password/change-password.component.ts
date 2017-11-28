@@ -16,6 +16,13 @@ export class ChangePasswordComponent implements OnInit {
   @Output()
   newpwd: EventEmitter<string> = new EventEmitter();
 
+  validators = [
+    Validators.required,
+    Validators.minLength(10),
+    Validators.maxLength(4096),
+    Validators.pattern('[^\\s]+$')// no white space
+  ];
+
   constructor(
     private authenticationService: AuthenticationService,
     private fb: FormBuilder) {
@@ -26,18 +33,11 @@ export class ChangePasswordComponent implements OnInit {
     // TODO : checks for each modification of the field confirmation if confirmation === password
   }
 
+
   createForm() {
     this.form = this.fb.group({
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.pattern('[^\\s]+$')// no white space
-      ]),
-      confirmation: new FormControl('', [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.pattern('[^\\s]+$')// no white space
-      ])
+      password: new FormControl('', this.validators),
+      confirmation: new FormControl('', this.validators)
     },
       {
         validator: passwordMatchValidator()
@@ -47,10 +47,11 @@ export class ChangePasswordComponent implements OnInit {
   generate() {
     this.authenticationService.password().subscribe(
       pwd => {
-        this.form.get('password').setValue(pwd);
-        this.form.get('password').markAsDirty();
-        this.form.get('confirmation').setValue(pwd);
-        this.form.get('confirmation').markAsDirty();
+        this.form.setValue({
+          password: pwd,
+          confirmation: pwd
+        });
+        this.form.markAsDirty();
       },
       // TODO: handle this (check the status code, etc)
       e => console.error('Impossible de générer un mot de passe depuis le serveur')
@@ -82,6 +83,15 @@ export class ChangePasswordComponent implements OnInit {
 
 export function passwordMatchValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } => {
-    return (control.get('password').value !== control.get('confirmation').value) ? { invalidPassword: true } : null;
+    if (control.get('password').value !== control.get('confirmation').value) {
+      return {
+        passwordMatchValidator: {
+          password: control.get('password').value,
+          confirmation: control.get('confirmation').value
+        }
+      };
+    } else {
+      return null;
+    }
   };
 }
