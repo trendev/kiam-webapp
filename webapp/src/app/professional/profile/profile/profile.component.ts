@@ -43,7 +43,11 @@ export class ProfileComponent implements OnInit {
     const fg = this.fb.group({
       accountInfo: this.fb.group({
         uuid: new FormControl({ value: this.pro.uuid, disabled: true }),
-        registrationDate: new FormControl({ value: moment(this.pro.registrationDate), disabled: true }),
+        registrationDate: new FormControl({
+          value: this.pro.registrationDate
+            ? moment(this.pro.registrationDate) : undefined,
+          disabled: true
+        }),
         username: new FormControl(this.pro.username, [
           Validators.required,
           Validators.maxLength(20),
@@ -94,17 +98,19 @@ export class ProfileComponent implements OnInit {
           CustomValidators.phoneNumber
         ]
         ),
-        birthdate: new FormControl(moment(this.pro.customerDetails.birthdate), [
-          Validators.required,
-          CustomValidators.adultOnly
-        ]),
+        birthdate: new FormControl(
+          this.pro.customerDetails.birthdate ? moment(this.pro.customerDetails.birthdate) : undefined, [
+            CustomValidators.adultOnly
+          ]),
         sex: this.pro.customerDetails.sex,
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
-        comments: this.fb.array(this.pro.customerDetails.comments, CustomValidators.validComments)
+        comments: this.fb.array(
+          this.pro.customerDetails.comments
+            ? this.pro.customerDetails.comments : [],
+          CustomValidators.validComments)
       }),
       businesses: this.fb.array([]),
       paymentModes: this.fb.array([]),
-      // TODO : Validators
       companyInformation: this.fb.group({
         website: new FormControl(this.pro.website, [
           CustomValidators.blankStringForbidden
@@ -128,31 +134,35 @@ export class ProfileComponent implements OnInit {
       })
     });
 
-    this.businessService.businesses.subscribe(
-      businesses => {
-        const businessesFA = fg.get('businesses') as FormArray;
-        businesses.forEach(b =>
-          businessesFA.push(this.fb.group({
-            designation: b.designation,
-            value: this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1
-          })));
-      },
-      // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de charger les activités depuis le serveur')
-    );
+    if (this.pro.businesses) {
+      this.businessService.businesses.subscribe(
+        businesses => {
+          const businessesFA = fg.get('businesses') as FormArray;
+          businesses.forEach(b =>
+            businessesFA.push(this.fb.group({
+              designation: b.designation,
+              value: this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1
+            })));
+        },
+        // TODO: handle this (check the status code, etc)
+        e => console.error('Impossible de charger les activités depuis le serveur')
+      );
+    }
 
-    this.paymentModeService.paymentModes.subscribe(
-      paymentModes => {
-        const paymentModesFA = fg.get('paymentModes') as FormArray;
-        paymentModes.forEach(pm =>
-          paymentModesFA.push(this.fb.group({
-            name: pm.name,
-            value: this.pro.paymentModes.findIndex(_pm => _pm.name === pm.name) !== -1
-          })));
-      },
-      // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de charger les activités depuis le serveur')
-    );
+    if (this.pro.paymentModes) {
+      this.paymentModeService.paymentModes.subscribe(
+        paymentModes => {
+          const paymentModesFA = fg.get('paymentModes') as FormArray;
+          paymentModes.forEach(pm =>
+            paymentModesFA.push(this.fb.group({
+              name: pm.name,
+              value: this.pro.paymentModes.findIndex(_pm => _pm.name === pm.name) !== -1
+            })));
+        },
+        // TODO: handle this (check the status code, etc)
+        e => console.error('Impossible de charger les activités depuis le serveur')
+      );
+    }
 
     return fg;
   }
@@ -160,7 +170,9 @@ export class ProfileComponent implements OnInit {
   revert() {
     // rebuilds the controls of the comments group if they have been modified/removed
     const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
-    customerDetailsFG.setControl('comments', this.fb.array(this.pro.customerDetails.comments, CustomValidators.validComments));
+    customerDetailsFG.setControl('comments', this.fb.array(
+      this.pro.customerDetails.comments
+        ? this.pro.customerDetails.comments : [], CustomValidators.validComments));
 
     // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
     this.form.reset(this.createForm().getRawValue());

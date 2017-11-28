@@ -34,17 +34,17 @@ export class CustomValidators {
     }
 
     static past(control: AbstractControl): ValidationErrors | null {
-        return moment(control.value).isBefore(moment())
+        return !control.value || moment(control.value).isBefore(moment())
             ? null : { 'past': { value: control.value } };
     }
 
     static adultOnly(control: AbstractControl): ValidationErrors | null {
-        return moment(control.value).isBefore(moment().subtract(18, 'years'))
+        return !control.value || moment(control.value).isBefore(moment().subtract(18, 'years'))
             ? null : { 'adultOnly': { value: control.value } };
     }
 
     static future(control: AbstractControl): ValidationErrors | null {
-        return moment(control.value).isAfter(moment())
+        return !control.value || moment(control.value).isAfter(moment())
             ? null : { 'future': { value: control.value } };
     }
 
