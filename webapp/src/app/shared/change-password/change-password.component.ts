@@ -47,9 +47,9 @@ export class ChangePasswordComponent implements OnInit {
   generate() {
     this.authenticationService.password().subscribe(
       pwd => {
-        this.form.get('password').setValue(pwd, { emitEvent: true });
+        this.form.get('password').setValue(pwd);
         this.form.get('password').markAsDirty();
-        this.form.get('confirmation').setValue(pwd, { emitEvent: true });
+        this.form.get('confirmation').setValue(pwd);
         this.form.get('confirmation').markAsDirty();
       },
       // TODO: handle this (check the status code, etc)
