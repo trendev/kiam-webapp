@@ -106,7 +106,9 @@ export class ProfileComponent implements OnInit {
       paymentModes: this.fb.array([]),
       // TODO : Validators
       companyInformation: this.fb.group({
-        website: this.pro.website,
+        website: new FormControl(this.pro.website, [
+          CustomValidators.blankStringForbidden
+        ]),
         companyName: this.pro.companyName,
         companyID: this.pro.companyID,
         vatcode: this.pro.vatcode,

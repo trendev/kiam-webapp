@@ -59,7 +59,7 @@
                 Complément d'information
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-company-information></app-company-information>
+            <app-company-information [errorAggregator]="errorAggregator"></app-company-information>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
@@ -68,7 +68,7 @@
                 Réseaux sociaux
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-social-network-accounts></app-social-network-accounts>
+            <app-social-network-accounts [errorAggregator]="errorAggregator"></app-social-network-accounts>
           </mat-expansion-panel>
 
         </mat-accordion>
