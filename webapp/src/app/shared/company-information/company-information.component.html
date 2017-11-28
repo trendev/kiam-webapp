@@ -42,7 +42,7 @@
       Le numéro de TVA intracommunautaire renseigné doit être valide.
     </mat-error>
     <mat-error *ngIf="form.get('companyInformation').get('companyCodes').hasError('validVatCodeFromCompanyID')">
-      Le numéro de TVA intracommunautaire renseigné ne correspond pas à celui de la société.
+      Le numéro de TVA intracommunautaire renseigné ne correspond pas à celui de la société: il devrait correspondre à {{form.get('companyInformation').get('companyCodes').errors.validVatCodeFromCompanyID.expectedVatCode}}.
     </mat-error>
   </ng-template>
 </section>
