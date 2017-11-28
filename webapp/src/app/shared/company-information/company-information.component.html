@@ -26,8 +26,14 @@
     <mat-error *ngIf="form.get('companyInformation').get('website').hasError('blankStringForbidden')">
       L'adresse du site web ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
     </mat-error>
+    <mat-error *ngIf="form.get('companyInformation').get('website').hasError('maxlength')">
+      L'adresse du site web ne doit pas excéder 150 caractères: elle en contient actuellement {{form.get('companyInformation').get('website').errors.maxlength.actualLength}}.
+    </mat-error>
     <mat-error *ngIf="form.get('companyInformation').get('companyName').hasError('required')">
       La dénomination de la société doit être renseignée.
+    </mat-error>
+    <mat-error *ngIf="form.get('companyInformation').get('companyName').hasError('maxlength')">
+      La dénomination de la société ne doit pas excéder 50 caractères: elle en contient actuellement {{form.get('companyInformation').get('companyName').errors.maxlength.actualLength}}.
     </mat-error>
     <mat-error *ngIf="form.get('companyInformation').get('companyName').hasError('blankStringForbidden')">
       La dénomination de la société ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.

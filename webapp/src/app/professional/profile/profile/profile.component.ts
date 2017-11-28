@@ -108,16 +108,19 @@ export class ProfileComponent implements OnInit {
           this.pro.customerDetails.comments
             ? this.pro.customerDetails.comments : [],
           CustomValidators.validComments)
+          // TODO : control the length of the comments
       }),
       businesses: this.fb.array([]),
       paymentModes: this.fb.array([]),
       companyInformation: this.fb.group({
         website: new FormControl(this.pro.website, [
-          CustomValidators.blankStringForbidden
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(150)
         ]),
         companyName: new FormControl(this.pro.companyName, [
           Validators.required,
-          CustomValidators.blankStringForbidden
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(50)
         ]),
         companyCodes: this.fb.group({
           companyID: new FormControl(this.pro.companyID, [
