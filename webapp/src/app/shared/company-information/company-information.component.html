@@ -5,12 +5,14 @@
   <mat-form-field>
     <input matInput placeholder="Dénomination" formControlName="companyName">
   </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Identifiant de la société (SIRET)" formControlName="companyID">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Numéro de TVA" formControlName="vatcode">
-  </mat-form-field>
+  <section formGroupName="companyCodes">
+    <mat-form-field>
+      <input matInput placeholder="Identifiant de la société (SIRET)" formControlName="companyID">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Numéro de TVA" formControlName="vatcode">
+    </mat-form-field>
+  </section>
   <mat-form-field>
     <input matInput [matDatepicker]="dp" formControlName="creationDate" placeholder="Date d'immatriculation">
     <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
@@ -27,10 +29,10 @@
     <mat-error *ngIf="form.get('companyInformation').get('companyName').hasError('blankStringForbidden')">
       La dénomination de la société ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
     </mat-error>
-    <mat-error *ngIf="form.get('companyInformation').get('companyID').hasError('required')">
+    <mat-error *ngIf="form.get('companyInformation').get('companyCodes').get('companyID').hasError('required')">
       L'identifiant de la société doit être renseigné.
     </mat-error>
-    <mat-error *ngIf="form.get('companyInformation').get('companyID').hasError('validCompanyID')">
+    <mat-error *ngIf="form.get('companyInformation').get('companyCodes').get('companyID').hasError('validCompanyID')">
       L'identifiant de la société doit être un identifiant (SIRET) valide.
     </mat-error>
   </ng-template>

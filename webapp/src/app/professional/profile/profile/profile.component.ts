@@ -119,11 +119,13 @@ export class ProfileComponent implements OnInit {
           Validators.required,
           CustomValidators.blankStringForbidden
         ]),
-        companyID: new FormControl(this.pro.companyID, [
-          Validators.required,
-          CustomValidators.validCompanyID
-        ]),
-        vatcode: this.pro.vatcode,
+        companyCodes: this.fb.group({
+          companyID: new FormControl(this.pro.companyID, [
+            Validators.required,
+            CustomValidators.validCompanyID
+          ]),
+          vatcode: this.pro.vatcode
+        }),
         creationDate: moment(this.pro.creationDate)
       }),
       socialNetworkAccounts: this.fb.group({
@@ -209,8 +211,8 @@ export class ProfileComponent implements OnInit {
       username: value.accountInfo.username || undefined,
       website: value.companyInformation.website || undefined,
       companyName: value.companyInformation.companyName || undefined,
-      companyID: value.companyInformation.companyID || undefined,
-      vatcode: value.companyInformation.vatcode || undefined,
+      companyID: value.companyInformation.companyCodes.companyID || undefined,
+      vatcode: value.companyInformation.companyCodes.vatcode || undefined,
       creationDate: value.companyInformation.creationDate.valueOf() || undefined,
       address: {
         street: value.address.street || undefined,
