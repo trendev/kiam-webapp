@@ -134,35 +134,35 @@ export class ProfileComponent implements OnInit {
       })
     });
 
-    if (this.pro.businesses) {
-      this.businessService.businesses.subscribe(
-        businesses => {
-          const businessesFA = fg.get('businesses') as FormArray;
-          businesses.forEach(b =>
-            businessesFA.push(this.fb.group({
-              designation: b.designation,
-              value: this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1
-            })));
-        },
-        // TODO: handle this (check the status code, etc)
-        e => console.error('Impossible de charger les activités depuis le serveur')
-      );
-    }
+    this.businessService.businesses.subscribe(
+      businesses => {
+        const businessesFA = fg.get('businesses') as FormArray;
+        businesses.forEach(b =>
+          businessesFA.push(this.fb.group({
+            designation: b.designation,
+            value: this.pro.businesses
+              ? this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1
+              : false
+          })));
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de charger les activités depuis le serveur')
+    );
 
-    if (this.pro.paymentModes) {
-      this.paymentModeService.paymentModes.subscribe(
-        paymentModes => {
-          const paymentModesFA = fg.get('paymentModes') as FormArray;
-          paymentModes.forEach(pm =>
-            paymentModesFA.push(this.fb.group({
-              name: pm.name,
-              value: this.pro.paymentModes.findIndex(_pm => _pm.name === pm.name) !== -1
-            })));
-        },
-        // TODO: handle this (check the status code, etc)
-        e => console.error('Impossible de charger les activités depuis le serveur')
-      );
-    }
+    this.paymentModeService.paymentModes.subscribe(
+      paymentModes => {
+        const paymentModesFA = fg.get('paymentModes') as FormArray;
+        paymentModes.forEach(pm =>
+          paymentModesFA.push(this.fb.group({
+            name: pm.name,
+            value: this.pro.paymentModes
+              ? this.pro.paymentModes.findIndex(_pm => _pm.name === pm.name) !== -1
+              : false
+          })));
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de charger les activités depuis le serveur')
+    );
 
     return fg;
   }
