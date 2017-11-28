@@ -127,9 +127,7 @@ export class ProfileComponent implements OnInit {
           vatcode: new FormControl(this.pro.vatcode, [
             CustomValidators.validVatCode
           ])
-        }, [
-            CustomValidators.validVatCodeFromCompanyID
-          ]),
+        }, { validator: CustomValidators.validVatCodeFromCompanyID }),
         creationDate: moment(this.pro.creationDate)
       }),
       socialNetworkAccounts: this.fb.group({

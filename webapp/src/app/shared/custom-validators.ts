@@ -96,9 +96,9 @@ export class CustomValidators {
         return code;
     }
 
-    static validVatCodeFromCompanyID(control: AbstractControl): ValidationErrors | null {
+    static validVatCodeFromCompanyID(control: FormGroup): ValidationErrors | null {
         if (control.get('companyID').valid
-            // && control.get('vatcode').valid
+            && control.get('vatcode').valid
             && control.get('vatcode').value
             && CustomValidators.computeVatCodeFromCompanyID(control.get('companyID').value) !== control.get('vatcode').value) {
             return {
@@ -109,7 +109,6 @@ export class CustomValidators {
                 }
             };
         } else {
-            console.log(control);
             return null;
         }
     }
