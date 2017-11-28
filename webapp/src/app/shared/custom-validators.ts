@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { ValidatorFn, AbstractControl, ValidationErrors, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { ValidatorFn, AbstractControl, ValidationErrors, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 
 export class CustomValidators {
     static whiteSpaceForbidden(control: AbstractControl): ValidationErrors | null {
@@ -12,21 +12,24 @@ export class CustomValidators {
             ? null : { 'blankStringForbidden': { value: control.value } };
     }
 
-    static validComments(control: AbstractControl): ValidationErrors | null {
-        const errors = [];
-        const c = control as FormArray;
+    static validComments(validators: ValidatorFn[]): ValidatorFn {
 
-        for (let i = 0; i < c.length; i++) {
-            if (CustomValidators.blankStringForbidden(c.at(i))
-                || !c.at(i).value) {
-                errors.push(i + 1);
-                c.at(i).setErrors({ 'validComments': { value: c.at(i).value } });
+        return (control: AbstractControl): { [key: string]: any } => {
+            const errors = [];
+            const fa = control as FormArray;
+            for (let i = 0; i < fa.length; i++) {
+                const c: AbstractControl = fa.at(i);
+                validators.forEach(validator => {
+                    const result = validator(c);
+                    if (result) {
+                        c.setErrors(Object.assign(c.errors || {}, result));
+                        errors.push(i + 1);
+                    }
+                });
             }
-        }
-
-        return !errors.length
-            ? null : { 'validComments': { value: errors } };
-
+            return !errors.length
+                ? null : { 'validComments': { value: errors } };
+        };
     }
 
     static phoneNumber(control: AbstractControl): ValidationErrors | null {
