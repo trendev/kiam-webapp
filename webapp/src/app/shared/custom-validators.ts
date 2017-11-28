@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { ValidatorFn, AbstractControl, ValidationErrors, FormArray } from '@angular/forms';
+import { ValidatorFn, AbstractControl, ValidationErrors, FormArray, FormGroup, FormControl } from '@angular/forms';
 
 export class CustomValidators {
     static whiteSpaceForbidden(control: AbstractControl): ValidationErrors | null {
@@ -68,6 +68,49 @@ export class CustomValidators {
                 ? null : { 'validCompanyID': { value: control.value } };
         } else {
             return { 'validCompanyID': { value: control.value } };
+        }
+    }
+
+    static validVatCode(control: AbstractControl): ValidationErrors | null {
+        if (/^FR\d{11}$/i.test(control.value)) {
+            const code = /^FR(\d{2})(\d{9})$/i.exec(control.value);
+            return ((+code[2] % 97) * 3 + 12) % 97 === +code[1] ? null : { 'validVatCode': { value: control.value } };
+        } else {
+            return !control.value ? null : { 'validVatCode': { value: control.value } };
+        }
+    }
+
+    static computeVatCodeFromCompanyID(companyID: string): string {
+        let code;
+        let id = companyID;
+
+        try {
+            if (companyID.length > 9) {
+                id = /^(\d{9}).*$/.exec(companyID)[1];
+            }
+            code = `FR${((+id % 97) * 3 + 12) % 97}${id}`;
+        } catch (e) {
+            console.error(e);
+        }
+
+        return code;
+    }
+
+    static validVatCodeFromCompanyID(control: AbstractControl): ValidationErrors | null {
+        if (control.get('companyID').valid
+            // && control.get('vatcode').valid
+            && control.get('vatcode').value
+            && CustomValidators.computeVatCodeFromCompanyID(control.get('companyID').value) !== control.get('vatcode').value) {
+            return {
+                'validVatCodeFromCompanyID': {
+                    companyID: control.get('companyID').value,
+                    vatcode: control.get('vatcode').value,
+                    expectedVatCode: CustomValidators.computeVatCodeFromCompanyID(control.get('companyID').value)
+                }
+            };
+        } else {
+            console.log(control);
+            return null;
         }
     }
 }

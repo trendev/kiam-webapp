@@ -18,7 +18,7 @@ export class ProfessionalSidenavComponent implements OnInit {
     { name: 'Groupes / Collectivités', url: 'groups', icon: 'group' },
     { name: 'Facturier', url: 'bills', icon: 'receipt' },
     { name: 'Dépenses', url: 'expenses', icon: 'trending_down' },
-    { name: 'Catégories', url: 'categories', icon: 'group_work' },
+    { name: 'Catégories', url: 'categories', icon: 'label_outline' },
     { name: 'Offres / Catalogues', url: 'offerings', icon: 'local_offer' },
   ];
 

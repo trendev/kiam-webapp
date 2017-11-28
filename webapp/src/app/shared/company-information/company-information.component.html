@@ -5,12 +5,15 @@
   <mat-form-field>
     <input matInput placeholder="Dénomination" formControlName="companyName">
   </mat-form-field>
-  <section formGroupName="companyCodes">
+  <section formGroupName="companyCodes" class="company-information">
     <mat-form-field>
       <input matInput placeholder="Identifiant de la société (SIRET)" formControlName="companyID">
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Numéro de TVA" formControlName="vatcode">
+      <button type="button" mat-button matSuffix mat-icon-button (click)="expectedVatCode()">
+        <mat-icon>subdirectory_arrow_left</mat-icon>
+      </button>
     </mat-form-field>
   </section>
   <mat-form-field>
@@ -35,5 +38,9 @@
     <mat-error *ngIf="form.get('companyInformation').get('companyCodes').get('companyID').hasError('validCompanyID')">
       L'identifiant de la société doit être un identifiant (SIRET) valide.
     </mat-error>
+    <mat-error *ngIf="form.get('companyInformation').get('companyCodes').get('vatcode').hasError('validVatCode')">
+      Le numéro de TVA intracommunautaire renseigné doit être valide.
+    </mat-error>
+    {{form.get('companyInformation').get('companyCodes').errors | json}}
   </ng-template>
 </section>

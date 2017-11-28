@@ -1,3 +1,4 @@
+import { CustomValidators } from './../custom-validators';
 import { ErrorAggregatorDirective } from './../error-aggregator.directive';
 import { Component, OnInit, ViewChild, Input, ViewContainerRef } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
@@ -44,5 +45,13 @@ export class CompanyInformationComponent implements OnInit {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
+  }
+
+  expectedVatCode() {
+    const vatcode =
+      CustomValidators.computeVatCodeFromCompanyID(this.form.get('companyInformation').get('companyCodes').get('companyID').value);
+    this.form.get('companyInformation').get('companyCodes').get('vatcode').setValue(vatcode);
+    this.form.get('companyInformation').get('companyCodes').get('vatcode').markAsDirty();
+    this.form.get('companyInformation').get('companyCodes').get('vatcode').markAsTouched();
   }
 }
