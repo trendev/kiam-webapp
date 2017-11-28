@@ -12,14 +12,15 @@ export class CustomValidators {
             ? null : { 'blankStringForbidden': { value: control.value } };
     }
 
-    static validComments(control: FormArray): ValidationErrors | null {
+    static validComments(control: AbstractControl): ValidationErrors | null {
         const errors = [];
+        const c = control as FormArray;
 
-        for (let i = 0; i < control.length; i++) {
-            if (CustomValidators.blankStringForbidden(control.at(i))
-                || !control.at(i).value) {
+        for (let i = 0; i < c.length; i++) {
+            if (CustomValidators.blankStringForbidden(c.at(i))
+                || !c.at(i).value) {
                 errors.push(i + 1);
-                control.at(i).setErrors({ 'validComments': { value: control.at(i).value } });
+                c.at(i).setErrors({ 'validComments': { value: c.at(i).value } });
             }
         }
 

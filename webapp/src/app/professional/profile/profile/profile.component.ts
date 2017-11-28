@@ -108,7 +108,7 @@ export class ProfileComponent implements OnInit {
           this.pro.customerDetails.comments
             ? this.pro.customerDetails.comments : [],
           CustomValidators.validComments)
-          // TODO : control the length of the comments
+        // TODO : control the length of the comments
       }),
       businesses: this.fb.array([]),
       paymentModes: this.fb.array([]),
