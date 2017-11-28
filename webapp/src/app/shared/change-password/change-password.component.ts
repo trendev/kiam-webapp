@@ -1,3 +1,4 @@
+import { CustomValidators } from './../custom-validators';
 import { AuthenticationService } from '@app/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
@@ -20,7 +21,7 @@ export class ChangePasswordComponent implements OnInit {
     Validators.required,
     Validators.minLength(10),
     Validators.maxLength(4096),
-    Validators.pattern('[^\\s]+$')// no white space
+    CustomValidators.whiteSpaceForbidden
   ];
 
   constructor(
