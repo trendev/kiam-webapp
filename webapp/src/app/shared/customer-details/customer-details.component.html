@@ -80,9 +80,6 @@
     <mat-error *ngIf="form.get('customerDetails').get('phone').hasError('phoneNumber')">
       Le numéro de téléphone doit être dans un format valide (+33153732200, 0153732200...)
     </mat-error>
-    <!-- <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('required')">
-      La date de naissance du chef d'entreprise doit être renseignée.
-    </mat-error> -->
     <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('adultOnly')">
       La date de naissance du chef d'entreprise doit correspondre à celle d'un individu de plus de 18 ans.
     </mat-error>
