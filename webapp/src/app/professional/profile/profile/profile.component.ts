@@ -134,10 +134,22 @@ export class ProfileComponent implements OnInit {
         ])
       }),
       socialNetworkAccounts: this.fb.group({
-        facebook: this.pro.socialNetworkAccounts.facebook,
-        twitter: this.pro.socialNetworkAccounts.twitter,
-        instagram: this.pro.socialNetworkAccounts.instagram,
-        pinterest: this.pro.socialNetworkAccounts.pinterest
+        facebook: new FormControl(this.pro.socialNetworkAccounts.facebook, [
+          Validators.maxLength(150),
+          CustomValidators.blankStringForbidden
+        ]),
+        twitter: new FormControl(this.pro.socialNetworkAccounts.twitter, [
+          Validators.maxLength(150),
+          CustomValidators.blankStringForbidden
+        ]),
+        instagram: new FormControl(this.pro.socialNetworkAccounts.instagram, [
+          Validators.maxLength(150),
+          CustomValidators.blankStringForbidden
+        ]),
+        pinterest: new FormControl(this.pro.socialNetworkAccounts.pinterest, [
+          Validators.maxLength(150),
+          CustomValidators.blankStringForbidden
+        ])
       })
     });
 
