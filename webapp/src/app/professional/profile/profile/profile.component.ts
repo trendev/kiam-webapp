@@ -109,8 +109,14 @@ export class ProfileComponent implements OnInit {
         website: new FormControl(this.pro.website, [
           CustomValidators.blankStringForbidden
         ]),
-        companyName: this.pro.companyName,
-        companyID: this.pro.companyID,
+        companyName: new FormControl(this.pro.companyName, [
+          Validators.required,
+          CustomValidators.blankStringForbidden
+        ]),
+        companyID: new FormControl(this.pro.companyID, [
+          Validators.required,
+          CustomValidators.validCompanyID
+        ]),
         vatcode: this.pro.vatcode,
         creationDate: moment(this.pro.creationDate)
       }),

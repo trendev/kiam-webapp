@@ -47,4 +47,27 @@ export class CustomValidators {
         return moment(control.value).isAfter(moment())
             ? null : { 'future': { value: control.value } };
     }
+
+    static validCompanyID(control: AbstractControl): ValidationErrors | null {
+        if (/^\d{14}$/.test(control.value)) {
+            const code = control.value.split('');
+            let sum = 0;
+            const parity = code.length % 2;
+
+            for (let i = 0; i < code.length - 1; i++) {
+                if (i % 2 === parity) {
+                    code[i] *= 2;
+                    if (code[i] > 9) {
+                        code[i] -= 9;
+                    }
+                }
+                sum += +code[i];
+            }
+
+            return sum * 9 % 10 === +code[code.length - 1]
+                ? null : { 'validCompanyID': { value: control.value } };
+        } else {
+            return { 'validCompanyID': { value: control.value } };
+        }
+    }
 }

@@ -16,4 +16,22 @@
     <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
     <mat-datepicker #dp></mat-datepicker>
   </mat-form-field>
+  <ng-container #errorContainer></ng-container>
+  <ng-template #errorsTemplate>
+    <mat-error *ngIf="form.get('companyInformation').get('website').hasError('blankStringForbidden')">
+      L'adresse du site web ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+    </mat-error>
+    <mat-error *ngIf="form.get('companyInformation').get('companyName').hasError('required')">
+      La dénomination de la société doit être renseignée.
+    </mat-error>
+    <mat-error *ngIf="form.get('companyInformation').get('companyName').hasError('blankStringForbidden')">
+      La dénomination de la société ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+    </mat-error>
+    <mat-error *ngIf="form.get('companyInformation').get('companyID').hasError('required')">
+      L'identifiant de la société doit être renseigné.
+    </mat-error>
+    <mat-error *ngIf="form.get('companyInformation').get('companyID').hasError('validCompanyID')">
+      L'identifiant de la société doit être un identifiant (SIRET) valide.
+    </mat-error>
+  </ng-template>
 </section>
