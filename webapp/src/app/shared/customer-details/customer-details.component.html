@@ -83,16 +83,18 @@
     <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('adultOnly')">
       La date de naissance du chef d'entreprise doit correspondre à celle d'un individu de plus de 18 ans.
     </mat-error>
-    <ng-container *ngFor="let comment of comments.controls; let i=index">
-      <mat-error *ngIf="comment.hasError('required')">
-        Le commentaire #{{i+1}} doit être renseigné.
-      </mat-error>
-      <mat-error *ngIf="comment.hasError('blankStringForbidden')">
-        Le commentaire #{{i+1}} ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-      </mat-error>
-      <mat-error *ngIf="comment.hasError('maxlength')">
-        Le commentaire #{{i+1}} ne doit pas excéder 200 caractères: il en contient actuellement {{comment.errors.maxlength.actualLength}}.
-      </mat-error>
+    <ng-container *ngIf="form.get('customerDetails').get('comments').hasError('validComments')">
+      <ng-container *ngFor="let comment of comments.controls; let i=index">
+        <mat-error *ngIf="comment.hasError('required')">
+          Le commentaire #{{i+1}} doit être renseigné.
+        </mat-error>
+        <mat-error *ngIf="comment.hasError('blankStringForbidden')">
+          Le commentaire #{{i+1}} ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+        </mat-error>
+        <mat-error *ngIf="comment.hasError('maxlength')">
+          Le commentaire #{{i+1}} ne doit pas excéder 200 caractères: il en contient actuellement {{comment.errors.maxlength.actualLength}}.
+        </mat-error>
+      </ng-container>
     </ng-container>
   </ng-template>
 </section>
