@@ -128,7 +128,10 @@ export class ProfileComponent implements OnInit {
             CustomValidators.validVatCode
           ])
         }, { validator: CustomValidators.validVatCodeFromCompanyID }),
-        creationDate: moment(this.pro.creationDate)
+        creationDate: new FormControl(this.pro.creationDate ? moment(this.pro.creationDate) : undefined, [
+          Validators.required,
+          CustomValidators.past
+        ])
       }),
       socialNetworkAccounts: this.fb.group({
         facebook: this.pro.socialNetworkAccounts.facebook,
