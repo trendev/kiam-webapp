@@ -20,6 +20,12 @@ export class ProfileComponent implements OnInit {
   pro: Professional;
   form: FormGroup;
 
+  private commentsValidators = [
+    Validators.required,
+    CustomValidators.blankStringForbidden,
+    Validators.maxLength(200)
+  ];
+
   @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private authenticationService: AuthenticationService,
@@ -106,11 +112,7 @@ export class ProfileComponent implements OnInit {
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
         comments: this.fb.array(
           this.pro.customerDetails.comments || [],
-          CustomValidators.validComments([
-            Validators.required,
-            CustomValidators.blankStringForbidden,
-            Validators.maxLength(200)
-          ]))
+          CustomValidators.validComments(this.commentsValidators))
       }),
       businesses: this.fb.array([]),
       paymentModes: this.fb.array([]),
@@ -195,11 +197,7 @@ export class ProfileComponent implements OnInit {
     // rebuilds the controls of the comments group if they have been modified/removed
     const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
     customerDetailsFG.setControl('comments', this.fb.array(
-      this.pro.customerDetails.comments || [], CustomValidators.validComments([
-          Validators.required,
-          CustomValidators.blankStringForbidden,
-          Validators.maxLength(200)
-        ])));
+      this.pro.customerDetails.comments || [], CustomValidators.validComments(this.commentsValidators)));
 
     // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
     this.form.reset(this.createForm().getRawValue());
