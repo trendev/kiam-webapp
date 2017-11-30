@@ -33,4 +33,8 @@ export class PaymentModeService {
 
   }
 
+  reset() {
+    this._paymentModes = undefined;
+  }
+
 }

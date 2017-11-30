@@ -10,8 +10,6 @@ import { Business } from '@app/entities';
 @Injectable()
 export class BusinessService {
 
-  public v = 0;
-
   readonly api = `${environment.api}/Business`;
 
   private _businesses: Business[];
