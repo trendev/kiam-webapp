@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+mat-card {
+    margin: 10px; // padding: 10px 5px 10px 5px;
+    width: 400px;
+}
+
+@media all and (max-device-width: 600px) {
+    mat-card {
+        width: 100%;
+    }
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-container>* {
+    margin: 5px;
+}

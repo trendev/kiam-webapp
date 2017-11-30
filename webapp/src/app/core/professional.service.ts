@@ -2,13 +2,15 @@ import { ErrorHandlerService } from './error-handler.service';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Professional } from '@app/entities';
+import { Professional, Client } from '@app/entities';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ProfessionalService {
 
   readonly api = `${environment.api}/Professional`;
+
+  private _clients: Client[];
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -30,6 +32,23 @@ export class ProfessionalService {
       .catch(e => {
         return this.errorHandler.handle(e);
       });
+  }
+
+  get clients(): Observable<Client[]> {
+
+    if (this._clients !== undefined) {
+      return Observable.of(this._clients);
+    } else {
+      return this.http.get<Client[]>(`${this.api}/clients`,
+        {
+          withCredentials: true
+        })
+        .map(result => {
+          this._clients = result.map(r => new Client(r));
+          return this._clients;
+        })
+        .catch(e => this.errorHandler.handle(e));
+    }
   }
 
 }

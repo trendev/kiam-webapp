@@ -1,3 +1,21 @@
-<p>
-  clients works!
-</p>
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Tél.</th>
+        </tr>
+        <tr *ngFor="let client of clients | async">
+            <td>{{client.id}}</td>
+            <td>{{client.customerDetails.lastName}}</td>
+            <td>{{client.customerDetails.firstName}}</td>
+            <td>{{client.customerDetails.phone}}</td>
+        </tr>
+      </table>
+
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -32,7 +32,5 @@ export class BusinessService {
     }
   }
 
-  reset() {
-    this._businesses = undefined;
-  }
+  resetBusinesses() { this._businesses = undefined; }
 }

@@ -1,4 +1,8 @@
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
+import { ProfessionalService } from '@app/core';
+import { Client } from '@app/entities';
 
 @Component({
   selector: 'app-clients',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private professionalService: ProfessionalService) { }
+
+  private _clients: Observable<Client[]>;
 
   ngOnInit() {
+  }
+
+  get clients(): Observable<Client[]> {
+    this._clients = this._clients || this.professionalService.clients;
+    return this._clients;
   }
 
 }
