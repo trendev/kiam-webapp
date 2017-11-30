@@ -51,7 +51,7 @@ describe('ErrorHandlerService', () => {
     AuthenticationService
   ], (errsrv: ErrorHandlerService, authsrv: AuthenticationService) => {
     expect(errsrv).toBeTruthy();
-    subscription = authsrv.profile().subscribe(
+    authsrv.profile().subscribe(
       data => expect(data).toBeUndefined('authsrv.profile() should fail and return no data'),
       error => {
         expect(error).toContain('401 - Unauthorized', 'should contain 401 - Unauthorized');

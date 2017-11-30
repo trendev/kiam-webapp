@@ -11,10 +11,6 @@ describe('BusinessService', () => {
   const username = 'vanessa.gay@gmail.com';
   const password = 'ponpon';
 
-  let loginSuscription: Subscription;
-  let logoutSuscription: Subscription;
-  let subscription: Subscription;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [CoreModule],
@@ -23,29 +19,18 @@ describe('BusinessService', () => {
   });
 
   beforeEach(async(inject([AuthenticationService],
-    (authService: AuthenticationService) => {
-      loginSuscription = authService.login(username, password).subscribe(result => { });
-    })));
+    (authService: AuthenticationService) =>
+      authService.login(username, password).subscribe(result => { })
+  )));
 
   afterEach(async(inject([AuthenticationService],
-    (authService: AuthenticationService) => {
-      logoutSuscription = authService.logout().subscribe(result => { });
-    })));
+    (authService: AuthenticationService) =>
+      authService.logout().subscribe(result => console.log(`BusinessServiceTest#logout()`))
+  )));
 
-  afterEach(() => {
-    if (loginSuscription && !loginSuscription.closed) {
-      loginSuscription.unsubscribe();
-      expect(loginSuscription.closed).toBeTruthy('subscription should be closed');
-    }
-    if (logoutSuscription && !logoutSuscription.closed) {
-      logoutSuscription.unsubscribe();
-      expect(logoutSuscription.closed).toBeTruthy('subscription should be closed');
-    }
-  });
-
-  it('should be created', async(inject([BusinessService], (service: BusinessService) => {
+  it('should get the businesses', async(inject([BusinessService], (service: BusinessService) => {
     expect(service).toBeTruthy();
-    subscription = service.businesses.subscribe(
+    service.businesses.subscribe(
       result => {
         expect(result.length).toBeGreaterThanOrEqual(3, 'result.length should be 3');
         expect(result.filter(b => b instanceof Business).length).toBeGreaterThanOrEqual(3, 'result should contains Business objects');

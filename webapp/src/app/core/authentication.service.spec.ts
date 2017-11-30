@@ -18,8 +18,6 @@ describe('AuthService', () => {
   const username = 'vanessa.gay@gmail.com';
   const password = 'ponpon';
 
-  let subscription: Subscription;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -27,13 +25,6 @@ describe('AuthService', () => {
       ],
       providers: [AuthenticationService]
     });
-  });
-
-  afterEach(() => {
-    if (subscription && !subscription.closed) {
-      subscription.unsubscribe();
-      expect(subscription.closed).toBeTruthy('subscription should be closed');
-    }
   });
 
   it('should be created', inject([AuthenticationService], (service: AuthenticationService) => {
@@ -45,7 +36,7 @@ describe('AuthService', () => {
 
   it('should login ' + username, async(inject([AuthenticationService], (service: AuthenticationService) => {
     expect(service).toBeTruthy();
-    subscription = service.login(username, password).subscribe(result => {
+    service.login(username, password).subscribe(result => {
       expect(result).toBe(true);
       expect(service.user).toBeTruthy();
       expect(service.user.cltype).toBe(UserAccountType.PROFESSIONAL);
@@ -55,7 +46,7 @@ describe('AuthService', () => {
 
   it('should get an updated profile of ' + username, async(inject([AuthenticationService], (service: AuthenticationService) => {
     expect(service).toBeTruthy();
-    subscription = service.profile().subscribe(p => {
+    service.profile().subscribe(p => {
       expect(p).toBeTruthy();
       expect(p.cltype).toBe(UserAccountType.PROFESSIONAL);
       expect(service.user).toBeTruthy();
@@ -68,17 +59,18 @@ describe('AuthService', () => {
   it('should get a password', async(inject([AuthenticationService], (service: AuthenticationService) => {
     expect(service).toBeTruthy();
     const size = 100;
-    subscription = service.password(size).subscribe(pwd => {
+    service.password(size).subscribe(pwd => {
       expect(pwd.length).toBe(size);
     });
   })));
 
   it('should logout ' + username, async(inject([AuthenticationService], (service: AuthenticationService) => {
     expect(service).toBeTruthy();
-    subscription = service.logout().subscribe(result => {
+    service.logout().subscribe(result => {
       expect(result).toBe(true);
       expect(service.user).toBeUndefined();
       expect(service.isLoggedIn).toBe(false);
+      console.log(`AuthenticationServiceTest#logou()`);
     });
   })));
 });
