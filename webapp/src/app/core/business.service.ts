@@ -10,6 +10,8 @@ import { Business } from '@app/entities';
 @Injectable()
 export class BusinessService {
 
+  public v = 0;
+
   readonly api = `${environment.api}/Business`;
 
   private _businesses: Business[];
@@ -17,7 +19,6 @@ export class BusinessService {
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
   get businesses(): Observable<Business[]> {
-
     if (this._businesses !== undefined) {
       return Observable.of(this._businesses);
     } else {
@@ -33,5 +34,7 @@ export class BusinessService {
     }
   }
 
-  reset() { }
+  reset() {
+    this._businesses = undefined;
+  }
 }
