@@ -5,21 +5,24 @@
       {clients.length, plural, =0 {aucun client} =1 {un client} other {{{clients.length}} clients}}
     </mat-card-subtitle>
     <mat-card-content>
-      <table>
-        <tr>
-          <th>#</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Tél.</th>
-        </tr>
-        <tr *ngFor="let client of clients">
-          <td>{{client.id}}</td>
-          <td>{{client.customerDetails.lastName}}</td>
-          <td>{{client.customerDetails.firstName}}</td>
-          <td>{{client.customerDetails.phone}}</td>
-        </tr>
-      </table>
-
+      <div class="list-container  mat-elevation-z2">
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="lastName">
+            <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.customerDetails.lastName}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="firstName">
+            <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.customerDetails.firstName}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef> Tél. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.customerDetails.phone}} </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

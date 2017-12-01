@@ -10,15 +10,20 @@ mat-card {
     width: 100%;
 }
 
-.button-container {
+.list-container {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
 }
 
-.button-container>* {
-    margin: 5px;
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
 }
 
 @media all and (max-device-width: 600px) {
-    
+    .mat-row,.mat-header-row{
+        padding: 0px 2px 0px 2px;
+    }
 }
