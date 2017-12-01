@@ -7,13 +7,7 @@
 
 mat-card {
     margin: 10px; // padding: 10px 5px 10px 5px;
-    width: 400px;
-}
-
-@media all and (max-device-width: 600px) {
-    mat-card {
-        width: 100%;
-    }
+    width: 100%;
 }
 
 .button-container {
@@ -23,4 +17,8 @@ mat-card {
 
 .button-container>* {
     margin: 5px;
+}
+
+@media all and (max-device-width: 600px) {
+    
 }

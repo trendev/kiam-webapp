@@ -1,5 +1,7 @@
 <div class="container">
   <mat-card>
+    <mat-card-title>Référentiel client</mat-card-title>
+    <mat-card-subtitle>{{clients?.length}} clients</mat-card-subtitle>
     <mat-card-content>
       <table>
         <tr>
@@ -8,11 +10,11 @@
           <th>Prénom</th>
           <th>Tél.</th>
         </tr>
-        <tr *ngFor="let client of clients | async">
-            <td>{{client.id}}</td>
-            <td>{{client.customerDetails.lastName}}</td>
-            <td>{{client.customerDetails.firstName}}</td>
-            <td>{{client.customerDetails.phone}}</td>
+        <tr *ngFor="let client of clients">
+          <td>{{client.id}}</td>
+          <td>{{client.customerDetails.lastName}}</td>
+          <td>{{client.customerDetails.firstName}}</td>
+          <td>{{client.customerDetails.phone}}</td>
         </tr>
       </table>
 

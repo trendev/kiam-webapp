@@ -13,10 +13,14 @@ export class ClientsComponent implements OnInit {
 
   constructor(private professionalService: ProfessionalService) { }
 
-  clients: Observable<Client[]>;
+  clients: Client[];
 
   ngOnInit() {
-    this.clients = this.professionalService.clients;
+    this.professionalService.clients.subscribe(
+      clients => this.clients = clients,
+      // TODO : handle the error
+      e => console.error(`Une erreur est survenue lors de la collecte des clients sur le serveur`)
+    );
   }
 
 }
