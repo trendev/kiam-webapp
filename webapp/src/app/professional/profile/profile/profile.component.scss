@@ -6,21 +6,36 @@
 }
 
 mat-card {
-    margin: 10px; // padding: 10px 5px 10px 5px;
-    width: 400px;
+    margin: 10px;
+    width: 100%;
 }
 
-@media all and (max-device-width: 600px) {
-    mat-card {
-        width: 100%;
-    }
-}
-
-.button-container {
+.form-button-container {
     display: flex;
     justify-content: flex-end;
 }
 
-.button-container>* {
+.form-button-container>* {
     margin: 5px;
+}
+
+.top-button-container {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+}
+
+.top-button-container>* {
+    margin: 0px 0px 5px 0px;
+}
+
+.mat-divider {
+    margin-bottom: 10px;
+}
+
+@media all and (max-device-width: 600px) {
+    .top-button-container {
+        flex-flow: column;
+        align-content: stretch;
+    }
 }
