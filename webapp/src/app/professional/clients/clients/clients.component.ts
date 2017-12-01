@@ -13,14 +13,10 @@ export class ClientsComponent implements OnInit {
 
   constructor(private professionalService: ProfessionalService) { }
 
-  private _clients: Observable<Client[]>;
+  clients: Observable<Client[]>;
 
   ngOnInit() {
-  }
-
-  get clients(): Observable<Client[]> {
-    this._clients = this._clients || this.professionalService.clients;
-    return this._clients;
+    this.clients = this.professionalService.clients;
   }
 
 }

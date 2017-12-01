@@ -10,8 +10,6 @@ export class ProfessionalService {
 
   readonly api = `${environment.api}/Professional`;
 
-  private _clients: Client[];
-
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
   profile(refresh: boolean = true): Observable<Professional> {
@@ -36,19 +34,12 @@ export class ProfessionalService {
 
   get clients(): Observable<Client[]> {
 
-    if (this._clients !== undefined) {
-      return Observable.of(this._clients);
-    } else {
-      return this.http.get<Client[]>(`${this.api}/clients`,
+   return this.http.get<Client[]>(`${this.api}/clients`,
         {
           withCredentials: true
         })
-        .map(result => {
-          this._clients = result.map(r => new Client(r));
-          return this._clients;
-        })
+        .map(result => result.map(r => new Client(r)))
         .catch(e => this.errorHandler.handle(e));
     }
-  }
 
 }
