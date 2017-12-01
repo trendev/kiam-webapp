@@ -17,7 +17,9 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatRadioModule,
-  MatTableModule
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -54,7 +56,9 @@ import { ErrorAggregatorDirective } from './error-aggregator.directive';
     MatNativeDateModule,
     MatMomentDateModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   declarations: [
     PageNotFoundComponent,
@@ -99,7 +103,9 @@ import { ErrorAggregatorDirective } from './error-aggregator.directive';
     LoremIpsumComponent,
     ChangePasswordComponent,
     ErrorAggregatorDirective,
-    MatTableModule
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ]
 })
 
