@@ -22,10 +22,6 @@ mat-card {
     max-height: 500px;
 }
 
-.hide {
-    //will be hidden on mobile devices
-}
-
 @media all and (max-device-width: 600px) {
     
     .hide {
