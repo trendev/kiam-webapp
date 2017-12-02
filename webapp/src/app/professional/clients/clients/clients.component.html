@@ -6,6 +6,11 @@
     </mat-card-subtitle>
     <mat-card-content>
       <div class="list-container  mat-elevation-z2">
+        <div class="search-header">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+          </mat-form-field>
+        </div>
         <mat-table #table [dataSource]="datasource" matSort>
           <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
             <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="column.hide">{{column.headerCellDef}}</mat-header-cell>

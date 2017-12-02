@@ -55,6 +55,12 @@ export class ClientsComponent implements OnInit, AfterViewInit {
     );
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.datasource.filter = filterValue;
+  }
+
 }
 
 interface ClientModel {
