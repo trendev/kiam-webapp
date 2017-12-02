@@ -7,17 +7,11 @@
     <mat-card-content>
       <div class="list-container  mat-elevation-z2">
         <mat-table #table [dataSource]="dataSource">
-          <ng-container matColumnDef="lastName">
-            <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.customerDetails.lastName}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="firstName">
-            <mat-header-cell *matHeaderCellDef> Prénom </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.customerDetails.firstName}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="phone">
-            <mat-header-cell *matHeaderCellDef> Tél. </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.customerDetails.phone}} </mat-cell>
+          <ng-container *ngFor="let column of columns">
+            <ng-container [matColumnDef]="column.columnDef">
+              <mat-header-cell *matHeaderCellDef [class.hide]="column.hide">{{column.headerCellDef}}</mat-header-cell>
+              <mat-cell *matCellDef="let element" [class.hide]="column.hide">{{column.cellDef(element)}}</mat-cell>
+            </ng-container>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
