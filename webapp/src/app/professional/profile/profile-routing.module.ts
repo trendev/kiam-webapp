@@ -7,7 +7,8 @@ import { PageNotFoundComponent } from '@app/shared';
 const routes: Routes = [
   {
     path: '',
-    component: ProfileComponent
+    component: ProfileComponent,
+    pathMatch: 'full'
   },
   {
     path: 'change-password',

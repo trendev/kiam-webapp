@@ -6,7 +6,8 @@ import { PageNotFoundComponent } from '@app/shared';
 const routes: Routes = [
   {
     path: '',
-    component: CategoriesComponent
+    component: CategoriesComponent,
+    pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }
 ];

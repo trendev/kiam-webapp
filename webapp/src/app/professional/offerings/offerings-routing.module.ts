@@ -5,7 +5,8 @@ import { OfferingsComponent } from './offerings/offerings.component';
 const routes: Routes = [
   {
     path: '',
-    component: OfferingsComponent
+    component: OfferingsComponent,
+    pathMatch: 'full'
   }
 ];
 
