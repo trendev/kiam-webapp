@@ -8,7 +8,10 @@
       <div class="list-container  mat-elevation-z2">
         <div class="search-header">
           <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Recherche">
+            <mat-placeholder>
+              <i>Recherche</i>
+            </mat-placeholder>
+            <input matInput (keyup)="applyFilter($event.target.value)">
           </mat-form-field>
         </div>
         <mat-table #table [dataSource]="datasource" matSort>
