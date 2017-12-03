@@ -95,7 +95,6 @@ export class ProfileComponent implements OnInit {
           Validators.maxLength(50)
         ]),
         nickname: new FormControl(this.pro.customerDetails.nickname, [
-          Validators.required,
           CustomValidators.blankStringForbidden,
           Validators.maxLength(50)
         ]),
