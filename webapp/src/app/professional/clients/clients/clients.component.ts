@@ -63,6 +63,11 @@ export class ClientsComponent implements OnInit {
     this.datasource.filter = filterValue;
   }
 
+  viewClient(client: ClientModel) {
+    // TODO : route to view-client
+    console.log(client);
+  }
+
 }
 
 interface ClientModel {
