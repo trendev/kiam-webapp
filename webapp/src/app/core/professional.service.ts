@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 export class ProfessionalService {
 
   readonly api = `${environment.api}/Professional`;
+  private _clients: Client[];
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -32,14 +33,21 @@ export class ProfessionalService {
       });
   }
 
-  get clients(): Observable<Client[]> {
+  getClients(refresh = false): Observable<Client[]> {
 
-   return this.http.get<Client[]>(`${this.api}/clients`,
+    if (this._clients && !refresh) {
+      return Observable.of(this._clients);
+    } else {
+      return this.http.get<Client[]>(`${this.api}/clients`,
         {
           withCredentials: true
         })
-        .map(result => result.map(r => new Client(r)))
+        .map(result => {
+          this._clients = result.map(r => new Client(r)); // request cached
+          return this._clients;
+        })
         .catch(e => this.errorHandler.handle(e));
     }
+  }
 
 }

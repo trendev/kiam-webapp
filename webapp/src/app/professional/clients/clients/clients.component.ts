@@ -35,7 +35,7 @@ export class ClientsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.professionalService.clients.subscribe(
+    this.professionalService.getClients().subscribe(
       clients => {
         this.clients = clients.map(client => {
           return {
