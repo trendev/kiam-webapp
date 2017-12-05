@@ -27,7 +27,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { AddressComponent } from './address/address.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
-import { BusinessComponent } from './business/business.component';
+import { BusinessesComponent } from './businesses/businesses.component';
 import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { CompanyInformationComponent } from './company-information/company-information.component';
 import { SocialNetworkAccountsComponent } from './social-network-accounts/social-network-accounts.component';
@@ -65,7 +65,7 @@ import { ErrorAggregatorDirective } from './error-aggregator.directive';
     AccountInfoComponent,
     AddressComponent,
     CustomerDetailsComponent,
-    BusinessComponent,
+    BusinessesComponent,
     PaymentModeComponent,
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,
@@ -96,7 +96,7 @@ import { ErrorAggregatorDirective } from './error-aggregator.directive';
     AddressComponent,
     MatRadioModule,
     CustomerDetailsComponent,
-    BusinessComponent,
+    BusinessesComponent,
     PaymentModeComponent,
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,

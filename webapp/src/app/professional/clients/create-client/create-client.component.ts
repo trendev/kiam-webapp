@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
 import { ProfessionalService } from '@app/core';
 
@@ -107,7 +107,38 @@ export class CreateClientComponent implements OnInit {
         ]),
         country: new FormControl({ value: 'France', disabled: true })
       }),
+      collectiveGroups: this.fb.array([]),
+      categories: this.fb.array([])
     });
+
+    this.professionalService.getCollectiveGroups().subscribe(
+      collectiveGroups => {
+        const collectiveGroupsFA = fg.get('collectiveGroups') as FormArray;
+        collectiveGroups.forEach(cg =>
+          collectiveGroupsFA.push(this.fb.group({
+            id: cg.id,
+            groupName: cg.groupName,
+            value: false
+          })));
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de charger les groupes/collectivités du professionel depuis le serveur')
+    );
+
+    this.professionalService.getCategories().subscribe(
+      categories => {
+        const categoriesFA = fg.get('categories') as FormArray;
+        categories.forEach(ct =>
+          categoriesFA.push(this.fb.group({
+            id: ct.id,
+            name: ct.name,
+            value: false
+          })));
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de charger les groupes/collectivités du professionel depuis le serveur')
+    );
+
     return fg;
   }
 
