@@ -35,6 +35,7 @@ import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ErrorAggregatorDirective } from './error-aggregator.directive';
 import { CollectiveGroupsComponent } from './collective-groups/collective-groups.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import { CollectiveGroupsComponent } from './collective-groups/collective-groups
     LoremIpsumComponent,
     ChangePasswordComponent,
     ErrorAggregatorDirective,
-    CollectiveGroupsComponent],
+    CollectiveGroupsComponent,
+    CategoriesComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -108,7 +110,8 @@ import { CollectiveGroupsComponent } from './collective-groups/collective-groups
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    CollectiveGroupsComponent
+    CollectiveGroupsComponent,
+    CategoriesComponent
   ]
 })
 
