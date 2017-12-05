@@ -79,7 +79,10 @@
       Le numéro de téléphone doit être dans un format valide (+33153732200, 0153732200...)
     </mat-error>
     <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('adultOnly')">
-      La date de naissance du chef d'entreprise doit correspondre à celle d'un individu de plus de 18 ans.
+      La date de naissance doit correspondre à celle d'un individu de plus de 18 ans.
+    </mat-error>
+    <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('past')">
+      La date de naissance ne peut correspondre à une date future.
     </mat-error>
     <ng-container *ngIf="form.get('customerDetails').get('comments').hasError('validComments')">
       <ng-container *ngFor="let comment of comments.controls; let i=index">

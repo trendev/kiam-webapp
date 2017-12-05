@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+mat-card {
+    margin: 10px; // padding: 10px 5px 10px 5px;
+    width: 100%;
+}
+
+.email {
+   width: 50%;
+}
+
+
+@media all and (max-device-width: 600px) {
+    .email {
+        width: 100%;
+     }
+}

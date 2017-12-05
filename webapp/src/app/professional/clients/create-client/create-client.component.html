@@ -1,0 +1,48 @@
+<div class="container">
+  <mat-card>
+    <form [formGroup]="form" novalidate>
+      <mat-card-title>Nouveau client</mat-card-title>
+      <mat-card-content>
+          <mat-form-field class="email">
+              <input matInput placeholder="Email" formControlName="email">
+            </mat-form-field>
+        <mat-accordion multi="false">
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Informations générales
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-customer-details [errorAggregator]="errorAggregator"></app-customer-details>
+          </mat-expansion-panel>
+
+
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Adresse
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-address [errorAggregator]="errorAggregator"></app-address>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Réseaux sociaux
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-social-network-accounts [errorAggregator]="errorAggregator"></app-social-network-accounts>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+      </mat-card-content>
+
+      <ng-container appErrorAggregator></ng-container>
+    </form>
+  </mat-card>
+
+</div>
