@@ -28,7 +28,7 @@ import { AccountInfoComponent } from './account-info/account-info.component';
 import { AddressComponent } from './address/address.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { BusinessesComponent } from './businesses/businesses.component';
-import { PaymentModeComponent } from './payment-mode/payment-mode.component';
+import { PaymentModesComponent } from './payment-modes/payment-modes.component';
 import { CompanyInformationComponent } from './company-information/company-information.component';
 import { SocialNetworkAccountsComponent } from './social-network-accounts/social-network-accounts.component';
 import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
@@ -66,7 +66,7 @@ import { ErrorAggregatorDirective } from './error-aggregator.directive';
     AddressComponent,
     CustomerDetailsComponent,
     BusinessesComponent,
-    PaymentModeComponent,
+    PaymentModesComponent,
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,
     LoremIpsumComponent,
@@ -97,7 +97,7 @@ import { ErrorAggregatorDirective } from './error-aggregator.directive';
     MatRadioModule,
     CustomerDetailsComponent,
     BusinessesComponent,
-    PaymentModeComponent,
+    PaymentModesComponent,
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,
     LoremIpsumComponent,

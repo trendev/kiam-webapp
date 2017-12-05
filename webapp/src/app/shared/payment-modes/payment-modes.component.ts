@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
-  selector: 'app-payment-mode',
-  templateUrl: './payment-mode.component.html',
-  styleUrls: ['./payment-mode.component.scss'],
+  selector: 'app-payment-modes',
+  templateUrl: './payment-modes.component.html',
+  styleUrls: ['./payment-modes.component.scss'],
   viewProviders: [
     {
       provide: ControlContainer,
@@ -12,7 +12,7 @@ import { ControlContainer, FormGroupDirective, FormGroup, FormArray } from '@ang
     }
   ]
 })
-export class PaymentModeComponent implements OnInit {
+export class PaymentModesComponent implements OnInit {
 
   form: FormGroup;
 
@@ -20,7 +20,7 @@ export class PaymentModeComponent implements OnInit {
 
   ngOnInit() {
     if (this.parent.form === null) {
-      throw new Error(`parent: FormGroupDirective should not be null in PaymentModeComponent#init()`);
+      throw new Error(`parent: FormGroupDirective should not be null in PaymentModesComponent#init()`);
     }
     this.form = this.parent.form;
   }
