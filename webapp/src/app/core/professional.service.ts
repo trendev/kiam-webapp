@@ -15,6 +15,12 @@ export class ProfessionalService {
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
+  resetCache() {
+    this._clients = undefined;
+    this._collectiveGroups = undefined;
+    this._categories = undefined;
+  }
+
   profile(refresh: boolean = true): Observable<Professional> {
     return this.http.get<Professional>(`${this.api}/profile`,
       {

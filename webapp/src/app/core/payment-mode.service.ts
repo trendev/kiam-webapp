@@ -33,6 +33,6 @@ export class PaymentModeService {
 
   }
 
-  resetPaymentModes() { this._paymentModes = undefined; }
+  resetCache() { this._paymentModes = undefined; }
 
 }

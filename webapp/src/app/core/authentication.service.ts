@@ -1,3 +1,4 @@
+import { CacheHandlerService } from './cache-handler.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { Administrator, Individual, Professional, UserAccount } from '@app/entities';
 import { environment } from '@env/environment';
@@ -23,15 +24,18 @@ export class AuthenticationService {
 
   readonly api = `${environment.api}/Authentication`;
 
-  constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
+  constructor(private http: HttpClient,
+    private errorHandler: ErrorHandlerService,
+    private cacheHandlerService: CacheHandlerService) { }
 
   get isLoggedIn(): boolean {
     return this._isLoggedIn;
   }
 
-  reset() {
+  resetCache() {
     this.user = undefined;
     this._isLoggedIn = false;
+    this.cacheHandlerService.resetCache();
   }
 
   login(username: string, password: string): Observable<boolean> {
@@ -48,13 +52,13 @@ export class AuthenticationService {
         return true;
       })
       .catch(e => {
-        this.reset();
+        this.resetCache();
         return this.errorHandler.handle(e);
       });
   }
 
   logout(): Observable<boolean> {
-    this.reset();
+    this.resetCache();
     return this.http.post<any>(`${this.api}/logout`,
       null,
       { observe: 'response', withCredentials: true })
@@ -71,7 +75,7 @@ export class AuthenticationService {
         return this.user;
       })
       .catch(e => {
-        this.reset();
+        this.resetCache();
         return this.errorHandler.handle(e);
       });
   }
@@ -86,7 +90,7 @@ export class AuthenticationService {
       })
       .retry(3)
       .catch(e => {
-        this.reset();
+        this.resetCache();
         return this.errorHandler.handle(e);
       });
   }
