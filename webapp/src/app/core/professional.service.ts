@@ -2,7 +2,7 @@ import { ErrorHandlerService } from './error-handler.service';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Professional, Client } from '@app/entities';
+import { Professional, Client, CollectiveGroup, Category } from '@app/entities';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -10,6 +10,8 @@ export class ProfessionalService {
 
   readonly api = `${environment.api}/Professional`;
   private _clients: Client[];
+  private _collectiveGroups: CollectiveGroup[];
+  private _categories: Category[];
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -45,6 +47,38 @@ export class ProfessionalService {
         .map(result => {
           this._clients = result.map(r => new Client(r)); // request cached
           return this._clients;
+        })
+        .catch(e => this.errorHandler.handle(e));
+    }
+  }
+
+  getCollectiveGroups(refresh = false): Observable<CollectiveGroup[]> {
+    if (this._collectiveGroups && !refresh) {
+      return Observable.of(this._collectiveGroups);
+    } else {
+      return this.http.get<CollectiveGroup[]>(`${this.api}/collectiveGroups`,
+        {
+          withCredentials: true
+        })
+        .map(result => {
+          this._collectiveGroups = result.map(r => new CollectiveGroup(r)); // request cached
+          return this._collectiveGroups;
+        })
+        .catch(e => this.errorHandler.handle(e));
+    }
+  }
+
+  getCategories(refresh = false): Observable<Category[]> {
+    if (this._categories && !refresh) {
+      return Observable.of(this._categories);
+    } else {
+      return this.http.get<Category[]>(`${this.api}/categories`,
+        {
+          withCredentials: true
+        })
+        .map(result => {
+          this._categories = result.map(r => new Category(r)); // request cached
+          return this._categories;
         })
         .catch(e => this.errorHandler.handle(e));
     }
