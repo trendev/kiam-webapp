@@ -34,6 +34,7 @@ import { SocialNetworkAccountsComponent } from './social-network-accounts/social
 import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ErrorAggregatorDirective } from './error-aggregator.directive';
+import { CollectiveGroupsComponent } from './collective-groups/collective-groups.component';
 
 @NgModule({
   imports: [
@@ -71,7 +72,8 @@ import { ErrorAggregatorDirective } from './error-aggregator.directive';
     SocialNetworkAccountsComponent,
     LoremIpsumComponent,
     ChangePasswordComponent,
-    ErrorAggregatorDirective],
+    ErrorAggregatorDirective,
+    CollectiveGroupsComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -105,7 +107,8 @@ import { ErrorAggregatorDirective } from './error-aggregator.directive';
     ErrorAggregatorDirective,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    CollectiveGroupsComponent
   ]
 })
 
