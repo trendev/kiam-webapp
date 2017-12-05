@@ -234,7 +234,7 @@ export class ProfileComponent implements OnInit {
       companyName: value.companyInformation.companyName || undefined,
       companyID: value.companyInformation.companyCodes.companyID || undefined,
       vatcode: value.companyInformation.companyCodes.vatcode || undefined,
-      creationDate: value.companyInformation.creationDate.valueOf() || undefined,
+      creationDate: value.companyInformation.creationDate ? value.companyInformation.creationDate.valueOf() : undefined,
       address: {
         street: value.address.street || undefined,
         optional: value.address.optional || undefined,
@@ -247,7 +247,7 @@ export class ProfileComponent implements OnInit {
         lastName: value.customerDetails.lastName || undefined,
         nickname: value.customerDetails.nickname || undefined,
         phone: value.customerDetails.phone || undefined,
-        birthdate: value.customerDetails.birthdate.valueOf() || undefined,
+        birthdate: value.customerDetails.birthdate ? value.customerDetails.birthdate.valueOf() : undefined,
         sex: value.customerDetails.sex || undefined,
         picturePath: value.customerDetails.picturePath || undefined,
         comments: value.customerDetails.comments || undefined
