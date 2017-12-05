@@ -1,3 +1,5 @@
-<p>
-  collective-groups works!
-</p>
+<section formGroupName="collectiveGroups">
+    <div *ngFor="let collectiveGroup of collectiveGroups.controls; let i=index" [formGroupName]="i">
+      <mat-checkbox formControlName="value">{{collectiveGroup.get('groupName').value}}</mat-checkbox>
+    </div>
+  </section>
