@@ -136,7 +136,7 @@ export class CreateClientComponent implements OnInit {
           })));
       },
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de charger les groupes/collectivités du professionel depuis le serveur')
+      e => console.error('Impossible de charger les catégories du professionel depuis le serveur')
     );
 
     return fg;

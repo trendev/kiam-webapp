@@ -1,3 +1,5 @@
-<p>
-  categories works!
-</p>
+<section formGroupName="categories">
+    <div *ngFor="let category of categories.controls; let i=index" [formGroupName]="i">
+      <mat-checkbox formControlName="value">{{category.get('name').value}}</mat-checkbox>
+    </div>
+  </section>
