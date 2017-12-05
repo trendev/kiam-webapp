@@ -3,9 +3,9 @@
     <form [formGroup]="form" novalidate>
       <mat-card-title>Nouveau client</mat-card-title>
       <mat-card-content>
-          <mat-form-field class="email">
-              <input matInput placeholder="Email" formControlName="email">
-            </mat-form-field>
+        <mat-form-field class="email">
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
         <mat-accordion multi="false">
 
           <mat-expansion-panel>
@@ -16,8 +16,6 @@
             </mat-expansion-panel-header>
             <app-customer-details [errorAggregator]="errorAggregator"></app-customer-details>
           </mat-expansion-panel>
-
-
 
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -40,7 +38,7 @@
         </mat-accordion>
 
       </mat-card-content>
-
+      {{form.getRawValue() | json}}
       <ng-container appErrorAggregator></ng-container>
     </form>
   </mat-card>
