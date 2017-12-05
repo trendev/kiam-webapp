@@ -17,7 +17,7 @@ export class PaymentModeService {
 
   get paymentModes(): Observable<PaymentMode[]> {
 
-    if (this._paymentModes !== undefined) {
+    if (this._paymentModes) {
       return Observable.of(this._paymentModes);
     } else {
       return this.http.get<PaymentMode[]>(`${this.api}`,

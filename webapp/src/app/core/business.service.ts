@@ -17,7 +17,7 @@ export class BusinessService {
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
   get businesses(): Observable<Business[]> {
-    if (this._businesses !== undefined) {
+    if (this._businesses) {
       return Observable.of(this._businesses);
     } else {
       return this.http.get<Business[]>(`${this.api}`,
