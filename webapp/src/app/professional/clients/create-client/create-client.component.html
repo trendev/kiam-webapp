@@ -57,20 +57,22 @@
 
       </mat-card-content>
       {{form.getRawValue() | json}}
+      <hr/>
+      {{form.invalid}}
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
-          <div class="form-button-container">
-            <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
-              <mat-icon aria-label="Annuler les modification">undo</mat-icon>
-            </button>
-            <a mat-mini-fab routerLink="../" routerLinkActive="active">
-              <mat-icon aria-label="Annuler la création du client">close</mat-icon>
-            </a>
-            <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
-              <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
-            </button>
-          </div>
-        </mat-card-actions>
+        <div class="form-button-container">
+          <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
+            <mat-icon aria-label="Annuler les modification">undo</mat-icon>
+          </button>
+          <a mat-mini-fab routerLink="../" routerLinkActive="active">
+            <mat-icon aria-label="Annuler la création du client">close</mat-icon>
+          </a>
+          <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+            <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
     </form>
   </mat-card>
 

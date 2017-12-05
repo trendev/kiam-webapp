@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
 import { ProfessionalService } from '@app/core';
+import { Client, CollectiveGroup, Category } from '@app/entities';
 
 @Component({
   selector: 'app-create-client',
@@ -149,6 +150,60 @@ export class CreateClientComponent implements OnInit {
 
     // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
     this.form.reset(this.createForm().getRawValue());
+  }
+
+  prepareSave(): Client {
+    const value = this.form.getRawValue();
+
+    const client = new Client({
+      email: value.email || undefined,
+      address: {
+        street: value.address.street || undefined,
+        optional: value.address.optional || undefined,
+        postalCode: value.address.postalCode || undefined,
+        city: value.address.city || undefined,
+        country: value.address.country || undefined
+      },
+      customerDetails: {
+        firstName: value.customerDetails.firstName || undefined,
+        lastName: value.customerDetails.lastName || undefined,
+        nickname: value.customerDetails.nickname || undefined,
+        phone: value.customerDetails.phone || undefined,
+        birthdate: value.customerDetails.birthdate ? value.customerDetails.birthdate.valueOf() : undefined,
+        sex: value.customerDetails.sex || undefined,
+        picturePath: value.customerDetails.picturePath || undefined,
+        comments: value.customerDetails.comments || undefined
+      },
+      socialNetworkAccounts: {
+        facebook: value.socialNetworkAccounts.facebook || undefined,
+        twitter: value.socialNetworkAccounts.twitter || undefined,
+        instagram: value.socialNetworkAccounts.instagram || undefined,
+        pinterest: value.socialNetworkAccounts.pinterest || undefined
+      },
+      collectiveGroups: this.extractArrayFromControl('collectiveGroups',
+        fg => new CollectiveGroup({
+          id: fg.value.id,
+          groupName: fg.value.groupName
+        })
+      ),
+      categories: this.extractArrayFromControl('categories',
+        fg => new Category({
+          name: fg.value.name,
+          id: fg.value.id
+        })
+      )
+    });
+
+    return client;
+  }
+
+  private extractArrayFromControl(faName: string, mapperFn: (fg: FormGroup) => any) {
+    const fa = this.form.get(faName) as FormArray;
+    return fa.controls.filter(fg => fg.value.value).map(mapperFn);
+  }
+
+  save() {
+    console.log(this.prepareSave());
   }
 
 }
