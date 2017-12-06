@@ -12,14 +12,14 @@
   </mat-form-field>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>
-    <mat-error *ngIf="form.get('accountInfo').get('username').hasError('required')">
+    <app-error [control]="form.get('accountInfo').get('username')" [error]="'required'">
       Le nom d'utilisateur doit être renseigné.
-    </mat-error>
-    <mat-error *ngIf="form.get('accountInfo').get('username').hasError('whiteSpaceForbidden')">
+    </app-error>
+    <app-error [control]="form.get('accountInfo').get('username')" [error]="'whiteSpaceForbidden'">
       Le nom d'utilisateur ne doit pas contenir de caractères d'espacement (espace, tabulation...).
-    </mat-error>
-    <mat-error *ngIf="form.get('accountInfo').get('username').hasError('maxlength')">
+    </app-error>
+    <app-error [control]="form.get('accountInfo').get('username')" [error]="'maxlength'">
       Le nom d'utilisateur ne doit pas contenir plus de 20 caractères.
-    </mat-error>
+    </app-error>
   </ng-template>
 </section>
