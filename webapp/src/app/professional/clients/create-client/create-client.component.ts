@@ -205,9 +205,8 @@ export class CreateClientComponent implements OnInit {
 
   save() {
     const client = this.prepareSave();
-    console.log(client);
     this.clientService.create(client).subscribe(
-      _client => console.log(_client),
+      _client => this.professionalService.addClient(_client), // add client in the cache
       // TODO: handle this (check the status code, etc)
       e => console.error('Impossible de sauvegarder le nouveau client sur le serveur'));
   }

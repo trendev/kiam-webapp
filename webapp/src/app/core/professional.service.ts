@@ -58,6 +58,10 @@ export class ProfessionalService {
     }
   }
 
+  addClient(client: Client) {
+    this._clients.push(client);
+  }
+
   getCollectiveGroups(refresh = false): Observable<CollectiveGroup[]> {
     if (this._collectiveGroups && !refresh) {
       return Observable.of(this._collectiveGroups);
