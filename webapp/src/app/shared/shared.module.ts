@@ -36,6 +36,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ErrorAggregatorDirective } from './error-aggregator.directive';
 import { CollectiveGroupsComponent } from './collective-groups/collective-groups.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   imports: [
@@ -75,7 +76,8 @@ import { CategoriesComponent } from './categories/categories.component';
     ChangePasswordComponent,
     ErrorAggregatorDirective,
     CollectiveGroupsComponent,
-    CategoriesComponent],
+    CategoriesComponent,
+    ErrorComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -111,7 +113,8 @@ import { CategoriesComponent } from './categories/categories.component';
     MatSortModule,
     MatPaginatorModule,
     CollectiveGroupsComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    ErrorComponent
   ]
 })
 

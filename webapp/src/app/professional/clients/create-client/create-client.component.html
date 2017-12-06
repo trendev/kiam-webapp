@@ -7,9 +7,9 @@
         <mat-form-field class="email">
           <input matInput placeholder="Email" formControlName="email">
         </mat-form-field>
-        <mat-error *ngIf="form.get('email').hasError('email') && (form.get('email').dirty || form.get('email').touched)">
+        <app-error [control]="form.get('email')" [error]="'email'">
           L'adresse email renseignée doit être valide.
-        </mat-error>
+        </app-error>
         <mat-accordion multi="false">
 
           <mat-expansion-panel>
@@ -60,7 +60,7 @@
         </mat-accordion>
 
       </mat-card-content>
-      
+
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
