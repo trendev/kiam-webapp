@@ -1,12 +1,13 @@
 <div class="container">
   <mat-card>
     <form [formGroup]="form" novalidate>
+      <p>Form is invalid : {{form.invalid | json}}</p>
       <mat-card-title>Nouveau client</mat-card-title>
       <mat-card-content>
         <mat-form-field class="email">
           <input matInput placeholder="Email" formControlName="email">
         </mat-form-field>
-        <mat-error *ngIf="form.get('email').hasError('email') && form.get('email').dirty && form.get('email').touched">
+        <mat-error *ngIf="form.get('email').hasError('email') && (form.get('email').dirty || form.get('email').touched)">
           L'adresse email renseignée doit être valide.
         </mat-error>
         <mat-accordion multi="false">
@@ -59,8 +60,7 @@
         </mat-accordion>
 
       </mat-card-content>
-      {{form.getRawValue() | json}}
-      <hr/>
+      
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
