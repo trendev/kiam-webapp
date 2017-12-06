@@ -1,53 +1,60 @@
 <section formGroupName="address" class="address">
   <mat-form-field>
-    <input matInput placeholder="Rue" formControlName="street" required>
+    <input matInput #street maxlength="100" placeholder="Rue" formControlName="street" required>
+    <mat-hint align="end">{{street.value?.length || 0}}/100</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Complément d'adresse (numéro d'appartement...)" formControlName="optional">
+    <input matInput #optional maxlength="100" placeholder="Complément d'adresse (numéro d'appartement...)" formControlName="optional">
+    <mat-hint align="end">{{optional.value?.length || 0}}/100</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Code postal" formControlName="postalCode" required>
+    <input matInput #postalCode maxlength="5" minlength="5" placeholder="Code postal" formControlName="postalCode" required>
+    <mat-hint align="end">{{postalCode.value?.length || 0}}/5</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Ville" formControlName="city" required>
+    <input matInput #city maxlength="75" placeholder="Ville" formControlName="city" required>
+    <mat-hint align="end">{{city.value?.length || 0}}/75</mat-hint>
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Pays" formControlName="country">
   </mat-form-field>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>
-    <mat-error *ngIf="form.get('address').get('street').hasError('required')">
+    <app-error [control]="form.get('address').get('street')" [error]="'required'">
       Le nom de la rue doit être renseigné.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('street').hasError('blankStringForbidden')">
+    </app-error>
+    <app-error [control]="form.get('address').get('street')" [error]="'blankStringForbidden'">
       Le nom de la rue ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('street').hasError('maxlength')">
-      Le nom de la rue ne doit pas excéder 100 caractères: il en contient actuellement {{form.get('address').get('street').errors.maxlength.actualLength}}.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('optional').hasError('blankStringForbidden')">
+    </app-error>
+    <app-error [control]="form.get('address').get('street')" [error]="'maxlength'">
+      Le nom de la rue ne doit pas excéder 100 caractères.
+    </app-error>
+    <app-error [control]="form.get('address').get('optional')" [error]="'blankStringForbidden'">
       Le complément d'adresse ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('optional').hasError('maxlength')">
-      Le complément d'adresse ne doit pas excéder 100 caractères: il en contient actuellement {{form.get('address').get('optional').errors.maxlength.actualLength}}.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('postalCode').hasError('required')">
+    </app-error>
+    <app-error [control]="form.get('address').get('optional')" [error]="'maxlength'">
+      Le complément d'adresse ne doit pas excéder 100 caractères.
+    </app-error>
+    <app-error [control]="form.get('address').get('postalCode')" [error]="'required'">
       Le code postal doit être renseigné.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('postalCode').hasError('whiteSpaceForbidden')">
+    </app-error>
+    <app-error [control]="form.get('address').get('postalCode')" [error]="'whiteSpaceForbidden'">
       Le code postal ne doit pas contenir de caractères d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('postalCode').hasError('maxlength') || form.get('address').get('postalCode').hasError('minlength')">
+    </app-error>
+    <app-error [control]="form.get('address').get('postalCode')" [error]="'maxlength'">
       Le code postal doit contenir 5 caractères.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('city').hasError('required')">
+    </app-error>
+    <app-error [control]="form.get('address').get('postalCode')" [error]="'minlength'">
+        Le code postal doit contenir 5 caractères.
+      </app-error>
+    <app-error [control]="form.get('address').get('city')" [error]="'required'">
       Le nom de la ville doit être renseigné.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('city').hasError('blankStringForbidden')">
+    </app-error>
+    <app-error [control]="form.get('address').get('city')" [error]="'blankStringForbidden'">
       Le nom de la ville ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('address').get('city').hasError('maxlength')">
-      Le nom de la ville ne doit pas excéder 75 caractères: il en contient actuellement {{form.get('address').get('city').errors.maxlength.actualLength}}.
-    </mat-error>
+    </app-error>
+    <app-error [control]="form.get('address').get('city')" [error]="'maxlength'">
+      Le nom de la ville ne doit pas excéder 75 caractères.
+    </app-error>
   </ng-template>
 </section>

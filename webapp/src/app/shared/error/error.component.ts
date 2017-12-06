@@ -20,6 +20,7 @@ export class ErrorComponent implements OnInit {
   }
 
   get show() {
-    return this.control.hasError(this.error) && (this.control.dirty || this.control.touched);
+    return this.control.hasError(this.error)
+      && (this.control.dirty || this.control.touched);
   }
 }

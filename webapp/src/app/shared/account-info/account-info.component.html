@@ -8,7 +8,8 @@
     <mat-datepicker #dp></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Nom d'utilisateur" formControlName="username" required>
+    <input matInput #username maxlength="20" placeholder="Nom d'utilisateur" formControlName="username" required>
+    <mat-hint align="end">{{username.value?.length || 0}}/20</mat-hint>
   </mat-form-field>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>

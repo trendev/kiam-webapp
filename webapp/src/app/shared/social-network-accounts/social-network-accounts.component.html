@@ -1,41 +1,45 @@
 <section formGroupName="socialNetworkAccounts" class="social-network-accounts">
   <mat-form-field>
-    <input matInput placeholder="Facebook" formControlName="facebook">
+    <input matInput #facebook maxlength="150" placeholder="Facebook" formControlName="facebook">
+    <mat-hint align="end">{{facebook.value?.length || 0}}/150</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Twitter" formControlName="twitter">
+    <input matInput #twitter maxlength="150" placeholder="Twitter" formControlName="twitter">
+    <mat-hint align="end">{{twitter.value?.length || 0}}/150</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Instagram" formControlName="instagram">
+    <input matInput #instagram maxlength="150" placeholder="Instagram" formControlName="instagram">
+    <mat-hint align="end">{{instagram.value?.length || 0}}/150</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Pinterest" formControlName="pinterest">
+    <input matInput #pinterest maxlength="150" placeholder="Pinterest" formControlName="pinterest">
+    <mat-hint align="end">{{pinterest.value?.length || 0}}/150</mat-hint>
   </mat-form-field>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>
-    <mat-error *ngIf="form.get('socialNetworkAccounts').get('facebook').hasError('blankStringForbidden')">
+    <app-error [control]="form.get('socialNetworkAccounts').get('facebook')" [error]="'blankStringForbidden'">
       L'identifiant facebook ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('socialNetworkAccounts').get('facebook').hasError('maxlength')">
-      L'identifiant facebook ne doit pas excéder 150 caractères: il en contient actuellement {{form.get('socialNetworkAccounts').get('facebook').errors.maxlength.actualLength}}.
-    </mat-error>
-    <mat-error *ngIf="form.get('socialNetworkAccounts').get('twitter').hasError('blankStringForbidden')">
+    </app-error>
+    <app-error [control]="form.get('socialNetworkAccounts').get('facebook')" [error]="'maxlength'">
+      L'identifiant facebook ne doit pas excéder 150 caractères.
+    </app-error>
+    <app-error [control]="form.get('socialNetworkAccounts').get('twitter')" [error]="'blankStringForbidden'">
       L'identifiant twitter ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('socialNetworkAccounts').get('twitter').hasError('maxlength')">
-      L'identifiant twitter ne doit pas excéder 150 caractères: il en contient actuellement {{form.get('socialNetworkAccounts').get('twitter').errors.maxlength.actualLength}}.
-    </mat-error>
-    <mat-error *ngIf="form.get('socialNetworkAccounts').get('instagram').hasError('blankStringForbidden')">
+    </app-error>
+    <app-error [control]="form.get('socialNetworkAccounts').get('twitter')" [error]="'maxlength'">
+      L'identifiant twitter ne doit pas excéder 150 caractères.
+    </app-error>
+    <app-error [control]="form.get('socialNetworkAccounts').get('instagram')" [error]="'blankStringForbidden'">
       L'identifiant instagram ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('socialNetworkAccounts').get('instagram').hasError('maxlength')">
-      L'identifiant instagram ne doit pas excéder 150 caractères: il en contient actuellement {{form.get('socialNetworkAccounts').get('instagram').errors.maxlength.actualLength}}.
-    </mat-error>
-    <mat-error *ngIf="form.get('socialNetworkAccounts').get('pinterest').hasError('blankStringForbidden')">
+    </app-error>
+    <app-error [control]="form.get('socialNetworkAccounts').get('instagram')" [error]="'maxlength'">
+      L'identifiant instagram ne doit pas excéder 150 caractères.
+    </app-error>
+    <app-error [control]="form.get('socialNetworkAccounts').get('pinterest')" [error]="'blankStringForbidden'">
       L'identifiant pinterest ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('socialNetworkAccounts').get('pinterest').hasError('maxlength')">
-      L'identifiant pinterest ne doit pas excéder 150 caractères: il en contient actuellement {{form.get('socialNetworkAccounts').get('pinterest').errors.maxlength.actualLength}}.
-    </mat-error>
+    </app-error>
+    <app-error [control]="form.get('socialNetworkAccounts').get('pinterest')" [error]="'maxlength'">
+      L'identifiant pinterest ne doit pas excéder 150 caractères.
+    </app-error>
   </ng-template>
 </section>

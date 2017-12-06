@@ -1,12 +1,15 @@
 <section formGroupName="customerDetails" class="customer-details">
   <mat-form-field>
-    <input matInput placeholder="Nom" formControlName="lastName" required>
+    <input matInput #lastName maxlength="50" placeholder="Nom" formControlName="lastName" required>
+    <mat-hint align="end">{{lastName.value?.length || 0}}/50</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Prénom" formControlName="firstName" required>
+    <input matInput #firstName maxlength="50" placeholder="Prénom" formControlName="firstName" required>
+    <mat-hint align="end">{{firstName.value?.length || 0}}/50</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Surnom" formControlName="nickname">
+    <input matInput #nickname maxlength="50" placeholder="Surnom" formControlName="nickname">
+    <mat-hint align="end">{{nickname.value?.length || 0}}/50</mat-hint>
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Téléphone" formControlName="phone" required>
@@ -40,7 +43,8 @@
     </div>
     <div *ngFor="let comment of comments.controls; let i=index">
       <mat-form-field class="full-width">
-        <input matInput placeholder="#{{i+1}}" formControlName="{{i}}">
+        <input matInput #cmt maxlength="200" placeholder="#{{i+1}}" formControlName="{{i}}" required>
+        <mat-hint align="end">{{cmt.value?.length || 0}}/200</mat-hint>
         <mat-icon *ngIf="isLastComment(i)" (click)="newComment()" matSuffix>add_circle_outline</mat-icon>
         <mat-icon (click)="removeComment(i)" matSuffix>remove_circle_outline</mat-icon>
       </mat-form-field>
@@ -48,54 +52,52 @@
   </div>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>
-    <mat-error *ngIf="form.get('customerDetails').get('firstName').hasError('required')">
+    <app-error [control]="form.get('customerDetails').get('firstName')" [error]="'required'">
       Le prénom doit être renseigné.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('firstName').hasError('blankStringForbidden')">
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('firstName')" [error]="'blankStringForbidden'">
       Le prénom ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('firstName').hasError('maxlength')">
-      Le prénom ne doit pas excéder 50 caractères: il en contient actuellement {{form.get('customerDetails').get('firstName').errors.maxlength.actualLength}}.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('lastName').hasError('required')">
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('firstName')" [error]="'maxlength'">
+      Le prénom ne doit pas excéder 50 caractères.
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('lastName')" [error]="'required'">
       Le nom doit être renseigné.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('lastName').hasError('blankStringForbidden')">
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('lastName')" [error]="'blankStringForbidden'">
       Le nom ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('lastName').hasError('maxlength')">
-      Le nom ne doit pas excéder 50 caractères: il en contient actuellement {{form.get('customerDetails').get('lastName').errors.maxlength.actualLength}}.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('nickname').hasError('blankStringForbidden')">
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('lastName')" [error]="'maxlength'">
+      Le nom ne doit pas excéder 50 caractères.
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('nickname')" [error]="'blankStringForbidden'">
       Le surnom ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('nickname').hasError('maxlength')">
-      Le surnom ne doit pas excéder 50 caractères: il en contient actuellement {{form.get('customerDetails').get('nickname').errors.maxlength.actualLength}}.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('phone').hasError('required')">
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('nickname')" [error]="'maxlength'">
+      Le surnom ne doit pas excéder 50 caractères.
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('phone')" [error]="'required'">
       Le numéro de téléphone doit être renseigné.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('phone').hasError('phoneNumber')">
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('phone')" [error]="'phoneNumber'">
       Le numéro de téléphone doit être dans un format valide (ex: +33153732200, 0153732200...).
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('adultOnly')">
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('birthdate')" [error]="'adultOnly'">
       La date de naissance doit correspondre à celle d'un individu de plus de 18 ans.
-    </mat-error>
-    <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('past')">
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('birthdate')" [error]="'past'">
       La date de naissance ne peut correspondre à une date future.
-    </mat-error>
-    <ng-container *ngIf="form.get('customerDetails').get('comments').hasError('validComments')">
-      <ng-container *ngFor="let comment of comments.controls; let i=index">
-        <mat-error *ngIf="comment.hasError('required')">
-          Le commentaire #{{i+1}} doit être renseigné.
-        </mat-error>
-        <mat-error *ngIf="comment.hasError('blankStringForbidden')">
-          Le commentaire #{{i+1}} ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-        </mat-error>
-        <mat-error *ngIf="comment.hasError('maxlength')">
-          Le commentaire #{{i+1}} ne doit pas excéder 200 caractères: il en contient actuellement {{comment.errors.maxlength.actualLength}}.
-        </mat-error>
-      </ng-container>
+    </app-error>
+    <ng-container *ngFor="let comment of comments.controls; let i=index">
+      <app-error [control]="comment" [error]="'required'">
+        Le commentaire #{{i+1}} doit être renseigné.
+      </app-error>
+      <app-error [control]="comment" [error]="'blankStringForbidden'">
+        Le commentaire #{{i+1}} ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+      </app-error>
+      <app-error [control]="comment" [error]="'maxlength'">
+        Le commentaire #{{i+1}} ne doit pas excéder 200 caractères.
+      </app-error>
     </ng-container>
   </ng-template>
 </section>
