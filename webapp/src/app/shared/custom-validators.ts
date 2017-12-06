@@ -12,6 +12,10 @@ export class CustomValidators {
             ? null : { 'blankStringForbidden': { value: control.value } };
     }
 
+    static email(control: AbstractControl): ValidationErrors | null {
+        return !control.value ? null : Validators.email(control);
+    }
+
     static validComments(validators: ValidatorFn[]): ValidatorFn {
 
         return (control: AbstractControl): { [key: string]: any } => {

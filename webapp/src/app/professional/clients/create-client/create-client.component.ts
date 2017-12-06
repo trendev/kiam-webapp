@@ -36,7 +36,7 @@ export class CreateClientComponent implements OnInit {
 
   createForm(): FormGroup {
     const fg = this.fb.group({
-      email: new FormControl('', [Validators.email]),
+      email: new FormControl('', [CustomValidators.email]),
       socialNetworkAccounts: this.fb.group({
         facebook: new FormControl('', [
           Validators.maxLength(150),
