@@ -76,7 +76,7 @@
       Le numéro de téléphone doit être renseigné.
     </mat-error>
     <mat-error *ngIf="form.get('customerDetails').get('phone').hasError('phoneNumber')">
-      Le numéro de téléphone doit être dans un format valide (+33153732200, 0153732200...).
+      Le numéro de téléphone doit être dans un format valide (ex: +33153732200, 0153732200...).
     </mat-error>
     <mat-error *ngIf="form.get('customerDetails').get('birthdate').hasError('adultOnly')">
       La date de naissance doit correspondre à celle d'un individu de plus de 18 ans.
