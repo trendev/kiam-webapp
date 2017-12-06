@@ -7,6 +7,7 @@ import { BusinessService } from './business.service';
 import { PaymentModeService } from './payment-mode.service';
 import { ProfessionalService } from './professional.service';
 import { CacheHandlerService } from './cache-handler.service';
+import { ClientService } from './client.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { CacheHandlerService } from './cache-handler.service';
     BusinessService,
     PaymentModeService,
     ProfessionalService,
-    CacheHandlerService]
+    CacheHandlerService,
+    ClientService]
 })
 export class CoreModule {
   /* make sure CoreModule is imported only by one NgModule the AppModule */

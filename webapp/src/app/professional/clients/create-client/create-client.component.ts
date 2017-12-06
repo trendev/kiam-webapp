@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
-import { ProfessionalService } from '@app/core';
+import { ProfessionalService, ClientService } from '@app/core';
 import { Client, CollectiveGroup, Category } from '@app/entities';
 
 @Component({
@@ -22,7 +22,8 @@ export class CreateClientComponent implements OnInit {
   @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private professionalService: ProfessionalService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private clientService: ClientService) {
     this.form = this.createForm();
   }
 
@@ -203,7 +204,12 @@ export class CreateClientComponent implements OnInit {
   }
 
   save() {
-    console.log(this.prepareSave());
+    const client = this.prepareSave();
+    console.log(client);
+    this.clientService.create(client).subscribe(
+      _client => console.log(_client),
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de sauvegarder le nouveau client sur le serveur'));
   }
 
 }
