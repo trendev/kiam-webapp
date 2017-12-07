@@ -79,6 +79,13 @@ export class ProfessionalService {
     this._clients.push(client);
   }
 
+  removeClient(client: Client) {
+    const index = this._clients.findIndex(c => c.id === client.id);
+    if (index !== -1) {
+      this._clients.splice(index, 1);
+    }
+  }
+
   getCollectiveGroups(refresh = false): Observable<CollectiveGroup[]> {
     if (this._collectiveGroups && !refresh) {
       return Observable.of(this._collectiveGroups);

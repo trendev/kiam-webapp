@@ -4,6 +4,7 @@ import { Client, ClientBill, Category, CollectiveGroup } from '@app/entities';
 import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { CustomValidators, ErrorAggregatorDirective } from '@app/shared';
 import { ProfessionalService, ClientService } from '@app/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-client-detail',
@@ -52,77 +53,77 @@ export class ClientDetailComponent implements OnInit {
 
   createForm(): FormGroup {
     const fg = this.fb.group({
-      email: new FormControl('', [CustomValidators.email]),
+      email: new FormControl(this.client.email, [CustomValidators.email]),
       socialNetworkAccounts: this.fb.group({
-        facebook: new FormControl('', [
+        facebook: new FormControl(this.client.socialNetworkAccounts.facebook, [
           Validators.maxLength(150),
           CustomValidators.blankStringForbidden
         ]),
-        twitter: new FormControl('', [
+        twitter: new FormControl(this.client.socialNetworkAccounts.twitter, [
           Validators.maxLength(150),
           CustomValidators.blankStringForbidden
         ]),
-        instagram: new FormControl('', [
+        instagram: new FormControl(this.client.socialNetworkAccounts.instagram, [
           Validators.maxLength(150),
           CustomValidators.blankStringForbidden
         ]),
-        pinterest: new FormControl('', [
+        pinterest: new FormControl(this.client.socialNetworkAccounts.pinterest, [
           Validators.maxLength(150),
           CustomValidators.blankStringForbidden
         ])
       }),
       customerDetails: this.fb.group({
-        firstName: new FormControl('', [
+        firstName: new FormControl(this.client.customerDetails.firstName, [
           Validators.required,
           CustomValidators.blankStringForbidden,
           Validators.maxLength(50)
         ]),
-        lastName: new FormControl('', [
+        lastName: new FormControl(this.client.customerDetails.lastName, [
           Validators.required,
           CustomValidators.blankStringForbidden,
           Validators.maxLength(50)
         ]),
-        nickname: new FormControl('', [
+        nickname: new FormControl(this.client.customerDetails.nickname, [
           CustomValidators.blankStringForbidden,
           Validators.maxLength(50)
         ]),
-        phone: new FormControl('', [
+        phone: new FormControl(this.client.customerDetails.phone, [
           Validators.required,
           CustomValidators.phoneNumber
         ]
         ),
         birthdate: new FormControl(
-          undefined, [
+          this.client.customerDetails.birthdate ? moment(this.client.customerDetails.birthdate) : undefined, [
             CustomValidators.past
           ]),
-        sex: 'F',
-        picturePath: new FormControl({ value: '', disabled: true }),
+        sex: this.client.customerDetails.sex,
+        picturePath: new FormControl({ value: this.client.customerDetails.picturePath, disabled: true }),
         comments: this.fb.array(
-          [],
+          this.client.customerDetails.comments || [],
           CustomValidators.validComments(this.commentsValidators))
       }),
       address: this.fb.group({
-        street: new FormControl('', [
+        street: new FormControl(this.client.address.street, [
           Validators.required,
           CustomValidators.blankStringForbidden,
           Validators.maxLength(100)
         ]),
-        optional: new FormControl('', [
+        optional: new FormControl(this.client.address.optional, [
           CustomValidators.blankStringForbidden,
           Validators.maxLength(100)
         ]),
-        postalCode: new FormControl('', [
+        postalCode: new FormControl(this.client.address.postalCode, [
           Validators.required,
           CustomValidators.whiteSpaceForbidden,
           Validators.maxLength(5),
           Validators.minLength(5)
         ]),
-        city: new FormControl('', [
+        city: new FormControl(this.client.address.city, [
           Validators.required,
           CustomValidators.blankStringForbidden,
           Validators.maxLength(75)
         ]),
-        country: new FormControl({ value: 'France', disabled: true })
+        country: new FormControl({ value: this.client.address.country, disabled: true })
       }),
       collectiveGroups: this.fb.array([]),
       categories: this.fb.array([])
@@ -135,7 +136,8 @@ export class ClientDetailComponent implements OnInit {
           collectiveGroupsFA.push(this.fb.group({
             id: cg.id,
             groupName: cg.groupName,
-            value: false
+            value: this.client.collectiveGroups ? this.client.collectiveGroups.findIndex(_cg => _cg.id === cg.id) !== -1
+              : false
           })));
       },
       // TODO: handle this (check the status code, etc)
@@ -149,7 +151,8 @@ export class ClientDetailComponent implements OnInit {
           categoriesFA.push(this.fb.group({
             id: ct.id,
             name: ct.name,
-            value: false
+            value: this.client.categories ? this.client.categories.findIndex(_ct => _ct.id === ct.id) !== -1
+              : false
           })));
       },
       // TODO: handle this (check the status code, etc)
@@ -162,7 +165,8 @@ export class ClientDetailComponent implements OnInit {
   revert() {
     // rebuilds the controls of the comments group if they have been modified/removed
     const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
-    customerDetailsFG.setControl('comments', this.fb.array([], CustomValidators.validComments(this.commentsValidators)));
+    customerDetailsFG.setControl('comments',
+      this.fb.array(this.client.customerDetails.comments || [], CustomValidators.validComments(this.commentsValidators)));
 
     // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
     this.form.reset(this.createForm().getRawValue());
@@ -210,6 +214,9 @@ export class ClientDetailComponent implements OnInit {
       )
     });
 
+    // set the id
+    client.id = this.client.id;
+
     return client;
   }
 
@@ -219,14 +226,15 @@ export class ClientDetailComponent implements OnInit {
   }
 
   save() {
-    // const client = this.prepareSave();
-    // this.clientService.create(client).subscribe(
-    //   _client => {
-    //     this.professionalService.addClient(_client); // add client in the cache
-    //     this.router.navigate(['../', _client.id], { relativeTo: this.route });
-    //   },
-    //   // TODO: handle this (check the status code, etc)
-    //   e => console.error('Impossible de sauvegarder le nouveau client sur le serveur'));
+    const client = this.prepareSave();
+    this.clientService.update(client).subscribe(
+      _client => {
+        this.professionalService.removeClient(client); // remove previous client version from the cache
+        this.professionalService.addClient(_client); // add client in the cache
+        this.router.navigate(['../'], { relativeTo: this.route });
+      },
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de sauvegarder le nouveau client sur le serveur'));
   }
 
 }

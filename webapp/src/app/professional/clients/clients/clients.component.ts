@@ -69,7 +69,6 @@ export class ClientsComponent implements OnInit {
   }
 
   gotoClientDetails(id: number) {
-    console.warn(this.route);
     this.router.navigate([id], { relativeTo: this.route });
   }
 

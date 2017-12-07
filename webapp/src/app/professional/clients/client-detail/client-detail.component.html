@@ -1,7 +1,7 @@
 <div class="container">
     <mat-card>
       <form [formGroup]="form" novalidate>
-        <mat-card-title>Nouveau client</mat-card-title>
+        <mat-card-title>{{client.customerDetails.firstName}} {{client.customerDetails.lastName}}</mat-card-title>
         <mat-card-content>
           <mat-form-field class="email">
             <input matInput placeholder="Email" formControlName="email">
