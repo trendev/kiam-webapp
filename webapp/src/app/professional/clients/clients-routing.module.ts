@@ -1,3 +1,4 @@
+import { ClientDetailComponent } from './client-detail/client-detail.component';
 import { CreateClientComponent } from './create-client/create-client.component';
 import { ClientsComponent } from './clients/clients.component';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: LoremIpsumComponent
+    component: ClientDetailComponent
   },
   { path: '**', component: PageNotFoundComponent }
 ];
