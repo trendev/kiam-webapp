@@ -48,7 +48,9 @@ export class ClientsComponent implements OnInit {
             phone: client.customerDetails.phone || '',
             email: client.email || ''
           };
-        });
+        }).sort((c1, c2) => c1.lastName === c2.lastName ?
+          c1.firstName.localeCompare(c2.firstName)
+          : c1.lastName.localeCompare(c2.lastName));
         this.datasource = new MatTableDataSource<ClientModel>(this.clients);
         this.datasource.sort = this.sort;
       },
