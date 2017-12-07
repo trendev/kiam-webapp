@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Client, ClientBill } from '@app/entities';
 
 @Component({
   selector: 'app-client-detail',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientDetailComponent implements OnInit {
 
-  constructor() { }
+  client: Client;
+  clientBills: ClientBill[];
+
+  constructor(private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
+    this.route.data.subscribe(
+      (data: {
+        client: Client,
+        clientBills: ClientBill[]
+      }) => {
+        this.client = data.client;
+        this.clientBills = data.clientBills;
+      }
+    );
   }
 
 }

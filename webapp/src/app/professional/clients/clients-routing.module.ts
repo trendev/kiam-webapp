@@ -1,3 +1,5 @@
+import { ClientBillsResolverService } from './client-bills-resolver.service';
+import { ClientDetailResolverService } from './client-detail-resolver.service';
 import { ClientDetailComponent } from './client-detail/client-detail.component';
 import { CreateClientComponent } from './create-client/create-client.component';
 import { ClientsComponent } from './clients/clients.component';
@@ -17,7 +19,11 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: ClientDetailComponent
+    component: ClientDetailComponent,
+    resolve: {
+      client: ClientDetailResolverService,
+      clientBills: ClientBillsResolverService
+    }
   },
   { path: '**', component: PageNotFoundComponent }
 ];
