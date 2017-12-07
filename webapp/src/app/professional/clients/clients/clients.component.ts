@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProfessionalService } from '@app/core';
 import { Client } from '@app/entities';
 import { MatTableDataSource, MatSort, Sort } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clients',
@@ -13,7 +14,9 @@ import { MatTableDataSource, MatSort, Sort } from '@angular/material';
 export class ClientsComponent implements OnInit {
 
 
-  constructor(private professionalService: ProfessionalService) { }
+  constructor(private professionalService: ProfessionalService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   clients: ClientModel[] = [];
 
@@ -65,9 +68,9 @@ export class ClientsComponent implements OnInit {
     this.datasource.filter = filterValue;
   }
 
-  viewClient(client: ClientModel) {
-    // TODO : route to view-client
-    console.log(client);
+  gotoClientDetails(id: number) {
+    console.warn(this.route);
+    this.router.navigate(['../', id ], { relativeTo: this.route });
   }
 
 }

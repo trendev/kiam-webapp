@@ -22,7 +22,7 @@
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewClient(row)">
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="gotoClientDetails(row.id)">
           </mat-row>
         </mat-table>
       </div>

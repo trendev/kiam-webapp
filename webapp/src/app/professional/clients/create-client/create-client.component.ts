@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@ang
 import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
 import { ProfessionalService, ClientService } from '@app/core';
 import { Client, CollectiveGroup, Category } from '@app/entities';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-client',
@@ -23,7 +24,9 @@ export class CreateClientComponent implements OnInit {
 
   constructor(private professionalService: ProfessionalService,
     private fb: FormBuilder,
-    private clientService: ClientService) {
+    private clientService: ClientService,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.form = this.createForm();
   }
 
@@ -206,7 +209,10 @@ export class CreateClientComponent implements OnInit {
   save() {
     const client = this.prepareSave();
     this.clientService.create(client).subscribe(
-      _client => this.professionalService.addClient(_client), // add client in the cache
+      _client => {
+        this.professionalService.addClient(_client); // add client in the cache
+        this.router.navigate(['../', _client.id], { relativeTo: this.route });
+      },
       // TODO: handle this (check the status code, etc)
       e => console.error('Impossible de sauvegarder le nouveau client sur le serveur'));
   }

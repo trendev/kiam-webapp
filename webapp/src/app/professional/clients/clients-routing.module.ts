@@ -2,7 +2,7 @@ import { CreateClientComponent } from './create-client/create-client.component';
 import { ClientsComponent } from './clients/clients.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from '@app/shared';
+import { PageNotFoundComponent, LoremIpsumComponent } from '@app/shared';
 
 const routes: Routes = [
   {
@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'create-client',
     component: CreateClientComponent
+  },
+  {
+    path: ':id',
+    component: LoremIpsumComponent
   },
   { path: '**', component: PageNotFoundComponent }
 ];
