@@ -2,16 +2,33 @@ import { ErrorHandlerService } from './error-handler.service';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Professional, Client, CollectiveGroup, Category } from '@app/entities';
+import {
+  Professional,
+  Client,
+  CollectiveGroup,
+  Category,
+  Bill,
+  Offering,
+  Expense,
+  Individual,
+  BillType,
+  ClientBill,
+  CollectiveGroupBill,
+  IndividualBill
+} from '@app/entities';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ProfessionalService {
 
   readonly api = `${environment.api}/Professional`;
+  private _bills: Bill[];
   private _clients: Client[];
-  private _collectiveGroups: CollectiveGroup[];
+  private _offerings: Offering[];
   private _categories: Category[];
+  private _expenses: Expense[];
+  private _collectiveGroups: CollectiveGroup[];
+  private __individuals: Individual[];
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -89,6 +106,31 @@ export class ProfessionalService {
         .map(result => {
           this._categories = result.map(r => new Category(r)); // request cached
           return this._categories;
+        })
+        .catch(e => this.errorHandler.handle(e));
+    }
+  }
+
+  getBills(refresh = false): Observable<Bill[]> {
+    if (this._bills && !refresh) {
+      return Observable.of(this._bills);
+    } else {
+      return this.http.get<Bill[]>(`${this.api}/bills`,
+        {
+          withCredentials: true
+        })
+        .map(result => {
+          this._bills = result.map(r => {
+            switch (r.cltype) {
+              case BillType.CLIENT_BILL:
+                return new ClientBill(r);
+              case BillType.COLLECTIVE_GROUP_BILL:
+                return new CollectiveGroupBill(r);
+              case BillType.INDIVIDUAL_BILL:
+                return new IndividualBill(r);
+            }
+          }); // request cached
+          return this._bills;
         })
         .catch(e => this.errorHandler.handle(e));
     }
