@@ -11,15 +11,6 @@
     max-height: 500px;
 }
 
-.search-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    min-height: 64px;
-    padding: 5px 0px;
-}
-
 @media all and (max-device-width: 600px) {
     .hide {
         display: none;

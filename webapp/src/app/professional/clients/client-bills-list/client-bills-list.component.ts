@@ -16,7 +16,6 @@ export class ClientBillsListComponent implements OnInit {
     'deliveryDate', 'amount', 'reference'];
   datasource: MatTableDataSource<ClientBill>;
 
-
   @ViewChild(MatSort) sort: MatSort;
 
   constructor() { }
@@ -37,10 +36,5 @@ export class ClientBillsListComponent implements OnInit {
     return this.bills.length === 0;
   }
 
-  applyFilter(filterValue: string) {
-    // filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.datasource.filter = filterValue;
-  }
 }
 
