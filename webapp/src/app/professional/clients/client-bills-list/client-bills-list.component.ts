@@ -13,7 +13,7 @@ export class ClientBillsListComponent implements OnInit {
   @Input() bills: ClientBill[];
 
   displayedColumns = [
-    'deliveryDate', 'amount', 'reference'];
+    'deliveryDate', 'amount', 'paymentDate'];
   datasource: MatTableDataSource<ClientBill>;
 
   @ViewChild(MatSort) sort: MatSort;

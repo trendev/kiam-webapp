@@ -11,15 +11,17 @@
   <mat-table #table [dataSource]="datasource" matSort>
     <ng-container matColumnDef="deliveryDate">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.deliveryDate | date:'shortDate':'':'fr'}} </mat-cell>
+      <mat-cell *matCellDef="let element">{{element.deliveryDate | date:'shortDate':'':'fr'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="amount">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Montant</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.amount / 100}} {{element.currency}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.amount / 100}} {{element.currency}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="reference">
-      <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Référence</mat-header-cell>
-      <mat-cell *matCellDef="let element" [class.hide]="true"> {{element.reference}}</mat-cell>
+    <ng-container matColumnDef="paymentDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header >Encaissement</mat-header-cell>
+      <mat-cell *matCellDef="let element" >
+        {{element.paymentDate | date:'shortDate':'':'fr'}}
+      </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;">
