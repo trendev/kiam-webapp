@@ -11,6 +11,7 @@ import * as moment from 'moment';
 export class ClientBillsListComponent implements OnInit {
 
   @Input() bills: ClientBill[];
+  billsModel: ClientBill[];
 
   displayedColumns = [
     'deliveryDate', 'amount', 'paymentDate'];
@@ -18,18 +19,47 @@ export class ClientBillsListComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
+  _showFull = false;
+
+  _showUnpaid = false;
+
   constructor() { }
 
   ngOnInit() {
+    this.billsModel = this.bills.sort(
+      (b1, b2) => -moment(b1.deliveryDate).diff(moment(b2.deliveryDate)) // inverse order : most recent first
+    );
     this.datasource =
-      new MatTableDataSource<ClientBill>(this.bills.sort(
-        (b1, b2) => -moment(b1.deliveryDate).diff(moment(b2.deliveryDate)) // inverse order : most recent first
-      ));
+      new MatTableDataSource<ClientBill>(this.billsModel);
     this.datasource.sort = this.sort;
   }
 
   get unpaid(): number {
     return this.bills.filter(b => !b.paymentDate).length;
+  }
+
+  get showFull(): boolean {
+    return this._showFull && !this.billsIsEmpty();
+  }
+
+  get showUnpaid(): boolean {
+    return this._showUnpaid && !this.billsIsEmpty();
+  }
+
+  set showFull(value: boolean) {
+    this._showFull = value;
+    if (this._showFull) {
+      this._showUnpaid = !this._showFull;
+      this.datasource.data = this.billsModel;
+    }
+  }
+
+  set showUnpaid(value: boolean) {
+    this._showUnpaid = value;
+    if (this._showUnpaid) {
+      this._showFull = !this._showUnpaid;
+      this.datasource.data = this.billsModel.filter(b => !b.paymentDate);
+    }
   }
 
   billsIsEmpty(): boolean {
