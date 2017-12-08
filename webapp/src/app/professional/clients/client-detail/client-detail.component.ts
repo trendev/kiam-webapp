@@ -14,7 +14,7 @@ import * as moment from 'moment';
 export class ClientDetailComponent implements OnInit {
 
   client: Client;
-  clientBills: ClientBill[];
+  clientBills: ClientBill[] = [];
 
   form: FormGroup;
 
@@ -49,10 +49,6 @@ export class ClientDetailComponent implements OnInit {
         this.errorAggregator.viewContainerRef.clear();
       }
     });
-  }
-
-  get unpaid(): number {
-    return this.clientBills.filter(b => !b.paymentDate).length;
   }
 
   createForm(): FormGroup {

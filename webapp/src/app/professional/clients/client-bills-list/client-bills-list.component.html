@@ -1,0 +1,8 @@
+<mat-chip-list>
+  <mat-chip [color]="bills?.length === 0?'accent':'primary'" selected="true" [disabled]="">
+    {bills?.length, plural, =0 {Aucune facture} =1 {1 Facture} other {{{bills?.length}} Factures}}
+  </mat-chip>
+  <mat-chip color="warn" *ngIf="unpaid > 0" selected="true">
+    {unpaid, plural, =0 {Aucun impayé} =1 {1 impayé} other {{{unpaid}} impayés}}
+  </mat-chip>
+</mat-chip-list>

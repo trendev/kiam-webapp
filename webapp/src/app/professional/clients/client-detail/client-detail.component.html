@@ -11,22 +11,6 @@
         </app-error>
         <mat-accordion multi="false">
 
-          <mat-expansion-panel [disabled]="clientBills?.length === 0">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-chip-list>
-                  <mat-chip [color]="clientBills?.length === 0?'accent':'primary'" selected="true" [disabled]="">
-                    {clientBills?.length, plural, =0 {Aucune facture} =1 {1 Facture} other {{{clientBills?.length}} Factures}}
-                  </mat-chip>
-                  <mat-chip color="warn" *ngIf="unpaid > 0" selected="true">
-                    {unpaid, plural, =0 {Aucun impayé} =1 {1 impayé} other {{{unpaid}} impayés}}
-                  </mat-chip>
-                </mat-chip-list>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
-          </mat-expansion-panel>
-
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -92,4 +76,12 @@
       </mat-card-actions>
     </form>
   </mat-card>
+
+  <mat-card>
+    <mat-card-title>Factures</mat-card-title>
+    <mat-card-content>
+      <app-client-bills-list [bills]="clientBills"></app-client-bills-list>
+    </mat-card-content>
+  </mat-card>
+
 </div>
