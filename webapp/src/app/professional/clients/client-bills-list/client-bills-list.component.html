@@ -1,7 +1,36 @@
 <mat-chip-list>
-  <mat-chip [color]="billsIsEmpty()?'accent':'primary'" selected="true" [selectable]="false" (click)="hello($event)">
+  <mat-chip [color]="billsIsEmpty()?'accent':'primary'" selected="true" [selectable]="false">
     {bills?.length, plural, =0 {Aucune facture} =1 {1 Facture} other {{{bills?.length}} Factures}}
   </mat-chip>
   <mat-chip color="warn" *ngIf="unpaid > 0" selected="true" [selectable]="false">
     {unpaid, plural, =0 {Aucun impayé} =1 {1 impayé} other {{{unpaid}} impayés}}
   </mat-chip>
+</mat-chip-list>
+
+<div class="list-container">
+  <div class="search-header">
+    <mat-form-field>
+      <mat-placeholder>
+        <i>Recherche</i>
+      </mat-placeholder>
+      <input matInput (keyup)="applyFilter($event.target.value)">
+    </mat-form-field>
+  </div>
+  <mat-table #table [dataSource]="datasource" matSort>
+    <ng-container matColumnDef="deliveryDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.deliveryDate | date:'shortDate':'':'fr'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Montant</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.amount / 100}} {{element.currency}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="reference">
+      <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Référence</mat-header-cell>
+      <mat-cell *matCellDef="let element" [class.hide]="true"> {{element.reference}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+</div>

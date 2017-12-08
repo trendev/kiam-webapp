@@ -1,0 +1,31 @@
+.list-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 250px;
+    margin: 5px 0px;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+}
+
+.search-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 64px;
+    padding: 5px 0px;
+}
+
+@media all and (max-device-width: 600px) {
+    .hide {
+        display: none;
+    }
+
+    .list-container {
+        max-height: 300px;
+    }
+}
