@@ -11,16 +11,21 @@
     max-height: 500px;
 }
 
+.paymentDate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media all and (max-device-width: 600px) {
     .hide {
         display: none;
     }
-
     .list-container {
         max-height: 300px;
     }
-
-    .mat-header-row, .mat-row{
+    .mat-header-row,
+    .mat-row {
         padding: 0;
     }
 }

@@ -18,9 +18,16 @@
       <mat-cell *matCellDef="let element">{{element.amount / 100}} {{element.currency}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="paymentDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header >Encaissement</mat-header-cell>
-      <mat-cell *matCellDef="let element" >
-        {{element.paymentDate | date:'shortDate':'':'fr'}}
+      <mat-header-cell class="paymentDate" *matHeaderCellDef mat-sort-header>Encaissement</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div *ngIf="element.paymentDate;else elseBlock" class="paymentDate">
+          <mat-icon color="primary">check</mat-icon>
+        </div>
+        <ng-template #elseBlock>
+          <div class="paymentDate">
+            <mat-icon color="warn">error_outline</mat-icon>
+          </div>
+        </ng-template>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

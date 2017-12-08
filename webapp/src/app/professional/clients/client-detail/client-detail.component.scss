@@ -10,7 +10,7 @@ mat-card {
 }
 
 .email {
-   width: 50%;
+    width: 50%;
 }
 
 .form-button-container {
@@ -26,12 +26,10 @@ mat-card {
     .container {
         flex-wrap: wrap-reverse;
     }
-    
     mat-card {
         margin: 10px 10px 0px 10px; // padding: 10px 5px 10px 5px;
     }
-
     .email {
         width: 100%;
-     }
+    }
 }
