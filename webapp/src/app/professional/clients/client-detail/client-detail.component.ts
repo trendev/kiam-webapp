@@ -14,7 +14,7 @@ import * as moment from 'moment';
 export class ClientDetailComponent implements OnInit {
 
   client: Client;
-  clientBills: ClientBill[] = [];
+  clientBills: ClientBill[];
 
   form: FormGroup;
 

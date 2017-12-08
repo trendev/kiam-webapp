@@ -18,4 +18,12 @@ export class ClientBillsListComponent implements OnInit {
   get unpaid(): number {
     return this.bills.filter(b => !b.paymentDate).length;
   }
+
+  billsIsEmpty(): boolean {
+    return this.bills.length === 0;
+  }
+
+  hello() {
+    console.log('Hello');
+  }
 }
