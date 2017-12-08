@@ -51,6 +51,10 @@ export class ClientDetailComponent implements OnInit {
     });
   }
 
+  get unpaid(): number {
+    return this.clientBills.filter(b => !b.paymentDate).length;
+  }
+
   createForm(): FormGroup {
     const fg = this.fb.group({
       email: new FormControl(this.client.email, [CustomValidators.email]),

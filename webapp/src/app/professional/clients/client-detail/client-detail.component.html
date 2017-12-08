@@ -1,80 +1,95 @@
 <div class="container">
-    <mat-card>
-      <form [formGroup]="form" novalidate>
-        <mat-card-title>{{client.customerDetails.firstName}} {{client.customerDetails.lastName}}</mat-card-title>
-        <mat-card-content>
-          <mat-form-field class="email">
-            <input matInput placeholder="Email" formControlName="email">
-          </mat-form-field>
-          <app-error [control]="form.get('email')" [error]="'email'">
-            L'adresse email renseignée doit être valide.
-          </app-error>
-          <mat-accordion multi="false">
-  
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Informations générales
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <app-customer-details [errorAggregator]="errorAggregator"></app-customer-details>
-            </mat-expansion-panel>
-  
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Adresse
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <app-address [errorAggregator]="errorAggregator"></app-address>
-            </mat-expansion-panel>
-  
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Réseaux sociaux
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <app-social-network-accounts [errorAggregator]="errorAggregator"></app-social-network-accounts>
-            </mat-expansion-panel>
-  
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Groupes / Collectivités
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <app-collective-groups></app-collective-groups>
-            </mat-expansion-panel>
-  
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Catégories
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <app-categories></app-categories>
-            </mat-expansion-panel>
-  
-          </mat-accordion>
-  
-        </mat-card-content>
-  
-        <ng-container appErrorAggregator></ng-container>
-        <mat-card-actions>
-          <div class="form-button-container">
-            <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
-              <mat-icon aria-label="Annuler les modification">undo</mat-icon>
-            </button>
-            <a mat-mini-fab routerLink="../" routerLinkActive="active">
-              <mat-icon aria-label="Annuler la création du client">list</mat-icon>
-            </a>
-            <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
-              <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
-            </button>
-          </div>
-        </mat-card-actions>
-      </form>
-    </mat-card>
-  
-  </div>
+  <mat-card>
+    <form [formGroup]="form" novalidate>
+      <mat-card-title>{{client.customerDetails.firstName}} {{client.customerDetails.lastName}}</mat-card-title>
+      <mat-card-content>
+        <mat-form-field class="email">
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <app-error [control]="form.get('email')" [error]="'email'">
+          L'adresse email renseignée doit être valide.
+        </app-error>
+        <mat-accordion multi="false">
+
+          <mat-expansion-panel [disabled]="clientBills?.length === 0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-chip-list>
+                  <mat-chip [color]="clientBills?.length === 0?'accent':'primary'" selected="true" [disabled]="">
+                    {clientBills?.length, plural, =0 {Aucune facture} =1 {1 Facture} other {{{clientBills?.length}} Factures}}
+                  </mat-chip>
+                  <mat-chip color="warn" *ngIf="unpaid > 0" selected="true">
+                    {unpaid, plural, =0 {Aucun impayé} =1 {1 impayé} other {{{unpaid}} impayés}}
+                  </mat-chip>
+                </mat-chip-list>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Informations générales
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-customer-details [errorAggregator]="errorAggregator"></app-customer-details>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Adresse
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-address [errorAggregator]="errorAggregator"></app-address>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Réseaux sociaux
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-social-network-accounts [errorAggregator]="errorAggregator"></app-social-network-accounts>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Groupes / Collectivités
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-collective-groups></app-collective-groups>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Catégories
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-categories></app-categories>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+      </mat-card-content>
+
+      <ng-container appErrorAggregator></ng-container>
+      <mat-card-actions>
+        <div class="form-button-container">
+          <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
+            <mat-icon aria-label="Annuler les modification">undo</mat-icon>
+          </button>
+          <a mat-mini-fab routerLink="../" routerLinkActive="active">
+            <mat-icon aria-label="Retour à la liste des clients">list</mat-icon>
+          </a>
+          <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+            <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
