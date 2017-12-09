@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
 import { ProfessionalService, ClientService } from '@app/core';
 import { Client, CollectiveGroup, Category } from '@app/entities';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -184,13 +184,13 @@ export class CreateClientComponent implements OnInit {
         instagram: value.socialNetworkAccounts.instagram || undefined,
         pinterest: value.socialNetworkAccounts.pinterest || undefined
       },
-      collectiveGroups: this.extractArrayFromControl('collectiveGroups',
+      collectiveGroups: Utils.extractArrayFromControl(this.form, 'collectiveGroups',
         fg => new CollectiveGroup({
           id: fg.value.id,
           groupName: fg.value.groupName
         })
       ),
-      categories: this.extractArrayFromControl('categories',
+      categories: Utils.extractArrayFromControl(this.form, 'categories',
         fg => new Category({
           name: fg.value.name,
           id: fg.value.id
@@ -199,11 +199,6 @@ export class CreateClientComponent implements OnInit {
     });
 
     return client;
-  }
-
-  private extractArrayFromControl(faName: string, mapperFn: (fg: FormGroup) => any) {
-    const fa = this.form.get(faName) as FormArray;
-    return fa.controls.filter(fg => fg.value.value).map(mapperFn);
   }
 
   save() {

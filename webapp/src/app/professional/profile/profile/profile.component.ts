@@ -8,7 +8,7 @@ import { Component, ViewContainerRef, ViewChild, OnInit } from '@angular/core';
 import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import * as moment from 'moment';
-import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
 
 @Component({
   selector: 'app-profile',
@@ -258,12 +258,12 @@ export class ProfileComponent implements OnInit {
         instagram: value.socialNetworkAccounts.instagram || undefined,
         pinterest: value.socialNetworkAccounts.pinterest || undefined
       },
-      businesses: this.extractArrayFromControl('businesses',
+      businesses: Utils.extractArrayFromControl(this.form, 'businesses',
         fg => new Business({
           designation: fg.value.designation
         })
       ),
-      paymentModes: this.extractArrayFromControl('paymentModes',
+      paymentModes: Utils.extractArrayFromControl(this.form, 'paymentModes',
         fg => new PaymentMode({
           name: fg.value.name
         })
@@ -271,11 +271,6 @@ export class ProfileComponent implements OnInit {
     });
 
     return pro;
-  }
-
-  private extractArrayFromControl(faName: string, mapperFn: (fg: FormGroup) => any) {
-    const fa = this.form.get(faName) as FormArray;
-    return fa.controls.filter(fg => fg.value.value).map(mapperFn);
   }
 
   refresh() {

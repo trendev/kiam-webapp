@@ -1,3 +1,4 @@
+import { Utils } from './utils';
 export * from './shared.module';
 export * from './page-not-found/page-not-found.component';
 export * from './account-info/account-info.component';
@@ -14,3 +15,4 @@ export * from './custom-validators';
 export * from './collective-groups/collective-groups.component';
 export * from './categories/categories.component';
 export * from './error/error.component';
+export * from './utils';

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ClientBill, Category, CollectiveGroup } from '@app/entities';
 import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { CustomValidators, ErrorAggregatorDirective } from '@app/shared';
+import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
 import { ProfessionalService, ClientService } from '@app/core';
 import * as moment from 'moment';
 
@@ -200,13 +200,13 @@ export class ClientDetailComponent implements OnInit {
         instagram: value.socialNetworkAccounts.instagram || undefined,
         pinterest: value.socialNetworkAccounts.pinterest || undefined
       },
-      collectiveGroups: this.extractArrayFromControl('collectiveGroups',
+      collectiveGroups: Utils.extractArrayFromControl(this.form, 'collectiveGroups',
         fg => new CollectiveGroup({
           id: fg.value.id,
           groupName: fg.value.groupName
         })
       ),
-      categories: this.extractArrayFromControl('categories',
+      categories: Utils.extractArrayFromControl(this.form, 'categories',
         fg => new Category({
           name: fg.value.name,
           id: fg.value.id
