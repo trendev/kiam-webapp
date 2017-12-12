@@ -32,6 +32,10 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
+      },
+      "appShell": {
+        "app": "comptandye-app-shell",
+        "route": "app-shell-path"
       }
     },
     {
