@@ -8,12 +8,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-// uses locale FR
-import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
-import { MAT_DATE_LOCALE } from '@angular/material';
-registerLocaleData(localeFr);
-
 @NgModule({
   declarations: [
     AppComponent
@@ -26,7 +20,6 @@ registerLocaleData(localeFr);
     LoginModule,
     AppRoutingModule
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
