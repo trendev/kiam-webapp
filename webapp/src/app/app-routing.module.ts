@@ -1,4 +1,3 @@
-import { AppShellComponent } from '@app/app-shell/app-shell.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { PageNotFoundComponent } from '@app/shared';
@@ -20,8 +19,7 @@ export const routes: Routes = [
     {
         path: 'administrator',
         loadChildren: 'app/administrator/administrator.module#AdministratorModule'
-    },
-    { path: 'appshell', component: AppShellComponent }
+    }
 ];
 
 @NgModule({

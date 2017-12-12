@@ -1,4 +1,3 @@
-import { AppShellComponent } from './app-shell/app-shell.component';
 import { SharedModule } from '@app/shared';
 import { CoreModule } from '@app/core';
 import { LoginModule } from '@app/login';
@@ -11,15 +10,14 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AppShellComponent
+    AppComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
-    LoginModule,
+    LoginModule, // must be before AppRoutingModule or won't be loaded as expected
     AppRoutingModule
   ],
   bootstrap: [AppComponent]

@@ -1,3 +1,4 @@
+import { SharedModule } from '@app/shared';
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
 
@@ -11,6 +12,7 @@ const routes: Routes = [ { path: 'app-shell-path', component: AppShellComponent 
 @NgModule({
   imports: [
     AppModule,
+    SharedModule,
     ServerModule,
     RouterModule.forRoot(routes),
   ],

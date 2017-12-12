@@ -19,7 +19,8 @@ import {
   MatRadioModule,
   MatTableModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -61,7 +62,8 @@ import { ErrorComponent } from './error/error.component';
     MatRadioModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressBarModule
   ],
   declarations: [
     PageNotFoundComponent,
@@ -114,7 +116,8 @@ import { ErrorComponent } from './error/error.component';
     MatPaginatorModule,
     CollectiveGroupsComponent,
     CategoriesComponent,
-    ErrorComponent
+    ErrorComponent,
+    MatProgressBarModule
   ]
 })
 

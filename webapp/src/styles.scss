@@ -2,7 +2,9 @@
 // @import '~@angular/material/prebuilt-themes/pink-bluegrey';
 // mat-sidenav-container must have a 100% height otherwise even if the div .dashboard is 100% height, 
 // the sidenav's content is not 100% height !
-body, mat-sidenav-container {
+html,
+body,
+mat-sidenav-container {
     margin: 0;
     height: 100%;
 }
