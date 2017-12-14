@@ -13,12 +13,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ClientsComponent implements OnInit {
 
-
-  constructor(private professionalService: ProfessionalService,
-    private router: Router,
-    private route: ActivatedRoute) { }
-
   clients: ClientModel[] = [];
+  private _clients: Client[];
 
   displayedColumns: string[];
   datasource: MatTableDataSource<ClientModel>;
@@ -34,28 +30,45 @@ export class ClientsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  ngOnInit() {
-    this.displayedColumns = this.columns.map(c => c.columnDef);
-    this.refreshClients();
+  constructor(private professionalService: ProfessionalService,
+    private router: Router,
+    private route: ActivatedRoute) {
+    this.route.data.subscribe(
+      (data: {
+        clients: Client[]
+      }) => {
+        this._clients = data.clients;
+      }
+    );
   }
 
-  refreshClients(refresh = false) {
-    this.professionalService.getClients(refresh).subscribe(
+  ngOnInit() {
+    this.displayedColumns = this.columns.map(c => c.columnDef);
+    this.initClients();
+  }
+
+  initClients() {
+    this.clients = this._clients.map(client => {
+      return {
+        id: client.id + '',
+        lastName: client.customerDetails.lastName || '',
+        firstName: client.customerDetails.firstName || '',
+        nickname: client.customerDetails.nickname || '',
+        phone: client.customerDetails.phone || '',
+        email: client.email || ''
+      };
+    }).sort((c1, c2) => c1.lastName === c2.lastName ?
+      c1.firstName.localeCompare(c2.firstName)
+      : c1.lastName.localeCompare(c2.lastName));
+    this.datasource = new MatTableDataSource<ClientModel>(this.clients);
+    this.datasource.sort = this.sort;
+  }
+
+  refreshClients() {
+    this.professionalService.getClients().subscribe(
       clients => {
-        this.clients = clients.map(client => {
-          return {
-            id: client.id + '',
-            lastName: client.customerDetails.lastName || '',
-            firstName: client.customerDetails.firstName || '',
-            nickname: client.customerDetails.nickname || '',
-            phone: client.customerDetails.phone || '',
-            email: client.email || ''
-          };
-        }).sort((c1, c2) => c1.lastName === c2.lastName ?
-          c1.firstName.localeCompare(c2.firstName)
-          : c1.lastName.localeCompare(c2.lastName));
-        this.datasource = new MatTableDataSource<ClientModel>(this.clients);
-        this.datasource.sort = this.sort;
+        this._clients = clients;
+        this.initClients();
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la collecte des clients depuis le serveur`)

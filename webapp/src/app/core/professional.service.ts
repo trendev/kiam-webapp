@@ -45,7 +45,7 @@ export class ProfessionalService {
       });
   }
 
-  getClients(refresh = false): Observable<Client[]> {
+  getClients(): Observable<Client[]> {
     return this.http.get<Client[]>(`${this.api}/clients`,
       {
         withCredentials: true
@@ -54,7 +54,7 @@ export class ProfessionalService {
       .catch(e => this.errorHandler.handle(e));
   }
 
-  getCollectiveGroups(refresh = false): Observable<CollectiveGroup[]> {
+  getCollectiveGroups(): Observable<CollectiveGroup[]> {
     return this.http.get<CollectiveGroup[]>(`${this.api}/collectiveGroups`,
       {
         withCredentials: true
@@ -63,7 +63,7 @@ export class ProfessionalService {
       .catch(e => this.errorHandler.handle(e));
   }
 
-  getCategories(refresh = false): Observable<Category[]> {
+  getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.api}/categories`,
       {
         withCredentials: true
@@ -72,7 +72,7 @@ export class ProfessionalService {
       .catch(e => this.errorHandler.handle(e));
   }
 
-  getBills(refresh = false): Observable<Bill[]> {
+  getBills(): Observable<Bill[]> {
     return this.http.get<Bill[]>(`${this.api}/bills`,
       {
         withCredentials: true

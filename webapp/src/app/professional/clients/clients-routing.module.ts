@@ -6,13 +6,16 @@ import { ClientsComponent } from './clients/clients.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent, LoremIpsumComponent } from '@app/shared';
-import { CollectiveGroupsResolverService, CategoriesResolverService } from '@app/core';
+import { CollectiveGroupsResolverService, CategoriesResolverService, ClientsResolverService } from '@app/core';
 
 const routes: Routes = [
   {
     path: '',
     component: ClientsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    resolve: {
+      clients: ClientsResolverService
+    }
   },
   {
     path: 'create-client',
