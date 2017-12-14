@@ -15,7 +15,6 @@ const routes: Routes = [
       {
         path: 'welcome',
         loadChildren: 'app/professional/welcome/welcome.module#WelcomeModule'
-
       },
       {
         path: 'clients',

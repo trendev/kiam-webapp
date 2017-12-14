@@ -9,6 +9,7 @@ import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import * as moment from 'moment';
 import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +20,8 @@ export class ProfileComponent implements OnInit {
 
   pro: Professional;
   form: FormGroup;
+  private businesses: Business[];
+  private paymentModes: PaymentMode[];
 
   private commentsValidators = [
     Validators.required,
@@ -29,12 +32,21 @@ export class ProfileComponent implements OnInit {
   @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private authenticationService: AuthenticationService,
-    private businessService: BusinessService,
-    private paymentModeService: PaymentModeService,
     private professionalService: ProfessionalService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute) {
     this.pro = new Professional(this.authenticationService.user);
-    this.form = this.createForm();
+    this.route.data.subscribe(
+      (data: {
+        businesses: Business[],
+        paymentModes: PaymentMode[]
+      }) => {
+        this.businesses = data.businesses;
+        this.paymentModes = data.paymentModes;
+        this.form = this.createForm();
+      }
+    );
   }
 
   ngOnInit() {
@@ -159,35 +171,25 @@ export class ProfileComponent implements OnInit {
       })
     });
 
-    this.businessService.businesses.subscribe(
-      businesses => {
-        const businessesFA = fg.get('businesses') as FormArray;
-        businesses.forEach(b =>
-          businessesFA.push(this.fb.group({
-            designation: b.designation,
-            value: this.pro.businesses
-              ? this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1
-              : false
-          })));
-      },
-      // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de charger les activités depuis le serveur')
-    );
 
-    this.paymentModeService.paymentModes.subscribe(
-      paymentModes => {
-        const paymentModesFA = fg.get('paymentModes') as FormArray;
-        paymentModes.forEach(pm =>
-          paymentModesFA.push(this.fb.group({
-            name: pm.name,
-            value: this.pro.paymentModes
-              ? this.pro.paymentModes.findIndex(_pm => _pm.name === pm.name) !== -1
-              : false
-          })));
-      },
-      // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de charger les activités depuis le serveur')
-    );
+    const businessesFA = fg.get('businesses') as FormArray;
+    this.businesses.forEach(b =>
+      businessesFA.push(this.fb.group({
+        designation: b.designation,
+        value: this.pro.businesses
+          ? this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1
+          : false
+      })));
+
+
+    const paymentModesFA = fg.get('paymentModes') as FormArray;
+    this.paymentModes.forEach(pm =>
+      paymentModesFA.push(this.fb.group({
+        name: pm.name,
+        value: this.pro.paymentModes
+          ? this.pro.paymentModes.findIndex(_pm => _pm.name === pm.name) !== -1
+          : false
+      })));
 
     return fg;
   }
@@ -196,10 +198,10 @@ export class ProfileComponent implements OnInit {
     // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
     this.form.reset(this.createForm().getRawValue());
 
-     // rebuilds the controls of the comments group if they have been modified/removed
-     const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
-     customerDetailsFG.setControl('comments', this.fb.array(
-       this.pro.customerDetails.comments || [], CustomValidators.validComments(this.commentsValidators)));
+    // rebuilds the controls of the comments group if they have been modified/removed
+    const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
+    customerDetailsFG.setControl('comments', this.fb.array(
+      this.pro.customerDetails.comments || [], CustomValidators.validComments(this.commentsValidators)));
   }
 
   save() {
