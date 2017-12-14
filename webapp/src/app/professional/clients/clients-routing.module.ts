@@ -26,6 +26,8 @@ const routes: Routes = [
     path: ':id',
     component: ClientDetailComponent,
     resolve: {
+      collectiveGroups: CollectiveGroupsResolverService,
+      categories: CategoriesResolverService,
       client: ClientDetailResolverService,
       clientBills: ClientBillsResolverService
     }

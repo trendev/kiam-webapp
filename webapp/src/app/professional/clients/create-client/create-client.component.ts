@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
-import { ProfessionalService, ClientService } from '@app/core';
+import { ClientService } from '@app/core';
 import { Client, CollectiveGroup, Category } from '@app/entities';
 import { Router, ActivatedRoute } from '@angular/router';
 

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ClientBill, Category, CollectiveGroup } from '@app/entities';
 import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
-import { ProfessionalService, ClientService } from '@app/core';
+import { ClientService } from '@app/core';
 import * as moment from 'moment';
 
 @Component({
@@ -15,6 +15,8 @@ export class ClientDetailComponent implements OnInit {
 
   client: Client;
   clientBills: ClientBill[];
+  private collectiveGroups: CollectiveGroup[];
+  private categories: Category[];
 
   form: FormGroup;
 
@@ -26,16 +28,19 @@ export class ClientDetailComponent implements OnInit {
 
   @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
-  constructor(private professionalService: ProfessionalService,
-    private fb: FormBuilder,
+  constructor(private fb: FormBuilder,
     private clientService: ClientService,
     private router: Router,
     private route: ActivatedRoute) {
     this.route.data.subscribe(
       (data: {
+        collectiveGroups: CollectiveGroup[],
+        categories: Category[],
         client: Client,
         clientBills: ClientBill[]
       }) => {
+        this.collectiveGroups = data.collectiveGroups;
+        this.categories = data.categories;
         this.client = data.client;
         this.clientBills = data.clientBills;
         this.form = this.createForm();
@@ -129,47 +134,33 @@ export class ClientDetailComponent implements OnInit {
       categories: this.fb.array([])
     });
 
-    this.professionalService.getCollectiveGroups().subscribe(
-      collectiveGroups => {
-        const collectiveGroupsFA = fg.get('collectiveGroups') as FormArray;
-        collectiveGroups.forEach(cg =>
-          collectiveGroupsFA.push(this.fb.group({
-            id: cg.id,
-            groupName: cg.groupName,
-            value: this.client.collectiveGroups ? this.client.collectiveGroups.findIndex(_cg => _cg.id === cg.id) !== -1
-              : false
-          })));
-      },
-      // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de charger les groupes/collectivités du professionel depuis le serveur')
-    );
+    const collectiveGroupsFA = fg.get('collectiveGroups') as FormArray;
+    this.collectiveGroups.forEach(cg =>
+      collectiveGroupsFA.push(this.fb.group({
+        id: cg.id,
+        groupName: cg.groupName,
+        value: false
+      })));
 
-    this.professionalService.getCategories().subscribe(
-      categories => {
-        const categoriesFA = fg.get('categories') as FormArray;
-        categories.forEach(ct =>
-          categoriesFA.push(this.fb.group({
-            id: ct.id,
-            name: ct.name,
-            value: this.client.categories ? this.client.categories.findIndex(_ct => _ct.id === ct.id) !== -1
-              : false
-          })));
-      },
-      // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de charger les catégories du professionel depuis le serveur')
-    );
+    const categoriesFA = fg.get('categories') as FormArray;
+    this.categories.forEach(ct =>
+      categoriesFA.push(this.fb.group({
+        id: ct.id,
+        name: ct.name,
+        value: false
+      })));
 
     return fg;
   }
 
   revert() {
+    // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
+    this.form.reset(this.createForm().getRawValue());
+
     // rebuilds the controls of the comments group if they have been modified/removed
     const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
     customerDetailsFG.setControl('comments',
       this.fb.array(this.client.customerDetails.comments || [], CustomValidators.validComments(this.commentsValidators)));
-
-    // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
-    this.form.reset(this.createForm().getRawValue());
   }
 
   prepareSave(): Client {
