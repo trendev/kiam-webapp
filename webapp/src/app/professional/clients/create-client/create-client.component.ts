@@ -14,6 +14,7 @@ export class CreateClientComponent implements OnInit {
 
   form: FormGroup;
   private collectiveGroups: CollectiveGroup[];
+  private categories: Category[];
 
   private commentsValidators = [
     Validators.required,
@@ -23,17 +24,18 @@ export class CreateClientComponent implements OnInit {
 
   @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
-  constructor(private professionalService: ProfessionalService,
-    private fb: FormBuilder,
+  constructor(private fb: FormBuilder,
     private clientService: ClientService,
     private router: Router,
     private route: ActivatedRoute) {
 
     this.route.data.subscribe(
       (data: {
-        collectiveGroups: CollectiveGroup[]
+        collectiveGroups: CollectiveGroup[],
+        categories: Category[]
       }) => {
         this.collectiveGroups = data.collectiveGroups;
+        this.categories = data.categories;
         this.form = this.createForm();
       }
     );
@@ -133,30 +135,24 @@ export class CreateClientComponent implements OnInit {
         value: false
       })));
 
-    this.professionalService.getCategories().subscribe(
-      categories => {
-        const categoriesFA = fg.get('categories') as FormArray;
-        categories.forEach(ct =>
-          categoriesFA.push(this.fb.group({
-            id: ct.id,
-            name: ct.name,
-            value: false
-          })));
-      },
-      // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de charger les catégories du professionel depuis le serveur')
-    );
+    const categoriesFA = fg.get('categories') as FormArray;
+    this.categories.forEach(ct =>
+      categoriesFA.push(this.fb.group({
+        id: ct.id,
+        name: ct.name,
+        value: false
+      })));
 
     return fg;
   }
 
   revert() {
+    // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
+    this.form.reset(this.createForm().getRawValue());
+
     // rebuilds the controls of the comments group if they have been modified/removed
     const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
     customerDetailsFG.setControl('comments', this.fb.array([], CustomValidators.validComments(this.commentsValidators)));
-
-    // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
-    this.form.reset(this.createForm().getRawValue());
   }
 
   prepareSave(): Client {

@@ -6,3 +6,4 @@ export * from './payment-mode.service';
 export * from './professional.service';
 export * from './client.service';
 export * from './collective-groups-resolver.service';
+export * from './categories-resolver.service';

@@ -8,6 +8,7 @@ import { PaymentModeService } from './payment-mode.service';
 import { ProfessionalService } from './professional.service';
 import { ClientService } from './client.service';
 import { CollectiveGroupsResolverService } from './collective-groups-resolver.service';
+import { CategoriesResolverService } from './categories-resolver.service';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { CollectiveGroupsResolverService } from './collective-groups-resolver.se
     PaymentModeService,
     ProfessionalService,
     ClientService,
-    CollectiveGroupsResolverService]
+    CollectiveGroupsResolverService,
+    CategoriesResolverService]
 })
 export class CoreModule {
   /* make sure CoreModule is imported only by one NgModule the AppModule */
