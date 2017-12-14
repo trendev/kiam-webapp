@@ -7,11 +7,9 @@ import { BusinessService } from './business.service';
 export class CacheHandlerService {
 
   constructor(
-    private paymentModeService: PaymentModeService,
     private professionalService: ProfessionalService) { }
 
   resetCache() {
-    this.paymentModeService.resetCache();
     this.professionalService.resetCache();
   }
 
