@@ -6,12 +6,11 @@ import { BusinessService } from './business.service';
 @Injectable()
 export class CacheHandlerService {
 
-  constructor(private businessService: BusinessService,
+  constructor(
     private paymentModeService: PaymentModeService,
     private professionalService: ProfessionalService) { }
 
   resetCache() {
-    this.businessService.resetCache();
     this.paymentModeService.resetCache();
     this.professionalService.resetCache();
   }

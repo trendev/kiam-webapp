@@ -12,25 +12,14 @@ export class BusinessService {
 
   readonly api = `${environment.api}/Business`;
 
-  private _businesses: Business[];
-
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
   get businesses(): Observable<Business[]> {
-    if (this._businesses) {
-      return Observable.of(this._businesses);
-    } else {
-      return this.http.get<Business[]>(`${this.api}`,
-        {
-          withCredentials: true
-        })
-        .map(result => {
-          this._businesses = result.map(r => new Business(r));
-          return this._businesses;
-        })
-        .catch(e => this.errorHandler.handle(e));
-    }
+    return this.http.get<Business[]>(`${this.api}`,
+      {
+        withCredentials: true
+      })
+      .map(result => result.map(r => new Business(r)))
+      .catch(e => this.errorHandler.handle(e));
   }
-
-  resetCache() { this._businesses = undefined; }
 }
