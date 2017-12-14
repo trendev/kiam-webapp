@@ -139,7 +139,8 @@ export class ClientDetailComponent implements OnInit {
       collectiveGroupsFA.push(this.fb.group({
         id: cg.id,
         groupName: cg.groupName,
-        value: false
+        value: this.client.collectiveGroups ? this.client.collectiveGroups.findIndex(_cg => _cg.id === cg.id) !== -1
+        : false
       })));
 
     const categoriesFA = fg.get('categories') as FormArray;
@@ -147,7 +148,8 @@ export class ClientDetailComponent implements OnInit {
       categoriesFA.push(this.fb.group({
         id: ct.id,
         name: ct.name,
-        value: false
+        value: this.client.categories ? this.client.categories.findIndex(_ct => _ct.id === ct.id) !== -1
+        : false
       })));
 
     return fg;

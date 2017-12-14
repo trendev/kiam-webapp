@@ -12,7 +12,7 @@ const routes: Routes = [
     pathMatch: 'full',
     resolve: {
       businesses: BusinessesResolverService,
-      paymentModes: PaymentModesResolverService,
+      paymentModes: PaymentModesResolverService
     }
   },
   {
