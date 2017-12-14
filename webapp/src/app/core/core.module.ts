@@ -6,7 +6,6 @@ import { ErrorHandlerService } from './error-handler.service';
 import { BusinessService } from './business.service';
 import { PaymentModeService } from './payment-mode.service';
 import { ProfessionalService } from './professional.service';
-import { CacheHandlerService } from './cache-handler.service';
 import { ClientService } from './client.service';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { ClientService } from './client.service';
     BusinessService,
     PaymentModeService,
     ProfessionalService,
-    CacheHandlerService,
     ClientService]
 })
 export class CoreModule {

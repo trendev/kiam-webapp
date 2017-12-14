@@ -1,4 +1,3 @@
-import { CacheHandlerService } from './cache-handler.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { Administrator, Individual, Professional, UserAccount } from '@app/entities';
 import { environment } from '@env/environment';
@@ -25,8 +24,7 @@ export class AuthenticationService {
   readonly api = `${environment.api}/Authentication`;
 
   constructor(private http: HttpClient,
-    private errorHandler: ErrorHandlerService,
-    private cacheHandlerService: CacheHandlerService) { }
+    private errorHandler: ErrorHandlerService) { }
 
   get isLoggedIn(): boolean {
     return this._isLoggedIn;
@@ -35,7 +33,6 @@ export class AuthenticationService {
   resetCache() {
     this.user = undefined;
     this._isLoggedIn = false;
-    this.cacheHandlerService.resetCache();
   }
 
   login(username: string, password: string): Observable<boolean> {

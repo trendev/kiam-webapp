@@ -22,21 +22,8 @@ import { Observable } from 'rxjs/Observable';
 export class ProfessionalService {
 
   readonly api = `${environment.api}/Professional`;
-  private _bills: Bill[];
-  private _clients: Client[];
-  private _offerings: Offering[];
-  private _categories: Category[];
-  private _expenses: Expense[];
-  private _collectiveGroups: CollectiveGroup[];
-  private __individuals: Individual[];
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
-
-  resetCache() {
-    this._clients = undefined;
-    this._collectiveGroups = undefined;
-    this._categories = undefined;
-  }
 
   profile(refresh: boolean = true): Observable<Professional> {
     return this.http.get<Professional>(`${this.api}/profile`,
@@ -59,88 +46,48 @@ export class ProfessionalService {
   }
 
   getClients(refresh = false): Observable<Client[]> {
-
-    if (this._clients && !refresh) {
-      return Observable.of(this._clients);
-    } else {
-      return this.http.get<Client[]>(`${this.api}/clients`,
-        {
-          withCredentials: true
-        })
-        .map(result => {
-          this._clients = result.map(r => new Client(r)); // request cached
-          return this._clients;
-        })
-        .catch(e => this.errorHandler.handle(e));
-    }
-  }
-
-  addClient(client: Client) {
-    this._clients.push(client);
-  }
-
-  removeClient(client: Client) {
-    const index = this._clients.findIndex(c => c.id === client.id);
-    if (index !== -1) {
-      this._clients.splice(index, 1);
-    }
+    return this.http.get<Client[]>(`${this.api}/clients`,
+      {
+        withCredentials: true
+      })
+      .map(result => result.map(r => new Client(r)))
+      .catch(e => this.errorHandler.handle(e));
   }
 
   getCollectiveGroups(refresh = false): Observable<CollectiveGroup[]> {
-    if (this._collectiveGroups && !refresh) {
-      return Observable.of(this._collectiveGroups);
-    } else {
-      return this.http.get<CollectiveGroup[]>(`${this.api}/collectiveGroups`,
-        {
-          withCredentials: true
-        })
-        .map(result => {
-          this._collectiveGroups = result.map(r => new CollectiveGroup(r)); // request cached
-          return this._collectiveGroups;
-        })
-        .catch(e => this.errorHandler.handle(e));
-    }
+    return this.http.get<CollectiveGroup[]>(`${this.api}/collectiveGroups`,
+      {
+        withCredentials: true
+      })
+      .map(result => result.map(r => new CollectiveGroup(r)))
+      .catch(e => this.errorHandler.handle(e));
   }
 
   getCategories(refresh = false): Observable<Category[]> {
-    if (this._categories && !refresh) {
-      return Observable.of(this._categories);
-    } else {
-      return this.http.get<Category[]>(`${this.api}/categories`,
-        {
-          withCredentials: true
-        })
-        .map(result => {
-          this._categories = result.map(r => new Category(r)); // request cached
-          return this._categories;
-        })
-        .catch(e => this.errorHandler.handle(e));
-    }
+    return this.http.get<Category[]>(`${this.api}/categories`,
+      {
+        withCredentials: true
+      })
+      .map(result => result.map(r => new Category(r)))
+      .catch(e => this.errorHandler.handle(e));
   }
 
   getBills(refresh = false): Observable<Bill[]> {
-    if (this._bills && !refresh) {
-      return Observable.of(this._bills);
-    } else {
-      return this.http.get<Bill[]>(`${this.api}/bills`,
-        {
-          withCredentials: true
-        })
-        .map(result => {
-          this._bills = result.map(r => {
-            switch (r.cltype) {
-              case BillType.CLIENT_BILL:
-                return new ClientBill(r);
-              case BillType.COLLECTIVE_GROUP_BILL:
-                return new CollectiveGroupBill(r);
-              case BillType.INDIVIDUAL_BILL:
-                return new IndividualBill(r);
-            }
-          }); // request cached
-          return this._bills;
-        })
-        .catch(e => this.errorHandler.handle(e));
-    }
+    return this.http.get<Bill[]>(`${this.api}/bills`,
+      {
+        withCredentials: true
+      })
+      .map(result => result.map(r => {
+        switch (r.cltype) {
+          case BillType.CLIENT_BILL:
+            return new ClientBill(r);
+          case BillType.COLLECTIVE_GROUP_BILL:
+            return new CollectiveGroupBill(r);
+          case BillType.INDIVIDUAL_BILL:
+            return new IndividualBill(r);
+        }
+      }))
+      .catch(e => this.errorHandler.handle(e));
   }
 
 }

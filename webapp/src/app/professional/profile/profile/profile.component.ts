@@ -193,13 +193,13 @@ export class ProfileComponent implements OnInit {
   }
 
   revert() {
-    // rebuilds the controls of the comments group if they have been modified/removed
-    const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
-    customerDetailsFG.setControl('comments', this.fb.array(
-      this.pro.customerDetails.comments || [], CustomValidators.validComments(this.commentsValidators)));
-
     // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
     this.form.reset(this.createForm().getRawValue());
+
+     // rebuilds the controls of the comments group if they have been modified/removed
+     const customerDetailsFG = this.form.get('customerDetails') as FormGroup;
+     customerDetailsFG.setControl('comments', this.fb.array(
+       this.pro.customerDetails.comments || [], CustomValidators.validComments(this.commentsValidators)));
   }
 
   save() {
