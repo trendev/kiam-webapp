@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CreateClientComponent implements OnInit {
 
   form: FormGroup;
+  private collectiveGroups: CollectiveGroup[];
 
   private commentsValidators = [
     Validators.required,
@@ -27,7 +28,15 @@ export class CreateClientComponent implements OnInit {
     private clientService: ClientService,
     private router: Router,
     private route: ActivatedRoute) {
-    this.form = this.createForm();
+
+    this.route.data.subscribe(
+      (data: {
+        collectiveGroups: CollectiveGroup[]
+      }) => {
+        this.collectiveGroups = data.collectiveGroups;
+        this.form = this.createForm();
+      }
+    );
   }
 
   ngOnInit() {
@@ -116,19 +125,13 @@ export class CreateClientComponent implements OnInit {
       categories: this.fb.array([])
     });
 
-    this.professionalService.getCollectiveGroups().subscribe(
-      collectiveGroups => {
-        const collectiveGroupsFA = fg.get('collectiveGroups') as FormArray;
-        collectiveGroups.forEach(cg =>
-          collectiveGroupsFA.push(this.fb.group({
-            id: cg.id,
-            groupName: cg.groupName,
-            value: false
-          })));
-      },
-      // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de charger les groupes/collectivités du professionel depuis le serveur')
-    );
+    const collectiveGroupsFA = fg.get('collectiveGroups') as FormArray;
+    this.collectiveGroups.forEach(cg =>
+      collectiveGroupsFA.push(this.fb.group({
+        id: cg.id,
+        groupName: cg.groupName,
+        value: false
+      })));
 
     this.professionalService.getCategories().subscribe(
       categories => {

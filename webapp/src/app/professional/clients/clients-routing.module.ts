@@ -6,6 +6,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent, LoremIpsumComponent } from '@app/shared';
+import { CollectiveGroupsResolverService } from '@app/core';
 
 const routes: Routes = [
   {
@@ -15,7 +16,10 @@ const routes: Routes = [
   },
   {
     path: 'create-client',
-    component: CreateClientComponent
+    component: CreateClientComponent,
+    resolve: {
+      collectiveGroups: CollectiveGroupsResolverService
+    }
   },
   {
     path: ':id',
