@@ -13,17 +13,13 @@ export class OfferingsComponent implements OnInit {
   private _offerings: Offering[];
   services: Service[] = [];
   packs: Pack[] = [];
+
+  readonly offeringType = {
+    'SERVICE': OfferingType.SERVICE,
+    'PACK': OfferingType.PACK
+  };
+
   _selectedOfferingType = OfferingType.SERVICE;
-  offeringsTypes = [
-    {
-      type: OfferingType.SERVICE,
-      label: 'Service'
-    },
-    {
-      type: OfferingType.PACK,
-      label: 'Forfait'
-    }
-  ];
 
   constructor(private professionalService: ProfessionalService,
     private router: Router,
@@ -64,7 +60,7 @@ export class OfferingsComponent implements OnInit {
     return this._selectedOfferingType;
   }
 
-  set selectedOfferingType(value: string){
+  set selectedOfferingType(value: string) {
     this._selectedOfferingType = value;
   }
 

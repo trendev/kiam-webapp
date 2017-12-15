@@ -7,10 +7,14 @@
     </mat-card-subtitle>
     <mat-card-content>
       <mat-radio-group [(ngModel)]="selectedOfferingType">
-        <mat-radio-button *ngFor="let ot of offeringsTypes" [value]="ot.type">
-          {{ot.label}}
-        </mat-radio-button>
+        <mat-radio-button [value]="offeringType.SERVICE">Service</mat-radio-button>
+        <mat-radio-button [value]="offeringType.PACK">Forfait</mat-radio-button>
       </mat-radio-group>
+      <div [ngSwitch]="selectedOfferingType">
+        <p *ngSwitchCase="offeringType.SERVICE">Ce sont des services que l'on veut voir</p>
+        <p *ngSwitchCase="offeringType.PACK">Ce sont des forfaits que l'on veut voir</p>
+        <app-page-not-found *ngSwitchDefault></app-page-not-found>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
