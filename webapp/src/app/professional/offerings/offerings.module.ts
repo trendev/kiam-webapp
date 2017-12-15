@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 import { OfferingsRoutingModule } from './offerings-routing.module';
 import { SharedModule } from '@app/shared';
 import { OfferingsComponent } from './offerings/offerings.component';
+import { ServicesComponentComponent } from './services-component/services-component.component';
+import { PacksComponentComponent } from './packs-component/packs-component.component';
 
 @NgModule({
   imports: [
     SharedModule,
     OfferingsRoutingModule
   ],
-  declarations: [OfferingsComponent]
+  declarations: [OfferingsComponent, ServicesComponentComponent, PacksComponentComponent]
 })
 export class OfferingsModule { }

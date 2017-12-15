@@ -14,6 +14,8 @@ export class OfferingsComponent implements OnInit {
   services: Service[] = [];
   packs: Pack[] = [];
 
+  // link between the local variable and the offerings type
+  // OfferingType cannot be accessed from the html template
   readonly offeringType = {
     'SERVICE': OfferingType.SERVICE,
     'PACK': OfferingType.PACK
@@ -34,8 +36,12 @@ export class OfferingsComponent implements OnInit {
   }
 
   initOfferings() {
+
+    // reset the service/pack sets
     this.services = [];
     this.packs = [];
+
+    // build the service/pack set
     this._offerings.forEach(
       o => {
         switch (o.cltype) {
