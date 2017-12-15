@@ -17,12 +17,12 @@
       <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Prix</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Prix (EUR)</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.price / 100}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="duration">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Durée(min)</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.duration}} EUR</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.duration}}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
