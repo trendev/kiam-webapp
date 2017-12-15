@@ -40,6 +40,10 @@ mat-card {
     margin: 5px;
 }
 
+.mat-radio-button{
+    padding-right: 16px;
+}
+
 @media all and (max-device-width: 720px) {
     .hide {
         display: none;

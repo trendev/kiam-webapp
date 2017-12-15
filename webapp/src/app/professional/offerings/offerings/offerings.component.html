@@ -6,7 +6,11 @@
       =0 {aucun Forfait} =1 {1 Forfait} other {{{packs.length}} Forfaits}}
     </mat-card-subtitle>
     <mat-card-content>
-      
+      <mat-radio-group [(ngModel)]="selectedOfferingType">
+        <mat-radio-button *ngFor="let ot of offeringsTypes" [value]="ot.type">
+          {{ot.label}}
+        </mat-radio-button>
+      </mat-radio-group>
     </mat-card-content>
   </mat-card>
 </div>
