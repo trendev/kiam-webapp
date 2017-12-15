@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Service, Offering } from '@app/entities';
+import { Service, Offering, Business } from '@app/entities';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -10,11 +10,11 @@ import { MatSort, MatTableDataSource } from '@angular/material';
 export class ServicesComponentComponent implements OnInit {
 
   @Input() offerings: Offering[];
-  offeringsModel: Offering[];
+  offeringsModel: OfferingModel[];
 
   displayedColumns = [
-    'id', 'name', 'price', 'duration'];
-  datasource: MatTableDataSource<Offering>;
+    'id', 'name', 'price', 'duration', 'businesses'];
+  datasource: MatTableDataSource<OfferingModel>;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -31,9 +31,17 @@ export class ServicesComponentComponent implements OnInit {
         }
         return diff;
       }
-    );
+    ).map(o => {
+      return {
+        id: o.id || 0,
+        name: o.name || '',
+        price: o.price || 0,
+        duration: o.duration || 0,
+        businesses: this.getBusinesses(o.businesses)
+      };
+    });
     this.datasource =
-      new MatTableDataSource<Offering>(this.offeringsModel);
+      new MatTableDataSource<OfferingModel>(this.offeringsModel);
     this.datasource.sort = this.sort;
   }
 
@@ -43,4 +51,16 @@ export class ServicesComponentComponent implements OnInit {
     this.datasource.filter = filterValue;
   }
 
+  private getBusinesses(businesses: Business[]): string {
+    return !businesses.length ? '' : businesses.map(b => b.designation).sort().join(', ');
+  }
+
+}
+
+interface OfferingModel {
+  id: number;
+  name: string;
+  price: number;
+  duration: number;
+  businesses: string;
 }
