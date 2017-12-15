@@ -1,3 +1,31 @@
-<p>
-  services-component works!
-</p>
+<div class="list-container  mat-elevation-z2">
+  <div class="search-header">
+    <mat-form-field>
+      <mat-placeholder>
+        <i>Recherche</i>
+      </mat-placeholder>
+      <input matInput (keyup)="applyFilter($event.target.value)">
+    </mat-form-field>
+  </div>
+  <mat-table #table [dataSource]="datasource" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Prix</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.price / 100}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="duration">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Durée(min)</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.duration}} EUR</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="gotoClientDetails(row.id)">
+    </mat-row>
+  </mat-table>

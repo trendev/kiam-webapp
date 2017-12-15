@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Pack } from '@app/entities';
 
 @Component({
   selector: 'app-packs-component',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./packs-component.component.scss']
 })
 export class PacksComponentComponent implements OnInit {
+
+  @Input() offerings: Pack[];
 
   constructor() { }
 

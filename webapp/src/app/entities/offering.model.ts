@@ -11,7 +11,6 @@ export abstract class Offering {
     name: string;
     price: number;
     duration: number;
-    hidden: boolean;
     businesses: Business[];
 
     constructor(values: Object = {}) {

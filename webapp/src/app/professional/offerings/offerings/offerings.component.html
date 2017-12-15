@@ -11,8 +11,8 @@
         <mat-radio-button [value]="offeringType.PACK">Forfait</mat-radio-button>
       </mat-radio-group>
       <div [ngSwitch]="selectedOfferingType">
-        <app-services-component *ngSwitchCase="offeringType.SERVICE"></app-services-component>
-        <app-packs-component *ngSwitchCase="offeringType.PACK"></app-packs-component>
+        <app-services-component *ngSwitchCase="offeringType.SERVICE" [offerings]="services"></app-services-component>
+        <app-packs-component *ngSwitchCase="offeringType.PACK" [offerings]="packs"></app-packs-component>
         <app-page-not-found *ngSwitchDefault></app-page-not-found>
       </div>
     </mat-card-content>
