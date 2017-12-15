@@ -14,7 +14,10 @@ import {
   BillType,
   ClientBill,
   CollectiveGroupBill,
-  IndividualBill
+  IndividualBill,
+  OfferingType,
+  Pack,
+  Service
 } from '@app/entities';
 import { Observable } from 'rxjs/Observable';
 
@@ -85,6 +88,22 @@ export class ProfessionalService {
             return new CollectiveGroupBill(r);
           case BillType.INDIVIDUAL_BILL:
             return new IndividualBill(r);
+        }
+      }))
+      .catch(e => this.errorHandler.handle(e));
+  }
+
+  getOfferings(): Observable<Offering[]> {
+    return this.http.get<Offering[]>(`${this.api}/offerings`,
+      {
+        withCredentials: true
+      })
+      .map(result => result.map(r => {
+        switch (r.cltype) {
+          case OfferingType.SERVICE:
+            return new Service(r);
+            case OfferingType.PACK:
+            return new Pack(r);
         }
       }))
       .catch(e => this.errorHandler.handle(e));

@@ -19,7 +19,7 @@ export class ProfessionalSidenavComponent implements OnInit {
     { name: 'Facturier', url: 'bills', icon: 'receipt'},
     { name: 'Dépenses', url: 'expenses', icon: 'trending_down'},
     { name: 'Catégories', url: 'categories', icon: 'label_outline'},
-    { name: 'Services', url: 'offerings', icon: 'local_offer'},
+    { name: 'Offres', url: 'offerings', icon: 'local_offer'},
   ];
 
   constructor() { }
