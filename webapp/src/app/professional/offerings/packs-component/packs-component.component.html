@@ -1,3 +1,46 @@
-<p>
-  packs-component works!
-</p>
+<div class="list-container  mat-elevation-z2">
+  <div class="search-header">
+    <mat-form-field>
+      <mat-placeholder>
+        <i>Recherche</i>
+      </mat-placeholder>
+      <input matInput (keyup)="applyFilter($event.target.value)">
+    </mat-form-field>
+  </div>
+  <mat-table #table [dataSource]="datasource" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">#</mat-header-cell>
+      <mat-cell *matCellDef="let element" [class.hide]="true">{{element.id}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Prix (EUR)</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.price / 100}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="duration">
+      <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Durée (min)</mat-header-cell>
+      <mat-cell *matCellDef="let element" [class.hide]="true">{{element.duration}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="businesses">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Activités</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.businesses}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="content">
+      <mat-header-cell *matHeaderCellDef [class.hide]="true">Contenu</mat-header-cell>
+      <mat-cell *matCellDef="let element" [class.hide]="true">
+        <div *ngIf="element.content.services > 0">
+          {element.content.services, plural, =1 {1 Service} other {{{element.content.services}} Services}}
+        </div>
+        <div *ngIf="element.content.packs > 0">
+          {element.content.packs, plural, =1 {1 Forfait} other {{{element.content.packs}} Forfaits}}
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
