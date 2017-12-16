@@ -70,5 +70,15 @@ export class OfferingsComponent implements OnInit {
     this._selectedOfferingType = value;
   }
 
+  refreshOfferings() {
+    this.professionalService.getOfferings().subscribe(
+      offerings => {
+        this._offerings = offerings;
+        this.initOfferings();
+      },
+      // TODO : handle the error
+      e => console.error(`Une erreur est survenue lors de la collecte des offres depuis le serveur`)
+    );
+  }
 
 }
