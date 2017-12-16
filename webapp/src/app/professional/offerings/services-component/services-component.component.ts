@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, OnChanges } from '@angular/core';
 import { Service, Offering, Business } from '@app/entities';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
@@ -7,7 +7,7 @@ import { MatSort, MatTableDataSource } from '@angular/material';
   templateUrl: './services-component.component.html',
   styleUrls: ['./services-component.component.scss']
 })
-export class ServicesComponentComponent implements OnInit {
+export class ServicesComponentComponent implements OnChanges {
 
   @Input() offerings: Offering[];
   offeringsModel: OfferingModel[];
@@ -20,7 +20,7 @@ export class ServicesComponentComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.offeringsModel = this.offerings.sort(
       (o1, o2) => {
         const diff = o1.name.localeCompare(o2.name);
