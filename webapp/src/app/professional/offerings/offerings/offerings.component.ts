@@ -21,7 +21,7 @@ export class OfferingsComponent implements OnInit {
     'PACK': OfferingType.PACK
   };
 
-  _selectedOfferingType = OfferingType.SERVICE;
+  _selectedOfferingType: string;
 
   constructor(private professionalService: ProfessionalService,
     private router: Router,
@@ -60,6 +60,14 @@ export class OfferingsComponent implements OnInit {
 
   ngOnInit() {
     this.initOfferings();
+
+    // check the query parameter ot (offering type)
+    this.route.queryParamMap.subscribe(params => {
+      this._selectedOfferingType = params.get('ot');
+      if (!this._selectedOfferingType) {
+        this._selectedOfferingType = this.services.length ? OfferingType.SERVICE : OfferingType.PACK;
+      }
+    });
   }
 
   get selectedOfferingType(): string {

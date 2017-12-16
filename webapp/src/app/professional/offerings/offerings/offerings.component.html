@@ -7,13 +7,16 @@
     </mat-card-subtitle>
     <mat-card-content>
       <mat-radio-group [(ngModel)]="selectedOfferingType">
-        <mat-radio-button [value]="offeringType.SERVICE">Service</mat-radio-button>
-        <mat-radio-button [value]="offeringType.PACK">Forfait</mat-radio-button>
+        <mat-radio-button *ngIf="services.length > 0" [value]="offeringType.SERVICE">Service</mat-radio-button>
+        <mat-radio-button *ngIf="packs.length > 0" [value]="offeringType.PACK">Forfait</mat-radio-button>
       </mat-radio-group>
       <div [ngSwitch]="selectedOfferingType">
-        <app-services-component *ngSwitchCase="offeringType.SERVICE" [offerings]="services"></app-services-component>
-        <app-packs-component *ngSwitchCase="offeringType.PACK" [offerings]="packs"></app-packs-component>
-        <app-page-not-found *ngSwitchDefault></app-page-not-found>
+        <ng-container *ngIf="services.length > 0">
+          <app-services-component *ngSwitchCase="offeringType.SERVICE" [offerings]="services"></app-services-component>
+        </ng-container>
+        <ng-container *ngIf="packs.length > 0">
+          <app-packs-component *ngSwitchCase="offeringType.PACK" [offerings]="packs"></app-packs-component>
+        </ng-container>
       </div>
     </mat-card-content>
     <mat-card-actions>
