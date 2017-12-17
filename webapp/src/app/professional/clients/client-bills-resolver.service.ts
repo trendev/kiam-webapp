@@ -12,7 +12,11 @@ export class ClientBillsResolverService implements Resolve<ClientBill[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): ClientBill[] | Observable<ClientBill[]> | Promise<ClientBill[]> {
     const id = +route.paramMap.get('id');
-    return this.clientService.getClientBills(id);
+    return this.clientService.getClientBills(id)
+      .catch(e => {
+        this.router.navigate(['/professional/clients']);
+        return Observable.of([]);
+      });
   }
 
 }

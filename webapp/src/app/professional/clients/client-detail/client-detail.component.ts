@@ -44,8 +44,7 @@ export class ClientDetailComponent implements OnInit {
         this.client = data.client;
         this.clientBills = data.clientBills;
         this.form = this.createForm();
-      }
-    );
+      });
   }
 
   ngOnInit() {
@@ -140,7 +139,7 @@ export class ClientDetailComponent implements OnInit {
         id: cg.id,
         groupName: cg.groupName,
         value: this.client.collectiveGroups ? this.client.collectiveGroups.findIndex(_cg => _cg.id === cg.id) !== -1
-        : false
+          : false
       })));
 
     const categoriesFA = fg.get('categories') as FormArray;
@@ -149,7 +148,7 @@ export class ClientDetailComponent implements OnInit {
         id: ct.id,
         name: ct.name,
         value: this.client.categories ? this.client.categories.findIndex(_ct => _ct.id === ct.id) !== -1
-        : false
+          : false
       })));
 
     return fg;

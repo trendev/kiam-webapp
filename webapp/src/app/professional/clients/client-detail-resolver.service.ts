@@ -20,7 +20,7 @@ export class ClientDetailResolverService implements Resolve<Client> {
           return client;
         } else {
           console.warn(`Client ${id} does not exist !`);
-          this.router.navigate(['../']);
+          this.router.navigate(['/professional/clients']);
           return null;
         }
 
