@@ -1,3 +1,4 @@
+import { NavigationUtils } from './navigation-utils';
 export * from './core.module';
 export * from './authentication.service';
 export * from './error-handler.service';
@@ -12,3 +13,5 @@ export * from './payment-modes-resolver.service';
 export * from './clients-resolver.service';
 export * from './offerings-resolver.service';
 export * from './pack.service';
+export * from './navigation-utils';
+
