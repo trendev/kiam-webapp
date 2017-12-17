@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { Pack, Business, Offering, Service, OfferingType } from '@app/entities';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Utils } from '@app/shared';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-packs-component',
@@ -19,7 +20,8 @@ export class PacksComponentComponent implements OnChanges {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor(private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnChanges() {
     this.offeringsModel = this.offerings.sort(
@@ -81,6 +83,10 @@ export class PacksComponentComponent implements OnChanges {
       services: services.length,
       packs: packs.length
     };
+  }
+
+  gotoPack(id: number) {
+    this.router.navigate(['pack/' + id], { relativeTo: this.route });
   }
 
 }
