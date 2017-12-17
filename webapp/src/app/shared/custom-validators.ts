@@ -123,10 +123,10 @@ export class CustomValidators {
 
     /**
      * Validate if one from group of the form array as a field 'value' true
-     * @param fa The form array to check
+     * @param fa The form array to validate
      */
     static selectedElementRequired(fa: FormArray): ValidationErrors | null {
-        let check = false;
+        let check: boolean;
 
         try {
             check = fa.controls.filter(c => c.value.value === true).length > 0;
@@ -134,6 +134,6 @@ export class CustomValidators {
             check = false;
         }
 
-        return false ? null : { 'selectedElementRequired': 'selection required' };
+        return check ? null : { 'selectedElementRequired': 'selection required' };
     }
 }
