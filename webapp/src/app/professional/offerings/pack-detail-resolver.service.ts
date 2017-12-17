@@ -19,7 +19,7 @@ export class PackDetailResolverService implements Resolve<Pack> {
           return new Pack(pack);
         } else {
           console.warn(`Pack ${id} does not exist !`);
-          this.router.navigate(['../', { ot: OfferingType.PACK }]);
+          this.router.navigate(['/professional/offerings', { ot: OfferingType.PACK }]);
           return null;
         }
       });
