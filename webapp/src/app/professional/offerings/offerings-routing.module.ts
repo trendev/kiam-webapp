@@ -1,3 +1,4 @@
+import { PackParentPacksResolverService } from './pack-parent-packs-resolver.service';
 import { PackDetailResolverService } from './pack-detail-resolver.service';
 import { PackDetailComponent } from './pack-detail/pack-detail.component';
 import { NgModule } from '@angular/core';
@@ -20,6 +21,7 @@ const routes: Routes = [
     component: PackDetailComponent,
     resolve: {
       pack: PackDetailResolverService,
+      parentPacks: PackParentPacksResolverService
     }
   },
   { path: '**', component: PageNotFoundComponent }

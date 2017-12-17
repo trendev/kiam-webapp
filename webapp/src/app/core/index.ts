@@ -11,3 +11,4 @@ export * from './businesses-resolver.service';
 export * from './payment-modes-resolver.service';
 export * from './clients-resolver.service';
 export * from './offerings-resolver.service';
+export * from './pack.service';

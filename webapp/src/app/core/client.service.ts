@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { map, filter } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { ErrorHandlerService } from './error-handler.service';
-import { ProfessionalService } from './professional.service';
 
 @Injectable()
 export class ClientService {
@@ -13,8 +12,7 @@ export class ClientService {
   readonly api = `${environment.api}/Client`;
 
   constructor(private http: HttpClient,
-    private errorHandler: ErrorHandlerService,
-    private professionalService: ProfessionalService) { }
+    private errorHandler: ErrorHandlerService) { }
 
   create(payload: Client): Observable<Client> {
     return this.http.post<Client>(`${this.api}`, payload, { withCredentials: true })
@@ -33,13 +31,7 @@ export class ClientService {
   }
 
   getClientBills(id: number): Observable<ClientBill[]> {
-    // return this.professionalService.getBills().map(
-    //   bills => bills.filter(b => b.cltype === BillType.CLIENT_BILL)
-    //     .map(b => new ClientBill(b))
-    //     .filter(b => b.client.id === id)
-    // );
-
-    return this.http.get<ClientBill[]>(`${this.api}/${id}/clientBills`, { withCredentials: true })
+   return this.http.get<ClientBill[]>(`${this.api}/${id}/clientBills`, { withCredentials: true })
       .map(clientBills => clientBills.map(cb => new ClientBill(cb)))
       .catch(e => {
         return this.errorHandler.handle(e);
