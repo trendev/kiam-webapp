@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, OnChanges } from '@angular/core';
 import { Service, Offering, Business } from '@app/entities';
 import { MatSort, MatTableDataSource } from '@angular/material';
+import { Utils } from '@app/shared';
 
 @Component({
   selector: 'app-services-component',
@@ -37,7 +38,7 @@ export class ServicesComponentComponent implements OnChanges {
         name: o.name || '',
         price: o.price || 0,
         duration: o.duration || 0,
-        businesses: this.getBusinesses(o.businesses)
+        businesses: Utils.getBusinesses(o.businesses)
       };
     });
     this.datasource =
@@ -49,10 +50,6 @@ export class ServicesComponentComponent implements OnChanges {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.datasource.filter = filterValue;
-  }
-
-  private getBusinesses(businesses: Business[]): string {
-    return !businesses.length ? '' : businesses.map(b => b.designation).sort().join(', ');
   }
 
 }
