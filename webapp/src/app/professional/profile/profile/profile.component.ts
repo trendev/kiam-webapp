@@ -125,8 +125,8 @@ export class ProfileComponent implements OnInit {
           this.pro.customerDetails.comments || [],
           CustomValidators.validComments(this.commentsValidators))
       }),
-      businesses: this.fb.array([]),
-      paymentModes: this.fb.array([]),
+      businesses: this.fb.array([], CustomValidators.selectedElementRequired),
+      paymentModes: this.fb.array([], CustomValidators.selectedElementRequired),
       companyInformation: this.fb.group({
         website: new FormControl(this.pro.website, [
           CustomValidators.blankStringForbidden,

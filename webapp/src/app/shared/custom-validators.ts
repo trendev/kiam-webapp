@@ -120,4 +120,9 @@ export class CustomValidators {
             return null;
         }
     }
+
+    static selectedElementRequired(fa: FormArray): ValidationErrors | null {
+        console.log(fa);
+        return fa.controls.filter(c => c.value.value).length > 0 ? null : { 'selectedElementRequired': 'selection required' };
+    }
 }

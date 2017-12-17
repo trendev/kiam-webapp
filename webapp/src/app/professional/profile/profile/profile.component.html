@@ -81,6 +81,7 @@
         </mat-accordion>
       </mat-card-content>
       <ng-container appErrorAggregator></ng-container>
+      {{form.get('businesses').errors | json}}
       <mat-card-actions>
         <div class="form-button-container">
           <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
