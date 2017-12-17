@@ -121,8 +121,19 @@ export class CustomValidators {
         }
     }
 
+    /**
+     * Validate if one from group of the form array as a field 'value' true
+     * @param fa The form array to check
+     */
     static selectedElementRequired(fa: FormArray): ValidationErrors | null {
-        console.log(fa);
-        return fa.controls.filter(c => c.value.value).length > 0 ? null : { 'selectedElementRequired': 'selection required' };
+        let check = false;
+
+        try {
+            check = fa.controls.filter(c => c.value.value === true).length > 0;
+        } catch (Error) { // should occurs if the formarray contains form groups without value field
+            check = false;
+        }
+
+        return false ? null : { 'selectedElementRequired': 'selection required' };
     }
 }
