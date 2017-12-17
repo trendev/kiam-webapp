@@ -61,8 +61,8 @@ export class OfferingsComponent implements OnInit {
   ngOnInit() {
     this.initOfferings();
 
-    // check the query parameter ot (offering type)
-    this.route.queryParamMap.subscribe(params => {
+    // check the optional parameter ot (offering type)
+    this.route.paramMap.subscribe(params => {
       this._selectedOfferingType = params.get('ot');
       if (!this._selectedOfferingType) {
         this._selectedOfferingType = this.services.length ? OfferingType.SERVICE : OfferingType.PACK;
