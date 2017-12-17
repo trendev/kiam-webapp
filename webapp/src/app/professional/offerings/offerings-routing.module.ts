@@ -4,7 +4,7 @@ import { PackDetailComponent } from './pack-detail/pack-detail.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { OfferingsComponent } from './offerings/offerings.component';
-import { OfferingsResolverService } from '@app/core';
+import { OfferingsResolverService, ProfessionalBusinessesResolverService } from '@app/core';
 import { PageNotFoundComponent } from '@app/shared';
 
 const routes: Routes = [
@@ -21,7 +21,8 @@ const routes: Routes = [
     component: PackDetailComponent,
     resolve: {
       pack: PackDetailResolverService,
-      parentPacks: PackParentPacksResolverService
+      parentPacks: PackParentPacksResolverService,
+      businesses: ProfessionalBusinessesResolverService
     }
   },
   { path: '**', component: PageNotFoundComponent }

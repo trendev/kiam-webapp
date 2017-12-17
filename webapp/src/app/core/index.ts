@@ -14,4 +14,4 @@ export * from './clients-resolver.service';
 export * from './offerings-resolver.service';
 export * from './pack.service';
 export * from './navigation-utils';
-
+export * from './professional-businesses-resolver.service';
