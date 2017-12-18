@@ -22,7 +22,8 @@ const routes: Routes = [
     resolve: {
       pack: PackDetailResolverService,
       parentPacks: PackParentPacksResolverService,
-      businesses: ProfessionalBusinessesResolverService
+      businesses: ProfessionalBusinessesResolverService,
+      offerings: OfferingsResolverService
     }
   },
   { path: '**', component: PageNotFoundComponent }

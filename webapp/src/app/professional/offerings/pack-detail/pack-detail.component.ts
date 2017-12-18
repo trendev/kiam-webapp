@@ -32,11 +32,13 @@ export class PackDetailComponent implements OnInit {
       (data: {
         pack: Pack,
         parentPacks: Pack[],
-        businesses: Business[]
+        businesses: Business[],
+        offerings: Offering[]
       }) => {
         this.pack = data.pack;
         this.parentPacks = data.parentPacks;
         this.businesses = data.businesses;
+        this.offerings = data.offerings;
         this.form = this.createForm();
       });
   }
@@ -66,6 +68,7 @@ export class PackDetailComponent implements OnInit {
         Validators.min(1)
       ]),
       businesses: this.fb.array([], CustomValidators.selectedElementRequired),
+      offerings: new FormControl(this.pack.offerings)
     });
 
     const businessesFA = fg.get('businesses') as FormArray;

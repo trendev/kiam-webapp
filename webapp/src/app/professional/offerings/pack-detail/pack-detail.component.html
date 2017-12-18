@@ -13,17 +13,24 @@
           <input matInput placeholder="Durée (minutes)" formControlName="duration" required>
         </mat-form-field>
 
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Activités * 
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <app-businesses [errorAggregator]="errorAggregator"></app-businesses>
-        </mat-expansion-panel>
-
         <mat-accordion multi="false">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Activités *
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-businesses [errorAggregator]="errorAggregator"></app-businesses>
+          </mat-expansion-panel>
 
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Offres incluses dans le forfait
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-pack-content></app-pack-content>
+          </mat-expansion-panel>
         </mat-accordion>
 
       </mat-card-content>
@@ -42,6 +49,7 @@
           </button>
         </div>
       </mat-card-actions>
+      {{form.getRawValue() | json}}
     </form>
   </mat-card>
 </div>

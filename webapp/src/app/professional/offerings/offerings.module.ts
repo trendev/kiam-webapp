@@ -8,13 +8,14 @@ import { PacksComponentComponent } from './packs-component/packs-component.compo
 import { PackDetailComponent } from './pack-detail/pack-detail.component';
 import { PackDetailResolverService } from './pack-detail-resolver.service';
 import { PackParentPacksResolverService } from './pack-parent-packs-resolver.service';
+import { PackContentComponent } from './pack-content/pack-content.component';
 
 @NgModule({
   imports: [
     SharedModule,
     OfferingsRoutingModule
   ],
-  declarations: [OfferingsComponent, ServicesComponentComponent, PacksComponentComponent, PackDetailComponent],
+  declarations: [OfferingsComponent, ServicesComponentComponent, PacksComponentComponent, PackDetailComponent, PackContentComponent],
   providers: [PackDetailResolverService, PackParentPacksResolverService]
 })
 export class OfferingsModule { }
