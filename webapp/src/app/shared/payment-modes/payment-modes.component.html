@@ -3,3 +3,9 @@
     <mat-checkbox formControlName="value">{{pm.get('name').value}}</mat-checkbox>
   </div>
 </section>
+<ng-container #errorContainer></ng-container>
+<ng-template #errorsTemplate>
+  <app-error [control]="form.get('paymentModes')" [error]="'selectedElementRequired'">
+    Au moins un moyen de paiement doit être sélectionné.
+  </app-error>
+</ng-template>
