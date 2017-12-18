@@ -18,7 +18,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Informations relatives au compte Comptandye
+                Informations relatives au compte Comptandye *
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-account-info [errorAggregator]="errorAggregator"></app-account-info>
@@ -27,7 +27,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Adresse de l'entreprise
+                Adresse de l'entreprise *
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-address [errorAggregator]="errorAggregator"></app-address>
@@ -36,7 +36,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Informations concernant le chef d'entreprise
+                Informations concernant le chef d'entreprise *
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-customer-details [errorAggregator]="errorAggregator"></app-customer-details>
@@ -45,25 +45,25 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Activités de l'entreprise
+                Activités de l'entreprise *
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-businesses></app-businesses>
+            <app-businesses [errorAggregator]="errorAggregator"></app-businesses>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Moyens de paiement acceptés
+                Moyens de paiement acceptés *
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-payment-modes></app-payment-modes>
+            <app-payment-modes [errorAggregator]="errorAggregator"></app-payment-modes>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Informations complémentaires sur l'entreprise
+                Informations complémentaires sur l'entreprise *
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-company-information [errorAggregator]="errorAggregator"></app-company-information>
@@ -81,7 +81,6 @@
         </mat-accordion>
       </mat-card-content>
       <ng-container appErrorAggregator></ng-container>
-      {{form.get('businesses').errors | json}}
       <mat-card-actions>
         <div class="form-button-container">
           <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">

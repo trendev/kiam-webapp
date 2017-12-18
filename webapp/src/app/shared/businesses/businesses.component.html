@@ -3,3 +3,9 @@
     <mat-checkbox formControlName="value">{{business.get('designation').value}}</mat-checkbox>
   </div>
 </section>
+<ng-container #errorContainer></ng-container>
+<ng-template #errorsTemplate>
+  <app-error [control]="form.get('businesses')" [error]="'selectedElementRequired'">
+    Au moins une activité doit être sélectionnée.
+  </app-error>
+</ng-template>
