@@ -3,7 +3,7 @@
     <form [formGroup]="form" novalidate>
       <mat-card-title>{{pack.name}}</mat-card-title>
       <mat-card-content>
-        <mat-form-field>
+        <mat-form-field class="name">
           <input matInput placeholder="Nom" formControlName="name" required>
         </mat-form-field>
         <mat-form-field>
@@ -29,7 +29,7 @@
                 Offres incluses dans le forfait
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-pack-content></app-pack-content>
+            <app-pack-content [offerings]="offerings"></app-pack-content>
           </mat-expansion-panel>
         </mat-accordion>
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
+import { Offering } from '@app/entities';
 
 @Component({
   selector: 'app-pack-content',
@@ -14,6 +15,8 @@ import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms'
 })
 export class PackContentComponent implements OnInit {
   form: FormGroup;
+  @Input() offerings: Offering[];
+  offeringModel: OfferingModel[];
 
   constructor(private parent: FormGroupDirective) { }
 
@@ -25,4 +28,27 @@ export class PackContentComponent implements OnInit {
     console.log(this.form.get('content').get('offerings'));
   }
 
+  get content(): Offering[] {
+    return this.form.get('content').get('offerings').value || [];
+  }
+
+  addOffering(offering: Offering) {
+    this.form.get('content').get('offerings')
+      .setValue(this.content.push(offering));
+  }
+
+  removeOffering(offering: Offering) {
+    this.form.get('content').get('offerings')
+      .setValue(this.content.filter(o => o.id !== offering.id));
+  }
+}
+
+interface OfferingModel {
+  checked: boolean;
+  id: number;
+  name: string;
+  price: number;
+  duration: number;
+  businesses: string;
+  offering: Offering;
 }
