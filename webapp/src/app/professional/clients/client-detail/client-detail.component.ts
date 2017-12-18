@@ -212,11 +212,6 @@ export class ClientDetailComponent implements OnInit {
     return client;
   }
 
-  private extractArrayFromControl(faName: string, mapperFn: (fg: FormGroup) => any) {
-    const fa = this.form.get(faName) as FormArray;
-    return fa.controls.filter(fg => fg.value.value).map(mapperFn);
-  }
-
   save() {
     const client = this.prepareSave();
     this.clientService.update(client).subscribe(
