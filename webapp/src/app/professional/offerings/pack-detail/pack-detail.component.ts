@@ -65,7 +65,7 @@ export class PackDetailComponent implements OnInit {
         Validators.required,
         Validators.min(1)
       ]),
-      businesses: this.fb.array([]),
+      businesses: this.fb.array([], CustomValidators.selectedElementRequired),
     });
 
     const businessesFA = fg.get('businesses') as FormArray;

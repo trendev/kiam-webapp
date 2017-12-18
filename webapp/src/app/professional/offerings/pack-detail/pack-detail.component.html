@@ -4,24 +4,24 @@
       <mat-card-title>{{pack.name}}</mat-card-title>
       <mat-card-content>
         <mat-form-field>
-          <input matInput placeholder="Nom" formControlName="name">
+          <input matInput placeholder="Nom" formControlName="name" required>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Prix (EUR)" formControlName="price">
+          <input matInput placeholder="Prix (EUR)" formControlName="price" required>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Durée (minutes)" formControlName="duration">
+          <input matInput placeholder="Durée (minutes)" formControlName="duration" required>
         </mat-form-field>
 
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Activités
+              Activités * 
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <app-businesses></app-businesses>
+          <app-businesses [errorAggregator]="errorAggregator"></app-businesses>
         </mat-expansion-panel>
-        
+
         <mat-accordion multi="false">
 
         </mat-accordion>
