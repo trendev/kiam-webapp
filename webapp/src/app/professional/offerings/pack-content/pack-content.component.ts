@@ -1,7 +1,6 @@
-import { Business } from './../../../entities/business.model';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
-import { Offering } from '@app/entities';
+import { Offering, Business } from '@app/entities';
 
 @Component({
   selector: 'app-pack-content',
@@ -14,7 +13,7 @@ import { Offering } from '@app/entities';
     }
   ]
 })
-export class PackContentComponent implements OnInit {
+export class PackContentComponent implements OnInit, OnChanges {
   form: FormGroup;
   @Input() offerings: Offering[];
   @Input() businesses: Business[];
@@ -22,11 +21,20 @@ export class PackContentComponent implements OnInit {
 
   constructor(private parent: FormGroupDirective) { }
 
+  ngOnChanges() {
+    if (this.form) { this.initOfferingsModel(); }
+  }
+
   ngOnInit() {
     if (this.parent.form === null) {
       throw new Error(`parent: FormGroupDirective should not be null in PackContentComponent#init()`);
     }
     this.form = this.parent.form;
+    this.initOfferingsModel();
+  }
+
+  initOfferingsModel() {
+    console.log('initOfferingsModel');
     this.offeringsModel = this.offerings.map(
       o => {
         return {
