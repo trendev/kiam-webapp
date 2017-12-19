@@ -35,7 +35,8 @@ export class PackContentComponent implements OnInit, OnChanges {
 
   initOfferingsModel() {
     console.log('initOfferingsModel');
-    this.offeringsModel = this.offerings.map(
+    this.offeringsModel = this.offerings
+      .map(
       o => {
         return {
           checked: (this.content.findIndex(_o => _o.id === o.id) === -1) ? false : true,
@@ -46,7 +47,10 @@ export class PackContentComponent implements OnInit, OnChanges {
           offering: o
         };
       }
-    );
+      )
+      .filter(om => om.checked
+        || om.offering.businesses.findIndex(b =>
+          this.businesses.findIndex(_b => _b.designation === b.designation) !== -1) !== -1);
   }
 
   get content(): Offering[] {
