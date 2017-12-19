@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
 import { Offering, Business } from '@app/entities';
+import { Utils } from '@app/shared';
+import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-pack-content',
@@ -17,7 +19,14 @@ export class PackContentComponent implements OnInit, OnChanges {
   form: FormGroup;
   @Input() offerings: Offering[];
   @Input() businesses: Business[];
+  @Input() id: number;
   offeringsModel: OfferingModel[];
+
+  displayedColumns = [
+    'checked', 'id', 'name', 'price', 'duration', 'businesses'];
+  datasource: MatTableDataSource<OfferingModel>;
+
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private parent: FormGroupDirective) { }
 
@@ -29,28 +38,40 @@ export class PackContentComponent implements OnInit, OnChanges {
     if (this.parent.form === null) {
       throw new Error(`parent: FormGroupDirective should not be null in PackContentComponent#init()`);
     }
+
+    if (!this.id) {
+      throw new Error(`[id] property is missing...`);
+    }
     this.form = this.parent.form;
     this.initOfferingsModel();
   }
 
   initOfferingsModel() {
-    console.log('initOfferingsModel');
     this.offeringsModel = this.offerings
+      .filter(o => o.id !== this.id) // remove itself from the overall offerings
       .map(
       o => {
         return {
+          // check if the offering is in the pack
           checked: (this.content.findIndex(_o => _o.id === o.id) === -1) ? false : true,
           id: o.id,
           name: o.name,
           price: o.price,
           duration: o.duration,
+          businesses: Utils.getBusinesses(o.businesses), // display businesses as a string
           offering: o
         };
       }
       )
+      // filter checked
+      // + businesses in the active businesses selection of the pack
       .filter(om => om.checked
         || om.offering.businesses.findIndex(b =>
           this.businesses.findIndex(_b => _b.designation === b.designation) !== -1) !== -1);
+
+    this.datasource =
+      new MatTableDataSource<OfferingModel>(this.offeringsModel);
+    this.datasource.sort = this.sort;
   }
 
   get content(): Offering[] {
@@ -66,6 +87,12 @@ export class PackContentComponent implements OnInit, OnChanges {
     this.form.get('content').get('offerings')
       .setValue(this.content.filter(o => o.id !== offering.id));
   }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.datasource.filter = filterValue;
+  }
 }
 
 interface OfferingModel {
@@ -74,5 +101,6 @@ interface OfferingModel {
   name: string;
   price: number;
   duration: number;
+  businesses: string;
   offering: Offering;
 }

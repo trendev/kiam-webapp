@@ -8,6 +8,6 @@ export class Utils {
     }
 
     static getBusinesses(businesses: Business[]): string {
-        return !businesses.length ? '' : businesses.map(b => b.designation).sort().join(', ');
+        return !businesses.length ? '' : businesses.map(b => b.designation).sort().join();
     }
 }
