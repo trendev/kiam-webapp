@@ -82,7 +82,7 @@ export class PackDetailComponent implements OnInit {
       ]),
       businesses: this.fb.array([], CustomValidators.selectedElementRequired),
       content: this.fb.group({
-        offerings: new FormControl(this.pack.offerings)
+        offerings: new FormControl(this.pack.offerings.slice())
       })
     });
 
