@@ -1,10 +1,9 @@
-import { CustomValidators } from './../../../shared/custom-validators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Pack, Offering, Business, OfferingType } from '@app/entities';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ErrorAggregatorDirective } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
 
 @Component({
   selector: 'app-pack-detail',
@@ -15,7 +14,8 @@ export class PackDetailComponent implements OnInit {
 
   pack: Pack;
   parentPacks: Pack[];
-  offerings: Offering[]; // the professional's offerings
+  professionalOfferings: Offering[]; // the professional's offerings
+  professionalBusinesses: Business[];
   businesses: Business[];
 
   form: FormGroup;
@@ -37,8 +37,8 @@ export class PackDetailComponent implements OnInit {
       }) => {
         this.pack = data.pack;
         this.parentPacks = data.parentPacks;
-        this.businesses = data.businesses;
-        this.offerings = data.offerings;
+        this.professionalBusinesses = data.businesses;
+        this.professionalOfferings = data.offerings;
         this.form = this.createForm();
       });
   }
@@ -49,6 +49,19 @@ export class PackDetailComponent implements OnInit {
         this.errorAggregator.viewContainerRef.clear();
       }
     });
+
+    this.businesses = this.pack.businesses;
+    this.onChanges();
+
+  }
+
+  onChanges() {
+    this.form.get('businesses').valueChanges
+      .subscribe(val => this.businesses = Utils.extractArrayFromControl(this.form, 'businesses',
+        fg => new Business({
+          designation: fg.value.designation
+        })
+      ));
   }
 
   createForm(): FormGroup {
@@ -74,13 +87,15 @@ export class PackDetailComponent implements OnInit {
     });
 
     const businessesFA = fg.get('businesses') as FormArray;
-    this.businesses.forEach(b =>
-      businessesFA.push(this.fb.group({
-        designation: b.designation,
-        value: this.pack.businesses
-          ? this.pack.businesses.findIndex(_b => _b.designation === b.designation) !== -1
-          : false
-      })));
+    this.professionalBusinesses
+      .sort((b1, b2) => b1.designation.localeCompare(b2.designation))
+      .forEach(b =>
+        businessesFA.push(this.fb.group({
+          designation: b.designation,
+          value: this.pack.businesses
+            ? this.pack.businesses.findIndex(_b => _b.designation === b.designation) !== -1
+            : false
+        })));
 
     return fg;
   }
