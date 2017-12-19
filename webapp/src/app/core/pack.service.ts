@@ -32,4 +32,10 @@ export class PackService {
       });
   }
 
+  remove(id: number): Observable<string> {
+    return this.http.delete(`${this.api}/${id}`, { responseType: 'text', withCredentials: true })
+      .catch(e => {
+        return this.errorHandler.handle(e);
+      });
+  }
 }

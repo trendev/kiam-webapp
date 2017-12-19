@@ -132,4 +132,13 @@ export class PackDetailComponent implements OnInit {
 
     return pack;
   }
+
+  remove() {
+    this.packService.remove(this.pack.id).subscribe(
+      resp => this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route }),
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de sauvegarder le nouveau forfait sur le serveur')
+    );
+
+  }
 }

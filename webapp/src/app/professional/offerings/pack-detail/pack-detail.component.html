@@ -47,6 +47,9 @@
           <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
             <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
           </button>
+          <button type="button" mat-mini-fab color="primary" (click)="remove()">
+              <mat-icon aria-label="Supprimer">delete_forever</mat-icon>
+            </button>
         </div>
       </mat-card-actions>
     </form>
