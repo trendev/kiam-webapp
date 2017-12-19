@@ -26,7 +26,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Offres incluses dans le forfait
+                Offres incluses dans le forfait : {{ pack.offerings?.length ? pack.offerings.length : 0 }}
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-pack-content [offerings]="professionalOfferings" [businesses]="businesses" [id]="pack.id"></app-pack-content>
@@ -48,8 +48,8 @@
             <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
           </button>
           <button type="button" mat-mini-fab color="primary" (click)="remove()">
-              <mat-icon aria-label="Supprimer">delete_forever</mat-icon>
-            </button>
+            <mat-icon aria-label="Supprimer">delete_forever</mat-icon>
+          </button>
         </div>
       </mat-card-actions>
     </form>
