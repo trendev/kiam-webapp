@@ -107,7 +107,11 @@ export class PackDetailComponent implements OnInit {
 
   save() {
     const pack = this.prepareSave();
-    this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
+    this.packService.update(pack).subscribe(
+      _pack => this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route }),
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de sauvegarder le nouveau forfait sur le serveur')
+    );
   }
 
   prepareSave(): Pack {
