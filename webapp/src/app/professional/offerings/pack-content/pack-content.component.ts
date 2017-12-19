@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
 import { Offering, Business } from '@app/entities';
 import { Utils } from '@app/shared';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/material';
 
 @Component({
   selector: 'app-pack-content',
@@ -74,6 +74,12 @@ export class PackContentComponent implements OnInit, OnChanges {
     this.datasource.sort = this.sort;
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.datasource.filter = filterValue;
+  }
+
   get content(): Offering[] {
     return this.form.get('content').get('offerings').value || [];
   }
@@ -88,10 +94,8 @@ export class PackContentComponent implements OnInit, OnChanges {
       .setValue(this.content.filter(o => o.id !== offering.id));
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.datasource.filter = filterValue;
+  offeringSelected(event: MatCheckboxChange, element: OfferingModel) {
+    element.checked = event.checked;
   }
 }
 
