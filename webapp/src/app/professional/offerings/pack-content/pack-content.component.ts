@@ -1,3 +1,4 @@
+import { Business } from './../../../entities/business.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
 import { Offering } from '@app/entities';
@@ -16,7 +17,8 @@ import { Offering } from '@app/entities';
 export class PackContentComponent implements OnInit {
   form: FormGroup;
   @Input() offerings: Offering[];
-  offeringModel: OfferingModel[];
+  @Input() businesses: Business[];
+  offeringsModel: OfferingModel[];
 
   constructor(private parent: FormGroupDirective) { }
 
@@ -25,7 +27,18 @@ export class PackContentComponent implements OnInit {
       throw new Error(`parent: FormGroupDirective should not be null in PackContentComponent#init()`);
     }
     this.form = this.parent.form;
-    console.log(this.form.get('content').get('offerings'));
+    this.offeringsModel = this.offerings.map(
+      o => {
+        return {
+          checked: (this.content.findIndex(_o => _o.id === o.id) === -1) ? false : true,
+          id: o.id,
+          name: o.name,
+          price: o.price,
+          duration: o.duration,
+          offering: o
+        };
+      }
+    );
   }
 
   get content(): Offering[] {
@@ -49,6 +62,5 @@ interface OfferingModel {
   name: string;
   price: number;
   duration: number;
-  businesses: string;
   offering: Offering;
 }
