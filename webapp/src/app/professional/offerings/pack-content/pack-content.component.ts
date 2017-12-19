@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
-import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
+import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
 import { Offering, Business } from '@app/entities';
 import { Utils } from '@app/shared';
 import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/material';
@@ -53,7 +53,7 @@ export class PackContentComponent implements OnInit, OnChanges {
       o => {
         return {
           // check if the offering is in the pack
-          checked: (this.content.findIndex(_o => _o.id === o.id) === -1) ? false : true,
+          checked: (this.contentOfferingsValue.findIndex(_o => _o.id === o.id) === -1) ? false : true,
           id: o.id,
           name: o.name,
           price: o.price,
@@ -80,22 +80,39 @@ export class PackContentComponent implements OnInit, OnChanges {
     this.datasource.filter = filterValue;
   }
 
-  get content(): Offering[] {
-    return this.form.get('content').get('offerings').value || [];
+  get contentOfferings(): AbstractControl {
+    return this.form.get('content').get('offerings');
+  }
+
+  get contentOfferingsValue(): Offering[] {
+    return this.contentOfferings.value || [];
+  }
+
+  set contentOfferingsValue(content: Offering[]) {
+    this.contentOfferings.setValue(content);
+    this.contentOfferings.markAsDirty();
+    this.contentOfferings.markAsTouched();
   }
 
   addOffering(offering: Offering) {
-    this.form.get('content').get('offerings')
-      .setValue(this.content.push(offering));
+    const content = this.contentOfferingsValue;
+    content.push(offering);
+    this.contentOfferingsValue = content;
   }
 
   removeOffering(offering: Offering) {
-    this.form.get('content').get('offerings')
-      .setValue(this.content.filter(o => o.id !== offering.id));
+    const content = this.contentOfferingsValue.filter(o => o.id !== offering.id);
+    this.contentOfferingsValue = content;
   }
 
   offeringSelected(event: MatCheckboxChange, element: OfferingModel) {
     element.checked = event.checked;
+    if (element.checked) {
+      this.addOffering(element.offering);
+    } else {
+      this.removeOffering(element.offering);
+    }
+    console.log(this.form.get('content').get('offerings'));
   }
 }
 
