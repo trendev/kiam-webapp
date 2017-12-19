@@ -86,7 +86,8 @@ export class PackDetailComponent implements OnInit {
   }
 
   revert() {
-
+    // resets the form field based on the raw value
+    this.form.reset(this.createForm().getRawValue());
   }
 
   save() {
