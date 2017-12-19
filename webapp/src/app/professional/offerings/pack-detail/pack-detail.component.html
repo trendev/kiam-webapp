@@ -49,11 +49,9 @@
           </button>
         </div>
       </mat-card-actions>
+      {{pack | json}}
+      <hr/>
       {{form.getRawValue() | json}}
-      <hr>
-      {{form.get('content').get('offerings').value | json}}
-      <hr>
-      {{pack.offerings | json}}
     </form>
   </mat-card>
 </div>

@@ -82,7 +82,7 @@ export class PackDetailComponent implements OnInit {
       ]),
       businesses: this.fb.array([], CustomValidators.selectedElementRequired),
       content: this.fb.group({
-        offerings: new FormControl(this.pack.offerings.slice())
+        offerings: new FormControl(this.pack.offerings ? this.pack.offerings.slice() : [])
       })
     });
 
@@ -106,6 +106,26 @@ export class PackDetailComponent implements OnInit {
   }
 
   save() {
+    const pack = this.prepareSave();
+    this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
+  }
 
+  prepareSave(): Pack {
+    const value = this.form.getRawValue();
+
+    const pack = new Pack({
+      id: this.pack.id,
+      name: value.name,
+      price: value.price * 100,
+      duration: value.duration,
+      businesses: Utils.extractArrayFromControl(this.form, 'businesses',
+        fg => new Business({
+          designation: fg.value.designation
+        })
+      ),
+      offerings: value.content.offerings.slice()
+    });
+
+    return pack;
   }
 }

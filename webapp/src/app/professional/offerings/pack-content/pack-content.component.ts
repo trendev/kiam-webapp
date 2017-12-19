@@ -112,7 +112,6 @@ export class PackContentComponent implements OnInit, OnChanges {
     } else {
       this.removeOffering(element.offering);
     }
-    console.log(this.form.get('content').get('offerings'));
   }
 }
 

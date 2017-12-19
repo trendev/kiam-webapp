@@ -168,6 +168,7 @@ export class ClientDetailComponent implements OnInit {
     const value = this.form.getRawValue();
 
     const client = new Client({
+      id: this.client.id,
       email: value.email || undefined,
       address: {
         street: value.address.street || undefined,
@@ -205,9 +206,6 @@ export class ClientDetailComponent implements OnInit {
         })
       )
     });
-
-    // set the id
-    client.id = this.client.id;
 
     return client;
   }
