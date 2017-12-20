@@ -35,10 +35,13 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Ce forfait {parentPacks.length, plural, =0 {n'est pas inclus dans un autre forfait} =1 {est inclus dans 1 Forfait} other {est inclus dans {{parentPacks.length}} Forfaits}}
+                Ce forfait {parentPacks.length, plural, =0 {n'est pas inclus dans un autre forfait} =1 {est inclus dans 1 Forfait} other
+                {est inclus dans {{parentPacks.length}} Forfaits}}
               </mat-panel-title>
             </mat-expansion-panel-header>
+            <app-parent-packs [parentPacks]="parentPacks"></app-parent-packs>
           </mat-expansion-panel>
+          
         </mat-accordion>
 
       </mat-card-content>
