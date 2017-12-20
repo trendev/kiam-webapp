@@ -54,7 +54,6 @@ export class PackContentComponent implements OnChanges {
 
   initOfferingsModel() {
     this.offeringsModel = this.professionalOfferings
-      .filter(o => o.id !== this.id) // remove itself from the overall offerings
       .map(
       o => {
         return {
