@@ -38,7 +38,9 @@ export class PackDetailComponent {
         this.pack = data.pack;
         this.parentPacks = data.parentPacks;
         this.professionalBusinesses = data.businesses;
-        this.professionalOfferings = data.offerings;
+        this.professionalOfferings = data.offerings
+          .filter(o => o.id !== this.pack.id) // filter itself
+          .filter(o => this.parentPacks.findIndex(p => p.id === o.id) === -1); // filter parent packs
         this.form = this.createForm();
 
         this.form.valueChanges.forEach(_ => {
@@ -107,7 +109,7 @@ export class PackDetailComponent {
     this.packService.update(pack).subscribe(
       _pack => this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route }),
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder le nouveau forfait sur le serveur')
+      e => console.error('Impossible de sauvegarder le forfait sur le serveur')
     );
   }
 
@@ -134,7 +136,7 @@ export class PackDetailComponent {
     this.packService.remove(this.pack.id).subscribe(
       resp => this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route }),
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder le forfait sur le serveur')
+      e => console.error('Impossible de supprimer le forfait sur le serveur')
     );
 
   }
