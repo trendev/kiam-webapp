@@ -14,7 +14,7 @@
                     <mat-icon>check_box</mat-icon>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <mat-checkbox [checked]="element.checked" (change)="offeringSelected($event,element)"></mat-checkbox>
+                    <mat-checkbox [checked]="element.checked" (change)="select($event,element)"></mat-checkbox>
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="id">
@@ -34,8 +34,8 @@
                 <mat-cell *matCellDef="let element" [class.hide]="true">{{element.duration}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="businesses">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Activités</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.businesses}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Activités</mat-header-cell>
+                <mat-cell *matCellDef="let element" [class.hide]="true">{{element.businesses}}</mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

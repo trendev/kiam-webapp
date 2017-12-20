@@ -105,8 +105,12 @@ export class PackContentComponent implements OnInit, OnChanges {
     this.contentOfferingsValue = content;
   }
 
-  offeringSelected(event: MatCheckboxChange, element: OfferingModel) {
+  select(event: MatCheckboxChange, element: OfferingModel) {
     element.checked = event.checked;
+    this.onChanges(element);
+  }
+
+  onChanges(element: OfferingModel) {
     if (element.checked) {
       this.addOffering(element.offering);
     } else {
