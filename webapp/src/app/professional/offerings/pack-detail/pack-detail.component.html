@@ -31,6 +31,14 @@
             </mat-expansion-panel-header>
             <app-pack-content [offerings]="professionalOfferings" [businesses]="businesses" [id]="pack.id"></app-pack-content>
           </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Ce forfait {parentPacks.length, plural, =0 {n'est pas inclus dans un autre forfait} =1 {est inclus dans 1 Forfait} other {est inclus dans {{parentPacks.length}} Forfaits}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
         </mat-accordion>
 
       </mat-card-content>
