@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Pack, Offering, Business, OfferingType } from '@app/entities';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { PackService } from '@app/core';
@@ -10,7 +10,7 @@ import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
   templateUrl: './pack-detail.component.html',
   styleUrls: ['./pack-detail.component.scss']
 })
-export class PackDetailComponent implements OnInit {
+export class PackDetailComponent {
 
   pack: Pack;
   parentPacks: Pack[];
@@ -40,22 +40,19 @@ export class PackDetailComponent implements OnInit {
         this.professionalBusinesses = data.businesses;
         this.professionalOfferings = data.offerings;
         this.form = this.createForm();
+
+        this.form.valueChanges.forEach(_ => {
+          if (this.form.invalid && this.errorAggregator) {
+            this.errorAggregator.viewContainerRef.clear();
+          }
+        });
+
+        this.businesses = this.pack.businesses;
+        this.setBusinessesValueChanges();
       });
   }
 
-  ngOnInit() {
-    this.form.valueChanges.forEach(_ => {
-      if (this.form.invalid && this.errorAggregator) {
-        this.errorAggregator.viewContainerRef.clear();
-      }
-    });
-
-    this.businesses = this.pack.businesses;
-    this.onChanges();
-
-  }
-
-  onChanges() {
+  setBusinessesValueChanges() {
     this.form.get('businesses').valueChanges
       .subscribe(val => this.businesses = Utils.extractArrayFromControl(this.form, 'businesses',
         fg => new Business({

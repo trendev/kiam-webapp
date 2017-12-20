@@ -15,9 +15,9 @@ import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/materia
     }
   ]
 })
-export class PackContentComponent implements OnInit, OnChanges {
+export class PackContentComponent implements OnChanges {
   form: FormGroup;
-  @Input() offerings: Offering[];
+  @Input() professionalOfferings: Offering[];
   @Input() businesses: Business[];
   @Input() id: number;
   offeringsModel: OfferingModel[];
@@ -40,23 +40,20 @@ export class PackContentComponent implements OnInit, OnChanges {
   constructor(private parent: FormGroupDirective) { }
 
   ngOnChanges() {
-    if (this.form) { this.initOfferingsModel(); }
-  }
 
-  ngOnInit() {
-    if (this.parent.form === null) {
-      throw new Error(`parent: FormGroupDirective should not be null in PackContentComponent#init()`);
+    if (!this.parent.form) {
+      throw new Error(`PackContentComponent#ngOnChanges(): this.parent form should not be undefined or null`);
     }
 
     if (!this.id) {
-      throw new Error(`[id] property is missing...`);
+      throw new Error(`PackContentComponent#ngOnChanges(): [id] property is missing...`);
     }
     this.form = this.parent.form;
     this.initOfferingsModel();
   }
 
   initOfferingsModel() {
-    this.offeringsModel = this.offerings
+    this.offeringsModel = this.professionalOfferings
       .filter(o => o.id !== this.id) // remove itself from the overall offerings
       .map(
       o => {
@@ -117,10 +114,10 @@ export class PackContentComponent implements OnInit, OnChanges {
 
   select(event: MatCheckboxChange, element: OfferingModel) {
     element.checked = event.checked;
-    this.onChanges(element);
+    this.onSelection(element);
   }
 
-  onChanges(element: OfferingModel) {
+  onSelection(element: OfferingModel) {
     if (element.checked) {
       this.addOffering(element.offering);
     } else {

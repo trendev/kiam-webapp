@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
 import { Pack } from '@app/entities';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './parent-packs.component.html',
   styleUrls: ['./parent-packs.component.scss']
 })
-export class ParentPacksComponent implements OnInit {
+export class ParentPacksComponent implements OnChanges {
 
   @Input() parentPacks: Pack[];
   offeringsModel: OfferingModel[];
@@ -21,7 +21,7 @@ export class ParentPacksComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.offeringsModel = this.parentPacks.sort(
       (p1, p2) => {
         const diff = p1.name.localeCompare(p2.name);
