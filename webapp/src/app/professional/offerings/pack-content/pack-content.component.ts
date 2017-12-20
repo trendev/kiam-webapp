@@ -28,6 +28,15 @@ export class PackContentComponent implements OnInit, OnChanges {
 
   @ViewChild(MatSort) sort: MatSort;
 
+  omSortFn: (om1: OfferingModel, om2: OfferingModel) => number
+    = (om1, om2) => {
+      if (om1.checked === om2.checked) {
+        return om1.name.localeCompare(om2.name);
+      } else {
+        return om1.checked < om2.checked ? 1 : -1;
+      }
+    }
+
   constructor(private parent: FormGroupDirective) { }
 
   ngOnChanges() {
@@ -67,7 +76,8 @@ export class PackContentComponent implements OnInit, OnChanges {
       // + businesses in the active businesses selection of the pack
       .filter(om => om.checked
         || om.offering.businesses.findIndex(b =>
-          this.businesses.findIndex(_b => _b.designation === b.designation) !== -1) !== -1);
+          this.businesses.findIndex(_b => _b.designation === b.designation) !== -1) !== -1)
+      .sort(this.omSortFn);
 
     this.datasource =
       new MatTableDataSource<OfferingModel>(this.offeringsModel);
