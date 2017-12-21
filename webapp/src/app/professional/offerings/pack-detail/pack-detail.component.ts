@@ -54,6 +54,9 @@ export class PackDetailComponent {
       });
   }
 
+  /**
+   * Set the businesses each time a business is checked/unchecked in the businesses panel
+   */
   setBusinessesValueChanges() {
     this.form.get('businesses').valueChanges
       .subscribe(val => this.businesses = Utils.extractArrayFromControl(this.form, 'businesses',
@@ -67,13 +70,13 @@ export class PackDetailComponent {
     const fg = this.fb.group({
       name: new FormControl(this.pack.name, [
         Validators.required,
-        Validators.maxLength(50),
+        Validators.maxLength(75),
         CustomValidators.blankStringForbidden
       ]),
       // price unit is 1/100 EUR !
       price: new FormControl(this.pack.price / 100, [
         Validators.required,
-        Validators.min(1)
+        Validators.min(0)
       ]),
       duration: new FormControl(this.pack.duration, [
         Validators.required,

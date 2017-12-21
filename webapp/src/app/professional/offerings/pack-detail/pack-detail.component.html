@@ -4,14 +4,37 @@
       <mat-card-title>{{pack.name}} - {{pack.id}}</mat-card-title>
       <mat-card-content>
         <mat-form-field class="name">
-          <input matInput placeholder="Nom" formControlName="name" required>
+          <input matInput #name placeholder="Nom" formControlName="name" required>
+          <mat-hint align="end">{{name.value?.length || 0}}/75</mat-hint>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Prix (EUR)" formControlName="price" required>
+          <input type="number" matInput placeholder="Prix (EUR)" formControlName="price" min="0" required>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Durée (minutes)" formControlName="duration" required>
+          <input type="number" matInput placeholder="Durée (minutes)" formControlName="duration" min="1" required>
         </mat-form-field>
+
+        <app-error [control]="form.get('name')" [error]="'required'">
+          Le libellé du forfait doit être renseigné.
+        </app-error>
+        <app-error [control]="form.get('name')" [error]="'blankStringForbidden'">
+          Le libellé du forfait ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+        </app-error>
+        <app-error [control]="form.get('name')" [error]="'maxlength'">
+          Le libellé du forfait ne doit pas excéder 75 caractères.
+        </app-error>
+        <app-error [control]="form.get('price')" [error]="'required'">
+          Le prix doit être renseigné.
+        </app-error>
+        <app-error [control]="form.get('price')" [error]="'min'">
+          Le prix ne peut pas être une valeur négative.
+        </app-error>
+        <app-error [control]="form.get('duration')" [error]="'required'">
+          La durée de réalisation doit être renseignée.
+        </app-error>
+        <app-error [control]="form.get('duration')" [error]="'min'">
+          La durée ne peut correspondre à une valeur négative ou nulle.
+        </app-error>
 
         <mat-accordion multi="false">
           <mat-expansion-panel>
