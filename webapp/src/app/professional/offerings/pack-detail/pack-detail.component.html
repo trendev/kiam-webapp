@@ -32,7 +32,7 @@
             <app-pack-content [professionalOfferings]="professionalOfferings" [businesses]="businesses" [id]="pack.id"></app-pack-content>
           </mat-expansion-panel>
 
-          <mat-expansion-panel>
+          <mat-expansion-panel *ngIf="parentPacks.length">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Ce forfait {parentPacks.length, plural, =0 {n'est pas inclus dans un autre forfait} =1 {est inclus dans 1 Forfait} other
