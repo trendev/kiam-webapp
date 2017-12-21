@@ -10,6 +10,7 @@ import { PackDetailResolverService } from './pack-detail-resolver.service';
 import { PackParentPacksResolverService } from './pack-parent-packs-resolver.service';
 import { PackContentComponent } from './pack-content/pack-content.component';
 import { ParentPacksComponent } from './parent-packs/parent-packs.component';
+import { CreatePackComponent } from './create-pack/create-pack.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { ParentPacksComponent } from './parent-packs/parent-packs.component';
     PacksComponentComponent,
     PackDetailComponent,
     PackContentComponent,
-    ParentPacksComponent
+    ParentPacksComponent,
+    CreatePackComponent
   ],
   providers: [PackDetailResolverService, PackParentPacksResolverService]
 })

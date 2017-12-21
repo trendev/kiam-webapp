@@ -1,3 +1,4 @@
+import { CreatePackComponent } from './create-pack/create-pack.component';
 import { PackParentPacksResolverService } from './pack-parent-packs-resolver.service';
 import { PackDetailResolverService } from './pack-detail-resolver.service';
 import { PackDetailComponent } from './pack-detail/pack-detail.component';
@@ -22,6 +23,14 @@ const routes: Routes = [
     resolve: {
       pack: PackDetailResolverService,
       parentPacks: PackParentPacksResolverService,
+      businesses: ProfessionalBusinessesResolverService,
+      offerings: OfferingsResolverService
+    }
+  },
+  {
+    path: 'create-pack',
+    component: CreatePackComponent,
+    resolve: {
       businesses: ProfessionalBusinessesResolverService,
       offerings: OfferingsResolverService
     }
