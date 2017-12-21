@@ -3,7 +3,7 @@ import { Pack, Offering, Business, OfferingType } from '@app/entities';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn } from '@app/shared';
 
 @Component({
   selector: 'app-pack-detail',
@@ -88,7 +88,7 @@ export class PackDetailComponent {
       })
     });
 
-    Utils.initFormControl(fg,
+    Utils.initFormArray(fg,
       'businesses',
       this.professionalBusinesses,
       b => this.fb.group({
@@ -97,8 +97,7 @@ export class PackDetailComponent {
           ? this.pack.businesses.findIndex(_b => _b.designation === b.designation) !== -1
           : false
       }),
-      (b1, b2) => b1.designation.localeCompare(b2.designation)
-    );
+      compareBusinessesFn);
 
     return fg;
   }

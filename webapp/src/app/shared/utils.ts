@@ -11,7 +11,7 @@ export class Utils {
         return !businesses.length ? '' : businesses.map(b => b.designation).sort().join();
     }
 
-    static initFormControl<T>(form: AbstractControl,
+    static initFormArray<T>(form: AbstractControl,
         faName: string,
         values: T[],
         createGroupFn: (v: T) => FormGroup,
@@ -24,3 +24,5 @@ export class Utils {
             );
     }
 }
+
+export const compareBusinessesFn = (b1: Business, b2: Business) => b1.designation.localeCompare(b2.designation);
