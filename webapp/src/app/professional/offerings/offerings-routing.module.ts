@@ -1,3 +1,4 @@
+import { CreateServiceComponent } from './create-service/create-service.component';
 import { ServiceParentPacksResolverService } from './service-parent-packs-resolver.service';
 import { ServiceDetailResolverService } from './service-detail-resolver.service';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
@@ -45,6 +46,13 @@ const routes: Routes = [
     resolve: {
       businesses: ProfessionalBusinessesResolverService,
       offerings: OfferingsResolverService
+    }
+  },
+  {
+    path: 'create-service',
+    component: CreateServiceComponent,
+    resolve: {
+      businesses: ProfessionalBusinessesResolverService
     }
   },
   { path: '**', component: PageNotFoundComponent }
