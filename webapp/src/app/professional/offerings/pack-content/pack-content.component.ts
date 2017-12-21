@@ -19,7 +19,6 @@ export class PackContentComponent implements OnChanges {
   form: FormGroup;
   @Input() professionalOfferings: Offering[];
   @Input() businesses: Business[];
-  @Input() id: number;
   offeringsModel: OfferingModel[];
 
   displayedColumns = [
@@ -45,9 +44,6 @@ export class PackContentComponent implements OnChanges {
       throw new Error(`PackContentComponent#ngOnChanges(): this.parent form should not be undefined or null`);
     }
 
-    if (!this.id) {
-      throw new Error(`PackContentComponent#ngOnChanges(): [id] property is missing...`);
-    }
     this.form = this.parent.form;
     this.initOfferingsModel();
   }
