@@ -32,7 +32,7 @@
       <mat-header-cell *matHeaderCellDef [class.hide]="true">Contenu</mat-header-cell>
       <mat-cell *matCellDef="let element" [class.hide]="true">
         <div *ngIf="element.content.services > 0">
-          {element.content.services, plural, =1 {1 Service} other {{{element.content.services}} Services}}
+          {element.content.services, plural, =1 {1 Prestation} other {{{element.content.services}} Prestations}}
         </div>
         <div *ngIf="element.content.packs > 0">
           {element.content.packs, plural, =1 {1 Forfait} other {{{element.content.packs}} Forfaits}}

@@ -2,12 +2,12 @@
   <mat-card>
     <mat-card-title>Catalogue d'offres</mat-card-title>
     <mat-card-subtitle>
-      {services.length, plural, =0 {aucun Service} =1 {1 Service} other {{{services.length}} Services}} - {packs.length, plural,
+      {services.length, plural, =0 {aucune Prestation} =1 {1 Prestation} other {{{services.length}} Prestations}} - {packs.length, plural,
       =0 {aucun Forfait} =1 {1 Forfait} other {{{packs.length}} Forfaits}}
     </mat-card-subtitle>
     <mat-card-content>
       <mat-radio-group [(ngModel)]="selectedOfferingType">
-        <mat-radio-button *ngIf="services.length > 0" [value]="offeringType.SERVICE">Service</mat-radio-button>
+        <mat-radio-button *ngIf="services.length > 0" [value]="offeringType.SERVICE">Prestation</mat-radio-button>
         <mat-radio-button *ngIf="packs.length > 0" [value]="offeringType.PACK">Forfait</mat-radio-button>
       </mat-radio-group>
       <div [ngSwitch]="selectedOfferingType">
