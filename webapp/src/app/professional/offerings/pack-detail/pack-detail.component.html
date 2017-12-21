@@ -52,7 +52,10 @@
                 Contenu du forfait
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-pack-content [professionalOfferings]="professionalOfferings" [businesses]="businesses" [id]="pack.id"></app-pack-content>
+            <app-pack-content *ngIf="businesses.length;else elseBlock" [professionalOfferings]="professionalOfferings" [businesses]="businesses" [id]="pack.id"></app-pack-content>
+            <ng-template #elseBlock>
+              <mat-error>Vous devez choisir au moins une activité pour modifier le contenu du forfait</mat-error>
+            </ng-template>
           </mat-expansion-panel>
 
           <mat-expansion-panel *ngIf="parentPacks.length">

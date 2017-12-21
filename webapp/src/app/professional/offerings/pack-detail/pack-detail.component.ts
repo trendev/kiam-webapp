@@ -49,7 +49,9 @@ export class PackDetailComponent {
           }
         });
 
-        this.businesses = this.pack.businesses;
+        this.businesses = this.pack.businesses
+          // avoid to display offerings associated to businesses which are not those of the professional
+          .filter(b => this.professionalBusinesses.findIndex(_b => _b.designation === b.designation) !== -1);
         this.setBusinessesValueChanges();
       });
   }
