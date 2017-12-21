@@ -24,6 +24,14 @@ export class PackService {
       });
   }
 
+  create(payload: Pack): Observable<Pack> {
+    return this.http.post<Pack>(`${this.api}`, payload, { withCredentials: true })
+      .map(pack => new Pack(pack))
+      .catch(e => {
+        return this.errorHandler.handle(e);
+      });
+  }
+
   update(payload: Pack): Observable<Pack> {
     return this.http.put<Pack>(`${this.api}`, payload, { withCredentials: true })
       .map(pack => new Pack(pack))
