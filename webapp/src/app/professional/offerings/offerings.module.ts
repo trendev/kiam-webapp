@@ -11,6 +11,10 @@ import { PackParentPacksResolverService } from './pack-parent-packs-resolver.ser
 import { PackContentComponent } from './pack-content/pack-content.component';
 import { ParentPacksComponent } from './parent-packs/parent-packs.component';
 import { CreatePackComponent } from './create-pack/create-pack.component';
+import { CreateServiceComponent } from './create-service/create-service.component';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
+import { ServiceDetailResolverService } from './service-detail-resolver.service';
+import { ServiceParentPacksResolverService } from './service-parent-packs-resolver.service';
 
 @NgModule({
   imports: [
@@ -24,8 +28,10 @@ import { CreatePackComponent } from './create-pack/create-pack.component';
     PackDetailComponent,
     PackContentComponent,
     ParentPacksComponent,
-    CreatePackComponent
+    CreatePackComponent,
+    CreateServiceComponent,
+    ServiceDetailComponent
   ],
-  providers: [PackDetailResolverService, PackParentPacksResolverService]
+  providers: [PackDetailResolverService, PackParentPacksResolverService, ServiceDetailResolverService, ServiceParentPacksResolverService]
 })
 export class OfferingsModule { }

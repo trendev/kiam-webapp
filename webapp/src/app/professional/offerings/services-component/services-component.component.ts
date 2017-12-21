@@ -2,6 +2,7 @@ import { Component, Input, ViewChild, OnChanges } from '@angular/core';
 import { Service, Offering, Business } from '@app/entities';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { Utils } from '@app/shared';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-services-component',
@@ -19,7 +20,8 @@ export class ServicesComponentComponent implements OnChanges {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor(private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnChanges() {
     this.offeringsModel = this.offerings.sort(
@@ -50,6 +52,10 @@ export class ServicesComponentComponent implements OnChanges {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.datasource.filter = filterValue;
+  }
+
+  gotoService(id: number) {
+    this.router.navigate(['service/' + id], { relativeTo: this.route });
   }
 
 }

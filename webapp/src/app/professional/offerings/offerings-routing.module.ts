@@ -1,3 +1,6 @@
+import { ServiceParentPacksResolverService } from './service-parent-packs-resolver.service';
+import { ServiceDetailResolverService } from './service-detail-resolver.service';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { CreatePackComponent } from './create-pack/create-pack.component';
 import { PackParentPacksResolverService } from './pack-parent-packs-resolver.service';
 import { PackDetailResolverService } from './pack-detail-resolver.service';
@@ -25,6 +28,15 @@ const routes: Routes = [
       parentPacks: PackParentPacksResolverService,
       businesses: ProfessionalBusinessesResolverService,
       offerings: OfferingsResolverService
+    }
+  },
+  {
+    path: 'service/:id',
+    component: ServiceDetailComponent,
+    resolve: {
+      service: ServiceDetailResolverService,
+      parentPacks: ServiceParentPacksResolverService,
+      businesses: ProfessionalBusinessesResolverService,
     }
   },
   {
