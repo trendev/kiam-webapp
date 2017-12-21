@@ -2,7 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ClientBill, Category, CollectiveGroup } from '@app/entities';
 import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
+import {
+  CustomValidators,
+  ErrorAggregatorDirective,
+  Utils,
+  compareCollectiveGroupsFn,
+  compareCategoriesFn
+} from '@app/shared';
 import { ClientService } from '@app/core';
 import * as moment from 'moment';
 
@@ -133,23 +139,28 @@ export class ClientDetailComponent implements OnInit {
       categories: this.fb.array([])
     });
 
-    const collectiveGroupsFA = fg.get('collectiveGroups') as FormArray;
-    this.collectiveGroups.forEach(cg =>
-      collectiveGroupsFA.push(this.fb.group({
+    Utils.initFormArray(fg,
+      'collectiveGroups',
+      this.collectiveGroups,
+      cg => this.fb.group({
         id: cg.id,
         groupName: cg.groupName,
         value: this.client.collectiveGroups ? this.client.collectiveGroups.findIndex(_cg => _cg.id === cg.id) !== -1
           : false
-      })));
+      }),
+      compareCollectiveGroupsFn);
 
-    const categoriesFA = fg.get('categories') as FormArray;
-    this.categories.forEach(ct =>
-      categoriesFA.push(this.fb.group({
+    Utils.initFormArray(fg,
+      'categories',
+      this.categories,
+      ct => this.fb.group({
         id: ct.id,
         name: ct.name,
         value: this.client.categories ? this.client.categories.findIndex(_ct => _ct.id === ct.id) !== -1
           : false
-      })));
+      }),
+      compareCategoriesFn
+    );
 
     return fg;
   }
