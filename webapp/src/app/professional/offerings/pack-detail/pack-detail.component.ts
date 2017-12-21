@@ -88,16 +88,17 @@ export class PackDetailComponent {
       })
     });
 
-    const businessesFA = fg.get('businesses') as FormArray;
-    this.professionalBusinesses
-      .sort((b1, b2) => b1.designation.localeCompare(b2.designation))
-      .forEach(b =>
-        businessesFA.push(this.fb.group({
-          designation: b.designation,
-          value: this.pack.businesses
-            ? this.pack.businesses.findIndex(_b => _b.designation === b.designation) !== -1
-            : false
-        })));
+    Utils.initFormControl(fg,
+      'businesses',
+      this.professionalBusinesses,
+      b => this.fb.group({
+        designation: b.designation,
+        value: this.pack.businesses
+          ? this.pack.businesses.findIndex(_b => _b.designation === b.designation) !== -1
+          : false
+      }),
+      (b1, b2) => b1.designation.localeCompare(b2.designation)
+    );
 
     return fg;
   }
