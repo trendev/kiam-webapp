@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Business, Offering, OfferingType } from '@app/entities';
+import { Business, Offering, OfferingType, Pack } from '@app/entities';
 import { ErrorAggregatorDirective, Utils, CustomValidators, compareBusinessesFn } from '@app/shared';
 
 @Component({
@@ -94,6 +94,33 @@ export class CreatePackComponent {
   revert() {
     // resets the form field based on the raw value
     this.form.reset(this.createForm().getRawValue());
+  }
+
+  save() {
+    const pack = this.prepareSave();
+    this.packService.create(pack).subscribe(
+      _pack => this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route }),
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de sauvegarder le forfait sur le serveur')
+    );
+  }
+
+  prepareSave(): Pack {
+    const value = this.form.getRawValue();
+
+    const pack = new Pack({
+      name: value.name,
+      price: value.price * 100,
+      duration: value.duration,
+      businesses: Utils.extractArrayFromControl(this.form, 'businesses',
+        fg => new Business({
+          designation: fg.value.designation
+        })
+      ),
+      offerings: value.content.offerings.slice()
+    });
+
+    return pack;
   }
 
 }
