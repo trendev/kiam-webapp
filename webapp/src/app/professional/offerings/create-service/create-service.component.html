@@ -1,3 +1,69 @@
-<p>
-  create-service works!
-</p>
+<div class="container">
+  <mat-card>
+    <form [formGroup]="form" novalidate>
+      <mat-card-title>Nouvelle Prestation</mat-card-title>
+      <mat-card-content>
+        <mat-form-field class="name">
+          <input matInput #name placeholder="Nom" formControlName="name" maxlength="75" required>
+          <mat-hint align="end">{{name.value?.length || 0}}/75</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput placeholder="Prix (EUR)" formControlName="price" min="0" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput placeholder="Durée (minutes)" formControlName="duration" min="1" required>
+        </mat-form-field>
+
+        <app-error [control]="form.get('name')" [error]="'required'">
+          Le libellé de la prestation doit être renseigné.
+        </app-error>
+        <app-error [control]="form.get('name')" [error]="'blankStringForbidden'">
+          Le libellé de la prestation ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+        </app-error>
+        <app-error [control]="form.get('name')" [error]="'maxlength'">
+          Le libellé de la prestation ne doit pas excéder 75 caractères.
+        </app-error>
+        <app-error [control]="form.get('price')" [error]="'required'">
+          Le prix doit être renseigné.
+        </app-error>
+        <app-error [control]="form.get('price')" [error]="'min'">
+          Le prix ne peut pas être une valeur négative.
+        </app-error>
+        <app-error [control]="form.get('duration')" [error]="'required'">
+          La durée de réalisation doit être renseignée.
+        </app-error>
+        <app-error [control]="form.get('duration')" [error]="'min'">
+          La durée ne peut correspondre à une valeur négative ou nulle.
+        </app-error>
+
+        <mat-accordion multi="false">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Activités *
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-businesses [errorAggregator]="errorAggregator"></app-businesses>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+      </mat-card-content>
+
+      <ng-container appErrorAggregator></ng-container>
+      <mat-card-actions>
+        <div class="form-button-container">
+          <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
+            <mat-icon aria-label="Annuler les modification">undo</mat-icon>
+          </button>
+          <a mat-mini-fab [routerLink]="['../../',{ot: ot}]" routerLinkActive="active">
+            <mat-icon aria-label="Retour à la liste des services">list</mat-icon>
+          </a>
+          <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+            <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
