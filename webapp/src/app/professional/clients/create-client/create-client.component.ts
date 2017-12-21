@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils, compareCollectiveGroupsFn, compareCategoriesFn } from '@app/shared';
 import { ClientService } from '@app/core';
 import { Client, CollectiveGroup, Category } from '@app/entities';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -127,21 +127,25 @@ export class CreateClientComponent implements OnInit {
       categories: this.fb.array([])
     });
 
-    const collectiveGroupsFA = fg.get('collectiveGroups') as FormArray;
-    this.collectiveGroups.forEach(cg =>
-      collectiveGroupsFA.push(this.fb.group({
+    Utils.initFormArray(fg,
+      'collectiveGroups',
+      this.collectiveGroups,
+      cg => this.fb.group({
         id: cg.id,
         groupName: cg.groupName,
         value: false
-      })));
+      }),
+      compareCollectiveGroupsFn);
 
-    const categoriesFA = fg.get('categories') as FormArray;
-    this.categories.forEach(ct =>
-      categoriesFA.push(this.fb.group({
+    Utils.initFormArray(fg,
+      'categories',
+      this.categories,
+      ct => this.fb.group({
         id: ct.id,
         name: ct.name,
         value: false
-      })));
+      }),
+      compareCategoriesFn);
 
     return fg;
   }

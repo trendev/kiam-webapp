@@ -159,8 +159,7 @@ export class ClientDetailComponent implements OnInit {
         value: this.client.categories ? this.client.categories.findIndex(_ct => _ct.id === ct.id) !== -1
           : false
       }),
-      compareCategoriesFn
-    );
+      compareCategoriesFn);
 
     return fg;
   }
