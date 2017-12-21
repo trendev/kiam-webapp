@@ -8,7 +8,7 @@ import { Component, ViewContainerRef, ViewChild, OnInit } from '@angular/core';
 import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import * as moment from 'moment';
-import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn, comparePaymentModesFn } from '@app/shared';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -171,25 +171,27 @@ export class ProfileComponent implements OnInit {
       })
     });
 
-
-    const businessesFA = fg.get('businesses') as FormArray;
-    this.businesses.forEach(b =>
-      businessesFA.push(this.fb.group({
+    Utils.initFormArray(fg,
+      'businesses',
+      this.businesses,
+      b => this.fb.group({
         designation: b.designation,
         value: this.pro.businesses
           ? this.pro.businesses.findIndex(_b => _b.designation === b.designation) !== -1
           : false
-      })));
+      }),
+      compareBusinessesFn);
 
-
-    const paymentModesFA = fg.get('paymentModes') as FormArray;
-    this.paymentModes.forEach(pm =>
-      paymentModesFA.push(this.fb.group({
+    Utils.initFormArray(fg,
+      'paymentModes',
+      this.paymentModes,
+      pm => this.fb.group({
         name: pm.name,
         value: this.pro.paymentModes
           ? this.pro.paymentModes.findIndex(_pm => _pm.name === pm.name) !== -1
           : false
-      })));
+      }),
+      comparePaymentModesFn);
 
     return fg;
   }

@@ -1,5 +1,5 @@
 import { FormGroup, FormArray, AbstractControl, FormBuilder } from '@angular/forms';
-import { Business, CollectiveGroup, Category } from '@app/entities';
+import { Business, CollectiveGroup, Category, PaymentMode } from '@app/entities';
 
 export class Utils {
     static extractArrayFromControl<T>(form: AbstractControl, faName: string, mapperFn: (control: AbstractControl) => T): T[] {
@@ -33,3 +33,6 @@ export const compareCollectiveGroupsFn =
 
 export const compareCategoriesFn =
     (ct1: Category, ct2: Category) => ct1.name.localeCompare(ct2.name);
+
+export const comparePaymentModesFn =
+    (pm1: PaymentMode, pm2: PaymentMode) => pm1.name.localeCompare(pm2.name);

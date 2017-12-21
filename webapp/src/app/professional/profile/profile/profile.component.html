@@ -1,7 +1,7 @@
 <div class="container">
   <mat-card>
     <form [formGroup]="form" novalidate>
-      <mat-card-title>{{pro.email}}</mat-card-title>
+      <mat-card-title>Modification du profil - {{pro.email}}</mat-card-title>
       
       <div class="top-button-container">
         <a mat-raised-button routerLink="./change-password" routerLinkActive="active">
@@ -18,7 +18,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Informations relatives au compte Comptandye *
+                Compte Comptandye *
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-account-info [errorAggregator]="errorAggregator"></app-account-info>
@@ -27,25 +27,16 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Adresse de l'entreprise *
+                Société / Entreprise *
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-address [errorAggregator]="errorAggregator"></app-address>
+            <app-company-information [errorAggregator]="errorAggregator"></app-company-information>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Informations concernant le chef d'entreprise *
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-customer-details [errorAggregator]="errorAggregator"></app-customer-details>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Activités de l'entreprise *
+                Activités *
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-businesses [errorAggregator]="errorAggregator"></app-businesses>
@@ -63,10 +54,19 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Informations complémentaires sur l'entreprise *
+                Identité du Dirigeant *
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-company-information [errorAggregator]="errorAggregator"></app-company-information>
+            <app-customer-details [errorAggregator]="errorAggregator"></app-customer-details>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Adresse de l'entreprise *
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-address [errorAggregator]="errorAggregator"></app-address>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
