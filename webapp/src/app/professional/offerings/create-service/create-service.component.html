@@ -56,7 +56,7 @@
           <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modification">undo</mat-icon>
           </button>
-          <a mat-mini-fab [routerLink]="['../../',{ot: ot}]" routerLinkActive="active">
+          <a mat-mini-fab [routerLink]="['../',{ot: ot}]" routerLinkActive="active">
             <mat-icon aria-label="Retour à la liste des services">list</mat-icon>
           </a>
           <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">

@@ -79,7 +79,7 @@ export class CreateServiceComponent {
   save() {
     const service = this.prepareSave();
     this.serviceService.create(service).subscribe(
-      _service => this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route }),
+      _service => this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route }),
       // TODO: handle this (check the status code, etc)
       e => console.error('Impossible de sauvegarder la prestation sur le serveur')
     );

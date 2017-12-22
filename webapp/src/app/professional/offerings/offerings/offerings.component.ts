@@ -65,7 +65,7 @@ export class OfferingsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this._selectedOfferingType = params.get('ot');
       if (!this._selectedOfferingType) {
-        this._selectedOfferingType = this.services.length ? OfferingType.SERVICE : OfferingType.PACK;
+        this._selectedOfferingType = OfferingType.SERVICE;
       }
     });
   }

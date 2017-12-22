@@ -2,20 +2,26 @@
   <mat-card>
     <mat-card-title>Catalogue d'offres</mat-card-title>
     <mat-card-subtitle>
-      {services.length, plural, =0 {aucune Prestation} =1 {1 Prestation} other {{{services.length}} Prestations}} - {packs.length, plural,
-      =0 {aucun Forfait} =1 {1 Forfait} other {{{packs.length}} Forfaits}}
+      {services.length, plural, =0 {aucune Prestation} =1 {1 Prestation} other {{{services.length}} Prestations}} - {packs.length,
+      plural, =0 {aucun Forfait} =1 {1 Forfait} other {{{packs.length}} Forfaits}}
     </mat-card-subtitle>
     <mat-card-content>
       <mat-radio-group [(ngModel)]="selectedOfferingType">
-        <mat-radio-button *ngIf="services.length > 0" [value]="offeringType.SERVICE">Prestation</mat-radio-button>
-        <mat-radio-button *ngIf="packs.length > 0" [value]="offeringType.PACK">Forfait</mat-radio-button>
+        <mat-radio-button [value]="offeringType.SERVICE">Prestation</mat-radio-button>
+        <mat-radio-button [value]="offeringType.PACK">Forfait</mat-radio-button>
       </mat-radio-group>
       <div [ngSwitch]="selectedOfferingType">
-        <ng-container *ngIf="services.length > 0">
-          <app-services-component *ngSwitchCase="offeringType.SERVICE" [offerings]="services"></app-services-component>
+        <ng-container *ngSwitchCase="offeringType.SERVICE">
+          <app-services-component *ngIf="services.length > 0;else elseBlockSERVICE" [offerings]="services"></app-services-component>
+          <ng-template #elseBlockSERVICE>
+            <mat-error>Aucune prestation pour le moment...</mat-error>
+          </ng-template>
         </ng-container>
-        <ng-container *ngIf="packs.length > 0">
-          <app-packs-component *ngSwitchCase="offeringType.PACK" [offerings]="packs"></app-packs-component>
+        <ng-container *ngSwitchCase="offeringType.PACK">
+          <app-packs-component *ngIf="packs.length > 0;else elseBlockPACK" [offerings]="packs"></app-packs-component>
+          <ng-template #elseBlockPACK>
+            <mat-error>Aucun forfait pour le moment...</mat-error>
+          </ng-template>
         </ng-container>
       </div>
     </mat-card-content>
