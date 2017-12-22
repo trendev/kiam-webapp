@@ -41,7 +41,9 @@ export class CreatePackComponent {
           }
         });
 
-        this.businesses = [];
+        // default behaviour if only one activity
+        this.businesses =
+          this.professionalBusinesses.length === 1 ? this.professionalBusinesses.slice() : [];
         this.setBusinessesValueChanges();
       });
   }
@@ -84,7 +86,8 @@ export class CreatePackComponent {
       this.professionalBusinesses,
       b => this.fb.group({
         designation: b.designation,
-        value: false
+        // default behaviour if only one activity
+        value: this.professionalBusinesses.length === 1 ? true : false
       }),
       compareBusinessesFn);
 
