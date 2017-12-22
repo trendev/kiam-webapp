@@ -14,13 +14,21 @@
         <ng-container *ngSwitchCase="offeringType.SERVICE">
           <app-services-component *ngIf="services.length > 0;else elseBlockSERVICE" [offerings]="services"></app-services-component>
           <ng-template #elseBlockSERVICE>
-            <mat-error>Aucune prestation pour le moment...</mat-error>
+            <div class=top-button-container>
+              <a mat-raised-button color="primary" [routerLink]="['./create-'+selectedOfferingType]" routerLinkActive="active">
+                Nouvelle Prestation
+              </a>
+            </div>
           </ng-template>
         </ng-container>
         <ng-container *ngSwitchCase="offeringType.PACK">
           <app-packs-component *ngIf="packs.length > 0;else elseBlockPACK" [offerings]="packs"></app-packs-component>
           <ng-template #elseBlockPACK>
-            <mat-error>Aucun forfait pour le moment...</mat-error>
+            <div class=top-button-container>
+              <a mat-raised-button color="primary" [routerLink]="['./create-'+selectedOfferingType]" routerLinkActive="active">
+                Nouveau Forfait
+              </a>
+            </div>
           </ng-template>
         </ng-container>
       </div>

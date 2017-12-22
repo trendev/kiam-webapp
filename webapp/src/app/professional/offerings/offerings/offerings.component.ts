@@ -85,7 +85,7 @@ export class OfferingsComponent implements OnInit {
         this.initOfferings();
       },
       // TODO : handle the error
-      e => console.error(`Une erreur est survenue lors de la collecte des offres depuis le serveur`)
+      e => console.error(`Une erreur est survenue lors de la collecte des offres sur le serveur`)
     );
   }
 
