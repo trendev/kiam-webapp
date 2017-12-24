@@ -29,6 +29,10 @@ mat-card {
     justify-content: flex-start;
 }
 
+.top-button-container>* {
+    margin: 5px;
+}
+
 @media all and (max-device-width: 600px) {
     .top-button-container {
         flex-flow: column;

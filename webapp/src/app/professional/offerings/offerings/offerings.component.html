@@ -15,6 +15,9 @@
           <app-services-component *ngIf="services.length > 0;else elseBlockSERVICE" [offerings]="services"></app-services-component>
           <ng-template #elseBlockSERVICE>
             <div class=top-button-container>
+              <button mat-raised-button color="primary" (click)="buildModelOfferings()">
+                Création Automatique d'Offres
+              </button>
               <a mat-raised-button color="primary" [routerLink]="['./create-'+selectedOfferingType]" routerLinkActive="active">
                 Nouvelle Prestation
               </a>
@@ -25,6 +28,9 @@
           <app-packs-component *ngIf="packs.length > 0;else elseBlockPACK" [offerings]="packs"></app-packs-component>
           <ng-template #elseBlockPACK>
             <div class=top-button-container>
+              <button mat-raised-button color="primary" (click)="buildModelOfferings()">
+                Création Automatique d'Offres
+              </button>
               <a mat-raised-button color="primary" [routerLink]="['./create-'+selectedOfferingType]" routerLinkActive="active">
                 Nouveau Forfait
               </a>

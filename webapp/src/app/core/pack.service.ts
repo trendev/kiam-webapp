@@ -46,4 +46,11 @@ export class PackService {
         return this.errorHandler.handle(e);
       });
   }
+
+  buildModelOfferings(): Observable<Offering[]> {
+    return this.http.post<Offering[]>(`${this.api}/buildModelOfferings`, null, { withCredentials: true })
+      .catch(e => {
+        return this.errorHandler.handle(e);
+      });
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfessionalService } from '@app/core';
+import { ProfessionalService, PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Offering, Service, Pack, OfferingType } from '@app/entities';
 
@@ -24,6 +24,7 @@ export class OfferingsComponent implements OnInit {
   _selectedOfferingType: string;
 
   constructor(private professionalService: ProfessionalService,
+    private packService: PackService,
     private router: Router,
     private route: ActivatedRoute) {
     this.route.data.subscribe(
@@ -86,6 +87,17 @@ export class OfferingsComponent implements OnInit {
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la collecte des offres sur le serveur`)
+    );
+  }
+
+  buildModelOfferings() {
+    this.packService.buildModelOfferings().subscribe(
+      offerings => {
+        this._offerings = offerings;
+        this.initOfferings();
+      },
+      // TODO : handle the error
+      e => console.error(`Une erreur est survenue lors de la création automatique d'offres sur le serveur`)
     );
   }
 
