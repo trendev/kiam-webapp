@@ -1,4 +1,31 @@
-<ng-content></ng-content>
-<p>
-  create-bill works!
-</p>
+<div class="container">
+  <mat-card>
+    <form [formGroup]="form" novalidate>
+      <mat-card-title>
+        {{name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        <b>Nouvelle facture</b>
+      </mat-card-subtitle>
+      <mat-card-content>
+
+      </mat-card-content>
+
+      <ng-container appErrorAggregator></ng-container>
+      <mat-card-actions>
+        <div class="form-button-container">
+          <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
+            <mat-icon aria-label="Annuler les modification">undo</mat-icon>
+          </button>
+          <a mat-mini-fab color="warn" [routerLink]="['/professional/clients',id]" routerLinkActive="active">
+            <mat-icon aria-label="Annuler la création de la facture">close</mat-icon>
+          </a>
+          <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+            <mat-icon aria-label="Sauvegarder et clore la Facture">done</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+
+</div>
