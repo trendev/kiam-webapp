@@ -18,11 +18,9 @@ export class CreateBillComponent {
   constructor() { }
 
   revert() {
-
   }
 
   save() {
-
   }
 
 }

@@ -8,7 +8,9 @@
         <b>Nouvelle facture</b>
       </mat-card-subtitle>
       <mat-card-content>
-
+        {{offerings | json}}
+        <mat-divider></mat-divider>
+        {{paymentModes | json}}
       </mat-card-content>
 
       <ng-container appErrorAggregator></ng-container>
