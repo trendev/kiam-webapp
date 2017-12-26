@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Offering, PaymentMode } from '@app/entities';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-create-bill',
@@ -13,9 +13,16 @@ export class CreateBillComponent {
   @Input() id: number;
   @Input() name: string;
 
-  form = new FormGroup({});
+  form: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+    this.form = this.createForm();
+  }
+
+  createForm(): FormGroup {
+    const fg = this.fb.group({});
+    return fg;
+  }
 
   revert() {
   }

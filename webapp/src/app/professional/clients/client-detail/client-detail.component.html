@@ -2,6 +2,9 @@
   <mat-card>
     <form [formGroup]="form" novalidate>
       <mat-card-title>{{client.customerDetails.firstName}} {{client.customerDetails.lastName}}</mat-card-title>
+      <mat-card-subtitle>
+        Code client: {{client.id}}
+      </mat-card-subtitle>
       <mat-card-content>
         <mat-form-field class="email">
           <input matInput placeholder="Email" formControlName="email">
