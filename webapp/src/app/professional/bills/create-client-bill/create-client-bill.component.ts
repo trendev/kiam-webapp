@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-create-client-bill',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateClientBillComponent implements OnInit {
 
-  constructor() { }
+  id: number;
+  name: string;
+
+  constructor(private route: ActivatedRoute,
+    private router: Router) {
+
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        this.id = +params.get('id');
+        this.name = params.get('name');
+      });
+  }
 
   ngOnInit() {
   }

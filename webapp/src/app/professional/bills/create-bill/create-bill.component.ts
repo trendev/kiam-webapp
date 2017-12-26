@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-create-bill',
@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-bill.component.scss']
 })
 export class CreateBillComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
