@@ -1,9 +1,10 @@
 import { Offering } from './offering.model';
+import { OfferingSnapshot } from './offering-snapshot.model';
 
 export class PurchasedOffering {
     id: number;
     qty: number;
-    price: number;
+    offeringSnapshot: OfferingSnapshot;
     offering: Offering;
 
     constructor(values: Object = {}) {

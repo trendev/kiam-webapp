@@ -22,3 +22,4 @@ export * from './customer.model';
 export * from './individual.model';
 export * from './professional.model';
 export * from './user-group.model';
+export * from './offering-snapshot.model';
