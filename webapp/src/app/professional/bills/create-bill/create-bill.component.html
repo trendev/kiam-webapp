@@ -5,14 +5,24 @@
         Nouvelle facture
       </mat-card-title>
       <mat-card-subtitle>
-        <p>
-          Client :
-          <b>{{name}}</b>
-        </p>
-        <p>Code client : {{id}}</p>
+        <ng-content></ng-content>
       </mat-card-subtitle>
 
       <mat-card-content>
+
+        <div class="bill-container">
+          <div>
+            <app-information></app-information>
+          </div>
+
+          <div>
+            <app-purchased-offerings></app-purchased-offerings>
+          </div>
+
+          <div>
+            <app-payments></app-payments>
+          </div>
+        </div>
 
       </mat-card-content>
 
@@ -22,9 +32,9 @@
           <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modification">undo</mat-icon>
           </button>
-          <a mat-mini-fab color="warn" [routerLink]="['/professional/clients',id]" routerLinkActive="active">
+          <button mat-mini-fab color="warn" (click)="cancelBillCreation()">
             <mat-icon aria-label="Annuler la création de la facture">close</mat-icon>
-          </a>
+          </button>
           <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
             <mat-icon aria-label="Sauvegarder et clore la Facture">done</mat-icon>
           </button>

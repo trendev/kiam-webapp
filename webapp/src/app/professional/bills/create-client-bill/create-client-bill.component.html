@@ -1,2 +1,7 @@
-<app-create-bill [id]="id" [name]="name" [offerings]="offerings" [paymentModes]="paymentModes">
+<app-create-bill [offerings]="offerings" [paymentModes]="paymentModes" (cancel)="returnToClientDetail()">
+    <p>
+        Client :
+        <b>{{name}}</b>
+    </p>
+    <p>Code client : {{id}}</p>
 </app-create-bill>

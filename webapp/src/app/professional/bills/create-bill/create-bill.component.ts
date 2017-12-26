@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { CustomValidators } from './../../../shared/custom-validators';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Offering, PaymentMode } from '@app/entities';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-bill',
@@ -10,8 +11,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class CreateBillComponent {
   @Input() offerings: Offering[];
   @Input() paymentModes: PaymentMode[];
-  @Input() id: number;
-  @Input() name: string;
+  @Output() cancel = new EventEmitter<any>();
 
   form: FormGroup;
 
@@ -20,7 +20,11 @@ export class CreateBillComponent {
   }
 
   createForm(): FormGroup {
-    const fg = this.fb.group({});
+    const fg = this.fb.group({
+      information: this.fb.group({}),
+      purchasedOfferings: new FormControl([]),
+      payments: new FormControl([]),
+    });
     return fg;
   }
 
@@ -28,6 +32,10 @@ export class CreateBillComponent {
   }
 
   save() {
+  }
+
+  cancelBillCreation() {
+    this.cancel.emit();
   }
 
 }

@@ -17,23 +17,27 @@ export class CreateClientBillComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router) {
 
-      this.route.paramMap.subscribe((params: ParamMap) => {
-        this.id = +params.get('id');
-        this.name = params.get('name');
-      });
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.id = +params.get('id');
+      this.name = params.get('name');
+    });
 
-      this.route.data.subscribe(
-        (data: {
-          offerings: Offering[],
-          paymentModes: PaymentMode[]
-        }) => {
-          this.offerings = data.offerings;
-          this.paymentModes = data.paymentModes;
-        }
-      );
+    this.route.data.subscribe(
+      (data: {
+        offerings: Offering[],
+        paymentModes: PaymentMode[]
+      }) => {
+        this.offerings = data.offerings;
+        this.paymentModes = data.paymentModes;
+      }
+    );
   }
 
   ngOnInit() {
+  }
+
+  returnToClientDetail() {
+    this.router.navigate(['/professional/clients', this.id]);
   }
 
 }
