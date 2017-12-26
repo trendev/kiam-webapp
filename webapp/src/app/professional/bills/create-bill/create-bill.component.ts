@@ -1,6 +1,5 @@
-import { CustomValidators } from './../../../shared/custom-validators';
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Offering, PaymentMode } from '@app/entities';
+import { Offering, PaymentMode, OfferingType } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -22,8 +21,13 @@ export class CreateBillComponent {
   createForm(): FormGroup {
     const fg = this.fb.group({
       information: this.fb.group({}),
-      purchasedOfferings: new FormControl([]),
-      payments: new FormControl([]),
+      purchasedOfferings: this.fb.group({
+        content: new FormControl([]),
+        selectedOfferingType: new FormControl(OfferingType.SERVICE),
+      }),
+      payments: this.fb.group({
+        content: new FormControl([])
+      }),
     });
     return fg;
   }

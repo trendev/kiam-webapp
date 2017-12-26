@@ -1,9 +1,7 @@
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Offres souscrites
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-  </mat-expansion-panel>
-</mat-accordion>
+<section formGroupName="purchasedOfferings">
+    <h2 class="mat-title">Offres souscrites</h2>
+  <mat-radio-group formControlName="selectedOfferingType">
+    <mat-radio-button [value]="offeringType.SERVICE">Prestation</mat-radio-button>
+    <mat-radio-button [value]="offeringType.PACK">Forfait</mat-radio-button>
+  </mat-radio-group>
+</section>
