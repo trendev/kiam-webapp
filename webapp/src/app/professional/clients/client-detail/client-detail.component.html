@@ -82,6 +82,13 @@
     <mat-card-content>
       <app-client-bills-list [bills]="clientBills"></app-client-bills-list>
     </mat-card-content>
+    <mat-card-actions>
+      <div class="form-button-container">
+        <button type="button" mat-mini-fab color="primary" (click)="createNewClientBill()">
+          <mat-icon aria-label="Nouvelle facture">add</mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
   </mat-card>
 
 </div>

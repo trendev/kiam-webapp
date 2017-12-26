@@ -228,4 +228,9 @@ export class ClientDetailComponent implements OnInit {
       e => console.error('Impossible de sauvegarder le nouveau client sur le serveur'));
   }
 
+  createNewClientBill() {
+    const id = this.client.id;
+    const name = `${this.client.customerDetails.firstName} ${this.client.customerDetails.lastName}`;
+    this.router.navigate(['/professional/bills/create-clientbill', { id: id, name: name }]);
+  }
 }
