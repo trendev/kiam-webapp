@@ -1,3 +1,22 @@
-<p>
-  information works!
-</p>
+<section formGroupName="information">
+  <h2 class="mat-title">Détails</h2>
+  <mat-form-field>
+    <input matInput placeholder="Montant" formControlName="amount">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Réduction" formControlName="discount">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="dp1" formControlName="deliveryDate" placeholder="Date de réalisation">
+    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+    <mat-datepicker #dp1></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="dp2" formControlName="paymentDate" placeholder="Date du solde">
+    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+    <mat-datepicker #dp2></mat-datepicker>
+  </mat-form-field>
+  <ng-container #errorContainer></ng-container>
+  <ng-template #errorsTemplate>
+  </ng-template>
+</section>
