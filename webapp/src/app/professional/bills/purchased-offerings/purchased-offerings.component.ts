@@ -1,8 +1,10 @@
-import { Component, OnChanges, Input } from '@angular/core';
-import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
-import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
-import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
-import { Offering, Service, Pack, OfferingType } from '@app/entities';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
+import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
+import { Offering, Service, Pack, OfferingType, PurchasedOffering } from '@app/entities';
+import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/material';
+import { Utils } from '@app/shared';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-purchased-offerings',
@@ -13,57 +15,103 @@ import { Offering, Service, Pack, OfferingType } from '@app/entities';
       provide: ControlContainer,
       useExisting: FormGroupDirective
     }
-  ],
-  providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ]
 })
-export class PurchasedOfferingsComponent implements OnChanges {
+export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
+
   form: FormGroup;
-
   @Input() offerings: Offering[];
-  services: Service[] = [];
-  packs: Pack[] = [];
+  @Input() resetRequest$: Subject<boolean>;
+  sub: Subscription;
 
-  // link between the local variable and the offerings type
-  // OfferingType cannot be accessed from the html template
-  readonly offeringType = {
-    'SERVICE': OfferingType.SERVICE,
-    'PACK': OfferingType.PACK
-  };
+  offeringsModel: PurchasedOfferingModel[];
+  displayedColumns = [
+    'checked', 'qty', 'name', 'price', 'businesses'];
+  datasource: MatTableDataSource<PurchasedOfferingModel>;
+
+  @ViewChild(MatSort) sort: MatSort;
+
+  omSortFn = (om1, om2) => om1.name.localeCompare(om2.name);
 
   constructor(private parent: FormGroupDirective) { }
 
-  ngOnChanges() {
+  ngOnInit() {
     if (!this.parent.form) {
-      throw new Error(`PackContentComponent#ngOnChanges(): this.parent form should not be undefined or null`);
+      throw new Error(`PackContentComponent#ngOnInit(): this.parent form should not be undefined or null`);
     }
     this.form = this.parent.form;
-    this.initOfferings();
+    this.initOfferingsModel();
+    this.sub = this.resetRequest$.subscribe(b => this.initOfferingsModel());
+
   }
 
-  initOfferings() {
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
-    // reset the service/pack sets
-    this.services = [];
-    this.packs = [];
+  get purchasedOfferingsContent(): AbstractControl {
+    return this.form.get('purchasedOfferings').get('content');
+  }
 
-    // build the service/pack set
-    this.offerings.forEach(
+  initOfferingsModel() {
+    this.offeringsModel = this.offerings
+      .map(
       o => {
-        switch (o.cltype) {
-          case OfferingType.SERVICE:
-            this.services.push(o as Service);
-            break;
-          case OfferingType.PACK:
-            this.packs.push(o as Pack);
-            break;
-          default:
-            throw new TypeError(`initOfferings(): ${o.cltype} is not a supported offering type`);
-        }
-      });
+        return {
+          checked: false,
+          qty: 0,
+          name: o.name,
+          price: o.price,
+          businesses: Utils.getBusinesses(o.businesses), // display businesses as a string
+          offering: o
+        };
+      }
+      )
+      .sort(this.omSortFn);
+
+    this.datasource =
+      new MatTableDataSource<PurchasedOfferingModel>(this.offeringsModel);
+    this.datasource.sort = this.sort;
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.datasource.filter = filterValue;
+  }
+
+  select(event: MatCheckboxChange, element: PurchasedOfferingModel) {
+    element.checked = event.checked;
+    this.onSelection(element);
+  }
+
+  onSelection(element: PurchasedOfferingModel) {
+    if (element.checked) {
+      element.qty = 1;
+    } else {
+      element.qty = 0;
+    }
+    this.computePurchasedOfferingsValue();
+  }
+
+  computePurchasedOfferingsValue() {
+    const value = this.offeringsModel
+      .filter(om => om.checked)
+      .map(om => new PurchasedOffering({
+        qty: om.qty,
+        offering: om.offering
+      }));
+    this.purchasedOfferingsContent.setValue(value);
+    this.purchasedOfferingsContent.markAsDirty();
+    this.purchasedOfferingsContent.markAsTouched();
+  }
+}
+
+interface PurchasedOfferingModel {
+  checked: boolean;
+  qty: number;
+  name: string;
+  price: number;
+  businesses: string;
+  offering: Offering;
 }

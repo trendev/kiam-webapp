@@ -1,3 +1,37 @@
-.mat-radio-button{
-    padding: 0px 16px 16px 0px;
+.list-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 250px;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 300px;
+}
+
+.search-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 64px;
+    padding: 5px 20px 0;
+}
+
+.qty{
+    max-width: 30px;
+}
+
+mat-cell {
+    overflow: visible;
+}
+
+@media all and (max-device-width: 720px) {
+    .hide {
+        display: none;
+    }
+    .list-container {
+        max-height: 300px;
+    }
 }

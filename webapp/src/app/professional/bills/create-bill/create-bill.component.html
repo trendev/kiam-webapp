@@ -16,7 +16,7 @@
           </div>
 
           <div class="purchased-offerings">
-            <app-purchased-offerings></app-purchased-offerings>
+            <app-purchased-offerings [offerings]="offerings" [resetRequest$]="resetRequest$"></app-purchased-offerings>
           </div>
 
           <div class="payments">
@@ -32,7 +32,7 @@
           <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modification">undo</mat-icon>
           </button>
-          <button mat-mini-fab color="warn" (click)="cancelBillCreation()">
+          <button type="button" mat-mini-fab color="warn" (click)="cancelBillCreation()">
             <mat-icon aria-label="Annuler la création de la facture">close</mat-icon>
           </button>
           <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">

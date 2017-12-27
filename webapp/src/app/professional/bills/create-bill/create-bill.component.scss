@@ -15,10 +15,16 @@ mat-card {
     flex-flow: wrap;
 }
 
-.information,
-.purchased-offerings,
+.information {
+    width: 30%;
+}
+
+.purchased-offerings {
+    width: 70%;
+}
+
 .payments {
-    width: 50%;
+    width: 100%;
 }
 
 .form-button-container {

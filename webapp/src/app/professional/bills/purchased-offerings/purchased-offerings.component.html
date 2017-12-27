@@ -1,7 +1,49 @@
 <section formGroupName="purchasedOfferings">
-    <h2 class="mat-title">Offres souscrites</h2>
-  <mat-radio-group formControlName="selectedOfferingType">
-    <mat-radio-button [value]="offeringType.SERVICE">Prestation</mat-radio-button>
-    <mat-radio-button [value]="offeringType.PACK">Forfait</mat-radio-button>
-  </mat-radio-group>
+  <h2 class="mat-title">Offres souscrites</h2>
+  <code>Form Status : {{form.status}} / </code>
+  <code>Form Errors : {{purchasedOfferingsContent.errors | json}}</code>
+  <div class="list-container">
+    <div class="search-header">
+      <mat-form-field>
+        <mat-placeholder>
+          <i>Recherche</i>
+        </mat-placeholder>
+        <input matInput (keyup)="applyFilter($event.target.value)">
+      </mat-form-field>
+    </div>
+    <mat-table #table [dataSource]="datasource" matSort>
+      <ng-container matColumnDef="checked">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <mat-icon>check_box</mat-icon>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox [checked]="element.checked" (change)="select($event,element)"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="qty">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Qté.</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-form-field *ngIf="element.checked" class="qty">
+            <input name="qty" type="number" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Prix (EUR)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.price / 100}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="businesses">
+        <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Activités</mat-header-cell>
+        <mat-cell *matCellDef="let element" [class.hide]="true">{{element.businesses}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  </div>
 </section>
