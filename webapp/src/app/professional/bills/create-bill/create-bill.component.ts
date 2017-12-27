@@ -73,6 +73,11 @@ export class CreateBillComponent implements OnInit {
 
   revert() {
     this.form.reset(this.createForm().getRawValue());
+
+    // rebuilds the controls of the comments group if they have been modified/removed
+    const information = this.form.get('information') as FormGroup;
+    information.setControl('comments', this.fb.array([], CustomValidators.validComments(this.commentsValidators)));
+
     this.resetRequest$.next();
   }
 

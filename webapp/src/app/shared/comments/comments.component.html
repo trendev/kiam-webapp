@@ -1,0 +1,22 @@
+<section [formGroup]="comments.parent">
+  <div formArrayName="comments">
+    <div class="comments-button">
+      <span>Commentaires:</span>
+      <span class="fill-space"></span>
+      <button type="button" mat-mini-fab color="primary" (click)="newComment()" class="half-size">
+        <mat-icon aria-label="Ajouter">comment</mat-icon>
+      </button>
+      <button type="button" mat-mini-fab color="primary" (click)="removeAllComments()" class="half-size">
+        <mat-icon aria-label="Supprimer">delete</mat-icon>
+      </button>
+    </div>
+    <div *ngFor="let comment of comments.controls; let i=index">
+      <mat-form-field class="full-width">
+        <input matInput #cmt maxlength="200" placeholder="#{{i+1}}" formControlName="{{i}}" required>
+        <mat-hint align="end">{{cmt.value?.length || 0}}/200</mat-hint>
+        <mat-icon *ngIf="isLastComment(i)" (click)="newComment()" matSuffix>add_circle_outline</mat-icon>
+        <mat-icon (click)="removeComment(i)" matSuffix>remove_circle_outline</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+</section>

@@ -16,3 +16,4 @@ export * from './collective-groups/collective-groups.component';
 export * from './categories/categories.component';
 export * from './error/error.component';
 export * from './utils';
+export * from './comments/comments.component';

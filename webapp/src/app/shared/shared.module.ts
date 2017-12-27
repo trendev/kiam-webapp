@@ -38,6 +38,7 @@ import { ErrorAggregatorDirective } from './error-aggregator.directive';
 import { CollectiveGroupsComponent } from './collective-groups/collective-groups.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ErrorComponent } from './error/error.component';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { ErrorComponent } from './error/error.component';
     ErrorAggregatorDirective,
     CollectiveGroupsComponent,
     CategoriesComponent,
-    ErrorComponent],
+    ErrorComponent,
+    CommentsComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -117,7 +119,8 @@ import { ErrorComponent } from './error/error.component';
     CollectiveGroupsComponent,
     CategoriesComponent,
     ErrorComponent,
-    MatProgressBarModule
+    MatProgressBarModule,
+    CommentsComponent
   ]
 })
 

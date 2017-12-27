@@ -1,0 +1,16 @@
+.comments-button {
+    display: flex;
+    align-items: center;
+}
+
+.fill-space {
+    flex: 1 1 auto;
+}
+
+.half-size {
+    transform: scale(0.7);
+}
+
+.full-width {
+    width: 100%;
+}

@@ -9,7 +9,7 @@
       </mat-card-subtitle>
 
       <mat-card-content>
-
+        {{form.getRawValue() | json}}
         <div class="bill-content">
           <div class="information">
             <app-information [errorAggregator]="errorAggregator"></app-information>

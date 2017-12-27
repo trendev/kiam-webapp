@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, ViewContainerRef } from '@angular/core';
-import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
+import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { ErrorAggregatorDirective } from '@app/shared';
@@ -44,6 +44,10 @@ export class InformationComponent implements OnInit {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
+  }
+
+  get comments(): AbstractControl {
+    return this.form.get('information').get('comments');
   }
 
 }
