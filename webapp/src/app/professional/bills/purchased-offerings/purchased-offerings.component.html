@@ -1,7 +1,6 @@
 <section formGroupName="purchasedOfferings">
   <h2 class="mat-title">Offres souscrites</h2>
-  <code>Form Status : {{form.status}} / </code>
-  <code>Form Errors : {{purchasedOfferingsContent.errors | json}}</code>
+  <ng-container #errorContainer></ng-container>
   <div class="list-container">
     <div class="search-header">
       <mat-form-field>
@@ -46,4 +45,14 @@
       </mat-row>
     </mat-table>
   </div>
+  <ng-template #errorsTemplate>
+    <app-error [control]="purchasedOfferingsContent" [error]="'required'">
+      Au moins une offre doit être sélectionnée.
+    </app-error>
+    <app-error [control]="purchasedOfferingsContent" [error]="'validPurchasedOfferings'">
+      <div *ngFor="let o of purchasedOfferingsContent.errors?.validPurchasedOfferings?.value">
+        Les quantités souscrites de l'offre "{{o}}" ne peuvent être nulle ou négatives.
+      </div>
+    </app-error>
+  </ng-template>
 </section>

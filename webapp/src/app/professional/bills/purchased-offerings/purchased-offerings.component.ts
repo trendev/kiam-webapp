@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy, EventEmitter, Output, ViewContainerRef } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
 import { Offering, Service, Pack, OfferingType, PurchasedOffering } from '@app/entities';
 import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/material';
-import { Utils } from '@app/shared';
+import { Utils, ErrorAggregatorDirective } from '@app/shared';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -30,6 +30,11 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
   datasource: MatTableDataSource<PurchasedOfferingModel>;
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('errorsTemplate') errorsTemplate;
+  @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
+  @Input() errorAggregator: ErrorAggregatorDirective;
+
+  @Output() total = new EventEmitter<number>();
 
   omSortFn = (om1, om2) => om1.name.localeCompare(om2.name);
 
@@ -40,6 +45,18 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
       throw new Error(`PackContentComponent#ngOnInit(): this.parent form should not be undefined or null`);
     }
     this.form = this.parent.form;
+
+    this.form.valueChanges.forEach(_ => {
+      if (this.form.invalid
+        && this.errorsTemplate
+        && this.errorContainer
+        && this.errorAggregator) {
+        this.errorContainer.clear();
+        this.errorContainer.createEmbeddedView(this.errorsTemplate);
+        this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
+      }
+    });
+
     this.initOfferingsModel();
     this.sub = this.resetRequest$.subscribe(b => this.initOfferingsModel());
 
@@ -101,7 +118,13 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
         qty: om.qty,
         offering: om.offering
       }));
+
+    this.total.emit(value
+      .map(po => po.qty * po.offering.price)
+      .reduce((a, b) => a + b, 0));
+
     this.purchasedOfferingsContent.setValue(value);
+
     this.purchasedOfferingsContent.markAsDirty();
     this.purchasedOfferingsContent.markAsTouched();
   }

@@ -1,5 +1,5 @@
-import { CustomValidators } from '@app/shared';
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { CustomValidators, ErrorAggregatorDirective } from '@app/shared';
+import { Component, Input, EventEmitter, Output, ViewChild, OnInit } from '@angular/core';
 import { Offering, PaymentMode, OfferingType } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
@@ -17,7 +17,7 @@ import * as moment from 'moment';
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ]
 })
-export class CreateBillComponent {
+export class CreateBillComponent implements OnInit {
   @Input() offerings: Offering[];
   @Input() paymentModes: PaymentMode[];
   @Output() cancel = new EventEmitter<any>();
@@ -32,8 +32,18 @@ export class CreateBillComponent {
     Validators.maxLength(200)
   ];
 
+  @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
+
   constructor(private fb: FormBuilder) {
     this.form = this.createForm();
+  }
+
+  ngOnInit() {
+    this.form.valueChanges.forEach(_ => {
+      if (this.form.invalid && this.errorAggregator) {
+        this.errorAggregator.viewContainerRef.clear();
+      }
+    });
   }
 
   createForm(): FormGroup {
