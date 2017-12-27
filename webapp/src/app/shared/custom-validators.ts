@@ -1,5 +1,6 @@
 import * as moment from 'moment';
 import { ValidatorFn, AbstractControl, ValidationErrors, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
+import { PurchasedOffering } from '@app/entities';
 
 export class CustomValidators {
     static whiteSpaceForbidden(control: AbstractControl): ValidationErrors | null {
@@ -135,5 +136,11 @@ export class CustomValidators {
         }
 
         return check ? null : { 'selectedElementRequired': 'selection required' };
+    }
+
+    static validPurchasedOfferings(control: AbstractControl): ValidationErrors | null {
+        const purchasedOfferings = control.value as PurchasedOffering[];
+        const errors = purchasedOfferings.filter(po => po.qty <= 0).map(po => po.offering.name);
+        return errors.length === 0 ? null : { 'validPurchasedOfferings': { value: errors } };
     }
 }
