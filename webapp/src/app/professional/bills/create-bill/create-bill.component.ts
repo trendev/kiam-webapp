@@ -70,12 +70,16 @@ export class CreateBillComponent implements OnInit {
         discount: new FormControl(0, [
           Validators.min(0)
         ]),
-        deliveryDate: new FormControl(moment(), [
-          CustomValidators.past
-        ]),
-        paymentDate: new FormControl(moment(), [
-          CustomValidators.past
-        ]),
+        dates: this.fb.group({
+          deliveryDate: new FormControl(moment(), [
+            CustomValidators.past
+          ]),
+          paymentDate: new FormControl(moment(), [
+            CustomValidators.past
+          ])
+        }, {
+            validator: CustomValidators.validBillDates
+          }),
         comments: this.fb.array([],
           CustomValidators.validComments(this.commentsValidators))
       }),
@@ -104,7 +108,7 @@ export class CreateBillComponent implements OnInit {
 
   isCloseable(): boolean {
     return this._amount === this._totalPayments
-      && this.form.get('information').get('paymentDate').value;
+      && this.form.get('information').get('dates').get('paymentDate').value;
   }
 
   revert() {

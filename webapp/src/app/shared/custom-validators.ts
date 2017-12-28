@@ -57,6 +57,23 @@ export class CustomValidators {
             ? null : { 'future': { value: control.value } };
     }
 
+    static validBillDates(control: FormGroup): ValidationErrors | null {
+        const deliveryDateControl = control.get('deliveryDate');
+        const paymentDate = control.get('paymentDate');
+
+        console.log('compare date');
+        if (deliveryDateControl.value && !paymentDate.value) {
+            return null;
+        }
+
+        return deliveryDateControl.value
+            && paymentDate.value
+            && moment(deliveryDateControl.value).isBefore(moment(paymentDate.value))
+            ? null : {
+                'validBillDates': { value: 'deliveryDate is before paymentDate' }
+            };
+    }
+
     static validCompanyID(control: AbstractControl): ValidationErrors | null {
         if (/^\d{14}$/.test(control.value)) {
             const code = control.value.split('');
