@@ -4,7 +4,7 @@
     <input type="number" matInput placeholder="Montant (EUR)" formControlName="amount">
   </mat-form-field>
   <mat-form-field>
-    <input type="number" matInput placeholder="Réduction (EUR)" formControlName="discount">
+    <input type="number" matInput placeholder="Réduction (EUR)" formControlName="discount" min="0">
   </mat-form-field>
   <div formGroupName="dates">
     <mat-form-field>
@@ -30,5 +30,16 @@
     <app-error [control]="form.get('information').get('dates').get('paymentDate')" [error]="'past'">
       La date du solde ne peut être une date dans le futur.
     </app-error>
+    <ng-container *ngFor="let comment of comments.controls; let i=index">
+      <app-error [control]="comment" [error]="'required'">
+        Le commentaire #{{i+1}} doit être renseigné.
+      </app-error>
+      <app-error [control]="comment" [error]="'blankStringForbidden'">
+        Le commentaire #{{i+1}} ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+      </app-error>
+      <app-error [control]="comment" [error]="'maxlength'">
+        Le commentaire #{{i+1}} ne doit pas excéder 200 caractères.
+      </app-error>
+    </ng-container>
   </ng-template>
 </section>
