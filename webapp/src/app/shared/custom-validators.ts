@@ -61,14 +61,13 @@ export class CustomValidators {
         const deliveryDateControl = control.get('deliveryDate');
         const paymentDate = control.get('paymentDate');
 
-        console.log('compare date');
         if (deliveryDateControl.value && !paymentDate.value) {
             return null;
         }
 
         return deliveryDateControl.value
             && paymentDate.value
-            && moment(deliveryDateControl.value).isBefore(moment(paymentDate.value))
+            && moment(deliveryDateControl.value).isSameOrBefore(moment(paymentDate.value))
             ? null : {
                 'validBillDates': { value: 'deliveryDate is before paymentDate' }
             };

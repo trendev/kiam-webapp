@@ -22,7 +22,13 @@
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>
     <app-error [control]="form.get('information').get('dates')" [error]="'validBillDates'">
-      Problème de date.
+      La date du solde ne peut être antérieure à la date de réalisation.
+    </app-error>
+    <app-error [control]="form.get('information').get('dates').get('deliveryDate')" [error]="'past'">
+      La date de réalisation ne peut être une date dans le futur.
+    </app-error>
+    <app-error [control]="form.get('information').get('dates').get('paymentDate')" [error]="'past'">
+      La date du solde ne peut être une date dans le futur.
     </app-error>
   </ng-template>
 </section>

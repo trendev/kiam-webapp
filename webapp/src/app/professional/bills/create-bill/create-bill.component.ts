@@ -71,10 +71,10 @@ export class CreateBillComponent implements OnInit {
           Validators.min(0)
         ]),
         dates: this.fb.group({
-          deliveryDate: new FormControl(moment(), [
+          deliveryDate: new FormControl(moment({ hour: 0 }), [
             CustomValidators.past
           ]),
-          paymentDate: new FormControl(moment(), [
+          paymentDate: new FormControl(moment({ hour: 0 }), [
             CustomValidators.past
           ])
         }, {
