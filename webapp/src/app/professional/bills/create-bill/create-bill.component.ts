@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { CustomValidators, ErrorAggregatorDirective } from '@app/shared';
 import { Component, Input, EventEmitter, Output, ViewChild, OnInit } from '@angular/core';
 import { Offering, PaymentMode, OfferingType } from '@app/entities';
@@ -16,6 +17,11 @@ export class CreateBillComponent implements OnInit {
   @Input() paymentModes: PaymentMode[];
   @Output() cancel = new EventEmitter<any>();
 
+  private _total: number;
+  private _totalPayments: number;
+  private _amount: number;
+  private _discount: number;
+
   resetRequest$ = new Subject<boolean>();
 
   form: FormGroup;
@@ -29,7 +35,15 @@ export class CreateBillComponent implements OnInit {
   @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private fb: FormBuilder) {
+    this.initAmountComputation();
     this.form = this.createForm();
+  }
+
+  private initAmountComputation() {
+    this._total = 0;
+    this._totalPayments = 0;
+    this._amount = 0;
+    this._discount = 0;
   }
 
   ngOnInit() {
@@ -38,6 +52,13 @@ export class CreateBillComponent implements OnInit {
         this.errorAggregator.viewContainerRef.clear();
       }
     });
+
+    this.form.get('information').get('discount').valueChanges
+      .map(value => +value ? value : 0)
+      .forEach(value => {
+        this._discount = value * 100;
+        this.computeAmount();
+      });
   }
 
   createForm(): FormGroup {
@@ -71,7 +92,23 @@ export class CreateBillComponent implements OnInit {
     return fg;
   }
 
+  computeAmount() {
+    this._amount = this._total - this._discount;
+    this.form.get('information').get('amount').setValue(this._amount / 100); // EUR cents
+  }
+
+  set total(total: number) {
+    this._total = total;
+    this.computeAmount();
+  }
+
+  isCloseable(): boolean {
+    return this._amount === this._totalPayments
+      && this.form.get('information').get('paymentDate').value;
+  }
+
   revert() {
+    this.initAmountComputation();
     this.form.reset(this.createForm().getRawValue());
 
     // rebuilds the controls of the comments group if they have been modified/removed
