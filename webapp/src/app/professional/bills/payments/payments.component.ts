@@ -63,9 +63,24 @@ export class PaymentsComponent implements OnChanges {
     return this.amount - this.total;
   }
 
+  get remainingState(): string {
+    const r = this.remaining;
+    if (!r) {
+      return 'ok';
+    } else {
+      return r > 0 ? 'low' : 'high';
+    }
+  }
+
   newPayment() {
     const _payments = this.payments.slice();
-    _payments.push(new Payment);
+    _payments.push(new Payment({
+      amount: this.remaining,
+      paymentMode: this.paymentModes[0]
+    }));
+    this.paymentsContent.setValue(_payments);
+    this.paymentsContent.markAsDirty();
+    this.paymentsContent.markAsTouched();
   }
 
 }

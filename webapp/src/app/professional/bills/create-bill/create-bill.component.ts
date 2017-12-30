@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { CustomValidators, ErrorAggregatorDirective } from '@app/shared';
-import { Component, Input, EventEmitter, Output, ViewChild, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Offering, PaymentMode, OfferingType } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -35,7 +35,7 @@ export class CreateBillComponent implements OnInit {
 
   @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     this.initAmountComputation();
     this.form = this.createForm();
   }
