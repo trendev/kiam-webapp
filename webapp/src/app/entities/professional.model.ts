@@ -10,6 +10,8 @@ export class Professional extends Customer {
     companyID: string;
     vatcode: string;
     creationDate: number;
+    billsCount: number; // cannot be directly edited (ignored during a POST/PUT)
+    billsRefDate: number; // cannot be directly edited (ignored during a POST/PUT)
     businesses: Business[];
     paymentModes: PaymentMode[];
 
