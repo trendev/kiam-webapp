@@ -1,7 +1,6 @@
 <section formGroupName="payments">
   <div>
     <h2 class="mat-title">Paiement</h2>
-    {{remaining}}
     <mat-chip-list>
       <mat-chip *ngIf="remaining > 0" [color]="'accent'" selected="true" [selectable]="false" (click)="newPayment()">
         <span class="mat-body-2">Reste à régler : {{remaining/100}} EUR</span>
