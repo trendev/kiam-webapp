@@ -1,5 +1,5 @@
 <section formGroupName="information">
-  <h2 class="mat-title">Détails</h2>
+  <h2 class="mat-title">Détail</h2>
   <mat-form-field>
     <input type="number" matInput placeholder="Montant (EUR)" formControlName="amount">
   </mat-form-field>
@@ -30,6 +30,9 @@
     </app-error>
     <app-error [control]="form.get('information').get('dates').get('paymentDate')" [error]="'past'">
       La date du solde ne peut être une date dans le futur.
+    </app-error>
+    <app-error [control]="form.get('information').get('discount')" [error]="'min'">
+      Le montant de la réduction ne peut correspondre à une valeur négative.
     </app-error>
     <ng-container *ngFor="let comment of comments.controls; let i=index">
       <app-error [control]="comment" [error]="'required'">

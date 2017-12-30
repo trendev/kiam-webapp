@@ -35,7 +35,7 @@ export class InformationComponent implements OnChanges {
 
   ngOnChanges() {
     if (!this.parent.form) {
-      throw new Error(`PackContentComponent#ngOnInit(): this.parent form should not be undefined or null`);
+      throw new Error(`PackContentComponent#ngOnChanges(): this.parent form should not be undefined or null`);
     }
     this.form = this.parent.form;
 

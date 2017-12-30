@@ -1,3 +1,8 @@
-<p>
-  payments works!
-</p>
+<section formGroupName="payments">
+  <h2 class="mat-title">Paiement</h2>
+  <p>Montant à régler: {{amount}}</p>
+  <ng-container #errorContainer></ng-container>
+  <ng-template #errorsTemplate>
+    <!-- <app-error></app-error> -->
+  </ng-template>
+</section>
