@@ -14,13 +14,22 @@
           <div class="purchased-offerings">
             <app-purchased-offerings [offerings]="offerings" [resetRequest$]="resetRequest$" [errorAggregator]="errorAggregator" (total)="total = $event"></app-purchased-offerings>
           </div>
+
           <div class="information">
             <app-information [billsRefDate]="billsRefDate" [errorAggregator]="errorAggregator"></app-information>
           </div>
-          <!-- *ngIf="amount > 0" -->
-          <div class="payments">
-            <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator"></app-payments>
-          </div>
+
+          <ng-container *ngIf="paymentModes.length === 0;else elseBlock">
+            <mat-error>Pour le moment, vous n'avez sélectionné aucun moyen de paiement et vous êtes donc dans l'incapacité de pouvoir
+              éditer une facture avec des paiements...</mat-error>
+            <mat-error>Sélectionnez vos moyens de paiement depuis votre profil.</mat-error>
+          </ng-container>
+          <ng-template #elseBlock>
+            <div class="payments" *ngIf="amount > 0">
+              <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator"></app-payments>
+            </div>
+          </ng-template>
+          
         </div>
 
       </mat-card-content>

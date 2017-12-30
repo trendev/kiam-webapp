@@ -20,7 +20,8 @@ import {
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatSelectModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -64,7 +65,8 @@ import { CommentsComponent } from './comments/comments.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSelectModule
   ],
   declarations: [
     PageNotFoundComponent,
@@ -120,7 +122,8 @@ import { CommentsComponent } from './comments/comments.component';
     CategoriesComponent,
     ErrorComponent,
     MatProgressBarModule,
-    CommentsComponent
+    CommentsComponent,
+    MatSelectModule
   ]
 })
 
