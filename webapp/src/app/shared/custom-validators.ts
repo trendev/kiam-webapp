@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import { ValidatorFn, AbstractControl, ValidationErrors, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
-import { PurchasedOffering } from '@app/entities';
+import { PurchasedOffering, Payment } from '@app/entities';
 
 export class CustomValidators {
     static whiteSpaceForbidden(control: AbstractControl): ValidationErrors | null {
@@ -159,4 +159,22 @@ export class CustomValidators {
         const errors = purchasedOfferings.filter(po => po.qty <= 0).map(po => po.offering.name);
         return errors.length === 0 ? null : { 'validPurchasedOfferings': { value: errors } };
     }
+
+    static validPayments(amount: number, total: number): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } => {
+            console.log(`validPayments: compare ${amount} and ${total}`);
+            if (amount > 0 && total !== amount) {
+                const err = {
+                    amount: amount,
+                    total: total
+                };
+                return total > amount ?
+                    { 'validPaymentsTotalHigher': { value: err } }
+                    : null;
+            }
+            return null;
+        };
+    }
+
+
 }

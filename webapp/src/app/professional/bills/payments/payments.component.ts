@@ -1,6 +1,7 @@
 import { Component, OnChanges, ViewChild, ViewContainerRef, Input } from '@angular/core';
-import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
-import { ErrorAggregatorDirective } from '@app/shared';
+import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl, Validators } from '@angular/forms';
+import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
+import { Payment, PaymentMode } from '@app/entities';
 
 @Component({
   selector: 'app-payments',
@@ -20,6 +21,7 @@ export class PaymentsComponent implements OnChanges {
   @Input() errorAggregator: ErrorAggregatorDirective;
 
   @Input() amount: number;
+  @Input() paymentModes: PaymentMode[];
 
   constructor(private parent: FormGroupDirective) { }
 
@@ -39,6 +41,31 @@ export class PaymentsComponent implements OnChanges {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
+    this.paymentsContent.setValidators([
+      CustomValidators.validPayments(this.amount, this.total)
+    ]);
+    this.paymentsContent.updateValueAndValidity();
+  }
+
+  get paymentsContent(): AbstractControl {
+    return this.form.get('payments').get('content');
+  }
+
+  get payments(): Payment[] {
+    return this.paymentsContent.value;
+  }
+
+  get total(): number {
+    return this.payments.map(p => p.amount).reduce((a, b) => a + b, 0);
+  }
+
+  get remaining(): number {
+    return this.amount - this.total;
+  }
+
+  newPayment() {
+    const _payments = this.payments.slice();
+    _payments.push(new Payment);
   }
 
 }

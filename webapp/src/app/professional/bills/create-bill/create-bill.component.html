@@ -17,8 +17,9 @@
           <div class="information">
             <app-information [billsRefDate]="billsRefDate" [errorAggregator]="errorAggregator"></app-information>
           </div>
+          <!-- *ngIf="amount > 0" -->
           <div class="payments">
-            <app-payments [amount]="amount" [errorAggregator]="errorAggregator"></app-payments>
+            <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator"></app-payments>
           </div>
         </div>
 

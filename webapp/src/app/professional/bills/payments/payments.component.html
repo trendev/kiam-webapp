@@ -1,8 +1,23 @@
 <section formGroupName="payments">
   <h2 class="mat-title">Paiement</h2>
-  <p>Montant à régler: {{amount}}</p>
-  <ng-container #errorContainer></ng-container>
-  <ng-template #errorsTemplate>
-    <!-- <app-error></app-error> -->
-  </ng-template>
+  <ng-container *ngIf="paymentModes.length > 0">
+    <mat-chip-list>
+      <mat-chip *ngIf="remaining > 0" [color]="'accent'" selected="true" [selectable]="false" (click)="newPayment()">
+        <span class="mat-body-2">Reste à régler : {{remaining/100}} EUR</span>
+      </mat-chip>
+      <mat-chip *ngIf="remaining < 0" [color]="'warn'" selected="true" [selectable]="false">
+        <span class="mat-body-2">Crédit : {{-remaining/100}} EUR</span>
+      </mat-chip>
+    </mat-chip-list>
+    <ng-container #errorContainer></ng-container>
+    <ng-template #errorsTemplate>
+      <app-error [control]="paymentsContent" [error]="'validPayments'">
+        Le total des paiments est supérieur au montant de la facture.
+      </app-error>
+    </ng-template>
+  </ng-container>
+  <ng-container *ngIf="paymentModes.length === 0">
+    <mat-error>Pour le moment, vous n'avez sélectionné aucun moyen de paiement et vous êtes donc dans l'incapacité de pouvoir éditer une facture avec des paiements...</mat-error>
+    <mat-error>Sélectionnez vos moyens de paiement depuis votre profil.</mat-error>
+  </ng-container>
 </section>

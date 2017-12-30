@@ -91,7 +91,7 @@ export class CreateBillComponent implements OnInit {
         ])
       }),
       payments: this.fb.group({
-        content: new FormControl([])
+        content: new FormControl([]) // dynamic validation is performed in the compoment itself
       }),
     });
     return fg;
