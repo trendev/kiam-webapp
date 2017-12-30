@@ -93,7 +93,8 @@ export class OfferingsComponent implements OnInit {
   buildModelOfferings() {
     this.packService.buildModelOfferings().subscribe(
       offerings => {
-        this._offerings = offerings;
+        this._offerings = [...this.services, ...this.packs, ...offerings]; // spread the result with the existing offerings
+        console.log(this._offerings);
         this.initOfferings();
       },
       // TODO : handle the error
