@@ -13,6 +13,7 @@ export class CreateClientBillComponent implements OnInit {
   name: string;
   offerings: Offering[];
   paymentModes: PaymentMode[];
+  billsRefDate: number;
 
   constructor(private route: ActivatedRoute,
     private router: Router) {
@@ -25,10 +26,12 @@ export class CreateClientBillComponent implements OnInit {
     this.route.data.subscribe(
       (data: {
         offerings: Offering[],
-        paymentModes: PaymentMode[]
+        paymentModes: PaymentMode[],
+        billsRefDate: number
       }) => {
         this.offerings = data.offerings;
         this.paymentModes = data.paymentModes;
+        this.billsRefDate = data.billsRefDate;
       }
     );
   }

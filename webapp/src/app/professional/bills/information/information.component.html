@@ -8,12 +8,13 @@
   </mat-form-field>
   <div formGroupName="dates">
     <mat-form-field>
-      <input matInput [matDatepicker]="dp1" formControlName="deliveryDate" placeholder="Date de réalisation">
+      <input matInput [matDatepicker]="dp1" [min]="minDate" [max]="maxDate" formControlName="deliveryDate" placeholder="Date de réalisation">
+      <mat-hint *ngIf="billsRefDate" align="end">Date Limite : {{billsRefDate | date:'shortDate':'':'fr'}}</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
       <mat-datepicker #dp1></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <input matInput [matDatepicker]="dp2" formControlName="paymentDate" placeholder="Date du solde">
+      <input matInput [matDatepicker]="dp2" [min]="minDate" [max]="maxDate" formControlName="paymentDate" placeholder="Date du solde">
       <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
       <mat-datepicker #dp2></mat-datepicker>
     </mat-form-field>

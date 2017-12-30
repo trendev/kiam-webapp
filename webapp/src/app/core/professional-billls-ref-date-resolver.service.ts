@@ -10,7 +10,7 @@ export class ProfessionalBilllsRefDateResolverService implements Resolve<number>
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): number | Observable<number> | Promise<number> {
     return this.professionalService.profile()
-      .map(pro => pro.billsRefDate ? pro.billsRefDate : null);
+      .map(pro => pro.billsRefDate ? pro.billsRefDate : undefined);
   }
 
 

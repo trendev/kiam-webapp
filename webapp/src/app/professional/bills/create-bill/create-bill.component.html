@@ -15,7 +15,7 @@
             <app-purchased-offerings [offerings]="offerings" [resetRequest$]="resetRequest$" [errorAggregator]="errorAggregator" (total)="total = $event"></app-purchased-offerings>
           </div>
           <div class="information">
-            <app-information [errorAggregator]="errorAggregator"></app-information>
+            <app-information [errorAggregator]="errorAggregator" [billsRefDate]="billsRefDate"></app-information>
           </div>
           <div class="payments">
             <app-payments></app-payments>

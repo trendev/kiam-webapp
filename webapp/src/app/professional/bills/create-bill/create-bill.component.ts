@@ -15,6 +15,7 @@ import * as moment from 'moment';
 export class CreateBillComponent implements OnInit {
   @Input() offerings: Offering[];
   @Input() paymentModes: PaymentMode[];
+  @Input() billsRefDate: number;
   @Output() cancel = new EventEmitter<any>();
 
   private _total: number;
