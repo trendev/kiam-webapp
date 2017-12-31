@@ -60,6 +60,16 @@ export class CreateBillComponent implements OnInit {
         this._discount = value * 100;
         this.computeAmount();
       });
+
+    // removes the payments if amount is 0 or less
+    this.form.get('information').get('amount').valueChanges
+      .map(value => +value ? value : 0)
+      .forEach(value => {
+        if (value <= 0) {
+          this.form.get('payments').get('content').reset([]);
+          this._totalPayments = 0;
+        }
+      });
   }
 
   createForm(): FormGroup {
