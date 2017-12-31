@@ -56,11 +56,11 @@ export class PaymentsComponent implements OnChanges {
   }
 
   get total(): number {
-    return this.payments.map(p => p.amount).reduce((a, b) => a + b, 0);
+    return this.payments.map(p => p.amount / 100).reduce((a, b) => a + b, 0);
   }
 
   get remaining(): number {
-    return this.amount - this.total;
+    return this.amount / 100 - this.total;
   }
 
   get remainingState(): string {
