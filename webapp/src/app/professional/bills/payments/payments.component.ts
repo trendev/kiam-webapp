@@ -1,4 +1,4 @@
-import { Component, OnChanges, ViewChild, ViewContainerRef, Input, OnInit } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
 import { Payment, PaymentMode } from '@app/entities';
@@ -14,7 +14,7 @@ import { Payment, PaymentMode } from '@app/entities';
     }
   ]
 })
-export class PaymentsComponent implements OnChanges, OnInit {
+export class PaymentsComponent implements OnInit {
   form: FormGroup;
   @ViewChild('errorsTemplate') errorsTemplate;
   @Input() errorAggregator: ErrorAggregatorDirective;
@@ -36,20 +36,6 @@ export class PaymentsComponent implements OnChanges, OnInit {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
-    this.setValidators();
-  }
-
-  ngOnChanges() {
-    if (this.form) {
-      this.setValidators();
-    }
-  }
-
-  private setValidators() {
-    this.paymentsContent.setValidators([
-      CustomValidators.validPayments(this.amount)
-    ]);
-    this.paymentsContent.updateValueAndValidity();
   }
 
   get paymentsContent(): AbstractControl {
@@ -99,7 +85,7 @@ export class PaymentsComponent implements OnChanges, OnInit {
     const _payments = this.payments.slice();
     this.paymentsContent.setValue(_payments.map(
       pm => new PaymentMode({
-        amount: pm.amount <= 0 ? 0 : pm.amount,
+        amount: pm.amount <= 0 ? 0 : pm.amount, // auto reset the value to 0 if negative
         paymentMode: pm.paymentMode
       })
     ));

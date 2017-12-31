@@ -2,7 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { CustomValidators, ErrorAggregatorDirective } from '@app/shared';
 import { Component, Input, EventEmitter, Output, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Offering, PaymentMode, OfferingType } from '@app/entities';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 import { Subject } from 'rxjs/Subject';
 import * as moment from 'moment';
@@ -19,7 +19,6 @@ export class CreateBillComponent implements OnInit {
   @Output() cancel = new EventEmitter<any>();
 
   private _total: number;
-  private _totalPayments: number;
   private _amount: number;
   private _discount: number;
 
@@ -42,7 +41,6 @@ export class CreateBillComponent implements OnInit {
 
   private initAmountComputation() {
     this._total = 0;
-    this._totalPayments = 0;
     this._amount = 0;
     this._discount = 0;
   }
@@ -66,9 +64,12 @@ export class CreateBillComponent implements OnInit {
       .map(value => +value ? value : 0)
       .forEach(value => {
         if (value <= 0) {
-          this.form.get('payments').get('content').reset([]);
-          this._totalPayments = 0;
+          this.paymentsContent.reset([]);
         }
+        this.paymentsContent.setValidators([
+          CustomValidators.validPayments(value * 100)
+        ]);
+        this.paymentsContent.updateValueAndValidity();
       });
   }
 
@@ -119,6 +120,10 @@ export class CreateBillComponent implements OnInit {
 
   get amount(): number {
     return this._amount;
+  }
+
+  get paymentsContent(): AbstractControl {
+    return this.form.get('payments').get('content');
   }
 
   isCloseable(): boolean {
