@@ -22,14 +22,17 @@
   <app-comments [comments]="comments"></app-comments>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>
-    <app-error [control]="form.get('information').get('dates')" [error]="'validBillDates'">
-      La date du solde ne peut être antérieure à la date de réalisation.
-    </app-error>
     <app-error [control]="form.get('information').get('dates').get('deliveryDate')" [error]="'past'">
       La date de réalisation ne peut être une date dans le futur.
     </app-error>
+    <app-error [control]="form.get('information').get('dates').get('deliveryDate')" [error]="'required'">
+      La date de réalisation doit être renseignée.
+    </app-error>
     <app-error [control]="form.get('information').get('dates').get('paymentDate')" [error]="'past'">
       La date du solde ne peut être une date dans le futur.
+    </app-error>
+    <app-error [control]="form.get('information').get('dates')" [error]="'validBillDates'">
+      La date du solde ne peut être antérieure à la date de réalisation.
     </app-error>
     <app-error [control]="form.get('information').get('discount')" [error]="'min'">
       Le montant de la réduction ne peut correspondre à une valeur négative.

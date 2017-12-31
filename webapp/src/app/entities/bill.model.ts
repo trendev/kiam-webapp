@@ -7,7 +7,7 @@ export class BillType {
     public static readonly INDIVIDUAL_BILL = 'individualbill';
 }
 
-export abstract class Bill {
+export class Bill {
     reference: string;
     deliveryDate: number;
     cltype: string;

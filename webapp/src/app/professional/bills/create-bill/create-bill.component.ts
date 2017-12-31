@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs/Observable';
 import { CustomValidators, ErrorAggregatorDirective } from '@app/shared';
 import { Component, Input, EventEmitter, Output, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Offering, PaymentMode, OfferingType } from '@app/entities';
+import { Offering, PaymentMode, OfferingType, Bill } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 import { Subject } from 'rxjs/Subject';
 import * as moment from 'moment';
@@ -84,6 +84,7 @@ export class CreateBillComponent implements OnInit {
         ]),
         dates: this.fb.group({
           deliveryDate: new FormControl(moment({ hour: 0 }), [
+            Validators.required,
             CustomValidators.past
           ]),
           paymentDate: new FormControl(moment({ hour: 0 }), [
@@ -146,6 +147,16 @@ export class CreateBillComponent implements OnInit {
   }
 
   save() {
+  }
+
+  prepareSave(): Bill {
+    const value = this.form.getRawValue();
+    const bill = new Bill({
+      amount: this._amount,
+      discount: this._discount,
+      deliveryDate: value.information.deliveryDate.valueOf()
+    });
+    return bill;
   }
 
   cancelBillCreation() {

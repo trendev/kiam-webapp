@@ -62,7 +62,7 @@ export class CustomValidators {
         const deliveryDateControl = control.get('deliveryDate');
         const paymentDate = control.get('paymentDate');
 
-        if (deliveryDateControl.value && !paymentDate.value) {
+        if (!deliveryDateControl.value || !paymentDate.value) {
             return null;
         }
 
