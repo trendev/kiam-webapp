@@ -1,25 +1,31 @@
 <section formGroupName="payments">
   <div>
     <h2 class="mat-title">Paiement</h2>
-    <mat-chip-list>
-      <ng-container [ngSwitch]="remainingState">
-        <ng-template [ngSwitchCase]="'low'">
+
+    <ng-container [ngSwitch]="remainingState">
+      <ng-template [ngSwitchCase]="'low'">
+        <mat-chip-list>
           <mat-chip [color]="'accent'" selected="true" [selectable]="false" (click)="newPayment()">
             <span class="mat-body-2">Reste à régler : {{remaining}} EUR</span>
           </mat-chip>
-        </ng-template>
-        <ng-template [ngSwitchCase]="'high'">
+        </mat-chip-list>
+      </ng-template>
+      <ng-template [ngSwitchCase]="'high'">
+        <mat-chip-list>
           <mat-chip [color]="'warn'" selected="true" [selectable]="false">
             <span class="mat-body-2">Crédit : {{-remaining}} EUR</span>
           </mat-chip>
-        </ng-template>
-        <ng-template ngSwitchDefault>
+        </mat-chip-list>
+      </ng-template>
+      <ng-template ngSwitchDefault>
+        <mat-chip-list>
           <mat-chip [color]="'primary'" selected="true" [selectable]="false">
             <mat-icon>check</mat-icon>
           </mat-chip>
-        </ng-template>
-      </ng-container>
-    </mat-chip-list>
+        </mat-chip-list>
+      </ng-template>
+    </ng-container>
+
   </div>
   <div *ngFor="let payment of payments">
     <mat-form-field>
