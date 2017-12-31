@@ -17,6 +17,7 @@ export class CreateBillComponent implements OnInit {
   @Input() paymentModes: PaymentMode[];
   @Input() billsRefDate: number;
   @Output() cancel = new EventEmitter<any>();
+  @Output() save = new EventEmitter<Bill>();
 
   private _total: number;
   private _amount: number;
@@ -146,17 +147,23 @@ export class CreateBillComponent implements OnInit {
     this.resetRequest$.next();
   }
 
-  save() {
+  saveBill() {
+    const bill = this.prepareSave();
+    this.save.emit(bill);
   }
 
   prepareSave(): Bill {
     const value = this.form.getRawValue();
-    const bill = new Bill({
+
+    return new Bill({
       amount: this._amount,
       discount: this._discount,
-      deliveryDate: value.information.deliveryDate.valueOf()
+      deliveryDate: value.information.dates.deliveryDate.valueOf(),
+      paymentDate: value.information.dates.paymentDate ? value.information.dates.paymentDate.valueOf() : undefined,
+      comments: value.information.comments ||  undefined,
+      purchasedOfferings: value.purchasedOfferings.content,
+      payments: value.payments.content
     });
-    return bill;
   }
 
   cancelBillCreation() {

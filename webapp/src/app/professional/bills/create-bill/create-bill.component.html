@@ -43,7 +43,7 @@
           <button type="button" mat-mini-fab color="warn" (click)="cancelBillCreation()">
             <mat-icon aria-label="Annuler la création de la facture">close</mat-icon>
           </button>
-          <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid"><!-- form.pristine || form.invalid -->
+          <button type="button" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="form.pristine || form.invalid"><!-- form.pristine || form.invalid -->
             <mat-icon aria-label="Sauvegarder et/ou Clore la Facture">{{isCloseable()?'done':'save'}}</mat-icon>
           </button>
         </div>

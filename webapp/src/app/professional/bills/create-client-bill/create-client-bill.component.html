@@ -1,4 +1,4 @@
-<app-create-bill [offerings]="offerings" [paymentModes]="paymentModes" [billsRefDate]="billsRefDate" (cancel)="returnToClientDetail()">
+<app-create-bill [offerings]="offerings" [paymentModes]="paymentModes" [billsRefDate]="billsRefDate" (cancel)="returnToClientDetail()" (save)="save($event)">
     <p>
         Client :
         <b>{{name}}</b>

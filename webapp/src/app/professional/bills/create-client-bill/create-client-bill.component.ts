@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { Offering, PaymentMode } from '@app/entities';
+import { Offering, PaymentMode, Bill, ClientBill, Client } from '@app/entities';
 
 @Component({
   selector: 'app-create-client-bill',
@@ -41,6 +41,15 @@ export class CreateClientBillComponent implements OnInit {
 
   returnToClientDetail() {
     this.router.navigate(['/professional/clients', this.id]);
+  }
+
+  save(bill: Bill) {
+    const cb = new ClientBill(bill);
+    cb.client = new Client({
+      id: this.id
+    });
+    console.log(cb);
+    this.returnToClientDetail();
   }
 
 }

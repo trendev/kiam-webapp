@@ -18,3 +18,4 @@ export * from './professional-businesses-resolver.service';
 export * from './service.service';
 export * from './professional-payment-modes-resolver.service';
 export * from './professional-billls-ref-date-resolver.service';
+export * from './client-bill.service';
