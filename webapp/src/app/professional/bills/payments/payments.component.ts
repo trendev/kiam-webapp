@@ -1,6 +1,6 @@
 import { Component, OnChanges, ViewChild, ViewContainerRef, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl, Validators } from '@angular/forms';
-import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
 import { Payment, PaymentMode } from '@app/entities';
 
 @Component({
@@ -17,7 +17,6 @@ import { Payment, PaymentMode } from '@app/entities';
 export class PaymentsComponent implements OnChanges, OnInit {
   form: FormGroup;
   @ViewChild('errorsTemplate') errorsTemplate;
-  @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
   @Input() errorAggregator: ErrorAggregatorDirective;
 
   @Input() amount: number;
@@ -33,10 +32,7 @@ export class PaymentsComponent implements OnChanges, OnInit {
     this.form.valueChanges.forEach(_ => {
       if (this.form.invalid
         && this.errorsTemplate
-        && this.errorContainer
         && this.errorAggregator) {
-        this.errorContainer.clear();
-        this.errorContainer.createEmbeddedView(this.errorsTemplate);
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
@@ -51,7 +47,7 @@ export class PaymentsComponent implements OnChanges, OnInit {
 
   private setValidators() {
     this.paymentsContent.setValidators([
-      CustomValidators.validPayments(this.amount, this.totalFn)
+      CustomValidators.validPayments(this.amount)
     ]);
     this.paymentsContent.updateValueAndValidity();
   }
@@ -65,11 +61,7 @@ export class PaymentsComponent implements OnChanges, OnInit {
   }
 
   get total(): number {
-    return this.totalFn(this.payments);
-  }
-
-  private totalFn(payments: Payment[]): number {
-    return payments.map(p => p.amount).reduce((a, b) => a + b, 0);
+    return Utils.totalPayments(this.payments);
   }
 
   get remaining(): number {
@@ -98,6 +90,7 @@ export class PaymentsComponent implements OnChanges, OnInit {
 
   removePayment(i: number) {
     this.payments.splice(i, 1);
+    this.paymentsContent.setValue(this.payments);
     this.paymentsContent.markAsDirty();
     this.paymentsContent.markAsTouched();
   }

@@ -1,7 +1,6 @@
 <section formGroupName="payments">
   <div>
     <h2 class="mat-title">Paiement</h2>
-    <ng-container #errorContainer></ng-container>
     <ng-container [ngSwitch]="remainingState">
       <ng-template [ngSwitchCase]="'low'">
         <mat-chip-list>
@@ -13,7 +12,7 @@
       <ng-template [ngSwitchCase]="'high'">
         <mat-chip-list>
           <mat-chip [color]="'warn'" selected="true" [selectable]="false">
-            <span class="mat-body-2">Crédit : {{-remaining}} EUR</span>
+            <span class="mat-body-2">Excédent : {{-remaining}} EUR</span>
           </mat-chip>
         </mat-chip-list>
       </ng-template>

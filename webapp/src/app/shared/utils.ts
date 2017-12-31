@@ -1,5 +1,5 @@
 import { FormGroup, FormArray, AbstractControl, FormBuilder } from '@angular/forms';
-import { Business, CollectiveGroup, Category, PaymentMode } from '@app/entities';
+import { Business, CollectiveGroup, Category, PaymentMode, Payment } from '@app/entities';
 
 export class Utils {
     static extractArrayFromControl<T>(form: AbstractControl, faName: string, mapperFn: (control: AbstractControl) => T): T[] {
@@ -23,6 +23,10 @@ export class Utils {
                 fa.push(createGroupFn(v))
             );
     }
+
+    static totalPayments(payments: Payment[]): number {
+        return payments.map(p => p.amount).reduce((a, b) => a + b, 0);
+      }
 }
 
 export const compareBusinessesFn =

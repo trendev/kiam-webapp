@@ -1,3 +1,4 @@
+import { Utils } from './utils';
 import * as moment from 'moment';
 import { ValidatorFn, AbstractControl, ValidationErrors, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PurchasedOffering, Payment } from '@app/entities';
@@ -160,9 +161,9 @@ export class CustomValidators {
         return errors.length === 0 ? null : { 'validPurchasedOfferings': { value: errors } };
     }
 
-    static validPayments(amount: number, totalFn: (payments: Payment[]) => number): ValidatorFn {
+    static validPayments(amount: number): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
-            const total = totalFn(control.value) * 100;
+            const total = Utils.totalPayments(control.value) * 100;
             console.log(`validPayments: compare ${amount} and ${total}`);
             if (amount > 0 && total !== amount) {
                 const err = {
