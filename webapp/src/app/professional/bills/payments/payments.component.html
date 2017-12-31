@@ -36,16 +36,16 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input name="amount" type="number" matInput min="0" [(ngModel)]="payment.amount" [ngModelOptions]="{standalone: true}">
+      <input name="amount" type="number" matInput min="0" [(ngModel)]="payment.amount" [ngModelOptions]="{standalone: true}" (change)="checkPayments()">
     </mat-form-field>
     <button type="button" mat-mini-fab color="accent" (click)="removePayment(i)" class="half-size">
       <mat-icon aria-label="Supprimer le paiement">close</mat-icon>
     </button>
   </div>
-  
+
   <ng-template #errorsTemplate>
     <app-error [control]="paymentsContent" [error]="'validPayments'">
-      Le total des paiments est supérieur au montant de la facture.
+      Le total des paiements est supérieur au montant de la facture.
     </app-error>
   </ng-template>
 </section>
