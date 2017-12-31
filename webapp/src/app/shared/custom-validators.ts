@@ -164,7 +164,6 @@ export class CustomValidators {
     static validPayments(amount: number): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
             const total = Utils.totalPayments(control.value) * 100;
-            console.log(`validPayments: compare ${amount} and ${total}`);
             if (amount > 0 && total !== amount) {
                 const err = {
                     amount: amount,
