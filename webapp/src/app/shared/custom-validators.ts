@@ -160,8 +160,9 @@ export class CustomValidators {
         return errors.length === 0 ? null : { 'validPurchasedOfferings': { value: errors } };
     }
 
-    static validPayments(amount: number, total: number): ValidatorFn {
+    static validPayments(amount: number, totalFn: (payments: Payment[]) => number): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
+            const total = totalFn(control.value) * 100;
             console.log(`validPayments: compare ${amount} and ${total}`);
             if (amount > 0 && total !== amount) {
                 const err = {
@@ -169,8 +170,8 @@ export class CustomValidators {
                     total: total
                 };
                 return total > amount ?
-                    { 'validPaymentsTotalHigher': { value: err } }
-                    : null;
+                    { 'validPayments': { value: err } }
+                    : null; // bill not closeable but valid
             }
             return null;
         };

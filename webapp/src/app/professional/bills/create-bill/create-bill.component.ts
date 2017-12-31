@@ -49,7 +49,7 @@ export class CreateBillComponent implements OnInit {
 
   ngOnInit() {
     this.form.valueChanges.forEach(_ => {
-      if (this.form.invalid && this.errorAggregator) {
+      if (this.errorAggregator) { // clear the errorAggregator every time
         this.errorAggregator.viewContainerRef.clear();
       }
     });
@@ -124,8 +124,8 @@ export class CreateBillComponent implements OnInit {
   isCloseable(): boolean {
     return this._amount <= 0
       ? true
-      : this._amount === this._totalPayments
-      && this.form.get('payments').get('content').value.length
+      : this.form.get('payments').get('content').value.length
+      // && this._amount === this._totalPayments
       && this.form.get('information').get('dates').get('paymentDate').value;
   }
 

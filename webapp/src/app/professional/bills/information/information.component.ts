@@ -1,4 +1,4 @@
-import { Component, OnChanges, ViewChild, Input, ViewContainerRef } from '@angular/core';
+import { Component, OnChanges, ViewChild, Input, ViewContainerRef, OnInit } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
@@ -22,7 +22,7 @@ import { Moment } from 'moment';
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ]
 })
-export class InformationComponent implements OnChanges {
+export class InformationComponent implements OnChanges, OnInit {
   form: FormGroup;
   @ViewChild('errorsTemplate') errorsTemplate;
   @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
@@ -33,7 +33,7 @@ export class InformationComponent implements OnChanges {
   maxDate = moment({ hour: 0 });
   constructor(private parent: FormGroupDirective) { }
 
-  ngOnChanges() {
+  ngOnInit() {
     if (!this.parent.form) {
       throw new Error(`PackContentComponent#ngOnChanges(): this.parent form should not be undefined or null`);
     }
@@ -49,7 +49,9 @@ export class InformationComponent implements OnChanges {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
+  }
 
+  ngOnChanges() {
     this.minDate = this.billsRefDate ? moment(this.billsRefDate) : undefined;
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnChanges, ViewChild, ViewContainerRef, Input } from '@angular/core';
+import { Component, OnChanges, ViewChild, ViewContainerRef, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators } from '@app/shared';
 import { Payment, PaymentMode } from '@app/entities';
@@ -14,7 +14,7 @@ import { Payment, PaymentMode } from '@app/entities';
     }
   ]
 })
-export class PaymentsComponent implements OnChanges {
+export class PaymentsComponent implements OnChanges, OnInit {
   form: FormGroup;
   @ViewChild('errorsTemplate') errorsTemplate;
   @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
@@ -25,12 +25,11 @@ export class PaymentsComponent implements OnChanges {
 
   constructor(private parent: FormGroupDirective) { }
 
-  ngOnChanges() {
+  ngOnInit() {
     if (!this.parent.form) {
       throw new Error(`PaymentsComponent#ngOnChanges(): this.parent form should not be undefined or null`);
     }
     this.form = this.parent.form;
-
     this.form.valueChanges.forEach(_ => {
       if (this.form.invalid
         && this.errorsTemplate
@@ -41,8 +40,18 @@ export class PaymentsComponent implements OnChanges {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
+    this.setValidators();
+  }
+
+  ngOnChanges() {
+    if (this.form) {
+      this.setValidators();
+    }
+  }
+
+  private setValidators() {
     this.paymentsContent.setValidators([
-      CustomValidators.validPayments(this.amount, this.total)
+      CustomValidators.validPayments(this.amount, this.totalFn)
     ]);
     this.paymentsContent.updateValueAndValidity();
   }
@@ -56,7 +65,11 @@ export class PaymentsComponent implements OnChanges {
   }
 
   get total(): number {
-    return this.payments.map(p => p.amount).reduce((a, b) => a + b, 0);
+    return this.totalFn(this.payments);
+  }
+
+  private totalFn(payments: Payment[]): number {
+    return payments.map(p => p.amount).reduce((a, b) => a + b, 0);
   }
 
   get remaining(): number {
@@ -85,6 +98,18 @@ export class PaymentsComponent implements OnChanges {
 
   removePayment(i: number) {
     this.payments.splice(i, 1);
+    this.paymentsContent.markAsDirty();
+    this.paymentsContent.markAsTouched();
+  }
+
+  checkPayments() {
+    const _payments = this.payments.slice();
+    this.paymentsContent.setValue(_payments.map(
+      pm => new PaymentMode({
+        amount: pm.amount <= 0 ? 0 : pm.amount,
+        paymentMode: pm.paymentMode
+      })
+    ));
     this.paymentsContent.markAsDirty();
     this.paymentsContent.markAsTouched();
   }

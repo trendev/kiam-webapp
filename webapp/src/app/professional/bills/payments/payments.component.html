@@ -1,7 +1,7 @@
 <section formGroupName="payments">
   <div>
     <h2 class="mat-title">Paiement</h2>
-
+    <ng-container #errorContainer></ng-container>
     <ng-container [ngSwitch]="remainingState">
       <ng-template [ngSwitchCase]="'low'">
         <mat-chip-list>
@@ -42,7 +42,7 @@
       <mat-icon aria-label="Supprimer le paiement">close</mat-icon>
     </button>
   </div>
-  <ng-container #errorContainer></ng-container>
+  
   <ng-template #errorsTemplate>
     <app-error [control]="paymentsContent" [error]="'validPayments'">
       Le total des paiments est supérieur au montant de la facture.
