@@ -27,7 +27,7 @@
     </ng-container>
 
   </div>
-  <div *ngFor="let payment of payments">
+  <div *ngFor="let payment of payments; let i=index;">
     <mat-form-field>
       <mat-select placeholder="Moyen de paiement" [(value)]="payment.paymentMode">
         <mat-option *ngFor="let pm of paymentModes" [value]="pm">
@@ -38,6 +38,9 @@
     <mat-form-field>
       <input name="amount" type="number" matInput min="0" [(ngModel)]="payment.amount" [ngModelOptions]="{standalone: true}">
     </mat-form-field>
+    <button type="button" mat-mini-fab color="accent" (click)="removePayment(i)" class="half-size">
+      <mat-icon aria-label="Supprimer le paiement">close</mat-icon>
+    </button>
   </div>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>

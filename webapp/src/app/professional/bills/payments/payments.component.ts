@@ -83,4 +83,10 @@ export class PaymentsComponent implements OnChanges {
     this.paymentsContent.markAsTouched();
   }
 
+  removePayment(i: number) {
+    this.payments.splice(i, 1);
+    this.paymentsContent.markAsDirty();
+    this.paymentsContent.markAsTouched();
+  }
+
 }
