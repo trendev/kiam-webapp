@@ -26,7 +26,23 @@ export class Utils {
 
     static totalPayments(payments: Payment[]): number {
         return payments.map(p => p.amount).reduce((a, b) => a + b, 0);
-      }
+    }
+
+    static xnorFn(val1: boolean, val2: boolean): boolean {
+        return val1 === val2;
+    }
+
+    static hasPayments(form: FormGroup): boolean {
+        return form.get('payments').get('content').value.length !== 0;
+    }
+
+    static hasPaymentDate(form: FormGroup): boolean {
+        return form.get('information').get('dates').get('paymentDate').value !== null;
+    }
+
+    static hasValidPaymentState(form: FormGroup): boolean {
+        return Utils.xnorFn(Utils.hasPayments(form), Utils.hasPaymentDate(form));
+    }
 }
 
 export const compareBusinessesFn =

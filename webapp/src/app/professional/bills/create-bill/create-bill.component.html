@@ -9,7 +9,6 @@
       </mat-card-subtitle>
 
       <mat-card-content>
-        {{form.getRawValue() | json}}
         <div class="bill-content">
           <div class="purchased-offerings">
             <app-purchased-offerings [offerings]="offerings" [resetRequest$]="resetRequest$" [errorAggregator]="errorAggregator" (total)="total = $event"></app-purchased-offerings>
@@ -43,7 +42,7 @@
           <button type="button" mat-mini-fab color="warn" (click)="cancelBillCreation()">
             <mat-icon aria-label="Annuler la création de la facture">close</mat-icon>
           </button>
-          <button type="button" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="form.pristine || form.invalid"><!-- form.pristine || form.invalid -->
+          <button type="button" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
             <mat-icon aria-label="Sauvegarder et/ou Clore la Facture">{{isCloseable()?'done':'save'}}</mat-icon>
           </button>
         </div>

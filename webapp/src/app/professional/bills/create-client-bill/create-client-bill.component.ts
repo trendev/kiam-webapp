@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Offering, PaymentMode, Bill, ClientBill, Client } from '@app/entities';
+import { ClientBillService } from '@app/core';
 
 @Component({
   selector: 'app-create-client-bill',
@@ -15,7 +16,8 @@ export class CreateClientBillComponent implements OnInit {
   paymentModes: PaymentMode[];
   billsRefDate: number;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private clientBillService: ClientBillService,
+    private route: ActivatedRoute,
     private router: Router) {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -49,7 +51,10 @@ export class CreateClientBillComponent implements OnInit {
       id: this.id
     });
     console.log(cb);
-    this.returnToClientDetail();
+    this.clientBillService.create(cb).subscribe(
+      _cb => this.returnToClientDetail(),
+      // TODO: handle this (check the status code, etc)
+      e => console.error('Impossible de sauvegarder la nouvelle facture du client sur le serveur'));
   }
 
 }

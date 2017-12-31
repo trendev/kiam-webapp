@@ -1,6 +1,6 @@
-import { CustomValidators, ErrorAggregatorDirective } from '@app/shared';
+import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
 import { Component, Input, EventEmitter, Output, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Offering, PaymentMode, OfferingType, Bill } from '@app/entities';
+import { Offering, PaymentMode, OfferingType, Bill, Payment } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
@@ -131,9 +131,13 @@ export class CreateBillComponent implements OnInit {
   isCloseable(): boolean {
     return this._amount <= 0
       ? true
-      : this.form.get('payments').get('content').value.length
-      // && this._amount === this._totalPayments
+      : this.paymentsContent.value.length
       && this.form.get('information').get('dates').get('paymentDate').value;
+  }
+
+  isValid(): boolean {
+    return !(this.form.pristine || this.form.invalid)
+      && Utils.hasValidPaymentState(this.form);
   }
 
   revert() {
@@ -160,9 +164,12 @@ export class CreateBillComponent implements OnInit {
       discount: this._discount,
       deliveryDate: value.information.dates.deliveryDate.valueOf(),
       paymentDate: value.information.dates.paymentDate ? value.information.dates.paymentDate.valueOf() : undefined,
-      comments: value.information.comments ||  undefined,
+      comments: value.information.comments || undefined,
       purchasedOfferings: value.purchasedOfferings.content,
-      payments: value.payments.content
+      payments: value.payments.content.map(pm => new Payment({
+        amount: pm.amount * 100,
+        paymentMode: pm.payementMode
+      }))
     });
   }
 
