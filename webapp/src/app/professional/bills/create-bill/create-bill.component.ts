@@ -49,7 +49,7 @@ export class CreateBillComponent implements OnInit {
 
   ngOnInit() {
     this.form.valueChanges.forEach(_ => {
-      if (this.errorAggregator) { // clear the errorAggregator every time
+      if (this.form.invalid && this.errorAggregator) { // clear the errorAggregator every time
         this.errorAggregator.viewContainerRef.clear();
       }
     });
