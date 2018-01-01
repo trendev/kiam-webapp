@@ -130,9 +130,9 @@ export class CreateBillComponent implements OnInit {
 
   isCloseable(): boolean {
     return this._amount <= 0
-      ? true
-      : this.paymentsContent.value.length
-      && this.form.get('information').get('dates').get('paymentDate').value;
+      ? this.form.get('information').get('dates').get('paymentDate').value
+      : ((Utils.totalPayments(this.paymentsContent.value) * 100 === this._amount)
+        && this.form.get('information').get('dates').get('paymentDate').value);
   }
 
   isValid(): boolean {

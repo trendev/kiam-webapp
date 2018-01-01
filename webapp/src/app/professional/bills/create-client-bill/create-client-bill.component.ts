@@ -50,7 +50,6 @@ export class CreateClientBillComponent implements OnInit {
     cb.client = new Client({
       id: this.id
     });
-    console.log(cb);
     this.clientBillService.create(cb).subscribe(
       _cb => this.returnToClientDetail(),
       // TODO: handle this (check the status code, etc)
