@@ -29,7 +29,7 @@ export class ClientBillsListComponent implements OnInit {
     this.billsModel = this.bills.sort(// inverse order : most recent first
       (b1, b2) => {
         const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
-        return (!diff) ? -b1.reference.localeCompare(b2.reference) : diff;
+        return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
       }
     );
     this.datasource =

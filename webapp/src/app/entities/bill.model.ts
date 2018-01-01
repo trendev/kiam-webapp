@@ -15,6 +15,7 @@ export class Bill {
     currency: string;
     discount: number;
     paymentDate: number;
+    issueDate: number;
     comments: string[];
     payments: Payment[];
     purchasedOfferings: PurchasedOffering[];
