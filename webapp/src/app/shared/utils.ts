@@ -42,7 +42,7 @@ export class Utils {
 
     static hasValidPaymentState(form: FormGroup): boolean {
         return !(Utils.hasPaymentDate(form)
-            && (Utils.totalPayments(form.get('payments').get('content').value) * 100
+            && (Utils.totalPayments(form.get('payments').get('content').value)
                 < form.get('information').get('amount').value
             )
         );
