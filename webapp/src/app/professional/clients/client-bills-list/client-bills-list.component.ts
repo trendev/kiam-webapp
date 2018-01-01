@@ -26,8 +26,11 @@ export class ClientBillsListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.billsModel = this.bills.sort(
-      (b1, b2) => -moment(b1.deliveryDate).diff(moment(b2.deliveryDate)) // inverse order : most recent first
+    this.billsModel = this.bills.sort(// inverse order : most recent first
+      (b1, b2) => {
+        const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
+        return (!diff) ? -b1.reference.localeCompare(b2.reference) : diff;
+      }
     );
     this.datasource =
       new MatTableDataSource<ClientBill>(this.billsModel);
