@@ -41,7 +41,11 @@ export class Utils {
     }
 
     static hasValidPaymentState(form: FormGroup): boolean {
-        return Utils.xnorFn(Utils.hasPayments(form), Utils.hasPaymentDate(form));
+        return !(Utils.hasPaymentDate(form)
+            && (Utils.totalPayments(form.get('payments').get('content').value) * 100
+                < form.get('information').get('amount').value
+            )
+        );
     }
 }
 
