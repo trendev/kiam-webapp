@@ -10,11 +10,11 @@
 
       <mat-card-content>
         <div class="bill-content">
-          <div class="purchased-offerings">
+          <div>
             <app-purchased-offerings [offerings]="offerings" [resetRequest$]="resetRequest$" [errorAggregator]="errorAggregator" (total)="total = $event"></app-purchased-offerings>
           </div>
 
-          <div class="information">
+          <div>
             <app-information [billsRefDate]="billsRefDate" [errorAggregator]="errorAggregator"></app-information>
           </div>
 
@@ -24,7 +24,7 @@
             <mat-error>Sélectionnez vos moyens de paiement depuis votre profil.</mat-error>
           </ng-container>
           <ng-template #elseBlock>
-            <div class="payments" *ngIf="amount > 0">
+            <div *ngIf="amount > 0">
               <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator"></app-payments>
             </div>
           </ng-template>

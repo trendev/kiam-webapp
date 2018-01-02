@@ -3,6 +3,10 @@
     align-items: center;
 }
 
+.comments{
+    max-height: 170px;
+}
+
 .fill-space {
     flex: 1 1 auto;
 }
@@ -14,3 +18,4 @@
 .full-width {
     width: 100%;
 }
+

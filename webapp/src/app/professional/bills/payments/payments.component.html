@@ -34,7 +34,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="amount">
       <input name="amount" type="number" matInput min="0" [(ngModel)]="payment.amount" [ngModelOptions]="{standalone: true}" (change)="checkPayments()">
     </mat-form-field>
     <button type="button" mat-mini-fab color="accent" (click)="removePayment(i)" class="half-size">
