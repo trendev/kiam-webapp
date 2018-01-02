@@ -32,7 +32,8 @@ export class ErrorHandlerService {
         console.warn('ErrorHandlerService#handle => ' + this.errmsg);
       }
     }
-    return Observable.throw(this.errmsg);
+    // return Observable.throw(this.errmsg);
+    return Observable.throw(err);
   }
 
 }
