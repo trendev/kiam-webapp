@@ -1,5 +1,5 @@
 import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
-import { Component, Input, EventEmitter, Output, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild, OnInit, OnChanges, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { Offering, PaymentMode, OfferingType, Bill, Payment } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -12,7 +12,7 @@ import * as moment from 'moment';
   templateUrl: './create-bill.component.html',
   styleUrls: ['./create-bill.component.scss']
 })
-export class CreateBillComponent implements OnInit {
+export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
   @Input() offerings: Offering[];
   @Input() paymentModes: PaymentMode[];
   @Input() billsRefDate: number;
@@ -35,7 +35,7 @@ export class CreateBillComponent implements OnInit {
 
   @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
-  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     this.initAmountComputation();
     this.form = this.createForm();
   }
@@ -47,7 +47,6 @@ export class CreateBillComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.form.valueChanges.forEach(_ => {
       if (this.form.invalid && this.errorAggregator) { // clear the errorAggregator every time
         this.errorAggregator.viewContainerRef.clear();
@@ -73,12 +72,21 @@ export class CreateBillComponent implements OnInit {
         ]);
         this.paymentsContent.updateValueAndValidity();
       });
+  }
 
+  ngOnChanges() {
+    this.setDatesValidators();
+  }
+
+  public ngDoCheck(): void {
+    this.cdr.detectChanges();
+  }
+
+  setDatesValidators() {
     this.form.get('information').get('dates').setValidators(Validators.compose([
       CustomValidators.validDeliveryPaymentDates,
       CustomValidators.validBillDates(this.billsRefDate)
-    ])
-    );
+    ]));
   }
 
   createForm(): FormGroup {
