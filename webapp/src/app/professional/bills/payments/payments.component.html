@@ -1,5 +1,5 @@
 <section formGroupName="payments">
-  <div>
+  <div class="states">
     <ng-container [ngSwitch]="remainingState">
       <ng-template [ngSwitchCase]="'low'">
         <mat-chip-list>
@@ -23,7 +23,6 @@
         </mat-chip-list>
       </ng-template>
     </ng-container>
-
   </div>
   <div *ngFor="let payment of payments; let i=index;">
     <mat-form-field>
