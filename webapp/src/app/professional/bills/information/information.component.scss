@@ -1,0 +1,9 @@
+.fields {
+    width: 210px;
+}
+
+@media all and (max-device-width: 720px) {
+    .fields {
+        width: 100%;
+    }
+}
