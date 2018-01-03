@@ -47,6 +47,7 @@ export class CreateBillComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.form.valueChanges.forEach(_ => {
       if (this.form.invalid && this.errorAggregator) { // clear the errorAggregator every time
         this.errorAggregator.viewContainerRef.clear();
@@ -72,6 +73,12 @@ export class CreateBillComponent implements OnInit {
         ]);
         this.paymentsContent.updateValueAndValidity();
       });
+
+    this.form.get('information').get('dates').setValidators(Validators.compose([
+      CustomValidators.validDeliveryPaymentDates,
+      CustomValidators.validBillDates(this.billsRefDate)
+    ])
+    );
   }
 
   createForm(): FormGroup {
@@ -91,9 +98,7 @@ export class CreateBillComponent implements OnInit {
           paymentDate: new FormControl(moment({ hour: 0 }), [
             CustomValidators.past
           ])
-        }, {
-            validator: CustomValidators.validBillDates
-          }),
+        }),
         comments: this.fb.array([],
           CustomValidators.validComments(this.commentsValidators))
       }),

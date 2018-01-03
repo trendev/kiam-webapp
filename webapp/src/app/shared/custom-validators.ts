@@ -58,7 +58,7 @@ export class CustomValidators {
             ? null : { 'future': { value: control.value } };
     }
 
-    static validBillDates(control: FormGroup): ValidationErrors | null {
+    static validDeliveryPaymentDates(control: FormGroup): ValidationErrors | null {
         const deliveryDateControl = control.get('deliveryDate');
         const paymentDate = control.get('paymentDate');
 
@@ -70,8 +70,26 @@ export class CustomValidators {
             && paymentDate.value
             && moment(deliveryDateControl.value).isSameOrBefore(moment(paymentDate.value))
             ? null : {
-                'validBillDates': { value: 'deliveryDate is before paymentDate' }
+                'validDeliveryPaymentDates': { value: 'paymentDate is before deliveryDate' }
             };
+    }
+
+    static validBillDates(billsRefDate: number): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } => {
+
+            const deliveryDateControl = control.get('deliveryDate');
+
+            if (!billsRefDate) {
+                return null;
+            }
+
+            return deliveryDateControl.value
+                && moment(deliveryDateControl.value).isSameOrAfter(moment(billsRefDate))
+                ? null : {
+                    'validBillDates': { value: 'deliveryDate is before billsRefDate' }
+                };
+
+        };
     }
 
     static validCompanyID(control: AbstractControl): ValidationErrors | null {

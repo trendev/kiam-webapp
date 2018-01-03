@@ -32,6 +32,9 @@
       La date du solde ne peut être une date dans le futur.
     </app-error>
     <app-error [control]="form.get('information').get('dates')" [error]="'validBillDates'">
+      La date de réalisation ne peut être antérieure à la date limite de facturation ({{billsRefDate | date:'shortDate':'':'fr'}}).
+    </app-error>
+    <app-error [control]="form.get('information').get('dates')" [error]="'validDeliveryPaymentDates'">
       La date du solde ne peut être antérieure à la date de réalisation.
     </app-error>
     <app-error [control]="form.get('information').get('discount')" [error]="'min'">
