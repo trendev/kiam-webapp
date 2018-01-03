@@ -15,7 +15,7 @@ export class ServicesComponentComponent implements OnChanges {
   offeringsModel: OfferingModel[];
 
   displayedColumns = [
-    'id', 'name', 'price', 'duration', 'businesses'];
+    'id', 'name', 'shortname', 'price', 'duration', 'businesses'];
   datasource: MatTableDataSource<OfferingModel>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -38,6 +38,7 @@ export class ServicesComponentComponent implements OnChanges {
       return {
         id: o.id || 0,
         name: o.name || '',
+        shortname: o.shortname || '',
         price: o.price || 0,
         duration: o.duration || 0,
         businesses: Utils.getBusinesses(o.businesses)
@@ -63,6 +64,7 @@ export class ServicesComponentComponent implements OnChanges {
 interface OfferingModel {
   id: number;
   name: string;
+  shortname: string;
   price: number;
   duration: number;
   businesses: string;

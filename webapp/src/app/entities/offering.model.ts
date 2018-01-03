@@ -9,6 +9,7 @@ export abstract class Offering {
     id: number;
     cltype: string;
     name: string;
+    shortname: string;
     price: number;
     duration: number;
     businesses: Business[];
