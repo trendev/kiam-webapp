@@ -24,7 +24,7 @@
       </ng-template>
     </ng-container>
   </div>
-  <div *ngFor="let payment of payments; let i=index;">
+  <div class="payments" *ngFor="let payment of payments; let i=index;">
     <mat-form-field>
       <mat-select placeholder="Moyen de paiement" [(value)]="payment.paymentMode">
         <mat-option *ngFor="let pm of paymentModes" [value]="pm">

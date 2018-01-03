@@ -7,5 +7,22 @@
 }
 
 .states {
-    padding: 0px 0px 16px 0px;
+    padding: 0px 0px 8px 0px;
+}
+
+.payments {
+    width: auto;
+}
+
+@media all and (max-device-width: 720px) {
+    .amount{
+        max-width: 30px;
+        padding-left: 4px;
+    }
+
+    .payments{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
 }
