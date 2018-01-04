@@ -48,7 +48,7 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
 
   ngOnInit() {
     this.form.valueChanges.forEach(_ => {
-      if (this.form.invalid && this.errorAggregator) { // clear the errorAggregator every time
+      if (this.form.invalid && this.errorAggregator) {
         this.errorAggregator.viewContainerRef.clear();
       }
     });

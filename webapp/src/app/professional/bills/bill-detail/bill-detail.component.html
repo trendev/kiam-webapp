@@ -1,3 +1,73 @@
-<p>
-  bill-detail works!
-</p>
+<div class="container">
+  <mat-card>
+    <form [formGroup]="form" novalidate>
+      <mat-card-title>
+        Nouvelle facture
+      </mat-card-title>
+      <mat-card-subtitle>
+        <ng-content></ng-content>
+      </mat-card-subtitle>
+
+      <mat-card-content>
+        <mat-accordion multi="false">
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Offres souscrites
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-fixed-purchased-offerings></app-fixed-purchased-offerings>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Détail
+              </mat-panel-title>
+              <mat-panel-description *ngIf="amount > 0">
+                ( Montant : {{amount / 100}} EUR )
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <app-information [billsRefDate]="billsRefDate" [errorAggregator]="errorAggregator"></app-information>
+          </mat-expansion-panel>
+
+
+          <ng-container *ngIf="paymentModes.length === 0;else elseBlock">
+            <mat-error>Pour le moment, vous n'avez sélectionné aucun moyen de paiement et vous êtes donc dans l'incapacité de pouvoir
+              éditer une facture avec des paiements...</mat-error>
+            <mat-error>Sélectionnez vos moyens de paiement depuis votre profil.</mat-error>
+          </ng-container>
+          <ng-template #elseBlock>
+            <mat-expansion-panel *ngIf="amount > 0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Paiement
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator"></app-payments>
+            </mat-expansion-panel>
+          </ng-template>
+
+        </mat-accordion>
+
+      </mat-card-content>
+
+      <ng-container appErrorAggregator></ng-container>
+      <mat-card-actions>
+        <div class="form-button-container">
+          <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
+            <mat-icon aria-label="Annuler les modification">undo</mat-icon>
+          </button>
+          <button type="button" mat-mini-fab color="warn" (click)="cancelBillCreation()">
+            <mat-icon aria-label="Annuler la création de la facture">close</mat-icon>
+          </button>
+          <button type="button" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
+            <mat-icon aria-label="Sauvegarder et/ou Clore la Facture">{{isCloseable()?'done':'save'}}</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+
+</div>

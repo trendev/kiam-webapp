@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { PaymentMode, Bill } from '@app/entities';
+import { FormGroup, Validators, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
+import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-bill-detail',
@@ -6,10 +10,99 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bill-detail.component.scss']
 })
 export class BillDetailComponent implements OnInit {
+  @Input() paymentModes: PaymentMode[];
+  @Input() bill: Bill;
+  @Output() cancel = new EventEmitter<any>();
+  @Output() save = new EventEmitter<Bill>();
 
-  constructor() { }
+  private _amount: number;
+
+  form: FormGroup;
+
+  private commentsValidators = [
+    Validators.required,
+    CustomValidators.blankStringForbidden,
+    Validators.maxLength(200)
+  ];
+
+  @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
+
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
+    this._amount = this.bill.amount;
+
+    this.form = this.createForm();
+
+    this.form.valueChanges.forEach(_ => {
+      if (this.form.invalid && this.errorAggregator) {
+        this.errorAggregator.viewContainerRef.clear();
+      }
+    });
   }
+
+  get amount(): number {
+    return this._amount;
+  }
+
+  get paymentsContent(): AbstractControl {
+    return this.form.get('payments').get('content');
+  }
+
+  isClosedBill() {
+    return this.bill.paymentDate ? true : false;
+  }
+
+  createForm(): FormGroup {
+    const fg = this.fb.group({
+      information: this.fb.group({
+        amount: new FormControl({ value: this._amount / 100, disabled: true }),
+        discount: new FormControl({ value: this.bill.discount / 100, disabled: true }),
+        dates: this.fb.group({
+          deliveryDate: new FormControl({ value: moment(this.bill.deliveryDate), disabled: true }),
+          paymentDate: new FormControl(this.isClosedBill() ? moment(this.bill.paymentDate) : moment({ hour: 0 }), [
+            CustomValidators.past
+          ])
+        }, { validator: CustomValidators.validDeliveryPaymentDates }),
+        comments: this.fb.array(this.bill.comments || [],
+          CustomValidators.validComments(this.commentsValidators))
+      }),
+      purchasedOfferings: this.fb.group({
+        content: new FormControl(this.bill.purchasedOfferings)
+      }),
+      payments: this.fb.group({
+        content: new FormControl(this.bill.payments || [], [
+          CustomValidators.validPayments(this._amount * 100)])
+      })
+    });
+    return fg;
+  }
+
+  isCloseable(): boolean {
+    return this._amount <= 0
+      ? this.form.get('information').get('dates').get('paymentDate').value
+      : ((Utils.totalPayments(this.paymentsContent.value) * 100 === this._amount)
+        && this.form.get('information').get('dates').get('paymentDate').value);
+  }
+
+  isValid(): boolean {
+    return !(this.form.pristine || this.form.invalid)
+      && Utils.hasValidPaymentState(this.form);
+  }
+
+  revert() {
+    this.form.reset(this.createForm().getRawValue());
+
+    // rebuilds the controls of the comments group if they have been modified/removed
+    const information = this.form.get('information') as FormGroup;
+    information.setControl('comments', this.fb.array(this.bill.comments || [], CustomValidators.validComments(this.commentsValidators)));
+  }
+
+  cancelBillCreation() {
+    this.cancel.emit();
+  }
+
+
 
 }

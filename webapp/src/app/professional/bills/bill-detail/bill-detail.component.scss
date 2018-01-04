@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+mat-card {
+    margin: 10px; // padding: 10px 5px 10px 5px;
+    width: 100%;
+}
+
+.bill-content {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.form-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-button-container>* {
+    margin: 5px;
+}
+
+@media all and (max-device-width: 600px) {
+    .bill-content {
+        display: flex;
+        flex-flow: column;
+    }
+}
