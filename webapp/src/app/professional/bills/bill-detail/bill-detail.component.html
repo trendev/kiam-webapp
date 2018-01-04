@@ -5,6 +5,7 @@
         Facture
       </mat-card-title>
       <mat-card-subtitle>
+        <p>Référence: {{bill.reference}}</p>
         <ng-content></ng-content>
       </mat-card-subtitle>
 
@@ -32,21 +33,19 @@
             <app-information [billsRefDate]="billsRefDate" [errorAggregator]="errorAggregator"></app-information>
           </mat-expansion-panel>
 
-
-          <ng-container *ngIf="paymentModes.length === 0;else elseBlock">
-            <mat-error>Pour le moment, vous n'avez sélectionné aucun moyen de paiement et vous êtes donc dans l'incapacité de pouvoir
-              éditer une facture avec des paiements...</mat-error>
-            <mat-error>Sélectionnez vos moyens de paiement depuis votre profil.</mat-error>
-          </ng-container>
-          <ng-template #elseBlock>
-            <mat-expansion-panel *ngIf="amount > 0">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Paiement
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+          <mat-expansion-panel *ngIf="amount > 0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Paiement
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-container *ngIf="isClosedBill;else elseBlock">
+              <p>Paiement : OK</p>
+            </ng-container>
+            <ng-template #elseBlock>
               <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator"></app-payments>
-            </mat-expansion-panel>
+            </ng-template>
+          </mat-expansion-panel>
 
         </mat-accordion>
 

@@ -65,9 +65,10 @@ export class BillDetailComponent implements OnInit, DoCheck {
         discount: new FormControl({ value: this.bill.discount / 100, disabled: true }),
         dates: this.fb.group({
           deliveryDate: new FormControl({ value: moment(this.bill.deliveryDate), disabled: true }),
-          paymentDate: new FormControl(this.isClosedBill() ? moment(this.bill.paymentDate) : moment({ hour: 0 }), [
-            CustomValidators.past
-          ])
+          paymentDate: new FormControl({
+            value: this.isClosedBill() ? moment(this.bill.paymentDate) : moment({ hour: 0 }),
+            disabled: this.isClosedBill()
+          })
         }, { validator: CustomValidators.validDeliveryPaymentDates }),
         comments: this.fb.array(this.bill.comments || [],
           CustomValidators.validComments(this.commentsValidators))
