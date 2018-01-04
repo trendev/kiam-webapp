@@ -61,7 +61,7 @@ export class InformationComponent implements OnChanges, OnInit {
 
   get deliveryDate(): Moment {
     const value = this.form.get('information').get('dates').get('deliveryDate').value;
-    return value ? moment(value) : undefined;
+    return value ? value : undefined;
   }
 
 }

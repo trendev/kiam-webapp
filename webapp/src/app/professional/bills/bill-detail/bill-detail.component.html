@@ -2,7 +2,7 @@
   <mat-card>
     <form [formGroup]="form" novalidate>
       <mat-card-title>
-        Nouvelle facture
+        Facture
       </mat-card-title>
       <mat-card-subtitle>
         <ng-content></ng-content>
@@ -47,7 +47,6 @@
               </mat-expansion-panel-header>
               <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator"></app-payments>
             </mat-expansion-panel>
-          </ng-template>
 
         </mat-accordion>
 

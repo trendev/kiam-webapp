@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef, DoCheck } from '@angular/core';
 import { PaymentMode, Bill } from '@app/entities';
 import { FormGroup, Validators, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
 import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
@@ -9,7 +9,7 @@ import * as moment from 'moment';
   templateUrl: './bill-detail.component.html',
   styleUrls: ['./bill-detail.component.scss']
 })
-export class BillDetailComponent implements OnInit {
+export class BillDetailComponent implements OnInit, DoCheck {
   @Input() paymentModes: PaymentMode[];
   @Input() bill: Bill;
   @Output() cancel = new EventEmitter<any>();
@@ -27,7 +27,7 @@ export class BillDetailComponent implements OnInit {
 
   @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -40,6 +40,10 @@ export class BillDetailComponent implements OnInit {
         this.errorAggregator.viewContainerRef.clear();
       }
     });
+  }
+
+  public ngDoCheck(): void {
+    this.cdr.detectChanges();
   }
 
   get amount(): number {
