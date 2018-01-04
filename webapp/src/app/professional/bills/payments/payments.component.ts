@@ -1,4 +1,5 @@
-import { Component, ViewChild, ViewContainerRef, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Component, ViewChild, ViewContainerRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
 import { Payment, PaymentMode } from '@app/entities';
@@ -14,13 +15,15 @@ import { Payment, PaymentMode } from '@app/entities';
     }
   ]
 })
-export class PaymentsComponent implements OnInit {
+export class PaymentsComponent implements OnInit, OnDestroy {
   form: FormGroup;
   @ViewChild('errorsTemplate') errorsTemplate;
   @Input() errorAggregator: ErrorAggregatorDirective;
 
   @Input() amount: number;
   @Input() paymentModes: PaymentMode[];
+
+  sub: Subscription;
 
   constructor(private parent: FormGroupDirective) { }
 
@@ -29,13 +32,19 @@ export class PaymentsComponent implements OnInit {
       throw new Error(`PaymentsComponent#ngOnChanges(): this.parent form should not be undefined or null`);
     }
     this.form = this.parent.form;
-    this.form.valueChanges.forEach(_ => {
+    this.sub = this.form.valueChanges.subscribe(_ => {
       if (this.form.invalid
         && this.errorsTemplate
         && this.errorAggregator) {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
+  }
+
+  ngOnDestroy() {
+    if (!this.sub.closed) {
+      this.sub.unsubscribe();
+    }
   }
 
   get paymentsContent(): AbstractControl {
