@@ -9,6 +9,8 @@ import { PurchasedOfferingsComponent } from './purchased-offerings/purchased-off
 import { InformationComponent } from './information/information.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ClientBillResolverService } from './client-bill-resolver.service';
+import { ClientBillDetailComponent } from './client-bill-detail/client-bill-detail.component';
+import { BillDetailComponent } from './bill-detail/bill-detail.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import { ClientBillResolverService } from './client-bill-resolver.service';
     CreateClientBillComponent,
     PurchasedOfferingsComponent,
     InformationComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    ClientBillDetailComponent,
+    BillDetailComponent
   ],
   providers: [ClientBillResolverService]
 })

@@ -43,7 +43,7 @@ export class ClientService {
       .map(clientBills => {
         const bills = clientBills.filter(cb => cb.reference === ref);
         switch (bills.length) {
-          case 0: throw new Error(`No client bill in Client with reference ${ref}`);
+          case 0: throw new Error(`No client bill in Client ${id} with reference ${ref}`);
           case 1: return bills[0];
           default: throw new Error(`Too many client bills with reference ${ref}`); // should not happen
         }

@@ -1,5 +1,11 @@
+import { ClientBillResolverService } from './client-bill-resolver.service';
+import { ClientBillDetailComponent } from './client-bill-detail/client-bill-detail.component';
 import { CreateClientBillComponent } from './create-client-bill/create-client-bill.component';
-import { OfferingsResolverService, ProfessionalPaymentModesResolverService, ProfessionalBilllsRefDateResolverService } from '@app/core';
+import {
+  OfferingsResolverService,
+  ProfessionalPaymentModesResolverService,
+  ProfessionalBilllsRefDateResolverService
+} from '@app/core';
 import { BillsComponent } from './bills/bills.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -18,6 +24,14 @@ const routes: Routes = [
       offerings: OfferingsResolverService,
       paymentModes: ProfessionalPaymentModesResolverService,
       billsRefDate: ProfessionalBilllsRefDateResolverService
+    }
+  },
+  {
+    path: 'clientbill',
+    component: ClientBillDetailComponent,
+    resolve: {
+      paymentModes: ProfessionalPaymentModesResolverService,
+      clientBill: ClientBillResolverService
     }
   },
   { path: '**', component: PageNotFoundComponent }

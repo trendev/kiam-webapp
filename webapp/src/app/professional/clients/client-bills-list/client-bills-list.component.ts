@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ClientBill } from '@app/entities';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-bills-list',
@@ -23,7 +24,7 @@ export class ClientBillsListComponent implements OnInit {
 
   _showUnpaid = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.billsModel = this.bills.sort(// inverse order : most recent first
@@ -67,6 +68,10 @@ export class ClientBillsListComponent implements OnInit {
 
   billsIsEmpty(): boolean {
     return this.bills.length === 0;
+  }
+
+  gotoClientBill(id: number, ref: string) {
+    this.router.navigate(['/professional/bills/clientbill', { id: id, ref: ref }]);
   }
 
 }
