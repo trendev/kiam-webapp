@@ -78,7 +78,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
       }),
       payments: this.fb.group({
         content: new FormControl(this.initPayments(), [
-          CustomValidators.validPayments(this._amount * 100)])
+          CustomValidators.validPayments(this._amount)])
       })
     });
     return fg;

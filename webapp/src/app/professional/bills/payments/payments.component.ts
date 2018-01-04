@@ -3,6 +3,7 @@ import { Component, ViewChild, ViewContainerRef, Input, OnInit, OnDestroy } from
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
 import { Payment, PaymentMode } from '@app/entities';
+import { MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'app-payments',
@@ -100,6 +101,14 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     ));
     this.paymentsContent.markAsDirty();
     this.paymentsContent.markAsTouched();
+  }
+
+  selectPayment(event: MatSelectChange) {
+    console.log(event.value);
+  }
+
+  comparePaymentModes(pm1: PaymentMode, pm2: PaymentMode) {
+    return pm1 && pm2 && pm1.name === pm2.name;
   }
 
 }
