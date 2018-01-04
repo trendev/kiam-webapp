@@ -21,4 +21,12 @@ export class ClientBillService {
       });
   }
 
+  update(payload: ClientBill): Observable<ClientBill> {
+    return this.http.put<ClientBill>(`${this.api}`, payload, { withCredentials: true })
+      .map(bill => new ClientBill(bill))
+      .catch(e => {
+        return this.errorHandler.handle(e);
+      });
+  }
+
 }

@@ -1,3 +1,7 @@
-<p>
-  client-bill-detail works!
-</p>
+<app-bill-detail [paymentModes]="paymentModes" [clientBill]="clientBill" (cancel)="returnToClientDetail()" (save)="save($event)">
+  <p>
+    Client :
+    <b>{{name}}</b>
+  </p>
+  <p>Code client : {{id}}</p>
+</app-bill-detail>
