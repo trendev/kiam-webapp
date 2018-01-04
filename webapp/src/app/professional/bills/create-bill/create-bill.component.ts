@@ -181,7 +181,7 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
       purchasedOfferings: value.purchasedOfferings.content,
       payments: value.payments.content.map(pm => new Payment({
         amount: pm.amount * 100,
-        paymentMode: pm.payementMode
+        paymentMode: pm.paymentMode
       }))
     });
   }

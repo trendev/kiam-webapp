@@ -5,8 +5,14 @@
         Facture
       </mat-card-title>
       <mat-card-subtitle>
-        <p>Référence: {{bill.reference}}</p>
+        <p>Référence:
+          <b>{{bill.reference}}</b>
+        </p>
         <ng-content></ng-content>
+        <p>Montant:
+          <b>{{bill.amount / 100}} {{bill.currency}}</b>
+        </p>
+        <p>Date d'émission: {{bill.issueDate | date:'medium':'':'fr'}}</p>
       </mat-card-subtitle>
 
       <mat-card-content>
@@ -26,9 +32,6 @@
               <mat-panel-title>
                 Détail
               </mat-panel-title>
-              <mat-panel-description *ngIf="amount > 0">
-                ( Montant : {{amount / 100}} EUR )
-              </mat-panel-description>
             </mat-expansion-panel-header>
             <app-information [billsRefDate]="billsRefDate" [errorAggregator]="errorAggregator"></app-information>
           </mat-expansion-panel>
@@ -39,8 +42,8 @@
                 Paiement
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <ng-container *ngIf="isClosedBill;else elseBlock">
-              <p>Paiement : OK</p>
+            <ng-container *ngIf="isClosedBill();else elseBlock">
+              <app-fixed-payments></app-fixed-payments>
             </ng-container>
             <ng-template #elseBlock>
               <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator"></app-payments>
@@ -50,7 +53,7 @@
         </mat-accordion>
 
       </mat-card-content>
-
+      {{form.getRawValue() | json}}
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
