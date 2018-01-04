@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef, DoCheck } from '@angular/core';
-import { PaymentMode, Bill } from '@app/entities';
+import { PaymentMode, Bill, Payment } from '@app/entities';
 import { FormGroup, Validators, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
 import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
 import * as moment from 'moment';
@@ -77,11 +77,22 @@ export class BillDetailComponent implements OnInit, DoCheck {
         content: new FormControl(this.bill.purchasedOfferings)
       }),
       payments: this.fb.group({
-        content: new FormControl(this.bill.payments || [], [
+        content: new FormControl(this.initPayments(), [
           CustomValidators.validPayments(this._amount * 100)])
       })
     });
     return fg;
+  }
+
+  private initPayments(): Payment[] {
+    if (!this.bill.payments) {
+      return [];
+    } else {
+      return this.bill.payments.map(pm => new Payment({
+        amount: pm.amount / 100,
+        paymentMode: pm.paymentMode
+      }));
+    }
   }
 
   isCloseable(): boolean {
