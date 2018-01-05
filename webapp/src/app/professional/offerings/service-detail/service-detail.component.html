@@ -3,10 +3,16 @@
     <form [formGroup]="form" novalidate>
       <mat-card-title>{{service.name}} - {{service.id}}</mat-card-title>
       <mat-card-content>
-        <mat-form-field class="name">
-          <input matInput #name placeholder="Nom" formControlName="name" maxlength="75" required>
-          <mat-hint align="end">{{name.value?.length || 0}}/75</mat-hint>
-        </mat-form-field>
+        <div>
+          <mat-form-field class="names">
+            <input matInput #name placeholder="Nom" formControlName="name" maxlength="75" required>
+            <mat-hint align="end">{{name.value?.length || 0}}/75</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="names">
+            <input matInput #shortname placeholder="Abréviation" formControlName="shortname" maxlength="20">
+            <mat-hint align="end">{{shortname.value?.length || 0}}/20</mat-hint>
+          </mat-form-field>
+        </div>
         <mat-form-field>
           <input type="number" matInput placeholder="Prix (EUR)" formControlName="price" min="0" required>
         </mat-form-field>
