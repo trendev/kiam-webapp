@@ -77,7 +77,7 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
         return {
           checked: false,
           qty: 0,
-          name: o.name,
+          name: o.shortname || o.name,
           price: o.price,
           businesses: Utils.getBusinesses(o.businesses), // display businesses as a string
           offering: o

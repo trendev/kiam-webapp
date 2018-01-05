@@ -50,7 +50,7 @@ export class FixedPurchasedOfferingsComponent implements OnInit {
         // use snapshotOffering instead of offering
         return {
           qty: po.qty,
-          name: po.offeringSnapshot.name,
+          name: po.offeringSnapshot.shortname || po.offeringSnapshot.name,
           price: po.offeringSnapshot.price,
           businesses: Utils.getBusinesses(po.offeringSnapshot.businesses) // display businesses as a string
         };
