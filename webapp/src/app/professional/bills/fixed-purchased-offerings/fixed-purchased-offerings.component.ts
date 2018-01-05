@@ -47,11 +47,12 @@ export class FixedPurchasedOfferingsComponent implements OnInit {
     this.purchasedOfferingsModel = purchasedOfferings
       .map(
       po => {
+        // use snapshotOffering instead of offering
         return {
           qty: po.qty,
-          name: po.offering.name,
-          price: po.offering.price,
-          businesses: Utils.getBusinesses(po.offering.businesses) // display businesses as a string
+          name: po.offeringSnapshot.name,
+          price: po.offeringSnapshot.price,
+          businesses: Utils.getBusinesses(po.offeringSnapshot.businesses) // display businesses as a string
         };
       }
       )
