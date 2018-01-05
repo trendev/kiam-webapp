@@ -1,3 +1,29 @@
-<p>
-  fixed-purchased-offerings works!
-</p>
+<section formGroupName="purchasedOfferings">
+    <div class="list-container">
+      <mat-table #table [dataSource]="datasource" matSort>
+   
+        <ng-container matColumnDef="qty">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Qté.</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+              {{element.qty}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Prix (EUR)</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.price / 100}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="businesses">
+          <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Activités</mat-header-cell>
+          <mat-cell *matCellDef="let element" [class.hide]="true">{{element.businesses}}</mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+    </div>
+  </section>

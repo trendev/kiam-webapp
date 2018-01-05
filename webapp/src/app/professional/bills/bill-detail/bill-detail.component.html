@@ -53,15 +53,14 @@
         </mat-accordion>
 
       </mat-card-content>
-      <!-- {{form.getRawValue() | json}} -->
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
           <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modification">undo</mat-icon>
           </button>
-          <button type="button" mat-mini-fab color="warn" (click)="cancelBillCreation()">
-            <mat-icon aria-label="Annuler la création de la facture">close</mat-icon>
+          <button type="button" mat-mini-fab [color]="isClosedBill()?'accent':'warn'" (click)="cancelBillCreation()">
+            <mat-icon aria-label="Annuler la modification de la facture">list</mat-icon>
           </button>
           <button type="button" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
             <mat-icon aria-label="Sauvegarder et/ou Clore la Facture">{{isCloseable()?'done':'save'}}</mat-icon>
