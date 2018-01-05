@@ -35,7 +35,7 @@ export class ParentPacksComponent implements OnChanges {
     ).map(o => {
       return {
         id: o.id || 0,
-        name: o.name || '',
+        name: o.shortname || o.name,
         price: o.price || 0
       };
     });

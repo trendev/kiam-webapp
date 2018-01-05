@@ -56,7 +56,7 @@ export class PackContentComponent implements OnChanges {
           // check if the offering is in the pack
           checked: (this.contentOfferingsValue.findIndex(_o => _o.id === o.id) === -1) ? false : true,
           id: o.id,
-          name: o.name,
+          name: o.shortname || o.name,
           price: o.price,
           duration: o.duration,
           businesses: Utils.getBusinesses(o.businesses), // display businesses as a string
