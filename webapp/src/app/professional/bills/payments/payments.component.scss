@@ -14,11 +14,11 @@
     width: auto;
 }
 
-.payment{
+.valid_payment{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-width: 80px;
+    min-width: 100px;
 }
 
 @media all and (max-device-width: 720px) {
