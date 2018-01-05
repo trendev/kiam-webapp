@@ -28,7 +28,7 @@ export class ProfessionalService {
 
   constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
-  profile(refresh: boolean = true): Observable<Professional> {
+  profile(refresh: boolean = false): Observable<Professional> {
     return this.http.get<Professional>(`${this.api}/profile`,
       {
         params: new HttpParams().set('refresh', `${refresh}`),
