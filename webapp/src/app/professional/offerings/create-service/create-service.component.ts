@@ -48,6 +48,10 @@ export class CreateServiceComponent {
         Validators.maxLength(75),
         CustomValidators.blankStringForbidden
       ]),
+      shortname: new FormControl('', [
+        Validators.maxLength(20),
+        CustomValidators.blankStringForbidden
+      ]),
       price: new FormControl(0, [
         Validators.required,
         Validators.min(0)
@@ -91,6 +95,7 @@ export class CreateServiceComponent {
 
     const service = new Service({
       name: value.name,
+      shortname: value.shortname,
       price: value.price * 100,
       duration: value.duration,
       businesses: Utils.extractArrayFromControl(this.form, 'businesses',
