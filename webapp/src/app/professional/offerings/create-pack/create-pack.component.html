@@ -30,11 +30,11 @@
           Le libellé du forfait ne doit pas excéder 75 caractères.
         </app-error>
         <app-error [control]="form.get('shortname')" [error]="'blankStringForbidden'">
-          L'abréviation du libellé de la prestation ne doit pas contenir que des caractères d'espacement ou commencer par un caractère
+          L'abréviation du libellé du forfait ne doit pas contenir que des caractères d'espacement ou commencer par un caractère
           d'espacement.
         </app-error>
         <app-error [control]="form.get('shortname')" [error]="'maxlength'">
-          L'abréviation du libellé de la prestation ne doit pas excéder 20 caractères.
+          L'abréviation du libellé du forfait ne doit pas excéder 20 caractères.
         </app-error>
         <app-error [control]="form.get('price')" [error]="'required'">
           Le prix doit être renseigné.

@@ -75,6 +75,10 @@ export class PackDetailComponent {
         Validators.maxLength(75),
         CustomValidators.blankStringForbidden
       ]),
+      shortname: new FormControl(this.pack.shortname || '', [
+        Validators.maxLength(20),
+        CustomValidators.blankStringForbidden
+      ]),
       // price unit is 1/100 EUR !
       price: new FormControl(this.pack.price / 100, [
         Validators.required,
@@ -124,6 +128,7 @@ export class PackDetailComponent {
     const pack = new Pack({
       id: this.pack.id,
       name: value.name,
+      shortname: value.shortname,
       price: value.price * 100,
       duration: value.duration,
       businesses: Utils.extractArrayFromControl(this.form, 'businesses',

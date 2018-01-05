@@ -3,10 +3,16 @@
     <form [formGroup]="form" novalidate>
       <mat-card-title>{{pack.name}} - {{pack.id}}</mat-card-title>
       <mat-card-content>
-        <mat-form-field class="name">
-          <input matInput #name placeholder="Nom" formControlName="name" maxlength="75" required>
-          <mat-hint align="end">{{name.value?.length || 0}}/75</mat-hint>
-        </mat-form-field>
+        <div>
+          <mat-form-field class="names">
+            <input matInput #name placeholder="Nom" formControlName="name" maxlength="75" required>
+            <mat-hint align="end">{{name.value?.length || 0}}/75</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="names">
+            <input matInput #shortname placeholder="Abréviation" formControlName="shortname" maxlength="20">
+            <mat-hint align="end">{{shortname.value?.length || 0}}/20</mat-hint>
+          </mat-form-field>
+        </div>
         <mat-form-field>
           <input type="number" matInput placeholder="Prix (EUR)" formControlName="price" min="0" required>
         </mat-form-field>
@@ -22,6 +28,13 @@
         </app-error>
         <app-error [control]="form.get('name')" [error]="'maxlength'">
           Le libellé du forfait ne doit pas excéder 75 caractères.
+        </app-error>
+        <app-error [control]="form.get('shortname')" [error]="'blankStringForbidden'">
+            L'abréviation du libellé du forfait ne doit pas contenir que des caractères d'espacement ou commencer par un caractère
+          d'espacement.
+        </app-error>
+        <app-error [control]="form.get('shortname')" [error]="'maxlength'">
+            L'abréviation du libellé du forfait ne doit pas excéder 20 caractères.
         </app-error>
         <app-error [control]="form.get('price')" [error]="'required'">
           Le prix doit être renseigné.
@@ -52,7 +65,8 @@
                 Contenu du forfait
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-pack-content *ngIf="businesses.length;else elseBlock" [professionalOfferings]="professionalOfferings" [businesses]="businesses" [id]="pack.id"></app-pack-content>
+            <app-pack-content *ngIf="businesses.length;else elseBlock" [professionalOfferings]="professionalOfferings" [businesses]="businesses"
+              [id]="pack.id"></app-pack-content>
             <ng-template #elseBlock>
               <mat-error>Vous devez choisir au moins une activité pour modifier le contenu du forfait</mat-error>
             </ng-template>
