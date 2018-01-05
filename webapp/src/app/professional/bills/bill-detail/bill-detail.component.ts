@@ -119,6 +119,27 @@ export class BillDetailComponent implements OnInit, DoCheck {
     this.cancel.emit();
   }
 
+  saveBill() {
+    const bill = this.prepareSave();
+    this.save.emit(bill);
+  }
 
+  prepareSave(): Bill {
+    const value = this.form.getRawValue();
+
+    return new Bill({
+      reference: this.bill.reference,
+      amount: this.bill.amount,
+      discount: this.bill.discount,
+      deliveryDate: value.information.dates.deliveryDate.valueOf(),
+      paymentDate: value.information.dates.paymentDate ? value.information.dates.paymentDate.valueOf() : undefined,
+      comments: value.information.comments || undefined,
+      purchasedOfferings: value.purchasedOfferings.content,
+      payments: value.payments.content.map(pm => new Payment({
+        amount: pm.amount * 100,
+        paymentMode: pm.paymentMode
+      }))
+    });
+  }
 
 }
