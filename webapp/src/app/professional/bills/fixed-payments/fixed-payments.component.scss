@@ -1,0 +1,15 @@
+.payments {
+    max-width: 200px;
+}
+
+.payment{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media all and (max-device-width: 720px) {
+    .payments {
+       max-width: 100%;
+    }
+}

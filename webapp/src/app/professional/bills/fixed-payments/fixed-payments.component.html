@@ -1,3 +1,12 @@
-<p>
-  fixed-payments works!
-</p>
+<section formGroupName="payments">
+  <div class="payments">
+    <mat-chip-list class="mat-chip-list-stacked" aria-orientation="vertical">
+      <mat-chip *ngFor="let payment of payments; let i=index;" [color]="'primary'" selected="true" [selectable]="false">
+        <div class="payment">
+          <span>{{payment.paymentMode.name}}: {{payment.amount}} EUR</span>
+          <mat-icon>check</mat-icon>
+        </div>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</section>

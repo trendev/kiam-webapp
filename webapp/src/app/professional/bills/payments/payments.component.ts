@@ -26,7 +26,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
 
   sub: Subscription;
 
-  constructor(private parent: FormGroupDirective) { }
+  constructor(protected parent: FormGroupDirective) { }
 
   ngOnInit() {
     if (!this.parent.form) {
@@ -43,7 +43,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (!this.sub.closed) {
+    if (this.sub && !this.sub.closed) {
       this.sub.unsubscribe();
     }
   }
@@ -101,10 +101,6 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     ));
     this.paymentsContent.markAsDirty();
     this.paymentsContent.markAsTouched();
-  }
-
-  selectPayment(event: MatSelectChange) {
-    console.log(event.value);
   }
 
   comparePaymentModes(pm1: PaymentMode, pm2: PaymentMode) {
