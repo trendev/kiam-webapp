@@ -9,32 +9,32 @@
   </div>
   <mat-table #table [dataSource]="datasource" matSort>
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">#</mat-header-cell>
-      <mat-cell *matCellDef="let element" [class.hide]="true">{{element.id}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">#</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="hide">{{element.id}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Nom</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="shortname">
-      <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Abrév.</mat-header-cell>
-      <mat-cell *matCellDef="let element" [class.hide]="true">{{element.shortname}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Abrév.</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="hide">{{element.shortname}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Prix (EUR)</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.price / 100}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Prix (EUR)</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="price">{{element.price / 100}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="duration">
-      <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Durée (min)</mat-header-cell>
-      <mat-cell *matCellDef="let element" [class.hide]="true">{{element.duration}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Durée (min)</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="hide">{{element.duration}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="businesses">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Activités</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.businesses}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Activités</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="hide">{{element.businesses}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="content">
-      <mat-header-cell *matHeaderCellDef [class.hide]="true">Contenu</mat-header-cell>
-      <mat-cell *matCellDef="let element" [class.hide]="true">
+      <mat-header-cell *matHeaderCellDef class="hide">Contenu</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="hide">
         <div *ngIf="element.content.services > 0">
           {element.content.services, plural, =1 {1 Prestation} other {{{element.content.services}} Prestations}}
         </div>
