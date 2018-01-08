@@ -10,7 +10,7 @@
         <mat-icon aria-label="Supprimer">delete</mat-icon>
       </button>
     </div>
-    <div class="comments">
+    <div>
       <div *ngFor="let comment of comments.controls; let i=index">
         <mat-form-field class="full-width">
           <input matInput #cmt maxlength="200" placeholder="#{{i+1}}" formControlName="{{i}}" required>
