@@ -22,7 +22,7 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>Qté.</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-form-field *ngIf="element.checked" class="qty">
-            <input name="qty" type="number" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()" required>
+            <input type="number" name="qty" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()" required>
           </mat-form-field>
         </mat-cell>
       </ng-container>
@@ -50,7 +50,7 @@
     </app-error>
     <app-error [control]="purchasedOfferingsContent" [error]="'validPurchasedOfferings'">
       <div *ngFor="let o of purchasedOfferingsContent.errors?.validPurchasedOfferings?.value">
-        Les quantités souscrites de l'offre "{{o}}" ne peuvent être nulle ou négatives.
+        Les quantités souscrites de l'offre "{{o}}" sont incorrectes.
       </div>
     </app-error>
   </ng-template>

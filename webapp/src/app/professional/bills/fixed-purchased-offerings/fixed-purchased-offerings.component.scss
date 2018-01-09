@@ -1,3 +1,18 @@
+.list-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 250px;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 300px;
+}
+
+.name {
+    flex-grow: 4;
+}
 
 @media all and (max-device-width: 720px) {
     .hide {
@@ -9,5 +24,10 @@
     .mat-header-row,
     .mat-row {
         padding: 0;
+    }
+    .price {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
