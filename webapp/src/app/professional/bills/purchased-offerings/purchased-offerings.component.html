@@ -22,7 +22,7 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>Qté.</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-form-field *ngIf="element.checked" class="qty">
-            <input name="qty" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()">
+            <input name="qty" type="number" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()" required>
           </mat-form-field>
         </mat-cell>
       </ng-container>
