@@ -9,20 +9,25 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@env/environment';
 
 import { AppComponent } from './app.component';
+import { LoadingOverlayComponent } from './loading-overlay/loading-overlay.component';
+import { LoadingOverlayService } from './loading-overlay.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoadingOverlayComponent
   ],
+  entryComponents: [LoadingOverlayComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
     LoginModule, // must be before AppRoutingModule or won't be loaded as expected
     AppRoutingModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [LoadingOverlayService]
 })
 export class AppModule { }

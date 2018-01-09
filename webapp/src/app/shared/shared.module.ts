@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OverlayModule } from '@angular/cdk/overlay';
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -66,7 +67,8 @@ import { CommentsComponent } from './comments/comments.component';
     MatSortModule,
     MatPaginatorModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    OverlayModule
   ],
   declarations: [
     PageNotFoundComponent,
@@ -123,7 +125,8 @@ import { CommentsComponent } from './comments/comments.component';
     ErrorComponent,
     MatProgressBarModule,
     CommentsComponent,
-    MatSelectModule
+    MatSelectModule,
+    OverlayModule
   ]
 })
 
