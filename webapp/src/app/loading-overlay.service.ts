@@ -44,7 +44,6 @@ export class LoadingOverlayService {
     this.overlayRef = this.createOverlay(dialogConfig);
     const filePreviewPortal = new ComponentPortal(LoadingOverlayComponent);
 
-    // Attach ComponentPortal to PortalHost
     this.overlayRef.attach(filePreviewPortal);
   }
 
