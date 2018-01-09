@@ -1,8 +1,10 @@
 import { LoadingOverlayComponent } from './loading-overlay/loading-overlay.component';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 interface LoadingConfig {
   panelClass?: string;
@@ -20,10 +22,14 @@ export class LoadingOverlayService {
 
   private overlayRef: OverlayRef;
 
-  constructor(private overlay: Overlay, private router: Router) {
-    router.events.subscribe((routerEvent: Event) => {
-      this.checkRouterEvent(routerEvent);
-    });
+  constructor(private overlay: Overlay,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      router.events.subscribe((routerEvent: Event) => {
+        this.checkRouterEvent(routerEvent);
+      });
+    }
   }
 
   checkRouterEvent(routerEvent: Event): void {
