@@ -10,27 +10,24 @@
     max-height: 500px;
 }
 
+.name {
+    flex-grow: 4;
+}
+
 @media all and (max-device-width: 720px) {
     .hide {
         display: none;
     }
-
     .list-container {
         max-height: 300px;
     }
-
     .mat-header-row,
     .mat-row {
         padding: 0 5px;
     }
-
     .price {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .name{
-        flex-grow: 4;
     }
 }
