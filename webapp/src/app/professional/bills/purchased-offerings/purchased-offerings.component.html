@@ -1,4 +1,4 @@
-<section formGroupName="purchasedOfferings">
+<section formGroupName="purchasedOfferings" class="section_container">
   <ng-container #errorContainer></ng-container>
   <div class="list-container">
     <div class="search-header">
@@ -35,8 +35,8 @@
         <mat-cell *matCellDef="let element" class="price">{{element.price / 100}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="businesses">
-        <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Activités</mat-header-cell>
-        <mat-cell *matCellDef="let element" [class.hide]="true">{{element.businesses}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Activités</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="hide">{{element.businesses}}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
