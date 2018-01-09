@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Component } from '@angular/core';
 import { AuthenticationService } from '@app/core';
@@ -54,7 +55,7 @@ export class LoginCardComponent {
         this.dispatcher.redirect();
       },
       e => {
-        if (e.match(/Blocked/)) {
+        if (e instanceof HttpErrorResponse && e.error.error.match(/Blocked/)) {
           this.errors.blocked = `User has been blocked`;
         } else {
           this.errors.unauthorized = `Unauthorized or network issues or server down`;
