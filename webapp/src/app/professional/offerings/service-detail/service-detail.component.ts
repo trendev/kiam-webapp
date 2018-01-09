@@ -51,7 +51,7 @@ export class ServiceDetailComponent {
     const fg = this.fb.group({
       name: new FormControl(this.service.name, [
         Validators.required,
-        Validators.maxLength(75),
+        Validators.maxLength(125),
         CustomValidators.blankStringForbidden
       ]),
       shortname: new FormControl(this.service.shortname || '', [

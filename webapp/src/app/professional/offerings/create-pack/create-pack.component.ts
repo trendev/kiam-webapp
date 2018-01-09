@@ -64,7 +64,7 @@ export class CreatePackComponent {
     const fg = this.fb.group({
       name: new FormControl('', [
         Validators.required,
-        Validators.maxLength(75),
+        Validators.maxLength(125),
         CustomValidators.blankStringForbidden
       ]),
       shortname: new FormControl('', [
