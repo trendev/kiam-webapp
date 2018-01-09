@@ -19,12 +19,16 @@
     padding: 0px 20px;
 }
 
-.qty{
+.qty {
     max-width: 30px;
 }
 
 mat-cell {
     overflow: visible;
+}
+
+.name {
+    flex-grow: 4;
 }
 
 @media all and (max-device-width: 720px) {
@@ -37,5 +41,10 @@ mat-cell {
     .mat-header-row,
     .mat-row {
         padding: 0;
+    }
+    .price {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

@@ -22,17 +22,17 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>Qté.</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-form-field *ngIf="element.checked" class="qty">
-            <input name="qty" type="number" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()">
+            <input name="qty" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()">
           </mat-form-field>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Nom</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Prix (EUR)</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.price / 100}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Prix (EUR)</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="price">{{element.price / 100}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="businesses">
         <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Activités</mat-header-cell>

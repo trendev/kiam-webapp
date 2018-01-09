@@ -121,7 +121,8 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
 
     this.total.emit(value
       .map(po => po.qty * po.offering.price)
-      .reduce((a, b) => a + b, 0));
+      .reduce((a, b) => a + b, 0)
+      || 0); // if the computed value is null or defined, will return 0
 
     this.purchasedOfferingsContent.setValue(value);
 
