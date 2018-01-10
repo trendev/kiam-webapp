@@ -76,7 +76,9 @@ export class LoadingOverlayService {
   }
 
   stop() {
-    this.overlayRef.dispose();
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+    }
   }
 
 }
