@@ -46,11 +46,13 @@ export class LoadingOverlayService {
 
 
   start(config: LoadingConfig = {}) {
-    const dialogConfig = { ...DEFAULT_CONFIG, ...config };
-    this.overlayRef = this.createOverlay(dialogConfig);
-    const filePreviewPortal = new ComponentPortal(LoadingOverlayComponent);
+    if (!this.overlayRef) {
+      const dialogConfig = { ...DEFAULT_CONFIG, ...config };
+      this.overlayRef = this.createOverlay(dialogConfig);
+      const filePreviewPortal = new ComponentPortal(LoadingOverlayComponent);
 
-    this.overlayRef.attach(filePreviewPortal);
+      this.overlayRef.attach(filePreviewPortal);
+    }
   }
 
   private createOverlay(config: LoadingConfig) {
@@ -78,6 +80,7 @@ export class LoadingOverlayService {
   stop() {
     if (this.overlayRef) {
       this.overlayRef.dispose();
+      this.overlayRef = null;
     }
   }
 
