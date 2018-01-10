@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn } from '@app/shared';
 import { ServiceService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
   selector: 'app-create-service',
@@ -23,7 +24,8 @@ export class CreateServiceComponent {
   constructor(private fb: FormBuilder,
     private serviceService: ServiceService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private loadingOverlayService: LoadingOverlayService) {
     this.route.data.subscribe(
       (data: {
         businesses: Business[]
@@ -83,11 +85,14 @@ export class CreateServiceComponent {
 
   save() {
     const service = this.prepareSave();
+    this.loadingOverlayService.start();
     this.serviceService.create(service).subscribe(
       _service => this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route }),
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder la prestation sur le serveur')
-    );
+      e => {
+        this.loadingOverlayService.stop();
+        console.error('Impossible de sauvegarder la prestation sur le serveur');
+      });
   }
 
   prepareSave(): Service {
