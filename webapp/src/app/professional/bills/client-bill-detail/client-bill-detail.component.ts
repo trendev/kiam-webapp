@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientBillService } from '@app/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { PaymentMode, ClientBill, Bill, Client } from '@app/entities';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
   selector: 'app-client-bill-detail',
@@ -17,7 +18,8 @@ export class ClientBillDetailComponent implements OnInit {
 
   constructor(private clientBillService: ClientBillService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private loadingOverlayService: LoadingOverlayService) {
 
     this.route.data.subscribe(
       (data: {
@@ -42,11 +44,14 @@ export class ClientBillDetailComponent implements OnInit {
   save(bill: Bill) {
     const cb = new ClientBill(bill);
     cb.client = this.clientBill.client;
+    this.loadingOverlayService.start();
     this.clientBillService.update(cb).subscribe(
       _cb => this.returnToClientDetail(),
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder la facture modifiée du client sur le serveur')
-    );
+      e => {
+        this.loadingOverlayService.stop();
+        console.error('Impossible de sauvegarder la facture modifiée du client sur le serveur');
+      });
   }
 
 }
