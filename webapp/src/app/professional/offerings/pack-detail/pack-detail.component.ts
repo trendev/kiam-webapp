@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@ang
 import { PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn } from '@app/shared';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
   selector: 'app-pack-detail',
@@ -27,7 +28,8 @@ export class PackDetailComponent {
   constructor(private fb: FormBuilder,
     private packService: PackService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private loadingOverlayService: LoadingOverlayService) {
     this.route.data.subscribe(
       (data: {
         pack: Pack,
@@ -115,11 +117,14 @@ export class PackDetailComponent {
 
   save() {
     const pack = this.prepareSave();
+    this.loadingOverlayService.start();
     this.packService.update(pack).subscribe(
       _pack => this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route }),
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder le forfait sur le serveur')
-    );
+      e => {
+        this.loadingOverlayService.stop();
+        console.error('Impossible de sauvegarder le forfait sur le serveur');
+      });
   }
 
   prepareSave(): Pack {
@@ -143,11 +148,13 @@ export class PackDetailComponent {
   }
 
   remove() {
+    this.loadingOverlayService.start();
     this.packService.remove(this.pack.id).subscribe(
       resp => this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route }),
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de supprimer le forfait sur le serveur')
-    );
-
+      e => {
+        this.loadingOverlayService.stop();
+        console.error('Impossible de supprimer le forfait sur le serveur');
+      });
   }
 }

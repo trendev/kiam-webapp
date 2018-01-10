@@ -4,6 +4,7 @@ import { PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Business, Offering, OfferingType, Pack } from '@app/entities';
 import { ErrorAggregatorDirective, Utils, CustomValidators, compareBusinessesFn } from '@app/shared';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
   selector: 'app-create-pack',
@@ -25,7 +26,8 @@ export class CreatePackComponent {
   constructor(private fb: FormBuilder,
     private packService: PackService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private loadingOverlayService: LoadingOverlayService) {
     this.route.data.subscribe(
       (data: {
         businesses: Business[],
@@ -105,11 +107,14 @@ export class CreatePackComponent {
 
   save() {
     const pack = this.prepareSave();
+    this.loadingOverlayService.start();
     this.packService.create(pack).subscribe(
       _pack => this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route }),
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder le forfait sur le serveur')
-    );
+      e => {
+        this.loadingOverlayService.stop();
+        console.error('Impossible de sauvegarder le forfait sur le serveur');
+      });
   }
 
   prepareSave(): Pack {
