@@ -2,6 +2,8 @@ import { CustomValidators } from './../custom-validators';
 import { AuthenticationService } from '@app/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'app-change-password',
@@ -26,7 +28,8 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private loadingOverlayService: LoadingOverlayService) {
     this.createForm();
   }
 
@@ -46,7 +49,10 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   generate() {
-    this.authenticationService.password().subscribe(
+    this.loadingOverlayService.start();
+    this.authenticationService.password()
+      .finally(() => this.loadingOverlayService.stop())
+      .subscribe(
       pwd => {
         this.form.setValue({
           password: pwd,
@@ -56,7 +62,7 @@ export class ChangePasswordComponent implements OnInit {
       },
       // TODO: handle this (check the status code, etc)
       e => console.error('Impossible de générer un mot de passe depuis le serveur')
-    );
+      );
   }
 
   save() {

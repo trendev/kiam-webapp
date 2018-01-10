@@ -10,6 +10,8 @@ import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@ang
 import * as moment from 'moment';
 import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn, comparePaymentModesFn } from '@app/shared';
 import { Router, ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/finally';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
   selector: 'app-profile',
@@ -35,7 +37,8 @@ export class ProfileComponent implements OnInit {
     private professionalService: ProfessionalService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private loadingOverlayService: LoadingOverlayService) {
     this.pro = new Professional(this.authenticationService.user);
     this.route.data.subscribe(
       (data: {
@@ -217,7 +220,10 @@ export class ProfileComponent implements OnInit {
     pro.registrationDate = this.pro.registrationDate;
     pro.blocked = this.pro.blocked;
 
-    this.professionalService.put(pro).subscribe(
+    this.loadingOverlayService.start();
+    this.professionalService.put(pro)
+      .finally(() => this.loadingOverlayService.stop())
+      .subscribe(
       _pro => {
         this.pro = _pro;
         this.authenticationService.user = _pro;
@@ -225,7 +231,7 @@ export class ProfileComponent implements OnInit {
       },
       // TODO: handle this (check the status code, etc)
       e => console.error('Impossible de sauvegarder les modifications du profile')
-    );
+      );
   }
 
   prepareSave(): Professional {
@@ -278,7 +284,10 @@ export class ProfileComponent implements OnInit {
   }
 
   refresh() {
-    this.professionalService.profile(true).subscribe(
+    this.loadingOverlayService.start();
+    this.professionalService.profile(true)
+      .finally(() => this.loadingOverlayService.stop())
+      .subscribe(
       _pro => {
         this.pro = _pro;
         this.authenticationService.user = _pro;
@@ -286,6 +295,6 @@ export class ProfileComponent implements OnInit {
       },
       // TODO: handle this (check the status code, etc)
       e => console.error('Impossible de rafraîchir le profil à partir du serveur')
-    );
+      );
   }
 }
