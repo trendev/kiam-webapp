@@ -54,7 +54,6 @@ export class LoginCardComponent {
     this.authenticationService.login(this.credentials.username, this.credentials.password)
       .subscribe(
       r => {
-        this.loadingOverlayService.stop();
         this.credentialsManagerService.save(this.credentials);
         this.dispatcher.redirect();
       },

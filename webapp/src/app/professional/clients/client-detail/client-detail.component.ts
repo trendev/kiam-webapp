@@ -227,7 +227,6 @@ export class ClientDetailComponent implements OnInit {
     this.loadingOverlayService.start();
     this.clientService.update(client).subscribe(
       _client => {
-        this.loadingOverlayService.stop();
         this.router.navigate(['../'], { relativeTo: this.route });
       },
       // TODO: handle this (check the status code, etc)

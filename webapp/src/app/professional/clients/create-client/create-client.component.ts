@@ -211,7 +211,6 @@ export class CreateClientComponent implements OnInit {
     this.loadingOverlayService.start();
     this.clientService.create(client).subscribe(
       _client => {
-        this.loadingOverlayService.stop();
         this.router.navigate(['../', _client.id], { relativeTo: this.route });
       },
       // TODO: handle this (check the status code, etc)
