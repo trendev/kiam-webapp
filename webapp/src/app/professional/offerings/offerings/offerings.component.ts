@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProfessionalService, PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Offering, Service, Pack, OfferingType } from '@app/entities';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'app-offerings',
@@ -26,7 +28,8 @@ export class OfferingsComponent implements OnInit {
   constructor(private professionalService: ProfessionalService,
     private packService: PackService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private loadingOverlayService: LoadingOverlayService) {
     this.route.data.subscribe(
       (data: {
         offerings: Offering[]
@@ -80,25 +83,31 @@ export class OfferingsComponent implements OnInit {
   }
 
   refreshOfferings() {
-    this.professionalService.getOfferings().subscribe(
+    this.loadingOverlayService.start();
+    this.professionalService.getOfferings()
+      .finally(() => this.loadingOverlayService.stop())
+      .subscribe(
       offerings => {
         this._offerings = offerings;
         this.initOfferings();
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la collecte des offres sur le serveur`)
-    );
+      );
   }
 
   buildModelOfferings() {
-    this.packService.buildModelOfferings().subscribe(
+    this.loadingOverlayService.start();
+    this.packService.buildModelOfferings()
+      .finally(() => this.loadingOverlayService.stop())
+      .subscribe(
       offerings => {
         this._offerings = [...this.services, ...this.packs, ...offerings]; // spread the result with the existing offerings
         this.initOfferings();
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la création automatique d'offres sur le serveur`)
-    );
+      );
   }
 
 }
