@@ -11,6 +11,7 @@ import {
 } from '@app/shared';
 import { ClientService } from '@app/core';
 import * as moment from 'moment';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
   selector: 'app-client-detail',
@@ -37,7 +38,8 @@ export class ClientDetailComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private clientService: ClientService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private loadingOverlayService: LoadingOverlayService) {
     this.route.data.subscribe(
       (data: {
         collectiveGroups: CollectiveGroup[],
@@ -222,10 +224,17 @@ export class ClientDetailComponent implements OnInit {
 
   save() {
     const client = this.prepareSave();
+    this.loadingOverlayService.start();
     this.clientService.update(client).subscribe(
-      _client => this.router.navigate(['../'], { relativeTo: this.route }),
+      _client => {
+        this.loadingOverlayService.stop();
+        this.router.navigate(['../'], { relativeTo: this.route });
+      },
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder le nouveau client sur le serveur'));
+      e => {
+        this.loadingOverlayService.stop();
+        console.error('Impossible de sauvegarder le nouveau client sur le serveur');
+      });
   }
 
   createNewClientBill() {
