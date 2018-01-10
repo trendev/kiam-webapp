@@ -23,7 +23,7 @@ mat-cell {
     overflow: visible;
 }
 
-.name{
+.name {
     flex-grow: 4;
 }
 
@@ -31,20 +31,17 @@ mat-cell {
     .hide {
         display: none;
     }
-
     .list-container {
         max-height: 300px;
     }
-
     .mat-header-row,
     .mat-row {
-        padding: 0 5px;
+        padding: 0;
     }
-
-    .price {
+    .item {
         display: flex;
         justify-content: center;
         align-items: center;
+        min-width: 50px;
     }
-
 }

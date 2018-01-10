@@ -11,10 +11,10 @@
     </div>
     <mat-table #table [dataSource]="datasource" matSort>
       <ng-container matColumnDef="checked">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="po_item">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="item">
           <mat-icon>check_box</mat-icon>
         </mat-header-cell>
-        <mat-cell *matCellDef="let element" class="po_item">
+        <mat-cell *matCellDef="let element" class="item">
           <mat-checkbox [checked]="element.checked" (change)="select($event,element)"></mat-checkbox>
         </mat-cell>
       </ng-container>
@@ -31,8 +31,8 @@
         <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="po_item">Prix (EUR)</mat-header-cell>
-        <mat-cell *matCellDef="let element" class="po_item">{{element.price / 100}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="item">Prix (EUR)</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="item">{{element.price / 100}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="businesses">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Activités</mat-header-cell>
