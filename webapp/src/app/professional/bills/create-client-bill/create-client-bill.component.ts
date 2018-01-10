@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Offering, PaymentMode, Bill, ClientBill, Client } from '@app/entities';
 import { ClientBillService } from '@app/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
   selector: 'app-create-client-bill',
@@ -19,7 +20,8 @@ export class CreateClientBillComponent implements OnInit {
 
   constructor(private clientBillService: ClientBillService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private loadingOverlayService: LoadingOverlayService) {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = +params.get('id');
@@ -51,10 +53,12 @@ export class CreateClientBillComponent implements OnInit {
     cb.client = new Client({
       id: this.id
     });
+    this.loadingOverlayService.start();
     this.clientBillService.create(cb).subscribe(
       _cb => this.returnToClientDetail(),
       // TODO: handle this (check the status code, etc)
       e => {
+        this.loadingOverlayService.stop();
         console.error('Impossible de sauvegarder la nouvelle facture du client sur le serveur');
         if (e instanceof HttpErrorResponse && e.status === 409) {
           this.billsRefDate = +e.error.error.deliveryDate;
