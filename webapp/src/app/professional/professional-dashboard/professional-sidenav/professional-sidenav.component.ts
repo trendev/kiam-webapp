@@ -13,7 +13,7 @@ export class ProfessionalSidenavComponent implements OnInit {
   @Input() sidenav: MatSidenav;
 
   links: LinkItem[] = [
-    { name: 'Accueil', url: 'welcome', icon: 'home'},
+    { name: 'Accueil', url: 'welcome', icon: 'dashboard'},
     { name: 'Clients', url: 'clients', icon: 'perm_contact_calendar'},
     { name: 'Groupes / Collectivités', url: 'groups', icon: 'group'},
     { name: 'Facturier', url: 'bills', icon: 'receipt'},
