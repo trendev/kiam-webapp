@@ -1,6 +1,6 @@
 <section formGroupName="purchasedOfferings" class="section_container">
   <ng-container #errorContainer></ng-container>
-  <div class="list-container">
+  <div class="list-container mat-elevation-z2">
     <div class="search-header">
       <mat-form-field>
         <mat-placeholder>
@@ -11,15 +11,15 @@
     </div>
     <mat-table #table [dataSource]="datasource" matSort>
       <ng-container matColumnDef="checked">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <mat-header-cell *matHeaderCellDef class="po_item">
           <mat-icon>check_box</mat-icon>
         </mat-header-cell>
-        <mat-cell *matCellDef="let element">
+        <mat-cell *matCellDef="let element" class="po_item">
           <mat-checkbox [checked]="element.checked" (change)="select($event,element)"></mat-checkbox>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="qty">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Qté.</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Qté.</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-form-field *ngIf="element.checked" class="qty">
             <input type="number" name="qty" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()" required>
@@ -31,8 +31,8 @@
         <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Prix (EUR)</mat-header-cell>
-        <mat-cell *matCellDef="let element" class="price">{{element.price / 100}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="po_item">Prix (EUR)</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="po_item">{{element.price / 100}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="businesses">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Activités</mat-header-cell>
