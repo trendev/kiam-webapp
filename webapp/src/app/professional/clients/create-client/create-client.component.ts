@@ -4,6 +4,7 @@ import { ErrorAggregatorDirective, CustomValidators, Utils, compareCollectiveGro
 import { ClientService } from '@app/core';
 import { Client, CollectiveGroup, Category } from '@app/entities';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
   selector: 'app-create-client',
@@ -27,7 +28,8 @@ export class CreateClientComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private clientService: ClientService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private loadingOverlayService: LoadingOverlayService) {
 
     this.route.data.subscribe(
       (data: {
@@ -206,10 +208,17 @@ export class CreateClientComponent implements OnInit {
 
   save() {
     const client = this.prepareSave();
+    this.loadingOverlayService.start();
     this.clientService.create(client).subscribe(
-      _client => this.router.navigate(['../', _client.id], { relativeTo: this.route }),
+      _client => {
+        this.loadingOverlayService.stop();
+        this.router.navigate(['../', _client.id], { relativeTo: this.route });
+      },
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder le nouveau client sur le serveur'));
+      e => {
+        this.loadingOverlayService.stop();
+        console.error('Impossible de sauvegarder le nouveau client sur le serveur');
+      });
   }
 
 }

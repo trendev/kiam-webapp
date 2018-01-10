@@ -1,10 +1,12 @@
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/finally';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProfessionalService } from '@app/core';
 import { Client } from '@app/entities';
 import { MatTableDataSource, MatSort, Sort } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
   selector: 'app-clients',
@@ -32,7 +34,8 @@ export class ClientsComponent implements OnInit {
 
   constructor(private professionalService: ProfessionalService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private loadingOverlayService: LoadingOverlayService) {
     this.route.data.subscribe(
       (data: {
         clients: Client[]
@@ -65,14 +68,17 @@ export class ClientsComponent implements OnInit {
   }
 
   refreshClients() {
-    this.professionalService.getClients().subscribe(
+    this.loadingOverlayService.start();
+    this.professionalService.getClients()
+      .finally(() => this.loadingOverlayService.stop())
+      .subscribe(
       clients => {
         this._clients = clients;
         this.initClients();
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la collecte des clients depuis le serveur`)
-    );
+      );
   }
 
   applyFilter(filterValue: string) {
