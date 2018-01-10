@@ -1,3 +1,4 @@
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Component } from '@angular/core';
@@ -26,7 +27,8 @@ export class LoginCardComponent {
   constructor(private authenticationService: AuthenticationService,
     private dispatcher: DispatcherService,
     private router: Router,
-    private credentialsManagerService: CredentialsManagerService) {
+    private credentialsManagerService: CredentialsManagerService,
+    private loadingOverlayService: LoadingOverlayService) {
 
     this.credentials = this.credentialsManagerService.credentials;
   }
@@ -47,14 +49,17 @@ export class LoginCardComponent {
   }
 
   login() {
+    this.loadingOverlayService.start();
     this.errors = {};
     this.authenticationService.login(this.credentials.username, this.credentials.password)
       .subscribe(
       r => {
+        this.loadingOverlayService.stop();
         this.credentialsManagerService.save(this.credentials);
         this.dispatcher.redirect();
       },
       e => {
+        this.loadingOverlayService.stop();
         if (e instanceof HttpErrorResponse && e.error.error.match(/Blocked/)) {
           this.errors.blocked = `User has been blocked`;
         } else {
