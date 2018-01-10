@@ -11,7 +11,7 @@
     </div>
     <mat-table #table [dataSource]="datasource" matSort>
       <ng-container matColumnDef="checked">
-        <mat-header-cell *matHeaderCellDef class="po_item">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="po_item">
           <mat-icon>check_box</mat-icon>
         </mat-header-cell>
         <mat-cell *matCellDef="let element" class="po_item">
