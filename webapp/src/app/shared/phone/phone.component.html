@@ -1,4 +1,5 @@
-<mat-form-field>
+<mat-form-field class="phone">
   <input matInput placeholder="Téléphone" [(ngModel)]="phone" required>
   <mat-icon matSuffix>phone</mat-icon>
 </mat-form-field>
+{{controlDir.control.value| json}}
