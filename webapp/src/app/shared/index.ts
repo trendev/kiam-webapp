@@ -17,3 +17,4 @@ export * from './categories/categories.component';
 export * from './error/error.component';
 export * from './utils';
 export * from './comments/comments.component';
+export * from './phone/phone.component';
