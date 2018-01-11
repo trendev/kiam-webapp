@@ -1,5 +1,5 @@
 <mat-form-field class="phone">
-  <input matInput placeholder="Téléphone" [(ngModel)]="phone" required>
+  <input matInput placeholder="Téléphone" #input (input)="onChange($event.target.value)" required>
   <mat-icon matSuffix>phone</mat-icon>
 </mat-form-field>
 <code>control.value = {{controlDir.control.value| json}}</code>

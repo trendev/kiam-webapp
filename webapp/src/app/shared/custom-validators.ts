@@ -39,10 +39,8 @@ export class CustomValidators {
     }
 
     static phoneNumber(control: AbstractControl): ValidationErrors | null {
-        let value = control.value as string;
-        value = value.replace(/\s/g, '');
-        return /^(((00|\+)\d{2})|0)\d{9}$/.test(value)
-            ? null : { 'phoneNumber': { value: value } };
+        return Utils.isValidPhoneNumber(control.value)
+            ? null : { 'phoneNumber': { value: control.value } };
     }
 
     static past(control: AbstractControl): ValidationErrors | null {

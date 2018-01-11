@@ -47,6 +47,24 @@ export class Utils {
             )
         );
     }
+
+    static shrinkPhoneNumber(value: string): string {
+        return value.replace(/[\-\s]/g, '');
+    }
+
+    static isValidPhoneNumber(value: string): boolean {
+        const val = Utils.shrinkPhoneNumber(value);
+        return /^(((00|\+)\d{2})|0)\d{9}$/.test(val);
+    }
+
+    static formatPhoneNumber(value: string): string {
+        if (Utils.isValidPhoneNumber(value)) {
+            return Utils.shrinkPhoneNumber(value)
+                .replace(/^((?:(?:(?:00|\+)\d{2})|0)\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5');
+        } else {
+            return value;
+        }
+    }
 }
 
 export const compareBusinessesFn =
