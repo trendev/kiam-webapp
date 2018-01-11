@@ -14,7 +14,7 @@ import {
   templateUrl: './phone.component.html',
   styleUrls: ['./phone.component.scss']
 })
-export class PhoneComponent implements ControlValueAccessor, OnInit {
+export class PhoneComponent implements ControlValueAccessor {
 
   private _isDisabled = false;
 
@@ -25,15 +25,6 @@ export class PhoneComponent implements ControlValueAccessor, OnInit {
 
   constructor( @Self() public controlDir: NgControl) {
     controlDir.valueAccessor = this;
-  }
-
-  ngOnInit() {
-    const control = this.controlDir.control;
-    const validators = control.validator
-      ? [control.validator, CustomValidators.phoneNumber]
-      : CustomValidators.phoneNumber;
-    control.setValidators(validators);
-    control.updateValueAndValidity();
   }
 
   writeValue(val: string): void {
