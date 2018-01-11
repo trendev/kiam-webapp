@@ -45,7 +45,7 @@ export class PhoneComponent implements ControlValueAccessor, OnInit {
 
   set phone(val: string) {
     this._phone = val;
-    // avoid to propagate if value and the reference are equal (ex: form reset...)
+    // avoid to propagate changes (ex: form reset...)
     if (val !== this._phoneRef) {
       this._onChanges(val.replace(/\s/g, ''));
     }
