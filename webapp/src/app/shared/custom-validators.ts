@@ -39,8 +39,13 @@ export class CustomValidators {
     }
 
     static phoneNumber(control: AbstractControl): ValidationErrors | null {
-        return /^(((00|\+)\d{2})|0)\d{9}$/.test(control.value)
-            ? null : { 'phoneNumber': { value: control.value } };
+        let value = control.value as string;
+        value = value.replace(/\s/g, '');
+
+        console.log(value.replace(/^((?:(?:(?:00|\+)\d{2})|0)\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5'));
+
+        return /^(((00|\+)\d{2})|0)\d{9}$/.test(value)
+            ? null : { 'phoneNumber': { value: value } };
     }
 
     static past(control: AbstractControl): ValidationErrors | null {

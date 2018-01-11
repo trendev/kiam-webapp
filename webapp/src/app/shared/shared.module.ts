@@ -42,6 +42,7 @@ import { CollectiveGroupsComponent } from './collective-groups/collective-groups
 import { CategoriesComponent } from './categories/categories.component';
 import { ErrorComponent } from './error/error.component';
 import { CommentsComponent } from './comments/comments.component';
+import { PhoneComponent } from './phone/phone.component';
 
 @NgModule({
   imports: [
@@ -87,7 +88,8 @@ import { CommentsComponent } from './comments/comments.component';
     CollectiveGroupsComponent,
     CategoriesComponent,
     ErrorComponent,
-    CommentsComponent],
+    CommentsComponent,
+    PhoneComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -129,7 +131,8 @@ import { CommentsComponent } from './comments/comments.component';
     CommentsComponent,
     MatSelectModule,
     OverlayModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    PhoneComponent
   ]
 })
 
