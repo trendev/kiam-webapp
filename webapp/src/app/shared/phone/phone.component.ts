@@ -12,7 +12,10 @@ import {
 @Component({
   selector: 'app-phone',
   templateUrl: './phone.component.html',
-  styleUrls: ['./phone.component.scss']
+  styleUrls: ['./phone.component.scss'],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: PhoneComponent, multi: true },
+  ]
 })
 export class PhoneComponent implements ControlValueAccessor {
 
@@ -23,8 +26,7 @@ export class PhoneComponent implements ControlValueAccessor {
   onChange: any = () => { };
   private _onTouched: any = () => { };
 
-  constructor( @Self() public controlDir: NgControl) {
-    controlDir.valueAccessor = this;
+  constructor() {
   }
 
   writeValue(val: string): void {
