@@ -11,11 +11,7 @@ import {
 @Component({
   selector: 'app-phone',
   templateUrl: './phone.component.html',
-  styleUrls: ['./phone.component.scss'],
-  // providers: [
-  //   { provide: NG_VALUE_ACCESSOR, useExisting: PhoneComponent, multi: true },
-  //   { provide: NG_VALIDATORS, useExisting: PhoneComponent, multi: true }
-  // ]
+  styleUrls: ['./phone.component.scss']
 })
 export class PhoneComponent implements ControlValueAccessor, OnInit {
 
