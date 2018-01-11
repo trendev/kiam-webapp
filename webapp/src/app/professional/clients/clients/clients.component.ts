@@ -7,6 +7,7 @@ import { Client } from '@app/entities';
 import { MatTableDataSource, MatSort, Sort } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
+import { PhonePipe } from '@app/shared';
 
 @Component({
   selector: 'app-clients',
@@ -18,6 +19,8 @@ export class ClientsComponent implements OnInit {
   clients: ClientModel[] = [];
   private _clients: Client[];
 
+  private phonePipe = new PhonePipe();
+
   displayedColumns: string[];
   datasource: MatTableDataSource<ClientModel>;
 
@@ -26,7 +29,7 @@ export class ClientsComponent implements OnInit {
     { columnDef: 'lastName', headerCellDef: 'Nom', cellDef: (client: ClientModel) => client.lastName, hide: false },
     { columnDef: 'firstName', headerCellDef: 'Prénom', cellDef: (client: ClientModel) => client.firstName, hide: false },
     { columnDef: 'nickname', headerCellDef: 'Surnom', cellDef: (client: ClientModel) => client.nickname, hide: true },
-    { columnDef: 'phone', headerCellDef: 'Tél.', cellDef: (client: ClientModel) => client.phone, hide: true },
+    { columnDef: 'phone', headerCellDef: 'Tél.', cellDef: (client: ClientModel) => this.phonePipe.transform(client.phone), hide: true },
     { columnDef: 'email', headerCellDef: 'Email', cellDef: (client: ClientModel) => client.email, hide: true },
   ];
 

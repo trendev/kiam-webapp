@@ -43,6 +43,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ErrorComponent } from './error/error.component';
 import { CommentsComponent } from './comments/comments.component';
 import { PhoneComponent } from './phone/phone.component';
+import { PhonePipe } from './phone.pipe';
 
 @NgModule({
   imports: [
@@ -89,7 +90,8 @@ import { PhoneComponent } from './phone/phone.component';
     CategoriesComponent,
     ErrorComponent,
     CommentsComponent,
-    PhoneComponent],
+    PhoneComponent,
+    PhonePipe],
   exports: [
     CommonModule,
     FormsModule,
@@ -132,7 +134,8 @@ import { PhoneComponent } from './phone/phone.component';
     MatSelectModule,
     OverlayModule,
     MatProgressSpinnerModule,
-    PhoneComponent
+    PhoneComponent,
+    PhonePipe
   ]
 })
 
