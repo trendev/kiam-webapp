@@ -53,6 +53,9 @@ export class Utils {
     }
 
     static isValidPhoneNumber(value: string): boolean {
+        if (!value) {
+            return false;
+        }
         const val = Utils.shrinkPhoneNumber(value);
         return /^(((00|\+)\d{2})|0)\d{9}$/.test(val);
     }

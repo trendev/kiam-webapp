@@ -30,9 +30,7 @@ export class PhoneComponent implements ControlValueAccessor {
   }
 
   writeValue(val: string): void {
-    if (val) {
-      this.input.nativeElement.value = Utils.formatPhoneNumber(val);
-    }
+    this.input.nativeElement.value = Utils.formatPhoneNumber(val);
   }
 
   registerOnChange(fn: any): void {
