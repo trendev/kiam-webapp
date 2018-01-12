@@ -59,7 +59,9 @@ export class LoginCardComponent {
       },
       e => {
         this.loadingOverlayService.stop();
-        if (e instanceof HttpErrorResponse && e.error.error.match(/Blocked/)) {
+        if (e instanceof HttpErrorResponse 
+          && e.error.error 
+          && e.error.error.match(/Blocked/)) {
           this.errors.blocked = `User has been blocked`;
         } else {
           this.errors.unauthorized = `Unauthorized or network issues or server down`;
