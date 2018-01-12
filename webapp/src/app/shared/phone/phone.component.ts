@@ -35,8 +35,12 @@ export class PhoneComponent implements ControlValueAccessor {
 
   registerOnChange(fn: any): void {
     this.onChange = (val: string) => {
-      this.input.nativeElement.value = Utils.formatPhoneNumber(val);
-      fn(Utils.shrinkPhoneNumber(val));
+      if (Utils.isValidPhoneNumber(val)) {
+        this.input.nativeElement.value = Utils.formatPhoneNumber(val);
+        fn(Utils.shrinkPhoneNumber(val));
+      } else {
+        fn(val);
+      }
     };
   }
 

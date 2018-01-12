@@ -4,7 +4,7 @@
       <mat-card-title>Nouveau client</mat-card-title>
       <mat-card-content>
         <mat-form-field class="email">
-          <input matInput placeholder="Email" formControlName="email">
+          <input type="email" matInput placeholder="Email" formControlName="email">
         </mat-form-field>
         <app-error [control]="form.get('email')" [error]="'email'">
           L'adresse email renseignée doit être valide.
