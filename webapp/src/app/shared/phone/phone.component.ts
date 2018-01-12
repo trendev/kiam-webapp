@@ -39,9 +39,6 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   private _value: string;
   stateChanges = new Subject<void>();
   focused = false;
-
-  private _errorState = false;
-
   controlType = 'app-phone';
   private _disabled = false;
   private _required = false;
@@ -107,7 +104,7 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
 
   @Input()
   get errorState() {
-    return !!this.ngControl.errors;
+    return !!this.ngControl.errors && (this.ngControl.dirty || this.ngControl.touched);
   }
 
   get empty() {
@@ -133,21 +130,20 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   }
 
   writeValue(val: string): void {
-    // this.input.nativeElement.value = Utils.formatPhoneNumber(val);
+    this.input.nativeElement.value = Utils.formatPhoneNumber(val);
     this._value = val;
     this.stateChanges.next();
   }
 
   registerOnChange(fn: any): void {
-    // this.onChange = (val: string) => {
-    //   if (Utils.isValidPhoneNumber(val)) {
-    //     this.input.nativeElement.value = Utils.formatPhoneNumber(val);
-    //     fn(Utils.shrinkPhoneNumber(val));
-    //   } else {
-    //     fn(val);
-    //   }
-    // };
-    this.onChange = fn;
+    this.onChange = (val: string) => {
+      if (Utils.isValidPhoneNumber(val)) {
+        this.input.nativeElement.value = Utils.formatPhoneNumber(val);
+        fn(Utils.shrinkPhoneNumber(val));
+      } else {
+        fn(val);
+      }
+    };
   }
 
   registerOnTouched(fn: any): void {

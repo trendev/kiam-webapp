@@ -1,1 +1,1 @@
-<input type="tel" matInput #input [(ngModel)]="value">
+<input type="tel" matInput #input (input)="value = $event.target.value">
