@@ -12,7 +12,11 @@
     <mat-hint align="end">{{nickname.value?.length || 0}}/50</mat-hint>
   </mat-form-field>
 
-  <app-phone formControlName="phone"></app-phone>
+  <mat-form-field class="phone">
+    <app-phone formControlName="phone" placeholder="Téléphone" required></app-phone>
+    <mat-icon matSuffix>phone</mat-icon>
+  </mat-form-field>
+  {{form.value | json}}
 
   <mat-form-field>
     <input matInput [matDatepicker]="dp" formControlName="birthdate" placeholder="Date de naissance">
