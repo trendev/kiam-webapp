@@ -49,7 +49,7 @@ export class Utils {
     }
 
     static shrinkPhoneNumber(value: string): string {
-        return value.replace(/[\-\s]/g, '');
+        return value.trim().replace(/[\-\s]/g, '');
     }
 
     static isValidPhoneNumber(value: string): boolean {
