@@ -69,10 +69,10 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   get value() {
     return this._value;
   }
-  set value(val: string) {
-    this._value = val;
+  set value(value: string) {
+    this._value = value;
     this.stateChanges.next();
-    this.onChange(val);
+    this.onChange(value);
   }
 
   @Input()
@@ -129,19 +129,24 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
     }
   }
 
-  writeValue(val: string): void {
-    this.input.nativeElement.value = Utils.formatPhoneNumber(val);
-    this._value = val;
+  writeValue(value: string): void {
+    this.input.nativeElement.value = Utils.formatPhoneNumber(value);
+    this._value = value;
     this.stateChanges.next();
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = (val: string) => {
-      if (Utils.isValidPhoneNumber(val)) {
-        this.input.nativeElement.value = Utils.formatPhoneNumber(val);
-        fn(Utils.shrinkPhoneNumber(val));
+    this.onChange = (value: string) => {
+      const start = this.input.nativeElement.selectionStart;
+      console.log(`[${value}] : ${start}`);
+      this.input.nativeElement.value = Utils.formatPhoneNumber(value);
+      const diff = this.input.nativeElement.value.length - value.length;
+      this.input.nativeElement.setSelectionRange(start + diff, start + diff);
+
+      if (Utils.isValidPhoneNumber(value)) {
+        fn(Utils.shrinkPhoneNumber(value));
       } else {
-        fn(val);
+        fn(value);
       }
     };
   }
