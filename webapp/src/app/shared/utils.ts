@@ -61,12 +61,18 @@ export class Utils {
     }
 
     static formatPhoneNumber(value: string): string {
-        if (Utils.isValidPhoneNumber(value)) {
-            return Utils.shrinkPhoneNumber(value)
-                .replace(/^((?:(?:(?:00|\+)\d{2})|0)\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5');
-        } else {
+        if (!value) {
             return value;
         }
+
+        const val = Utils.shrinkPhoneNumber(value)
+            .replace(/^((?:(?:(?:00|\+)\d{2})|0)\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5')
+            .replace(/^((?:(?:(?:00|\+)\d{2})|0)\d)(\d{2})(\d{2})(\d{2})(\d\d?)$/, '$1 $2 $3 $4 $5')
+            .replace(/^((?:(?:(?:00|\+)\d{2})|0)\d)(\d{2})(\d{2})(\d\d?)$/, '$1 $2 $3 $4')
+            .replace(/^((?:(?:(?:00|\+)\d{2})|0)\d)(\d{2})(\d\d?)$/, '$1 $2 $3')
+            .replace(/^((?:(?:(?:00|\+)\d{2})|0)\d)(\d\d?)$/, '$1 $2')
+            .replace(/^((?:(?:(?:00|\+)\d{2})|0)\d)$/, '$1');
+        return val === Utils.shrinkPhoneNumber(value) ? value.trim() : val;
     }
 }
 
