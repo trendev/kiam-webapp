@@ -130,13 +130,14 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   registerOnChange(fn: any): void {
     this.onChange = (value: string) => {
 
-      this.value = this.updateInput(value);
+      const newValue = this.updateInput(value);
+      this.value = newValue;
       this.stateChanges.next();
 
-      if (Utils.isValidPhoneNumber(value)) {
-        fn(Utils.shrinkPhoneNumber(value));
+      if (Utils.isValidPhoneNumber(newValue)) {
+        fn(Utils.shrinkPhoneNumber(newValue));
       } else {
-        fn(value);
+        fn(newValue);
       }
     };
   }
