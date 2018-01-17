@@ -35,6 +35,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
   ]
 })
 export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl<string>, OnDestroy {
+
   static nextId = 0;
   value: string;
   stateChanges = new Subject<void>();
@@ -129,9 +130,7 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   registerOnChange(fn: any): void {
     this.onChange = (value: string) => {
 
-      this.updateInput(value);
-
-      this.value = value;
+      this.value = this.updateInput(value);
       this.stateChanges.next();
 
       if (Utils.isValidPhoneNumber(value)) {
@@ -142,36 +141,62 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
     };
   }
 
-  private updateInput(inputValue: string) {
-    const start = this.input.nativeElement.selectionStart;
-    const newValue = Utils.formatPhoneNumber(inputValue);
+  private updateInput(inputValue: string): string {
+
+    const value = this.controlWhitespace(inputValue);
+
+    const newValue = Utils.formatPhoneNumber(value);
+    const caretStart = this.input.nativeElement.selectionStart;
     this.input.nativeElement.value = newValue;
 
     // compute the length diff between the provided value and the formated one
-    const diff = newValue.length - inputValue.length;
+    const diff = newValue.length - value.length;
 
     // caret's offset (no move by default)
-    let offset = start;
+    let offset = caretStart;
 
     switch (diff) {
       case -1: { // remove a character
-        if (/\s/.test(`${inputValue.charAt(start - 1)}`)) { // if original char is a whitespace
-          offset = start + diff; // slide to the left
+        if (/\s/.test(`${value.charAt(caretStart - 1)}`)) { // if original char is a whitespace
+          offset = caretStart + diff; // slide to the left
         }
         break;
       }
       case 1: { // add a character
-        if (/\s/.test(`${newValue.charAt(start - 1)}`)) { // if new char is a whitespace
-          offset = start + diff; // slide to the right
+        if (/\s/.test(`${newValue.charAt(caretStart - 1)}`)) { // if new char is a whitespace
+          offset = caretStart + diff; // slide to the right
         }
         break;
       }
       default: { // case for copy/paste
-        offset = start + diff;
+        offset = caretStart + diff;
         break;
       }
     }
     this.input.nativeElement.setSelectionRange(offset, offset);
+
+    return newValue;
+  }
+
+  /**
+   * Control whitespace removal
+   * @param inputValue the value of the input field
+   */
+  controlWhitespace(inputValue: string): string {
+    const caretStart = this.input.nativeElement.selectionStart;
+
+    if (inputValue.length - this.value.length === -1
+      && /\s/.test(`${this.value.charAt(caretStart)}`)) {
+
+      // set the new offset
+      const offset = caretStart - 1;
+      this.input.nativeElement.setSelectionRange(offset, offset);
+      // remove the next character
+      return inputValue.slice(0, offset) + inputValue.slice(offset + 1);
+
+    } else {
+      return inputValue;
+    }
   }
 
   registerOnTouched(fn: any): void {
