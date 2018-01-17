@@ -36,7 +36,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 })
 export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl<string>, OnDestroy {
   static nextId = 0;
-  private _value: string;
+  value: string;
   stateChanges = new Subject<void>();
   focused = false;
   controlType = 'app-phone';
@@ -63,14 +63,6 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   ngOnDestroy() {
     this.stateChanges.complete();
     this.fm.stopMonitoring(this.elRef.nativeElement);
-  }
-
-  @Input()
-  get value() {
-    return this._value;
-  }
-  set value(value: string) {
-    this.onChange(value);
   }
 
   @Input()
@@ -106,7 +98,7 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   }
 
   get empty() {
-    return !this._value;
+    return !this.value;
   }
 
   get shouldLabelFloat() {
@@ -128,9 +120,9 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   }
 
   writeValue(value: string): void {
-    const val = Utils.formatPhoneNumber(value);
-    this.input.nativeElement.value = val;
-    this._value = val;
+    const newValue = Utils.formatPhoneNumber(value);
+    this.input.nativeElement.value = newValue;
+    this.value = newValue;
     this.stateChanges.next();
   }
 
@@ -139,7 +131,7 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
 
       this.updateInput(value);
 
-      this._value = value;
+      this.value = value;
       this.stateChanges.next();
 
       if (Utils.isValidPhoneNumber(value)) {
