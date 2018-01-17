@@ -15,9 +15,7 @@
           "/*.chunk.js"
         ],
         "urls": [
-          "https://fonts.googleapis.com/icon?family=Material+Icons",
-          "https://fonts.googleapis.com/css?family=Indie+Flower",
-          "https://fonts.googleapis.com/css?family=Arapey:400,400i",
+          "https://fonts.googleapis.com/**",
           "https://fonts.gstatic.com/s/arapey/v6/2fD9gIinOROmREwVfSHWKnYhjbSpvc47ee6xR_80Hnw.woff2",
           "https://fonts.gstatic.com/s/materialicons/v32/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2"
         ]
