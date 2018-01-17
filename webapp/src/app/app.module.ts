@@ -1,3 +1,4 @@
+import { LogUpdateService } from './log-update.service';
 import { SharedModule } from '@app/shared';
 import { CoreModule } from '@app/core';
 import { LoginModule } from '@app/login';
@@ -19,7 +20,7 @@ import { LoadingOverlayService } from './loading-overlay.service';
   ],
   entryComponents: [LoadingOverlayComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     CoreModule,
@@ -28,6 +29,9 @@ import { LoadingOverlayService } from './loading-overlay.service';
     AppRoutingModule
   ],
   bootstrap: [AppComponent],
-  providers: [LoadingOverlayService]
+  providers: [
+    LoadingOverlayService,
+    LogUpdateService
+  ]
 })
 export class AppModule { }

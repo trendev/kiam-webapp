@@ -5,10 +5,6 @@
   },
   "apps": [
     {
-      "appShell": {
-        "app": "comptandye-app-shell",
-        "route": "app-shell-path"
-      },
       "root": "src",
       "outDir": "dist",
       "assets": [
@@ -23,38 +19,6 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "serviceWorker": true,
-      "styles": [
-        "styles.scss"
-      ],
-      "stylePreprocessorOptions": {
-        "includePaths": [
-          "./",
-          "./themes"
-        ]
-      },
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
-    },
-    {
-      "name": "comptandye-app-shell",
-      "root": "src",
-      "outDir": "dist-server/",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "platform": "server",
-      "index": "index.html",
-      "main": "main.server.ts",
-      "polyfills": "polyfills.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.server.json",
-      "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
       "styles": [
         "styles.scss"
       ],
@@ -101,7 +65,6 @@
     "class": {
       "spec": false
     },
-    "component": {
-    }
+    "component": {}
   }
 }

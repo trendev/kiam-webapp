@@ -24,7 +24,6 @@
     "@angular/material-moment-adapter": "^5.0.4",
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
-    "@angular/platform-server": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@angular/service-worker": "^5.2.0",
     "core-js": "^2.5.3",
