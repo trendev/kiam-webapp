@@ -17,7 +17,7 @@ import { PackService } from './pack.service';
 import { ProfessionalBusinessesResolverService } from './professional-businesses-resolver.service';
 import { ServiceService } from './service.service';
 import { ProfessionalPaymentModesResolverService } from './professional-payment-modes-resolver.service';
-import { ProfessionalBilllsRefDateResolverService } from './professional-billls-ref-date-resolver.service';
+import { ProfessionalBillsRefDateResolverService } from './professional-bills-ref-date-resolver.service';
 import { ClientBillService } from './client-bill.service';
 
 @NgModule({
@@ -44,7 +44,7 @@ import { ClientBillService } from './client-bill.service';
     ProfessionalBusinessesResolverService,
     ServiceService,
     ProfessionalPaymentModesResolverService,
-    ProfessionalBilllsRefDateResolverService,
+    ProfessionalBillsRefDateResolverService,
     ClientBillService]
 })
 export class CoreModule {

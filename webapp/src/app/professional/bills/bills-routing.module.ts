@@ -4,7 +4,7 @@ import { CreateClientBillComponent } from './create-client-bill/create-client-bi
 import {
   OfferingsResolverService,
   ProfessionalPaymentModesResolverService,
-  ProfessionalBilllsRefDateResolverService
+  ProfessionalBillsRefDateResolverService
 } from '@app/core';
 import { BillsComponent } from './bills/bills.component';
 import { NgModule } from '@angular/core';
@@ -23,7 +23,7 @@ const routes: Routes = [
     resolve: {
       offerings: OfferingsResolverService,
       paymentModes: ProfessionalPaymentModesResolverService,
-      billsRefDate: ProfessionalBilllsRefDateResolverService
+      billsRefDate: ProfessionalBillsRefDateResolverService
     }
   },
   {

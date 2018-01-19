@@ -4,7 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class ProfessionalBilllsRefDateResolverService implements Resolve<number> {
+export class ProfessionalBillsRefDateResolverService implements Resolve<number> {
 
   constructor(private professionalService: ProfessionalService) { }
 
