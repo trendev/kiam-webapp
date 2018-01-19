@@ -24,6 +24,12 @@ mat-card {
     margin: 5px;
 }
 
+.manage-offering{
+    display:flex;
+    align-content: center;
+    align-items: center;
+}
+
 @media all and (max-device-width: 600px) {
     .bill-content {
         display: flex;

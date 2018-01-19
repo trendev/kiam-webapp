@@ -17,7 +17,19 @@
                 Offres souscrites
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-purchased-offerings [offerings]="offerings" [resetRequest$]="resetRequest$" [errorAggregator]="errorAggregator" (total)="total = $event"></app-purchased-offerings>
+            <ng-container *ngIf="offerings.length === 0;else elseOfferingsBlock">
+              <mat-error>Vous devez générer vos offres avant de créer des factures...</mat-error>
+              <br>
+              <a mat-raised-button color="primary" routerLink="/professional/offerings" routerLinkActive="active">
+                <div class="manage-offering">
+                  <mat-icon aria-label="Catalogue d'offres">local_offer</mat-icon>
+                  <span>Gérer vos offres</span>
+                </div>
+              </a>
+            </ng-container>
+            <ng-template #elseOfferingsBlock>
+              <app-purchased-offerings [offerings]="offerings" [resetRequest$]="resetRequest$" [errorAggregator]="errorAggregator" (total)="total = $event"></app-purchased-offerings>
+            </ng-template>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
