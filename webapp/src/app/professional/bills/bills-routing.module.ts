@@ -4,7 +4,8 @@ import { CreateClientBillComponent } from './create-client-bill/create-client-bi
 import {
   OfferingsResolverService,
   ProfessionalPaymentModesResolverService,
-  ProfessionalBillsRefDateResolverService
+  ProfessionalBillsRefDateResolverService,
+  ProfessionalBillsResolverService
 } from '@app/core';
 import { BillsComponent } from './bills/bills.component';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,10 @@ const routes: Routes = [
   {
     path: '',
     component: BillsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    resolve: {
+      bills: ProfessionalBillsResolverService
+    }
   },
   {
     path: 'create-clientbill',

@@ -19,6 +19,7 @@ import { ServiceService } from './service.service';
 import { ProfessionalPaymentModesResolverService } from './professional-payment-modes-resolver.service';
 import { ProfessionalBillsRefDateResolverService } from './professional-bills-ref-date-resolver.service';
 import { ClientBillService } from './client-bill.service';
+import { ProfessionalBillsResolverService } from './professional-bills-resolver.service';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { ClientBillService } from './client-bill.service';
     ServiceService,
     ProfessionalPaymentModesResolverService,
     ProfessionalBillsRefDateResolverService,
-    ClientBillService]
+    ClientBillService,
+    ProfessionalBillsResolverService]
 })
 export class CoreModule {
   /* make sure CoreModule is imported only by one NgModule the AppModule */
