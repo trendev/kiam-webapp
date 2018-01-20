@@ -23,7 +23,7 @@ export class OfferingsComponent implements OnInit {
     'PACK': OfferingType.PACK
   };
 
-  _selectedOfferingType: string;
+  selectedOfferingType: string;
 
   constructor(private professionalService: ProfessionalService,
     private packService: PackService,
@@ -67,19 +67,11 @@ export class OfferingsComponent implements OnInit {
 
     // check the optional parameter ot (offering type)
     this.route.paramMap.subscribe(params => {
-      this._selectedOfferingType = params.get('ot');
-      if (!this._selectedOfferingType) {
-        this._selectedOfferingType = OfferingType.SERVICE;
+      this.selectedOfferingType = params.get('ot');
+      if (!this.selectedOfferingType) {
+        this.selectedOfferingType = OfferingType.SERVICE;
       }
     });
-  }
-
-  get selectedOfferingType(): string {
-    return this._selectedOfferingType;
-  }
-
-  set selectedOfferingType(value: string) {
-    this._selectedOfferingType = value;
   }
 
   refreshOfferings() {
