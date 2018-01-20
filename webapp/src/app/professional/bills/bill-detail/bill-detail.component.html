@@ -56,7 +56,7 @@
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
-          <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
+          <button type="button" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modification">undo</mat-icon>
           </button>
           <button type="button" mat-mini-fab [color]="isClosedBill()?'accent':'warn'" (click)="cancelBillCreation()">

@@ -2,7 +2,7 @@
   <mat-card>
     <form [formGroup]="form" novalidate>
       <mat-card-title>Modification du profil - {{pro.email}}</mat-card-title>
-      
+
       <div class="top-button-container">
         <a mat-raised-button color="primary" routerLink="./change-password" routerLinkActive="active">
           Nouveau mot de passe
@@ -81,10 +81,10 @@
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
-          <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
+          <button type="button" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modification">undo</mat-icon>
           </button>
-          <button type="button" mat-mini-fab (click)="refresh()">
+          <button type="button" mat-mini-fab color="accent" (click)="refresh()">
             <mat-icon aria-label="Rafraîchir avec les données du serveur">refresh</mat-icon>
           </button>
           <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">

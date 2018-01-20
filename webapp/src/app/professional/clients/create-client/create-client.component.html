@@ -63,10 +63,10 @@
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
-          <button type="button" mat-mini-fab (click)="revert()" [disabled]="form.pristine">
+          <button type="button" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modification">undo</mat-icon>
           </button>
-          <a mat-mini-fab routerLink="../" routerLinkActive="active">
+          <a mat-mini-fab color="accent" routerLink="../" routerLinkActive="active">
             <mat-icon aria-label="Annuler la création du client">list</mat-icon>
           </a>
           <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
