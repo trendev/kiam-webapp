@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Bill, BillType, ClientBill } from '@app/entities';
+import { Bill, BillType, ClientBill, CollectiveGroupBill, IndividualBill } from '@app/entities';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -133,10 +133,23 @@ class BillModel {
     this.currency = bill.currency;
     this.paymentDate = !!bill.paymentDate;
     switch (bill.cltype) {
-      case BillType.CLIENT_BILL:
-        const b = bill as ClientBill;
-        this.name = `${b.client.customerDetails.firstName} ${b.client.customerDetails.lastName}`;
+      case BillType.CLIENT_BILL: {
+        const clb = bill as ClientBill;
+        this.name = `${clb.client.customerDetails.firstName} ${clb.client.customerDetails.lastName}`;
         break;
+      }
+      case BillType.COLLECTIVE_GROUP_BILL: {
+        const cgb = bill as CollectiveGroupBill;
+        this.name = `${cgb.collectiveGroup.groupName}`;
+        break;
+      }
+      case BillType.INDIVIDUAL_BILL: {
+        const ib = bill as IndividualBill;
+        this.name = `${ib.individual.customerDetails.firstName} ${ib.individual.customerDetails.lastName}`;
+        break;
+      }
+      default:
+        throw new Error(`${bill.cltype} is not a supported type of Bill`);
     }
   }
 }
