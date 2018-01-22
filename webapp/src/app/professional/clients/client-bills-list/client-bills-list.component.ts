@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { ClientBill } from '@app/entities';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import * as moment from 'moment';
@@ -18,8 +18,6 @@ export class ClientBillsListComponent implements OnInit {
     'deliveryDate', 'amount', 'paymentDate'];
   datasource: MatTableDataSource<ClientBill>;
 
-  @ViewChild(MatSort) sort: MatSort;
-
   _showFull = false;
 
   _showUnpaid = false;
@@ -35,7 +33,6 @@ export class ClientBillsListComponent implements OnInit {
     );
     this.datasource =
       new MatTableDataSource<ClientBill>(this.billsModel);
-    this.datasource.sort = this.sort;
   }
 
   get unpaid(): number {
