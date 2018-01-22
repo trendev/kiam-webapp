@@ -11,6 +11,14 @@
         </mat-chip>
       </mat-chip-list>
       <div class="list-container" *ngIf="showFull || showUnpaid">
+        <div class="search-header">
+          <mat-form-field>
+            <mat-placeholder>
+              <i>Recherche</i>
+            </mat-placeholder>
+            <input matInput (keyup)="applyFilter($event.target.value)">
+          </mat-form-field>
+        </div>
         <mat-table #table [dataSource]="datasource" matSort>
           <ng-container matColumnDef="deliveryDate">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
@@ -41,7 +49,8 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="form-button-container">
-        <button type="button" mat-mini-fab color="primary" (click)="createNewClientBill()">
+        <button type="button" mat-mini-fab color="primary">
+          <!-- (click)="createNewClientBill()" -->
           <mat-icon aria-label="Nouvelle facture">add</mat-icon>
         </button>
       </div>

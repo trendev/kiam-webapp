@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Bill } from '@app/entities';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ProfessionalService } from '@app/core';
@@ -11,18 +11,17 @@ import * as moment from 'moment';
   templateUrl: './bills.component.html',
   styleUrls: ['./bills.component.scss'],
 })
-export class BillsComponent implements OnInit {
-
+export class BillsComponent implements OnInit, AfterViewInit {
   private bills: Bill[];
-  billsModel: Bill[];
+  billsModel: BillModel[];
 
   displayedColumns = [
     'deliveryDate', 'amount', 'paymentDate'];
-  datasource: MatTableDataSource<Bill>;
+  datasource: MatTableDataSource<BillModel>;
 
   @ViewChild(MatSort) sort: MatSort;
 
-  _showFull = false;
+  _showFull = true;
 
   _showUnpaid = false;
 
@@ -40,15 +39,30 @@ export class BillsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initBillsModel();
+  }
+
+  ngAfterViewInit() {
+    this.datasource.sort = this.sort;
+  }
+
+  initBillsModel() {
     this.billsModel = this.bills.sort(// inverse order : most recent first
       (b1, b2) => {
         const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
         return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
       }
-    );
+    )
+      .map(b => new BillModel(b));
+
     this.datasource =
-      new MatTableDataSource<Bill>(this.billsModel);
-    this.datasource.sort = this.sort;
+      new MatTableDataSource<BillModel>(this.billsModel);
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.datasource.filter = filterValue;
   }
 
   refreshBills() {
@@ -100,4 +114,22 @@ export class BillsComponent implements OnInit {
     this.router.navigate(['/professional/bills/clientbill', { id: id, ref: ref }]);
   }
 
+}
+
+class BillModel {
+  reference: string;
+  deliveryDate: number;
+  cltype: string;
+  amount: number;
+  currency: string;
+  paymentDate: boolean;
+
+  constructor(b: Bill) {
+    this.reference = b.reference;
+    this.deliveryDate = b.deliveryDate;
+    this.cltype = b.cltype;
+    this.amount = b.amount;
+    this.currency = b.currency;
+    this.paymentDate = !!b.paymentDate;
+  }
 }

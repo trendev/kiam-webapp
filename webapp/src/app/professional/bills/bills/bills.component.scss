@@ -18,6 +18,15 @@ mat-card {
     margin: 5px 0px;
 }
 
+.search-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 64px;
+    padding: 5px 20px 0;
+}
+
 .mat-table {
     overflow: auto;
     max-height: 500px;
