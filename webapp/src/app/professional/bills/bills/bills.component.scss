@@ -38,7 +38,6 @@ mat-card {
     align-items: center;
 }
 
-
 .form-button-container {
     display: flex;
     justify-content: flex-end;
@@ -57,11 +56,15 @@ mat-card {
     }
     .mat-header-row,
     .mat-row {
-        padding: 0 5px;
+        padding: 0;
+    }
+    .mat-cell {
+        font-size: 0.8em;
     }
     .price {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
+        max-width: 50px;
     }
 }

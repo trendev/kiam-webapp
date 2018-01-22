@@ -17,7 +17,7 @@
       <mat-cell *matCellDef="let element">{{element.amount / 100}} {{element.currency}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="paymentDate">
-      <mat-header-cell class="paymentDate" *matHeaderCellDef>Encaissement</mat-header-cell>
+      <mat-header-cell class="paymentDate" *matHeaderCellDef>Statut</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <div *ngIf="element.paymentDate;else elseBlock" class="paymentDate">
           <mat-icon color="primary">check</mat-icon>

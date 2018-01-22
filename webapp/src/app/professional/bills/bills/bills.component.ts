@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Bill } from '@app/entities';
+import { Bill, BillType, ClientBill } from '@app/entities';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   billsModel: BillModel[];
 
   displayedColumns = [
-    'deliveryDate', 'amount', 'paymentDate'];
+    'deliveryDate', 'name', 'amount', 'paymentDate'];
   datasource: MatTableDataSource<BillModel>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -123,13 +123,20 @@ class BillModel {
   amount: number;
   currency: string;
   paymentDate: boolean;
+  name: string;
 
-  constructor(b: Bill) {
-    this.reference = b.reference;
-    this.deliveryDate = b.deliveryDate;
-    this.cltype = b.cltype;
-    this.amount = b.amount;
-    this.currency = b.currency;
-    this.paymentDate = !!b.paymentDate;
+  constructor(bill: Bill) {
+    this.reference = bill.reference;
+    this.deliveryDate = bill.deliveryDate;
+    this.cltype = bill.cltype;
+    this.amount = bill.amount;
+    this.currency = bill.currency;
+    this.paymentDate = !!bill.paymentDate;
+    switch (bill.cltype) {
+      case BillType.CLIENT_BILL:
+        const b = bill as ClientBill;
+        this.name = `${b.client.customerDetails.firstName} ${b.client.customerDetails.lastName}`;
+        break;
+    }
   }
 }
