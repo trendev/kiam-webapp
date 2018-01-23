@@ -16,7 +16,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   billsModel: BillModel[];
 
   displayedColumns = [
-    'deliveryDate', 'name', 'amount', 'paymentDate'];
+    'deliveryDate', 'reference', 'name', 'amount', 'paymentDate'];
   datasource: MatTableDataSource<BillModel>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -117,6 +117,10 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   gotoClientBill(id: number, ref: string) {
     this.router.navigate(['/professional/bills/clientbill', { id: id, ref: ref }]);
+  }
+
+  shrinkRef(ref: string) {
+    return ref.replace(/^PRO\-[\d\w]+\-(.+)$/, '$1');
   }
 
 }

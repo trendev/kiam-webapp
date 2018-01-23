@@ -24,9 +24,13 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
             <mat-cell *matCellDef="let element">{{element.deliveryDate | date:'shortDate':'':'fr'}}</mat-cell>
           </ng-container>
+          <ng-container matColumnDef="reference">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Référence courte</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="hide">{{shrinkRef(element.reference)}}</mat-cell>
+          </ng-container>
           <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Nom</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="amount">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Montant</mat-header-cell>
