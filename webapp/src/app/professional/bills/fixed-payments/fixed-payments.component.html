@@ -3,7 +3,7 @@
     <mat-chip-list class="mat-chip-list-stacked" aria-orientation="vertical">
       <mat-chip *ngFor="let payment of payments; let i=index;" [color]="'primary'" selected="true" [selectable]="false">
         <div class="payment">
-          <span>{{payment.paymentMode.name}}: {{payment.amount | number:'.2':'fr'}} EUR</span>
+          <span>{{payment.paymentMode.name}}: {{payment.amount | number:'.0-2':'fr'}} EUR</span>
           <mat-icon>check</mat-icon>
         </div>
       </mat-chip>

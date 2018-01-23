@@ -4,14 +4,14 @@
       <ng-template [ngSwitchCase]="'low'">
         <mat-chip-list>
           <mat-chip [color]="'accent'" selected="true" [selectable]="false" (click)="newPayment()">
-            <span class="mat-body-2">Reste à régler : {{remaining | number:'.2':'fr'}} EUR</span>
+            <span class="mat-body-2">Reste à régler : {{remaining | number:'.0-2':'fr'}} EUR</span>
           </mat-chip>
         </mat-chip-list>
       </ng-template>
       <ng-template [ngSwitchCase]="'high'">
         <mat-chip-list>
           <mat-chip [color]="'warn'" selected="true" [selectable]="false">
-            <span class="mat-body-2">Excédent : {{-remaining | number:'.2':'fr'}} EUR</span>
+            <span class="mat-body-2">Excédent : {{-remaining | number:'.0-2':'fr'}} EUR</span>
           </mat-chip>
         </mat-chip-list>
       </ng-template>
