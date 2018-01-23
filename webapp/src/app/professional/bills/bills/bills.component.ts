@@ -72,6 +72,11 @@ export class BillsComponent implements OnInit, AfterViewInit {
       .subscribe(
       bills => {
         this.bills = bills;
+        this.initBillsModel();
+        // keep the current view updated
+        this.showFull = this._showFull;
+        this.showUnpaid = this._showUnpaid;
+
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la collecte des factures sur le serveur`)
