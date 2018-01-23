@@ -118,11 +118,23 @@ export class BillsComponent implements OnInit, AfterViewInit {
   gotoBill(ref: string) {
     const bill = this.bills.filter(b => b.reference === ref).pop();
     if (bill) {
-
+      visitBill(bill, {
+        clientbill: () => {
+          const clb = bill as ClientBill;
+          this.router.navigate(['/professional/bills/clientbill', { id: clb.client.id, ref: ref }]);
+        },
+        collectivegroupbill: () => {
+          const cgb = bill as CollectiveGroupBill;
+          this.router.navigate(['/professional/bills/collectivegroupbill', { id: cgb.collectiveGroup.id, ref: ref }]);
+        },
+        individualbill: () => {
+          const ib = bill as IndividualBill;
+          this.router.navigate(['/professional/bills/individualbill', { email: ib.individual.email, ref: ref }]);
+        },
+      });
     } else {
       console.warn(`Bill ${ref} cannot be found !`);
     }
-    // this.router.navigate(['/professional/bills/clientbill', { id: id, ref: ref }]);
   }
 
   shrinkRef(ref: string) {
@@ -147,28 +159,40 @@ class BillModel {
     this.amount = bill.amount;
     this.currency = bill.currency;
     this.paymentDate = !!bill.paymentDate;
-    switch (bill.cltype) {
-      case BillType.CLIENT_BILL: {
-        const clb = bill as ClientBill;
-        this.name = `${clb.client.customerDetails.firstName} ${clb.client.customerDetails.lastName}`;
-        break;
+    visitBill(bill,
+      {
+        clientbill: () => {
+          const clb = bill as ClientBill;
+          this.name = `${clb.client.customerDetails.firstName} ${clb.client.customerDetails.lastName}`;
+        },
+        collectivegroupbill: () => {
+          const cgb = bill as CollectiveGroupBill;
+          this.name = `${cgb.collectiveGroup.groupName}`;
+        },
+        individualbill: () => {
+          const ib = bill as IndividualBill;
+          this.name = `${ib.individual.customerDetails.firstName} ${ib.individual.customerDetails.lastName}`;
+        },
       }
-      case BillType.COLLECTIVE_GROUP_BILL: {
-        const cgb = bill as CollectiveGroupBill;
-        this.name = `${cgb.collectiveGroup.groupName}`;
-        break;
-      }
-      case BillType.INDIVIDUAL_BILL: {
-        const ib = bill as IndividualBill;
-        this.name = `${ib.individual.customerDetails.firstName} ${ib.individual.customerDetails.lastName}`;
-        break;
-      }
-      default:
-        throw new Error(`${bill.cltype} is not a supported type of Bill`);
-    }
+    );
   }
 }
 
-function consumeBill(bill: Bill) {
-
+function visitBill(bill: Bill, fcts: { [key: string]: () => void }) {
+  switch (bill.cltype) {
+    case BillType.CLIENT_BILL: {
+      fcts[BillType.CLIENT_BILL]();
+      break;
+    }
+    case BillType.COLLECTIVE_GROUP_BILL: {
+      fcts[BillType.COLLECTIVE_GROUP_BILL]();
+      break;
+    }
+    case BillType.INDIVIDUAL_BILL: {
+      fcts[BillType.INDIVIDUAL_BILL]();
+      break;
+    }
+    default:
+      throw new Error(`${bill.cltype} is not a supported type of Bill`);
+  }
 }
