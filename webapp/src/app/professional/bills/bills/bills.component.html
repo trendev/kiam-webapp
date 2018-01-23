@@ -50,7 +50,7 @@
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;" [matTooltip]="row.reference" matTooltipPosition="above" (click)="gotoClientBill(row.client.id,row.reference)">
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [matTooltip]="row.reference" matTooltipPosition="above" (click)="gotoBill(row.reference)">
           </mat-row>
         </mat-table>
       </div>

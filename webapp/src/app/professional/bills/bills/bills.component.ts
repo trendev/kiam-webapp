@@ -115,8 +115,14 @@ export class BillsComponent implements OnInit, AfterViewInit {
     return this.bills.length === 0;
   }
 
-  gotoClientBill(id: number, ref: string) {
-    this.router.navigate(['/professional/bills/clientbill', { id: id, ref: ref }]);
+  gotoBill(ref: string) {
+    const bill = this.bills.filter(b => b.reference === ref).pop();
+    if (bill) {
+
+    } else {
+      console.warn(`Bill ${ref} cannot be found !`);
+    }
+    // this.router.navigate(['/professional/bills/clientbill', { id: id, ref: ref }]);
   }
 
   shrinkRef(ref: string) {
@@ -161,4 +167,8 @@ class BillModel {
         throw new Error(`${bill.cltype} is not a supported type of Bill`);
     }
   }
+}
+
+function consumeBill(bill: Bill) {
+
 }
