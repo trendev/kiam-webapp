@@ -12,7 +12,7 @@ import * as moment from 'moment';
   styleUrls: ['./bills.component.scss'],
 })
 export class BillsComponent implements OnInit, AfterViewInit {
-  private bills: Bill[];
+  bills: Bill[];
   billsModel: BillModel[];
 
   displayedColumns = [
