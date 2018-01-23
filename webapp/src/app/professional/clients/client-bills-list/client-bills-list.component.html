@@ -14,7 +14,7 @@
     </ng-container>
     <ng-container matColumnDef="amount">
       <mat-header-cell *matHeaderCellDef>Montant</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.amount / 100}} {{element.currency}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.amount / 100 | number:'.2':'fr'}} {{element.currency}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="paymentDate">
       <mat-header-cell class="paymentDate" *matHeaderCellDef>Statut</mat-header-cell>

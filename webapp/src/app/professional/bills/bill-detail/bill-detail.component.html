@@ -10,7 +10,7 @@
         </p>
         <ng-content></ng-content>
         <p>Montant:
-          <b>{{bill.amount / 100}} {{bill.currency}}</b>
+          <b>{{bill.amount / 100 | number:'.2':'fr'}} {{bill.currency}}</b>
         </p>
         <p>Date d'émission: {{bill.issueDate | date:'medium':'':'fr'}}</p>
       </mat-card-subtitle>

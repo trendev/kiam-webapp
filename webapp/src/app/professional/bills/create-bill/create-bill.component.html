@@ -38,7 +38,7 @@
                 Détail
               </mat-panel-title>
               <mat-panel-description *ngIf="amount > 0">
-                ( Montant : {{amount / 100}} EUR )
+                ( Montant : {{amount / 100 | number:'.2':'fr'}} EUR )
               </mat-panel-description>
             </mat-expansion-panel-header>
             <app-information [billsRefDate]="billsRefDate" [errorAggregator]="errorAggregator"></app-information>
