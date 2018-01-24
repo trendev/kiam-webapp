@@ -83,6 +83,10 @@ export class BillsComponent implements OnInit, AfterViewInit {
       );
   }
 
+  get total(): number {
+    return this.bills.length;
+  }
+
   get unpaid(): number {
     return this.bills.filter(b => !b.paymentDate).length;
   }
