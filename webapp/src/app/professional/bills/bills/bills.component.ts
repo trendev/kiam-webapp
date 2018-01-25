@@ -25,6 +25,12 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   _showUnpaid = false;
 
+  currentMonthRevenue = 0;
+  previousMonthRevenue = 0;
+
+  currentWeekRevenue = 0;
+  previousWeekRevenue = 0;
+
   constructor(private professionalService: ProfessionalService,
     private router: Router,
     private route: ActivatedRoute,
@@ -40,6 +46,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.initBillsModel();
+    this.initRevenues();
   }
 
   ngAfterViewInit() {
@@ -59,6 +66,39 @@ export class BillsComponent implements OnInit, AfterViewInit {
       new MatTableDataSource<BillModel>(this.billsModel);
   }
 
+  initRevenues() {
+    console.log(moment().locale('fr').startOf('week').subtract(1, 'week').toString());
+
+    this.currentMonthRevenue = this.bills
+      .filter(b => !!b.paymentDate)
+      .filter(b => moment(b.paymentDate).isSameOrAfter(moment().startOf('month'))
+        && moment(b.paymentDate).isSameOrBefore(moment()))
+      .map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
+
+    this.previousMonthRevenue = this.bills
+      .filter(b => !!b.paymentDate)
+      .filter(b => moment(b.paymentDate).isSameOrAfter(moment().startOf('month').subtract(1, 'month'))
+        && moment(b.paymentDate).isSameOrBefore(moment().startOf('month').subtract(1, 'month').endOf('month')))
+      .map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
+
+    this.currentWeekRevenue = this.bills
+      .filter(b => !!b.paymentDate)
+      .filter(b => moment(b.paymentDate).isSameOrAfter(moment().locale('fr').startOf('week'))
+        && moment(b.paymentDate).isSameOrBefore(moment()))
+      .map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
+
+    this.previousWeekRevenue = this.bills
+      .filter(b => !!b.paymentDate)
+      .filter(b => moment(b.paymentDate).isSameOrAfter(moment().locale('fr').startOf('week').subtract(1, 'week'))
+        && moment(b.paymentDate).isBefore(moment().locale('fr').startOf('week')))
+      .map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
+
+  }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
@@ -73,6 +113,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
       bills => {
         this.bills = bills;
         this.initBillsModel();
+        this.initRevenues();
         // keep the current view updated
         this.showFull = this._showFull;
         this.showUnpaid = this._showUnpaid;
@@ -89,6 +130,13 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   get unpaid(): number {
     return this.bills.filter(b => !b.paymentDate).length;
+  }
+
+  get unpaidRevenue(): number {
+    return this.bills
+      .filter(b => !b.paymentDate)
+      .map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
   }
 
   get showFull(): boolean {

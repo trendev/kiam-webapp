@@ -1,13 +1,29 @@
 <div class="container">
   <mat-card>
     <mat-card-title>Factures</mat-card-title>
+    <mat-card-subtitle>
+      <span>
+        <b>CA mensuel : {{currentMonthRevenue / 100 | currency:'EUR':'':'':'fr'}}</b>
+      </span>
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      <span class="mat-caption">CA mensuel précédent : {{previousMonthRevenue / 100 | currency:'EUR':'':'':'fr'}}</span>
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      <span>
+        <b>CA hebdomadaire : {{currentWeekRevenue / 100 | currency:'EUR':'':'':'fr'}}</b>
+      </span>
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      <span class="mat-caption">CA hebdomadaire précédent : {{previousWeekRevenue / 100 | currency:'EUR':'':'':'fr'}}</span>
+    </mat-card-subtitle>
     <mat-card-content>
       <mat-chip-list>
         <mat-chip [color]="billsIsEmpty()?'accent':'primary'" selected="true" [selectable]="false" (click)="showFull =! showFull">
           {total, plural, =0 {Aucune facture} =1 {1 Facture} other {{{total}} Factures}}
         </mat-chip>
         <mat-chip color="warn" *ngIf="unpaid > 0" selected="true" [selectable]="false" (click)="showUnpaid =! showUnpaid">
-          {unpaid, plural, =0 {Aucun impayé} =1 {1 impayé} other {{{unpaid}} impayés}}
+          {unpaid, plural, =0 {Aucun impayé} =1 {1 impayé} other {{{unpaid}} impayés}} : {{unpaidRevenue / 100 | currency:'EUR':'':'':'fr'}}
         </mat-chip>
       </mat-chip-list>
       <div *ngIf="!billsIsEmpty()" class="list-container">
