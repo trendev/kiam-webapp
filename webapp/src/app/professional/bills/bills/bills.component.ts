@@ -31,6 +31,8 @@ export class BillsComponent implements OnInit, AfterViewInit {
   currentWeekRevenue = 0;
   previousWeekRevenue = 0;
 
+  unpaidRevenue = 0;
+
   constructor(private professionalService: ProfessionalService,
     private router: Router,
     private route: ActivatedRoute,
@@ -67,7 +69,6 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   initRevenues() {
-    console.log(moment().locale('fr').startOf('week').subtract(1, 'week').toString());
 
     this.currentMonthRevenue = this.bills
       .filter(b => !!b.paymentDate)
@@ -94,6 +95,11 @@ export class BillsComponent implements OnInit, AfterViewInit {
       .filter(b => !!b.paymentDate)
       .filter(b => moment(b.paymentDate).isSameOrAfter(moment().locale('fr').startOf('week').subtract(1, 'week'))
         && moment(b.paymentDate).isBefore(moment().locale('fr').startOf('week')))
+      .map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
+
+    this.unpaidRevenue = this.bills
+      .filter(b => !b.paymentDate)
       .map(b => b.amount)
       .reduce((a, b) => a + b, 0);
 
@@ -130,13 +136,6 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   get unpaid(): number {
     return this.bills.filter(b => !b.paymentDate).length;
-  }
-
-  get unpaidRevenue(): number {
-    return this.bills
-      .filter(b => !b.paymentDate)
-      .map(b => b.amount)
-      .reduce((a, b) => a + b, 0);
   }
 
   get showFull(): boolean {
