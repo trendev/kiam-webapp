@@ -13,6 +13,7 @@ import { ClientBillDetailComponent } from './client-bill-detail/client-bill-deta
 import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { FixedPurchasedOfferingsComponent } from './fixed-purchased-offerings/fixed-purchased-offerings.component';
 import { FixedPaymentsComponent } from './fixed-payments/fixed-payments.component';
+import { RevenuesSumupComponent } from './revenues-sumup/revenues-sumup.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { FixedPaymentsComponent } from './fixed-payments/fixed-payments.componen
     ClientBillDetailComponent,
     BillDetailComponent,
     FixedPurchasedOfferingsComponent,
-    FixedPaymentsComponent
+    FixedPaymentsComponent,
+    RevenuesSumupComponent
   ],
   providers: [ClientBillResolverService]
 })

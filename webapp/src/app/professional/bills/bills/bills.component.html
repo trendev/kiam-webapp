@@ -1,22 +1,7 @@
 <div class="container">
   <mat-card>
     <mat-card-title>Factures</mat-card-title>
-    <mat-card-subtitle>
-      <span>
-        <b>CA mensuel : {{currentMonthRevenue / 100 | currency:'EUR':'':'':'fr'}}</b>
-      </span>
-    </mat-card-subtitle>
-    <mat-card-subtitle>
-      <span class="mat-caption">CA mensuel précédent : {{previousMonthRevenue / 100 | currency:'EUR':'':'':'fr'}}</span>
-    </mat-card-subtitle>
-    <mat-card-subtitle>
-      <span>
-        <b>CA hebdomadaire : {{currentWeekRevenue / 100 | currency:'EUR':'':'':'fr'}}</b>
-      </span>
-    </mat-card-subtitle>
-    <mat-card-subtitle>
-      <span class="mat-caption">CA hebdomadaire précédent : {{previousWeekRevenue / 100 | currency:'EUR':'':'':'fr'}}</span>
-    </mat-card-subtitle>
+    <app-revenues-sumup [bills]="bills"></app-revenues-sumup>
     <mat-card-content>
       <mat-chip-list>
         <mat-chip [color]="billsIsEmpty()?'accent':'primary'" selected="true" [selectable]="false" (click)="showFull =! showFull">
