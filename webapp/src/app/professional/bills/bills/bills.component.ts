@@ -12,7 +12,7 @@ import * as moment from 'moment';
   styleUrls: ['./bills.component.scss'],
 })
 export class BillsComponent implements OnInit, AfterViewInit {
-  bills: Bill[];
+  bills: Bill[] = [];
   billsModel: BillModel[];
 
   displayedColumns = [
@@ -27,6 +27,17 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   unpaidRevenue = 0;
 
+  minDate: number;
+  maxDate: number;
+
+  billsFilterFn = (b: Bill) => true;
+
+  // inverse order : most recent first
+  billsSortFn = (b1: Bill, b2: Bill) => {
+    const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
+    return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
+  }
+
   constructor(private professionalService: ProfessionalService,
     private router: Router,
     private route: ActivatedRoute,
@@ -35,28 +46,46 @@ export class BillsComponent implements OnInit, AfterViewInit {
       (data: {
         bills: Bill[]
       }) => {
-        this.bills = data.bills;
+        this.bills = data.bills.sort(this.billsSortFn);
+        this.initDates();
+        this.initBillsFilterFn();
       }
     );
   }
 
   ngOnInit() {
-    this.initBillsModel();
     this.initRevenues();
+    this.initBillsModel();
   }
 
   ngAfterViewInit() {
     this.datasource.sort = this.sort;
   }
 
+  initAll() {
+    this.initDates();
+    this.initBillsFilterFn();
+    this.initRevenues();
+    this.initBillsModel();
+  }
+
+  initDates() {
+    const size = this.bills.length;
+    if (size > 0) {
+      this.minDate = this.bills[size - 1].deliveryDate; // the last one is the oldest one
+      this.maxDate = this.bills[0].deliveryDate; // the first one is the most recent one
+    }
+  }
+
+  initBillsFilterFn() {
+    if (this.bills.length > 0) {
+      this.billsFilterFn = (b: Bill) => moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
+        && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate));
+    }
+  }
+
   initBillsModel() {
-    this.billsModel = this.bills.sort(// inverse order : most recent first
-      (b1, b2) => {
-        const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
-        return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
-      }
-    )
-      .map(b => new BillModel(b));
+    this.billsModel = this.bills.filter(this.billsFilterFn).map(b => new BillModel(b));
 
     this.datasource =
       new MatTableDataSource<BillModel>(this.billsModel);
@@ -81,9 +110,8 @@ export class BillsComponent implements OnInit, AfterViewInit {
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
       bills => {
-        this.bills = bills;
-        this.initBillsModel();
-        this.initRevenues();
+        this.bills = bills.sort(this.billsSortFn);
+        this.initAll();
         // keep the current view updated
         this.showFull = this._showFull;
         this.showUnpaid = this._showUnpaid;
