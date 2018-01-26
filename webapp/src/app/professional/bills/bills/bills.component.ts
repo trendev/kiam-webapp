@@ -13,7 +13,7 @@ import * as moment from 'moment';
 })
 export class BillsComponent implements OnInit, AfterViewInit {
   bills: Bill[] = [];
-  billsModel: BillModel[];
+  private billsModel: BillModel[];
 
   displayedColumns = [
     'deliveryDate', 'reference', 'name', 'amount', 'paymentDate'];
@@ -128,6 +128,13 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   get unpaid(): number {
     return this.bills.filter(b => !b.paymentDate).length;
+  }
+
+  get selectionRevenue(): number {
+    return this.billsModel
+      .filter(bm => !!bm.paymentDate)
+      .map(bm => bm.amount)
+      .reduce((a, b) => a + b, 0);
   }
 
   get showFull(): boolean {

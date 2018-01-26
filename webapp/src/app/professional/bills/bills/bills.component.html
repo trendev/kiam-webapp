@@ -12,7 +12,7 @@
         </mat-chip>
       </mat-chip-list>
       <div *ngIf="!billsIsEmpty()" class="list-container">
-        <div class="search-header">
+         <div class="search-header">
           <mat-form-field>
             <mat-placeholder>
               <i>Recherche</i>
@@ -54,6 +54,7 @@
           <mat-row *matRowDef="let row; columns: displayedColumns;" [matTooltip]="row.reference" matTooltipPosition="above" (click)="gotoBill(row.reference)">
           </mat-row>
         </mat-table>
+        <span class="mat-caption">CA pour la période du {{minDate | date:'shortDate':'':'fr'}} au {{maxDate | date:'shortDate':'':'fr'}} : {{selectionRevenue / 100 | currency:'EUR':'':'':'fr'}}</span>
       </div>
     </mat-card-content>
     <mat-card-actions>
