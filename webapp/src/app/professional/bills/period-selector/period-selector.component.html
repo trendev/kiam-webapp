@@ -1,3 +1,12 @@
-<p>
-  period-selector works!
-</p>
+<div>
+  <mat-form-field class="fields">
+    <input matInput [matDatepicker]="dp1" [min]="minDate" [max]="maxDate"  placeholder="Du">
+    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+    <mat-datepicker #dp1></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="fields">
+    <input matInput [matDatepicker]="dp2" [min]="deliveryDate" [max]="maxDate" placeholder="Au">
+    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+    <mat-datepicker #dp2></mat-datepicker>
+  </mat-form-field>
+</div>
