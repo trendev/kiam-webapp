@@ -3,16 +3,28 @@
     <mat-card-title>Factures</mat-card-title>
     <app-revenues-sumup [bills]="bills"></app-revenues-sumup>
     <mat-card-content>
-      <mat-chip-list>
+      <div class="selection">
+        <mat-accordion *ngIf="!billsIsEmpty()">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Période : {{minDate | date:'shortDate':'':'fr'}} - {{maxDate | date:'shortDate':'':'fr'}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-period-selector></app-period-selector>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <mat-chip-list class="mat-chip-list-stacked">
         <mat-chip [color]="billsIsEmpty()?'accent':'primary'" selected="true" [selectable]="false" (click)="showFull =! showFull">
-          {total, plural, =0 {Aucune facture} =1 {1 Facture} other {{{total}} Factures}}
+          {total, plural, =0 {Aucune facture} =1 {1 Facture} other {{{total}} Factures : {{selectionRevenue / 100 | currency:'EUR':'':'':'fr'}}}}
         </mat-chip>
         <mat-chip color="warn" *ngIf="unpaid > 0" selected="true" [selectable]="false" (click)="showUnpaid =! showUnpaid">
           {unpaid, plural, =0 {Aucun impayé} =1 {1 impayé} other {{{unpaid}} impayés}} : {{unpaidRevenue / 100 | currency:'EUR':'':'':'fr'}}
         </mat-chip>
       </mat-chip-list>
       <div *ngIf="!billsIsEmpty()" class="list-container">
-         <div class="search-header">
+        <div class="search-header">
           <mat-form-field>
             <mat-placeholder>
               <i>Recherche</i>
@@ -54,7 +66,6 @@
           <mat-row *matRowDef="let row; columns: displayedColumns;" [matTooltip]="row.reference" matTooltipPosition="above" (click)="gotoBill(row.reference)">
           </mat-row>
         </mat-table>
-        <span class="mat-caption">CA pour la période du {{minDate | date:'shortDate':'':'fr'}} au {{maxDate | date:'shortDate':'':'fr'}} : {{selectionRevenue / 100 | currency:'EUR':'':'':'fr'}}</span>
       </div>
     </mat-card-content>
     <mat-card-actions>

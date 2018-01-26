@@ -14,6 +14,7 @@ import { BillDetailComponent } from './bill-detail/bill-detail.component';
 import { FixedPurchasedOfferingsComponent } from './fixed-purchased-offerings/fixed-purchased-offerings.component';
 import { FixedPaymentsComponent } from './fixed-payments/fixed-payments.component';
 import { RevenuesSumupComponent } from './revenues-sumup/revenues-sumup.component';
+import { PeriodSelectorComponent } from './period-selector/period-selector.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { RevenuesSumupComponent } from './revenues-sumup/revenues-sumup.componen
     BillDetailComponent,
     FixedPurchasedOfferingsComponent,
     FixedPaymentsComponent,
-    RevenuesSumupComponent
+    RevenuesSumupComponent,
+    PeriodSelectorComponent
   ],
   providers: [ClientBillResolverService]
 })

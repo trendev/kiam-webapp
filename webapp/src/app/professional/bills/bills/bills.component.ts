@@ -13,7 +13,7 @@ import * as moment from 'moment';
 })
 export class BillsComponent implements OnInit, AfterViewInit {
   bills: Bill[] = [];
-  private billsModel: BillModel[];
+  private billsModel: BillModel[] = [];
 
   displayedColumns = [
     'deliveryDate', 'reference', 'name', 'amount', 'paymentDate'];
@@ -123,11 +123,11 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   get total(): number {
-    return this.bills.length;
+    return this.billsModel.length;
   }
 
   get unpaid(): number {
-    return this.bills.filter(b => !b.paymentDate).length;
+    return this.billsModel.filter(b => !b.paymentDate).length;
   }
 
   get selectionRevenue(): number {
@@ -162,7 +162,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   billsIsEmpty(): boolean {
-    return this.bills.length === 0;
+    return this.billsModel.length === 0;
   }
 
   gotoBill(ref: string) {
