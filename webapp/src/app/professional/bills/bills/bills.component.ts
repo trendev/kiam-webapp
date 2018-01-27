@@ -198,15 +198,20 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   updateMinDate(minDate: number) {
-    this.minDate = minDate;
-    this.initBillsFilterFn();
-    this.initBillsModel();
+    if (this.minDate !== minDate) {
+      this.minDate = minDate;
+      this.initBillsFilterFn();
+      this.initBillsModel();
+    }
   }
 
   updateMaxDate(maxDate: number) {
-    this.maxDate = maxDate;
-    this.initBillsFilterFn();
-    this.initBillsModel();
+    if (this.maxDate !== maxDate) {
+      console.warn('updateMaxDate');
+      this.maxDate = maxDate;
+      this.initBillsFilterFn();
+      this.initBillsModel();
+    }
   }
 
 }

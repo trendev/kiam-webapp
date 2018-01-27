@@ -4,6 +4,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
 import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/distinctUntilChanged';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
@@ -38,10 +39,28 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    this.first.valueChanges.takeUntil(this.unsubscribe)
+    this.first.valueChanges.takeUntil(this.unsubscribe).distinctUntilChanged()
+      .map(value => {
+        if (!value) {
+          return this.firstBound;
+        }
+        const val = value as moment.Moment;
+        return (val.isBefore(this.firstBound) || val.isAfter(this.last.value)) ? this.firstBound : value;
+      })
       .subscribe(value => this.minDateChange.emit(value.valueOf()));
-    this.last.valueChanges.takeUntil(this.unsubscribe)
-      .subscribe(value => this.maxDateChange.emit(value.valueOf()));
+
+    this.last.valueChanges.takeUntil(this.unsubscribe).distinctUntilChanged()
+      .map(value => {
+        if (!value) {
+          return this.lastBound;
+        }
+        const val = value as moment.Moment;
+        return (val.isBefore(this.first.value) || val.isAfter(this.lastBound)) ? this.lastBound : value;
+      })
+      .subscribe(value => {
+        console.log(value);
+        this.maxDateChange.emit(value.valueOf());
+      });
   }
 
   ngOnChanges() {
