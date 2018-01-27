@@ -75,9 +75,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     const size = this.bills.length;
     if (size > 0) {
       this.minDate = this.minBound = this.bills[size - 1].deliveryDate; // the last one is the oldest one
-      // this.minBound = this.minDate;
       this.maxDate = this.maxBound = this.bills[0].deliveryDate; // the first one is the most recent one
-      // this.maxBound = this.maxDate;
     }
   }
 
