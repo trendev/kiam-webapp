@@ -11,7 +11,8 @@
                 Période : {{minDate | date:'shortDate':'':'fr'}} - {{maxDate | date:'shortDate':'':'fr'}}
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-period-selector [minDate]="minDate" (minDateChange)="updateMinDate($event)" [maxDate]="maxDate" (maxDateChange)="updateMaxDate($event)"></app-period-selector>
+            <app-period-selector [minDate]="minDate" (minDateChange)="updateMinDate($event)" [maxDate]="maxDate" (maxDateChange)="updateMaxDate($event)"
+              [minBound]="minBound" [maxBound]="maxBound"></app-period-selector>
           </mat-expansion-panel>
         </mat-accordion>
       </div>

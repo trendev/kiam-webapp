@@ -24,7 +24,9 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() maxDate: number;
   @Output() maxDateChange = new EventEmitter<number>();
 
+  @Input() minBound: number;
   firstBound: moment.Moment;
+  @Input() maxBound: number;
   lastBound: moment.Moment;
 
   first = new FormControl();
@@ -52,8 +54,8 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   initBounds() {
-    this.firstBound = moment(this.minDate);
-    this.lastBound = moment(this.maxDate);
+    this.firstBound = moment(this.minBound);
+    this.lastBound = moment(this.maxBound);
   }
 
   initAll() {

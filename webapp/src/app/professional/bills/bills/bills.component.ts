@@ -27,7 +27,9 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   unpaidRevenue = 0;
 
+  minBound: number;
   minDate: number;
+  maxBound: number;
   maxDate: number;
 
   billsFilterFn = (b: Bill) => true;
@@ -72,8 +74,10 @@ export class BillsComponent implements OnInit, AfterViewInit {
   initDates() {
     const size = this.bills.length;
     if (size > 0) {
-      this.minDate = this.bills[size - 1].deliveryDate; // the last one is the oldest one
-      this.maxDate = this.bills[0].deliveryDate; // the first one is the most recent one
+      this.minDate = this.minBound = this.bills[size - 1].deliveryDate; // the last one is the oldest one
+      // this.minBound = this.minDate;
+      this.maxDate = this.maxBound = this.bills[0].deliveryDate; // the first one is the most recent one
+      // this.maxBound = this.maxDate;
     }
   }
 
