@@ -140,11 +140,11 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   get showFull(): boolean {
-    return this._showFull && !this.billsIsEmpty();
+    return this._showFull && !this.billsModelIsEmpty();
   }
 
   get showUnpaid(): boolean {
-    return this._showUnpaid && !this.billsIsEmpty();
+    return this._showUnpaid && !this.billsModelIsEmpty();
   }
 
   set showFull(value: boolean) {
@@ -163,8 +163,12 @@ export class BillsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  billsIsEmpty(): boolean {
+  billsModelIsEmpty(): boolean {
     return this.billsModel.length === 0;
+  }
+
+  isEmpty(): boolean {
+    return this.bills.length === 0;
   }
 
   gotoBill(ref: string) {
