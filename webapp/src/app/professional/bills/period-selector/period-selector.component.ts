@@ -57,10 +57,7 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
         const val = value as moment.Moment;
         return (val.isBefore(this.first.value) || val.isAfter(this.lastBound)) ? this.lastBound : value;
       })
-      .subscribe(value => {
-        console.log(value);
-        this.maxDateChange.emit(value.valueOf());
-      });
+      .subscribe(value => this.maxDateChange.emit(value.valueOf()));
   }
 
   ngOnChanges() {

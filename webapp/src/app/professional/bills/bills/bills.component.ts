@@ -207,7 +207,6 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   updateMaxDate(maxDate: number) {
     if (this.maxDate !== maxDate) {
-      console.warn('updateMaxDate');
       this.maxDate = maxDate;
       this.initBillsFilterFn();
       this.initBillsModel();
