@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import * as moment from 'moment';
+import { FormControl } from '@angular/forms';
+import 'rxjs/add/operator/takeUntil';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-period-selector',
@@ -13,12 +16,49 @@ import * as moment from 'moment';
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ]
 })
-export class PeriodSelectorComponent implements OnInit {
-  minDate: moment.Moment;
-  maxDate = moment({ hour: 0 });
-  constructor() { }
+export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
 
-  ngOnInit() {
+  @Input() minDate: number;
+  @Output() minDateChange = new EventEmitter<number>();
+
+  @Input() maxDate: number;
+  @Output() maxDateChange = new EventEmitter<number>();
+
+  firstBound: moment.Moment;
+  lastBound: moment.Moment;
+
+  first = new FormControl();
+  last = new FormControl();
+
+  private unsubscribe: Subject<void> = new Subject();
+
+  constructor() {
   }
 
+  ngOnInit() {
+    this.first.valueChanges.takeUntil(this.unsubscribe)
+      .subscribe(value => this.minDateChange.emit(value.valueOf()));
+    this.last.valueChanges.takeUntil(this.unsubscribe)
+      .subscribe(value => this.maxDateChange.emit(value.valueOf()));
+  }
+
+  ngOnChanges() {
+    this.initAll();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
+  initBounds() {
+    this.firstBound = moment(this.minDate);
+    this.lastBound = moment(this.maxDate);
+  }
+
+  initAll() {
+    this.initBounds();
+    this.first.reset(moment(this.minDate));
+    this.last.reset(moment(this.maxDate));
+  }
 }

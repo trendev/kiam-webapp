@@ -11,7 +11,7 @@
                 Période : {{minDate | date:'shortDate':'':'fr'}} - {{maxDate | date:'shortDate':'':'fr'}}
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-period-selector></app-period-selector>
+            <app-period-selector [minDate]="minDate" (minDateChange)="updateMinDate($event)" [maxDate]="maxDate" (maxDateChange)="updateMaxDate($event)"></app-period-selector>
           </mat-expansion-panel>
         </mat-accordion>
       </div>
@@ -72,10 +72,6 @@
       <div class="form-button-container">
         <button type="button" mat-mini-fab color="accent" (click)="refreshBills()">
           <mat-icon aria-label="Rafraîchir avec les données du serveur">refresh</mat-icon>
-        </button>
-        <button type="button" mat-mini-fab color="primary" disabled>
-          <!-- (click)="createNewClientBill()" -->
-          <mat-icon aria-label="Nouvelle facture">add</mat-icon>
         </button>
       </div>
     </mat-card-actions>

@@ -1,11 +1,11 @@
 <div>
   <mat-form-field class="fields">
-    <input matInput [matDatepicker]="dp1" [min]="minDate" [max]="maxDate"  placeholder="Du">
+    <input matInput [matDatepicker]="dp1" [min]="firstBound" [max]="last.value" [formControl]="first" placeholder="Du">
     <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
     <mat-datepicker #dp1></mat-datepicker>
   </mat-form-field>
   <mat-form-field class="fields">
-    <input matInput [matDatepicker]="dp2" [min]="deliveryDate" [max]="maxDate" placeholder="Au">
+    <input matInput [matDatepicker]="dp2" [min]="first.value" [max]="lastBound" [formControl]="last" placeholder="Au">
     <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
     <mat-datepicker #dp2></mat-datepicker>
   </mat-form-field>

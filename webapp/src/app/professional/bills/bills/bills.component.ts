@@ -191,6 +191,18 @@ export class BillsComponent implements OnInit, AfterViewInit {
     return ref.replace(/^PRO\-[\d\w]+\-(.+)$/, '$1');
   }
 
+  updateMinDate(minDate: number) {
+    this.minDate = minDate;
+    this.initBillsFilterFn();
+    this.initBillsModel();
+  }
+
+  updateMaxDate(maxDate: number) {
+    this.maxDate = maxDate;
+    this.initBillsFilterFn();
+    this.initBillsModel();
+  }
+
 }
 
 class BillModel {
