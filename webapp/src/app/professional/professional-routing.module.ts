@@ -44,7 +44,7 @@ const routes: Routes = [
         path: 'offerings',
         loadChildren: 'app/professional/offerings/offerings.module#OfferingsModule'
       },
-      { path: '', redirectTo: 'bills', pathMatch: 'full' },
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]
   }
