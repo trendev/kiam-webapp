@@ -29,11 +29,11 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="form-button-container">
-        <button type="button" mat-mini-fab color="accent" (click)="refreshClients()">
-          <mat-icon aria-label="Rafraîchir avec les données du serveur">refresh</mat-icon>
+        <button type="button" matTooltip="Rafraîchir le référentiel à partir du serveur" mat-mini-fab color="accent" (click)="refreshClients()">
+          <mat-icon aria-label="Rafraîchir le référentiel à partir du serveur">refresh</mat-icon>
         </button>
-        <a mat-mini-fab color="primary" routerLink="./create-client" routerLinkActive="active">
-          <mat-icon aria-label="Créer un client">add</mat-icon>
+        <a mat-mini-fab matTooltip="Ajouter un nouveau client" color="primary" routerLink="./create-client" routerLinkActive="active">
+          <mat-icon aria-label="Ajouter un nouveau client">add</mat-icon>
         </a>
       </div>
     </mat-card-actions>

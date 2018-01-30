@@ -66,14 +66,14 @@
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
-          <button type="button" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
-            <mat-icon aria-label="Annuler les modification">undo</mat-icon>
+          <button type="button" matTooltip="Annuler les modifications" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
+            <mat-icon aria-label="Annuler les modifications">undo</mat-icon>
           </button>
-          <a mat-mini-fab color="accent" routerLink="../" routerLinkActive="active">
-            <mat-icon aria-label="Retour à la liste des clients">list</mat-icon>
+          <a mat-mini-fab matTooltip="Annuler les modifications et retourner au référentiel" color="accent" routerLink="../" routerLinkActive="active">
+            <mat-icon aria-label="Annuler les modifications et retourner au référentiel">list</mat-icon>
           </a>
-          <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
-            <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
+          <button type="button" matTooltip="Sauvegarder la fiche" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+            <mat-icon aria-label="Sauvegarder la fiche">done</mat-icon>
           </button>
         </div>
       </mat-card-actions>
@@ -87,8 +87,8 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="form-button-container">
-        <button type="button" mat-mini-fab color="primary" (click)="createNewClientBill()">
-          <mat-icon aria-label="Nouvelle facture">add</mat-icon>
+        <button type="button" matTooltip="Créer une nouvelle facture" mat-mini-fab color="primary" (click)="createNewClientBill()">
+          <mat-icon aria-label="Créer une nouvelle facture">add</mat-icon>
         </button>
       </div>
     </mat-card-actions>

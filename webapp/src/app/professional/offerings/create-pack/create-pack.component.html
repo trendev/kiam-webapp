@@ -77,14 +77,14 @@
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
-          <button type="button" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
-            <mat-icon aria-label="Annuler les modification">undo</mat-icon>
+          <button type="button" matTooltip="Annuler les modifications" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
+            <mat-icon aria-label="Annuler les modifications">undo</mat-icon>
           </button>
-          <a mat-mini-fab color="accent" [routerLink]="['../',{ot: ot}]" routerLinkActive="active">
-            <mat-icon aria-label="Retour à la liste des forfaits">list</mat-icon>
+          <a mat-mini-fab matTooltip="Retourner à la liste des forfaits" color="accent" [routerLink]="['../',{ot: ot}]" routerLinkActive="active">
+            <mat-icon aria-label="Retourner à la liste des forfaits">list</mat-icon>
           </a>
-          <button type="button" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
-            <mat-icon aria-label="Valider la mise à jour">done</mat-icon>
+          <button type="button" matTooltip="Sauvegarder le forfait" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+            <mat-icon aria-label="Sauvegarder le forfait">done</mat-icon>
           </button>
         </div>
       </mat-card-actions>
