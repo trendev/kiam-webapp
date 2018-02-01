@@ -45,6 +45,7 @@ import { ErrorComponent } from './error/error.component';
 import { CommentsComponent } from './comments/comments.component';
 import { PhoneComponent } from './phone/phone.component';
 import { PhonePipe } from './phone.pipe';
+import { PasswordChangedComponent } from './password-changed/password-changed.component';
 
 @NgModule({
   imports: [
@@ -93,7 +94,8 @@ import { PhonePipe } from './phone.pipe';
     ErrorComponent,
     CommentsComponent,
     PhoneComponent,
-    PhonePipe],
+    PhonePipe,
+    PasswordChangedComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -138,7 +140,11 @@ import { PhonePipe } from './phone.pipe';
     MatProgressSpinnerModule,
     PhoneComponent,
     PhonePipe,
-    MatSnackBarModule
+    MatSnackBarModule,
+    PasswordChangedComponent
+  ],
+  entryComponents: [
+    PasswordChangedComponent
   ]
 })
 
