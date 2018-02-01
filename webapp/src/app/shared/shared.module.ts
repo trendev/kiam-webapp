@@ -23,7 +23,8 @@ import {
   MatPaginatorModule,
   MatProgressBarModule,
   MatSelectModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -72,7 +73,8 @@ import { PhonePipe } from './phone.pipe';
     MatProgressBarModule,
     MatSelectModule,
     OverlayModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   declarations: [
     PageNotFoundComponent,
@@ -135,7 +137,8 @@ import { PhonePipe } from './phone.pipe';
     OverlayModule,
     MatProgressSpinnerModule,
     PhoneComponent,
-    PhonePipe
+    PhonePipe,
+    MatSnackBarModule
   ]
 })
 

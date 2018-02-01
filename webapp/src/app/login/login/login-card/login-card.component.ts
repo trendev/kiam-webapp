@@ -6,6 +6,7 @@ import { AuthenticationService } from '@app/core';
 import { DispatcherService } from '@app/login/dispatcher.service';
 import { CredentialsManagerService, Credentials } from '@app/login/credentials-manager.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login-card',
@@ -28,7 +29,8 @@ export class LoginCardComponent {
     private dispatcher: DispatcherService,
     private router: Router,
     private credentialsManagerService: CredentialsManagerService,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
 
     this.credentials = this.credentialsManagerService.credentials;
   }
@@ -59,10 +61,11 @@ export class LoginCardComponent {
       },
       e => {
         this.loadingOverlayService.stop();
-        if (e instanceof HttpErrorResponse 
-          && e.error.error 
+        if (e instanceof HttpErrorResponse
+          && e.error.error
           && e.error.error.match(/Blocked/)) {
           this.errors.blocked = `User has been blocked`;
+          this.snackBar.open(`Désolé, votre compte a été bloqué !`, `ERREUR`, { duration: 2000 });
         } else {
           this.errors.unauthorized = `Unauthorized or network issues or server down`;
         }
