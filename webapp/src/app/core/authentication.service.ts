@@ -1,4 +1,3 @@
-import { ErrorHandlerService } from './error-handler.service';
 import { Administrator, Individual, Professional, UserAccount } from '@app/entities';
 import { environment } from '@env/environment';
 
@@ -8,6 +7,7 @@ import { NavigationExtras } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/retry';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 
 @Injectable()

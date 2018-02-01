@@ -2,7 +2,6 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
-import { ErrorHandlerService } from './error-handler.service';
 import { BusinessService } from './business.service';
 import { PaymentModeService } from './payment-mode.service';
 import { ProfessionalService } from './professional.service';
@@ -30,7 +29,6 @@ import { ProfessionalBillsResolverService } from './professional-bills-resolver.
   declarations: [],
   providers: [
     AuthenticationService,
-    ErrorHandlerService,
     BusinessService,
     PaymentModeService,
     ProfessionalService,

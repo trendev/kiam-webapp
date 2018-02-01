@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ErrorHandlerService } from './error-handler.service';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs/Observable';
 import { Service, Pack, Offering, OfferingType } from '@app/entities';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Injectable()
 export class ServiceService {

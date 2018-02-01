@@ -1,11 +1,11 @@
 import { Injectable, Optional } from '@angular/core';
 import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
-import { ErrorHandlerService } from './error-handler.service';
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
 
 import { Business } from '@app/entities';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Injectable()
 export class BusinessService {

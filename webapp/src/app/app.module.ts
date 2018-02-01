@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './error-handler.service';
 import { LogUpdateService } from './log-update.service';
 import { SharedModule } from '@app/shared';
 import { CoreModule } from '@app/core';
@@ -31,7 +32,8 @@ import { LoadingOverlayService } from './loading-overlay.service';
   bootstrap: [AppComponent],
   providers: [
     LoadingOverlayService,
-    LogUpdateService
+    LogUpdateService,
+    ErrorHandlerService
   ]
 })
 export class AppModule { }
