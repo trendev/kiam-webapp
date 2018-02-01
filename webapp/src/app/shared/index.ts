@@ -19,4 +19,4 @@ export * from './utils';
 export * from './comments/comments.component';
 export * from './phone/phone.component';
 export * from './phone.pipe';
-export * from './password-changed/password-changed.component';
+export * from './snack-messages/password-changed/password-changed.component';

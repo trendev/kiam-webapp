@@ -45,7 +45,8 @@ import { ErrorComponent } from './error/error.component';
 import { CommentsComponent } from './comments/comments.component';
 import { PhoneComponent } from './phone/phone.component';
 import { PhonePipe } from './phone.pipe';
-import { PasswordChangedComponent } from './password-changed/password-changed.component';
+import { PasswordChangedComponent } from './snack-messages/password-changed/password-changed.component';
+import { SuccessMessageComponent } from './snack-messages/success-message/success-message.component';
 
 @NgModule({
   imports: [
@@ -95,7 +96,8 @@ import { PasswordChangedComponent } from './password-changed/password-changed.co
     CommentsComponent,
     PhoneComponent,
     PhonePipe,
-    PasswordChangedComponent],
+    PasswordChangedComponent,
+    SuccessMessageComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -141,7 +143,8 @@ import { PasswordChangedComponent } from './password-changed/password-changed.co
     PhoneComponent,
     PhonePipe,
     MatSnackBarModule,
-    PasswordChangedComponent
+    PasswordChangedComponent,
+    SuccessMessageComponent
   ],
   entryComponents: [
     PasswordChangedComponent
