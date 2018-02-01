@@ -23,7 +23,7 @@ export class ChangeProfessionalPasswordComponent {
       .subscribe(
       pwd => {
         this.authenticationService.user.password = pwd;
-        this.snackBar.openFromComponent(PasswordChangedComponent);
+        this.snackBar.openFromComponent(PasswordChangedComponent, { duration: 2000 });
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la modification du mot de passe sur le serveur`)
