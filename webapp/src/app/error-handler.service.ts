@@ -42,7 +42,7 @@ export class ErrorHandlerService {
         if (err.status === 401 || err.status === 403) {
           this.snackBar.open(`Vous êtes actuellement déconnecté des services: veuillez vous connecter/reconnecter s'il vous plaît...`,
             `ERREUR`,
-            { duration: 5000 });
+            { duration: 2000 });
         }
       }
     }
