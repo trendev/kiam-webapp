@@ -35,9 +35,7 @@ export class ProfessionalService {
         withCredentials: true
       })
       .map(pro => new Professional(pro))
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => this.errorHandler.handle(e));
   }
 
   put(payload: Professional): Observable<Professional> {
@@ -102,7 +100,7 @@ export class ProfessionalService {
         switch (r.cltype) {
           case OfferingType.SERVICE:
             return new Service(r);
-            case OfferingType.PACK:
+          case OfferingType.PACK:
             return new Pack(r);
         }
       }))

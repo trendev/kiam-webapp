@@ -40,9 +40,9 @@ export class ErrorHandlerService {
         }
 
         if (err.status === 401 || err.status === 403) {
-          this.snackBar.open(`Vous êtes actuellement déconnecté des services: veuillez vous connecter/reconnecter s'il vous plaît...`,
+          this.snackBar.open(`Accès non autorisé: identification incorrecte/bloquée ou session expirée...`,
             `ERREUR`,
-            { duration: 2000 });
+            { duration: 3000 });
         }
       }
     }

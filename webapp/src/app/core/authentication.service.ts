@@ -73,7 +73,7 @@ export class AuthenticationService {
       })
       .catch(e => {
         this.resetCache();
-        return this.errorHandler.handle(e);
+        return Observable.throw(e);
       });
   }
 
