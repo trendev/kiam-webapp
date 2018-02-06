@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class LogUpdateService {
 
-  constructor(updates: SwUpdate) {
+  constructor(updates: SwUpdate,private snackBar: MatSnackBar) {
     updates.available.subscribe(event => {
       console.log('current version is', event.current);
       console.log('available version is', event.available);

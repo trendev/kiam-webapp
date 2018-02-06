@@ -13,7 +13,7 @@ export class ErrorHandlerService {
 
   errmsg: string;
 
-  constructor(public snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) { }
 
   /**
    * Updates errmsg, logs it on the console and returns an ErrorObservable with the message
