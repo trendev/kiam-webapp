@@ -33,8 +33,8 @@ export class ErrorHandlerService {
         console.warn('ErrorHandlerService#handle => ' + this.errmsg);
 
         if (err.status === 404 || err.status === 0) {
-          this.snackBar.open(`Oups, une erreur est survenue sur le réseau ` +
-            `ou l'application n'est pas en ligne pour le moment (maintenance en cours...)`,
+          this.snackBar.open(`Problèmes de connexion à internet ` +
+            `ou Application hors ligne pour le moment (ex: maintenance en cours...)`,
             `ERREUR`,
             { duration: 5000 });
         }
