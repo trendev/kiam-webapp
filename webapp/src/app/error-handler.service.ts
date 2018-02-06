@@ -1,3 +1,4 @@
+import { UnauthorizedAccessComponent } from './shared/snack-messages/unauthorized-access/unauthorized-access.component';
 import { Injectable } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
@@ -40,8 +41,7 @@ export class ErrorHandlerService {
         }
 
         if (err.status === 401 || err.status === 403) {
-          this.snackBar.open(`Accès non autorisé: identification incorrecte/bloquée ou session expirée...`,
-            `ERREUR`,
+          this.snackBar.openFromComponent(UnauthorizedAccessComponent,
             { duration: 3000 });
         }
       }
