@@ -34,7 +34,7 @@ export class ErrorHandlerService {
         this.errmsg += JSON.stringify(err.error) || '';
         console.warn('ErrorHandlerService#handle => ' + this.errmsg);
 
-        if (err.status === 404 || err.status === 0) {
+        if (err.status === 404 || err.status === 0 || err.status === 504) {
           this.snackBar.openFromComponent(SlowUnstableConnectionComponent,
             { duration: 5000 });
         }
