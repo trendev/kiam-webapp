@@ -1,3 +1,4 @@
+import { LogUpdateService } from './log-update.service';
 import { LoadingOverlayService } from './loading-overlay.service';
 import { Component } from '@angular/core';
 
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private loadingOverlayService: LoadingOverlayService) {
+  constructor(private loadingOverlayService: LoadingOverlayService,
+    private logUpdateService: LogUpdateService) {
   }
 }

@@ -6,6 +6,9 @@ import { MatSnackBar } from '@angular/material';
 export class LogUpdateService {
 
   constructor(updates: SwUpdate, private snackBar: MatSnackBar) {
+
+    this.snackBar.open(`LogUpdateService`, `RUNNING`, { duration: 3000 });
+
     updates.available.subscribe(event => {
       console.log('current version is', event.current);
       console.log('available version is', event.available);
