@@ -53,6 +53,7 @@ import { SlowUnstableConnectionComponent } from './snack-messages/slow-unstable-
 import { ProfileRefreshedComponent } from './snack-messages/profile-refreshed/profile-refreshed.component';
 import { ProfileSavedComponent } from './snack-messages/profile-saved/profile-saved.component';
 import { ClientsListRefreshedComponent } from './snack-messages/clients-list-refreshed/clients-list-refreshed.component';
+import { ClientCreatedComponent } from './snack-messages/client-created/client-created.component';
 
 @NgModule({
   imports: [
@@ -109,7 +110,8 @@ import { ClientsListRefreshedComponent } from './snack-messages/clients-list-ref
     SlowUnstableConnectionComponent,
     ProfileRefreshedComponent,
     ProfileSavedComponent,
-    ClientsListRefreshedComponent],
+    ClientsListRefreshedComponent,
+    ClientCreatedComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -162,7 +164,8 @@ import { ClientsListRefreshedComponent } from './snack-messages/clients-list-ref
     SlowUnstableConnectionComponent,
     ProfileRefreshedComponent,
     ProfileSavedComponent,
-    ClientsListRefreshedComponent
+    ClientsListRefreshedComponent,
+    ClientCreatedComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
@@ -170,7 +173,8 @@ import { ClientsListRefreshedComponent } from './snack-messages/clients-list-ref
     SlowUnstableConnectionComponent,
     ProfileRefreshedComponent,
     ProfileSavedComponent,
-    ClientsListRefreshedComponent
+    ClientsListRefreshedComponent,
+    ClientCreatedComponent
   ]
 })
 

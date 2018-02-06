@@ -1,3 +1,4 @@
+import { ClientCreatedComponent } from './../../../shared/snack-messages/client-created/client-created.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators, Utils, compareCollectiveGroupsFn, compareCategoriesFn } from '@app/shared';
@@ -5,6 +6,7 @@ import { ClientService } from '@app/core';
 import { Client, CollectiveGroup, Category } from '@app/entities';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-create-client',
@@ -29,7 +31,8 @@ export class CreateClientComponent implements OnInit {
     private clientService: ClientService,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
 
     this.route.data.subscribe(
       (data: {
@@ -211,6 +214,10 @@ export class CreateClientComponent implements OnInit {
     this.loadingOverlayService.start();
     this.clientService.create(client).subscribe(
       _client => {
+        this.snackBar.openFromComponent(ClientCreatedComponent, {
+          data: _client,
+          duration: 2000
+        });
         this.router.navigate(['../', _client.id], { relativeTo: this.route });
       },
       // TODO: handle this (check the status code, etc)
