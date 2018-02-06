@@ -8,7 +8,15 @@ import { Component, ViewContainerRef, ViewChild, OnInit } from '@angular/core';
 import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import * as moment from 'moment';
-import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn, comparePaymentModesFn, ProfileRefreshedComponent } from '@app/shared';
+import {
+  ErrorAggregatorDirective,
+  CustomValidators,
+  Utils,
+  compareBusinessesFn,
+  comparePaymentModesFn,
+  ProfileRefreshedComponent,
+  ProfileSavedComponent
+} from '@app/shared';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/finally';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -230,6 +238,7 @@ export class ProfileComponent implements OnInit {
         this.pro = _pro;
         this.authenticationService.user = _pro;
         this.revert(); // reset the controls (pristine, untouched...)
+        this.snackBar.openFromComponent(ProfileSavedComponent, { duration: 2000 });
       },
       // TODO: handle this (check the status code, etc)
       e => console.error('Impossible de sauvegarder les modifications du profile')
