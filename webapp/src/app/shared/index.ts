@@ -26,3 +26,4 @@ export * from './snack-messages/profile-refreshed/profile-refreshed.component';
 export * from './snack-messages/profile-saved/profile-saved.component';
 export * from './snack-messages/clients-list-refreshed/clients-list-refreshed.component';
 export * from './snack-messages/client-created/client-created.component';
+export * from './snack-messages/client-updated/client-updated.component';

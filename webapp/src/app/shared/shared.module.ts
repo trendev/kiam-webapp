@@ -54,6 +54,7 @@ import { ProfileRefreshedComponent } from './snack-messages/profile-refreshed/pr
 import { ProfileSavedComponent } from './snack-messages/profile-saved/profile-saved.component';
 import { ClientsListRefreshedComponent } from './snack-messages/clients-list-refreshed/clients-list-refreshed.component';
 import { ClientCreatedComponent } from './snack-messages/client-created/client-created.component';
+import { ClientUpdatedComponent } from './snack-messages/client-updated/client-updated.component';
 
 @NgModule({
   imports: [
@@ -111,7 +112,8 @@ import { ClientCreatedComponent } from './snack-messages/client-created/client-c
     ProfileRefreshedComponent,
     ProfileSavedComponent,
     ClientsListRefreshedComponent,
-    ClientCreatedComponent],
+    ClientCreatedComponent,
+    ClientUpdatedComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -165,7 +167,8 @@ import { ClientCreatedComponent } from './snack-messages/client-created/client-c
     ProfileRefreshedComponent,
     ProfileSavedComponent,
     ClientsListRefreshedComponent,
-    ClientCreatedComponent
+    ClientCreatedComponent,
+    ClientUpdatedComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
@@ -174,7 +177,8 @@ import { ClientCreatedComponent } from './snack-messages/client-created/client-c
     ProfileRefreshedComponent,
     ProfileSavedComponent,
     ClientsListRefreshedComponent,
-    ClientCreatedComponent
+    ClientCreatedComponent,
+    ClientUpdatedComponent
   ]
 })
 
