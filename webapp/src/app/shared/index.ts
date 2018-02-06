@@ -21,3 +21,5 @@ export * from './phone/phone.component';
 export * from './phone.pipe';
 export * from './snack-messages/password-changed/password-changed.component';
 export * from './snack-messages/unauthorized-access/unauthorized-access.component';
+export * from './snack-messages/slow-unstable-connection/slow-unstable-connection.component';
+

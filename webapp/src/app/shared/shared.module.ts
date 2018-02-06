@@ -49,6 +49,7 @@ import { PasswordChangedComponent } from './snack-messages/password-changed/pass
 import { SuccessMessageComponent } from './snack-messages/success-message/success-message.component';
 import { ErrorMessageComponent } from './snack-messages/error-message/error-message.component';
 import { UnauthorizedAccessComponent } from './snack-messages/unauthorized-access/unauthorized-access.component';
+import { SlowUnstableConnectionComponent } from './snack-messages/slow-unstable-connection/slow-unstable-connection.component';
 
 @NgModule({
   imports: [
@@ -101,7 +102,8 @@ import { UnauthorizedAccessComponent } from './snack-messages/unauthorized-acces
     PasswordChangedComponent,
     SuccessMessageComponent,
     ErrorMessageComponent,
-    UnauthorizedAccessComponent],
+    UnauthorizedAccessComponent,
+    SlowUnstableConnectionComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -150,11 +152,13 @@ import { UnauthorizedAccessComponent } from './snack-messages/unauthorized-acces
     PasswordChangedComponent,
     SuccessMessageComponent,
     ErrorMessageComponent,
-    UnauthorizedAccessComponent
+    UnauthorizedAccessComponent,
+    SlowUnstableConnectionComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
-    UnauthorizedAccessComponent
+    UnauthorizedAccessComponent,
+    SlowUnstableConnectionComponent
   ]
 })
 

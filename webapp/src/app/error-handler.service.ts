@@ -1,3 +1,4 @@
+import { SlowUnstableConnectionComponent } from './shared/snack-messages/slow-unstable-connection/slow-unstable-connection.component';
 import { UnauthorizedAccessComponent } from './shared/snack-messages/unauthorized-access/unauthorized-access.component';
 import { Injectable } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -34,9 +35,7 @@ export class ErrorHandlerService {
         console.warn('ErrorHandlerService#handle => ' + this.errmsg);
 
         if (err.status === 404 || err.status === 0) {
-          this.snackBar.open(`Problèmes de connexion à internet ` +
-            `ou Application hors ligne pour le moment (ex: maintenance en cours...)`,
-            `ERREUR`,
+          this.snackBar.openFromComponent(SlowUnstableConnectionComponent,
             { duration: 5000 });
         }
 
