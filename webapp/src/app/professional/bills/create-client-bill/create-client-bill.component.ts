@@ -4,6 +4,8 @@ import { Offering, PaymentMode, Bill, ClientBill, Client } from '@app/entities';
 import { ClientBillService } from '@app/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
+import { MatSnackBar } from '@angular/material';
+import { BillCreatedComponent } from '@app/shared';
 
 @Component({
   selector: 'app-create-client-bill',
@@ -21,7 +23,8 @@ export class CreateClientBillComponent implements OnInit {
   constructor(private clientBillService: ClientBillService,
     private route: ActivatedRoute,
     private router: Router,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = +params.get('id');
@@ -45,6 +48,7 @@ export class CreateClientBillComponent implements OnInit {
   }
 
   returnToClientDetail() {
+    this.snackBar.openFromComponent(BillCreatedComponent, { duration: 2000 });
     this.router.navigate(['/professional/clients', this.id]);
   }
 
