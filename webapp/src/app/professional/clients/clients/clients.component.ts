@@ -4,10 +4,10 @@ import 'rxjs/add/operator/finally';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProfessionalService } from '@app/core';
 import { Client } from '@app/entities';
-import { MatTableDataSource, MatSort, Sort } from '@angular/material';
+import { MatTableDataSource, MatSort, Sort, MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { Utils } from '@app/shared';
+import { Utils, ClientsListRefreshedComponent } from '@app/shared';
 
 @Component({
   selector: 'app-clients',
@@ -36,7 +36,8 @@ export class ClientsComponent implements OnInit {
   constructor(private professionalService: ProfessionalService,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
     this.route.data.subscribe(
       (data: {
         clients: Client[]
@@ -76,6 +77,7 @@ export class ClientsComponent implements OnInit {
       clients => {
         this._clients = clients;
         this.initClients();
+        this.snackBar.openFromComponent(ClientsListRefreshedComponent, { duration: 2000 });
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la collecte des clients depuis le serveur`)
