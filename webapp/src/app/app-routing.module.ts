@@ -30,7 +30,7 @@ export const routes: Routes = [
             {
                 // enableTracing: true, // <-- debugging purposes only
                 preloadingStrategy: PreloadAllModules,
-                useHash: true
+                // useHash: true
             }
         )],
     exports: [RouterModule]
