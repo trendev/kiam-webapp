@@ -1,9 +1,11 @@
+import { MatSnackBar } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { ProfessionalService, PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Offering, Service, Pack, OfferingType } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import 'rxjs/add/operator/finally';
+import { OfferingRefreshedComponent } from '@app/shared';
 
 @Component({
   selector: 'app-offerings',
@@ -29,7 +31,8 @@ export class OfferingsComponent implements OnInit {
     private packService: PackService,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
     this.route.data.subscribe(
       (data: {
         offerings: Offering[]
@@ -82,6 +85,7 @@ export class OfferingsComponent implements OnInit {
       offerings => {
         this._offerings = offerings;
         this.initOfferings();
+        this.snackBar.openFromComponent(OfferingRefreshedComponent, { duration: 2000 });
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la collecte des offres sur le serveur`)
