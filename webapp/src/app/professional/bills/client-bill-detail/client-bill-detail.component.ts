@@ -41,7 +41,6 @@ export class ClientBillDetailComponent implements OnInit {
   }
 
   returnToClientDetail() {
-    this.snackBar.openFromComponent(BillUpdatedComponent, { duration: 2000 });
     this.router.navigate(['/professional/clients', this.id]);
   }
 
@@ -50,7 +49,10 @@ export class ClientBillDetailComponent implements OnInit {
     cb.client = this.clientBill.client;
     this.loadingOverlayService.start();
     this.clientBillService.update(cb).subscribe(
-      _cb => this.returnToClientDetail(),
+      _cb => {
+        this.snackBar.openFromComponent(BillUpdatedComponent, { duration: 2000 });
+        this.returnToClientDetail();
+      },
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();

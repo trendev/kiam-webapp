@@ -48,7 +48,6 @@ export class CreateClientBillComponent implements OnInit {
   }
 
   returnToClientDetail() {
-    this.snackBar.openFromComponent(BillCreatedComponent, { duration: 2000 });
     this.router.navigate(['/professional/clients', this.id]);
   }
 
@@ -59,7 +58,10 @@ export class CreateClientBillComponent implements OnInit {
     });
     this.loadingOverlayService.start();
     this.clientBillService.create(cb).subscribe(
-      _cb => this.returnToClientDetail(),
+      _cb => {
+        this.snackBar.openFromComponent(BillCreatedComponent, { duration: 2000 });
+        this.returnToClientDetail();
+      },
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
