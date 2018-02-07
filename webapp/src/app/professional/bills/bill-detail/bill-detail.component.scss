@@ -15,6 +15,11 @@ mat-card {
     flex-flow: wrap;
 }
 
+.title{
+    display: flex;
+    align-items: center;
+}
+
 .form-button-container {
     display: flex;
     justify-content: flex-end;

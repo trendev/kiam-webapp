@@ -2,7 +2,16 @@
   <mat-card>
     <form [formGroup]="form" novalidate>
       <mat-card-title>
-        Facture
+        <div class="title">Facture
+          <ng-container *ngIf="bill.paymentDate;else elseBlock">
+            <mat-icon color="primary">check</mat-icon>
+          </ng-container>
+          <ng-template #elseBlock>
+            <ng-container>
+              <mat-icon color="warn">error_outline</mat-icon>
+            </ng-container>
+          </ng-template>
+        </div>
       </mat-card-title>
       <mat-card-subtitle>
         <p>Référence:
@@ -59,7 +68,8 @@
           <button type="button" matTooltip="Annuler les modifications" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modifications">undo</mat-icon>
           </button>
-          <button type="button" matTooltip="Annuler les modifications sur la facture" mat-mini-fab [color]="isClosedBill()?'accent':'warn'" (click)="cancelBillCreation()">
+          <button type="button" matTooltip="Annuler les modifications sur la facture" mat-mini-fab [color]="isClosedBill()?'accent':'warn'"
+            (click)="cancelBillCreation()">
             <mat-icon aria-label="Annuler les modifications sur la facture">list</mat-icon>
           </button>
           <button type="button" matTooltip="Sauvegarder/Clore la Facture" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
