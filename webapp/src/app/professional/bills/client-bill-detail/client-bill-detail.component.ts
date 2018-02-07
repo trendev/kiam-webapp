@@ -3,6 +3,8 @@ import { ClientBillService } from '@app/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { PaymentMode, ClientBill, Bill, Client } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
+import { MatSnackBar } from '@angular/material';
+import { BillUpdatedComponent } from '@app/shared';
 
 @Component({
   selector: 'app-client-bill-detail',
@@ -19,7 +21,8 @@ export class ClientBillDetailComponent implements OnInit {
   constructor(private clientBillService: ClientBillService,
     private route: ActivatedRoute,
     private router: Router,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
 
     this.route.data.subscribe(
       (data: {
@@ -38,6 +41,7 @@ export class ClientBillDetailComponent implements OnInit {
   }
 
   returnToClientDetail() {
+    this.snackBar.openFromComponent(BillUpdatedComponent, { duration: 2000 });
     this.router.navigate(['/professional/clients', this.id]);
   }
 
