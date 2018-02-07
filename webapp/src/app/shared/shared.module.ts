@@ -60,6 +60,9 @@ import { BillUpdatedComponent } from './snack-messages/bill-updated/bill-updated
 import { BillsRefreshedComponent } from './snack-messages/bills-refreshed/bills-refreshed.component';
 import { LogoutComponent } from './snack-messages/logout/logout.component';
 import { OfferingRefreshedComponent } from './snack-messages/offering-refreshed/offering-refreshed.component';
+import { ServiceCreatedComponent } from './snack-messages/service-created/service-created.component';
+import { ServiceUpdatedComponent } from './snack-messages/service-updated/service-updated.component';
+import { ServiceRemovedComponent } from './snack-messages/service-removed/service-removed.component';
 
 @NgModule({
   imports: [
@@ -123,7 +126,10 @@ import { OfferingRefreshedComponent } from './snack-messages/offering-refreshed/
     BillUpdatedComponent,
     BillsRefreshedComponent,
     LogoutComponent,
-    OfferingRefreshedComponent],
+    OfferingRefreshedComponent,
+    ServiceCreatedComponent,
+    ServiceUpdatedComponent,
+    ServiceRemovedComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -183,7 +189,10 @@ import { OfferingRefreshedComponent } from './snack-messages/offering-refreshed/
     BillUpdatedComponent,
     BillsRefreshedComponent,
     LogoutComponent,
-    OfferingRefreshedComponent
+    OfferingRefreshedComponent,
+    ServiceCreatedComponent,
+    ServiceUpdatedComponent,
+    ServiceRemovedComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
@@ -198,7 +207,10 @@ import { OfferingRefreshedComponent } from './snack-messages/offering-refreshed/
     BillUpdatedComponent,
     BillsRefreshedComponent,
     LogoutComponent,
-    OfferingRefreshedComponent
+    OfferingRefreshedComponent,
+    ServiceCreatedComponent,
+    ServiceUpdatedComponent,
+    ServiceRemovedComponent
   ]
 })
 

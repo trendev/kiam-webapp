@@ -1,7 +1,8 @@
+import { MatSnackBar } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Business, OfferingType, Service } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn, ServiceCreatedComponent } from '@app/shared';
 import { ServiceService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -25,7 +26,8 @@ export class CreateServiceComponent {
     private serviceService: ServiceService,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
     this.route.data.subscribe(
       (data: {
         businesses: Business[]
@@ -87,7 +89,13 @@ export class CreateServiceComponent {
     const service = this.prepareSave();
     this.loadingOverlayService.start();
     this.serviceService.create(service).subscribe(
-      _service => this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route }),
+      _service => {
+        this.snackBar.openFromComponent(ServiceCreatedComponent, {
+          data: _service,
+          duration: 2000
+        });
+        this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route });
+      },
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();

@@ -32,4 +32,7 @@ export * from './snack-messages/bill-updated/bill-updated.component';
 export * from './snack-messages/bills-refreshed/bills-refreshed.component';
 export * from './snack-messages/logout/logout.component';
 export * from './snack-messages/offering-refreshed/offering-refreshed.component';
+export * from './snack-messages/service-created/service-created.component';
+export * from './snack-messages/service-updated/service-updated.component';
+export * from './snack-messages/service-removed/service-removed.component';
 
