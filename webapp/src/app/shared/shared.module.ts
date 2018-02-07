@@ -58,6 +58,7 @@ import { ClientUpdatedComponent } from './snack-messages/client-updated/client-u
 import { BillCreatedComponent } from './snack-messages/bill-created/bill-created.component';
 import { BillUpdatedComponent } from './snack-messages/bill-updated/bill-updated.component';
 import { BillsRefreshedComponent } from './snack-messages/bills-refreshed/bills-refreshed.component';
+import { LogoutComponent } from './snack-messages/logout/logout.component';
 
 @NgModule({
   imports: [
@@ -119,7 +120,8 @@ import { BillsRefreshedComponent } from './snack-messages/bills-refreshed/bills-
     ClientUpdatedComponent,
     BillCreatedComponent,
     BillUpdatedComponent,
-    BillsRefreshedComponent],
+    BillsRefreshedComponent,
+    LogoutComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -177,7 +179,8 @@ import { BillsRefreshedComponent } from './snack-messages/bills-refreshed/bills-
     ClientUpdatedComponent,
     BillCreatedComponent,
     BillUpdatedComponent,
-    BillsRefreshedComponent
+    BillsRefreshedComponent,
+    LogoutComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
@@ -190,7 +193,8 @@ import { BillsRefreshedComponent } from './snack-messages/bills-refreshed/bills-
     ClientUpdatedComponent,
     BillCreatedComponent,
     BillUpdatedComponent,
-    BillsRefreshedComponent
+    BillsRefreshedComponent,
+    LogoutComponent
   ]
 })
 

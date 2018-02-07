@@ -30,4 +30,5 @@ export * from './snack-messages/client-updated/client-updated.component';
 export * from './snack-messages/bill-created/bill-created.component';
 export * from './snack-messages/bill-updated/bill-updated.component';
 export * from './snack-messages/bills-refreshed/bills-refreshed.component';
+export * from './snack-messages/logout/logout.component';
 

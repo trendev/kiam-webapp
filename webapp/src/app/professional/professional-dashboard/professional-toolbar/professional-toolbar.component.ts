@@ -1,3 +1,5 @@
+import { LogoutComponent } from '@app/shared';
+import { MatSnackBar } from '@angular/material';
 import { Router, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from '@app/core';
 import { environment } from '@env/environment';
@@ -16,13 +18,15 @@ export class ProfessionalToolbarComponent {
 
   constructor(private authenticationService: AuthenticationService,
     private router: Router,
-    private loadingOverlayService: LoadingOverlayService) { }
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) { }
 
   logout() {
     this.loadingOverlayService.start();
     this.authenticationService.logout()
       .finally(() => {
         this.loadingOverlayService.stop();
+        this.snackBar.openFromComponent(LogoutComponent, { duration: 2000 });
         this.router.navigate(['/login'], this.authenticationService.loginRequired);
       })
       .subscribe(); // TODO : handle success and failure
