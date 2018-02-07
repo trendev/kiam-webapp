@@ -1,9 +1,10 @@
+import { MatSnackBar } from '@angular/material';
 import { Component, ViewChild } from '@angular/core';
 import { Pack, Offering, Business, OfferingType } from '@app/entities';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn, PackUpdatedComponent, PackRemovedComponent } from '@app/shared';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
@@ -29,7 +30,8 @@ export class PackDetailComponent {
     private packService: PackService,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
     this.route.data.subscribe(
       (data: {
         pack: Pack,
@@ -119,7 +121,13 @@ export class PackDetailComponent {
     const pack = this.prepareSave();
     this.loadingOverlayService.start();
     this.packService.update(pack).subscribe(
-      _pack => this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route }),
+      _pack => {
+        this.snackBar.openFromComponent(PackUpdatedComponent, {
+          data: _pack,
+          duration: 2000
+        });
+        this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
+      },
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
@@ -150,7 +158,10 @@ export class PackDetailComponent {
   remove() {
     this.loadingOverlayService.start();
     this.packService.remove(this.pack.id).subscribe(
-      resp => this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route }),
+      resp => {
+        this.snackBar.openFromComponent(PackRemovedComponent, { duration: 2000 });
+        this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
+      },
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();

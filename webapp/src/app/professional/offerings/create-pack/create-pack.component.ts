@@ -1,9 +1,16 @@
+import { MatSnackBar } from '@angular/material';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Business, Offering, OfferingType, Pack } from '@app/entities';
-import { ErrorAggregatorDirective, Utils, CustomValidators, compareBusinessesFn } from '@app/shared';
+import {
+  ErrorAggregatorDirective,
+  Utils,
+  CustomValidators,
+  compareBusinessesFn,
+  PackCreatedComponent
+} from '@app/shared';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
@@ -27,7 +34,8 @@ export class CreatePackComponent {
     private packService: PackService,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
     this.route.data.subscribe(
       (data: {
         businesses: Business[],
@@ -109,7 +117,13 @@ export class CreatePackComponent {
     const pack = this.prepareSave();
     this.loadingOverlayService.start();
     this.packService.create(pack).subscribe(
-      _pack => this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route }),
+      _pack => {
+        this.snackBar.openFromComponent(PackCreatedComponent, {
+          data: _pack,
+          duration: 2000
+        });
+        this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route });
+      },
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();

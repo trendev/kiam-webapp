@@ -63,6 +63,9 @@ import { OfferingRefreshedComponent } from './snack-messages/offering-refreshed/
 import { ServiceCreatedComponent } from './snack-messages/service-created/service-created.component';
 import { ServiceUpdatedComponent } from './snack-messages/service-updated/service-updated.component';
 import { ServiceRemovedComponent } from './snack-messages/service-removed/service-removed.component';
+import { PackCreatedComponent } from './snack-messages/pack-created/pack-created.component';
+import { PackUpdatedComponent } from './snack-messages/pack-updated/pack-updated.component';
+import { PackRemovedComponent } from './snack-messages/pack-removed/pack-removed.component';
 
 @NgModule({
   imports: [
@@ -129,7 +132,10 @@ import { ServiceRemovedComponent } from './snack-messages/service-removed/servic
     OfferingRefreshedComponent,
     ServiceCreatedComponent,
     ServiceUpdatedComponent,
-    ServiceRemovedComponent],
+    ServiceRemovedComponent,
+    PackCreatedComponent,
+    PackUpdatedComponent,
+    PackRemovedComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -192,7 +198,10 @@ import { ServiceRemovedComponent } from './snack-messages/service-removed/servic
     OfferingRefreshedComponent,
     ServiceCreatedComponent,
     ServiceUpdatedComponent,
-    ServiceRemovedComponent
+    ServiceRemovedComponent,
+    PackCreatedComponent,
+    PackUpdatedComponent,
+    PackRemovedComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
@@ -210,7 +219,10 @@ import { ServiceRemovedComponent } from './snack-messages/service-removed/servic
     OfferingRefreshedComponent,
     ServiceCreatedComponent,
     ServiceUpdatedComponent,
-    ServiceRemovedComponent
+    ServiceRemovedComponent,
+    PackCreatedComponent,
+    PackUpdatedComponent,
+    PackRemovedComponent
   ]
 })
 

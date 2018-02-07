@@ -35,4 +35,6 @@ export * from './snack-messages/offering-refreshed/offering-refreshed.component'
 export * from './snack-messages/service-created/service-created.component';
 export * from './snack-messages/service-updated/service-updated.component';
 export * from './snack-messages/service-removed/service-removed.component';
-
+export * from './snack-messages/pack-created/pack-created.component';
+export * from './snack-messages/pack-updated/pack-updated.component';
+export * from './snack-messages/pack-removed/pack-removed.component';
