@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Bill, BillType, ClientBill, CollectiveGroupBill, IndividualBill } from '@app/entities';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import * as moment from 'moment';
+import { BillsRefreshedComponent } from '@app/shared';
 
 @Component({
   selector: 'app-bills',
@@ -43,7 +44,8 @@ export class BillsComponent implements OnInit, AfterViewInit {
   constructor(private professionalService: ProfessionalService,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingOverlayService: LoadingOverlayService) {
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar) {
     this.route.data.subscribe(
       (data: {
         bills: Bill[]
@@ -117,7 +119,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
         // keep the current view updated
         this.showFull = this._showFull;
         this.showUnpaid = this._showUnpaid;
-
+        this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
       },
       // TODO : handle the error
       e => console.error(`Une erreur est survenue lors de la collecte des factures sur le serveur`)
