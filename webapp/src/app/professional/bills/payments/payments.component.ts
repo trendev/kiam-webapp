@@ -40,6 +40,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
+    this.paymentModes = this.paymentModes.sort(this.sortPaymentModes);
   }
 
   ngOnDestroy() {
@@ -104,7 +105,11 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   }
 
   comparePaymentModes(pm1: PaymentMode, pm2: PaymentMode) {
-    return pm1 && pm2 && pm1.name === pm2.name;
+    return pm1 && pm2 ? pm1.name === pm2.name : pm1 === pm2;
+  }
+
+  sortPaymentModes(pm1: PaymentMode, pm2: PaymentMode) {
+    return pm1.name.localeCompare(pm2.name);
   }
 
 }
