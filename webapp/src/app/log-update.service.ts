@@ -11,7 +11,8 @@ export class LogUpdateService {
       console.log('current version is', event.current);
       console.log('available version is', event.available);
 
-      this.snackBar.open(`version actuelle: ${event.current} / version disponible: ${event.available}`,
+      this.snackBar.open(`version actuelle: ${event.current.appData.toString()} `
+        + `/ version disponible: ${event.available.appData.toString()}`,
         `Mise à jour disponible`,
         { duration: 3000 });
     });
@@ -19,7 +20,7 @@ export class LogUpdateService {
       console.log('old version was', event.previous);
       console.log('new version is', event.current);
 
-      this.snackBar.open(`ancienne version: ${event.previous} / nouvelle version: ${event.current}`,
+      this.snackBar.open(`ancienne version: ${event.previous.appData.toString()} / nouvelle version: ${event.current.appData.toString()}`,
         `Mise à jour effectuée`,
         { duration: 3000 });
     });
