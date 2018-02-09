@@ -4,7 +4,14 @@ import { Pack, Offering, Business, OfferingType } from '@app/entities';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn, PackUpdatedComponent, PackRemovedComponent } from '@app/shared';
+import {
+  ErrorAggregatorDirective,
+  CustomValidators,
+  Utils,
+  compareBusinessesFn,
+  PackUpdatedComponent,
+  PackRemovedComponent
+} from '@app/shared';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 @Component({
@@ -142,7 +149,7 @@ export class PackDetailComponent {
       id: this.pack.id,
       name: value.name,
       shortname: value.shortname,
-      price: value.price * 100,
+      price: value.price * 10 * 10,
       duration: value.duration,
       businesses: Utils.extractArrayFromControl(this.form, 'businesses',
         fg => new Business({

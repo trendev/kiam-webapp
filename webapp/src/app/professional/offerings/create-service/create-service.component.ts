@@ -109,7 +109,7 @@ export class CreateServiceComponent {
     const service = new Service({
       name: value.name,
       shortname: value.shortname,
-      price: value.price * 100,
+      price: value.price * 10 * 10,
       duration: value.duration,
       businesses: Utils.extractArrayFromControl(this.form, 'businesses',
         fg => new Business({

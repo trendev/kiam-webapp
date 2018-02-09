@@ -62,7 +62,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   }
 
   get remaining(): number {
-    return (this.amount - this.total * 100) / 100;
+    return (this.amount - this.total * 10 * 10) / 100;
   }
 
   get remainingState(): string {
