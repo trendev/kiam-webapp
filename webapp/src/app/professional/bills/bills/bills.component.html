@@ -21,7 +21,7 @@
           {total, plural, =0 {Aucune facture} =1 {1 facture} other {{{total}} factures : {{selectionRevenue / 100 | currency:'EUR':'':'':'fr'}}}}
         </mat-chip>
         <mat-chip color="warn" *ngIf="unpaid > 0" selected="true" [selectable]="false" (click)="showUnpaid =! showUnpaid">
-          {unpaid, plural, =0 {Aucun impayé} =1 {1 impayé} other {{{unpaid}} impayés}} : {{unpaidRevenue / 100 | currency:'EUR':'':'':'fr'}}
+          {unpaid, plural, =0 {Aucune non soldée} =1 {1 non soldée} other {{{unpaid}} non soldées}} : {{unpaidRevenue / 100 | currency:'EUR':'':'':'fr'}}
         </mat-chip>
       </mat-chip-list>
       <div *ngIf="!billsModelIsEmpty()" class="list-container">

@@ -3,7 +3,7 @@
     {bills?.length, plural, =0 {Aucune facture} =1 {1 facture} other {{{bills?.length}} factures}}
   </mat-chip>
   <mat-chip color="warn" *ngIf="unpaid > 0" selected="true" [selectable]="false" (click)="showUnpaid =! showUnpaid">
-    {unpaid, plural, =0 {Aucun impayé} =1 {1 impayé} other {{{unpaid}} impayés}}
+    {unpaid, plural, =0 {Aucune non soldée} =1 {1 non soldée} other {{{unpaid}} non soldées}}
   </mat-chip>
 </mat-chip-list>
 <div class="list-container" *ngIf="showFull || showUnpaid">
