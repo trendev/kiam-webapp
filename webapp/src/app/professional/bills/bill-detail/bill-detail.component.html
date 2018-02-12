@@ -72,8 +72,8 @@
             (click)="cancelBillCreation()">
             <mat-icon aria-label="Annuler les modifications sur la facture">list</mat-icon>
           </button>
-          <button type="button" matTooltip="Sauvegarder/Clore la Facture" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
-            <mat-icon aria-label="Sauvegarder/Clore la Facture">{{isCloseable()?'done':'save'}}</mat-icon>
+          <button type="button" matTooltip="Sauvegarder/Clore la facture" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
+            <mat-icon aria-label="Sauvegarder/Clore la facture">{{isCloseable()?'done':'save'}}</mat-icon>
           </button>
         </div>
       </mat-card-actions>
