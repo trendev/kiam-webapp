@@ -70,6 +70,10 @@ export class BillDetailComponent implements OnInit, DoCheck {
             disabled: this.isClosedBill()
           })
         }, { validator: CustomValidators.validDeliveryPaymentDates }),
+        closeable: new FormControl({
+          value: true,
+          disabled: this.isClosedBill()
+        }),
         comments: this.fb.array(this.bill.comments || [],
           CustomValidators.validComments(this.commentsValidators))
       }),

@@ -18,6 +18,9 @@
       <mat-datepicker #dp2></mat-datepicker>
     </mat-form-field>
   </div>
+  <mat-slide-toggle [checked]="closeable.value" labelPosition="before" [disabled]="closeable.disabled" (change)="closeableChanges($event)">
+    Clore la facture
+  </mat-slide-toggle>
   <app-comments [comments]="comments"></app-comments>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>

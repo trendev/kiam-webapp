@@ -24,7 +24,8 @@ import {
   MatProgressBarModule,
   MatSelectModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -95,7 +96,8 @@ import { PackRemovedComponent } from './snack-messages/pack-removed/pack-removed
     MatSelectModule,
     OverlayModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSlideToggleModule
   ],
   declarations: [
     PageNotFoundComponent,
@@ -201,7 +203,8 @@ import { PackRemovedComponent } from './snack-messages/pack-removed/pack-removed
     ServiceRemovedComponent,
     PackCreatedComponent,
     PackUpdatedComponent,
-    PackRemovedComponent
+    PackRemovedComponent,
+    MatSlideToggleModule
   ],
   entryComponents: [
     PasswordChangedComponent,

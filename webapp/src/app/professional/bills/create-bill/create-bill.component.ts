@@ -108,6 +108,10 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
             CustomValidators.past
           ])
         }),
+        closeable: new FormControl({
+          value: true,
+          disabled: false
+        }),
         comments: this.fb.array([],
           CustomValidators.validComments(this.commentsValidators))
       }),

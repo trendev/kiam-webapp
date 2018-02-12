@@ -1,6 +1,6 @@
 import { Component, OnChanges, ViewChild, Input, ViewContainerRef, OnInit } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
-import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, MatSlideToggleChange } from '@angular/material';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { ErrorAggregatorDirective } from '@app/shared';
 import * as moment from 'moment';
@@ -31,6 +31,9 @@ export class InformationComponent implements OnChanges, OnInit {
 
   minDate: Moment;
   maxDate = moment({ hour: 0 });
+
+  private lastPaymentDate: Moment;
+
   constructor(private parent: FormGroupDirective) { }
 
   ngOnInit() {
@@ -49,6 +52,14 @@ export class InformationComponent implements OnChanges, OnInit {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
+
+    this.paymentDate.valueChanges.forEach(value => {
+      // if the closeable field is disabled it means paymentDate has to be also disabled (paid bill)
+      if (value && this.paymentDate.disabled && !this.closeable.disabled) {
+        this.paymentDate.enable();
+      }
+    });
+
   }
 
   ngOnChanges() {
@@ -62,6 +73,30 @@ export class InformationComponent implements OnChanges, OnInit {
   get deliveryDate(): Moment {
     const value = this.form.get('information').get('dates').get('deliveryDate').value;
     return value ? value : undefined;
+  }
+
+  get paymentDate(): AbstractControl {
+    return this.form.get('information').get('dates').get('paymentDate');
+  }
+
+  get closeable(): AbstractControl {
+    return this.form.get('information').get('closeable');
+  }
+
+  closeableChanges(change: MatSlideToggleChange) {
+    this.closeable.setValue(change.checked);
+    this.closeable.markAsDirty();
+    this.closeable.markAsTouched();
+
+    if (change.checked) {
+      this.paymentDate.enable({ emitEvent: false }); // avoid to emit this changes...
+      this.paymentDate.reset(this.lastPaymentDate);
+    } else {
+      this.lastPaymentDate = this.paymentDate.value;
+      this.paymentDate.disable({ emitEvent: false }); // avoid to emit this changes...
+      this.paymentDate.reset();
+    }
+
   }
 
 }
