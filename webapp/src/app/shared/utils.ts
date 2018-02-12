@@ -38,7 +38,7 @@ export class Utils {
     }
 
     static hasPaymentDate(form: FormGroup): boolean {
-        return form.get('information').get('dates').get('paymentDate').value !== null;
+        return !!form.get('information').get('dates').get('paymentDate').value;
     }
 
     static hasValidPaymentState(form: FormGroup): boolean {
