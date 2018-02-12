@@ -171,7 +171,6 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
 
   saveBill() {
     const bill = this.prepareSave();
-    console.log(bill);
     this.save.emit(bill);
   }
 

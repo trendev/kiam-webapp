@@ -32,7 +32,7 @@ export class InformationComponent implements OnChanges, OnInit {
   minDate: Moment;
   maxDate = moment({ hour: 0 });
 
-  private lastPaymentDate: Moment;
+  private lastPaymentDate = moment({ hour: 0 });
 
   constructor(private parent: FormGroupDirective) { }
 
