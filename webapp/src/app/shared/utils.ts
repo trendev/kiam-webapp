@@ -46,9 +46,10 @@ export class Utils {
             (Utils.hasPaymentDate(form)
                 && (Utils.totalPayments(form.get('payments').get('content').value)
                     < form.get('information').get('amount').value))
-            ||
-            (!Utils.hasPaymentDate(form) && (Utils.totalPayments(form.get('payments').get('content').value)
-                === form.get('information').get('amount').value))
+            // allows to save bills if the payment is not trusted/confirmed
+            // ||
+            // (!Utils.hasPaymentDate(form) && (Utils.totalPayments(form.get('payments').get('content').value)
+            //     === form.get('information').get('amount').value))
         );
     }
 
