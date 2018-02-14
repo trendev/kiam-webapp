@@ -52,7 +52,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
       }) => {
         this.bills = data.bills.sort(this.billsSortFn);
         this.initDates();
-        this.initBillsFilterFn();
+        this.initbillsPeriodFilterFn();
       }
     );
   }
@@ -68,7 +68,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   initAll() {
     this.initDates();
-    this.initBillsFilterFn();
+    this.initbillsPeriodFilterFn();
     this.initRevenues();
     this.setBillsModel();
   }
@@ -81,7 +81,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  initBillsFilterFn() {
+  initbillsPeriodFilterFn() {
     if (this.bills.length > 0) {
       this.billsPeriodFilterFn = (b: Bill) => moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
         && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate));
@@ -202,7 +202,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   updateMinDate(minDate: number) {
     if (this.minDate !== minDate) {
       this.minDate = minDate;
-      this.initBillsFilterFn();
+      this.initbillsPeriodFilterFn();
       this.setBillsModel();
     }
   }
@@ -210,7 +210,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   updateMaxDate(maxDate: number) {
     if (this.maxDate !== maxDate) {
       this.maxDate = maxDate;
-      this.initBillsFilterFn();
+      this.initbillsPeriodFilterFn();
       this.setBillsModel();
     }
   }
