@@ -26,6 +26,8 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   _showUnpaid = false;
 
+  _showPending = false;
+
   unpaidRevenue = 0;
 
   minBound: number;
@@ -149,6 +151,10 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   get showUnpaid(): boolean {
     return this._showUnpaid && !this.billsModelIsEmpty();
+  }
+
+  get showPending(): boolean {
+    return this._showPending && !this.billsModelIsEmpty();
   }
 
   set showFull(value: boolean) {
