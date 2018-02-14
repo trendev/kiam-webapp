@@ -23,7 +23,7 @@
       <mat-header-cell class="paymentStatus" *matHeaderCellDef>Statut</mat-header-cell>
       <mat-cell *matCellDef="let element">
         <div class="paymentStatus">
-          <mat-icon [color]="element.status.color">{{element.status.icon}}</mat-icon>
+          <app-payment-status [bill]="element.bill"></app-payment-status>
         </div>
       </mat-cell>
     </ng-container>

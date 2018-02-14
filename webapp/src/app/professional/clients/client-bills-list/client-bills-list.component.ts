@@ -45,8 +45,8 @@ export class ClientBillsListComponent implements OnInit {
             bill.deliveryDate,
             bill.amount,
             bill.currency,
-            BillsUtils.getStatus(bill),
-            bill.client
+            bill.client,
+            bill
           );
           return billModel;
         }
@@ -117,8 +117,8 @@ class ClientBillModel {
     public deliveryDate: number,
     public amount: number,
     public currency: string,
-    public status: BillStatus,
-    public client: Client) {
+    public client: Client,
+    public bill: Bill) {
   }
 }
 
