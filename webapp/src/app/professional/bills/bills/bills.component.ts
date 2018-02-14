@@ -33,7 +33,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   maxBound: number;
   maxDate: number;
 
-  billsFilterFn = (b: Bill) => true;
+  billsPeriodFilterFn = (b: Bill) => true;
 
   // inverse order : most recent first
   billsSortFn = (b1: Bill, b2: Bill) => {
@@ -83,13 +83,13 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   initBillsFilterFn() {
     if (this.bills.length > 0) {
-      this.billsFilterFn = (b: Bill) => moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
+      this.billsPeriodFilterFn = (b: Bill) => moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
         && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate));
     }
   }
 
   setBillsModel() {
-    this.billsModel = this.bills.filter(this.billsFilterFn).map(b => new BillModel(b));
+    this.billsModel = this.bills.filter(this.billsPeriodFilterFn).map(b => new BillModel(b));
 
     this.datasource =
       new MatTableDataSource<BillModel>(this.billsModel);
