@@ -1,9 +1,9 @@
-<mat-chip-list>
+<mat-chip-list class="mat-chip-list-stacked">
   <mat-chip [color]="billsIsEmpty()?'accent':'primary'" selected="true" [selectable]="false" (click)="showFull =! showFull">
     {bills?.length, plural, =0 {Aucune facture} =1 {1 facture} other {{{bills?.length}} factures}}
   </mat-chip>
-  <mat-chip color="warn" *ngIf="unpaid > 0" selected="true" [selectable]="false" (click)="showUnpaid =! showUnpaid">
-    {unpaid, plural, =0 {Aucune non soldée} =1 {1 non soldée} other {{{unpaid}} non soldées}}
+  <mat-chip color="warn" *ngIf="unpaid.length > 0" selected="true" [selectable]="false" (click)="showUnpaid =! showUnpaid">
+    {unpaid.length, plural, =0 {Aucune impayée} =1 {1 impayée} other {{{unpaid.length}} impayées}}
   </mat-chip>
 </mat-chip-list>
 <div class="list-container" *ngIf="showFull || showUnpaid">

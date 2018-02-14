@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class ClientBillsListComponent implements OnInit {
 
   @Input() bills: ClientBill[];
-  billsModel: ClientBill[];
 
   displayedColumns = [
     'deliveryDate', 'amount', 'paymentDate'];
@@ -22,21 +21,33 @@ export class ClientBillsListComponent implements OnInit {
 
   _showUnpaid = false;
 
+  _showPending = false;
+
+  sortFn = // inverse order : most recent first
+    (b1, b2) => {
+      const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
+      return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
+    }
+
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.billsModel = this.bills.sort(// inverse order : most recent first
-      (b1, b2) => {
-        const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
-        return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
-      }
-    );
-    this.datasource =
-      new MatTableDataSource<ClientBill>(this.billsModel);
+    this.setDataSource(this.full);
   }
 
-  get unpaid(): number {
-    return this.bills.filter(b => !b.paymentDate).length;
+  setDataSource(billsModel: ClientBill[]) {
+    this.datasource =
+      new MatTableDataSource<ClientBill>(billsModel);
+  }
+
+  get full(): ClientBill[] {
+    return this.bills.sort(this.sortFn);
+  }
+
+  get unpaid(): ClientBill[] {
+    return this.bills.sort(this.sortFn)
+      .filter(b => !b.paymentDate
+        && moment(b.deliveryDate).isSameOrBefore(moment().locale('fr').startOf('week').subtract(2, 'week')));
   }
 
   get showFull(): boolean {
@@ -51,7 +62,7 @@ export class ClientBillsListComponent implements OnInit {
     this._showFull = value;
     if (this._showFull) {
       this._showUnpaid = !this._showFull;
-      this.datasource.data = this.billsModel;
+      this.setDataSource(this.full);
     }
   }
 
@@ -59,7 +70,7 @@ export class ClientBillsListComponent implements OnInit {
     this._showUnpaid = value;
     if (this._showUnpaid) {
       this._showFull = !this._showUnpaid;
-      this.datasource.data = this.billsModel.filter(b => !b.paymentDate);
+      this.setDataSource(this.unpaid);
     }
   }
 
