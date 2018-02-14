@@ -5,7 +5,7 @@ import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import * as moment from 'moment';
-import { BillsRefreshedComponent } from '@app/shared';
+import { BillsRefreshedComponent, BillModel, BillsUtils } from '@app/shared';
 
 @Component({
   selector: 'app-bills',
@@ -176,7 +176,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   gotoBill(ref: string) {
     const bill = this.bills.filter(b => b.reference === ref).pop();
     if (bill) {
-      visitBill(bill, {
+      BillsUtils.visitBill(bill, {
         clientbill: () => {
           const clb = bill as ClientBill;
           this.router.navigate(['/professional/bills/clientbill', { id: clb.client.id, ref: ref }]);
@@ -215,60 +215,4 @@ export class BillsComponent implements OnInit, AfterViewInit {
     }
   }
 
-}
-
-class BillModel {
-  reference: string;
-  deliveryDate: number;
-  cltype: string;
-  amount: number;
-  currency: string;
-  paymentDate: boolean;
-  name: string;
-  bill: Bill;
-
-  constructor(bill: Bill) {
-    this.reference = bill.reference;
-    this.deliveryDate = bill.deliveryDate;
-    this.cltype = bill.cltype;
-    this.amount = bill.amount;
-    this.currency = bill.currency;
-    this.paymentDate = !!bill.paymentDate;
-    this.bill = bill;
-    visitBill(bill,
-      {
-        clientbill: () => {
-          const clb = bill as ClientBill;
-          this.name = `${clb.client.customerDetails.firstName} ${clb.client.customerDetails.lastName}`;
-        },
-        collectivegroupbill: () => {
-          const cgb = bill as CollectiveGroupBill;
-          this.name = `${cgb.collectiveGroup.groupName}`;
-        },
-        individualbill: () => {
-          const ib = bill as IndividualBill;
-          this.name = `${ib.individual.customerDetails.firstName} ${ib.individual.customerDetails.lastName}`;
-        },
-      }
-    );
-  }
-}
-
-function visitBill(bill: Bill, fcts: { [key: string]: () => void }) {
-  switch (bill.cltype) {
-    case BillType.CLIENT_BILL: {
-      fcts[BillType.CLIENT_BILL]();
-      break;
-    }
-    case BillType.COLLECTIVE_GROUP_BILL: {
-      fcts[BillType.COLLECTIVE_GROUP_BILL]();
-      break;
-    }
-    case BillType.INDIVIDUAL_BILL: {
-      fcts[BillType.INDIVIDUAL_BILL]();
-      break;
-    }
-    default:
-      throw new Error(`${bill.cltype} is not a supported type of Bill`);
-  }
 }
