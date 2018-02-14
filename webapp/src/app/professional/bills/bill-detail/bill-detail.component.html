@@ -2,15 +2,9 @@
   <mat-card>
     <form [formGroup]="form" novalidate>
       <mat-card-title>
-        <div class="title">Facture
-          <ng-container *ngIf="bill.paymentDate;else elseBlock">
-            <mat-icon color="primary">done_all</mat-icon>
-          </ng-container>
-          <ng-template #elseBlock>
-            <ng-container>
-              <mat-icon color="warn">error_outline</mat-icon>
-            </ng-container>
-          </ng-template>
+        <div class="title">
+          <span>Facture&nbsp;</span>
+          <app-payment-status [bill]="bill"></app-payment-status>
         </div>
       </mat-card-title>
       <mat-card-subtitle>
