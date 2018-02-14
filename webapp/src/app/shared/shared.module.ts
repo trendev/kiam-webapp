@@ -67,6 +67,7 @@ import { ServiceRemovedComponent } from './snack-messages/service-removed/servic
 import { PackCreatedComponent } from './snack-messages/pack-created/pack-created.component';
 import { PackUpdatedComponent } from './snack-messages/pack-updated/pack-updated.component';
 import { PackRemovedComponent } from './snack-messages/pack-removed/pack-removed.component';
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
 
 @NgModule({
   imports: [
@@ -137,7 +138,8 @@ import { PackRemovedComponent } from './snack-messages/pack-removed/pack-removed
     ServiceRemovedComponent,
     PackCreatedComponent,
     PackUpdatedComponent,
-    PackRemovedComponent],
+    PackRemovedComponent,
+    PaymentStatusComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -204,7 +206,8 @@ import { PackRemovedComponent } from './snack-messages/pack-removed/pack-removed
     PackCreatedComponent,
     PackUpdatedComponent,
     PackRemovedComponent,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    PaymentStatusComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
