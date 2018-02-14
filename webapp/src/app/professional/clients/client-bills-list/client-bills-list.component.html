@@ -19,10 +19,10 @@
       <mat-header-cell *matHeaderCellDef>Montant</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.amount / 100 | number:'.0-2':'fr'}} {{element.currency}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="paymentDate">
-      <mat-header-cell class="paymentDate" *matHeaderCellDef>Statut</mat-header-cell>
+    <ng-container matColumnDef="paymentStatus">
+      <mat-header-cell class="paymentStatus" *matHeaderCellDef>Statut</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <div class="paymentDate">
+        <div class="paymentStatus">
           <mat-icon [color]="element.status.color">{{element.status.icon}}</mat-icon>
         </div>
       </mat-cell>
