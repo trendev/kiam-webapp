@@ -89,7 +89,9 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   setBillsModel() {
-    this.billsModel = this.bills.filter(this.billsPeriodFilterFn).map(b => new BillModel(b));
+    this.billsModel = this.bills
+      .filter(this.billsPeriodFilterFn)
+      .map(b => new BillModel(b));
 
     this.datasource =
       new MatTableDataSource<BillModel>(this.billsModel);
@@ -113,16 +115,16 @@ export class BillsComponent implements OnInit, AfterViewInit {
     this.professionalService.getBills()
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
-      bills => {
-        this.bills = bills.sort(this.billsSortFn);
-        this.initAll();
-        // keep the current view updated
-        this.showFull = this._showFull;
-        this.showUnpaid = this._showUnpaid;
-        this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
-      },
-      // TODO : handle the error
-      e => console.error(`Une erreur est survenue lors de la collecte des factures sur le serveur`)
+        bills => {
+          this.bills = bills.sort(this.billsSortFn);
+          this.initAll();
+          // keep the current view updated
+          this.showFull = this._showFull;
+          this.showUnpaid = this._showUnpaid;
+          this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
+        },
+        // TODO : handle the error
+        e => console.error(`Une erreur est survenue lors de la collecte des factures sur le serveur`)
       );
   }
 
