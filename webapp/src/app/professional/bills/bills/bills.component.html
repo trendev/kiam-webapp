@@ -50,17 +50,12 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Montant</mat-header-cell>
             <mat-cell *matCellDef="let element" class="price">{{element.amount / 100 | number:'.0-2':'fr'}}</mat-cell>
           </ng-container>
-          <ng-container matColumnDef="paymentDate">
-            <mat-header-cell class="paymentDate" *matHeaderCellDef mat-sort-header>Statut</mat-header-cell>
+          <ng-container matColumnDef="paymentStatus">
+            <mat-header-cell class="paymentStatus" *matHeaderCellDef mat-sort-header>Statut</mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <div *ngIf="element.paymentDate;else elseBlock" class="paymentDate">
-                <mat-icon color="primary">done_all</mat-icon>
+              <div class="paymentStatus">
+                <app-payment-status [bill]="element.bill"></app-payment-status>
               </div>
-              <ng-template #elseBlock>
-                <div class="paymentDate">
-                  <mat-icon color="warn">error_outline</mat-icon>
-                </div>
-              </ng-template>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -17,7 +17,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   private billsModel: BillModel[] = [];
 
   displayedColumns = [
-    'deliveryDate', 'reference', 'name', 'amount', 'paymentDate'];
+    'deliveryDate', 'reference', 'name', 'amount', 'paymentStatus'];
   datasource: MatTableDataSource<BillModel>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -225,6 +225,7 @@ class BillModel {
   currency: string;
   paymentDate: boolean;
   name: string;
+  bill: Bill;
 
   constructor(bill: Bill) {
     this.reference = bill.reference;
@@ -233,6 +234,7 @@ class BillModel {
     this.amount = bill.amount;
     this.currency = bill.currency;
     this.paymentDate = !!bill.paymentDate;
+    this.bill = bill;
     visitBill(bill,
       {
         clientbill: () => {
