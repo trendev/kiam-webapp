@@ -22,14 +22,9 @@
     <ng-container matColumnDef="paymentDate">
       <mat-header-cell class="paymentDate" *matHeaderCellDef>Statut</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <div *ngIf="element.paymentDate;else elseBlock" class="paymentDate">
-          <mat-icon color="primary">check</mat-icon>
+        <div class="paymentDate">
+          <mat-icon [color]="element.status.color">{{element.status.icon}}</mat-icon>
         </div>
-        <ng-template #elseBlock>
-          <div class="paymentDate">
-            <mat-icon color="warn">error_outline</mat-icon>
-          </div>
-        </ng-template>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

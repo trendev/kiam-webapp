@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
-import { ClientBill } from '@app/entities';
+import { ClientBill, Client, Bill } from '@app/entities';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class ClientBillsListComponent implements OnInit {
 
   displayedColumns = [
     'deliveryDate', 'amount', 'paymentDate'];
-  datasource: MatTableDataSource<ClientBill>;
+  datasource: MatTableDataSource<ClientBillModel>;
 
   _showFull = false;
 
@@ -35,9 +35,21 @@ export class ClientBillsListComponent implements OnInit {
     return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
   }
 
-  setDataSource(billsModel: ClientBill[]) {
+  setDataSource(bills: ClientBill[]) {
     this.datasource =
-      new MatTableDataSource<ClientBill>(billsModel);
+      new MatTableDataSource<ClientBillModel>(bills.map(
+        bill => {
+          const billModel = new ClientBillModel(
+            bill.reference,
+            bill.deliveryDate,
+            bill.amount,
+            bill.currency,
+            this.getStatus(bill),
+            bill.client
+          );
+          return billModel;
+        }
+      ));
   }
 
   get full(): ClientBill[] {
@@ -46,14 +58,22 @@ export class ClientBillsListComponent implements OnInit {
 
   get unpaid(): ClientBill[] {
     return this.bills.sort(this.sortFn)
-      .filter(b => !b.paymentDate
-        && moment(b.deliveryDate).isBefore(moment().locale('fr').startOf('week').subtract(2, 'week')));
+      .filter(this.isUnPaid);
+  }
+
+  private isUnPaid(b: Bill) {
+    return !b.paymentDate
+      && moment(b.deliveryDate).isBefore(moment().locale('fr').startOf('week').subtract(2, 'week'));
   }
 
   get pending(): ClientBill[] {
     return this.bills.sort(this.sortFn)
-      .filter(b => !b.paymentDate
-        && moment(b.deliveryDate).isSameOrAfter(moment().locale('fr').startOf('week').subtract(2, 'week')));
+      .filter(this.isPending);
+  }
+
+  private isPending(b: Bill) {
+    return !b.paymentDate
+      && moment(b.deliveryDate).isSameOrAfter(moment().locale('fr').startOf('week').subtract(2, 'week'));
   }
 
   get showFull(): boolean {
@@ -88,7 +108,6 @@ export class ClientBillsListComponent implements OnInit {
     this._showPending = value;
     if (this._showPending) {
       this._showFull = this._showUnpaid = !this.showPending;
-      console.log(this.pending);
       this.setDataSource(this.pending);
     }
   }
@@ -101,5 +120,33 @@ export class ClientBillsListComponent implements OnInit {
     this.router.navigate(['/professional/bills/clientbill', { id: id, ref: ref }]);
   }
 
+  getStatus(bill: Bill): Status {
+    if (bill.paymentDate) {
+      return new Status('primary', 'done_all');
+    } else {
+      if (this.isUnPaid(bill)) {
+        return new Status('warn', 'error_outline');
+      }
+      if (this.isPending(bill)) {
+        return new Status('accent', 'warning'); // warning more_horiz
+      }
+    }
+  }
+
 }
 
+class ClientBillModel {
+  constructor(public reference: string,
+    public deliveryDate: number,
+    public amount: number,
+    public currency: string,
+    public status: Status,
+    public client: Client) {
+  }
+}
+
+class Status {
+  constructor(public color: string,
+    public icon: string) {
+  }
+}
