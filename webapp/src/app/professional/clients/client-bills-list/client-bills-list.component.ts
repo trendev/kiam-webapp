@@ -23,16 +23,16 @@ export class ClientBillsListComponent implements OnInit {
 
   _showPending = false;
 
-  sortFn = // inverse order : most recent first
-    (b1, b2) => {
-      const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
-      return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
-    }
-
   constructor(private router: Router) { }
 
   ngOnInit() {
     this.setDataSource(this.full);
+  }
+
+  // inverse order : most recent first
+  sortFn(b1: ClientBill, b2: ClientBill): number {
+    const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
+    return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
   }
 
   setDataSource(billsModel: ClientBill[]) {
