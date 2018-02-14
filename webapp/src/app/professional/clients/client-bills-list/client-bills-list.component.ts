@@ -3,6 +3,7 @@ import { ClientBill, Client, Bill } from '@app/entities';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { BillsUtils, BillStatus } from '@app/shared';
 
 @Component({
   selector: 'app-client-bills-list',
@@ -44,7 +45,7 @@ export class ClientBillsListComponent implements OnInit {
             bill.deliveryDate,
             bill.amount,
             bill.currency,
-            this.getStatus(bill),
+            BillsUtils.getStatus(bill),
             bill.client
           );
           return billModel;
@@ -58,22 +59,12 @@ export class ClientBillsListComponent implements OnInit {
 
   get unpaid(): ClientBill[] {
     return this.bills.sort(this.sortFn)
-      .filter(this.isUnPaid);
-  }
-
-  private isUnPaid(b: Bill) {
-    return !b.paymentDate
-      && moment(b.deliveryDate).isBefore(moment().locale('fr').startOf('week').subtract(2, 'week'));
+      .filter(BillsUtils.isUnPaid);
   }
 
   get pending(): ClientBill[] {
     return this.bills.sort(this.sortFn)
-      .filter(this.isPending);
-  }
-
-  private isPending(b: Bill) {
-    return !b.paymentDate
-      && moment(b.deliveryDate).isSameOrAfter(moment().locale('fr').startOf('week').subtract(2, 'week'));
+      .filter(BillsUtils.isPending);
   }
 
   get showFull(): boolean {
@@ -119,20 +110,6 @@ export class ClientBillsListComponent implements OnInit {
   gotoClientBill(id: number, ref: string) {
     this.router.navigate(['/professional/bills/clientbill', { id: id, ref: ref }]);
   }
-
-  getStatus(bill: Bill): Status {
-    if (bill.paymentDate) {
-      return new Status('primary', 'done_all');
-    } else {
-      if (this.isUnPaid(bill)) {
-        return new Status('warn', 'error_outline');
-      }
-      if (this.isPending(bill)) {
-        return new Status('accent', 'warning'); // warning more_horiz
-      }
-    }
-  }
-
 }
 
 class ClientBillModel {
@@ -140,13 +117,8 @@ class ClientBillModel {
     public deliveryDate: number,
     public amount: number,
     public currency: string,
-    public status: Status,
+    public status: BillStatus,
     public client: Client) {
   }
 }
 
-class Status {
-  constructor(public color: string,
-    public icon: string) {
-  }
-}

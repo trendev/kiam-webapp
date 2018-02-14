@@ -1,3 +1,4 @@
+import { BillsUtils } from './bills-utils';
 import { Utils } from './utils';
 export * from './shared.module';
 export * from './page-not-found/page-not-found.component';
@@ -16,6 +17,7 @@ export * from './collective-groups/collective-groups.component';
 export * from './categories/categories.component';
 export * from './error/error.component';
 export * from './utils';
+export * from './bills-utils';
 export * from './comments/comments.component';
 export * from './phone/phone.component';
 export * from './phone.pipe';
