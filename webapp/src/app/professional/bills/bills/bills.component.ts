@@ -59,7 +59,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.initRevenues();
-    this.initBillsModel();
+    this.setBillsModel();
   }
 
   ngAfterViewInit() {
@@ -70,7 +70,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     this.initDates();
     this.initBillsFilterFn();
     this.initRevenues();
-    this.initBillsModel();
+    this.setBillsModel();
   }
 
   initDates() {
@@ -88,7 +88,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  initBillsModel() {
+  setBillsModel() {
     this.billsModel = this.bills.filter(this.billsFilterFn).map(b => new BillModel(b));
 
     this.datasource =
@@ -203,7 +203,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     if (this.minDate !== minDate) {
       this.minDate = minDate;
       this.initBillsFilterFn();
-      this.initBillsModel();
+      this.setBillsModel();
     }
   }
 
@@ -211,7 +211,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     if (this.maxDate !== maxDate) {
       this.maxDate = maxDate;
       this.initBillsFilterFn();
-      this.initBillsModel();
+      this.setBillsModel();
     }
   }
 
