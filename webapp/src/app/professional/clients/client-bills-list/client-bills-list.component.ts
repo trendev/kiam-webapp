@@ -47,7 +47,13 @@ export class ClientBillsListComponent implements OnInit {
   get unpaid(): ClientBill[] {
     return this.bills.sort(this.sortFn)
       .filter(b => !b.paymentDate
-        && moment(b.deliveryDate).isSameOrBefore(moment().locale('fr').startOf('week').subtract(2, 'week')));
+        && moment(b.deliveryDate).isBefore(moment().locale('fr').startOf('week').subtract(2, 'week')));
+  }
+
+  get pending(): ClientBill[] {
+    return this.bills.sort(this.sortFn)
+      .filter(b => !b.paymentDate
+        && moment(b.deliveryDate).isSameOrAfter(moment().locale('fr').startOf('week').subtract(2, 'week')));
   }
 
   get showFull(): boolean {
@@ -58,10 +64,14 @@ export class ClientBillsListComponent implements OnInit {
     return this._showUnpaid && !this.billsIsEmpty();
   }
 
+  get showPending(): boolean {
+    return this._showPending && !this.billsIsEmpty();
+  }
+
   set showFull(value: boolean) {
     this._showFull = value;
     if (this._showFull) {
-      this._showUnpaid = !this._showFull;
+      this._showUnpaid = this._showPending = !this._showFull;
       this.setDataSource(this.full);
     }
   }
@@ -69,8 +79,17 @@ export class ClientBillsListComponent implements OnInit {
   set showUnpaid(value: boolean) {
     this._showUnpaid = value;
     if (this._showUnpaid) {
-      this._showFull = !this._showUnpaid;
+      this._showFull = this._showPending = !this._showUnpaid;
       this.setDataSource(this.unpaid);
+    }
+  }
+
+  set showPending(value: boolean) {
+    this._showPending = value;
+    if (this._showPending) {
+      this._showFull = this._showUnpaid = !this.showPending;
+      console.log(this.pending);
+      this.setDataSource(this.pending);
     }
   }
 
