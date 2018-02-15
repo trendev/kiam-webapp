@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Bill, BillType, ClientBill, CollectiveGroupBill, IndividualBill } from '@app/entities';
+import { Bill, BillType, ClientBill, CollectiveGroupBill, IndividualBill, PaymentMode } from '@app/entities';
 import { MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import * as moment from 'moment';
-import { BillsRefreshedComponent, BillModel, BillsUtils } from '@app/shared';
+import { BillsRefreshedComponent, BillModel, BillsUtils, comparePaymentModesFn } from '@app/shared';
 
 @Component({
   selector: 'app-bills',
@@ -14,6 +14,7 @@ import { BillsRefreshedComponent, BillModel, BillsUtils } from '@app/shared';
 })
 export class BillsComponent implements OnInit, AfterViewInit {
   bills: Bill[] = [];
+  paymentModes: PaymentMode[]= [];
   private billsModel: BillModel[] = [];
 
   displayedColumns = [
@@ -48,9 +49,11 @@ export class BillsComponent implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar) {
     this.route.data.subscribe(
       (data: {
-        bills: Bill[]
+        bills: Bill[],
+        paymentModes: PaymentMode[]
       }) => {
         this.bills = data.bills.sort(this.billsSortFn);
+        this.paymentModes = data.paymentModes.sort(comparePaymentModesFn);
         this.initDates();
         this.initBillsPeriodFilterFn();
       }

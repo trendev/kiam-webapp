@@ -14,6 +14,14 @@
             <app-period-selector [minDate]="minDate" (minDateChange)="updateMinDate($event)" [maxDate]="maxDate" (maxDateChange)="updateMaxDate($event)"
               [minBound]="minBound" [maxBound]="maxBound"></app-period-selector>
           </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Moyens de paiement
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            {{paymentModes | json}}
+          </mat-expansion-panel>
         </mat-accordion>
       </div>
       <mat-chip-list class="mat-chip-list-stacked">

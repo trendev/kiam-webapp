@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs/Subscription';
 import { Component, ViewChild, ViewContainerRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl, Validators } from '@angular/forms';
-import { ErrorAggregatorDirective, CustomValidators, Utils } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils, comparePaymentModesFn } from '@app/shared';
 import { Payment, PaymentMode } from '@app/entities';
 import { MatSelectChange } from '@angular/material';
 
@@ -40,7 +40,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
-    this.paymentModes = this.paymentModes.sort(this.sortPaymentModes);
+    this.paymentModes = this.paymentModes.sort(comparePaymentModesFn);
   }
 
   ngOnDestroy() {
@@ -106,10 +106,6 @@ export class PaymentsComponent implements OnInit, OnDestroy {
 
   comparePaymentModes(pm1: PaymentMode, pm2: PaymentMode) {
     return pm1 && pm2 ? pm1.name === pm2.name : pm1 === pm2;
-  }
-
-  sortPaymentModes(pm1: PaymentMode, pm2: PaymentMode) {
-    return pm1.name.localeCompare(pm2.name);
   }
 
 }
