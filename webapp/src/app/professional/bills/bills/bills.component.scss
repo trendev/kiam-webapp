@@ -73,9 +73,9 @@ mat-card {
     }
     .price {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
-        max-width: 50px;
+        min-width: 65px;
     }
     .name {
         flex-grow: 1;
