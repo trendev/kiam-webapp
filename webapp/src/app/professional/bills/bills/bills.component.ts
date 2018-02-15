@@ -14,8 +14,10 @@ import { BillsRefreshedComponent, BillModel, BillsUtils, comparePaymentModesFn }
 })
 export class BillsComponent implements OnInit, AfterViewInit {
   bills: Bill[] = [];
-  paymentModes: PaymentMode[]= [];
+  paymentModes: PaymentMode[] = [];
+
   private billsModel: BillModel[] = [];
+  private selectedPaymentModes: PaymentMode[] = [];
 
   displayedColumns = [
     'deliveryDate', 'reference', 'name', 'amount', 'paymentStatus'];
@@ -56,6 +58,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
         this.paymentModes = data.paymentModes.sort(comparePaymentModesFn);
         this.initDates();
         this.initBillsPeriodFilterFn();
+        this.selectedPaymentModes = this.paymentModes.slice();
       }
     );
   }

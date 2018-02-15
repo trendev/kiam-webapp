@@ -1,0 +1,5 @@
+<mat-selection-list (selectionChange)="paymentModeSelected($event)">
+  <mat-list-option *ngFor="let pm of paymentModes" [value]="pm" selected="true">
+    {{pm.name}}
+  </mat-list-option>
+</mat-selection-list>

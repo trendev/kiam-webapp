@@ -20,7 +20,7 @@
                 Moyens de paiement
               </mat-panel-title>
             </mat-expansion-panel-header>
-            {{paymentModes | json}}
+            <app-payment-mode-selector [paymentModes]="paymentModes"></app-payment-mode-selector>
           </mat-expansion-panel>
         </mat-accordion>
       </div>
