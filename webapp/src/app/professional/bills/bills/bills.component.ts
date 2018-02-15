@@ -28,8 +28,6 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   _showPending = false;
 
-  unpaidRevenue = 0;
-
   minBound: number;
   minDate: number;
   maxBound: number;
@@ -54,13 +52,12 @@ export class BillsComponent implements OnInit, AfterViewInit {
       }) => {
         this.bills = data.bills.sort(this.billsSortFn);
         this.initDates();
-        this.initbillsPeriodFilterFn();
+        this.initBillsPeriodFilterFn();
       }
     );
   }
 
   ngOnInit() {
-    this.initRevenues();
     this.setBillsModel();
   }
 
@@ -70,8 +67,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   initAll() {
     this.initDates();
-    this.initbillsPeriodFilterFn();
-    this.initRevenues();
+    this.initBillsPeriodFilterFn();
     this.setBillsModel();
   }
 
@@ -83,7 +79,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  initbillsPeriodFilterFn() {
+  initBillsPeriodFilterFn() {
     if (this.bills.length > 0) {
       this.billsPeriodFilterFn = (b: Bill) => moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
         && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate));
@@ -95,15 +91,10 @@ export class BillsComponent implements OnInit, AfterViewInit {
       .filter(this.billsPeriodFilterFn)
       .map(b => new BillModel(b));
 
+    // TODO : init datasource in constructor or ngOnInit
+    // TODO : set datasource.data with this.billsModel
     this.datasource =
       new MatTableDataSource<BillModel>(this.billsModel);
-  }
-
-  initRevenues() {
-    this.unpaidRevenue = this.bills
-      .filter(b => !b.paymentDate)
-      .map(b => b.amount)
-      .reduce((a, b) => a + b, 0);
   }
 
   applyFilter(filterValue: string) {
@@ -143,6 +134,13 @@ export class BillsComponent implements OnInit, AfterViewInit {
       .filter(bm => !!bm.paymentDate)
       .map(bm => bm.amount)
       .reduce((a, b) => a + b, 0);
+  }
+
+  get unpaidRevenue(): number {
+    return this.billsModel
+    .filter(b => !b.paymentDate)
+    .map(b => b.amount)
+    .reduce((a, b) => a + b, 0);
   }
 
   get showFull(): boolean {
@@ -210,7 +208,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   updateMinDate(minDate: number) {
     if (this.minDate !== minDate) {
       this.minDate = minDate;
-      this.initbillsPeriodFilterFn();
+      this.initBillsPeriodFilterFn();
       this.setBillsModel();
     }
   }
@@ -218,7 +216,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   updateMaxDate(maxDate: number) {
     if (this.maxDate !== maxDate) {
       this.maxDate = maxDate;
-      this.initbillsPeriodFilterFn();
+      this.initBillsPeriodFilterFn();
       this.setBillsModel();
     }
   }
