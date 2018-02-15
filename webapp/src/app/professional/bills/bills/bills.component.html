@@ -20,8 +20,8 @@
         <mat-chip [color]="billsModelIsEmpty()?'accent':'primary'" selected="true" [selectable]="false" (click)="showFull =! showFull">
           {total, plural, =0 {Aucune facture} =1 {1 facture} other {{{total}} factures : {{selectionRevenue / 100 | currency:'EUR':'':'':'fr'}}}}
         </mat-chip>
-        <mat-chip color="warn" *ngIf="unpaid > 0" selected="true" [selectable]="false" (click)="showUnpaid =! showUnpaid">
-          {unpaid, plural, =0 {Aucune non soldée} =1 {1 non soldée} other {{{unpaid}} non soldées}} : {{unpaidRevenue / 100 | currency:'EUR':'':'':'fr'}}
+        <mat-chip color="warn" *ngIf="unpaid.length > 0" selected="true" [selectable]="false" (click)="showUnpaid =! showUnpaid">
+          {unpaid.length, plural, =0 {Aucune impayée} =1 {1 impayée} other {{{unpaid.length}} impayées}} : {{unpaidRevenue / 100 | currency:'EUR':'':'':'fr'}}
         </mat-chip>
       </mat-chip-list>
       <div *ngIf="!billsModelIsEmpty()" class="list-container">
@@ -51,7 +51,7 @@
             <mat-cell *matCellDef="let element" class="price">{{element.amount / 100 | number:'.0-2':'fr'}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="paymentStatus">
-            <mat-header-cell class="paymentStatus" *matHeaderCellDef mat-sort-header>Statut</mat-header-cell>
+            <mat-header-cell class="paymentStatus" *matHeaderCellDef>Statut</mat-header-cell>
             <mat-cell *matCellDef="let element">
               <div class="paymentStatus">
                 <app-payment-status [bill]="element.bill"></app-payment-status>

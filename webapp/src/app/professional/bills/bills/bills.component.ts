@@ -81,8 +81,14 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   initBillsPeriodFilterFn() {
     if (this.bills.length > 0) {
-      this.billsPeriodFilterFn = (b: Bill) => moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
-        && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate));
+      this.billsPeriodFilterFn = (b: Bill) => (
+        (moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
+          && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate)))
+        || (!!b.paymentDate
+          && moment(b.paymentDate).isSameOrAfter(moment(this.minDate))
+          && moment(b.paymentDate).isSameOrBefore(moment(this.maxDate))
+        )
+      );
     }
   }
 
@@ -91,8 +97,6 @@ export class BillsComponent implements OnInit, AfterViewInit {
       .filter(this.billsPeriodFilterFn)
       .map(b => new BillModel(b));
 
-    // TODO : init datasource in constructor or ngOnInit
-    // TODO : set datasource.data with this.billsModel
     this.datasource =
       new MatTableDataSource<BillModel>(this.billsModel);
   }
@@ -125,8 +129,8 @@ export class BillsComponent implements OnInit, AfterViewInit {
     return this.billsModel.length;
   }
 
-  get unpaid(): number {
-    return this.billsModel.filter(b => !b.paymentDate).length;
+  get unpaid(): BillModel[] {
+    return this.billsModel.filter(b => BillsUtils.isUnPaid(b.bill));
   }
 
   get selectionRevenue(): number {
@@ -137,10 +141,8 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   get unpaidRevenue(): number {
-    return this.billsModel
-    .filter(b => !b.paymentDate)
-    .map(b => b.amount)
-    .reduce((a, b) => a + b, 0);
+    return this.unpaid.map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
   }
 
   get showFull(): boolean {
@@ -167,7 +169,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     this._showUnpaid = value;
     if (this._showUnpaid) {
       this._showFull = !this._showUnpaid;
-      this.datasource.data = this.billsModel.filter(b => !b.paymentDate);
+      this.datasource.data = this.unpaid;
     }
   }
 
