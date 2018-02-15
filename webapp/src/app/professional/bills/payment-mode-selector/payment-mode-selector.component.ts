@@ -1,5 +1,5 @@
 import { comparePaymentModesFn } from '@app/shared';
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { PaymentMode } from '@app/entities';
 import { MatSelectionListChange } from '@angular/material';
 
@@ -12,6 +12,7 @@ export class PaymentModeSelectorComponent implements OnChanges {
 
   @Input() paymentModes: PaymentMode[] = [];
   private _selectedPaymentMode: PaymentMode[];
+  @Output() updatePaymentModeSelection = new EventEmitter<PaymentMode[]>();
 
   constructor() { }
 
@@ -29,17 +30,17 @@ export class PaymentModeSelectorComponent implements OnChanges {
 
   removePaymentMode(pm: PaymentMode) {
     this._selectedPaymentMode = this._selectedPaymentMode.filter(_pm => pm.name !== _pm.name);
-    this.display_selectedPaymentMode();
+    this.emitUpdate();
   }
 
   addPaymentMode(pm: PaymentMode) {
     this._selectedPaymentMode.push(pm);
     this._selectedPaymentMode = this._selectedPaymentMode.sort(comparePaymentModesFn);
-    this.display_selectedPaymentMode();
+    this.emitUpdate();
   }
 
-  private display_selectedPaymentMode() {
-    console.log(this._selectedPaymentMode);
+  private emitUpdate() {
+    this.updatePaymentModeSelection.emit(this._selectedPaymentMode);
   }
 
 }

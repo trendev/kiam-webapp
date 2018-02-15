@@ -20,7 +20,7 @@
                 Moyens de paiement utilisés
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-payment-mode-selector [paymentModes]="paymentModes"></app-payment-mode-selector>
+            <app-payment-mode-selector [paymentModes]="paymentModes" (updatePaymentModeSelection)="updatePaymentModeSelection($event)"></app-payment-mode-selector>
           </mat-expansion-panel>
         </mat-accordion>
       </div>

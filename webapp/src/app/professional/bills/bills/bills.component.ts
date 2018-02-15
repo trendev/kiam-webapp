@@ -16,8 +16,8 @@ export class BillsComponent implements OnInit, AfterViewInit {
   bills: Bill[] = [];
   paymentModes: PaymentMode[] = [];
 
-  private billsModel: BillModel[] = [];
-  private selectedPaymentModes: PaymentMode[] = [];
+  private _billsModel: BillModel[] = [];
+  private _selectedPaymentModes: PaymentMode[] = [];
 
   displayedColumns = [
     'deliveryDate', 'reference', 'name', 'amount', 'paymentStatus'];
@@ -76,7 +76,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
       .map(name => new PaymentMode({ name: name })) // rebuild a new payment mode array from the deduplicated names
       .sort(comparePaymentModesFn); // order by name
 
-    this.selectedPaymentModes = this.paymentModes.slice(); // copy the payment modes
+    this._selectedPaymentModes = this.paymentModes.slice(); // copy the payment modes
   }
 
   initAll() {
@@ -107,13 +107,13 @@ export class BillsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setBillsModel() {
-    this.billsModel = this.bills
+  setBillsModel(pmFilter: (PaymentMode) => boolean = (pm) => true) {
+    this._billsModel = this.bills
       .filter(this.billsPeriodFilterFn)
       .map(b => new BillModel(b));
 
     this.datasource =
-      new MatTableDataSource<BillModel>(this.billsModel);
+      new MatTableDataSource<BillModel>(this._billsModel);
   }
 
   applyFilter(filterValue: string) {
@@ -142,19 +142,19 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   get total(): number {
-    return this.billsModel.length;
+    return this._billsModel.length;
   }
 
   get unpaid(): BillModel[] {
-    return this.billsModel.filter(b => BillsUtils.isUnPaid(b.bill));
+    return this._billsModel.filter(b => BillsUtils.isUnPaid(b.bill));
   }
 
   get pending(): BillModel[] {
-    return this.billsModel.filter(b => BillsUtils.isPending(b.bill));
+    return this._billsModel.filter(b => BillsUtils.isPending(b.bill));
   }
 
   get selectionRevenue(): number {
-    return this.billsModel
+    return this._billsModel
       .filter(bm => !!bm.paymentDate
         && moment(bm.paymentDate).isSameOrBefore(moment(this.maxDate)))
       .map(bm => bm.amount)
@@ -187,7 +187,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     this._showFull = value;
     if (this._showFull) {
       this._showUnpaid = this._showPending = !this._showFull;
-      this.datasource.data = this.billsModel;
+      this.datasource.data = this._billsModel;
     }
   }
 
@@ -208,7 +208,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   billsModelIsEmpty(): boolean {
-    return this.billsModel.length === 0;
+    return this._billsModel.length === 0;
   }
 
   isEmpty(): boolean {
@@ -256,6 +256,11 @@ export class BillsComponent implements OnInit, AfterViewInit {
       this.initBillsPeriodFilterFn();
       this.setBillsModel();
     }
+  }
+
+  updatePaymentModeSelection(pms: PaymentMode[]) {
+    this._selectedPaymentModes = pms.slice();
+    this.setBillsModel();
   }
 
 }
