@@ -41,7 +41,6 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     this.first.valueChanges.takeUntil(this.unsubscribe).distinctUntilChanged()
       .map(value => {
-        console.log(value);
         if (!value) {
           return this.firstBound;
         }

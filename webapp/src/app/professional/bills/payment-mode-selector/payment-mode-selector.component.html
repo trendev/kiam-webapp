@@ -1,5 +1,5 @@
 <mat-selection-list (selectionChange)="selectionChange($event)">
-  <mat-list-option *ngFor="let pm of paymentModes" [value]="pm" selected="true">
+  <mat-list-option *ngFor="let pm of paymentModes" [value]="pm" selected="false">
     {{pm.name}}
   </mat-list-option>
 </mat-selection-list>

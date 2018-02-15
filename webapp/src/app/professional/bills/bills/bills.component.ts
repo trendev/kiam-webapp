@@ -21,7 +21,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   displayedColumns = [
     'deliveryDate', 'reference', 'name', 'amount', 'paymentStatus'];
-  datasource: MatTableDataSource<BillModel>;
+  datasource: MatTableDataSource<BillModel> = new MatTableDataSource<BillModel>();
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -49,6 +49,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
     private snackBar: MatSnackBar) {
+
     this.route.data.subscribe(
       (data: {
         bills: Bill[]
@@ -69,21 +70,22 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   initPaymentModes() {
     this.paymentModes = Array.from(new Set( // use a set to remove duplicated payment mode
-      this.bills.filter(b => !!b.paymentDate) // get payment modes from payed bills only
+      this._billsModel.map(bm => bm.bill)
+        .filter(b => !!b.paymentDate) // get payment modes from payed bills only
         .map(b => b.payments.map(p => p.paymentMode.name)) // convert bills stream into a stream of names of payment modes
         .reduce((a, b) => [...a, ...b], [])
     ))
       .map(name => new PaymentMode({ name: name })) // rebuild a new payment mode array from the deduplicated names
       .sort(comparePaymentModesFn); // order by name
 
-    this._selectedPaymentModes = this.paymentModes.slice(); // copy the payment modes
+    this._selectedPaymentModes = [];
   }
 
   initAll() {
-    this.initPaymentModes();
     this.initDates();
     this.initBillsPeriodFilterFn();
     this.setBillsModel();
+    this.initPaymentModes();
   }
 
   initDates() {
@@ -107,13 +109,14 @@ export class BillsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setBillsModel(pmFilter: (PaymentMode) => boolean = (pm) => true) {
+  setBillsModel(pmFilter: (Bill) => boolean = (b) => true) {
     this._billsModel = this.bills
       .filter(this.billsPeriodFilterFn)
+      .filter(pmFilter)
       .map(b => new BillModel(b));
 
-    this.datasource =
-      new MatTableDataSource<BillModel>(this._billsModel);
+
+    this.datasource.data = this._billsModel;
   }
 
   applyFilter(filterValue: string) {
@@ -243,10 +246,10 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   updateMinDate(minDate: number) {
     if (this.minDate !== minDate) {
-      console.log(`==> ` + minDate);
       this.minDate = minDate;
       this.initBillsPeriodFilterFn();
       this.setBillsModel();
+      this.initPaymentModes();
     }
   }
 
@@ -255,12 +258,25 @@ export class BillsComponent implements OnInit, AfterViewInit {
       this.maxDate = maxDate;
       this.initBillsPeriodFilterFn();
       this.setBillsModel();
+      this.initPaymentModes();
     }
   }
 
   updatePaymentModeSelection(pms: PaymentMode[]) {
     this._selectedPaymentModes = pms.slice();
-    this.setBillsModel();
+
+    this.setBillsModel((bill: Bill) => {
+
+      if (!!bill.paymentDate) {
+        return bill.payments
+          .map(p => p.paymentMode)
+          .findIndex(pm =>
+            this._selectedPaymentModes.findIndex(_pm => _pm.name === pm.name) !== -1)
+          !== -1;
+      } else {
+        return false;
+      }
+    });
   }
 
 }

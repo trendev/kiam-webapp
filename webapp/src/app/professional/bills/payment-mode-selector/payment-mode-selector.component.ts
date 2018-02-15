@@ -11,13 +11,13 @@ import { MatSelectionListChange } from '@angular/material';
 export class PaymentModeSelectorComponent implements OnChanges {
 
   @Input() paymentModes: PaymentMode[] = [];
-  private _selectedPaymentMode: PaymentMode[];
+  private _selectedPaymentMode: PaymentMode[] = [];
   @Output() updatePaymentModeSelection = new EventEmitter<PaymentMode[]>();
 
   constructor() { }
 
   ngOnChanges() {
-    this._selectedPaymentMode = this.paymentModes;
+    this._selectedPaymentMode = [];
   }
 
   selectionChange(change: MatSelectionListChange) {
