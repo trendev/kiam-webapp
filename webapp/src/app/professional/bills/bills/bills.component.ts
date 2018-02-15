@@ -228,6 +228,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   updateMinDate(minDate: number) {
     if (this.minDate !== minDate) {
+      console.log(`==> ` + minDate);
       this.minDate = minDate;
       this.initBillsPeriodFilterFn();
       this.setBillsModel();

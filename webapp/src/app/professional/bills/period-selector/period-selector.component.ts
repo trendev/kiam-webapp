@@ -30,8 +30,8 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() maxBound: number;
   lastBound: moment.Moment;
 
-  first = new FormControl();
-  last = new FormControl();
+  first = new FormControl(moment(), { updateOn: 'blur' });
+  last = new FormControl(moment(), { updateOn: 'blur' });
 
   private unsubscribe: Subject<void> = new Subject();
 
@@ -41,6 +41,7 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     this.first.valueChanges.takeUntil(this.unsubscribe).distinctUntilChanged()
       .map(value => {
+        console.log(value);
         if (!value) {
           return this.firstBound;
         }
