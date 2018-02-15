@@ -57,7 +57,7 @@ export class BillModel {
     cltype: string;
     amount: number;
     currency: string;
-    paymentDate: boolean;
+    paymentDate: number;
     name: string;
     bill: Bill;
 
@@ -67,7 +67,7 @@ export class BillModel {
         this.cltype = bill.cltype;
         this.amount = bill.amount;
         this.currency = bill.currency;
-        this.paymentDate = !!bill.paymentDate;
+        this.paymentDate = bill.paymentDate;
         this.bill = bill;
         BillsUtils.visitBill(bill,
             {

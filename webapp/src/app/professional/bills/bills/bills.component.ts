@@ -118,6 +118,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
           // keep the current view updated
           this.showFull = this._showFull;
           this.showUnpaid = this._showUnpaid;
+          this.showPending = this._showPending;
           this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
         },
         // TODO : handle the error
@@ -133,15 +134,25 @@ export class BillsComponent implements OnInit, AfterViewInit {
     return this.billsModel.filter(b => BillsUtils.isUnPaid(b.bill));
   }
 
+  get pending(): BillModel[] {
+    return this.billsModel.filter(b => BillsUtils.isPending(b.bill));
+  }
+
   get selectionRevenue(): number {
     return this.billsModel
-      .filter(bm => !!bm.paymentDate)
+      .filter(bm => !!bm.paymentDate
+        && moment(bm.paymentDate).isSameOrBefore(moment(this.maxDate)))
       .map(bm => bm.amount)
       .reduce((a, b) => a + b, 0);
   }
 
   get unpaidRevenue(): number {
     return this.unpaid.map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
+  }
+
+  get pendingRevenue(): number {
+    return this.pending.map(b => b.amount)
       .reduce((a, b) => a + b, 0);
   }
 
@@ -160,7 +171,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   set showFull(value: boolean) {
     this._showFull = value;
     if (this._showFull) {
-      this._showUnpaid = !this._showFull;
+      this._showUnpaid = this._showPending = !this._showFull;
       this.datasource.data = this.billsModel;
     }
   }
@@ -168,8 +179,16 @@ export class BillsComponent implements OnInit, AfterViewInit {
   set showUnpaid(value: boolean) {
     this._showUnpaid = value;
     if (this._showUnpaid) {
-      this._showFull = !this._showUnpaid;
+      this._showFull = this._showPending = !this._showUnpaid;
       this.datasource.data = this.unpaid;
+    }
+  }
+
+  set showPending(value: boolean) {
+    this._showPending = value;
+    if (this._showPending) {
+      this._showFull = this._showUnpaid = !this._showPending;
+      this.datasource.data = this.pending;
     }
   }
 
