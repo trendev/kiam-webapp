@@ -18,8 +18,7 @@ const routes: Routes = [
     component: BillsComponent,
     pathMatch: 'full',
     resolve: {
-      bills: ProfessionalBillsResolverService,
-      paymentModes: ProfessionalPaymentModesResolverService
+      bills: ProfessionalBillsResolverService
     }
   },
   {

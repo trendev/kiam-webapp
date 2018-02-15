@@ -51,27 +51,36 @@ export class BillsComponent implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar) {
     this.route.data.subscribe(
       (data: {
-        bills: Bill[],
-        paymentModes: PaymentMode[]
+        bills: Bill[]
       }) => {
         this.bills = data.bills.sort(this.billsSortFn);
-        this.paymentModes = data.paymentModes.sort(comparePaymentModesFn);
-        this.initDates();
-        this.initBillsPeriodFilterFn();
-        this.selectedPaymentModes = this.paymentModes.slice();
+        this.initAll();
       }
     );
   }
 
   ngOnInit() {
-    this.setBillsModel();
+    // this.setBillsModel();
   }
 
   ngAfterViewInit() {
     this.datasource.sort = this.sort;
   }
 
+  initPaymentModes() {
+    this.paymentModes = Array.from(new Set( // use a set to remove duplicated payment mode
+      this.bills.filter(b => !!b.paymentDate) // get payment modes from payed bills only
+        .map(b => b.payments.map(p => p.paymentMode.name)) // convert bills stream into a stream of names of payment modes
+        .reduce((a, b) => [...a, ...b], [])
+    ))
+      .map(name => new PaymentMode({ name: name })) // rebuild a new payment mode array from the deduplicated names
+      .sort(comparePaymentModesFn); // order by name
+
+    this.selectedPaymentModes = this.paymentModes.slice(); // copy the payment modes
+  }
+
   initAll() {
+    this.initPaymentModes();
     this.initDates();
     this.initBillsPeriodFilterFn();
     this.setBillsModel();
