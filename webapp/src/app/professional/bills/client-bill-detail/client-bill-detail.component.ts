@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from '@app/error-handler.service';
 import { Component, OnInit } from '@angular/core';
 import { ClientBillService } from '@app/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
@@ -22,7 +23,8 @@ export class ClientBillDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
 
     this.route.data.subscribe(
       (data: {
@@ -46,6 +48,7 @@ export class ClientBillDetailComponent implements OnInit {
 
   save(bill: Bill) {
     const cb = new ClientBill(bill);
+    cb.amount++;
     cb.client = this.clientBill.client;
     this.loadingOverlayService.start();
     this.clientBillService.update(cb).subscribe(
@@ -53,10 +56,9 @@ export class ClientBillDetailComponent implements OnInit {
         this.snackBar.openFromComponent(BillUpdatedComponent, { duration: 2000 });
         this.returnToClientDetail();
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
-        console.error('Impossible de sauvegarder la facture modifiée du client sur le serveur');
+        this.errorHandler.handle(e, 'Une erreur est survenue lors de la sauvegarde de la facture...');
       });
   }
 

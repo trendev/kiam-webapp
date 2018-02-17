@@ -6,6 +6,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
 import { BillCreatedComponent } from '@app/shared';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-create-client-bill',
@@ -24,7 +25,8 @@ export class CreateClientBillComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = +params.get('id');
@@ -62,12 +64,12 @@ export class CreateClientBillComponent implements OnInit {
         this.snackBar.openFromComponent(BillCreatedComponent, { duration: 2000 });
         this.returnToClientDetail();
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
-        console.error('Impossible de sauvegarder la nouvelle facture du client sur le serveur');
+        this.errorHandler.handle(e, 'Une erreur est survenue lors de la sauvegarde de la facture...');
         if (e instanceof HttpErrorResponse && e.status === 409) {
           this.billsRefDate = +e.error.error.deliveryDate;
+          this.errorHandler.handle(e, `Vous ne pouvez pas créer une facture antérieure à la date limite de facturation !`);
         }
       }
     );

@@ -68,6 +68,7 @@ import { PackCreatedComponent } from './snack-messages/pack-created/pack-created
 import { PackUpdatedComponent } from './snack-messages/pack-updated/pack-updated.component';
 import { PackRemovedComponent } from './snack-messages/pack-removed/pack-removed.component';
 import { PaymentStatusComponent } from './payment-status/payment-status.component';
+import { UnexpectedErrorComponent } from './snack-messages/unexpected-error/unexpected-error.component';
 
 @NgModule({
   imports: [
@@ -139,7 +140,8 @@ import { PaymentStatusComponent } from './payment-status/payment-status.componen
     PackCreatedComponent,
     PackUpdatedComponent,
     PackRemovedComponent,
-    PaymentStatusComponent],
+    PaymentStatusComponent,
+    UnexpectedErrorComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -207,7 +209,8 @@ import { PaymentStatusComponent } from './payment-status/payment-status.componen
     PackUpdatedComponent,
     PackRemovedComponent,
     MatSlideToggleModule,
-    PaymentStatusComponent
+    PaymentStatusComponent,
+    UnexpectedErrorComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
@@ -228,7 +231,8 @@ import { PaymentStatusComponent } from './payment-status/payment-status.componen
     ServiceRemovedComponent,
     PackCreatedComponent,
     PackUpdatedComponent,
-    PackRemovedComponent
+    PackRemovedComponent,
+    UnexpectedErrorComponent
   ]
 })
 

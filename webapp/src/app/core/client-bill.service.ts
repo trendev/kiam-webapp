@@ -16,17 +16,13 @@ export class ClientBillService {
   create(payload: ClientBill): Observable<ClientBill> {
     return this.http.post<ClientBill>(`${this.api}`, payload, { withCredentials: true })
       .map(bill => new ClientBill(bill))
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
   update(payload: ClientBill): Observable<ClientBill> {
     return this.http.put<ClientBill>(`${this.api}`, payload, { withCredentials: true })
       .map(bill => new ClientBill(bill))
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
 }
