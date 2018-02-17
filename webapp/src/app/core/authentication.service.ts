@@ -30,7 +30,7 @@ export class AuthenticationService {
     return this._isLoggedIn;
   }
 
-  resetCache() {
+  resetUserInformation() {
     this.user = undefined;
     this._isLoggedIn = false;
   }
@@ -49,13 +49,13 @@ export class AuthenticationService {
         return true;
       })
       .catch(e => {
-        this.resetCache();
+        this.resetUserInformation();
         return this.errorHandler.handle(e);
       });
   }
 
   logout(): Observable<boolean> {
-    this.resetCache();
+    this.resetUserInformation();
     return this.http.post<any>(`${this.api}/logout`,
       null,
       { observe: 'response', withCredentials: true })
@@ -72,7 +72,7 @@ export class AuthenticationService {
         return this.user;
       })
       .catch(e => {
-        this.resetCache();
+        this.resetUserInformation();
         return Observable.throw(e);
       });
   }
@@ -87,7 +87,7 @@ export class AuthenticationService {
       })
       .retry(3)
       .catch(e => {
-        this.resetCache();
+        this.resetUserInformation();
         return this.errorHandler.handle(e);
       });
   }
