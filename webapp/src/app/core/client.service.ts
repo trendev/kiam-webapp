@@ -17,25 +17,19 @@ export class ClientService {
   create(payload: Client): Observable<Client> {
     return this.http.post<Client>(`${this.api}`, payload, { withCredentials: true })
       .map(client => new Client(client))
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
   update(payload: Client): Observable<Client> {
     return this.http.put<Client>(`${this.api}`, payload, { withCredentials: true })
       .map(client => new Client(client))
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
   getClientBills(id: number): Observable<ClientBill[]> {
     return this.http.get<ClientBill[]>(`${this.api}/${id}/clientBills`, { withCredentials: true })
       .map(clientBills => clientBills.map(cb => new ClientBill(cb)))
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
   getClientBill(id: number, ref: string): Observable<ClientBill> {
@@ -48,9 +42,7 @@ export class ClientService {
           default: throw new Error(`Too many client bills with reference ${ref}`); // should not happen
         }
       })
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
 }

@@ -19,38 +19,28 @@ export class PackService {
         .filter(o => o.cltype === OfferingType.PACK)
         .map(o => new Pack(o))
       )
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
   create(payload: Pack): Observable<Pack> {
     return this.http.post<Pack>(`${this.api}`, payload, { withCredentials: true })
       .map(pack => new Pack(pack))
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
   update(payload: Pack): Observable<Pack> {
     return this.http.put<Pack>(`${this.api}`, payload, { withCredentials: true })
       .map(pack => new Pack(pack))
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
   remove(id: number): Observable<string> {
     return this.http.delete(`${this.api}/${id}`, { responseType: 'text', withCredentials: true })
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
   buildModelOfferings(): Observable<Offering[]> {
     return this.http.post<Offering[]>(`${this.api}/buildModelOfferings`, null, { withCredentials: true })
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 }

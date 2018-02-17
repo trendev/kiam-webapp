@@ -35,15 +35,13 @@ export class ProfessionalService {
         withCredentials: true
       })
       .map(pro => new Professional(pro))
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 
   put(payload: Professional): Observable<Professional> {
     return this.http.put<Professional>(`${this.api}`, payload, { withCredentials: true })
       .map(_pro => new Professional(_pro))
-      .catch(e => {
-        return this.errorHandler.handle(e);
-      });
+      .catch(e => Observable.throw(e));
   }
 
   getClients(): Observable<Client[]> {
@@ -52,7 +50,7 @@ export class ProfessionalService {
         withCredentials: true
       })
       .map(result => result.map(r => new Client(r)))
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 
   getCollectiveGroups(): Observable<CollectiveGroup[]> {
@@ -61,7 +59,7 @@ export class ProfessionalService {
         withCredentials: true
       })
       .map(result => result.map(r => new CollectiveGroup(r)))
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 
   getCategories(): Observable<Category[]> {
@@ -70,7 +68,7 @@ export class ProfessionalService {
         withCredentials: true
       })
       .map(result => result.map(r => new Category(r)))
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 
   getBills(): Observable<Bill[]> {
@@ -88,7 +86,7 @@ export class ProfessionalService {
             return new IndividualBill(r);
         }
       }))
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 
   getOfferings(): Observable<Offering[]> {
@@ -104,7 +102,7 @@ export class ProfessionalService {
             return new Pack(r);
         }
       }))
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 
 }

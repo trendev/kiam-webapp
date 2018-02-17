@@ -50,7 +50,7 @@ export class AuthenticationService {
       })
       .catch(e => {
         this.resetUserInformation();
-        return this.errorHandler.handle(e);
+        return Observable.throw(e);
       });
   }
 
@@ -60,7 +60,7 @@ export class AuthenticationService {
       null,
       { observe: 'response', withCredentials: true })
       .map(resp => true)
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 
   profile(): Observable<UserAccount> {
@@ -88,7 +88,7 @@ export class AuthenticationService {
       .retry(3)
       .catch(e => {
         this.resetUserInformation();
-        return this.errorHandler.handle(e);
+        return Observable.throw(e);
       });
   }
 
@@ -102,7 +102,7 @@ export class AuthenticationService {
       payload,
       { withCredentials: true })
       .map(resp => resp.password)
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 
 }

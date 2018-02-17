@@ -20,7 +20,7 @@ export class PaymentModeService {
         withCredentials: true
       })
       .map(result => result.map(r => new PaymentMode(r)))
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 
 }

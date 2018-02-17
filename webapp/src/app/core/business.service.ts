@@ -20,6 +20,6 @@ export class BusinessService {
         withCredentials: true
       })
       .map(result => result.map(r => new Business(r)))
-      .catch(e => this.errorHandler.handle(e));
+      .catch(e => Observable.throw(e));
   }
 }
