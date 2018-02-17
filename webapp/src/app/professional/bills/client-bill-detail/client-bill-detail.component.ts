@@ -48,7 +48,6 @@ export class ClientBillDetailComponent implements OnInit {
 
   save(bill: Bill) {
     const cb = new ClientBill(bill);
-    cb.amount++;
     cb.client = this.clientBill.client;
     this.loadingOverlayService.start();
     this.clientBillService.update(cb).subscribe(

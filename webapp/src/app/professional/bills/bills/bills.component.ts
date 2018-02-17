@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from '@app/error-handler.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Bill, BillType, ClientBill, CollectiveGroupBill, IndividualBill, PaymentMode } from '@app/entities';
 import { MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
@@ -48,7 +49,8 @@ export class BillsComponent implements OnInit, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
 
     this.route.data.subscribe(
       (data: {
@@ -139,9 +141,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
           this.showPending = this._showPending;
           this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
         },
-        // TODO : handle the error
-        e => console.error(`Une erreur est survenue lors de la collecte des factures sur le serveur`)
-      );
+        e => this.errorHandler.handle(e, 'Une erreur est survenue lors de la collecte des factures depuis le serveur'));
   }
 
   get total(): number {

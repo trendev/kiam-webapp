@@ -8,6 +8,7 @@ import { MatTableDataSource, MatSort, Sort, MatSnackBar } from '@angular/materia
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Utils, ClientsListRefreshedComponent } from '@app/shared';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-clients',
@@ -37,7 +38,8 @@ export class ClientsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
     this.route.data.subscribe(
       (data: {
         clients: Client[]
@@ -80,7 +82,7 @@ export class ClientsComponent implements OnInit {
         this.snackBar.openFromComponent(ClientsListRefreshedComponent, { duration: 2000 });
       },
       // TODO : handle the error
-      e => console.error(`Une erreur est survenue lors de la collecte des clients depuis le serveur`)
+      e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des clients depuis le serveur`)
       );
   }
 

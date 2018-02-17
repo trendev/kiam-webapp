@@ -14,6 +14,7 @@ import { ClientService } from '@app/core';
 import * as moment from 'moment';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-client-detail',
@@ -42,7 +43,8 @@ export class ClientDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
     this.route.data.subscribe(
       (data: {
         collectiveGroups: CollectiveGroup[],
@@ -238,7 +240,7 @@ export class ClientDetailComponent implements OnInit {
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
-        console.error('Impossible de sauvegarder le nouveau client sur le serveur');
+        this.errorHandler.handle(e, 'Impossible de sauvegarder le nouveau client sur le serveur');
       });
   }
 
