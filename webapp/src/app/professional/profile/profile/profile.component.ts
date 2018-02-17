@@ -21,6 +21,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/finally';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-profile',
@@ -48,7 +49,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
     this.pro = new Professional(this.authenticationService.user);
     this.route.data.subscribe(
       (data: {
@@ -241,7 +243,7 @@ export class ProfileComponent implements OnInit {
         this.snackBar.openFromComponent(ProfileSavedComponent, { duration: 2000 });
       },
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de sauvegarder les modifications du profile')
+      e => this.errorHandler.handle(e, 'Impossible de sauvegarder les modifications du profile')
       );
   }
 
@@ -306,7 +308,7 @@ export class ProfileComponent implements OnInit {
         this.snackBar.openFromComponent(ProfileRefreshedComponent, { duration: 2000 });
       },
       // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de rafraîchir le profil à partir du serveur')
+      e => this.errorHandler.handle(e, 'Impossible de rafraîchir le profil à partir du serveur')
       );
   }
 }

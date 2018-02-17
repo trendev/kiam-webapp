@@ -6,6 +6,7 @@ import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn,
 import { ServiceService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-create-service',
@@ -27,7 +28,8 @@ export class CreateServiceComponent {
     private router: Router,
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
     this.route.data.subscribe(
       (data: {
         businesses: Business[]
@@ -99,7 +101,7 @@ export class CreateServiceComponent {
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
-        console.error('Impossible de sauvegarder la prestation sur le serveur');
+        this.errorHandler.handle(e, 'Impossible de sauvegarder la prestation sur le serveur');
       });
   }
 

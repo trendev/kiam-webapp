@@ -44,7 +44,7 @@ export class ErrorHandlerService {
               { duration: 3000 });
           } else {
             this.snackBar.openFromComponent(UnexpectedErrorComponent, {
-              data: message,
+              data: message || 'une erreur est survenue',
               duration: 5000
             });
           }

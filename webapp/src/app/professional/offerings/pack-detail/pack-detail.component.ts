@@ -13,6 +13,7 @@ import {
   PackRemovedComponent
 } from '@app/shared';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-pack-detail',
@@ -38,7 +39,8 @@ export class PackDetailComponent {
     private router: Router,
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
     this.route.data.subscribe(
       (data: {
         pack: Pack,
@@ -138,7 +140,7 @@ export class PackDetailComponent {
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
-        console.error('Impossible de sauvegarder le forfait sur le serveur');
+        this.errorHandler.handle(e, 'Impossible de sauvegarder le forfait sur le serveur');
       });
   }
 
@@ -172,7 +174,7 @@ export class PackDetailComponent {
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
-        console.error('Impossible de supprimer le forfait sur le serveur');
+        this.errorHandler.handle(e, 'Impossible de supprimer le forfait sur le serveur');
       });
   }
 }

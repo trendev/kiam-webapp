@@ -13,6 +13,7 @@ import { ServiceService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-service-detail',
@@ -36,7 +37,8 @@ export class ServiceDetailComponent {
     private router: Router,
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
     this.route.data.subscribe(
       (data: {
         service: Service;
@@ -114,7 +116,7 @@ export class ServiceDetailComponent {
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
-        console.error('Impossible de sauvegarder la prestation sur le serveur');
+        this.errorHandler.handle(e, 'Impossible de sauvegarder la prestation sur le serveur');
       });
   }
 
@@ -147,7 +149,7 @@ export class ServiceDetailComponent {
       // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
-        console.error('Impossible de supprimer la prestation sur le serveur');
+        this.errorHandler.handle(e, 'Impossible de supprimer la prestation sur le serveur');
       });
   }
 

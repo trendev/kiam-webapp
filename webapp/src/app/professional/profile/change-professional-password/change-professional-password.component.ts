@@ -4,6 +4,7 @@ import { AuthenticationService } from '@app/core';
 import 'rxjs/add/operator/finally';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { PasswordChangedComponent } from '@app/shared';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-change-professional-password',
@@ -14,7 +15,8 @@ export class ChangeProfessionalPasswordComponent {
 
   constructor(private authenticationService: AuthenticationService,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) { }
 
   save(password: string) {
     this.loadingOverlayService.start();
@@ -25,8 +27,7 @@ export class ChangeProfessionalPasswordComponent {
         this.authenticationService.user.password = pwd;
         this.snackBar.openFromComponent(PasswordChangedComponent, { duration: 2000 });
       },
-      // TODO : handle the error
-      e => console.error(`Une erreur est survenue lors de la modification du mot de passe sur le serveur`)
+      e => this.errorHandler.handle(e, `Une erreur est survenue lors de la modification du mot de passe sur le serveur`)
       );
   }
 

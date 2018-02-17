@@ -6,6 +6,7 @@ import { Offering, Service, Pack, OfferingType } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import 'rxjs/add/operator/finally';
 import { OfferingRefreshedComponent } from '@app/shared';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-offerings',
@@ -32,7 +33,8 @@ export class OfferingsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
     this.route.data.subscribe(
       (data: {
         offerings: Offering[]
@@ -82,13 +84,13 @@ export class OfferingsComponent implements OnInit {
     this.professionalService.getOfferings()
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
-      offerings => {
-        this._offerings = offerings;
-        this.initOfferings();
-        this.snackBar.openFromComponent(OfferingRefreshedComponent, { duration: 2000 });
-      },
-      // TODO : handle the error
-      e => console.error(`Une erreur est survenue lors de la collecte des offres sur le serveur`)
+        offerings => {
+          this._offerings = offerings;
+          this.initOfferings();
+          this.snackBar.openFromComponent(OfferingRefreshedComponent, { duration: 2000 });
+        },
+        // TODO : handle the error
+        e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des offres sur le serveur`)
       );
   }
 
@@ -97,12 +99,12 @@ export class OfferingsComponent implements OnInit {
     this.packService.buildModelOfferings()
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
-      offerings => {
-        this._offerings = [...this.services, ...this.packs, ...offerings]; // spread the result with the existing offerings
-        this.initOfferings();
-      },
-      // TODO : handle the error
-      e => console.error(`Une erreur est survenue lors de la création automatique d'offres sur le serveur`)
+        offerings => {
+          this._offerings = [...this.services, ...this.packs, ...offerings]; // spread the result with the existing offerings
+          this.initOfferings();
+        },
+        // TODO : handle the error
+        e => this.errorHandler.handle(e, `Une erreur est survenue lors de la création automatique d'offres sur le serveur`)
       );
   }
 
