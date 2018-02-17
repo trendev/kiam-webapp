@@ -53,15 +53,15 @@ export class ChangePasswordComponent implements OnInit {
     this.authenticationService.password()
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
-      pwd => {
-        this.form.setValue({
-          password: pwd,
-          confirmation: pwd
-        });
-        this.form.markAsDirty();
-      },
-      // TODO: handle this (check the status code, etc)
-      e => console.error('Impossible de générer un mot de passe depuis le serveur')
+        pwd => {
+          this.form.setValue({
+            password: pwd,
+            confirmation: pwd
+          });
+          this.form.markAsDirty();
+        },
+        // TODO: handle this (check the status code, etc)
+        e => console.error('Impossible de générer un mot de passe depuis le serveur')
       );
   }
 
@@ -77,8 +77,6 @@ export class ChangePasswordComponent implements OnInit {
         password: password,
         confirmation: confirmation
       });
-    } else {
-      console.warn('Les mots de passse ne sont pas identiques...');
     }
   }
 
