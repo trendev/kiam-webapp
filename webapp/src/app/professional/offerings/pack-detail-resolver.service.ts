@@ -3,12 +3,14 @@ import { ProfessionalService } from '@app/core';
 import { Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Pack, OfferingType } from '@app/entities';
 import { Observable } from 'rxjs/Observable';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Injectable()
 export class PackDetailResolverService implements Resolve<Pack> {
 
   constructor(private professionalService: ProfessionalService,
-    private router: Router) { }
+    private router: Router,
+    private errorHandler: ErrorHandlerService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Pack | Observable<Pack> | Promise<Pack> {
     const id = +route.paramMap.get('id');
@@ -22,6 +24,11 @@ export class PackDetailResolverService implements Resolve<Pack> {
           this.router.navigate(['/professional/offerings', { ot: OfferingType.PACK }]);
           return null;
         }
+      })
+      .catch(e => {
+        this.errorHandler.handle(e, `Impossible de récupérer le détail du forfait ${id}...`);
+        this.router.navigate(['/professional/offerings', { ot: OfferingType.PACK }]);
+        return Observable.of(null);
       });
   }
 }

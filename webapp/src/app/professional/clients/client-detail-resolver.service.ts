@@ -3,13 +3,15 @@ import { Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@a
 import { Client } from '@app/entities';
 import { ProfessionalService } from '@app/core';
 import { Observable } from 'rxjs/Observable';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Injectable()
 export class ClientDetailResolverService implements Resolve<Client> {
 
 
   constructor(private professionalService: ProfessionalService,
-    private router: Router) { }
+    private router: Router,
+    private errorHandler: ErrorHandlerService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Client | Observable<Client> | Promise<Client> {
     const id = +route.paramMap.get('id');
@@ -23,7 +25,11 @@ export class ClientDetailResolverService implements Resolve<Client> {
           this.router.navigate(['/professional/clients']);
           return null;
         }
-
+      })
+      .catch(e => {
+        this.errorHandler.handle(e, `Impossible de récupérer la fiche du client ${id}...`);
+        this.router.navigate(['/professional/clients']);
+        return Observable.of(null);
       });
   }
 
