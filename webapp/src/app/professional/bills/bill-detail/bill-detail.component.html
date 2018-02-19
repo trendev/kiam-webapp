@@ -16,7 +16,7 @@
           <b>{{bill.amount / 100 | number:'.0-2':'fr'}} {{bill.currency}}</b>
         </p>
         <p>Date d'émission: {{bill.issueDate | date:'medium':'':'fr'}}</p>
-        <p *ngIf="!!bill.paymentDate">Date de paiement : {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
+        <p *ngIf="!!bill.paymentDate">Facture réglée le: {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
       </mat-card-subtitle>
 
       <mat-card-content>
