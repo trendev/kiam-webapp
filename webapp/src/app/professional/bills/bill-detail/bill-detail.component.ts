@@ -14,6 +14,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
   @Input() bill: Bill;
   @Output() cancel = new EventEmitter<any>();
   @Output() save = new EventEmitter<Bill>();
+  @Output() export = new EventEmitter<string>();
 
   private _amount: number;
 
@@ -144,6 +145,10 @@ export class BillDetailComponent implements OnInit, DoCheck {
         paymentMode: pm.paymentMode
       }))
     });
+  }
+
+  exportBill() {
+   this.export.emit('yes');
   }
 
 }

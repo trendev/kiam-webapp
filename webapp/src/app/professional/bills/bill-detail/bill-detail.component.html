@@ -16,7 +16,7 @@
           <b>{{bill.amount / 100 | number:'.0-2':'fr'}} {{bill.currency}}</b>
         </p>
         <p>Date d'émission: {{bill.issueDate | date:'medium':'':'fr'}}</p>
-        <p *ngIf="!!bill.paymentDate">Facture réglée le: {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
+        <p *ngIf="isClosedBill()">Facture réglée le: {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
       </mat-card-subtitle>
 
       <mat-card-content>
@@ -69,6 +69,9 @@
           </button>
           <button type="button" matTooltip="Sauvegarder/Clore la facture" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
             <mat-icon aria-label="Sauvegarder/Clore la facture">{{isCloseable()?'done':'save'}}</mat-icon>
+          </button>
+          <button *ngIf="isClosedBill()" type="button" matTooltip="Exporter" mat-mini-fab color="primary" (click)="exportBill()">
+            <mat-icon aria-label="Exporter la facture">description</mat-icon>
           </button>
         </div>
       </mat-card-actions>

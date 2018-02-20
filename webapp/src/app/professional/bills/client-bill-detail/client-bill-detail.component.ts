@@ -61,4 +61,8 @@ export class ClientBillDetailComponent implements OnInit {
       });
   }
 
+  exportBill(detail: string) {
+    console.log(detail);
+  }
+
 }
