@@ -1,9 +1,8 @@
 import { Utils } from './../shared/utils';
-import { Bill } from './../entities/bill.model';
-import { Professional } from './../entities/professional.model';
 import { AuthenticationService } from './authentication.service';
-import { ClientBill } from './../entities/client-bill.model';
 import { Injectable } from '@angular/core';
+import { Professional, Bill, ClientBill } from '@app/entities';
+
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
