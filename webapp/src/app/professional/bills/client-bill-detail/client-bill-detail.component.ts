@@ -1,6 +1,6 @@
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { Component, OnInit } from '@angular/core';
-import { ClientBillService } from '@app/core';
+import { ClientBillService, ExportBillService } from '@app/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { PaymentMode, ClientBill, Bill, Client } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -24,7 +24,8 @@ export class ClientBillDetailComponent implements OnInit {
     private router: Router,
     private loadingOverlayService: LoadingOverlayService,
     private snackBar: MatSnackBar,
-    private errorHandler: ErrorHandlerService) {
+    private errorHandler: ErrorHandlerService,
+    private exportBillService: ExportBillService) {
 
     this.route.data.subscribe(
       (data: {
@@ -62,7 +63,7 @@ export class ClientBillDetailComponent implements OnInit {
   }
 
   exportBill(detail: string) {
-    console.log(detail);
+    this.exportBillService.exportClientBill(this.clientBill);
   }
 
 }
