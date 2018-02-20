@@ -59,9 +59,9 @@ export class ExportBillService {
       '\n',
       ...this.professionalAddress(professional),
       '\n',
-      `Dirigeant: ${professional.customerDetails.firstName} ${professional.customerDetails.lastName}`,
-      `Tél: ${Utils.formatPhoneNumber(professional.customerDetails.phone)}`,
-      `Email: ${professional.email}`,
+      `Dirigeant : ${professional.customerDetails.firstName} ${professional.customerDetails.lastName}`,
+      `Tél. : ${Utils.formatPhoneNumber(professional.customerDetails.phone)}`,
+      `Email : ${professional.email}`,
     ];
   }
 
