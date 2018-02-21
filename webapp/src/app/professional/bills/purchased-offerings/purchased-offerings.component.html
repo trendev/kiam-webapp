@@ -22,12 +22,13 @@
         <mat-header-cell *matHeaderCellDef>Qté.</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-form-field *ngIf="element.checked" class="qty">
-            <input type="number" name="qty" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()" required>
+            <input type="number" name="qty" matInput min="1" [(ngModel)]="element.qty" [ngModelOptions]="{standalone: true}" (change)="computePurchasedOfferingsValue()"
+              required>
           </mat-form-field>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Nom</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Desc.</mat-header-cell>
         <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="price">
