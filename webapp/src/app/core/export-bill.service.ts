@@ -1,7 +1,7 @@
 import { Utils } from './../shared/utils';
 import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
-import { Professional, Bill, ClientBill } from '@app/entities';
+import { Professional, Bill, ClientBill, Address } from '@app/entities';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
@@ -14,9 +14,12 @@ export class ExportBillService {
 
   exportClientBill(clientBill: ClientBill) {
 
-    const customerDetails = {
-      text: 'Customer Details should go here'
-    };
+    const customerDetails = [
+      `${clientBill.client.customerDetails.firstName} ${clientBill.client.customerDetails.lastName}`,
+      `N° client : ${clientBill.client.id}`,
+      '\n',
+      this.getAddress(clientBill.client.address)
+    ];
 
     const dd = this.createPDF(clientBill, customerDetails);
 
@@ -35,12 +38,17 @@ export class ExportBillService {
               stack: this.professionalDetails()
             },
             {
-              stack: [customerDetails]
+              stack: customerDetails
             }
           ],
           // optional space between columns
           columnGap: 10
         },
+        {
+          text: `\nFacture ${bill.reference}\n`,
+          bold: true,
+          alignment: 'center'
+        }
       ]
     };
     pdfMake.createPdf(dd).download(`${bill.reference}.pdf`);
@@ -56,7 +64,7 @@ export class ExportBillService {
       },
       `SIRET : ${professional.companyID}`,
       '\n',
-      ...this.professionalAddress(professional),
+      ...this.getAddress(professional.address),
       '\n',
       `Dirigeant : ${professional.customerDetails.firstName} ${professional.customerDetails.lastName}`,
       `Tél. : ${Utils.formatPhoneNumber(professional.customerDetails.phone)}`,
@@ -64,12 +72,12 @@ export class ExportBillService {
     ];
   }
 
-  private professionalAddress(pro: Professional): any[] {
+  private getAddress(address: Address): any[] {
     return [
-      pro.address.street,
-      pro.address.optional,
-      pro.address.postalCode,
-      pro.address.city]
+      address.street,
+      address.optional,
+      address.postalCode,
+      address.city]
       // remove undefined values
       .filter(e => !!e);
   }
