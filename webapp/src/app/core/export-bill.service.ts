@@ -1,4 +1,4 @@
-import { Utils } from './../shared/utils';
+import { Utils, BillsUtils } from '@app/shared';
 import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
 import { Professional, Bill, ClientBill, Address } from '@app/entities';
@@ -6,6 +6,8 @@ import { Professional, Bill, ClientBill, Address } from '@app/entities';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+import * as moment from 'moment';
 
 @Injectable()
 export class ExportBillService {
@@ -19,9 +21,10 @@ export class ExportBillService {
         text: `${clientBill.client.customerDetails.firstName} ${clientBill.client.customerDetails.lastName}`,
         bold: true
       },
-      `N° client : ${clientBill.client.id}`,
       '\n',
-      this.getAddress(clientBill.client.address)
+      this.getAddress(clientBill.client.address),
+      '\n',
+      `N° Client : ${clientBill.client.id}`
     ];
 
     const dd = this.createPDF(clientBill, customerDetails);
@@ -34,19 +37,6 @@ export class ExportBillService {
     // docDefinition
     const dd = {
       content: [
-        // {
-        //   alignment: 'justify',
-        //   columns: [
-        //     {
-        //       stack: this.professionalDetails()
-        //     },
-        //     {
-        //       stack: customerDetails
-        //     }
-        //   ],
-        //   // optional space between columns
-        //   columnGap: 10
-        // },
         {
           table: {
             widths: ['50%', '50%'],
@@ -64,19 +54,24 @@ export class ExportBillService {
             ]
           }
         },
-        '\n',
+        '\n\n\n',
         {
           table: {
             widths: ['*'],
             body: [
               [{
-                text: `Facture ${bill.reference}\n`,
+                text: `Facture ${BillsUtils.shrinkRef(bill.reference)}\n`,
                 bold: true,
-                alignment: 'center'
+                alignment: 'center',
+                fillColor: '#cccccc'
               }],
             ]
           }
         },
+        '\n',
+        `Référence : ${bill.reference}`,
+        `Date de réalisation  : ${moment(bill.deliveryDate).locale('fr').format('L')}`,
+        { text: `Facture réglée le : ${moment(bill.paymentDate).locale('fr').format('L')}`, bold: true }
       ]
     };
     pdfMake.createPdf(dd).download(`${bill.reference}.pdf`);

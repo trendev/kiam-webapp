@@ -15,6 +15,7 @@
         <p>Montant:
           <b>{{bill.amount / 100 | number:'.0-2':'fr'}} {{bill.currency}}</b>
         </p>
+        <p>Date de réalisation: {{bill.deliveryDate | date:'mediumDate':'':'fr'}}</p>
         <p>Date d'émission: {{bill.issueDate | date:'medium':'':'fr'}}</p>
         <p *ngIf="isClosedBill()">Facture réglée le: {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
       </mat-card-subtitle>

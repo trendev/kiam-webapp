@@ -1,5 +1,5 @@
+import { AuthenticationService } from './../../core/authentication.service';
 import { CustomValidators } from './../custom-validators';
-import { AuthenticationService } from '@app/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { LoadingOverlayService } from '@app/loading-overlay.service';

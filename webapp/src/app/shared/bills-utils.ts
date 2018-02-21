@@ -43,6 +43,11 @@ export class BillsUtils {
                 throw new Error(`${bill.cltype} is not a supported type of Bill`);
         }
     }
+
+    static shrinkRef(ref: string) {
+        return ref.replace(/^PRO\-[\d\w]+\-(.+)$/, '$1');
+    }
+
 }
 
 export class BillStatus {

@@ -241,7 +241,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   shrinkRef(ref: string) {
-    return ref.replace(/^PRO\-[\d\w]+\-(.+)$/, '$1');
+    return BillsUtils.shrinkRef(ref);
   }
 
   updateMinDate(minDate: number) {
