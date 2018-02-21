@@ -98,6 +98,10 @@ export class ExportBillService {
           bold: true,
           fillColor: '#dddddd'
         },
+        poFooter: {
+          // fontSize: 10,
+          fillColor: '#dddddd'
+        },
         poContent: {
           fontSize: 10,
           // fillColor: '#dddddd'
@@ -154,14 +158,13 @@ export class ExportBillService {
             { text: `${po.offeringSnapshot.price / 100}`, alignment: 'center', style: 'poContent' },
             { text: `${(po.offeringSnapshot.price * po.qty) / 100}`, alignment: 'center', style: 'poContent' }
           ]),
-          // colSpan: 3
           [
-            { text: 'TOTAL', alignment: 'left', style: 'poHeader', colSpan: 3 },
+            { text: 'TOTAL', alignment: 'left', style: 'poFooter', colSpan: 3 },
             {},
             {},
             {
               text: `${purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0) / 100}`,
-              alignment: 'center', style: 'poHeader'
+              alignment: 'center', style: 'poFooter'
             }
           ]
         ]
@@ -171,15 +174,30 @@ export class ExportBillService {
 
   private buildTotal(bill: Bill) {
     const total = {
-      // table: {
       body: [
         [
+          { text: 'Réduction (EUR)', border: [false, false, false, false] },
+          { text: `${bill.discount / 100}`, border: [false, false, false, false] }
+        ],
+        [
           { text: 'Total à régler HT (EUR)', bold: true, border: [false, false, false, false] },
-          { text: `${bill.amount / 100}`, bold: true }
+          { text: `${bill.amount / 100}`, alignment: 'center', style: 'poHeader' }
+        ],
+        [
+          {
+            text: 'TVA non applicable, art. 293B du CGI',
+            italics: true, colSpan: 2,
+            fontSize: 10,
+            border: [false, false, false, false]
+          },
+          {}
         ]
       ]
-      // }
     };
+
+    if (!bill.discount) {
+      total.body.shift();
+    }
 
     return total;
   }
