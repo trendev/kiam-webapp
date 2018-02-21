@@ -15,7 +15,10 @@ export class ExportBillService {
   exportClientBill(clientBill: ClientBill) {
 
     const customerDetails = [
-      `${clientBill.client.customerDetails.firstName} ${clientBill.client.customerDetails.lastName}`,
+      {
+        text: `${clientBill.client.customerDetails.firstName} ${clientBill.client.customerDetails.lastName}`,
+        bold: true
+      },
       `N° client : ${clientBill.client.id}`,
       '\n',
       this.getAddress(clientBill.client.address)
@@ -31,24 +34,49 @@ export class ExportBillService {
     // docDefinition
     const dd = {
       content: [
+        // {
+        //   alignment: 'justify',
+        //   columns: [
+        //     {
+        //       stack: this.professionalDetails()
+        //     },
+        //     {
+        //       stack: customerDetails
+        //     }
+        //   ],
+        //   // optional space between columns
+        //   columnGap: 10
+        // },
         {
-          alignment: 'justify',
-          columns: [
-            {
-              stack: this.professionalDetails()
-            },
-            {
-              stack: customerDetails
-            }
-          ],
-          // optional space between columns
-          columnGap: 10
+          table: {
+            widths: ['50%', '50%'],
+            body: [
+              [
+                {
+                  border: [false, false, false, false],
+                  stack: this.professionalDetails()
+                },
+                {
+                  fillColor: '#dddddd',
+                  stack: customerDetails
+                }
+              ]
+            ]
+          }
         },
+        '\n',
         {
-          text: `\nFacture ${bill.reference}\n`,
-          bold: true,
-          alignment: 'center'
-        }
+          table: {
+            widths: ['*'],
+            body: [
+              [{
+                text: `Facture ${bill.reference}\n`,
+                bold: true,
+                alignment: 'center'
+              }],
+            ]
+          }
+        },
       ]
     };
     pdfMake.createPdf(dd).download(`${bill.reference}.pdf`);
@@ -62,7 +90,7 @@ export class ExportBillService {
         text: `${professional.companyName}`,
         bold: true
       },
-      `SIRET : ${professional.companyID}`,
+      `N° SIRET : ${professional.companyID}`,
       '\n',
       ...this.getAddress(professional.address),
       '\n',
