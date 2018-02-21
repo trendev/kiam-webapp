@@ -14,8 +14,13 @@ export class ExportBillService {
 
   constructor(private authenticationService: AuthenticationService) { }
 
+  /**
+   * Export a Client bill into PDF
+   * @param clientBill the clientbill to export, must be closed/payed
+   */
   exportClientBill(clientBill: ClientBill) {
 
+    // Build the customer details part
     const customerDetails = [
       {
         text: `${clientBill.client.customerDetails.firstName} ${clientBill.client.customerDetails.lastName}`,
@@ -31,6 +36,11 @@ export class ExportBillService {
 
   }
 
+  /**
+   * Create a PDF from a Bill
+   * @param bill the bill to convert
+   * @param customerDetails the customer details part previously generated
+   */
   private createPDF(bill: Bill, customerDetails: any) {
     const professional = new Professional(this.authenticationService.user);
 
@@ -55,11 +65,13 @@ export class ExportBillService {
           }
         },
         {
+          // display the date when the bill was issued (date time)
           text: `\nDate : ${moment(bill.issueDate).locale('fr').format('L LT')}`,
           bold: true,
           alignment: 'right'
         },
         '\n\n\n',
+        // display the bills shrinked reference
         {
           table: {
             widths: ['*'],
@@ -82,6 +94,7 @@ export class ExportBillService {
         this.buildPurchasedOfferings(bill.purchasedOfferings),
         '\n',
         {
+          // use columns attribute to align the total table on right
           columns: [
             {
               width: '*', text: ''
@@ -112,6 +125,9 @@ export class ExportBillService {
     pdfMake.createPdf(dd).download(`${bill.reference}.pdf`);
   }
 
+  /**
+   * Build the professional details part
+  */
   private buildProfessionalDetails(): any[] {
     const professional = new Professional(this.authenticationService.user);
 
@@ -130,6 +146,10 @@ export class ExportBillService {
     ];
   }
 
+  /**
+   * Build an address detail and filter undefined value in order to avoid failures in pdfmake parsing
+   * @param address the address to display
+   */
   private buildAddress(address: Address): any[] {
     return [
       address.street,
@@ -140,18 +160,23 @@ export class ExportBillService {
       .filter(e => !!e);
   }
 
+  /**
+   * Build the table of the purchased offerings
+   * @param purchasedOfferings the purchased offerings of the Bill
+   */
   private buildPurchasedOfferings(purchasedOfferings: PurchasedOffering[]) {
     return {
       table: {
         widths: ['*', 'auto', 'auto', 'auto'],
         headerRows: 1,
         body: [
-          [
+          [ // header
             { text: 'Désignation des prestations/forfaits', alignment: 'left', style: 'poHeader' },
             { text: 'Qté.', alignment: 'center', style: 'poHeader' },
             { text: 'Prix HT (EUR)', alignment: 'center', style: 'poHeader' },
             { text: 'Montant HT (EUR)', alignment: 'center', style: 'poHeader' }
           ],
+          // spread the content
           ...purchasedOfferings.map(po => [
             { text: po.offeringSnapshot.name, alignment: 'left', style: 'poContent' },
             { text: po.qty, alignment: 'center', style: 'poContent' },
@@ -159,6 +184,7 @@ export class ExportBillService {
             { text: `${(po.offeringSnapshot.price * po.qty) / 100}`, alignment: 'center', style: 'poContent' }
           ]),
           [
+            // compute the total amount
             { text: 'TOTAL', alignment: 'left', style: 'poFooter', colSpan: 3 },
             {},
             {},
@@ -172,6 +198,10 @@ export class ExportBillService {
     };
   }
 
+  /**
+   * Build the total part (discount, total amount...)
+   * @param bill the bill to export
+   */
   private buildTotal(bill: Bill) {
     const total = {
       body: [
@@ -195,6 +225,7 @@ export class ExportBillService {
       ]
     };
 
+    // clear the discount part if there is no discount in the bill
     if (!bill.discount) {
       total.body.shift();
     }
