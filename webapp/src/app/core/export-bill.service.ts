@@ -1,7 +1,7 @@
 import { Utils, BillsUtils } from '@app/shared';
 import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
-import { Professional, Bill, ClientBill, Address } from '@app/entities';
+import { Professional, Bill, ClientBill, Address, PurchasedOffering } from '@app/entities';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
@@ -22,7 +22,7 @@ export class ExportBillService {
         bold: true
       },
       '\n',
-      this.getAddress(clientBill.client.address),
+      this.buildAddress(clientBill.client.address),
       '\n',
       `N° Client : ${clientBill.client.id}`
     ];
@@ -44,7 +44,7 @@ export class ExportBillService {
               [
                 {
                   border: [false, false, false, false],
-                  stack: this.professionalDetails()
+                  stack: this.buildProfessionalDetails()
                 },
                 {
                   fillColor: '#dddddd',
@@ -53,6 +53,11 @@ export class ExportBillService {
               ]
             ]
           }
+        },
+        {
+          text: `\nDate : ${moment(bill.issueDate).locale('fr').format('L LT')}`,
+          bold: true,
+          alignment: 'right'
         },
         '\n\n\n',
         {
@@ -63,6 +68,7 @@ export class ExportBillService {
                 text: `Facture ${BillsUtils.shrinkRef(bill.reference)}\n`,
                 bold: true,
                 alignment: 'center',
+                border: [false, false, false, false],
                 fillColor: '#cccccc'
               }],
             ]
@@ -71,13 +77,38 @@ export class ExportBillService {
         '\n',
         `Référence : ${bill.reference}`,
         `Date de réalisation  : ${moment(bill.deliveryDate).locale('fr').format('L')}`,
-        { text: `Facture réglée le : ${moment(bill.paymentDate).locale('fr').format('L')}`, bold: true }
-      ]
+        { text: `Facture réglée le : ${moment(bill.paymentDate).locale('fr').format('L')}`, bold: true },
+        '\n',
+        this.buildPurchasedOfferings(bill.purchasedOfferings),
+        '\n',
+        {
+          columns: [
+            {
+              width: '*', text: ''
+            },
+            {
+              width: 'auto', table: this.buildTotal(bill)
+            }
+          ]
+        }
+      ],
+      styles: {
+        poHeader: {
+          // fontSize: 10,
+          bold: true,
+          fillColor: '#dddddd'
+        },
+        poContent: {
+          fontSize: 10,
+          // fillColor: '#dddddd'
+        }
+      },
     };
+
     pdfMake.createPdf(dd).download(`${bill.reference}.pdf`);
   }
 
-  private professionalDetails(): any[] {
+  private buildProfessionalDetails(): any[] {
     const professional = new Professional(this.authenticationService.user);
 
     return [
@@ -87,7 +118,7 @@ export class ExportBillService {
       },
       `N° SIRET : ${professional.companyID}`,
       '\n',
-      ...this.getAddress(professional.address),
+      ...this.buildAddress(professional.address),
       '\n',
       `Dirigeant : ${professional.customerDetails.firstName} ${professional.customerDetails.lastName}`,
       `Tél. : ${Utils.formatPhoneNumber(professional.customerDetails.phone)}`,
@@ -95,7 +126,7 @@ export class ExportBillService {
     ];
   }
 
-  private getAddress(address: Address): any[] {
+  private buildAddress(address: Address): any[] {
     return [
       address.street,
       address.optional,
@@ -103,6 +134,54 @@ export class ExportBillService {
       address.city]
       // remove undefined values
       .filter(e => !!e);
+  }
+
+  private buildPurchasedOfferings(purchasedOfferings: PurchasedOffering[]) {
+    return {
+      table: {
+        widths: ['*', 'auto', 'auto', 'auto'],
+        headerRows: 1,
+        body: [
+          [
+            { text: 'Désignation des prestations/forfaits', alignment: 'left', style: 'poHeader' },
+            { text: 'Qté.', alignment: 'center', style: 'poHeader' },
+            { text: 'Prix HT (EUR)', alignment: 'center', style: 'poHeader' },
+            { text: 'Montant HT (EUR)', alignment: 'center', style: 'poHeader' }
+          ],
+          ...purchasedOfferings.map(po => [
+            { text: po.offeringSnapshot.name, alignment: 'left', style: 'poContent' },
+            { text: po.qty, alignment: 'center', style: 'poContent' },
+            { text: `${po.offeringSnapshot.price / 100}`, alignment: 'center', style: 'poContent' },
+            { text: `${(po.offeringSnapshot.price * po.qty) / 100}`, alignment: 'center', style: 'poContent' }
+          ]),
+          // colSpan: 3
+          [
+            { text: 'TOTAL', alignment: 'left', style: 'poHeader', colSpan: 3 },
+            {},
+            {},
+            {
+              text: `${purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0) / 100}`,
+              alignment: 'center', style: 'poHeader'
+            }
+          ]
+        ]
+      }
+    };
+  }
+
+  private buildTotal(bill: Bill) {
+    const total = {
+      // table: {
+      body: [
+        [
+          { text: 'Total à régler HT (EUR)', bold: true, border: [false, false, false, false] },
+          { text: `${bill.amount / 100}`, bold: true }
+        ]
+      ]
+      // }
+    };
+
+    return total;
   }
 
 }
