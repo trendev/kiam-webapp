@@ -287,7 +287,8 @@ export class ExportBillService {
           {
             text: `Facture soldée le : ${moment(bill.paymentDate).locale('fr').format('L')}`,
             bold: true,
-            fillColor: '#dddddd'
+            color: 'white',
+            fillColor: 'black'
           }
         ],
       ]
@@ -324,9 +325,27 @@ export class ExportBillService {
         [this.getPaymentsDetails(bill)],
         [
           {
-            text: `Montant à régler HT (EUR) : 1234`,
-            bold: true,
-            fillColor: '#dddddd'
+            table: {
+              body: [
+                [
+                  {
+                    text: `Montant à régler HT (EUR):`,
+                    bold: true,
+                    color: 'white',
+                    fillColor: 'black'
+                  },
+                  {
+                    text: `${this.remainingAmount(bill) / 100}`,
+                    bold: true,
+                    alignment: 'right',
+                    color: 'white',
+                    fillColor: 'black'
+                  }
+                ]
+              ]
+            },
+            fillColor: 'black',
+            border: [false, false, false, false]
           }
         ],
       ]
@@ -338,6 +357,18 @@ export class ExportBillService {
     }
 
     return paymentPart;
+  }
+
+  /**
+   * Computes and returns the remaining amount to pay
+   * @param bill the bill to export
+   */
+  private remainingAmount(bill: Bill): number {
+    if (bill.payments) {
+      return bill.amount - bill.payments.map(pm => pm.amount).reduce((a, b) => a + b, 0);
+    } else {
+      return bill.amount;
+    }
   }
 
   /**
