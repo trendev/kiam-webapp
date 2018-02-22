@@ -47,11 +47,11 @@ export class ExportBillService {
     // docDefinition
     const dd = {
       footer: {
-        text: `Facture générée et protégée par l'application Comptandye`,
+        text: `Facture générée et protégée par Comptandye`,
         italics: true,
         fontSize: 9,
-        alignment: 'center',
-        // color: '#dddddd'
+        margin: [0, 25, 0, 0],
+        alignment: 'center'
       },
       content: [
         {
@@ -299,7 +299,8 @@ export class ExportBillService {
             text: `Facture soldée le : ${moment(bill.paymentDate).locale('fr').format('L')}`,
             bold: true,
             color: 'white',
-            fillColor: 'black'
+            fillColor: 'black',
+            border: [false, false, false, false]
           }
         ],
       ]
