@@ -66,7 +66,7 @@ export class ExportBillService {
         },
         {
           // display the date when the bill was issued (date time)
-          text: `\nDate : ${moment(bill.issueDate).locale('fr').format('L LT')}`,
+          text: `\nDate de la facture : ${moment(bill.issueDate).locale('fr').format('L LT')}`,
           bold: true,
           alignment: 'right'
         },
@@ -99,7 +99,7 @@ export class ExportBillService {
               width: '*', text: ''
             },
             {
-              width: 'auto', table: this.buildTotal(bill)
+              width: 'auto', table: this.buildTotalPart(bill)
             }
           ]
         },
@@ -203,21 +203,14 @@ export class ExportBillService {
    * Build the total part (discount, total amount...)
    * @param bill the bill to export
    */
-  private buildTotal(bill: Bill) {
+  private buildTotalPart(bill: Bill) {
     const total = {
       body: [
         [
           { text: 'Réduction (EUR)', border: [false, false, false, false] },
           { text: `${bill.discount / 100}`, border: [false, false, false, false], alignment: 'right' }
         ],
-        [
-          {
-            text: 'Total à régler HT (EUR)',
-            fillColor: '#dddddd',
-            bold: true, border: [false, false, false, false]
-          },
-          { text: `${bill.amount / 100}`, style: 'header', alignment: 'right' }
-        ],
+        this.buildTotalDetails(bill),
         [
           {
             text: 'TVA non applicable, art. 293B du CGI',
@@ -238,6 +231,20 @@ export class ExportBillService {
     return total;
   }
 
+  private buildTotalDetails(bill: Bill) {
+    if (bill.amount >= 0) {
+      return [
+        {
+          text: 'Total à régler HT (EUR)',
+          fillColor: '#dddddd',
+          bold: true, border: [false, false, false, false]
+        },
+        { text: `${bill.amount / 100}`, style: 'header', alignment: 'right' }
+      ];
+    }
+  }
+
+
   private buildPayments(bill: Bill) {
     if (bill.paymentDate) {
       return this.buildPaymentsDone(bill);
@@ -250,7 +257,7 @@ export class ExportBillService {
         body: [
           [
             {
-              text: `Facture réglée le : ${moment(bill.paymentDate).locale('fr').format('L')}`,
+              text: `Facture soldée le : ${moment(bill.paymentDate).locale('fr').format('L')}`,
               bold: true,
               fillColor: '#eeeeee',
               // border: [false, false, false, false]
