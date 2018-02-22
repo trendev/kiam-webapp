@@ -230,6 +230,10 @@ export class ExportBillService {
     return total;
   }
 
+  /**
+   * Build the details of the bill sum up
+   * @param bill the bill to export
+   */
   private buildTotalDetails(bill: Bill) {
     if (bill.amount >= 0) {
       return [
@@ -259,6 +263,10 @@ export class ExportBillService {
     }
   }
 
+  /**
+   * Build the payment part if the bill is closed and payed
+   * @param bill the bill to export
+   */
   private buildPaymentsDone(bill: Bill) {
     return {
       table: {
