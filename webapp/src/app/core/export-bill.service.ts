@@ -46,6 +46,13 @@ export class ExportBillService {
 
     // docDefinition
     const dd = {
+      footer: {
+        text: `Facture générée et protégée par l'application Comptandye`,
+        italics: true,
+        fontSize: 9,
+        alignment: 'center',
+        // color: '#dddddd'
+      },
       content: [
         {
           table: {
@@ -267,6 +274,10 @@ export class ExportBillService {
   }
 
 
+  /**
+   * Dispatch between closed / opened bills
+   * @param bill bill to export
+   */
   private buildPayments(bill: Bill) {
     if (bill.paymentDate) {
       return this.buildPaymentsClosedBill(bill);
