@@ -73,7 +73,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   initPaymentModes() {
     this.paymentModes = Array.from(new Set( // use a set to remove duplicated payment mode
       this._billsModel.map(bm => bm.bill)
-        .filter(b => !!b.paymentDate) // get payment modes from payed bills only
+        .filter(b => !!b.paymentDate && !!b.payments) // get payment modes from closed & payed bills only
         .map(b => b.payments.map(p => p.paymentMode.name)) // convert bills stream into a stream of names of payment modes
         .reduce((a, b) => [...a, ...b], [])
     ))
@@ -268,11 +268,12 @@ export class BillsComponent implements OnInit, AfterViewInit {
     this.setBillsModel((bill: Bill) => {
 
       if (!!bill.paymentDate) {
-        return bill.payments
-          .map(p => p.paymentMode)
-          .findIndex(pm =>
-            this._selectedPaymentModes.findIndex(_pm => _pm.name === pm.name) !== -1)
-          !== -1;
+        return bill.payments ?
+          (bill.payments.map(p => p.paymentMode)
+            .findIndex(pm =>
+              this._selectedPaymentModes.findIndex(_pm => _pm.name === pm.name) !== -1)
+            !== -1)
+          : false; // can be a bill with an amount <= 0
       } else {
         return false;
       }
