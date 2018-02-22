@@ -256,13 +256,17 @@ export class ExportBillService {
               // border: [false, false, false, false]
             }
           ],
-          [this.getPayments(bill)]
+          [this.getPaymentsDetails(bill)]
         ]
       }
     };
   }
 
-  private getPayments(bill: Bill) {
+  /**
+   * Build the payment details
+   * @param bill the bill to export
+   */
+  private getPaymentsDetails(bill: Bill) {
     if (bill.payments && bill.payments.length) {
       return {
         table: {
@@ -270,6 +274,7 @@ export class ExportBillService {
           border: [false, false, false, false],
           body: [
             [{
+              // correct plurials
               text: `Paiement${bill.payments.length > 1 ? 's' : ''} (EUR) :`,
               colSpan: 2,
               border: [false, false, false, false],
@@ -298,6 +303,7 @@ export class ExportBillService {
         border: [false, false, false, false]
       };
     } else {
+      // no payment found
       return {
         text: `Aucun paiement`,
         fillColor: '#eeeeee',
