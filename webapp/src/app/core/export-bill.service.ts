@@ -88,7 +88,7 @@ export class ExportBillService {
         },
         '\n',
         `Référence : ${bill.reference}`,
-        `Date de réalisation  : ${moment(bill.deliveryDate).locale('fr').format('L')}`,
+        `Date de réalisation : ${moment(bill.deliveryDate).locale('fr').format('L')}`,
         '\n',
         this.buildPurchasedOfferings(bill.purchasedOfferings),
         '\n\n\n',
@@ -172,7 +172,7 @@ export class ExportBillService {
         headerRows: 1,
         body: [
           [ // header
-            { text: 'Désignation des prestations/forfaits', alignment: 'left', style: 'header' },
+            { text: 'Désignation des prestations / forfaits', alignment: 'left', style: 'header' },
             { text: 'Qté.', alignment: 'center', style: 'header' },
             { text: 'Prix HT (EUR)', alignment: 'center', style: 'header' },
             { text: 'Montant HT (EUR)', alignment: 'center', style: 'header' }
@@ -208,7 +208,7 @@ export class ExportBillService {
       body: [
         [
           { text: 'Réduction (EUR)', border: [false, false, false, false] },
-          { text: `${bill.discount / 100}`, border: [false, false, false, false] }
+          { text: `${bill.discount / 100}`, border: [false, false, false, false], alignment: 'right' }
         ],
         [
           {
@@ -216,7 +216,7 @@ export class ExportBillService {
             fillColor: '#dddddd',
             bold: true, border: [false, false, false, false]
           },
-          { text: `${bill.amount / 100}`, alignment: 'center', style: 'header' }
+          { text: `${bill.amount / 100}`, style: 'header', alignment: 'right' }
         ],
         [
           {
