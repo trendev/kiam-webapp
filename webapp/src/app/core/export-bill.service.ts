@@ -280,7 +280,7 @@ export class ExportBillService {
    * @param bill the bill to export
    */
   private buildPaymentsClosedBill(bill: Bill) {
-    return {
+    const paymentPart = {
       body: [
         [this.getPaymentsDetails(bill)],
         [
@@ -292,6 +292,13 @@ export class ExportBillService {
         ],
       ]
     };
+
+    // remove the payment details if there is no payment
+    if (!bill.payments) {
+      paymentPart.body.shift();
+    }
+
+    return paymentPart;
   }
 
   /**
@@ -300,14 +307,12 @@ export class ExportBillService {
    */
   private buildPaymentsOpenedBill(bill: Bill) {
 
+    // the bills with an amount <= 0 are auto-closed, this should never occur..
     if (bill.amount <= 0) {
       return {
         body: [
           [{
-            text: `Le montant à régler est inférieur ou égal à 0 et la facture devrait être close...`,
-            color: '#673ab7',
-            italics: true,
-            fontSize: 10,
+            text: '',
             border: [false, false, false, false]
           }]
         ]
