@@ -89,10 +89,9 @@ export class ExportBillService {
         '\n',
         `Référence : ${bill.reference}`,
         `Date de réalisation  : ${moment(bill.deliveryDate).locale('fr').format('L')}`,
-        { text: `Facture réglée le : ${moment(bill.paymentDate).locale('fr').format('L')}`, bold: true },
         '\n',
         this.buildPurchasedOfferings(bill.purchasedOfferings),
-        '\n',
+        '\n\n\n',
         {
           // use columns attribute to align the total table on right
           columns: [
@@ -103,19 +102,21 @@ export class ExportBillService {
               width: 'auto', table: this.buildTotal(bill)
             }
           ]
-        }
+        },
+        '\n\n\n',
+        this.buildPayments(bill)
       ],
       styles: {
-        poHeader: {
+        header: {
           // fontSize: 10,
           bold: true,
           fillColor: '#dddddd'
         },
-        poFooter: {
-          // fontSize: 10,
+        footer: {
+          fontSize: 10,
           fillColor: '#dddddd'
         },
-        poContent: {
+        smaller: {
           fontSize: 10,
           // fillColor: '#dddddd'
         }
@@ -136,7 +137,7 @@ export class ExportBillService {
         text: `${professional.companyName}`,
         bold: true
       },
-      `N° SIRET : ${professional.companyID}`,
+      { text: `N° SIRET : ${professional.companyID}`, style: 'smaller' },
       '\n',
       ...this.buildAddress(professional.address),
       '\n',
@@ -167,30 +168,30 @@ export class ExportBillService {
   private buildPurchasedOfferings(purchasedOfferings: PurchasedOffering[]) {
     return {
       table: {
-        widths: ['*', 'auto', 'auto', 'auto'],
+        widths: [280, 'auto', 'auto', '*'],
         headerRows: 1,
         body: [
           [ // header
-            { text: 'Désignation des prestations/forfaits', alignment: 'left', style: 'poHeader' },
-            { text: 'Qté.', alignment: 'center', style: 'poHeader' },
-            { text: 'Prix HT (EUR)', alignment: 'center', style: 'poHeader' },
-            { text: 'Montant HT (EUR)', alignment: 'center', style: 'poHeader' }
+            { text: 'Désignation des prestations/forfaits', alignment: 'left', style: 'header' },
+            { text: 'Qté.', alignment: 'center', style: 'header' },
+            { text: 'Prix HT (EUR)', alignment: 'center', style: 'header' },
+            { text: 'Montant HT (EUR)', alignment: 'center', style: 'header' }
           ],
-          // spread the content
+          // spread the purchased offerings content
           ...purchasedOfferings.map(po => [
-            { text: po.offeringSnapshot.name, alignment: 'left', style: 'poContent' },
-            { text: po.qty, alignment: 'center', style: 'poContent' },
-            { text: `${po.offeringSnapshot.price / 100}`, alignment: 'center', style: 'poContent' },
-            { text: `${(po.offeringSnapshot.price * po.qty) / 100}`, alignment: 'center', style: 'poContent' }
+            { text: po.offeringSnapshot.name, alignment: 'left', style: 'smaller' },
+            { text: po.qty, alignment: 'center', style: 'smaller' },
+            { text: `${po.offeringSnapshot.price / 100}`, alignment: 'center', style: 'smaller' },
+            { text: `${(po.offeringSnapshot.price * po.qty) / 100}`, alignment: 'center', style: 'smaller' }
           ]),
           [
             // compute the total amount
-            { text: 'TOTAL', alignment: 'left', style: 'poFooter', colSpan: 3 },
-            {},
-            {},
+            { text: 'Total', alignment: 'left', style: 'footer', colSpan: 3 },
+            {}, // add empty cell for spaning
+            {}, // add empty cell for spaning
             {
               text: `${purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0) / 100}`,
-              alignment: 'center', style: 'poFooter'
+              alignment: 'center', style: 'footer'
             }
           ]
         ]
@@ -210,8 +211,12 @@ export class ExportBillService {
           { text: `${bill.discount / 100}`, border: [false, false, false, false] }
         ],
         [
-          { text: 'Total à régler HT (EUR)', bold: true, border: [false, false, false, false] },
-          { text: `${bill.amount / 100}`, alignment: 'center', style: 'poHeader' }
+          {
+            text: 'Total à régler HT (EUR)',
+            fillColor: '#dddddd',
+            bold: true, border: [false, false, false, false]
+          },
+          { text: `${bill.amount / 100}`, alignment: 'center', style: 'header' }
         ],
         [
           {
@@ -231,6 +236,64 @@ export class ExportBillService {
     }
 
     return total;
+  }
+
+  private buildPayments(bill: Bill) {
+    if (bill.paymentDate) {
+      return this.buildPaymentsDone(bill);
+    }
+  }
+
+  private buildPaymentsDone(bill: Bill) {
+    return {
+      table: {
+        body: [
+          [
+            {
+              text: `Facture réglée le : ${moment(bill.paymentDate).locale('fr').format('L')}`,
+              bold: true,
+              fillColor: '#eeeeee',
+              // border: [false, false, false, false]
+            }
+          ],
+          [
+            {
+              table: {
+                widths: ['*', 'auto'],
+                border: [false, false, false, false],
+                body: [
+                  [{
+                    text: `Paiement${bill.payments.length > 1 ? 's' : ''} (EUR) :`,
+                    colSpan: 2,
+                    border: [false, false, false, false],
+                    // style: 'smaller'
+                  },
+                  {} // add empty cell for spaning
+                  ],
+                  // spread the content
+                  ...bill.payments.map(p => [
+                    {
+                      text: p.paymentMode.name,
+                      alignment: 'left',
+                      border: [false, false, false, false],
+                      style: 'smaller'
+                    },
+                    {
+                      text: `${p.amount / 100}`,
+                      alignment: 'right',
+                      border: [false, false, false, false],
+                      style: 'smaller'
+                    }
+                  ]),
+                ]
+              },
+              fillColor: '#eeeeee',
+              border: [false, false, false, false]
+            }
+          ],
+        ]
+      }
+    };
   }
 
 }
