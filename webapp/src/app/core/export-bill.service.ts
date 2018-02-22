@@ -104,7 +104,17 @@ export class ExportBillService {
           ]
         },
         '\n\n\n',
-        this.buildPayments(bill)
+        {
+          // use columns attribute to align the total table on right
+          columns: [
+            {
+              width: '*', text: ''
+            },
+            {
+              width: 'auto', table: this.buildPayments(bill)
+            }
+          ]
+        }
       ],
       styles: {
         header: {
@@ -269,19 +279,17 @@ export class ExportBillService {
    */
   private buildPaymentsDone(bill: Bill) {
     return {
-      table: {
-        body: [
-          [
-            {
-              text: `Facture soldée le : ${moment(bill.paymentDate).locale('fr').format('L')}`,
-              bold: true,
-              fillColor: '#eeeeee',
-              // border: [false, false, false, false]
-            }
-          ],
-          [this.getPaymentsDetails(bill)]
-        ]
-      }
+      body: [
+        [
+          {
+            text: `Facture soldée le : ${moment(bill.paymentDate).locale('fr').format('L')}`,
+            bold: true,
+            fillColor: '#eeeeee',
+            // border: [false, false, false, false]
+          }
+        ],
+        [this.getPaymentsDetails(bill)]
+      ]
     };
   }
 
