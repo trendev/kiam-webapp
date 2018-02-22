@@ -248,7 +248,7 @@ export class ExportBillService {
     if (bill.amount >= 0) {
       return [
         {
-          text: 'Total à régler HT (EUR)',
+          text: 'Montant Total HT (EUR)',
           fillColor: '#dddddd',
           bold: true, border: [false, false, false, false]
         },
@@ -338,6 +338,7 @@ export class ExportBillService {
       return {
         text: `Aucun paiement`,
         fillColor: '#eeeeee',
+        italics: true,
         border: [false, false, false, false],
       };
 
