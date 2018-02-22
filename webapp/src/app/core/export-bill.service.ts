@@ -256,44 +256,55 @@ export class ExportBillService {
               // border: [false, false, false, false]
             }
           ],
-          [
-            {
-              table: {
-                widths: ['*', 'auto'],
-                border: [false, false, false, false],
-                body: [
-                  [{
-                    text: `Paiement${bill.payments.length > 1 ? 's' : ''} (EUR) :`,
-                    colSpan: 2,
-                    border: [false, false, false, false],
-                    // style: 'smaller'
-                  },
-                  {} // add empty cell for spaning
-                  ],
-                  // spread the content
-                  ...bill.payments.map(p => [
-                    {
-                      text: p.paymentMode.name,
-                      alignment: 'left',
-                      border: [false, false, false, false],
-                      style: 'smaller'
-                    },
-                    {
-                      text: `${p.amount / 100}`,
-                      alignment: 'right',
-                      border: [false, false, false, false],
-                      style: 'smaller'
-                    }
-                  ]),
-                ]
-              },
-              fillColor: '#eeeeee',
-              border: [false, false, false, false]
-            }
-          ],
+          [this.getPayments(bill)]
         ]
       }
     };
+  }
+
+  private getPayments(bill: Bill) {
+    if (bill.payments && bill.payments.length) {
+      return {
+        table: {
+          widths: ['*', 'auto'],
+          border: [false, false, false, false],
+          body: [
+            [{
+              text: `Paiement${bill.payments.length > 1 ? 's' : ''} (EUR) :`,
+              colSpan: 2,
+              border: [false, false, false, false],
+              // style: 'smaller'
+            },
+            {} // add empty cell for spaning
+            ],
+            // spread the content
+            ...bill.payments.map(p => [
+              {
+                text: p.paymentMode.name,
+                alignment: 'left',
+                border: [false, false, false, false],
+                style: 'smaller'
+              },
+              {
+                text: `${p.amount / 100}`,
+                alignment: 'right',
+                border: [false, false, false, false],
+                style: 'smaller'
+              }
+            ]),
+          ]
+        },
+        fillColor: '#eeeeee',
+        border: [false, false, false, false]
+      };
+    } else {
+      return {
+        text: `Aucun paiement`,
+        fillColor: '#eeeeee',
+        border: [false, false, false, false],
+      };
+
+    }
   }
 
 }
