@@ -227,7 +227,6 @@ export class ExportBillService {
     if (!bill.discount) {
       total.body.shift();
     }
-
     return total;
   }
 
@@ -240,6 +239,15 @@ export class ExportBillService {
           bold: true, border: [false, false, false, false]
         },
         { text: `${bill.amount / 100}`, style: 'header', alignment: 'right' }
+      ];
+    } else { // it's a credit
+      return [
+        {
+          text: 'Avoir HT (EUR)',
+          fillColor: '#dddddd',
+          bold: true, border: [false, false, false, false]
+        },
+        { text: `${-bill.amount / 100}`, style: 'header', alignment: 'right' }
       ];
     }
   }
