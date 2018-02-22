@@ -71,7 +71,7 @@
           <button type="button" matTooltip="Sauvegarder/Clore la facture" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
             <mat-icon aria-label="Sauvegarder/Clore la facture">{{isCloseable()?'done':'save'}}</mat-icon>
           </button>
-          <button *ngIf="isClosedBill()" type="button" matTooltip="Exporter" mat-mini-fab color="primary" (click)="exportBill()">
+          <button type="button" matTooltip="Exporter" mat-mini-fab color="primary" (click)="exportBill()">
             <mat-icon aria-label="Exporter la facture">description</mat-icon>
           </button>
         </div>

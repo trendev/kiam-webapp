@@ -148,7 +148,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
   }
 
   exportBill() {
-   this.export.emit('yes');
+    this.export.emit('yes');
   }
 
 }

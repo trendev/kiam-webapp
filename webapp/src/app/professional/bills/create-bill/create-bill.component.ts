@@ -147,8 +147,8 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
   }
 
   isCloseable(): boolean {
-    return this._amount <= 0
-      ? this.form.get('information').get('dates').get('paymentDate').value
+    return this._amount <= 0 // if amount <= 0, the bill will be auto-closed
+      ? true // old condition : this.form.get('information').get('dates').get('paymentDate').value
       : ((Utils.totalPayments(this.paymentsContent.value) * 10 * 10 === this._amount)
         && this.form.get('information').get('dates').get('paymentDate').value);
   }
@@ -174,6 +174,9 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
     this.save.emit(bill);
   }
 
+  /**
+   * Prepare the save and auto-close the bill if amount <= 0
+  */
   prepareSave(): Bill {
     const value = this.form.getRawValue();
 
@@ -181,7 +184,11 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
       amount: this._amount,
       discount: this._discount,
       deliveryDate: value.information.dates.deliveryDate.valueOf(),
-      paymentDate: value.information.dates.paymentDate ? value.information.dates.paymentDate.valueOf() : undefined,
+      paymentDate: value.information.dates.paymentDate
+        ? value.information.dates.paymentDate.valueOf()
+        : (this._amount <= 0 // auto-close the bill if amount <= 0
+          ? value.information.dates.deliveryDate.valueOf()
+          : undefined),
       comments: value.information.comments || undefined,
       purchasedOfferings: value.purchasedOfferings.content,
       payments: value.payments.content.map(pm => new Payment({

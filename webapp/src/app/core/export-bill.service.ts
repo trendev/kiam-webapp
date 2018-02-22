@@ -269,7 +269,9 @@ export class ExportBillService {
 
   private buildPayments(bill: Bill) {
     if (bill.paymentDate) {
-      return this.buildPaymentsDone(bill);
+      return this.buildPaymentsClosedBill(bill);
+    } else {
+      return this.buildPaymentsOpenedBill(bill);
     }
   }
 
@@ -277,7 +279,7 @@ export class ExportBillService {
    * Build the payment part if the bill is closed and payed
    * @param bill the bill to export
    */
-  private buildPaymentsDone(bill: Bill) {
+  private buildPaymentsClosedBill(bill: Bill) {
     return {
       body: [
         [this.getPaymentsDetails(bill)],
@@ -285,12 +287,52 @@ export class ExportBillService {
           {
             text: `Facture soldée le : ${moment(bill.paymentDate).locale('fr').format('L')}`,
             bold: true,
-            fillColor: '#eeeeee',
-            // border: [false, false, false, false]
+            fillColor: '#dddddd'
           }
         ],
       ]
     };
+  }
+
+  /**
+   * Build the payment part if the bill is not closed or partially paid
+   * @param bill the bill to export
+   */
+  private buildPaymentsOpenedBill(bill: Bill) {
+
+    if (bill.amount <= 0) {
+      return {
+        body: [
+          [{
+            text: `Le montant à régler est inférieur ou égal à 0 et la facture devrait être close...`,
+            color: '#673ab7',
+            italics: true,
+            fontSize: 10,
+            border: [false, false, false, false]
+          }]
+        ]
+      };
+    }
+
+    const paymentPart = {
+      body: [
+        [this.getPaymentsDetails(bill)],
+        [
+          {
+            text: `Montant à régler HT (EUR) : 1234`,
+            bold: true,
+            fillColor: '#dddddd'
+          }
+        ],
+      ]
+    };
+
+    // remove the payment details if there is no payment
+    if (!bill.payments) {
+      paymentPart.body.shift();
+    }
+
+    return paymentPart;
   }
 
   /**
