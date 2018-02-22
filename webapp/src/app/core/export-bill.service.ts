@@ -280,6 +280,7 @@ export class ExportBillService {
   private buildPaymentsDone(bill: Bill) {
     return {
       body: [
+        [this.getPaymentsDetails(bill)],
         [
           {
             text: `Facture soldée le : ${moment(bill.paymentDate).locale('fr').format('L')}`,
@@ -288,7 +289,6 @@ export class ExportBillService {
             // border: [false, false, false, false]
           }
         ],
-        [this.getPaymentsDetails(bill)]
       ]
     };
   }
