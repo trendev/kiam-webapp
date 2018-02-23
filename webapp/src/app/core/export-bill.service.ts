@@ -50,7 +50,7 @@ export class ExportBillService {
         text: `Facture générée et protégée par Comptandye`,
         italics: true,
         fontSize: 9,
-        margin: [0, 25, 0, 0],
+        margin: [0, 10, 0, 0],
         alignment: 'center'
       },
       content: [
@@ -341,7 +341,7 @@ export class ExportBillService {
               body: [
                 [
                   {
-                    text: `Montant à régler HT (EUR):`,
+                    text: `${bill.payments ? 'Reste' : 'Montant'} à régler HT (EUR):`,
                     bold: true,
                     color: 'white',
                     fillColor: 'black'
