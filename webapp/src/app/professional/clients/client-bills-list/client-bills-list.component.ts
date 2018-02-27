@@ -15,7 +15,7 @@ export class ClientBillsListComponent implements OnInit {
   @Input() bills: ClientBill[];
 
   displayedColumns = [
-    'deliveryDate', 'amount', 'paymentStatus'];
+    'deliveryDate', 'amount', 'payment-status'];
   datasource: MatTableDataSource<ClientBillModel>;
 
   _showFull = false;

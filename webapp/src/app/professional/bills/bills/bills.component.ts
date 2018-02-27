@@ -21,7 +21,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   private _selectedPaymentModes: PaymentMode[] = [];
 
   displayedColumns = [
-    'deliveryDate', 'reference', 'name', 'amount', 'paymentStatus'];
+    'deliveryDate', 'reference', 'name', 'amount', 'payment-status'];
   datasource: MatTableDataSource<BillModel> = new MatTableDataSource<BillModel>();
 
   @ViewChild(MatSort) sort: MatSort;

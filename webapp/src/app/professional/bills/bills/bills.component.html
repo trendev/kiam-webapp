@@ -63,10 +63,10 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Montant</mat-header-cell>
             <mat-cell *matCellDef="let element" class="price">{{element.amount / 100 | number:'.0-2':'fr'}}</mat-cell>
           </ng-container>
-          <ng-container matColumnDef="paymentStatus">
-            <mat-header-cell class="paymentStatus" *matHeaderCellDef>Statut</mat-header-cell>
+          <ng-container matColumnDef="payment-status">
+            <mat-header-cell class="payment-status" *matHeaderCellDef>Statut</mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <div class="paymentStatus">
+              <div class="payment-status">
                 <app-payment-status [bill]="element.bill"></app-payment-status>
               </div>
             </mat-cell>
