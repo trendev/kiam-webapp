@@ -1,7 +1,7 @@
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Bill, BillType, ClientBill, CollectiveGroupBill, IndividualBill, PaymentMode } from '@app/entities';
-import { MatTableDataSource, MatSort, MatSnackBar } from '@angular/material';
+import { MatTableDataSource, MatSort, MatSnackBar, MatPaginator } from '@angular/material';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -25,6 +25,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   datasource: MatTableDataSource<BillModel> = new MatTableDataSource<BillModel>();
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   _showFull = true;
 
@@ -68,6 +69,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.datasource.sort = this.sort;
+    this.datasource.paginator = this.paginator;
   }
 
   initPaymentModes() {
