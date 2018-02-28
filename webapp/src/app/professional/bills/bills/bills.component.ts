@@ -108,7 +108,6 @@ export class BillsComponent implements OnInit {
       .filter(this.billsPeriodFilterFn)
       .filter(pmFilter)
       .map(b => new BillModel(b));
-
     this.data = this._billsModel;
   }
 

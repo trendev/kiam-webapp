@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, Input, OnChanges } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { BillModel, BillsUtils } from '@app/shared';
 
@@ -17,11 +17,12 @@ export class BillsTableComponent implements AfterViewInit, OnChanges {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  @Output() gotobill = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnChanges() {
     this.datasource.data = this.data;
-    console.log(this.data);
   }
 
   ngAfterViewInit() {
@@ -37,6 +38,10 @@ export class BillsTableComponent implements AfterViewInit, OnChanges {
 
   shrinkRef(ref: string) {
     return BillsUtils.shrinkRef(ref);
+  }
+
+  gotoBill(ref: string) {
+    this.gotobill.emit(ref);
   }
 
 }

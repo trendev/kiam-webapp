@@ -38,7 +38,7 @@
         </mat-chip>
       </mat-chip-list>
       <div *ngIf="!billsModelIsEmpty()" class="list-container">
-        <app-bills-table [data]="data"></app-bills-table>
+        <app-bills-table [data]="data" (gotobill)="gotoBill($event)"></app-bills-table>
       </div>
     </mat-card-content>
     <mat-card-actions>
