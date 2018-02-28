@@ -1,7 +1,7 @@
 import { ErrorHandlerService } from '@app/error-handler.service';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Bill, BillType, ClientBill, CollectiveGroupBill, IndividualBill, PaymentMode } from '@app/entities';
-import { MatTableDataSource, MatSort, MatSnackBar, MatPaginator } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -13,19 +13,14 @@ import { BillsRefreshedComponent, BillModel, BillsUtils, comparePaymentModesFn }
   templateUrl: './bills.component.html',
   styleUrls: ['./bills.component.scss'],
 })
-export class BillsComponent implements OnInit, AfterViewInit {
+export class BillsComponent implements OnInit {
   bills: Bill[] = [];
   paymentModes: PaymentMode[] = [];
 
   private _billsModel: BillModel[] = [];
   private _selectedPaymentModes: PaymentMode[] = [];
 
-  displayedColumns = [
-    'deliveryDate', 'reference', 'name', 'amount', 'payment-status'];
-  datasource: MatTableDataSource<BillModel> = new MatTableDataSource<BillModel>();
-
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  data: BillModel[];
 
   _showFull = true;
 
@@ -65,11 +60,6 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // this.setBillsModel();
-  }
-
-  ngAfterViewInit() {
-    this.datasource.sort = this.sort;
-    this.datasource.paginator = this.paginator;
   }
 
   initPaymentModes() {
@@ -119,14 +109,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
       .filter(pmFilter)
       .map(b => new BillModel(b));
 
-
-    this.datasource.data = this._billsModel;
-  }
-
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.datasource.filter = filterValue;
+    this.data = this._billsModel;
   }
 
   refreshBills() {
@@ -192,7 +175,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     this._showFull = value;
     if (this._showFull) {
       this._showUnpaid = this._showPending = !this._showFull;
-      this.datasource.data = this._billsModel;
+      this.data = this._billsModel;
     }
   }
 
@@ -200,7 +183,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     this._showUnpaid = value;
     if (this._showUnpaid) {
       this._showFull = this._showPending = !this._showUnpaid;
-      this.datasource.data = this.unpaid;
+      this.data = this.unpaid;
     }
   }
 
@@ -208,7 +191,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     this._showPending = value;
     if (this._showPending) {
       this._showFull = this._showUnpaid = !this._showPending;
-      this.datasource.data = this.pending;
+      this.data = this.pending;
     }
   }
 
@@ -242,9 +225,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  shrinkRef(ref: string) {
-    return BillsUtils.shrinkRef(ref);
-  }
+
 
   updateMinDate(minDate: number) {
     if (this.minDate !== minDate) {

@@ -38,45 +38,7 @@
         </mat-chip>
       </mat-chip-list>
       <div *ngIf="!billsModelIsEmpty()" class="list-container">
-        <div class="search-header">
-          <mat-form-field>
-            <mat-placeholder>
-              <i>Recherche</i>
-            </mat-placeholder>
-            <input matInput (keyup)="applyFilter($event.target.value)">
-          </mat-form-field>
-        </div>
-        <mat-table #table [dataSource]="datasource" matSort>
-          <ng-container matColumnDef="deliveryDate">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.deliveryDate | date:'shortDate':'':'fr'}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="reference">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Référence courte</mat-header-cell>
-            <mat-cell *matCellDef="let element" class="hide">{{shrinkRef(element.reference)}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Nom</mat-header-cell>
-            <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="amount">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Montant</mat-header-cell>
-            <mat-cell *matCellDef="let element" class="price">{{element.amount / 100 | number:'.0-2':'fr'}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="payment-status">
-            <mat-header-cell class="payment-status" *matHeaderCellDef>Statut</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <div class="payment-status">
-                <app-payment-status [bill]="element.bill"></app-payment-status>
-              </div>
-            </mat-cell>
-          </ng-container>
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;" [matTooltip]="row.reference" matTooltipPosition="above" (click)="gotoBill(row.reference)">
-          </mat-row>
-        </mat-table>
-
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        <app-bills-table [data]="data"></app-bills-table>
       </div>
     </mat-card-content>
     <mat-card-actions>

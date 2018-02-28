@@ -16,6 +16,7 @@ import { FixedPaymentsComponent } from './fixed-payments/fixed-payments.componen
 import { RevenuesSumupComponent } from './revenues-sumup/revenues-sumup.component';
 import { PeriodSelectorComponent } from './period-selector/period-selector.component';
 import { PaymentModeSelectorComponent } from './payment-mode-selector/payment-mode-selector.component';
+import { BillsTableComponent } from './bills-table/bills-table.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { PaymentModeSelectorComponent } from './payment-mode-selector/payment-mo
     FixedPaymentsComponent,
     RevenuesSumupComponent,
     PeriodSelectorComponent,
-    PaymentModeSelectorComponent
+    PaymentModeSelectorComponent,
+    BillsTableComponent
   ],
   providers: [ClientBillResolverService]
 })

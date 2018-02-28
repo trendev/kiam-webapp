@@ -2,8 +2,8 @@ import { MatPaginatorIntl } from '@angular/material';
 
 export class CustomMatPaginatorIntlFr extends MatPaginatorIntl {
     itemsPerPageLabel = 'Factures par page :';
-    nextPageLabel = 'Suivantes';
-    previousPageLabel = 'Précédentes';
+    nextPageLabel = 'Suivante';
+    previousPageLabel = 'Précédente';
 
     getRangeLabel = function (page, pageSize, length) {
         if (length === 0 || pageSize === 0) {
