@@ -1,3 +1,4 @@
+import { CustomMatPaginatorIntlFr } from './custom-mat-paginator-intl/custom-mat-paginator-intl-fr';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +26,8 @@ import {
   MatSelectModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatPaginatorIntl
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -233,6 +235,9 @@ import { UnexpectedErrorComponent } from './snack-messages/unexpected-error/unex
     PackUpdatedComponent,
     PackRemovedComponent,
     UnexpectedErrorComponent
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr }
   ]
 })
 

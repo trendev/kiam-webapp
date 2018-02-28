@@ -41,3 +41,5 @@ export * from './snack-messages/pack-created/pack-created.component';
 export * from './snack-messages/pack-updated/pack-updated.component';
 export * from './snack-messages/pack-removed/pack-removed.component';
 export * from './snack-messages/unexpected-error/unexpected-error.component';
+export * from './custom-mat-paginator-intl/custom-mat-paginator-intl-fr';
+
