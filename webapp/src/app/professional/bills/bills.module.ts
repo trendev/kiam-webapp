@@ -1,4 +1,5 @@
-import { SharedModule } from '@app/shared';
+import { MatPaginatorIntl } from '@angular/material';
+import { SharedModule, CustomMatPaginatorIntlFr } from '@app/shared';
 import { NgModule } from '@angular/core';
 
 import { BillsRoutingModule } from './bills-routing.module';
@@ -39,6 +40,9 @@ import { BillsTableComponent } from './bills-table/bills-table.component';
     PaymentModeSelectorComponent,
     BillsTableComponent
   ],
-  providers: [ClientBillResolverService]
+  providers: [
+    ClientBillResolverService,
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr }
+  ]
 })
 export class BillsModule { }

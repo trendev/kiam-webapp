@@ -235,9 +235,6 @@ import { UnexpectedErrorComponent } from './snack-messages/unexpected-error/unex
     PackUpdatedComponent,
     PackRemovedComponent,
     UnexpectedErrorComponent
-  ],
-  providers: [
-    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr }
   ]
 })
 
