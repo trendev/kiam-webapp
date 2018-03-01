@@ -1,0 +1,23 @@
+<mat-table #table [dataSource]="datasource">
+  <ng-container matColumnDef="deliveryDate">
+    <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.deliveryDate | date:'shortDate':'':'fr'}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="amount">
+    <mat-header-cell *matHeaderCellDef>Montant</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.amount / 100 | number:'.0-2':'fr'}} {{element.currency}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="payment-status">
+    <mat-header-cell class="payment-status" *matHeaderCellDef>Statut</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div class="payment-status">
+        <app-payment-status [bill]="element.bill"></app-payment-status>
+      </div>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" [matTooltip]="row.reference" matTooltipPosition="above" (click)="gotoClientBill(row)">
+  </mat-row>
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

@@ -8,13 +8,14 @@ import { ClientDetailComponent } from './client-detail/client-detail.component';
 import { ClientDetailResolverService } from './client-detail-resolver.service';
 import { ClientBillsResolverService } from './client-bills-resolver.service';
 import { ClientBillsListComponent } from './client-bills-list/client-bills-list.component';
+import { ClientBillsListTableComponent } from './client-bills-list-table/client-bills-list-table.component';
 
 @NgModule({
   imports: [
     SharedModule,
     ClientsRoutingModule
   ],
-  declarations: [ClientsComponent, CreateClientComponent, ClientDetailComponent, ClientBillsListComponent],
+  declarations: [ClientsComponent, CreateClientComponent, ClientDetailComponent, ClientBillsListComponent, ClientBillsListTableComponent],
   providers: [ClientDetailResolverService, ClientBillsResolverService]
 })
 export class ClientsModule { }

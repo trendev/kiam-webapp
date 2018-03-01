@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { ClientBillModel } from './../client-bill-model';
+import { Component, OnInit, Input } from '@angular/core';
 import { ClientBill, Client, Bill } from '@app/entities';
-import { MatTableDataSource, MatSort } from '@angular/material';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { BillsUtils, BillStatus } from '@app/shared';
@@ -14,9 +14,7 @@ export class ClientBillsListComponent implements OnInit {
 
   @Input() bills: ClientBill[];
 
-  displayedColumns = [
-    'deliveryDate', 'amount', 'payment-status'];
-  datasource: MatTableDataSource<ClientBillModel>;
+  data: ClientBillModel[];
 
   _showFull = false;
 
@@ -37,20 +35,19 @@ export class ClientBillsListComponent implements OnInit {
   }
 
   setDataSource(bills: ClientBill[]) {
-    this.datasource =
-      new MatTableDataSource<ClientBillModel>(bills.map(
-        bill => {
-          const billModel = new ClientBillModel(
-            bill.reference,
-            bill.deliveryDate,
-            bill.amount,
-            bill.currency,
-            bill.client,
-            bill
-          );
-          return billModel;
-        }
-      ));
+    this.data = bills.map(
+      bill => {
+        const billModel = new ClientBillModel(
+          bill.reference,
+          bill.deliveryDate,
+          bill.amount,
+          bill.currency,
+          bill.client,
+          bill
+        );
+        return billModel;
+      }
+    );
   }
 
   get full(): ClientBill[] {
@@ -107,18 +104,9 @@ export class ClientBillsListComponent implements OnInit {
     return this.bills.length === 0;
   }
 
-  gotoClientBill(id: number, ref: string) {
-    this.router.navigate(['/professional/bills/clientbill', { id: id, ref: ref }]);
+  gotoClientBill(bill: ClientBillModel) {
+    this.router.navigate(['/professional/bills/clientbill', { id: bill.client.id, ref: bill.reference }]);
   }
 }
 
-class ClientBillModel {
-  constructor(public reference: string,
-    public deliveryDate: number,
-    public amount: number,
-    public currency: string,
-    public client: Client,
-    public bill: Bill) {
-  }
-}
 
