@@ -40,6 +40,10 @@ mat-card {
     margin: 5px;
 }
 
+.name {
+    flex-grow: 3;
+}
+
 @media all and (max-device-width: 720px) {
     .hide {
         display: none;
@@ -49,5 +53,8 @@ mat-card {
     }
     .mat-cell {
         font-size: 0.8em;
+    }
+    .name {
+        flex-grow: 1;
     }
 }

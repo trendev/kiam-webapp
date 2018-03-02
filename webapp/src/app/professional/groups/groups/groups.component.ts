@@ -17,36 +17,8 @@ export class GroupsComponent implements OnInit {
   collectiveGroups: CollectiveGroupModel[] = [];
   private _collectiveGroups: CollectiveGroup[];
 
-  displayedColumns: string[];
+  displayedColumns = ['id', 'groupName', 'city', 'phone'];
   datasource: MatTableDataSource<CollectiveGroupModel>;
-
-  columns: CollectiveGroupColumnDef[] = [
-    {
-      columnDef: 'id',
-      headerCellDef: 'id',
-      cellDef: (cg: CollectiveGroupModel) => cg.id,
-      hide: true
-    },
-    {
-      columnDef: 'groupName',
-      headerCellDef: 'Nom',
-      cellDef: (cg: CollectiveGroupModel) => cg.groupName,
-      hide: false
-    },
-    {
-      columnDef: 'city',
-      headerCellDef: 'Ville',
-      cellDef: (cg: CollectiveGroupModel) => cg.city,
-      hide: false
-    },
-    {
-      columnDef: 'phone',
-      headerCellDef: 'Tél.',
-      cellDef: (cg: CollectiveGroupModel) => Utils.formatPhoneNumber(cg.phone),
-      hide: true
-    }
-
-  ];
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -66,7 +38,6 @@ export class GroupsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.displayedColumns = this.columns.map(c => c.columnDef);
     this.initCollectiveGroups();
   }
 
@@ -76,7 +47,7 @@ export class GroupsComponent implements OnInit {
         id: cg.id + '',
         groupName: cg.groupName || '',
         city: cg.address.city || '',
-        phone: cg.phone || ''
+        phone: Utils.formatPhoneNumber(cg.phone) || ''
       };
     }).sort((cg1, cg2) => cg1.groupName.localeCompare(cg2.groupName));
     this.datasource = new MatTableDataSource<CollectiveGroupModel>(this.collectiveGroups);
@@ -117,9 +88,3 @@ interface CollectiveGroupModel {
   phone: string;
 }
 
-interface CollectiveGroupColumnDef {
-  columnDef: string;
-  headerCellDef: string;
-  cellDef: (cg: CollectiveGroupModel) => any;
-  hide: boolean;
-}
