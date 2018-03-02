@@ -22,6 +22,12 @@ export class GroupsComponent implements OnInit {
 
   columns: CollectiveGroupColumnDef[] = [
     {
+      columnDef: 'id',
+      headerCellDef: 'id',
+      cellDef: (cg: CollectiveGroupModel) => cg.id,
+      hide: true
+    },
+    {
       columnDef: 'groupName',
       headerCellDef: 'Nom',
       cellDef: (cg: CollectiveGroupModel) => cg.groupName,
@@ -38,13 +44,8 @@ export class GroupsComponent implements OnInit {
       headerCellDef: 'Tél.',
       cellDef: (cg: CollectiveGroupModel) => Utils.formatPhoneNumber(cg.phone),
       hide: true
-    },
-    {
-      columnDef: 'id',
-      headerCellDef: 'id',
-      cellDef: (cg: CollectiveGroupModel) => cg.id,
-      hide: true
     }
+
   ];
 
   @ViewChild(MatSort) sort: MatSort;
