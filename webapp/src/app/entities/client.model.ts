@@ -10,7 +10,6 @@ export class Client {
     socialNetworkAccounts: SocialNetworkAccounts;
     customerDetails: CustomerDetails;
     address: Address;
-    collectiveGroups: CollectiveGroup[];
     categories: Category[];
 
     constructor(values: Object = {}) {

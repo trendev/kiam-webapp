@@ -4,6 +4,7 @@ import { Bill, BillType } from './bill.model';
 export class CollectiveGroupBill extends Bill {
 
     collectiveGroup: CollectiveGroup;
+    recipient: string;
 
     constructor(values: Object = {}) {
         super(values);
