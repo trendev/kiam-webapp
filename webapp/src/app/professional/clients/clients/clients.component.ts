@@ -1,5 +1,3 @@
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProfessionalService } from '@app/core';
@@ -76,13 +74,13 @@ export class ClientsComponent implements OnInit {
     this.professionalService.getClients()
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
-      clients => {
-        this._clients = clients;
-        this.initClients();
-        this.snackBar.openFromComponent(ClientsListRefreshedComponent, { duration: 2000 });
-      },
-      // TODO : handle the error
-      e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des clients depuis le serveur`)
+        clients => {
+          this._clients = clients;
+          this.initClients();
+          this.snackBar.openFromComponent(ClientsListRefreshedComponent, { duration: 2000 });
+        },
+        // TODO : handle the error
+        e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des clients depuis le serveur`)
       );
   }
 
