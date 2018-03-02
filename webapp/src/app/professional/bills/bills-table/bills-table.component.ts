@@ -22,23 +22,17 @@ export class BillsTableComponent implements AfterViewInit, OnChanges {
 
   constructor() { }
 
-  // https://github.com/angular/material2/issues/10227
-
   ngOnChanges() {
+    // move to the very first page and avoid to display an empty content
+    // must be performed before setting a new data set
+    if (this.paginator) { this.paginator.pageIndex = 0; }
+
     this.datasource.data = this.data;
-    this.paginator.page.emit({
-      pageIndex: 0,
-      pageSize: 5,
-      length: this.data.length
-    });
   }
 
   ngAfterViewInit() {
     this.datasource.sort = this.sort;
     this.datasource.paginator = this.paginator;
-    this.paginator.page.pipe(
-      tap((e) => console.log(e))
-    ).subscribe();
   }
 
   applyFilter(filterValue: string) {
