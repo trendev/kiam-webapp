@@ -22,15 +22,15 @@ export class GroupsComponent implements OnInit {
 
   columns: CollectiveGroupColumnDef[] = [
     {
-      columnDef: 'id',
-      headerCellDef: 'id',
-      cellDef: (cg: CollectiveGroupModel) => cg.id,
-      hide: true
-    },
-    {
       columnDef: 'groupName',
       headerCellDef: 'Nom',
       cellDef: (cg: CollectiveGroupModel) => cg.groupName,
+      hide: false
+    },
+    {
+      columnDef: 'city',
+      headerCellDef: 'Ville',
+      cellDef: (cg: CollectiveGroupModel) => cg.city,
       hide: false
     },
     {
@@ -39,6 +39,12 @@ export class GroupsComponent implements OnInit {
       cellDef: (cg: CollectiveGroupModel) => Utils.formatPhoneNumber(cg.phone),
       hide: true
     },
+    {
+      columnDef: 'id',
+      headerCellDef: 'id',
+      cellDef: (cg: CollectiveGroupModel) => cg.id,
+      hide: true
+    }
   ];
 
   @ViewChild(MatSort) sort: MatSort;
@@ -68,6 +74,7 @@ export class GroupsComponent implements OnInit {
       return {
         id: cg.id + '',
         groupName: cg.groupName || '',
+        city: cg.address.city || '',
         phone: cg.phone || ''
       };
     }).sort((cg1, cg2) => cg1.groupName.localeCompare(cg2.groupName));
@@ -105,6 +112,7 @@ export class GroupsComponent implements OnInit {
 interface CollectiveGroupModel {
   id: string;
   groupName: string;
+  city: string;
   phone: string;
 }
 
