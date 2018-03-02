@@ -1,3 +1,41 @@
-<p>
-  La gestion des groupes et des collectivités depuis l'interface graphique n'est pas encore opérationnelle...
-</p>
+<div class="container">
+  <mat-card>
+    <mat-card-title>Référentiel des groupes</mat-card-title>
+    <mat-card-subtitle>
+      {collectiveGroups.length, plural, =0 {aucun groupe} =1 {un groupe} other {{{collectiveGroups.length}} groupes}}
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div class="list-container  mat-elevation-z2">
+        <div class="search-header">
+          <mat-form-field>
+            <mat-placeholder>
+              <i>Recherche</i>
+            </mat-placeholder>
+            <input matInput (keyup)="applyFilter($event.target.value)">
+          </mat-form-field>
+        </div>
+        <mat-table #table [dataSource]="datasource" matSort>
+          <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+            <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="column.hide">{{column.headerCellDef}}</mat-header-cell>
+            <mat-cell *matCellDef="let element" [class.hide]="column.hide">
+              {{column.cellDef(element)}}
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="gotoCollectiveGroupDetails(row.id)">
+          </mat-row>
+        </mat-table>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="form-button-container">
+        <button type="button" matTooltip="Rafraîchir le référentiel à partir du serveur" mat-mini-fab color="accent" (click)="refreshCollectiveGroups()">
+          <mat-icon aria-label="Rafraîchir le référentiel à partir du serveur">refresh</mat-icon>
+        </button>
+        <a mat-mini-fab matTooltip="Ajouter un nouveau groupe" color="primary" routerLink="./create-collective-group" routerLinkActive="active">
+          <mat-icon aria-label="Ajouter un nouveau groupe">add</mat-icon>
+        </a>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
