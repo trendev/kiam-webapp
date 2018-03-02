@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Client, ClientBill, Category, CollectiveGroup } from '@app/entities';
+import { Client, ClientBill, Category } from '@app/entities';
 import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import {
   CustomValidators,
@@ -25,7 +25,6 @@ export class ClientDetailComponent implements OnInit {
 
   client: Client;
   clientBills: ClientBill[];
-  private collectiveGroups: CollectiveGroup[];
   private categories: Category[];
 
   form: FormGroup;
@@ -47,12 +46,10 @@ export class ClientDetailComponent implements OnInit {
     private errorHandler: ErrorHandlerService) {
     this.route.data.subscribe(
       (data: {
-        collectiveGroups: CollectiveGroup[],
         categories: Category[],
         client: Client,
         clientBills: ClientBill[]
       }) => {
-        this.collectiveGroups = data.collectiveGroups;
         this.categories = data.categories;
         this.client = data.client;
         this.clientBills = data.clientBills;
@@ -142,20 +139,8 @@ export class ClientDetailComponent implements OnInit {
         ]),
         country: new FormControl({ value: this.client.address.country, disabled: true })
       }),
-      collectiveGroups: this.fb.array([]),
       categories: this.fb.array([])
     });
-
-    Utils.initFormArray(fg,
-      'collectiveGroups',
-      this.collectiveGroups,
-      cg => this.fb.group({
-        id: cg.id,
-        groupName: cg.groupName,
-        value: this.client.collectiveGroups ? this.client.collectiveGroups.findIndex(_cg => _cg.id === cg.id) !== -1
-          : false
-      }),
-      compareCollectiveGroupsFn);
 
     Utils.initFormArray(fg,
       'categories',
@@ -210,12 +195,6 @@ export class ClientDetailComponent implements OnInit {
         instagram: value.socialNetworkAccounts.instagram || undefined,
         pinterest: value.socialNetworkAccounts.pinterest || undefined
       },
-      collectiveGroups: Utils.extractArrayFromControl(this.form, 'collectiveGroups',
-        fg => new CollectiveGroup({
-          id: fg.value.id,
-          groupName: fg.value.groupName
-        })
-      ),
       categories: Utils.extractArrayFromControl(this.form, 'categories',
         fg => new Category({
           name: fg.value.name,

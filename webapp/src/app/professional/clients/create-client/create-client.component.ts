@@ -1,9 +1,15 @@
-import { ClientCreatedComponent } from './../../../shared/snack-messages/client-created/client-created.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-import { ErrorAggregatorDirective, CustomValidators, Utils, compareCollectiveGroupsFn, compareCategoriesFn } from '@app/shared';
+import {
+  ErrorAggregatorDirective,
+  CustomValidators,
+  Utils,
+  compareCollectiveGroupsFn,
+  compareCategoriesFn,
+  ClientCreatedComponent
+} from '@app/shared';
 import { ClientService } from '@app/core';
-import { Client, CollectiveGroup, Category } from '@app/entities';
+import { Client, Category } from '@app/entities';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
@@ -17,7 +23,6 @@ import { ErrorHandlerService } from '@app/error-handler.service';
 export class CreateClientComponent implements OnInit {
 
   form: FormGroup;
-  private collectiveGroups: CollectiveGroup[];
   private categories: Category[];
 
   private commentsValidators = [
@@ -38,10 +43,8 @@ export class CreateClientComponent implements OnInit {
 
     this.route.data.subscribe(
       (data: {
-        collectiveGroups: CollectiveGroup[],
         categories: Category[]
       }) => {
-        this.collectiveGroups = data.collectiveGroups;
         this.categories = data.categories;
         this.form = this.createForm();
       }
@@ -135,16 +138,6 @@ export class CreateClientComponent implements OnInit {
     });
 
     Utils.initFormArray(fg,
-      'collectiveGroups',
-      this.collectiveGroups,
-      cg => this.fb.group({
-        id: cg.id,
-        groupName: cg.groupName,
-        value: false
-      }),
-      compareCollectiveGroupsFn);
-
-    Utils.initFormArray(fg,
       'categories',
       this.categories,
       ct => this.fb.group({
@@ -194,12 +187,6 @@ export class CreateClientComponent implements OnInit {
         instagram: value.socialNetworkAccounts.instagram || undefined,
         pinterest: value.socialNetworkAccounts.pinterest || undefined
       },
-      collectiveGroups: Utils.extractArrayFromControl(this.form, 'collectiveGroups',
-        fg => new CollectiveGroup({
-          id: fg.value.id,
-          groupName: fg.value.groupName
-        })
-      ),
       categories: Utils.extractArrayFromControl(this.form, 'categories',
         fg => new Category({
           name: fg.value.name,
