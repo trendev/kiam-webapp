@@ -25,6 +25,10 @@ export class ClientBillsListTableComponent implements OnChanges, AfterViewInit {
   constructor() { }
 
   ngOnChanges() {
+    // move to the very first page and avoid to display an empty content
+    // must be performed before setting a new data set
+    if (this.paginator) { this.paginator.pageIndex = 0; }
+
     this.datasource.data = this.data;
   }
 

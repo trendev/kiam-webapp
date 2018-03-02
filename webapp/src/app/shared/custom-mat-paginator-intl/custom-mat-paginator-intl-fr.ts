@@ -4,6 +4,8 @@ export class CustomMatPaginatorIntlFr extends MatPaginatorIntl {
     itemsPerPageLabel = 'Factures par page :';
     nextPageLabel = 'Suivante';
     previousPageLabel = 'Précédente';
+    firstPageLabel = 'Première page';
+    lastPageLabel= 'Dernière page';
 
     getRangeLabel = function (page, pageSize, length) {
         if (length === 0 || pageSize === 0) {

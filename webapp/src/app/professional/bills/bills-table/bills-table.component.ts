@@ -36,6 +36,7 @@ export class BillsTableComponent implements AfterViewInit, OnChanges {
   }
 
   applyFilter(filterValue: string) {
+    this.paginator.pageIndex = 0;
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.datasource.filter = filterValue;
