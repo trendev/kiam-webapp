@@ -35,5 +35,5 @@
   <mat-row *matRowDef="let row; columns: displayedColumns;" [matTooltip]="row.reference" matTooltipPosition="above" (click)="gotoBill(row.reference)">
   </mat-row>
 </mat-table>
-
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<!-- [showFirstLastButtons]="true" -->
+<mat-paginator  [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
