@@ -1,4 +1,4 @@
-import { GroupsComponent } from './groups/groups.component';
+import { CollectiveGroupsComponent } from './collective-groups/collective-groups.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from '@app/shared';
@@ -7,7 +7,7 @@ import { CollectiveGroupsResolverService } from '@app/core';
 const routes: Routes = [
   {
     path: '',
-    component: GroupsComponent,
+    component: CollectiveGroupsComponent,
     pathMatch: 'full',
     resolve: {
       collectiveGroups: CollectiveGroupsResolverService

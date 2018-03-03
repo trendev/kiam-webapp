@@ -1,7 +1,7 @@
 import { CollectiveGroupsRoutingModule } from './collective-groups-routing.module';
 import { NgModule } from '@angular/core';
 
-import { GroupsComponent } from './groups/groups.component';
+import { CollectiveGroupsComponent } from './collective-groups/collective-groups.component';
 import { SharedModule, CustomMatPaginatorIntlFr } from '@app/shared';
 import { MatPaginatorIntl } from '@angular/material';
 
@@ -10,7 +10,7 @@ import { MatPaginatorIntl } from '@angular/material';
     SharedModule,
     CollectiveGroupsRoutingModule
   ],
-  declarations: [GroupsComponent],
+  declarations: [CollectiveGroupsComponent],
   providers: [
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr }
   ],

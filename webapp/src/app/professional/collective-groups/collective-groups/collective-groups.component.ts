@@ -8,11 +8,11 @@ import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
-  selector: 'app-groups',
-  templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.scss'],
+  selector: 'app-collective-groups',
+  templateUrl: './collective-groups.component.html',
+  styleUrls: ['./collective-groups.component.scss'],
 })
-export class GroupsComponent implements OnInit {
+export class CollectiveGroupsComponent implements OnInit {
 
   collectiveGroups: CollectiveGroupModel[] = [];
   private _collectiveGroups: CollectiveGroup[];
