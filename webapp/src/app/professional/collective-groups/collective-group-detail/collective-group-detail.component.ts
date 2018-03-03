@@ -1,7 +1,7 @@
 import { CollectiveGroup, CollectiveGroupBill } from '@app/entities';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ErrorAggregatorDirective, CustomValidators, CollectiveGroupUpdatedComponent } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, CollectiveGroupUpdatedComponent, BillModel } from '@app/shared';
 import { CollectiveGroupService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -128,6 +128,10 @@ export class CollectiveGroupDetailComponent implements OnInit {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de sauvegarder les modifications du Groupe sur le serveur');
       });
+  }
+
+  gotoBill(bill: BillModel) {
+    this.router.navigate(['/professional/bills/collectivegroupbill', { id: this.collectiveGroup.id, ref: bill.reference }]);
   }
 
   // createNewClientBill() {
