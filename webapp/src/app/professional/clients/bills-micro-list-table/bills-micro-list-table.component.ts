@@ -1,14 +1,14 @@
 import { BillModel } from '@app/shared';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Component, OnChanges, Input, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
-import { Bill, Client } from '@app/entities';
+import { Bill } from '@app/entities';
 
 @Component({
-  selector: 'app-client-bills-list-table',
-  templateUrl: './client-bills-list-table.component.html',
-  styleUrls: ['./client-bills-list-table.component.scss']
+  selector: 'app-bills-micro-list-table',
+  templateUrl: './bills-micro-list-table.component.html',
+  styleUrls: ['./bills-micro-list-table.component.scss']
 })
-export class ClientBillsListTableComponent implements OnChanges, AfterViewInit {
+export class BillsMicroListTableComponent implements OnChanges, AfterViewInit {
 
   @Input() data: BillModel[];
 
@@ -37,7 +37,7 @@ export class ClientBillsListTableComponent implements OnChanges, AfterViewInit {
     this.datasource.paginator = this.paginator;
   }
 
-  gotoClientBill(bill: BillModel) {
+  gotoBill(bill: BillModel) {
     this.gotobill.emit(bill);
   }
 

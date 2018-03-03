@@ -10,5 +10,5 @@
   </mat-chip>
 </mat-chip-list>
 <div class="list-container" *ngIf="showFull || showUnpaid || showPending">
-  <app-client-bills-list-table [data]="data" (gotobill)="gotoClientBill($event)"></app-client-bills-list-table>
+  <app-bills-micro-list-table [data]="data" (gotobill)="gotoClientBill($event)"></app-bills-micro-list-table>
 </div>

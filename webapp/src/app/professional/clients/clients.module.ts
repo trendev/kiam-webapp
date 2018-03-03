@@ -1,3 +1,4 @@
+import { BillsMicroListTableComponent } from './bills-micro-list-table/bills-micro-list-table.component';
 import { MatPaginatorIntl } from '@angular/material';
 import { NgModule } from '@angular/core';
 
@@ -9,14 +10,13 @@ import { ClientDetailComponent } from './client-detail/client-detail.component';
 import { ClientDetailResolverService } from './client-detail-resolver.service';
 import { ClientBillsResolverService } from './client-bills-resolver.service';
 import { ClientBillsListComponent } from './client-bills-list/client-bills-list.component';
-import { ClientBillsListTableComponent } from './client-bills-list-table/client-bills-list-table.component';
 
 @NgModule({
   imports: [
     SharedModule,
     ClientsRoutingModule
   ],
-  declarations: [ClientsComponent, CreateClientComponent, ClientDetailComponent, ClientBillsListComponent, ClientBillsListTableComponent],
+  declarations: [ClientsComponent, CreateClientComponent, ClientDetailComponent, ClientBillsListComponent, BillsMicroListTableComponent],
   providers: [
     ClientDetailResolverService,
     ClientBillsResolverService,
