@@ -1,3 +1,4 @@
+import { BillModel } from './../../../shared/bills-utils';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ClientBill, Category } from '@app/entities';
@@ -221,6 +222,10 @@ export class ClientDetailComponent implements OnInit {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de sauvegarder les modifications du client sur le serveur');
       });
+  }
+
+  gotoBill(bill: BillModel) {
+    this.router.navigate(['/professional/bills/clientbill', { id: this.client.id, ref: bill.reference }]);
   }
 
   createNewClientBill() {

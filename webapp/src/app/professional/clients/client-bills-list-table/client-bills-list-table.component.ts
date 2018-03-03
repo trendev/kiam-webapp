@@ -1,4 +1,4 @@
-import { ClientBillModel } from './../client-bill-model';
+import { BillModel } from '@app/shared';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Component, OnChanges, Input, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Bill, Client } from '@app/entities';
@@ -10,16 +10,16 @@ import { Bill, Client } from '@app/entities';
 })
 export class ClientBillsListTableComponent implements OnChanges, AfterViewInit {
 
-  @Input() data: ClientBillModel[];
+  @Input() data: BillModel[];
 
   displayedColumns = [
     'deliveryDate', 'amount', 'payment-status'];
-  datasource: MatTableDataSource<ClientBillModel> = new MatTableDataSource<ClientBillModel>();
+  datasource: MatTableDataSource<BillModel> = new MatTableDataSource<BillModel>();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  @Output() gotobill = new EventEmitter<ClientBillModel>();
+  @Output() gotobill = new EventEmitter<BillModel>();
 
 
   constructor() { }
@@ -37,7 +37,7 @@ export class ClientBillsListTableComponent implements OnChanges, AfterViewInit {
     this.datasource.paginator = this.paginator;
   }
 
-  gotoClientBill(bill: ClientBillModel) {
+  gotoClientBill(bill: BillModel) {
     this.gotobill.emit(bill);
   }
 

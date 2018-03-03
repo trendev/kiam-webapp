@@ -1,9 +1,7 @@
-import { ClientBillModel } from './../client-bill-model';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ClientBill, Client, Bill } from '@app/entities';
 import * as moment from 'moment';
-import { Router } from '@angular/router';
-import { BillsUtils, BillStatus } from '@app/shared';
+import { BillsUtils, BillStatus, BillModel } from '@app/shared';
 
 @Component({
   selector: 'app-client-bills-list',
@@ -12,9 +10,10 @@ import { BillsUtils, BillStatus } from '@app/shared';
 })
 export class ClientBillsListComponent implements OnInit {
 
-  @Input() bills: ClientBill[];
+  @Input() bills: Bill[];
+  @Output() gotobill = new EventEmitter<BillModel>();
 
-  data: ClientBillModel[];
+  data: BillModel[];
 
   _showFull = false;
 
@@ -22,44 +21,32 @@ export class ClientBillsListComponent implements OnInit {
 
   _showPending = false;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
     this.setDataSource(this.full);
   }
 
   // inverse order : most recent first
-  sortFn(b1: ClientBill, b2: ClientBill): number {
+  sortFn(b1: Bill, b2: Bill): number {
     const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
     return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
   }
 
-  setDataSource(bills: ClientBill[]) {
-    this.data = bills.map(
-      bill => {
-        const billModel = new ClientBillModel(
-          bill.reference,
-          bill.deliveryDate,
-          bill.amount,
-          bill.currency,
-          bill.client,
-          bill
-        );
-        return billModel;
-      }
-    );
+  setDataSource(bills: Bill[]) {
+    this.data = bills.map(bill => new BillModel(bill));
   }
 
-  get full(): ClientBill[] {
+  get full(): Bill[] {
     return this.bills.sort(this.sortFn);
   }
 
-  get unpaid(): ClientBill[] {
+  get unpaid(): Bill[] {
     return this.bills.sort(this.sortFn)
       .filter(BillsUtils.isUnPaid);
   }
 
-  get pending(): ClientBill[] {
+  get pending(): Bill[] {
     return this.bills.sort(this.sortFn)
       .filter(BillsUtils.isPending);
   }
@@ -104,8 +91,8 @@ export class ClientBillsListComponent implements OnInit {
     return this.bills.length === 0;
   }
 
-  gotoClientBill(bill: ClientBillModel) {
-    this.router.navigate(['/professional/bills/clientbill', { id: bill.client.id, ref: bill.reference }]);
+  gotoClientBill(bill: BillModel) {
+    this.gotobill.emit(bill);
   }
 }
 
