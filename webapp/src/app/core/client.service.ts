@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Client, ClientBill, BillType } from '@app/entities';
 import { Observable } from 'rxjs/Observable';
-import { map, filter } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { ErrorHandlerService } from '@app/error-handler.service';
 

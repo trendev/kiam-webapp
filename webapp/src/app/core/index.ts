@@ -20,3 +20,4 @@ export * from './professional-bills-ref-date-resolver.service';
 export * from './client-bill.service';
 export * from './professional-bills-resolver.service';
 export * from './export-bill.service';
+export * from './collective-group.service';
