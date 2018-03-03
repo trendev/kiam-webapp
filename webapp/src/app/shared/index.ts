@@ -44,5 +44,6 @@ export * from './custom-mat-paginator-intl/custom-mat-paginator-intl-fr';
 export * from './snack-messages/collective-groups-list-refreshed/collective-groups-list-refreshed.component';
 export * from './snack-messages/collective-group-created/collective-group-created.component';
 export * from './snack-messages/collective-group-updated/collective-group-updated.component';
-
+export * from './bills/bills-micro-list-table/bills-micro-list-table.component';
+export * from './bills/bills-micro-list/bills-micro-list.component';
 

@@ -74,6 +74,8 @@ import { UnexpectedErrorComponent } from './snack-messages/unexpected-error/unex
 import { CollectiveGroupsListRefreshedComponent } from './snack-messages/collective-groups-list-refreshed/collective-groups-list-refreshed.component';
 import { CollectiveGroupCreatedComponent } from './snack-messages/collective-group-created/collective-group-created.component';
 import { CollectiveGroupUpdatedComponent } from './snack-messages/collective-group-updated/collective-group-updated.component';
+import { BillsMicroListTableComponent } from './bills/bills-micro-list-table/bills-micro-list-table.component';
+import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-list.component';
 
 @NgModule({
   imports: [
@@ -148,7 +150,10 @@ import { CollectiveGroupUpdatedComponent } from './snack-messages/collective-gro
     UnexpectedErrorComponent,
     CollectiveGroupsListRefreshedComponent,
     CollectiveGroupCreatedComponent,
-    CollectiveGroupUpdatedComponent],
+    CollectiveGroupUpdatedComponent,
+    BillsMicroListComponent,
+    BillsMicroListTableComponent
+  ],
   exports: [
     CommonModule,
     FormsModule,
@@ -219,7 +224,9 @@ import { CollectiveGroupUpdatedComponent } from './snack-messages/collective-gro
     UnexpectedErrorComponent,
     CollectiveGroupsListRefreshedComponent,
     CollectiveGroupCreatedComponent,
-    CollectiveGroupUpdatedComponent
+    CollectiveGroupUpdatedComponent,
+    BillsMicroListComponent,
+    BillsMicroListTableComponent
   ],
   entryComponents: [
     PasswordChangedComponent,

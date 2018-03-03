@@ -1,7 +1,7 @@
+import { BillModel, BillsUtils } from '../../bills-utils';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ClientBill, Client, Bill } from '@app/entities';
+import { Bill } from '@app/entities';
 import * as moment from 'moment';
-import { BillsUtils, BillStatus, BillModel } from '@app/shared';
 
 @Component({
   selector: 'app-bills-micro-list',

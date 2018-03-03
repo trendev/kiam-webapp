@@ -1,4 +1,3 @@
-import { BillModel } from './../../../shared/bills-utils';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ClientBill, Category } from '@app/entities';
@@ -9,7 +8,8 @@ import {
   Utils,
   compareCollectiveGroupsFn,
   compareCategoriesFn,
-  ClientUpdatedComponent
+  ClientUpdatedComponent,
+  BillModel
 } from '@app/shared';
 import { ClientService } from '@app/core';
 import * as moment from 'moment';

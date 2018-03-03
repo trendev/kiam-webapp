@@ -1,4 +1,4 @@
-import { BillModel } from '@app/shared';
+import { BillModel } from '../../bills-utils';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Component, OnChanges, Input, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Bill } from '@app/entities';
