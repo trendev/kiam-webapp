@@ -33,8 +33,8 @@ const routes: Routes = [
         loadChildren: 'app/professional/categories/categories.module#CategoriesModule'
       },
       {
-        path: 'groups',
-        loadChildren: 'app/professional/groups/groups.module#GroupsModule'
+        path: 'collective-groups',
+        loadChildren: 'app/professional/collective-groups/collective-groups.module#CollectiveGroupsModule'
       },
       {
         path: 'profile',
