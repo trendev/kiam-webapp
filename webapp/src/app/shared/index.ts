@@ -42,5 +42,7 @@ export * from './snack-messages/pack-removed/pack-removed.component';
 export * from './snack-messages/unexpected-error/unexpected-error.component';
 export * from './custom-mat-paginator-intl/custom-mat-paginator-intl-fr';
 export * from './snack-messages/collective-groups-list-refreshed/collective-groups-list-refreshed.component';
+export * from './snack-messages/collective-group-created/collective-group-created.component';
+
 
 

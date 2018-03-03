@@ -72,6 +72,7 @@ import { PaymentStatusComponent } from './payment-status/payment-status.componen
 import { UnexpectedErrorComponent } from './snack-messages/unexpected-error/unexpected-error.component';
 // tslint:disable-next-line:max-line-length
 import { CollectiveGroupsListRefreshedComponent } from './snack-messages/collective-groups-list-refreshed/collective-groups-list-refreshed.component';
+import { CollectiveGroupCreatedComponent } from './snack-messages/collective-group-created/collective-group-created.component';
 
 @NgModule({
   imports: [
@@ -144,7 +145,8 @@ import { CollectiveGroupsListRefreshedComponent } from './snack-messages/collect
     PackRemovedComponent,
     PaymentStatusComponent,
     UnexpectedErrorComponent,
-    CollectiveGroupsListRefreshedComponent],
+    CollectiveGroupsListRefreshedComponent,
+    CollectiveGroupCreatedComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -213,7 +215,8 @@ import { CollectiveGroupsListRefreshedComponent } from './snack-messages/collect
     MatSlideToggleModule,
     PaymentStatusComponent,
     UnexpectedErrorComponent,
-    CollectiveGroupsListRefreshedComponent
+    CollectiveGroupsListRefreshedComponent,
+    CollectiveGroupCreatedComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
@@ -236,7 +239,8 @@ import { CollectiveGroupsListRefreshedComponent } from './snack-messages/collect
     PackUpdatedComponent,
     PackRemovedComponent,
     UnexpectedErrorComponent,
-    CollectiveGroupsListRefreshedComponent
+    CollectiveGroupsListRefreshedComponent,
+    CollectiveGroupCreatedComponent
   ]
 })
 
