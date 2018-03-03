@@ -4,11 +4,11 @@ import * as moment from 'moment';
 import { BillsUtils, BillStatus, BillModel } from '@app/shared';
 
 @Component({
-  selector: 'app-client-bills-list',
-  templateUrl: './client-bills-list.component.html',
-  styleUrls: ['./client-bills-list.component.scss']
+  selector: 'app-bills-micro-list',
+  templateUrl: './bills-micro-list.component.html',
+  styleUrls: ['./bills-micro-list.component.scss']
 })
-export class ClientBillsListComponent implements OnInit {
+export class BillsMicroListComponent implements OnInit {
 
   @Input() bills: Bill[];
   @Output() gotobill = new EventEmitter<BillModel>();
