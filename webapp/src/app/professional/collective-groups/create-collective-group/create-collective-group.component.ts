@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-collective-group',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-collective-group.component.scss']
 })
 export class CreateCollectiveGroupComponent implements OnInit {
+  form: FormGroup;
 
   constructor() { }
 
