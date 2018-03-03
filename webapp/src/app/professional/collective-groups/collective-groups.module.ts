@@ -11,7 +11,10 @@ import { CreateCollectiveGroupComponent } from './create-collective-group/create
     SharedModule,
     CollectiveGroupsRoutingModule
   ],
-  declarations: [CollectiveGroupsComponent, CreateCollectiveGroupComponent],
+  declarations: [
+    CollectiveGroupsComponent,
+    CreateCollectiveGroupComponent
+  ],
   providers: [
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr }
   ],
