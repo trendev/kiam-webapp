@@ -42,7 +42,6 @@ import { SocialNetworkAccountsComponent } from './social-network-accounts/social
 import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ErrorAggregatorDirective } from './error-aggregator.directive';
-import { CollectiveGroupsComponent } from './collective-groups/collective-groups.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ErrorComponent } from './error/error.component';
 import { CommentsComponent } from './comments/comments.component';
@@ -117,7 +116,6 @@ import { CollectiveGroupsListRefreshedComponent } from './snack-messages/collect
     LoremIpsumComponent,
     ChangePasswordComponent,
     ErrorAggregatorDirective,
-    CollectiveGroupsComponent,
     CategoriesComponent,
     ErrorComponent,
     CommentsComponent,
@@ -181,7 +179,6 @@ import { CollectiveGroupsListRefreshedComponent } from './snack-messages/collect
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    CollectiveGroupsComponent,
     CategoriesComponent,
     ErrorComponent,
     MatProgressBarModule,

@@ -13,7 +13,6 @@ export * from './payment-modes/payment-modes.component';
 export * from './change-password/change-password.component';
 export * from './error-aggregator.directive';
 export * from './custom-validators';
-export * from './collective-groups/collective-groups.component';
 export * from './categories/categories.component';
 export * from './error/error.component';
 export * from './utils';
