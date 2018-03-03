@@ -44,6 +44,10 @@ mat-card {
     flex-grow: 3;
 }
 
+.city {
+    flex-grow: 2;
+}
+
 @media all and (max-device-width: 720px) {
     .hide {
         display: none;
@@ -54,7 +58,8 @@ mat-card {
     .mat-cell {
         font-size: 0.8em;
     }
-    .name {
+    .name,
+    .city {
         flex-grow: 1;
     }
 }

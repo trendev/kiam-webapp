@@ -17,7 +17,7 @@
         <mat-table #table [dataSource]="datasource" matSort>
 
           <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Code du groupe</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Code</mat-header-cell>
             <mat-cell *matCellDef="let element" class="hide">{{element.id}}</mat-cell>
           </ng-container>
 
@@ -27,8 +27,8 @@
           </ng-container>
 
           <ng-container matColumnDef="city">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Ville</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.city}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="city">Ville</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="city">{{element.city}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="phone">
