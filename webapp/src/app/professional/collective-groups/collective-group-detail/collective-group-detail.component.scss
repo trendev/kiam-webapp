@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+}
+
+mat-card {
+    margin: 10px; // padding: 10px 5px 10px 5px;
+    width: 100%;
+}
+
+.phone {
+    width: 50%;
+}
+
+.groupName {
+    width: 100%;
+}
+
+.form-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-button-container>* {
+    margin: 5px;
+}
+
+@media all and (max-device-width: 720px) {
+    .container {
+        flex-wrap: wrap-reverse;
+    }
+    mat-card {
+        margin: 10px 10px 0px 10px; // padding: 10px 5px 10px 5px;
+    }
+    .phone,
+    .groupName {
+        width: 100%;
+    }
+}
