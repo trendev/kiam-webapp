@@ -1,3 +1,62 @@
-<p>
-  create-collective-group works!
-</p>
+<div class="container">
+  <mat-card>
+    <form [formGroup]="form" novalidate>
+      <mat-card-title>Nouveau Groupe</mat-card-title>
+      <mat-card-content>
+       
+        <mat-form-field class="groupName">
+          <input matInput #groupName maxlength="50" placeholder="Nom" formControlName="groupName" required>
+          <mat-hint align="end">{{groupName.value?.length || 0}}/50</mat-hint>
+        </mat-form-field>
+        <app-error [control]="form.get('groupName')" [error]="'required'">
+          Le nom doit être renseigné.
+        </app-error>
+        <app-error [control]="form.get('groupName')" [error]="'blankStringForbidden'">
+          Le nom ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+        </app-error>
+        <app-error [control]="form.get('groupName')" [error]="'maxlength'">
+          Le nom ne doit pas excéder 50 caractères.
+        </app-error>
+
+        <mat-form-field class="phone">
+          <app-phone formControlName="phone" placeholder="Téléphone" required></app-phone>
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+        <app-error [control]="form.get('phone')" [error]="'required'">
+          Le numéro de téléphone doit être renseigné.
+        </app-error>
+        <app-error [control]="form.get('phone')" [error]="'phoneNumber'">
+          Le numéro de téléphone doit être dans un format valide (ex: +33153732200, 0153732200...).
+        </app-error>
+
+        <mat-accordion multi="false">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Adresse *
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-address [errorAggregator]="errorAggregator"></app-address>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </mat-card-content>
+
+      <ng-container appErrorAggregator></ng-container>
+      <mat-card-actions>
+        <div class="form-button-container">
+          <button type="button" matTooltip="Annuler les modifications" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
+            <mat-icon aria-label="Annuler les modifications">undo</mat-icon>
+          </button>
+          <a mat-mini-fab matTooltip="Annuler la création du groupe et retourner au référentiel" color="accent" routerLink="../" routerLinkActive="active">
+            <mat-icon aria-label="Annuler la création du groupe et retourner au référentiel">list</mat-icon>
+          </a>
+          <button type="button" mat-mini-fab matTooltip="Sauvegarder le nouveau groupe" color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+            <mat-icon aria-label="Sauvegarder le nouveau groupe">done</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+
+</div>
