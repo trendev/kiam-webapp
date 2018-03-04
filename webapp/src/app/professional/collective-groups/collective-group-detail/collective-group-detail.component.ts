@@ -134,6 +134,10 @@ export class CollectiveGroupDetailComponent implements OnInit {
     this.router.navigate(['/professional/bills/collectivegroupbill', { id: this.collectiveGroup.id, ref: bill.reference }]);
   }
 
+  // gotoBill(bill: BillModel) {
+  //   this.router.navigate(['/professional/bills/clientbill', { id: this.client.id, ref: bill.reference }]);
+  // }
+
   // createNewClientBill() {
   //   const id = this.client.id;
   //   const name = `${this.client.customerDetails.firstName} ${this.client.customerDetails.lastName}`;

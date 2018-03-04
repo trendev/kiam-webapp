@@ -85,7 +85,7 @@ export class BillsMicroListComponent implements OnInit {
     return this.bills.length === 0;
   }
 
-  gotoClientBill(bill: BillModel) {
+  gotoBill(bill: BillModel) {
     this.gotobill.emit(bill);
   }
 }
