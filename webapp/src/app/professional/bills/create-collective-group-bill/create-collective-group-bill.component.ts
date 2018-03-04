@@ -56,6 +56,7 @@ export class CreateCollectiveGroupBillComponent implements OnInit {
 
   save(bill: Bill) {
     const cgb = new CollectiveGroupBill(bill);
+    cgb.recipient = this.rpt;
     cgb.collectiveGroup = new CollectiveGroup({
       id: this.id
     });
