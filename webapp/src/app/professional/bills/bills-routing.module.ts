@@ -1,3 +1,4 @@
+import { CreateCollectiveGroupBillComponent } from './create-collective-group-bill/create-collective-group-bill.component';
 import { ClientBillResolverService } from './client-bill-resolver.service';
 import { ClientBillDetailComponent } from './client-bill-detail/client-bill-detail.component';
 import { CreateClientBillComponent } from './create-client-bill/create-client-bill.component';
@@ -38,7 +39,15 @@ const routes: Routes = [
       clientBill: ClientBillResolverService
     }
   },
-  // create-collectivegroupbill
+  {
+    path: 'create-collectivegroupbill',
+    component: CreateCollectiveGroupBillComponent,
+    resolve: {
+      offerings: OfferingsResolverService,
+      paymentModes: ProfessionalPaymentModesResolverService,
+      billsRefDate: ProfessionalBillsRefDateResolverService
+    }
+  },
   { path: '**', component: PageNotFoundComponent }
 ];
 

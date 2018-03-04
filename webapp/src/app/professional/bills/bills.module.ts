@@ -18,6 +18,7 @@ import { RevenuesSumupComponent } from './revenues-sumup/revenues-sumup.componen
 import { PeriodSelectorComponent } from './period-selector/period-selector.component';
 import { PaymentModeSelectorComponent } from './payment-mode-selector/payment-mode-selector.component';
 import { BillsTableComponent } from './bills-table/bills-table.component';
+import { CreateCollectiveGroupBillComponent } from './create-collective-group-bill/create-collective-group-bill.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { BillsTableComponent } from './bills-table/bills-table.component';
     RevenuesSumupComponent,
     PeriodSelectorComponent,
     PaymentModeSelectorComponent,
-    BillsTableComponent
+    BillsTableComponent,
+    CreateCollectiveGroupBillComponent
   ],
   providers: [
     ClientBillResolverService,
