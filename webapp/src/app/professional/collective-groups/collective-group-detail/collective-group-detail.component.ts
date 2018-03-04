@@ -1,3 +1,4 @@
+import { RecipientDialogComponent } from './../recipient-dialog/recipient-dialog.component';
 import { CollectiveGroup, CollectiveGroupBill } from '@app/entities';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -5,7 +6,7 @@ import { ErrorAggregatorDirective, CustomValidators, CollectiveGroupUpdatedCompo
 import { CollectiveGroupService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
@@ -28,7 +29,8 @@ export class CollectiveGroupDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
     private snackBar: MatSnackBar,
-    private errorHandler: ErrorHandlerService) {
+    private errorHandler: ErrorHandlerService,
+    public dialog: MatDialog) {
     this.route.data.subscribe(
       (data: {
         collectiveGroup: CollectiveGroup;
@@ -135,10 +137,19 @@ export class CollectiveGroupDetailComponent implements OnInit {
   }
 
   createNewBill() {
-    const id = this.collectiveGroup.id;
-    const name = this.collectiveGroup.groupName;
-    const rpt = 'Chambre A113';
-    this.router.navigate(['/professional/bills/create-collectivegroupbill', { id: id, name: name, rpt: rpt }]);
+
+    const dialogRef = this.dialog.open(RecipientDialogComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      const id = this.collectiveGroup.id;
+      const name = this.collectiveGroup.groupName;
+      const rpt = result;
+      this.router.navigate(['/professional/bills/create-collectivegroupbill', { id: id, name: name, rpt: rpt }]);
+    });
+
+
   }
 
 }

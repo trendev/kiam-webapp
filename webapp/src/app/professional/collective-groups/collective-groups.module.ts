@@ -8,6 +8,7 @@ import { CreateCollectiveGroupComponent } from './create-collective-group/create
 import { CollectiveGroupDetailComponent } from './collective-group-detail/collective-group-detail.component';
 import { CollectiveGroupDetailResolverService } from './collective-group-detail-resolver.service';
 import { CollectiveGroupBillsResolverService } from './collective-group-bills-resolver.service';
+import { RecipientDialogComponent } from './recipient-dialog/recipient-dialog.component';
 
 @NgModule({
   imports: [
@@ -17,12 +18,16 @@ import { CollectiveGroupBillsResolverService } from './collective-group-bills-re
   declarations: [
     CollectiveGroupsComponent,
     CreateCollectiveGroupComponent,
-    CollectiveGroupDetailComponent
+    CollectiveGroupDetailComponent,
+    RecipientDialogComponent
   ],
   providers: [
     CollectiveGroupDetailResolverService,
     CollectiveGroupBillsResolverService,
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr }
   ],
+  entryComponents: [
+    RecipientDialogComponent
+  ]
 })
 export class CollectiveGroupsModule { }
