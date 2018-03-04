@@ -35,12 +35,6 @@ export class BillsComponent implements OnInit {
 
   billsPeriodFilterFn = (b: Bill) => true;
 
-  // inverse order : most recent first
-  billsSortFn = (b1: Bill, b2: Bill) => {
-    const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
-    return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
-  }
-
   constructor(private professionalService: ProfessionalService,
     private router: Router,
     private route: ActivatedRoute,
@@ -52,7 +46,7 @@ export class BillsComponent implements OnInit {
       (data: {
         bills: Bill[]
       }) => {
-        this.bills = data.bills.sort(this.billsSortFn);
+        this.bills = data.bills.sort(BillsUtils.sortBillsFn);
         this.initAll();
       }
     );
@@ -117,7 +111,7 @@ export class BillsComponent implements OnInit {
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
         bills => {
-          this.bills = bills.sort(this.billsSortFn);
+          this.bills = bills.sort(BillsUtils.sortBillsFn);
           this.initAll();
           // keep the current view updated
           this.showFull = this._showFull;

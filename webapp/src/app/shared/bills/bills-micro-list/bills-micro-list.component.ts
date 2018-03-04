@@ -27,27 +27,21 @@ export class BillsMicroListComponent implements OnInit {
     this.setDataSource(this.full);
   }
 
-  // inverse order : most recent first
-  sortFn(b1: Bill, b2: Bill): number {
-    const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
-    return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
-  }
-
   setDataSource(bills: Bill[]) {
     this.data = bills.map(bill => new BillModel(bill));
   }
 
   get full(): Bill[] {
-    return this.bills.sort(this.sortFn);
+    return this.bills.sort(BillsUtils.sortBillsFn);
   }
 
   get unpaid(): Bill[] {
-    return this.bills.sort(this.sortFn)
+    return this.bills.sort(BillsUtils.sortBillsFn)
       .filter(BillsUtils.isUnPaid);
   }
 
   get pending(): Bill[] {
-    return this.bills.sort(this.sortFn)
+    return this.bills.sort(BillsUtils.sortBillsFn)
       .filter(BillsUtils.isPending);
   }
 

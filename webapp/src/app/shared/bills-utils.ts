@@ -48,6 +48,12 @@ export class BillsUtils {
         return ref.replace(/^PRO\-[\d\w]+\-(.+)$/, '$1');
     }
 
+    // inverse order : most recent first
+    static sortBillsFn(b1: Bill, b2: Bill): number {
+        const diff = -moment(b1.deliveryDate).diff(moment(b2.deliveryDate));
+        return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
+    }
+
 }
 
 export class BillStatus {
