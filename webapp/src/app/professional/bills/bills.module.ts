@@ -19,6 +19,8 @@ import { PeriodSelectorComponent } from './period-selector/period-selector.compo
 import { PaymentModeSelectorComponent } from './payment-mode-selector/payment-mode-selector.component';
 import { BillsTableComponent } from './bills-table/bills-table.component';
 import { CreateCollectiveGroupBillComponent } from './create-collective-group-bill/create-collective-group-bill.component';
+import { CollectiveGroupBillDetailComponent } from './collective-group-bill-detail/collective-group-bill-detail.component';
+import { CollectiveGroupBillResolverService } from './collective-group-bill-resolver.service';
 
 @NgModule({
   imports: [
@@ -40,11 +42,13 @@ import { CreateCollectiveGroupBillComponent } from './create-collective-group-bi
     PeriodSelectorComponent,
     PaymentModeSelectorComponent,
     BillsTableComponent,
-    CreateCollectiveGroupBillComponent
+    CreateCollectiveGroupBillComponent,
+    CollectiveGroupBillDetailComponent
   ],
   providers: [
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr },
     ClientBillResolverService,
-    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr }
+    CollectiveGroupBillResolverService
   ]
 })
 export class BillsModule { }

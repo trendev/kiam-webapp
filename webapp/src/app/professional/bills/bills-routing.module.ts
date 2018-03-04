@@ -1,3 +1,5 @@
+import { CollectiveGroupBillResolverService } from './collective-group-bill-resolver.service';
+import { CollectiveGroupBillDetailComponent } from './collective-group-bill-detail/collective-group-bill-detail.component';
 import { CreateCollectiveGroupBillComponent } from './create-collective-group-bill/create-collective-group-bill.component';
 import { ClientBillResolverService } from './client-bill-resolver.service';
 import { ClientBillDetailComponent } from './client-bill-detail/client-bill-detail.component';
@@ -46,6 +48,14 @@ const routes: Routes = [
       offerings: OfferingsResolverService,
       paymentModes: ProfessionalPaymentModesResolverService,
       billsRefDate: ProfessionalBillsRefDateResolverService
+    }
+  },
+  {
+    path: 'collectivegroupbill',
+    component: CollectiveGroupBillDetailComponent,
+    resolve: {
+      paymentModes: ProfessionalPaymentModesResolverService,
+      collectiveGroupBill: CollectiveGroupBillResolverService
     }
   },
   { path: '**', component: PageNotFoundComponent }
