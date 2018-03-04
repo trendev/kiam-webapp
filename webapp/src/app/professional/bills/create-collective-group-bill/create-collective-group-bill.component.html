@@ -1,3 +1,11 @@
-<p>
-  create-collective-group-bill works!
-</p>
+<app-create-bill [offerings]="offerings" [paymentModes]="paymentModes" [billsRefDate]="billsRefDate" (cancel)="returnToCollectiveGroupsDetail()"
+  (save)="save($event)">
+  <p>
+    Groupe :
+    <b>{{name}}</b>
+  </p>
+  <p>Code du groupe : {{id}}</p>
+  <p>Bénéficiaire :
+    <b>{{rpt}}</b>
+  </p>
+</app-create-bill>
