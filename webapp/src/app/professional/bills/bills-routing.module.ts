@@ -38,6 +38,7 @@ const routes: Routes = [
       clientBill: ClientBillResolverService
     }
   },
+  // create-collectivegroupbill
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -228,7 +228,7 @@ export class ClientDetailComponent implements OnInit {
     this.router.navigate(['/professional/bills/clientbill', { id: this.client.id, ref: bill.reference }]);
   }
 
-  createNewClientBill() {
+  createNewBill() {
     const id = this.client.id;
     const name = `${this.client.customerDetails.firstName} ${this.client.customerDetails.lastName}`;
     this.router.navigate(['/professional/bills/create-clientbill', { id: id, name: name }]);

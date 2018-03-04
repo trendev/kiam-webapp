@@ -134,14 +134,11 @@ export class CollectiveGroupDetailComponent implements OnInit {
     this.router.navigate(['/professional/bills/collectivegroupbill', { id: this.collectiveGroup.id, ref: bill.reference }]);
   }
 
-  // gotoBill(bill: BillModel) {
-  //   this.router.navigate(['/professional/bills/clientbill', { id: this.client.id, ref: bill.reference }]);
-  // }
-
-  // createNewClientBill() {
-  //   const id = this.client.id;
-  //   const name = `${this.client.customerDetails.firstName} ${this.client.customerDetails.lastName}`;
-  //   this.router.navigate(['/professional/bills/create-clientbill', { id: id, name: name }]);
-  // }
+  createNewBill() {
+    const id = this.collectiveGroup.id;
+    const name = this.collectiveGroup.groupName;
+    const rpt = 'Chambre A113';
+    this.router.navigate(['/professional/bills/create-collectivegroupbill', { id: id, name: name, rpt: rpt }]);
+  }
 
 }
