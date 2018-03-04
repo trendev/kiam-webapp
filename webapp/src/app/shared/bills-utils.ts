@@ -17,12 +17,12 @@ export class BillsUtils {
 
     static isUnPaid(b: Bill) {
         return !b.paymentDate
-            && moment(b.deliveryDate).isBefore(moment().locale('fr').startOf('week').subtract(2, 'week'));
+            && moment(b.deliveryDate).isBefore(moment().locale('fr').subtract(2, 'week'));
     }
 
     static isPending(b: Bill) {
         return !b.paymentDate
-            && moment(b.deliveryDate).isSameOrAfter(moment().locale('fr').startOf('week').subtract(2, 'week'));
+            && moment(b.deliveryDate).isSameOrAfter(moment().locale('fr').subtract(2, 'week'));
     }
 
     static visitBill(bill: Bill, fcts: { [key: string]: () => void }) {
