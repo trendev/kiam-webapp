@@ -1,3 +1,19 @@
-<p>
-  recipient-dialog works!
-</p>
+<h2 mat-dialog-title>Bénéficiaire</h2>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <input matInput maxlength="50" placeholder="Ex: Nom ou Chambre..." [formControl]="recipient">
+      <mat-hint align="end">{{recipient.value?.length || 0}}/50</mat-hint>
+    </mat-form-field>
+  </form>
+  <app-error [control]="recipient" [error]="'blankStringForbidden'">
+    <p class="mat-caption">Le bénéficiaire ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.</p>
+  </app-error>
+  <app-error [control]="recipient" [error]="'maxlength'">
+    Le bénéficiaire ne doit pas excéder 50 caractères.
+  </app-error>
+</div>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-button [mat-dialog-close]="recipient.value" cdkFocusInitial [disabled]="recipient.invalid">Ok</button>
+</mat-dialog-actions>

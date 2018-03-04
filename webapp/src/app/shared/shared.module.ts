@@ -27,7 +27,8 @@ import {
   MatProgressSpinnerModule,
   MatSnackBarModule,
   MatSlideToggleModule,
-  MatPaginatorIntl
+  MatPaginatorIntl,
+  MatDialogModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -106,7 +107,8 @@ import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-li
     OverlayModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDialogModule
   ],
   declarations: [
     PageNotFoundComponent,
@@ -226,7 +228,8 @@ import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-li
     CollectiveGroupCreatedComponent,
     CollectiveGroupUpdatedComponent,
     BillsMicroListComponent,
-    BillsMicroListTableComponent
+    BillsMicroListTableComponent,
+    MatDialogModule
   ],
   entryComponents: [
     PasswordChangedComponent,
