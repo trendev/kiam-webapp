@@ -21,3 +21,4 @@ export * from './client-bill.service';
 export * from './professional-bills-resolver.service';
 export * from './export-bill.service';
 export * from './collective-group.service';
+export * from './collective-group-bill.service';
