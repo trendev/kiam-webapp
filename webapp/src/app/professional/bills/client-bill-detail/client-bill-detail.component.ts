@@ -43,7 +43,7 @@ export class ClientBillDetailComponent implements OnInit {
   ngOnInit() {
   }
 
-  returnToClientDetail() {
+  returnToDetail() {
     this.router.navigate(['/professional/clients', this.id]);
   }
 
@@ -54,7 +54,7 @@ export class ClientBillDetailComponent implements OnInit {
     this.clientBillService.update(cb).subscribe(
       _cb => {
         this.snackBar.openFromComponent(BillUpdatedComponent, { duration: 2000 });
-        this.returnToClientDetail();
+        this.returnToDetail();
       },
       e => {
         this.loadingOverlayService.stop();

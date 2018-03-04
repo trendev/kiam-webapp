@@ -1,3 +1,11 @@
-<p>
-  collective-group-bill-detail works!
-</p>
+<app-bill-detail [paymentModes]="paymentModes" [bill]="collectiveGroupBill" (cancel)="returnToDetail()" (save)="save($event)"
+  (export)="exportBill($event)">
+  <p>
+    Groupe :
+    <b>{{name}}</b>
+  </p>
+  <p>Code du groupe : {{id}}</p>
+  <p *ngIf="rpt">Bénéficiaire :
+    <b>{{rpt}}</b>
+  </p>
+</app-bill-detail>
