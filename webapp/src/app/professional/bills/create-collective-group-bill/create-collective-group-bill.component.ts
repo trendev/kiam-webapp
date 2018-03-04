@@ -28,11 +28,11 @@ export class CreateCollectiveGroupBillComponent implements OnInit {
     private loadingOverlayService: LoadingOverlayService,
     private snackBar: MatSnackBar,
     private errorHandler: ErrorHandlerService) {
-      this.route.paramMap.subscribe((params: ParamMap) => {
-        this.id = +params.get('id');
-        this.name = params.get('name');
-        this.rpt = params.get('rpt');
-      });
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.id = +params.get('id');
+      this.name = params.get('name');
+      this.rpt = params.get('rpt') || undefined;
+    });
 
     this.route.data.subscribe(
       (data: {

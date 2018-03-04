@@ -18,10 +18,13 @@ export class RecipientDialogComponent implements OnInit {
       CustomValidators.blankStringForbidden,
       Validators.maxLength(50)
     ]);
-    console.log(this.recipient);
   }
 
   ngOnInit() {
+  }
+
+  cancel() {
+    this.dialogRef.close();
   }
 
 }

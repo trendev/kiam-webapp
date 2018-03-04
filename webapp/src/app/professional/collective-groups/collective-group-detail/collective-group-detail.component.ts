@@ -139,16 +139,17 @@ export class CollectiveGroupDetailComponent implements OnInit {
   createNewBill() {
 
     const dialogRef = this.dialog.open(RecipientDialogComponent, {
-      width: '250px'
+      disableClose: false // if true backdrop click or ESC won't close
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      const id = this.collectiveGroup.id;
-      const name = this.collectiveGroup.groupName;
-      const rpt = result;
-      this.router.navigate(['/professional/bills/create-collectivegroupbill', { id: id, name: name, rpt: rpt }]);
+      if (result !== undefined) { // result = empty string if user click OK / undefined otherwise
+        const id = this.collectiveGroup.id;
+        const name = this.collectiveGroup.groupName;
+        const rpt = result;
+        this.router.navigate(['/professional/bills/create-collectivegroupbill', { id: id, name: name, rpt: rpt }]);
+      }
     });
-
 
   }
 
