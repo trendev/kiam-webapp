@@ -46,4 +46,5 @@ export * from './snack-messages/collective-group-created/collective-group-create
 export * from './snack-messages/collective-group-updated/collective-group-updated.component';
 export * from './bills/bills-micro-list-table/bills-micro-list-table.component';
 export * from './bills/bills-micro-list/bills-micro-list.component';
+export * from './bills/period-selector/period-selector.component';
 

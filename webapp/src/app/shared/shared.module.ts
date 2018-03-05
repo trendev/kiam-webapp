@@ -77,6 +77,7 @@ import { CollectiveGroupCreatedComponent } from './snack-messages/collective-gro
 import { CollectiveGroupUpdatedComponent } from './snack-messages/collective-group-updated/collective-group-updated.component';
 import { BillsMicroListTableComponent } from './bills/bills-micro-list-table/bills-micro-list-table.component';
 import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-list.component';
+import { PeriodSelectorComponent } from './bills/period-selector/period-selector.component';
 
 @NgModule({
   imports: [
@@ -154,7 +155,8 @@ import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-li
     CollectiveGroupCreatedComponent,
     CollectiveGroupUpdatedComponent,
     BillsMicroListComponent,
-    BillsMicroListTableComponent
+    BillsMicroListTableComponent,
+    PeriodSelectorComponent
   ],
   exports: [
     CommonModule,
@@ -229,7 +231,8 @@ import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-li
     CollectiveGroupUpdatedComponent,
     BillsMicroListComponent,
     BillsMicroListTableComponent,
-    MatDialogModule
+    MatDialogModule,
+    PeriodSelectorComponent
   ],
   entryComponents: [
     PasswordChangedComponent,
