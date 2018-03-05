@@ -31,9 +31,9 @@ export class BillsMicroListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.bills.sort(BillsUtils.sortBillsFn);
-    this.initDates();
-    this.initBillsPeriodFilterFn();
+    this.bills.sort(BillsUtils.sortBillsFn); // bills should be sorted first
+    this.initDates(); // inits the bound dates
+    this.initBillsPeriodFilterFn(); // inits the period filter
     this.setDataSource(this.full);
   }
 
@@ -125,17 +125,24 @@ export class BillsMicroListComponent implements OnInit {
   updateMinDate(minDate: number) {
     if (this.minDate !== minDate) {
       this.minDate = minDate;
-      // this.initBillsPeriodFilterFn();
-      // this.setBillsModel();
+      this.initBillsPeriodFilterFn();
+      this.updateCurrentModel();
     }
   }
 
   updateMaxDate(maxDate: number) {
     if (this.maxDate !== maxDate) {
       this.maxDate = maxDate;
-      // this.initBillsPeriodFilterFn();
-      // this.setBillsModel();
+      this.initBillsPeriodFilterFn();
+      this.updateCurrentModel();
     }
+  }
+
+  private updateCurrentModel() {
+    // keep the current view updated
+    this.showFull = this._showFull;
+    this.showUnpaid = this._showUnpaid;
+    this.showPending = this._showPending;
   }
 }
 
