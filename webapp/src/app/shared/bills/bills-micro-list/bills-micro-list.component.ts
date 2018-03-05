@@ -11,7 +11,6 @@ import * as moment from 'moment';
 export class BillsMicroListComponent implements OnChanges {
 
   @Input() bills: Bill[];
-  private _bills: Bill[];
   @Output() gotobill = new EventEmitter<BillModel>();
 
   data: BillModel[];
@@ -32,22 +31,26 @@ export class BillsMicroListComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges() {
-    this._bills = this.bills.sort(BillsUtils.sortBillsFn); // bills should be sorted first
+    this.bills.sort(BillsUtils.sortBillsFn); // bills should be sorted first
     this.initDates(); // inits the bound dates
     this.initBillsPeriodFilterFn(); // inits the period filter
-    this.setDataSource(this.full);
+    this.updateCurrentModel();
+  }
+
+  get billsModel(): Bill[] {
+    return this.bills.filter(this.billsPeriodFilterFn);
   }
 
   initDates() {
-    const size = this._bills.length;
+    const size = this.bills.length;
     if (size > 0) {
-      this.minDate = this.minBound = this._bills[size - 1].deliveryDate; // the last one is the oldest one
-      this.maxDate = this.maxBound = this._bills[0].deliveryDate; // the first one is the most recent
+      this.minDate = this.minBound = this.bills[size - 1].deliveryDate; // the last one is the oldest one
+      this.maxDate = this.maxBound = this.bills[0].deliveryDate; // the first one is the most recent
     }
   }
 
   initBillsPeriodFilterFn() {
-    if (this._bills.length > 0) {
+    if (this.bills.length > 0) {
       this.billsPeriodFilterFn = (b: Bill) => (
         (moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
           && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate)))
@@ -60,20 +63,20 @@ export class BillsMicroListComponent implements OnChanges {
   }
 
   setDataSource(bills: Bill[]) {
-    this.data = bills.filter(this.billsPeriodFilterFn).map(bill => new BillModel(bill));
+    this.data = bills.map(bill => new BillModel(bill));
   }
 
   get full(): Bill[] {
-    return this._bills.sort(BillsUtils.sortBillsFn);
+    return this.billsModel.sort(BillsUtils.sortBillsFn);
   }
 
   get unpaid(): Bill[] {
-    return this._bills.sort(BillsUtils.sortBillsFn)
+    return this.billsModel.sort(BillsUtils.sortBillsFn)
       .filter(BillsUtils.isUnPaid);
   }
 
   get pending(): Bill[] {
-    return this._bills.sort(BillsUtils.sortBillsFn)
+    return this.billsModel.sort(BillsUtils.sortBillsFn)
       .filter(BillsUtils.isPending);
   }
 
@@ -114,7 +117,7 @@ export class BillsMicroListComponent implements OnChanges {
   }
 
   billsIsEmpty(): boolean {
-    return this._bills.length === 0;
+    return this.billsModel.length === 0;
   }
 
   gotoBill(bill: BillModel) {
