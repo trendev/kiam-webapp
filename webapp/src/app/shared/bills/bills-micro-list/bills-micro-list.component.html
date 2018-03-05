@@ -14,13 +14,15 @@
 
 <mat-chip-list class="mat-chip-list-stacked">
   <mat-chip [color]="full.length > 0 ?'primary':'accent'" selected="true" [selectable]="false" (click)="showFull = !showFull">
-    {full?.length, plural, =0 {Aucune facture} =1 {1 facture} other {{{full?.length}} factures}}
+    {full.length, plural, =0 {Aucune facture} =1 {1 facture} other {{{full.length}} factures : {{selectionRevenue / 100 | currency:'EUR':'':'':'fr'}}}}
   </mat-chip>
   <mat-chip color="warn" *ngIf="unpaid.length > 0" selected="true" [selectable]="false" (click)="showUnpaid = !showUnpaid">
-    {unpaid.length, plural, =0 {Aucune impayée} =1 {1 impayée} other {{{unpaid.length}} impayées}}
+      {unpaid.length, plural, =0 {Aucune impayée} =1 {1 impayée} other {{{unpaid.length}} impayées}} : {{unpaidRevenue / 100 |
+        currency:'EUR':'':'':'fr'}}
   </mat-chip>
   <mat-chip color="accent" *ngIf="pending.length > 0" selected="true" [selectable]="false" (click)="showPending = !showPending">
-    {pending.length, plural, =0 {Aucune non soldée} =1 {1 non soldée} other {{{pending.length}} non soldées}}
+      {pending.length, plural, =0 {Aucune non soldée} =1 {1 non soldée} other {{{pending.length}} non soldées}} : {{pendingRevenue
+        / 100 | currency:'EUR':'':'':'fr'}}
   </mat-chip>
 </mat-chip-list>
 

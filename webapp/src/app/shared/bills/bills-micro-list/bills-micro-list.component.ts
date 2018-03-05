@@ -116,6 +116,24 @@ export class BillsMicroListComponent implements OnChanges {
     }
   }
 
+  get selectionRevenue(): number {
+    return this.full
+      .filter(bm => !!bm.paymentDate
+        && moment(bm.paymentDate).isSameOrBefore(moment(this.maxDate)))
+      .map(bm => bm.amount)
+      .reduce((a, b) => a + b, 0);
+  }
+
+  get unpaidRevenue(): number {
+    return this.unpaid.map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
+  }
+
+  get pendingRevenue(): number {
+    return this.pending.map(b => b.amount)
+      .reduce((a, b) => a + b, 0);
+  }
+
   billsIsEmpty(): boolean {
     return this.billsModel.length === 0;
   }

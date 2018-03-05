@@ -53,7 +53,6 @@ export class BillsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.setBillsModel();
   }
 
   initPaymentModes() {
