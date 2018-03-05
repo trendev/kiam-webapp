@@ -4,7 +4,7 @@
     <mat-card-subtitle>
       {clients.length, plural, =0 {aucun client} =1 {un client} other {{{clients.length}} clients}}
     </mat-card-subtitle>
-    <mat-card-content>
+    <mat-card-content *ngIf="clients.length > 0">
       <div class="list-container  mat-elevation-z2">
         <div class="search-header">
           <mat-form-field>

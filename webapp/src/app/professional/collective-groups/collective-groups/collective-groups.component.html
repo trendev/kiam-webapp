@@ -4,7 +4,7 @@
     <mat-card-subtitle>
       {collectiveGroups.length, plural, =0 {aucun groupe} =1 {un groupe} other {{{collectiveGroups.length}} groupes}}
     </mat-card-subtitle>
-    <mat-card-content>
+    <mat-card-content *ngIf="collectiveGroups.length > 0">
       <div class="list-container  mat-elevation-z2">
         <div class="search-header">
           <mat-form-field>
