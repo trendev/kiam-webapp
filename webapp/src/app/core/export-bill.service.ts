@@ -1,7 +1,7 @@
 import { Utils, BillsUtils } from '@app/shared';
 import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
-import { Professional, Bill, ClientBill, Address, PurchasedOffering } from '@app/entities';
+import { Professional, Bill, ClientBill, Address, PurchasedOffering, CollectiveGroupBill } from '@app/entities';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
@@ -16,7 +16,7 @@ export class ExportBillService {
 
   /**
    * Export a Client bill into PDF
-   * @param clientBill the clientbill to export, must be closed/payed
+   * @param clientBill the clientbill to export
    */
   exportClientBill(clientBill: ClientBill) {
 
@@ -34,6 +34,40 @@ export class ExportBillService {
 
     const dd = this.createPDF(clientBill, customerDetails);
 
+  }
+
+  /**
+   * Export a CollectiveGroup bill into PDF
+   * @param collectiveGroupBill the collectiveGroup Bill to export
+   */
+  exportCollectiveGroupBill(collectiveGroupBill: CollectiveGroupBill) {
+    // Build the customer details part
+    const customerDetails = [
+      {
+        text: collectiveGroupBill.collectiveGroup.groupName,
+        bold: true
+      },
+      `N° groupe : ${collectiveGroupBill.collectiveGroup.id}`,
+      '\n',
+      this.buildAddress(collectiveGroupBill.collectiveGroup.address),
+      '\n',
+      {
+        text: [
+          'Bénéficiaire : ',
+          {
+            text: collectiveGroupBill.recipient,
+            bold: true
+          }
+        ]
+      }
+    ];
+
+    // remove recipient item if there is no recipient
+    if (!collectiveGroupBill.recipient) {
+      customerDetails.pop();
+    }
+
+    const dd = this.createPDF(collectiveGroupBill, customerDetails);
   }
 
   /**
