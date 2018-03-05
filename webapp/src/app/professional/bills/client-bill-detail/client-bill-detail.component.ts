@@ -62,7 +62,7 @@ export class ClientBillDetailComponent implements OnInit {
       });
   }
 
-  exportBill(detail: string) {
+  exportBill() {
     this.exportBillService.exportClientBill(this.clientBill);
   }
 

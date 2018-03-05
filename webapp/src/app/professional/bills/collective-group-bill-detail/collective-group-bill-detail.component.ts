@@ -65,7 +65,7 @@ export class CollectiveGroupBillDetailComponent implements OnInit {
       });
   }
 
-  exportBill(detail: string) {
+  exportBill() {
     // this.exportBillService.exportCollectiveGroupBill(this.collectiveGroupBill);
   }
 
