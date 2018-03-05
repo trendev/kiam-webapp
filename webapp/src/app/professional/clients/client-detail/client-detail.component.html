@@ -78,6 +78,9 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="form-button-container">
+        <button type="button" matTooltip="Rafraîchir" mat-mini-fab color="accent" (click)="refreshBills()">
+          <mat-icon aria-label="Rafraîchir">refresh</mat-icon>
+        </button>
         <button type="button" matTooltip="Créer une nouvelle facture" mat-mini-fab color="primary" (click)="createNewBill()">
           <mat-icon aria-label="Créer une nouvelle facture">add</mat-icon>
         </button>

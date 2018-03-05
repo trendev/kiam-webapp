@@ -9,7 +9,9 @@ import {
   compareCollectiveGroupsFn,
   compareCategoriesFn,
   ClientUpdatedComponent,
-  BillModel
+  BillModel,
+  BillsUtils,
+  BillsRefreshedComponent
 } from '@app/shared';
 import { ClientService } from '@app/core';
 import * as moment from 'moment';
@@ -232,5 +234,17 @@ export class ClientDetailComponent implements OnInit {
     const id = this.client.id;
     const name = `${this.client.customerDetails.firstName} ${this.client.customerDetails.lastName}`;
     this.router.navigate(['/professional/bills/create-clientbill', { id: id, name: name }]);
+  }
+
+  refreshBills() {
+    this.loadingOverlayService.start();
+    this.clientService.getClientBills(this.client.id)
+      .finally(() => this.loadingOverlayService.stop())
+      .subscribe(
+        bills => {
+          this.clientBills = bills.sort(BillsUtils.sortBillsFn);
+          this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
+        },
+        e => this.errorHandler.handle(e, 'Une erreur est survenue lors de la collecte des factures depuis le serveur'));
   }
 }
