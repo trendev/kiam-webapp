@@ -1,5 +1,5 @@
 import { BillModel, BillsUtils } from '../../bills-utils';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Bill } from '@app/entities';
 import * as moment from 'moment';
 
@@ -8,9 +8,10 @@ import * as moment from 'moment';
   templateUrl: './bills-micro-list.component.html',
   styleUrls: ['./bills-micro-list.component.scss']
 })
-export class BillsMicroListComponent implements OnInit {
+export class BillsMicroListComponent implements OnChanges {
 
   @Input() bills: Bill[];
+  // private _bills: Bill[];
   @Output() gotobill = new EventEmitter<BillModel>();
 
   data: BillModel[];
@@ -30,7 +31,7 @@ export class BillsMicroListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.bills.sort(BillsUtils.sortBillsFn); // bills should be sorted first
     this.initDates(); // inits the bound dates
     this.initBillsPeriodFilterFn(); // inits the period filter
@@ -40,10 +41,8 @@ export class BillsMicroListComponent implements OnInit {
   initDates() {
     const size = this.bills.length;
     if (size > 0) {
-      console.log(this.bills);
       this.minDate = this.minBound = this.bills[size - 1].deliveryDate; // the last one is the oldest one
       this.maxDate = this.maxBound = this.bills[0].deliveryDate; // the first one is the most recent
-      console.log(this.minDate);
     }
   }
 
