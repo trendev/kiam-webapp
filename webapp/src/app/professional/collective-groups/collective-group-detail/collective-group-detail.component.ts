@@ -2,7 +2,14 @@ import { RecipientDialogComponent } from './../recipient-dialog/recipient-dialog
 import { CollectiveGroup, CollectiveGroupBill } from '@app/entities';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ErrorAggregatorDirective, CustomValidators, CollectiveGroupUpdatedComponent, BillModel } from '@app/shared';
+import {
+  ErrorAggregatorDirective,
+  CustomValidators,
+  CollectiveGroupUpdatedComponent,
+  BillModel,
+  BillsRefreshedComponent,
+  BillsUtils
+} from '@app/shared';
 import { CollectiveGroupService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -151,6 +158,18 @@ export class CollectiveGroupDetailComponent implements OnInit {
       }
     });
 
+  }
+
+  refreshBills() {
+    this.loadingOverlayService.start();
+    this.collectiveGroupService.getCollectiveGroupBills(this.collectiveGroup.id)
+      .finally(() => this.loadingOverlayService.stop())
+      .subscribe(
+        bills => {
+          this.collectiveGroupBills = bills.sort(BillsUtils.sortBillsFn);
+          this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
+        },
+        e => this.errorHandler.handle(e, 'Une erreur est survenue lors de la collecte des factures depuis le serveur'));
   }
 
 }
