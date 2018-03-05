@@ -21,14 +21,47 @@ export class BillsMicroListComponent implements OnInit {
 
   _showPending = false;
 
+  minBound: number;
+  minDate: number;
+  maxBound: number;
+  maxDate: number;
+
+  billsPeriodFilterFn = (b: Bill) => true;
+
   constructor() { }
 
   ngOnInit() {
+    this.bills.sort(BillsUtils.sortBillsFn);
+    this.initDates();
+    this.initBillsPeriodFilterFn();
     this.setDataSource(this.full);
   }
 
+  initDates() {
+    const size = this.bills.length;
+    if (size > 0) {
+      console.log(this.bills);
+      this.minDate = this.minBound = this.bills[size - 1].deliveryDate; // the last one is the oldest one
+      this.maxDate = this.maxBound = this.bills[0].deliveryDate; // the first one is the most recent
+      console.log(this.minDate);
+    }
+  }
+
+  initBillsPeriodFilterFn() {
+    if (this.bills.length > 0) {
+      this.billsPeriodFilterFn = (b: Bill) => (
+        (moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
+          && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate)))
+        || (!!b.paymentDate
+          && moment(b.paymentDate).isSameOrAfter(moment(this.minDate))
+          && moment(b.paymentDate).isSameOrBefore(moment(this.maxDate))
+        )
+      );
+    }
+  }
+
   setDataSource(bills: Bill[]) {
-    this.data = bills.map(bill => new BillModel(bill));
+    this.data = bills.filter(this.billsPeriodFilterFn).map(bill => new BillModel(bill));
   }
 
   get full(): Bill[] {
@@ -87,6 +120,22 @@ export class BillsMicroListComponent implements OnInit {
 
   gotoBill(bill: BillModel) {
     this.gotobill.emit(bill);
+  }
+
+  updateMinDate(minDate: number) {
+    if (this.minDate !== minDate) {
+      this.minDate = minDate;
+      // this.initBillsPeriodFilterFn();
+      // this.setBillsModel();
+    }
+  }
+
+  updateMaxDate(maxDate: number) {
+    if (this.maxDate !== maxDate) {
+      this.maxDate = maxDate;
+      // this.initBillsPeriodFilterFn();
+      // this.setBillsModel();
+    }
   }
 }
 
