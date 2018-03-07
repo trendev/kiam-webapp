@@ -1,5 +1,4 @@
 import { Utils, BillsUtils } from '@app/shared';
-import { AuthenticationService } from './authentication.service';
 import { Injectable } from '@angular/core';
 import { Professional, Bill, ClientBill, Address, PurchasedOffering, CollectiveGroupBill } from '@app/entities';
 
@@ -8,6 +7,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import * as moment from 'moment';
+import { AuthenticationService } from '@app/core';
 
 @Injectable()
 export class ExportBillService {

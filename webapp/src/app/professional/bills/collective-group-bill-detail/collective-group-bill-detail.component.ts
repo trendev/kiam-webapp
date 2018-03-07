@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PaymentMode, CollectiveGroupBill, Bill } from '@app/entities';
-import { CollectiveGroupBillService, ExportBillService } from '@app/core';
+import { CollectiveGroupBillService } from '@app/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { BillUpdatedComponent } from '@app/shared';
+import { ExportBillService } from '../export-bill.service';
 
 @Component({
   selector: 'app-collective-group-bill-detail',

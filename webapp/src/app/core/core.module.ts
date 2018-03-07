@@ -19,7 +19,6 @@ import { ProfessionalPaymentModesResolverService } from './professional-payment-
 import { ProfessionalBillsRefDateResolverService } from './professional-bills-ref-date-resolver.service';
 import { ClientBillService } from './client-bill.service';
 import { ProfessionalBillsResolverService } from './professional-bills-resolver.service';
-import { ExportBillService } from './export-bill.service';
 import { CollectiveGroupService } from './collective-group.service';
 import { CollectiveGroupBillService } from './collective-group-bill.service';
 
@@ -49,13 +48,12 @@ import { CollectiveGroupBillService } from './collective-group-bill.service';
     ProfessionalBillsRefDateResolverService,
     ClientBillService,
     ProfessionalBillsResolverService,
-    ExportBillService,
     CollectiveGroupService,
     CollectiveGroupBillService]
 })
 export class CoreModule {
   /* make sure CoreModule is imported only by one NgModule the AppModule */
-  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
       throw new Error('CoreModule is already loaded. Import only in AppModule');
     }

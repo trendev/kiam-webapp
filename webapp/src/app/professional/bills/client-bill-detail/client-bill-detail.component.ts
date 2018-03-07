@@ -1,11 +1,12 @@
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { Component, OnInit } from '@angular/core';
-import { ClientBillService, ExportBillService } from '@app/core';
+import { ClientBillService } from '@app/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { PaymentMode, ClientBill, Bill, Client } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
 import { BillUpdatedComponent } from '@app/shared';
+import { ExportBillService } from '../export-bill.service';
 
 @Component({
   selector: 'app-client-bill-detail',
