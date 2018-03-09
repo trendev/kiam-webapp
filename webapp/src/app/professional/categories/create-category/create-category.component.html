@@ -19,7 +19,7 @@
         </app-error>
 
         <mat-form-field class="description">
-          <input matInput #description maxlength="150" placeholder="Nom" formControlName="description" required>
+          <input matInput #description maxlength="150" placeholder="Description" formControlName="description" required>
           <mat-hint align="end">{{description.value?.length || 0}}/150</mat-hint>
         </mat-form-field>
         <app-error [control]="form.get('description')" [error]="'required'">
@@ -34,7 +34,6 @@
 
       </mat-card-content>
 
-      <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
           <button type="button" matTooltip="Annuler les modifications" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">

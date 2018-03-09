@@ -17,8 +17,6 @@ export class CreateCategoryComponent implements OnInit {
 
   form: FormGroup;
 
-  @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
-
   constructor(private fb: FormBuilder,
     private categoryService: CategoryService,
     private router: Router,
@@ -30,11 +28,6 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form.valueChanges.forEach(_ => {
-      if (this.form.invalid && this.errorAggregator) {
-        this.errorAggregator.viewContainerRef.clear();
-      }
-    });
   }
 
   createForm(): FormGroup {
