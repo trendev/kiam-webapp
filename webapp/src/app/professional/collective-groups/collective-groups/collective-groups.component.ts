@@ -1,8 +1,7 @@
-import { compareCollectiveGroupsFn } from './../../../shared/utils';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CollectiveGroup } from '@app/entities';
 import { MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
-import { Utils, CollectiveGroupsListRefreshedComponent } from '@app/shared';
+import { Utils, CollectiveGroupsListRefreshedComponent, compareCollectiveGroupsFn } from '@app/shared';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -13,7 +12,7 @@ import { ErrorHandlerService } from '@app/error-handler.service';
   templateUrl: './collective-groups.component.html',
   styleUrls: ['./collective-groups.component.scss'],
 })
-export class CollectiveGroupsComponent implements OnInit {
+export class CollectiveGroupsComponent implements OnInit, AfterViewInit {
 
   collectiveGroups: CollectiveGroupModel[] = [];
   private _collectiveGroups: CollectiveGroup[] = [];
@@ -40,6 +39,10 @@ export class CollectiveGroupsComponent implements OnInit {
 
   ngOnInit() {
     this.initCollectiveGroups();
+  }
+
+  ngAfterViewInit() {
+    this.datasource.sort = this.sort;
   }
 
   initCollectiveGroups() {

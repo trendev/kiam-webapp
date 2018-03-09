@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Category } from '@app/entities';
 import { ProfessionalService } from '@app/core';
@@ -12,7 +12,7 @@ import { compareCategoriesFn, SuccessMessageComponent } from '@app/shared';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss'],
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent implements OnInit, AfterViewInit {
 
   categories: CategoryModel[] = [];
   private _categories: Category[] = [];
@@ -39,6 +39,10 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.initCategories();
+  }
+
+  ngAfterViewInit() {
+    this.datasource.sort = this.sort;
   }
 
   initCategories() {

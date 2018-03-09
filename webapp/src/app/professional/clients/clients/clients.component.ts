@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/finally';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ProfessionalService } from '@app/core';
 import { Client } from '@app/entities';
 import { MatTableDataSource, MatSort, Sort, MatSnackBar } from '@angular/material';
@@ -13,7 +13,7 @@ import { ErrorHandlerService } from '@app/error-handler.service';
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss'],
 })
-export class ClientsComponent implements OnInit {
+export class ClientsComponent implements OnInit, AfterViewInit {
 
   clients: ClientModel[] = [];
   private _clients: Client[];
@@ -50,6 +50,10 @@ export class ClientsComponent implements OnInit {
   ngOnInit() {
     this.displayedColumns = this.columns.map(c => c.columnDef);
     this.initClients();
+  }
+
+  ngAfterViewInit() {
+    this.datasource.sort = this.sort;
   }
 
   initClients() {
