@@ -1,3 +1,4 @@
+import { compareCollectiveGroupsFn } from './../../../shared/utils';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CollectiveGroup } from '@app/entities';
 import { MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
@@ -15,7 +16,7 @@ import { ErrorHandlerService } from '@app/error-handler.service';
 export class CollectiveGroupsComponent implements OnInit {
 
   collectiveGroups: CollectiveGroupModel[] = [];
-  private _collectiveGroups: CollectiveGroup[];
+  private _collectiveGroups: CollectiveGroup[] = [];
 
   displayedColumns = ['id', 'groupName', 'city', 'phone'];
   datasource: MatTableDataSource<CollectiveGroupModel>;
@@ -42,14 +43,14 @@ export class CollectiveGroupsComponent implements OnInit {
   }
 
   initCollectiveGroups() {
-    this.collectiveGroups = this._collectiveGroups.map(cg => {
+    this.collectiveGroups = this._collectiveGroups.sort(compareCollectiveGroupsFn).map(cg => {
       return {
         id: cg.id + '',
         groupName: cg.groupName || '',
         city: cg.address.city || '',
         phone: Utils.formatPhoneNumber(cg.phone) || ''
       };
-    }).sort((cg1, cg2) => cg1.groupName.localeCompare(cg2.groupName));
+    });
     this.datasource = new MatTableDataSource<CollectiveGroupModel>(this.collectiveGroups);
     this.datasource.sort = this.sort;
   }

@@ -1,3 +1,46 @@
-<p>
-  La gestion des catégories (ex: libellé de fidélité du client, de son importance...) sera prochainement disponible sur cette page.
-</p>
+<div class="container">
+  <mat-card>
+    <mat-card-title>Liste des catégories de Client</mat-card-title>
+    <mat-card-subtitle>
+      {categories.length, plural, =0 {aucune catégorie} =1 {une catégorie} other {{{categories.length}} catégories}}
+    </mat-card-subtitle>
+    <mat-card-content *ngIf="categories.length > 0">
+      <div class="list-container  mat-elevation-z2">
+        <div class="search-header">
+          <mat-form-field>
+            <mat-placeholder>
+              <i>Recherche</i>
+            </mat-placeholder>
+            <input matInput (keyup)="applyFilter($event.target.value)">
+          </mat-form-field>
+        </div>
+        <mat-table #table [dataSource]="datasource" matSort>
+
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Nom</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="gotoCategoryDetails(row.id)">
+          </mat-row>
+        </mat-table>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="form-button-container">
+        <button type="button" matTooltip="Rafraîchir la liste à partir du serveur" mat-mini-fab color="accent" (click)="refreshCategories()">
+          <mat-icon aria-label="Rafraîchir la liste à partir du serveur">refresh</mat-icon>
+        </button>
+        <a mat-mini-fab matTooltip="Ajouter une nouvelle catégori" color="primary" routerLink="./create-category" routerLinkActive="active">
+          <mat-icon aria-label="Ajouter une nouvelle catégori">add</mat-icon>
+        </a>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

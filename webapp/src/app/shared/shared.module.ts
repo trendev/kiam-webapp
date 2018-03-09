@@ -257,7 +257,8 @@ import { PeriodSelectorComponent } from './bills/period-selector/period-selector
     UnexpectedErrorComponent,
     CollectiveGroupsListRefreshedComponent,
     CollectiveGroupCreatedComponent,
-    CollectiveGroupUpdatedComponent
+    CollectiveGroupUpdatedComponent,
+    SuccessMessageComponent
   ]
 })
 
