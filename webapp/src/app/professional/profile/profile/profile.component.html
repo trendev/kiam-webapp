@@ -1,8 +1,8 @@
 <div class="container">
   <mat-card>
     <form [formGroup]="form" novalidate>
-      <mat-card-title>Modification du profil - {{pro.email}}</mat-card-title>
-
+      <mat-card-title>Profil</mat-card-title>
+      <mat-card-subtitle>Email : {{pro.email}}</mat-card-subtitle>
       <div class="top-button-container">
         <a mat-raised-button color="primary" routerLink="./change-password" routerLinkActive="active">
           Nouveau mot de passe
