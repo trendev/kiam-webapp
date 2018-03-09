@@ -30,4 +30,10 @@ export class CategoryService {
       .catch(e => Observable.throw(e));
   }
 
+  getClients(id: number): Observable<Client[]> {
+    return this.http.get<Client[]>(`${this.api}/${id}/clients`, { withCredentials: true })
+      .map(clients => clients.map(c => new Client(c)))
+      .catch(e => Observable.throw(e));
+  }
+
 }
