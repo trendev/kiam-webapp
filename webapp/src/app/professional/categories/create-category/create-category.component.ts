@@ -35,12 +35,12 @@ export class CreateCategoryComponent implements OnInit {
       description: new FormControl('', [
         Validators.required,
         CustomValidators.blankStringForbidden,
-        Validators.maxLength(50)
+        Validators.maxLength(150)
       ]),
       name: new FormControl('', [
         Validators.required,
         CustomValidators.blankStringForbidden,
-        Validators.maxLength(150)
+        Validators.maxLength(50)
       ])
     });
 

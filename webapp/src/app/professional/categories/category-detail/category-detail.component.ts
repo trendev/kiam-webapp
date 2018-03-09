@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Category, Client } from '@app/entities';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { CategoryService } from '@app/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
+import { MatSnackBar } from '@angular/material';
+import { ErrorHandlerService } from '@app/error-handler.service';
+import { CustomValidators, SuccessMessageComponent } from '@app/shared';
 
 @Component({
   selector: 'app-category-detail',
@@ -7,9 +15,88 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryDetailComponent implements OnInit {
 
-  constructor() { }
+  category: Category;
+  clients: Client[];
+  categoryClients: Client[];
+
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder,
+    private categoryService: CategoryService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private loadingOverlayService: LoadingOverlayService,
+    private snackBar: MatSnackBar,
+    private errorHandler: ErrorHandlerService) {
+    this.route.data.subscribe(
+      (data: {
+        category: Category;
+        clients: Client[];
+        categoryClients: Client[];
+      }) => {
+
+        this.category = data.category;
+        this.clients = data.clients;
+        this.categoryClients = data.categoryClients;
+        this.form = this.createForm();
+      });
+  }
 
   ngOnInit() {
   }
+
+  createForm(): FormGroup {
+    const fg = this.fb.group({
+      description: new FormControl(this.category.description, [
+        Validators.required,
+        CustomValidators.blankStringForbidden,
+        Validators.maxLength(150)
+      ]),
+      name: new FormControl(this.category.name, [
+        Validators.required,
+        CustomValidators.blankStringForbidden,
+        Validators.maxLength(50)
+      ])
+    });
+
+    return fg;
+  }
+
+  revert() {
+    // resets the form field based on the raw value, value alone will ignore disabled field (uuid,registrationDate...)
+    this.form.reset(this.createForm().getRawValue());
+
+  }
+
+  prepareSave(): Category {
+    const value = this.form.getRawValue();
+
+    const ct = new Category({
+      id: this.category.id,
+      description: value.description || undefined,
+      name: value.name || undefined
+    });
+
+    return ct;
+  }
+
+  save() {
+    const ct = this.prepareSave();
+    this.loadingOverlayService.start();
+    this.categoryService.update(ct).subscribe(
+      _ct => {
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `La catégorie ${_ct.name} a été modifiée`,
+          duration: 2000
+        });
+        this.router.navigate(['../'], { relativeTo: this.route });
+      },
+      // TODO: handle this (check the status code, etc)
+      e => {
+        this.loadingOverlayService.stop();
+        this.errorHandler.handle(e, 'Impossible de sauvegarder les modifications de la catégorie sur le serveur');
+      });
+  }
+
 
 }

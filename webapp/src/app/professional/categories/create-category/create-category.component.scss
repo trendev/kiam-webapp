@@ -28,8 +28,8 @@ mat-card {
 }
 
 @media all and (max-device-width: 600px) {
-    .phone,
-    .groupName {
+    .name,
+    .description {
         width: 100%;
     }
 }
