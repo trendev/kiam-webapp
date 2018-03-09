@@ -1,3 +1,4 @@
+import { CreateCategoryComponent } from './create-category/create-category.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -12,6 +13,10 @@ const routes: Routes = [
     resolve: {
       categories: CategoriesResolverService
     }
+  },
+  {
+    path: 'create-category',
+    component: CreateCategoryComponent,
   },
   { path: '**', component: PageNotFoundComponent }
 ];
