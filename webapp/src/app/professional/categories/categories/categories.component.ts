@@ -5,8 +5,7 @@ import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
-import { compareCategoriesFn } from '@app/shared';
-import { SuccessMessageComponent } from '@app/shared/snack-messages/success-message/success-message.component';
+import { compareCategoriesFn, SuccessMessageComponent } from '@app/shared';
 
 @Component({
   selector: 'app-categories',

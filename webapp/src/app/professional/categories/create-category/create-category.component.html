@@ -1,3 +1,54 @@
-<p>
-  create-category works!
-</p>
+<div class="container">
+  <mat-card>
+    <form [formGroup]="form" novalidate>
+      <mat-card-title>Nouvelle Catégorie</mat-card-title>
+      <mat-card-content>
+       
+        <mat-form-field class="name">
+          <input matInput #name maxlength="50" placeholder="Nom" formControlName="name" required>
+          <mat-hint align="end">{{name.value?.length || 0}}/50</mat-hint>
+        </mat-form-field>
+        <app-error [control]="form.get('name')" [error]="'required'">
+          Le nom doit être renseigné.
+        </app-error>
+        <app-error [control]="form.get('name')" [error]="'blankStringForbidden'">
+          Le nom ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+        </app-error>
+        <app-error [control]="form.get('name')" [error]="'maxlength'">
+          Le nom ne doit pas excéder 50 caractères.
+        </app-error>
+
+        <mat-form-field class="description">
+          <input matInput #description maxlength="150" placeholder="Nom" formControlName="description" required>
+          <mat-hint align="end">{{description.value?.length || 0}}/150</mat-hint>
+        </mat-form-field>
+        <app-error [control]="form.get('description')" [error]="'required'">
+          La description doit être renseigné.
+        </app-error>
+        <app-error [control]="form.get('description')" [error]="'blankStringForbidden'">
+          La description ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+        </app-error>
+        <app-error [control]="form.get('description')" [error]="'maxlength'">
+          La description ne doit pas excéder 150 caractères.
+        </app-error>
+
+      </mat-card-content>
+
+      <ng-container appErrorAggregator></ng-container>
+      <mat-card-actions>
+        <div class="form-button-container">
+          <button type="button" matTooltip="Annuler les modifications" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
+            <mat-icon aria-label="Annuler les modifications">undo</mat-icon>
+          </button>
+          <a mat-mini-fab matTooltip="Annuler la création de la catégorie et retourner à la liste" color="accent" routerLink="../" routerLinkActive="active">
+            <mat-icon aria-label="Annuler la création de la catégorie et retourner à la liste">list</mat-icon>
+          </a>
+          <button type="button" mat-mini-fab matTooltip="Sauvegarder la nouvelle catégorie" color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+            <mat-icon aria-label="Sauvegarder la nouvelle catégorie">done</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+
+</div>
