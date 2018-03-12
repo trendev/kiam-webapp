@@ -1,3 +1,34 @@
-<p>
-  client-list works!
-</p>
+<section>
+  <div class="search-header">
+    <mat-form-field>
+      <mat-placeholder>
+        <i>Recherche</i>
+      </mat-placeholder>
+      <input matInput (keyup)="applyFilter($event.target.value)">
+    </mat-form-field>
+  </div>
+  <mat-table #table [dataSource]="datasource" matSort>
+    <ng-container matColumnDef="checked">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="item">
+        <mat-icon>check_box</mat-icon>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="item">
+        <mat-checkbox [checked]="element.checked" (change)="select($event,element)"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.lastname}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef>Prénom</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.firstname}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <!-- (click)="gotoBill(row)" -->
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [showFirstLastButtons]="true" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</section>

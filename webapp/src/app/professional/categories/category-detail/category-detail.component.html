@@ -60,7 +60,7 @@
     <mat-card-title>Clients</mat-card-title>
     <mat-card-content>
       <!-- <app-bills-micro-list [bills]="collectiveGroupBills" (gotobill)="gotoBill($event)"></app-bills-micro-list> -->
-      <app-category-client-list></app-category-client-list>
+      <app-category-client-list [clients]="clients" [categoryClients]="categoryClients"></app-category-client-list>
     </mat-card-content>
     <!-- <mat-card-actions>
       <div class="form-button-container">

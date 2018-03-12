@@ -28,7 +28,7 @@ mat-card {
 
 @media all and (max-device-width: 600px) {
     .container {
-        flex-wrap: wrap-reverse;
+        flex-wrap: wrap;
     }
     mat-card {
         margin: 10px 10px 0px 10px; // padding: 10px 5px 10px 5px;

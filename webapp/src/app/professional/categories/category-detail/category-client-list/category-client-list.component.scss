@@ -1,0 +1,33 @@
+.mat-table {
+    overflow: auto;
+    // max-height: 500px;
+}
+
+
+.search-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 64px;
+    padding: 5px 20px 0;
+}
+
+mat-cell {
+    overflow: visible;
+}
+
+
+@media all and (max-device-width: 720px) {
+    .mat-header-row,
+    .mat-row {
+        padding: 0;
+    }
+
+    .item {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        min-width: 50px;
+    }
+}
