@@ -7,6 +7,7 @@ import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { CustomValidators, SuccessMessageComponent } from '@app/shared';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-category-detail',
@@ -113,6 +114,49 @@ export class CategoryDetailComponent implements OnInit {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de supprimer la catégorie sur le serveur');
       });
+  }
+
+  addClient(clientid: number) {
+    this.manageAssociation(clientid,
+      this.categoryService.addClient,
+      `a été ajouté à`,
+      `d'ajouter le client à`,
+      cl => this.categoryClients.push(cl));
+  }
+
+  removeClient(clientid: number) {
+    this.manageAssociation(clientid,
+      this.categoryService.removeClient,
+      `a été supprimé de`,
+      `de supprimer le client de`,
+      cl => {
+        this.categoryClients = this.categoryClients.filter(_cl => _cl.id !== cl.id);
+      });
+  }
+
+  manageAssociation(clientid: number,
+    actionCallback: (categoryid: number, clientid: number) => Observable<Client>,
+    successmsg: string,
+    errmsg: string,
+    updateCategoryClients: (client: Client) => void) {
+
+    this.loadingOverlayService.start();
+    const categoryid = this.category.id;
+    actionCallback.apply(this.categoryService, [categoryid, clientid])
+      .finally(() => this.loadingOverlayService.stop())
+      .subscribe(
+        client => {
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Le client ${client.customerDetails.lastName} ${client.customerDetails.firstName} `
+              + successmsg + ` la catégorie ${this.category.name}`,
+            duration: 2000
+          });
+          updateCategoryClients(client);
+        },
+        // TODO: handle this (check the status code, etc)
+        e => {
+          this.errorHandler.handle(e, `Impossible ` + errmsg + ` la catégorie`);
+        });
   }
 
 }

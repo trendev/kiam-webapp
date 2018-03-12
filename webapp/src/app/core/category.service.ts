@@ -36,4 +36,17 @@ export class CategoryService {
       .catch(e => Observable.throw(e));
   }
 
+  addClient(categoryid: number, clientid: number): Observable<Client> {
+    return this.http.put<Client>(`${this.api}/${categoryid}/addClient/${clientid}`, null, { withCredentials: true })
+      .map(cl => new Client(cl))
+      .catch(e => Observable.throw(e));
+  }
+
+  removeClient(categoryid: number, clientid: number): Observable<Client> {
+    return this.http.put<Client>(`${this.api}/${categoryid}/removeClient/${clientid}`, null, { withCredentials: true })
+      .map(cl => new Client(cl))
+      .catch(e => Observable.throw(e));
+  }
+
+
 }
