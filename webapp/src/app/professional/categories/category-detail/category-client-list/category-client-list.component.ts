@@ -11,7 +11,7 @@ export class CategoryClientListComponent implements OnInit, OnChanges, AfterView
 
   @Input() categoryClients: Client[] = [];
   @Input() clients: Client[] = [];
-  clientsModel: ClientModel[];
+  private clientsModel: ClientModel[];
 
   displayedColumns = [
     'checked', 'lastname', 'firstname'];
@@ -23,7 +23,7 @@ export class CategoryClientListComponent implements OnInit, OnChanges, AfterView
   @Output() add = new EventEmitter<number>();
   @Output() remove = new EventEmitter<number>();
 
-  clientSortFn: (cl1: ClientModel, cl2: ClientModel) => number
+  private clientSortFn: (cl1: ClientModel, cl2: ClientModel) => number
     = (cl1, cl2) => {
       if (cl1.checked === cl2.checked) {
         return cl1.lastname === cl2.lastname ?
@@ -37,11 +37,12 @@ export class CategoryClientListComponent implements OnInit, OnChanges, AfterView
   constructor() { }
 
   ngOnChanges() {
-    this.initClientModel();
-    this.datasource.data = this.clientsModel.sort(this.clientSortFn);
+    this.checkClientModel();
   }
 
   ngOnInit() {
+    this.initClientModel();
+    this.datasource.data = this.clientsModel.sort(this.clientSortFn);
   }
 
   ngAfterViewInit() {
@@ -53,7 +54,7 @@ export class CategoryClientListComponent implements OnInit, OnChanges, AfterView
     this.clientsModel = this.clients.map(
       cl => {
         return {
-          // find the current client in the category's client list
+          // test if the client is categorized
           checked: this.categoryClients.findIndex(_cl => _cl.id === cl.id) !== -1,
           id: cl.id,
           firstname: cl.customerDetails.firstName || '',
@@ -61,6 +62,16 @@ export class CategoryClientListComponent implements OnInit, OnChanges, AfterView
         };
       }
     );
+  }
+
+  checkClientModel() {
+    if (this.clientsModel) {
+      // preserve the order and update the checked value
+      this.clientsModel.forEach(cm => {
+        cm.checked = this.categoryClients.findIndex(_cl => _cl.id === cm.id) !== -1;
+      });
+      this.datasource.data = this.clientsModel;
+    }
   }
 
   applyFilter(filterValue: string) {

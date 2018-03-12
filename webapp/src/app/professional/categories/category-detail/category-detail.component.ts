@@ -116,6 +116,10 @@ export class CategoryDetailComponent implements OnInit {
       });
   }
 
+  /**
+   * Add a client in the category
+   * @param clientid the client's id
+   */
   addClient(clientid: number) {
     this.manageAssociation(clientid,
       this.categoryService.addClient,
@@ -124,6 +128,10 @@ export class CategoryDetailComponent implements OnInit {
       cl => this.categoryClients.push(cl));
   }
 
+  /**
+   * Remove a client from the category
+   * @param clientid the client's id
+   */
   removeClient(clientid: number) {
     this.manageAssociation(clientid,
       this.categoryService.removeClient,
@@ -139,7 +147,15 @@ export class CategoryDetailComponent implements OnInit {
       });
   }
 
-  manageAssociation(clientid: number,
+  /**
+   * Factorized method used to create/delete a client & category association
+   * @param clientid the id of the client to add/remove
+   * @param actionCallback the callback action (should be this.categoryService.addClient() or this.categoryService.removeClient() )
+   * @param successmsg the message to display if the callback successfully finished
+   * @param errmsg the error message to display
+   * @param updateCategoryClients operations to perform on the client list of the category, use to update the model if an error occurs
+   */
+  private manageAssociation(clientid: number,
     actionCallback: (categoryid: number, clientid: number) => Observable<Client>,
     successmsg: string,
     errmsg: string,
@@ -147,6 +163,7 @@ export class CategoryDetailComponent implements OnInit {
 
     this.loadingOverlayService.start();
     const categoryid = this.category.id;
+    // apply the action callback on the category service with the specified parameters
     actionCallback.apply(this.categoryService, [categoryid, clientid])
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
@@ -156,11 +173,13 @@ export class CategoryDetailComponent implements OnInit {
               + successmsg + ` la catégorie ${this.category.name}`,
             duration: 2000
           });
+          // add/remove the client from the client list of the category
           updateCategoryClients(client);
         },
-        // TODO: handle this (check the status code, etc)
         e => {
           this.errorHandler.handle(e, `Impossible ` + errmsg + ` la catégorie`);
+          // provoke a change event
+          // TODO : use an Observer instead...
           this.categoryClients = this.categoryClients.slice();
         });
   }
