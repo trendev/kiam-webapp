@@ -11,7 +11,7 @@
     <mat-form-field>
       <input matInput placeholder="Identifiant de la société (SIRET)" formControlName="companyID" required>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field [floatLabel]="floatLabel">
       <input matInput placeholder="Numéro de TVA" formControlName="vatcode">
       <button type="button" mat-button matSuffix mat-icon-button (click)="expectedVatCode()">
         <mat-icon>subdirectory_arrow_left</mat-icon>

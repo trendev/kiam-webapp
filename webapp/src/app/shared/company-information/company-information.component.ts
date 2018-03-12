@@ -30,7 +30,6 @@ export class CompanyInformationComponent implements OnInit {
 
 
   // float label option of the vatcode input
-  // used to fix an issue on iOS where the computed vatcode were overlayed by the floating label
   floatLabel = 'auto';
 
   constructor(private parent: FormGroupDirective) { }
@@ -50,11 +49,18 @@ export class CompanyInformationComponent implements OnInit {
         this.errorAggregator.viewContainerRef.createEmbeddedView(this.errorsTemplate);
       }
     });
+
+    // used to fix an issue on iOS where the computed vatcode were overlayed by the floating label
+    this.form.get('companyInformation').get('vatcode').valueChanges.subscribe(value => {
+      if (!value) {
+        this.floatLabel = 'auto';
+      } else {
+        this.floatLabel = 'always';
+      }
+    });
   }
 
   expectedVatCode() {
-    this.floatLabel = 'always';
-
     const vatcode =
       CustomValidators.computeVatCodeFromCompanyID(this.form.get('companyInformation').get('companyCodes').get('companyID').value);
     this.form.get('companyInformation').get('companyCodes').get('vatcode').setValue(vatcode);
