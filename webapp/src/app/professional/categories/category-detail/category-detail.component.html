@@ -56,21 +56,19 @@
     </form>
   </mat-card>
 
-  <!-- <mat-card>
-    <mat-card-title>Factures</mat-card-title>
+  <mat-card>
+    <mat-card-title>Clients</mat-card-title>
     <mat-card-content>
-      <app-bills-micro-list [bills]="collectiveGroupBills" (gotobill)="gotoBill($event)"></app-bills-micro-list>
+      <!-- <app-bills-micro-list [bills]="collectiveGroupBills" (gotobill)="gotoBill($event)"></app-bills-micro-list> -->
+      <app-category-client-list></app-category-client-list>
     </mat-card-content>
     <mat-card-actions>
       <div class="form-button-container">
-        <button type="button" matTooltip="Rafraîchir" mat-mini-fab color="accent" (click)="refreshBills()">
+        <button type="button" matTooltip="Rafraîchir" mat-mini-fab color="accent" (click)="refreshClientList()">
           <mat-icon aria-label="Rafraîchir">refresh</mat-icon>
-        </button>
-        <button type="button" matTooltip="Créer une nouvelle facture" mat-mini-fab color="primary" (click)="createNewBill()">
-          <mat-icon aria-label="Créer une nouvelle facture">add</mat-icon>
         </button>
       </div>
     </mat-card-actions>
-  </mat-card> -->
+  </mat-card>
 
 </div>

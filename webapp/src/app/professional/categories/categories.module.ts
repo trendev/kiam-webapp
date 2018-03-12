@@ -1,3 +1,4 @@
+import { CategoryClientListComponent } from './category-detail/category-client-list/category-client-list.component';
 import { CategoryClientsResolverService } from './category-clients-resolver.service';
 import { SharedModule } from '@app/shared';
 import { NgModule } from '@angular/core';
@@ -14,7 +15,7 @@ import {  } from './clients-resolver.service';
     SharedModule,
     CategoriesRoutingModule
   ],
-  declarations: [CategoriesComponent, CreateCategoryComponent, CategoryDetailComponent],
+  declarations: [CategoriesComponent, CreateCategoryComponent, CategoryDetailComponent, CategoryClientListComponent],
   providers: [CategoryDetailResolverService, CategoryClientsResolverService]
 })
 export class CategoriesModule { }
