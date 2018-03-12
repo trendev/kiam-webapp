@@ -28,6 +28,11 @@ export class CompanyInformationComponent implements OnInit {
   @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
   @Input() errorAggregator: ErrorAggregatorDirective;
 
+
+  // float label option of the vatcode input
+  // used to fix an issue on iOS where the computed vatcode were overlayed by the floating label
+  floatLabel = 'auto';
+
   constructor(private parent: FormGroupDirective) { }
 
   ngOnInit() {
@@ -48,6 +53,8 @@ export class CompanyInformationComponent implements OnInit {
   }
 
   expectedVatCode() {
+    this.floatLabel = 'always';
+
     const vatcode =
       CustomValidators.computeVatCodeFromCompanyID(this.form.get('companyInformation').get('companyCodes').get('companyID').value);
     this.form.get('companyInformation').get('companyCodes').get('vatcode').setValue(vatcode);
