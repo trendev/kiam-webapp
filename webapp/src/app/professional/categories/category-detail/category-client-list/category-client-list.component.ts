@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Client } from '@app/entities';
 import { MatTableDataSource, MatSort, MatPaginator, MatCheckboxChange } from '@angular/material';
 
@@ -7,7 +7,7 @@ import { MatTableDataSource, MatSort, MatPaginator, MatCheckboxChange } from '@a
   templateUrl: './category-client-list.component.html',
   styleUrls: ['./category-client-list.component.scss']
 })
-export class CategoryClientListComponent implements OnInit, AfterViewInit {
+export class CategoryClientListComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() categoryClients: Client[] = [];
   @Input() clients: Client[] = [];
@@ -36,9 +36,12 @@ export class CategoryClientListComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.initClientModel();
     this.datasource.data = this.clientsModel.sort(this.clientSortFn);
+  }
+
+  ngOnInit() {
   }
 
   ngAfterViewInit() {

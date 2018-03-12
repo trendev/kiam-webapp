@@ -130,7 +130,12 @@ export class CategoryDetailComponent implements OnInit {
       `a été supprimé de`,
       `de supprimer le client de`,
       cl => {
-        this.categoryClients = this.categoryClients.filter(_cl => _cl.id !== cl.id);
+        // remove the client from the list
+        // avoid to filter/set a new list and emit a change
+        const index = this.categoryClients.findIndex(_cl => _cl.id === cl.id);
+        if (index !== -1) {
+          this.categoryClients.splice(index, 1);
+        }
       });
   }
 
@@ -156,6 +161,7 @@ export class CategoryDetailComponent implements OnInit {
         // TODO: handle this (check the status code, etc)
         e => {
           this.errorHandler.handle(e, `Impossible ` + errmsg + ` la catégorie`);
+          this.categoryClients = this.categoryClients.slice();
         });
   }
 
