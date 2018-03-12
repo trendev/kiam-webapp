@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Client } from '@app/entities';
 import { MatTableDataSource, MatSort, MatPaginator, MatCheckboxChange } from '@angular/material';
 
@@ -19,6 +19,9 @@ export class CategoryClientListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  @Output() add = new EventEmitter<number>();
+  @Output() remove = new EventEmitter<number>();
 
   clientSortFn: (cl1: ClientModel, cl2: ClientModel) => number
     = (cl1, cl2) => {
@@ -70,9 +73,9 @@ export class CategoryClientListComponent implements OnInit, AfterViewInit {
 
   private onSelection(element: ClientModel) {
     if (element.checked) {
-      // this.addOffering(element.offering);
+      this.add.emit(element.id);
     } else {
-      // this.removeOffering(element.offering);
+      this.remove.emit(element.id);
     }
   }
 
