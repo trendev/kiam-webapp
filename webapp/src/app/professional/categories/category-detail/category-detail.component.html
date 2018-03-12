@@ -57,17 +57,10 @@
   </mat-card>
 
   <mat-card>
-    <mat-card-title>Clients</mat-card-title>
+    <mat-card-title> {categoryClients.length, plural, =0 {Catégorie vide} =1 {1 client} other {{{categoryClients.length}} clients}}</mat-card-title>
     <mat-card-content>
       <app-category-client-list [clients]="clients" [categoryClients]="categoryClients" (add)="addClient($event)" (remove)="removeClient($event)"></app-category-client-list>
     </mat-card-content>
-    <!-- <mat-card-actions>
-      <div class="form-button-container">
-        <button type="button" matTooltip="Rafraîchir" mat-mini-fab color="accent" (click)="refreshClientList()">
-          <mat-icon aria-label="Rafraîchir">refresh</mat-icon>
-        </button>
-      </div>
-    </mat-card-actions> -->
   </mat-card>
 
 </div>
