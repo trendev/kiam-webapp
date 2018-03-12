@@ -98,5 +98,21 @@ export class CategoryDetailComponent implements OnInit {
       });
   }
 
+  remove() {
+    this.loadingOverlayService.start();
+    this.categoryService.remove(this.category.id).subscribe(
+      resp => {
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `La catégorie ${this.category.name} a été supprimée`,
+          duration: 2000
+        });
+        this.router.navigate(['../'], { relativeTo: this.route });
+      },
+      // TODO: handle this (check the status code, etc)
+      e => {
+        this.loadingOverlayService.stop();
+        this.errorHandler.handle(e, 'Impossible de supprimer la catégorie sur le serveur');
+      });
+  }
 
 }

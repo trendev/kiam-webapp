@@ -48,6 +48,9 @@
           <button type="button" matTooltip="Sauvegarder la catégorie" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
             <mat-icon aria-label="Sauvegarder la catégorie">done</mat-icon>
           </button>
+          <button type="button" matTooltip="Supprimer la catégorie" mat-mini-fab color="warn" (click)="remove()">
+            <mat-icon aria-label="Supprimer la catégorie">delete_forever</mat-icon>
+          </button>
         </div>
       </mat-card-actions>
     </form>
