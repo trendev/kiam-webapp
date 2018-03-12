@@ -17,11 +17,11 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="lastname">
-      <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header >Nom</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.lastname}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="firstname">
-      <mat-header-cell *matHeaderCellDef>Prénom</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Prénom</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.firstname}}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

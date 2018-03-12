@@ -14,7 +14,7 @@ export class CategoryClientListComponent implements OnInit, AfterViewInit {
   clientsModel: ClientModel[];
 
   displayedColumns = [
-    'checked', 'firstname', 'lastname'];
+    'checked', 'lastname', 'firstname'];
   datasource: MatTableDataSource<ClientModel> = new MatTableDataSource<ClientModel>();
 
   @ViewChild(MatSort) sort: MatSort;
@@ -47,6 +47,7 @@ export class CategoryClientListComponent implements OnInit, AfterViewInit {
     this.clientsModel = this.clients.map(
       cl => {
         return {
+          // find the current client in the category's client list
           checked: this.categoryClients.findIndex(_cl => _cl.id === cl.id) !== -1,
           id: cl.id,
           firstname: cl.customerDetails.firstName || '',
