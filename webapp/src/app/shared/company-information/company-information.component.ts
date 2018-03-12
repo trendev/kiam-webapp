@@ -51,13 +51,15 @@ export class CompanyInformationComponent implements OnInit {
     });
 
     // used to fix an issue on iOS where the computed vatcode were overlayed by the floating label
-    this.form.get('companyInformation').get('vatcode').valueChanges.subscribe(value => {
-      if (!value) {
-        this.floatLabel = 'auto';
-      } else {
-        this.floatLabel = 'always';
-      }
-    });
+    this.form.get('companyInformation')
+      .get('companyCodes')
+      .get('vatcode').valueChanges.forEach(value => {
+        if (!value) {
+          this.floatLabel = 'auto';
+        } else {
+          this.floatLabel = 'always';
+        }
+      });
   }
 
   expectedVatCode() {
