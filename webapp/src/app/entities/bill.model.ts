@@ -16,6 +16,8 @@ export class Bill {
     discount: number;
     paymentDate: number;
     issueDate: number;
+    vatInclusive: boolean;
+    cancelled: boolean;
     comments: string[];
     payments: Payment[];
     purchasedOfferings: PurchasedOffering[];

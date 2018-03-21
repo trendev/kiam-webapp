@@ -4,6 +4,7 @@ import { OfferingSnapshot } from './offering-snapshot.model';
 export class PurchasedOffering {
     id: number;
     qty: number;
+    vatRate: number;
     offeringSnapshot: OfferingSnapshot;
     offering: Offering;
 
