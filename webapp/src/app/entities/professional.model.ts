@@ -1,3 +1,4 @@
+import { VatRates } from './vat-rates.model';
 import { PaymentMode } from './payment-mode.model';
 import { Business } from './business.model';
 import { UserAccountType } from './user-account.model';
@@ -14,6 +15,7 @@ export class Professional extends Customer {
     billsRefDate: number; // cannot be directly edited (ignored during a POST/PUT)
     businesses: Business[];
     paymentModes: PaymentMode[];
+    vatRates: VatRates; // init during a POST/PUT if vatcode is provided
 
     constructor(values: Object = {}) {
         super(values);
