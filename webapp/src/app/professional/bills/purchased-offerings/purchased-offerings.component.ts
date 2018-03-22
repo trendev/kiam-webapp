@@ -63,6 +63,8 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
     this.initOfferingsModel();
     this.sub = this.resetRequest$.subscribe(b => this.initOfferingsModel());
 
+    this.vatInclusive.valueChanges.forEach(_ => this.computePurchasedOfferingsValue());
+
   }
 
   ngOnDestroy() {
