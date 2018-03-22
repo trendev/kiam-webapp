@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Subject } from 'rxjs/Subject';
 import * as moment from 'moment';
+import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-create-bill',
@@ -39,7 +40,6 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     this.initAmountComputation();
-    this.form = this.createForm();
   }
 
   private initAmountComputation() {
@@ -49,12 +49,18 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngOnInit() {
+    this.form = this.createForm();
+
+    // inits the delivery and payment dates bounds
+    this.setDatesValidators();
+
     this.form.valueChanges.forEach(_ => {
       if (this.form.invalid && this.errorAggregator) {
         this.errorAggregator.viewContainerRef.clear();
       }
     });
 
+    // compute the amount everytime the discount value is changed
     this.form.get('information').get('discount').valueChanges
       .map(value => +value ? value : 0)
       .forEach(value => {
@@ -78,7 +84,8 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngOnChanges() {
-    this.setDatesValidators();
+    // changes should occur if the deliveryDate of the submitted bill is not correct
+    if (this.form) { this.setDatesValidators(); }
   }
 
   public ngDoCheck(): void {
@@ -94,6 +101,7 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
 
   createForm(): FormGroup {
     const fg = this.fb.group({
+      vatInclusive: new FormControl(this.vatRates ? true : false),
       information: this.fb.group({
         amount: new FormControl({ value: 0, disabled: true }, [
           Validators.min(0)
@@ -196,12 +204,24 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
       payments: value.payments.content.map(pm => new Payment({
         amount: pm.amount * 10 * 10,
         paymentMode: pm.paymentMode
-      }))
+      })),
+      vatInclusive: value.vatInclusive
     });
   }
 
   cancelBillCreation() {
     this.cancel.emit();
+  }
+
+
+  get vatInclusive(): AbstractControl {
+    return this.form.get('vatInclusive');
+  }
+
+  vatChanges(change: MatSlideToggleChange) {
+    this.vatInclusive.setValue(change.checked);
+    this.vatInclusive.markAsDirty();
+    this.vatInclusive.markAsTouched();
   }
 
 }
