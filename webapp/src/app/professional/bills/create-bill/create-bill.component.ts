@@ -1,6 +1,6 @@
 import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
 import { Component, Input, EventEmitter, Output, ViewChild, OnInit, OnChanges, DoCheck, ChangeDetectorRef } from '@angular/core';
-import { Offering, PaymentMode, OfferingType, Bill, Payment } from '@app/entities';
+import { Offering, PaymentMode, OfferingType, Bill, Payment, VatRates } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
@@ -16,6 +16,8 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
   @Input() offerings: Offering[];
   @Input() paymentModes: PaymentMode[];
   @Input() billsRefDate: number;
+  @Input() vatRates: VatRates;
+
   @Output() cancel = new EventEmitter<any>();
   @Output() save = new EventEmitter<Bill>();
 

@@ -1,7 +1,7 @@
 import { BillCreatedComponent } from '@app/shared';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { Offering, PaymentMode, Bill, CollectiveGroupBill, CollectiveGroup } from '@app/entities';
+import { Offering, PaymentMode, Bill, CollectiveGroupBill, CollectiveGroup, VatRates } from '@app/entities';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
@@ -21,6 +21,7 @@ export class CreateCollectiveGroupBillComponent implements OnInit {
   offerings: Offering[];
   paymentModes: PaymentMode[];
   billsRefDate: number;
+  vatRates: VatRates;
 
   constructor(private collectiveGroupBillService: CollectiveGroupBillService,
     private route: ActivatedRoute,
@@ -38,11 +39,13 @@ export class CreateCollectiveGroupBillComponent implements OnInit {
       (data: {
         offerings: Offering[],
         paymentModes: PaymentMode[],
-        billsRefDate: number
+        billsRefDate: number,
+        vatRates: VatRates
       }) => {
         this.offerings = data.offerings;
         this.paymentModes = data.paymentModes;
         this.billsRefDate = data.billsRefDate;
+        this.vatRates = data.vatRates;
       }
     );
   }

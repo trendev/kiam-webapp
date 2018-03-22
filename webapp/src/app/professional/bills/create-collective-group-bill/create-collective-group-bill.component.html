@@ -1,5 +1,5 @@
-<app-create-bill [offerings]="offerings" [paymentModes]="paymentModes" [billsRefDate]="billsRefDate" (cancel)="returnToCollectiveGroupsDetail()"
-  (save)="save($event)">
+<app-create-bill [offerings]="offerings" [paymentModes]="paymentModes" [billsRefDate]="billsRefDate" [vatRates]="vatRates"
+  (cancel)="returnToCollectiveGroupsDetail()" (save)="save($event)">
   <p>
     Groupe :
     <b>{{name}}</b>

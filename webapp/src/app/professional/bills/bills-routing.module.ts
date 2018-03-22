@@ -8,7 +8,8 @@ import {
   OfferingsResolverService,
   ProfessionalPaymentModesResolverService,
   ProfessionalBillsRefDateResolverService,
-  ProfessionalBillsResolverService
+  ProfessionalBillsResolverService,
+  ProfessionalVatRatesResolverService
 } from '@app/core';
 import { BillsComponent } from './bills/bills.component';
 import { NgModule } from '@angular/core';
@@ -30,7 +31,8 @@ const routes: Routes = [
     resolve: {
       offerings: OfferingsResolverService,
       paymentModes: ProfessionalPaymentModesResolverService,
-      billsRefDate: ProfessionalBillsRefDateResolverService
+      billsRefDate: ProfessionalBillsRefDateResolverService,
+      vatRates: ProfessionalVatRatesResolverService
     }
   },
   {
@@ -47,7 +49,8 @@ const routes: Routes = [
     resolve: {
       offerings: OfferingsResolverService,
       paymentModes: ProfessionalPaymentModesResolverService,
-      billsRefDate: ProfessionalBillsRefDateResolverService
+      billsRefDate: ProfessionalBillsRefDateResolverService,
+      vatRates: ProfessionalVatRatesResolverService
     }
   },
   {

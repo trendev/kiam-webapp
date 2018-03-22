@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { Offering, PaymentMode, Bill, ClientBill, Client } from '@app/entities';
+import { Offering, PaymentMode, Bill, ClientBill, Client, VatRates } from '@app/entities';
 import { ClientBillService } from '@app/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -20,6 +20,7 @@ export class CreateClientBillComponent implements OnInit {
   offerings: Offering[];
   paymentModes: PaymentMode[];
   billsRefDate: number;
+  vatRates: VatRates;
 
   constructor(private clientBillService: ClientBillService,
     private route: ActivatedRoute,
@@ -37,11 +38,13 @@ export class CreateClientBillComponent implements OnInit {
       (data: {
         offerings: Offering[],
         paymentModes: PaymentMode[],
-        billsRefDate: number
+        billsRefDate: number,
+        vatRates: VatRates
       }) => {
         this.offerings = data.offerings;
         this.paymentModes = data.paymentModes;
         this.billsRefDate = data.billsRefDate;
+        this.vatRates = data.vatRates;
       }
     );
   }
