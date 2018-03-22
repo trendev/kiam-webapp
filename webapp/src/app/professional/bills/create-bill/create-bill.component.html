@@ -40,7 +40,8 @@
               </a>
             </ng-container>
             <ng-template #elseOfferingsBlock>
-              <app-purchased-offerings [offerings]="offerings" [resetRequest$]="resetRequest$" [errorAggregator]="errorAggregator" (total)="total = $event"></app-purchased-offerings>
+              <app-purchased-offerings [offerings]="offerings" [resetRequest$]="resetRequest$" [errorAggregator]="errorAggregator" [vatRates]="vatRates"
+                (total)="total = $event"></app-purchased-offerings>
             </ng-template>
           </mat-expansion-panel>
 

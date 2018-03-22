@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, OnDestroy, EventEmitter, Output, ViewContainerRef } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
-import { Offering, Service, Pack, OfferingType, PurchasedOffering } from '@app/entities';
+import { Offering, Service, Pack, OfferingType, PurchasedOffering, VatRates } from '@app/entities';
 import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/material';
 import { Utils, ErrorAggregatorDirective } from '@app/shared';
 import { Subject } from 'rxjs/Subject';
@@ -21,12 +21,15 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   @Input() offerings: Offering[];
+  @Input() vatRates: VatRates;
   @Input() resetRequest$: Subject<boolean>;
+
+  private _rates: number[];
+
   sub: Subscription;
 
   offeringsModel: PurchasedOfferingModel[];
-  displayedColumns = [
-    'checked', 'qty', 'name', 'price', 'businesses'];
+
   datasource: MatTableDataSource<PurchasedOfferingModel>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -73,16 +76,17 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
   initOfferingsModel() {
     this.offeringsModel = this.offerings
       .map(
-      o => {
-        return {
-          checked: false,
-          qty: 0,
-          name: o.shortname || o.name,
-          price: o.price,
-          businesses: Utils.getBusinesses(o.businesses), // display businesses as a string
-          offering: o
-        };
-      }
+        o => {
+          return {
+            checked: false,
+            qty: 0,
+            vatRate: this.rates.length ? this.rates[0] : undefined,
+            name: o.shortname || o.name,
+            price: o.price,
+            businesses: Utils.getBusinesses(o.businesses), // display businesses as a string
+            offering: o
+          };
+        }
       )
       .sort(this.omSortFn);
 
@@ -116,11 +120,14 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
       .filter(om => om.checked)
       .map(om => new PurchasedOffering({
         qty: om.qty,
+        vatRate: this.vatInclusive.value ? om.vatRate : undefined,
         offering: om.offering
       }));
 
     this.total.emit(value
-      .map(po => po.qty * po.offering.price)
+      .map(po => this.vatInclusive.value
+        ? po.qty * Math.round((po.offering.price * (100 + po.vatRate)) / 100) // with VAT
+        : po.qty * po.offering.price) // without VAT
       .reduce((a, b) => a + b, 0)
       || 0); // if the computed value is null or defined, will return 0
 
@@ -129,12 +136,33 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
     this.purchasedOfferingsContent.markAsDirty();
     this.purchasedOfferingsContent.markAsTouched();
   }
+
+  get vatInclusive(): AbstractControl {
+    return this.form.get('vatInclusive');
+  }
+
+  get rates(): number[] {
+    if (!this._rates) {
+      this._rates = this.vatRates
+        ? this.vatRates.rates.sort((a, b) => b - a) // DESC sort
+        : [];
+    }
+    return this._rates;
+  }
+
+  get displayedColumns(): string[] {
+    return this.vatInclusive.value
+      ? ['checked', 'qty', 'name', 'price', 'vatrate', 'businesses']
+      : ['checked', 'qty', 'name', 'price', 'businesses'];
+  }
+
 }
 
 interface PurchasedOfferingModel {
   checked: boolean;
   qty: number;
   name: string;
+  vatRate: number;
   price: number;
   businesses: string;
   offering: Offering;

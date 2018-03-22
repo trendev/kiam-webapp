@@ -35,6 +35,11 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header class="item">Prix (EUR)</mat-header-cell>
         <mat-cell *matCellDef="let element" class="item">{{element.price / 100}}</mat-cell>
       </ng-container>
+      <!-- Will be removed if vat is not applied -->
+      <ng-container matColumnDef="vatrate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>TVA</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.vatRate}}</mat-cell>
+      </ng-container>
       <ng-container matColumnDef="businesses">
         <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Activités</mat-header-cell>
         <mat-cell *matCellDef="let element" class="hide">{{element.businesses}}</mat-cell>
