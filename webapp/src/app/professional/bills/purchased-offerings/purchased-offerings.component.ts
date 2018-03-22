@@ -63,6 +63,7 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
     this.initOfferingsModel();
     this.sub = this.resetRequest$.subscribe(b => this.initOfferingsModel());
 
+    // recompute the total and apply/disable VAT on the purchased offerings
     this.vatInclusive.valueChanges.forEach(_ => this.computePurchasedOfferingsValue());
 
   }
