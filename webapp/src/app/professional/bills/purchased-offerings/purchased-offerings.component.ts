@@ -119,6 +119,7 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
   }
 
   computePurchasedOfferingsValue() {
+    console.warn('compute');
     const value = this.offeringsModel
       .filter(om => om.checked)
       .map(om => new PurchasedOffering({
