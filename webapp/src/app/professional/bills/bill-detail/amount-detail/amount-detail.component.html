@@ -1,10 +1,14 @@
 <ng-container *ngIf="bill.vatInclusive;else elseBlock">
-  <p>Montant TTC :
-    <b>{{bill.amount / 100 | number:'.0-2':'fr'}} {{bill.currency}}</b>
-  </p>
   <p>Montant HT :
     <b>{{amount / 100 | number:'.0-2':'fr'}} {{bill.currency}}</b>
   </p>
+  <p *ngFor="let va of vatAmounts">
+    Montant TVA {{va.rate}} % :
+    <b>{{va.amount / 100 | number:'.0-2':'fr'}} {{bill.currency}}</b>
+  </p>
+  <p>Montant TTC :
+      <b>{{bill.amount / 100 | number:'.0-2':'fr'}} {{bill.currency}}</b>
+    </p>
 </ng-container>
 <ng-template #elseBlock>
   <p>Montant HT :

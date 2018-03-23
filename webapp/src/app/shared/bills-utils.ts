@@ -1,4 +1,4 @@
-import { Bill, ClientBill, CollectiveGroupBill, IndividualBill, BillType } from '@app/entities';
+import { Bill, ClientBill, CollectiveGroupBill, IndividualBill, BillType, PurchasedOffering } from '@app/entities';
 import * as moment from 'moment';
 
 export class BillsUtils {
@@ -54,6 +54,47 @@ export class BillsUtils {
         return (!diff) ? -moment(b1.issueDate).diff(moment(b2.issueDate)) : diff;
     }
 
+    /**
+     * Returns the bill's amount : if the bill has taxes, computes the total price from the prices of the offering snapshots.
+     * Otherwise returns the total amount.
+     * @param bill the bill
+     */
+    static getAmount(bill: Bill): number {
+        return bill.vatInclusive
+            ? bill.purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0) - bill.discount
+            : bill.amount;
+    }
+
+    /**
+     * Get the VAT amounts of the bill. Returns an empty array if the bill has no VAT
+     * @param bill the bill
+     */
+    static getVATAmounts(bill: Bill): VatAmount[] {
+        const vatAmounts: VatAmount[] = [];
+
+        if (bill.vatInclusive) {
+            bill.purchasedOfferings.forEach(po => {
+                const index = vatAmounts.findIndex(va => po.vatRate === va.rate);
+                if (index !== -1) {
+                    vatAmounts[index].amount += this.getVATAmount(po);
+                } else {
+                    vatAmounts.push({
+                        rate: po.vatRate,
+                        amount: this.getVATAmount(po)
+                    });
+                }
+            });
+            return vatAmounts;
+        }
+
+        return vatAmounts;
+    }
+
+    private static getVATAmount(po: PurchasedOffering): number {
+        console.log(Math.round((po.offeringSnapshot.price * po.vatRate) / 100));
+        return Math.round((po.offeringSnapshot.price * po.vatRate) / 100);
+    }
+
 }
 
 export class BillStatus {
@@ -97,4 +138,9 @@ export class BillModel {
             }
         );
     }
+}
+
+export interface VatAmount {
+    rate: number;
+    amount: number;
 }

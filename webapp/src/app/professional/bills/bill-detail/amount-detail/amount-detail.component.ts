@@ -1,3 +1,4 @@
+import { BillsUtils, VatAmount } from '@app/shared';
 import { Component, OnInit, Input } from '@angular/core';
 import { Bill } from '@app/entities';
 
@@ -10,15 +11,22 @@ export class AmountDetailComponent implements OnInit {
 
   @Input() bill: Bill;
 
+  private _amount: number;
+  private _vatAmounts: VatAmount[];
+
   constructor() { }
 
   ngOnInit() {
+    this._amount = BillsUtils.getAmount(this.bill);
+    this._vatAmounts = BillsUtils.getVATAmounts(this.bill).sort((a, b) => b.rate - a.rate); // DESC sort
   }
 
   get amount(): number {
-    return this.bill.vatInclusive
-      ? this.bill.purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0) - this.bill.discount
-      : this.bill.amount;
+    return this._amount;
+  }
+
+  get vatAmounts(): VatAmount[] {
+    return this._vatAmounts;
   }
 
 }
