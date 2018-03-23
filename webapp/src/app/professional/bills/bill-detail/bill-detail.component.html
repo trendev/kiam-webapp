@@ -64,7 +64,7 @@
           <button type="button" matTooltip="Annuler les modifications" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modifications">undo</mat-icon>
           </button>
-          <button type="button" matTooltip="Annuler les modifications sur la facture" mat-mini-fab [color]="isClosedBill()?'accent':'warn'"
+          <button type="button" matTooltip="Annuler les modifications sur la facture" mat-mini-fab color="accent"
             (click)="cancelBillCreation()">
             <mat-icon aria-label="Annuler les modifications sur la facture">list</mat-icon>
           </button>

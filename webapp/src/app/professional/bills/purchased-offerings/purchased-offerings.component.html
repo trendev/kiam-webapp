@@ -37,9 +37,9 @@
       </ng-container>
       <!-- Will be removed if vat is not applied -->
       <ng-container matColumnDef="vatrate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>TVA</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>TVA</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-form-field>
+          <mat-form-field class="vat">
             <mat-select [(value)]="element.vatRate" (selectionChange)="computePurchasedOfferingsValue()">
               <mat-option *ngFor="let rate of rates" [value]="rate">
                 {{ rate }}
