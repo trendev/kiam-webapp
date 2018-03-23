@@ -1,5 +1,5 @@
 import { PurchasedOffering } from '@app/entities';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Utils } from '@app/shared';
@@ -17,11 +17,11 @@ import { Utils } from '@app/shared';
 })
 export class FixedPurchasedOfferingsComponent implements OnInit {
 
+  @Input() vatInclusive: boolean;
+
   form: FormGroup;
 
   purchasedOfferingsModel: PurchasedOfferingModel[];
-  displayedColumns = [
-    'qty', 'name', 'price', 'businesses'];
   datasource: MatTableDataSource<PurchasedOfferingModel>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -46,15 +46,18 @@ export class FixedPurchasedOfferingsComponent implements OnInit {
     const purchasedOfferings = this.purchasedOfferingsContent.value as PurchasedOffering[];
     this.purchasedOfferingsModel = purchasedOfferings
       .map(
-      po => {
-        // use snapshotOffering instead of offering
-        return {
-          qty: po.qty,
-          name: po.offeringSnapshot.shortname || po.offeringSnapshot.name,
-          price: po.offeringSnapshot.price,
-          businesses: Utils.getBusinesses(po.offeringSnapshot.businesses) // display businesses as a string
-        };
-      }
+        po => {
+          // use snapshotOffering instead of offering
+          return {
+            qty: po.qty,
+            name: po.offeringSnapshot.shortname || po.offeringSnapshot.name,
+            price: this.vatInclusive
+              ? Math.round((po.offeringSnapshot.price * (100 + po.vatRate)) / 100) // with VAT
+              : po.offeringSnapshot.price, // without VAT
+            vatRate: this.vatInclusive ? po.vatRate : undefined,
+            businesses: Utils.getBusinesses(po.offeringSnapshot.businesses) // display businesses as a string
+          };
+        }
       )
       .sort(this.pomSortFn);
 
@@ -63,11 +66,18 @@ export class FixedPurchasedOfferingsComponent implements OnInit {
     this.datasource.sort = this.sort;
   }
 
+  get displayedColumns(): string[] {
+    return this.vatInclusive
+      ? ['qty', 'name', 'price', 'vatrate', 'businesses']
+      : ['qty', 'name', 'price', 'businesses'];
+  }
+
 }
 
 interface PurchasedOfferingModel {
   qty: number;
   name: string;
+  vatRate: number;
   price: number;
   businesses: string;
 }

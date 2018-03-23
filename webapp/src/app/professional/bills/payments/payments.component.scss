@@ -3,7 +3,7 @@
 }
 
 .amount{
-    max-width: 50px;
+    max-width: 75px;
 }
 
 .states {
@@ -23,7 +23,6 @@
 
 @media all and (max-device-width: 720px) {
     .amount{
-        max-width: 30px;
         padding-left: 4px;
     }
 

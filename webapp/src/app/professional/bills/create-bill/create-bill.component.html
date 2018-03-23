@@ -10,9 +10,6 @@
 
       <mat-card-content>
 
-        <code> {{form.getRawValue() | json}}</code>
-
-
         <mat-slide-toggle *ngIf="vatRates" [checked]="vatInclusive.value" labelPosition="after" (change)="vatChanges($event)">
           <ng-container *ngIf="vatInclusive.value;else elseVATBlock">
             <b>TVA Applicable</b>
