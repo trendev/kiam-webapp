@@ -98,7 +98,11 @@ export class BillsUtils {
         return po.qty * Math.round((po.offeringSnapshot.price * po.vatRate) / 100);
     }
 
-    static reduceVATAmount(bills: Bill[]): VatAmount[] {
+    /**
+     * Reduce a bill list to a set of VAT Amount
+     * @param bills the bills
+     */
+    static reduceVATAmounts(bills: Bill[]): VatAmount[] {
         return Object.values(bills.filter(b => b.vatInclusive)
             .map(b => BillsUtils.getVATAmounts(b))
             .reduce((map, vas) => {

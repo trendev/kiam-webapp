@@ -54,7 +54,7 @@ export class RevenuesSumupComponent implements OnChanges {
       .map(b => BillsUtils.getAmount(b))
       .reduce((a, b) => a + b, 0);
 
-      console.log(BillsUtils.reduceVATAmount(this.bills));
+      console.log(BillsUtils.reduceVATAmounts(this.bills));
   }
 
 }
