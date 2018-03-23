@@ -159,6 +159,12 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
       : ['checked', 'qty', 'name', 'price', 'businesses'];
   }
 
+  displayOfferingModelPrice(po: PurchasedOfferingModel): number {
+    return this.vatInclusive.value
+      ? Math.round((po.price * (100 + po.vatRate)) / 100) // with VAT
+      : po.price; // without VAT
+  }
+
 }
 
 interface PurchasedOfferingModel {
