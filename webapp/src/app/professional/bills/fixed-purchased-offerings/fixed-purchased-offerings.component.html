@@ -13,7 +13,7 @@
         <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Prix (EUR)</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Prix {{vatInclusive?'TTC':'HT'}} (EUR)</mat-header-cell>
         <mat-cell *matCellDef="let element" class="price">{{element.price / 100 | number:'.0-2':'fr'}}</mat-cell>
       </ng-container>
       <!-- Will be removed if vat is not applied -->
