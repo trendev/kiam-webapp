@@ -24,9 +24,8 @@ export class Utils {
             );
     }
 
-    // converts first in integer
     static totalPayments(payments: Payment[]): number {
-        return payments.map(p => p.amount).reduce((a, b) => (a * 10 * 10 + b * 10 * 10) / (10 * 10), 0);
+        return payments.map(p => p.amount).reduce((a, b) => Math.round(a * 100 + b * 100) / 100, 0);
     }
 
     static xnorFn(val1: boolean, val2: boolean): boolean {

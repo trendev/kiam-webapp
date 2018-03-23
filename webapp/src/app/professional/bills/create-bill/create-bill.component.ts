@@ -65,7 +65,7 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
       .map(value => +value ? value : 0)
       .forEach(value => {
         // this._discount = Math.round(parseFloat((value * Math.pow(10, 2)).toFixed(2)));
-        this._discount = value * 10 * 10;
+        this._discount = Math.round(value * 100);
         this.computeAmount();
       });
 
@@ -77,7 +77,7 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
           this.paymentsContent.reset([]);
         }
         this.paymentsContent.setValidators([
-          CustomValidators.validPayments(value * 10 * 10)
+          CustomValidators.validPayments(Math.round(value * 100))
         ]);
         this.paymentsContent.updateValueAndValidity();
       });
@@ -159,7 +159,7 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
   isCloseable(): boolean {
     return this._amount <= 0 // if amount <= 0, the bill will be auto-closed
       ? true // old condition : this.form.get('information').get('dates').get('paymentDate').value
-      : ((Utils.totalPayments(this.paymentsContent.value) * 10 * 10 === this._amount)
+      : ((Math.round(Utils.totalPayments(this.paymentsContent.value) * 100) === this._amount)
         && this.form.get('information').get('dates').get('paymentDate').value);
   }
 
@@ -202,7 +202,7 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
       comments: value.information.comments || undefined,
       purchasedOfferings: value.purchasedOfferings.content,
       payments: value.payments.content.map(pm => new Payment({
-        amount: pm.amount * 10 * 10,
+        amount: Math.round(pm.amount * 100),
         paymentMode: pm.paymentMode
       })),
       vatInclusive: value.vatInclusive

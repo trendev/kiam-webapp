@@ -151,7 +151,7 @@ export class PackDetailComponent {
       id: this.pack.id,
       name: value.name,
       shortname: value.shortname,
-      price: value.price * 10 * 10,
+      price: Math.round(value.price * 100),
       duration: value.duration,
       businesses: Utils.extractArrayFromControl(this.form, 'businesses',
         fg => new Business({

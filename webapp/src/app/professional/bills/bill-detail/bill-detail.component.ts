@@ -103,7 +103,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
   isCloseable(): boolean {
     return this._amount <= 0
       ? this.form.get('information').get('dates').get('paymentDate').value
-      : ((Utils.totalPayments(this.paymentsContent.value) * 10 * 10 === this._amount)
+      : (( Math.round(Utils.totalPayments(this.paymentsContent.value) * 100) === this._amount)
         && this.form.get('information').get('dates').get('paymentDate').value);
   }
 
@@ -141,7 +141,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
       comments: value.information.comments || undefined,
       purchasedOfferings: value.purchasedOfferings.content,
       payments: value.payments.content.map(pm => new Payment({
-        amount: pm.amount * 10 * 10,
+        amount: Math.round(pm.amount * 100),
         paymentMode: pm.paymentMode
       }))
     });
