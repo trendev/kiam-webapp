@@ -21,6 +21,7 @@ import { CreateCollectiveGroupBillComponent } from './create-collective-group-bi
 import { CollectiveGroupBillDetailComponent } from './collective-group-bill-detail/collective-group-bill-detail.component';
 import { CollectiveGroupBillResolverService } from './collective-group-bill-resolver.service';
 import { ExportBillService } from './export-bill.service';
+import { AmountDetailComponent } from './bill-detail/amount-detail/amount-detail.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { ExportBillService } from './export-bill.service';
     PaymentModeSelectorComponent,
     BillsTableComponent,
     CreateCollectiveGroupBillComponent,
-    CollectiveGroupBillDetailComponent
+    CollectiveGroupBillDetailComponent,
+    AmountDetailComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr },

@@ -12,9 +12,7 @@
           <b>{{bill.reference}}</b>
         </p>
         <ng-content></ng-content>
-        <p>Montant:
-          <b>{{bill.amount / 100 | number:'.0-2':'fr'}} {{bill.currency}}</b>
-        </p>
+        <app-amount-detail [bill]="bill"></app-amount-detail>
         <p>Date de réalisation: {{bill.deliveryDate | date:'mediumDate':'':'fr'}}</p>
         <p>Date d'émission: {{bill.issueDate | date:'medium':'':'fr'}}</p>
         <p *ngIf="isClosedBill()">Facture réglée le: {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
