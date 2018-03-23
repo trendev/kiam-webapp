@@ -91,7 +91,7 @@ export class BillsUtils {
     }
 
     private static getVATAmount(po: PurchasedOffering): number {
-        return Math.round((po.offeringSnapshot.price * po.vatRate) / 100);
+        return po.qty * Math.round((po.offeringSnapshot.price * po.vatRate) / 100);
     }
 
 }
