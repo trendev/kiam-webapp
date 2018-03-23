@@ -118,19 +118,19 @@ export class BillsMicroListComponent implements OnChanges {
 
   get selectionRevenue(): number {
     return this.full
-      .filter(bm => !!bm.paymentDate
-        && moment(bm.paymentDate).isSameOrBefore(moment(this.maxDate)))
-      .map(bm => bm.amount)
+      .filter(b => !!b.paymentDate
+        && moment(b.paymentDate).isSameOrBefore(moment(this.maxDate)))
+      .map(b => BillsUtils.getAmount(b))
       .reduce((a, b) => a + b, 0);
   }
 
   get unpaidRevenue(): number {
-    return this.unpaid.map(b => b.amount)
+    return this.unpaid.map(b => BillsUtils.getAmount(b))
       .reduce((a, b) => a + b, 0);
   }
 
   get pendingRevenue(): number {
-    return this.pending.map(b => b.amount)
+    return this.pending.map(b => BillsUtils.getAmount(b))
       .reduce((a, b) => a + b, 0);
   }
 
