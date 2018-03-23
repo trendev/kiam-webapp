@@ -116,7 +116,7 @@ export class BillModel {
         this.reference = bill.reference;
         this.deliveryDate = bill.deliveryDate;
         this.cltype = bill.cltype;
-        this.amount = bill.amount;
+        this.amount = BillsUtils.getAmount(bill);
         this.currency = bill.currency;
         this.paymentDate = bill.paymentDate;
         this.bill = bill;

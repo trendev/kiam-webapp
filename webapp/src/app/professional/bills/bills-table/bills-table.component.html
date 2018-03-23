@@ -20,7 +20,7 @@
     <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="amount">
-    <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Montant</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Montant HT (EUR)</mat-header-cell>
     <mat-cell *matCellDef="let element" class="price">{{element.amount / 100 | number:'.0-2':'fr'}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="payment-status">
