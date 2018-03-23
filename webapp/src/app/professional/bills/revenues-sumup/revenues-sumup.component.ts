@@ -53,6 +53,8 @@ export class RevenuesSumupComponent implements OnChanges {
         && moment(b.paymentDate).isBefore(moment().locale('fr').startOf('week')))
       .map(b => BillsUtils.getAmount(b))
       .reduce((a, b) => a + b, 0);
+
+      console.log(BillsUtils.reduceVATAmount(this.bills));
   }
 
 }

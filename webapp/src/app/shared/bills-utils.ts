@@ -76,11 +76,11 @@ export class BillsUtils {
             bill.purchasedOfferings.forEach(po => {
                 const index = vatAmounts.findIndex(va => po.vatRate === va.rate);
                 if (index !== -1) {
-                    vatAmounts[index].amount += this.getVATAmount(po);
+                    vatAmounts[index].amount += BillsUtils.getVATAmount(po);
                 } else {
                     vatAmounts.push({
                         rate: po.vatRate,
-                        amount: this.getVATAmount(po)
+                        amount: BillsUtils.getVATAmount(po)
                     });
                 }
             });
@@ -90,8 +90,27 @@ export class BillsUtils {
         return vatAmounts;
     }
 
+    /**
+     * Computes the total VAT Amount of a Purchased Offering
+     * @param po the purchased offering
+     */
     private static getVATAmount(po: PurchasedOffering): number {
         return po.qty * Math.round((po.offeringSnapshot.price * po.vatRate) / 100);
+    }
+
+    static reduceVATAmount(bills: Bill[]): VatAmount[] {
+        return Object.values(bills.filter(b => b.vatInclusive)
+            .map(b => BillsUtils.getVATAmounts(b))
+            .reduce((map, vas) => {
+                vas.forEach(va => {
+                    if (map[va.rate]) {
+                        map[va.rate].amount += va.amount;
+                    } else {
+                        map[va.rate] = va;
+                    }
+                });
+                return map;
+            }, {}));
     }
 
 }
