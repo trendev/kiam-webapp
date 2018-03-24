@@ -7,7 +7,7 @@
       <mat-card-subtitle>
         <ng-content></ng-content>
       </mat-card-subtitle>
-
+      <code>{{form.getRawValue() | json}}</code>
       <mat-card-content>
 
         <mat-slide-toggle *ngIf="vatRates" [checked]="vatInclusive.value" labelPosition="after" (change)="vatChanges($event)">
