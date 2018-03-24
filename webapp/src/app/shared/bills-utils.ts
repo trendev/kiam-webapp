@@ -119,6 +119,9 @@ export class BillsUtils {
         return vatAmounts.sort(VatAmountDescSortFn);
     }
 
+    static getTaxBase(va: VatAmount): number {
+        return (va.amount * 100) / va.rate;
+    }
 
 }
 

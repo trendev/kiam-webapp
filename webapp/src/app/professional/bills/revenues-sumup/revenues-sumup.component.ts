@@ -65,4 +65,7 @@ export class RevenuesSumupComponent implements OnChanges {
         && moment(b.paymentDate).isBefore(moment().locale('fr').startOf('week')));
   }
 
+  getTaxBase(va: VatAmount): number {
+    return Math.round(BillsUtils.getTaxBase(va) / 100);
+  }
 }
