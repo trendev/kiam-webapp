@@ -168,15 +168,19 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
       && Utils.hasValidPaymentState(this.form);
   }
 
+  /**
+   * First, reset the purchased offering component, then the amounts values and at last the form model.
+   * Operations order is important (ex: avoid the total amount to be computed after the form model reset...)
+   */
   revert() {
+    this.resetRequest$.next(true);
+
     this.initAmountComputation();
     this.form.reset(this.createForm().getRawValue());
 
     // rebuilds the controls of the comments group if they have been modified/removed
     const information = this.form.get('information') as FormGroup;
     information.setControl('comments', this.fb.array([], CustomValidators.validComments(this.commentsValidators)));
-
-    this.resetRequest$.next();
   }
 
   saveBill() {
@@ -212,7 +216,6 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
   cancelBillCreation() {
     this.cancel.emit();
   }
-
 
   get vatInclusive(): AbstractControl {
     return this.form.get('vatInclusive');

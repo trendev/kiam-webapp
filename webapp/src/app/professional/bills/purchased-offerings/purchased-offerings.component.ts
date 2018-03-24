@@ -5,6 +5,7 @@ import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/materia
 import { Utils, ErrorAggregatorDirective } from '@app/shared';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-purchased-offerings',
@@ -26,7 +27,7 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
 
   private _rates: number[];
 
-  sub: Subscription;
+  private unsubscribe = new Subject<boolean>();
 
   offeringsModel: PurchasedOfferingModel[];
 
@@ -61,15 +62,16 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
     });
 
     this.initOfferingsModel();
-    this.sub = this.resetRequest$.subscribe(b => this.initOfferingsModel());
+    this.resetRequest$.takeUntil(this.unsubscribe).subscribe(_ => this.initOfferingsModel());
 
     // recompute the total and apply/disable VAT on the purchased offerings
-    this.vatInclusive.valueChanges.forEach(_ => this.computePurchasedOfferingsValue());
+    this.vatInclusive.valueChanges.takeUntil(this.unsubscribe).subscribe(_ => this.computePurchasedOfferingsValue());
 
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.unsubscribe.next(true);
+    this.unsubscribe.complete();
   }
 
   get purchasedOfferingsContent(): AbstractControl {
