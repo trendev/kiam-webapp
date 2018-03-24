@@ -3,9 +3,15 @@
     <span>
       <b>CA mensuel : {{currentMonthRevenue / 100 | currency:'EUR':'':'':'fr'}}</b>
     </span>
+    <p class="mat-caption vat" *ngFor="let va of currentMonthVATAmounts">
+      TVA {{va.rate}} % : {{va.amount / 100 | currency:'EUR':'':'':'fr'}}
+    </p>
   </mat-card-subtitle>
   <mat-card-subtitle>
     <span class="mat-caption">CA mensuel précédent : {{previousMonthRevenue / 100 | currency:'EUR':'':'':'fr'}}</span>
+    <p class="mat-caption vat" *ngFor="let va of previousMonthVATAmounts">
+      TVA {{va.rate}} % : {{va.amount / 100 | currency:'EUR':'':'':'fr'}}
+    </p>
   </mat-card-subtitle>
   <mat-card-subtitle>
     <span>
