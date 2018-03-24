@@ -1,24 +1,24 @@
 <ng-container>
   <mat-card-subtitle>
     <span>
-      <b>CA mensuel : {{currentMonthRevenue / 100 | currency:'EUR':'':'':'fr'}}</b>
+      <b>CA mensuel : {{currentMonthRevenue / 100 | currency:'EUR':'':'.0-0':'fr'}}</b>
     </span>
     <p class="mat-caption vat" *ngFor="let va of currentMonthVATAmounts">
-      TVA {{va.rate}} % : {{va.amount / 100 | currency:'EUR':'':'':'fr'}} / base : {{getTaxBase(va) / 100| currency:'EUR':'':'':'fr'}}
+      TVA {{va.rate}} % : {{va.amount / 100 | currency:'EUR':'':'.0-0':'fr'}} / base : {{getTaxBase(va) / 100| currency:'EUR':'':'.0-0':'fr'}}
     </p>
   </mat-card-subtitle>
   <mat-card-subtitle>
-    <span class="mat-caption">CA mensuel précédent : {{previousMonthRevenue / 100 | currency:'EUR':'':'':'fr'}}</span>
+    <span class="mat-caption">CA mensuel précédent : {{previousMonthRevenue / 100 | currency:'EUR':'':'.0-0':'fr'}}</span>
     <p class="mat-caption vat" *ngFor="let va of previousMonthVATAmounts">
-      TVA {{va.rate}} % : {{va.amount / 100 | currency:'EUR':'':'':'fr'}} / base : {{getTaxBase(va) / 100| currency:'EUR':'':'':'fr'}}
+      TVA {{va.rate}} % : {{va.amount / 100 | currency:'EUR':'':'.0-0':'fr'}} / base : {{getTaxBase(va) / 100| currency:'EUR':'':'.0-0':'fr'}}
     </p>
   </mat-card-subtitle>
   <mat-card-subtitle>
     <span>
-      <b>CA hebdomadaire : {{currentWeekRevenue / 100 | currency:'EUR':'':'':'fr'}}</b>
+      <b>CA hebdomadaire : {{currentWeekRevenue / 100 | currency:'EUR':'':'.0-0':'fr'}}</b>
     </span>
   </mat-card-subtitle>
   <mat-card-subtitle>
-    <span class="mat-caption">CA hebdomadaire précédent : {{previousWeekRevenue / 100 | currency:'EUR':'':'':'fr'}}</span>
+    <span class="mat-caption">CA hebdomadaire précédent : {{previousWeekRevenue / 100 | currency:'EUR':'':'.0-0':'fr'}}</span>
   </mat-card-subtitle>
 </ng-container>
