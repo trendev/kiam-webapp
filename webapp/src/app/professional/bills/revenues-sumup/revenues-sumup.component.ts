@@ -66,6 +66,6 @@ export class RevenuesSumupComponent implements OnChanges {
   }
 
   getTaxBase(va: VatAmount): number {
-    return Math.round(BillsUtils.getTaxBase(va) / 100);
+    return BillsUtils.getTaxBase(va);
   }
 }
