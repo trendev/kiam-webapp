@@ -1,4 +1,4 @@
-import { BillsUtils, VatAmount } from '@app/shared';
+import { BillsUtils, VatAmount, VatAmountDescSortFn } from '@app/shared';
 import { Component, OnInit, Input } from '@angular/core';
 import { Bill } from '@app/entities';
 
@@ -18,7 +18,7 @@ export class AmountDetailComponent implements OnInit {
 
   ngOnInit() {
     this._amount = BillsUtils.getAmount(this.bill);
-    this._vatAmounts = BillsUtils.getVATAmounts(this.bill).sort((a, b) => b.rate - a.rate); // DESC sort
+    this._vatAmounts = BillsUtils.getVATAmounts(this.bill).sort(VatAmountDescSortFn);
   }
 
   get amount(): number {

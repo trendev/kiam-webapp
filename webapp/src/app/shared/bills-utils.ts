@@ -1,3 +1,4 @@
+import { VatAmount } from '@app/shared';
 import { Bill, ClientBill, CollectiveGroupBill, IndividualBill, BillType, PurchasedOffering } from '@app/entities';
 import * as moment from 'moment';
 
@@ -103,7 +104,7 @@ export class BillsUtils {
      * @param bills the bills
      */
     static reduceVATAmounts(bills: Bill[]): VatAmount[] {
-        return Object.values(bills.filter(b => b.vatInclusive)
+        const vatAmounts = Object.values(bills.filter(b => b.vatInclusive)
             .map(b => BillsUtils.getVATAmounts(b))
             .reduce((map, vas) => {
                 vas.forEach(va => {
@@ -114,8 +115,10 @@ export class BillsUtils {
                     }
                 });
                 return map;
-            }, {}));
+            }, {})) as VatAmount[];
+        return vatAmounts.sort(VatAmountDescSortFn);
     }
+
 
 }
 
@@ -166,3 +169,6 @@ export interface VatAmount {
     rate: number;
     amount: number;
 }
+
+export const VatAmountDescSortFn =
+    (va1: VatAmount, va2: VatAmount) => va2.rate - va1.rate;
