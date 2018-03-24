@@ -28,6 +28,9 @@
         <mat-chip [color]="billsModelIsEmpty()?'accent':'primary'" selected="true" [selectable]="false" (click)="showFull = true">
           {total, plural, =0 {Aucune facture} =1 {1 facture} other {{{total}} factures : {{selectionRevenue / 100 | currency:'EUR':'':'':'fr'}}}}
         </mat-chip>
+        <mat-chip *ngFor="let va of vatAmounts" [selectable]="false">
+          TVA {{va.rate}} % : {{va.amount / 100 | currency:'EUR':'':'':'fr'}} / base : {{getTaxBase(va) / 100| currency:'EUR':'':'':'fr'}}
+        </mat-chip>
         <mat-chip color="warn" *ngIf="unpaid.length > 0" selected="true" [selectable]="false" (click)="showUnpaid = true">
           {unpaid.length, plural, =0 {Aucune impayée} =1 {1 impayée} other {{{unpaid.length}} impayées}} : {{unpaidRevenue / 100 |
           currency:'EUR':'':'':'fr'}}

@@ -6,7 +6,7 @@ import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import * as moment from 'moment';
-import { BillsRefreshedComponent, BillModel, BillsUtils, comparePaymentModesFn } from '@app/shared';
+import { BillsRefreshedComponent, BillModel, BillsUtils, comparePaymentModesFn, VatAmount } from '@app/shared';
 
 @Component({
   selector: 'app-bills',
@@ -32,6 +32,8 @@ export class BillsComponent implements OnInit {
   minDate: number;
   maxBound: number;
   maxDate: number;
+
+  private _vatAmounts: VatAmount[];
 
   billsPeriodFilterFn = (b: Bill) => true;
 
@@ -102,6 +104,7 @@ export class BillsComponent implements OnInit {
       .filter(pmFilter)
       .map(b => new BillModel(b));
     this.data = this._billsModel;
+    this.initVATAmounts();
   }
 
   refreshBills() {
@@ -253,6 +256,19 @@ export class BillsComponent implements OnInit {
         return false;
       }
     });
+  }
+
+
+  private initVATAmounts() {
+    this._vatAmounts = BillsUtils.reduceVATAmounts(this._billsModel.filter(bm => bm.paymentDate).map(bm => bm.bill));
+  }
+
+  get vatAmounts(): VatAmount[] {
+    return this._vatAmounts;
+  }
+
+  getTaxBase(va: VatAmount): number {
+    return BillsUtils.getTaxBase(va);
   }
 
 }
