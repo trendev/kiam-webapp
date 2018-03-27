@@ -245,28 +245,23 @@ export class ExportBillService {
 
     const purchasedOfferings = bill.purchasedOfferings;
     if (bill.vatInclusive) {
+      // TODO : add the correct algorithm for VAT
       return {
         table: {
-          widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+          widths: ['*', 'auto', 'auto', 'auto'],
           headerRows: 1,
           body: [
             [ // header
               { text: 'Désignation des prestations / forfaits', alignment: 'left', style: 'header' },
               { text: 'Qté.', alignment: 'center', style: 'header' },
               { text: 'Prix HT', alignment: 'center', style: 'header' },
-              { text: 'Prix TTC', alignment: 'center', style: 'header' },
-              { text: 'TVA', alignment: 'center', style: 'header' },
-              { text: 'Montant HT', alignment: 'center', style: 'header' },
-              { text: 'Montant TTC', alignment: 'center', style: 'header' }
+              { text: 'Montant HT', alignment: 'center', style: 'header' }
             ],
-            //TODO : complete with correct inputs
             // spread the purchased offerings content
             ...purchasedOfferings.map(po => [
               { text: po.offeringSnapshot.name, alignment: 'left', style: 'smaller' },
               { text: po.qty, alignment: 'center', style: 'smaller' },
               { text: `${po.offeringSnapshot.price / 100}`, alignment: 'center', style: 'smaller' },
-              { text: `${Math.round((po.offeringSnapshot.price * (100 + po.vatRate)) / 100)}`, alignment: 'center', style: 'smaller' },
-              { text: `${po.vatRate} %`, alignment: 'center', style: 'smaller' },
               { text: `${(po.offeringSnapshot.price * po.qty) / 100}`, alignment: 'center', style: 'smaller' }
             ]),
             [
