@@ -95,7 +95,7 @@ export class ExportBillService {
               [
                 {
                   border: [false, false, false, false],
-                  stack: this.buildProfessionalDetails()
+                  stack: this.buildProfessionalDetails(bill)
                 },
                 {
                   fillColor: '#dddddd',
@@ -107,7 +107,7 @@ export class ExportBillService {
         },
         {
           // display the date when the bill was issued (date time)
-          text: `\nDate de la facture : ${moment(bill.issueDate).locale('fr').format('L LT')}`,
+          text: `\nDate de la facture : ${moment(bill.issueDate).locale('fr').format('L - LT')}`,
           bold: true,
           alignment: 'right'
         },
@@ -132,6 +132,21 @@ export class ExportBillService {
         `Date de réalisation : ${moment(bill.deliveryDate).locale('fr').format('L')}`,
         '\n',
         this.buildPurchasedOfferings(bill.purchasedOfferings),
+        {
+          // use columns attribute to align the total table on right
+          columns: [
+            {
+              width: '*', text: ''
+            },
+            {
+              width: 'auto',
+              text: 'Prix et Montants spécifiés en Euros (€)',
+              italics: true,
+              fontSize: 10,
+            }
+          ]
+        },
+
         '\n\n\n',
         {
           // use columns attribute to align the total table on right
@@ -159,7 +174,11 @@ export class ExportBillService {
       ],
       styles: {
         header: {
-          // fontSize: 10,
+          fontSize: 10,
+          bold: true,
+          fillColor: '#dddddd'
+        },
+        total: {
           bold: true,
           fillColor: '#dddddd'
         },
@@ -180,7 +199,7 @@ export class ExportBillService {
   /**
    * Build the professional details part
   */
-  private buildProfessionalDetails(): any[] {
+  private buildProfessionalDetails(bill: Bill): any[] {
     const professional = new Professional(this.authenticationService.user);
 
     return [
@@ -188,7 +207,7 @@ export class ExportBillService {
         text: `${professional.companyName}`,
         bold: true
       },
-      { text: `N° SIRET : ${professional.companyID}`, style: 'smaller' },
+      ...this.buildCompanyDetails(bill, professional),
       '\n',
       ...this.buildAddress(professional.address),
       '\n',
@@ -196,6 +215,16 @@ export class ExportBillService {
       `Tél. : ${Utils.formatPhoneNumber(professional.customerDetails.phone)}`,
       `Email : ${professional.email}`,
     ];
+  }
+
+  private buildCompanyDetails(bill: Bill, professional: Professional): any[] {
+    const companyDetails = [{ text: `N° SIRET : ${professional.companyID}`, style: 'smaller' }];
+
+    if (bill.vatInclusive) {
+      companyDetails.push({ text: `N° TVA intra. : ${professional.vatcode}`, style: 'smaller' });
+    }
+
+    return companyDetails;
   }
 
   /**
@@ -219,14 +248,14 @@ export class ExportBillService {
   private buildPurchasedOfferings(purchasedOfferings: PurchasedOffering[]) {
     return {
       table: {
-        widths: [280, 'auto', 'auto', '*'],
+        widths: ['*', 'auto', 'auto', 'auto'],
         headerRows: 1,
         body: [
           [ // header
             { text: 'Désignation des prestations / forfaits', alignment: 'left', style: 'header' },
             { text: 'Qté.', alignment: 'center', style: 'header' },
-            { text: 'Prix HT (EUR)', alignment: 'center', style: 'header' },
-            { text: 'Montant HT (EUR)', alignment: 'center', style: 'header' }
+            { text: 'Prix HT', alignment: 'center', style: 'header' },
+            { text: 'Montant HT', alignment: 'center', style: 'header' }
           ],
           // spread the purchased offerings content
           ...purchasedOfferings.map(po => [
@@ -258,7 +287,7 @@ export class ExportBillService {
     const total = {
       body: [
         [
-          { text: 'Réduction (EUR)', border: [false, false, false, false] },
+          { text: 'Réduction (€)', border: [false, false, false, false] },
           { text: `${bill.discount / 100}`, border: [false, false, false, false], alignment: 'right' }
         ],
         this.buildTotalDetails(bill),
@@ -289,20 +318,20 @@ export class ExportBillService {
     if (bill.amount >= 0) {
       return [
         {
-          text: 'Montant Total HT (EUR)',
+          text: 'Montant Total HT (€)',
           fillColor: '#dddddd',
           bold: true, border: [false, false, false, false]
         },
-        { text: `${bill.amount / 100}`, style: 'header', alignment: 'right' }
+        { text: `${bill.amount / 100}`, style: 'total', alignment: 'right' }
       ];
     } else { // it's a credit
       return [
         {
-          text: 'Avoir HT (EUR)',
+          text: 'Avoir HT (€)',
           fillColor: '#dddddd',
           bold: true, border: [false, false, false, false]
         },
-        { text: `${-bill.amount / 100}`, style: 'header', alignment: 'right' }
+        { text: `${-bill.amount / 100}`, style: 'total', alignment: 'right' }
       ];
     }
   }
@@ -375,7 +404,7 @@ export class ExportBillService {
               body: [
                 [
                   {
-                    text: `${bill.payments ? 'Reste' : 'Montant'} à régler HT (EUR):`,
+                    text: `${bill.payments ? 'Reste' : 'Montant'} à régler HT (€):`,
                     bold: true,
                     color: 'white',
                     fillColor: 'black'
@@ -430,7 +459,7 @@ export class ExportBillService {
           body: [
             [{
               // correct plurials
-              text: `Paiement${bill.payments.length > 1 ? 's' : ''} (EUR) :`,
+              text: `Paiement${bill.payments.length > 1 ? 's' : ''} (€) :`,
               colSpan: 2,
               border: [false, false, false, false],
               // style: 'smaller'
