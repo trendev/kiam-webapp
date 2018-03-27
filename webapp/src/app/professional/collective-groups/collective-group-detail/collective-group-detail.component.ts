@@ -132,7 +132,6 @@ export class CollectiveGroupDetailComponent implements OnInit {
         });
         this.router.navigate(['../'], { relativeTo: this.route });
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de sauvegarder les modifications du Groupe sur le serveur');

@@ -69,7 +69,6 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
             duration: 2000
           });
         },
-        // TODO : handle the error
         e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des catégories depuis le serveur`)
       );
   }

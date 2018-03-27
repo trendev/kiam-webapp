@@ -242,7 +242,7 @@ export class ProfileComponent implements OnInit {
         this.revert(); // reset the controls (pristine, untouched...)
         this.snackBar.openFromComponent(ProfileSavedComponent, { duration: 2000 });
       },
-      // TODO: handle this (check the status code, etc)
+      // : handle this (check the status code, etc)
       e => this.errorHandler.handle(e, 'Impossible de sauvegarder les modifications du profile')
       );
   }
@@ -307,7 +307,6 @@ export class ProfileComponent implements OnInit {
         this.revert(); // reset the controls (pristine, untouched...)
         this.snackBar.openFromComponent(ProfileRefreshedComponent, { duration: 2000 });
       },
-      // TODO: handle this (check the status code, etc)
       e => this.errorHandler.handle(e, 'Impossible de rafraîchir le profil à partir du serveur')
       );
   }

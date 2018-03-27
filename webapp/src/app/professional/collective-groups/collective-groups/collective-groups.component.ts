@@ -68,7 +68,6 @@ export class CollectiveGroupsComponent implements OnInit, AfterViewInit {
           this.initCollectiveGroups();
           this.snackBar.openFromComponent(CollectiveGroupsListRefreshedComponent, { duration: 2000 });
         },
-        // TODO : handle the error
         e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des groupes et collectivités depuis le serveur`)
       );
   }

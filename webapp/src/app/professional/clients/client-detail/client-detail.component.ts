@@ -219,7 +219,6 @@ export class ClientDetailComponent implements OnInit {
         });
         this.router.navigate(['../'], { relativeTo: this.route });
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de sauvegarder les modifications du client sur le serveur');

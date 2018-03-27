@@ -74,7 +74,6 @@ export class CreateCategoryComponent implements OnInit {
         });
         this.router.navigate(['../', _ct.id], { relativeTo: this.route });
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de sauvegarder la nouvelle catégorie sur le serveur');

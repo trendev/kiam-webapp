@@ -126,7 +126,6 @@ export class CreatePackComponent {
         });
         this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route });
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de sauvegarder le forfait sur le serveur');

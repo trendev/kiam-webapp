@@ -36,7 +36,6 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO : checks for each modification of the field confirmation if confirmation === password
   }
 
 
@@ -62,7 +61,6 @@ export class ChangePasswordComponent implements OnInit {
           });
           this.form.markAsDirty();
         },
-        // TODO: handle this (check the status code, etc)
         e => this.errorHandler.handle(e, 'Impossible de générer un mot de passe depuis le serveur')
       );
   }

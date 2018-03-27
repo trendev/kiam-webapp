@@ -114,7 +114,6 @@ export class CreateCollectiveGroupComponent implements OnInit {
         });
         this.router.navigate(['../', _cg.id], { relativeTo: this.route });
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de sauvegarder le nouveau Groupe sur le serveur');

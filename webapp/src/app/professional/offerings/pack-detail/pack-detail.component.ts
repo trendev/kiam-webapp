@@ -137,7 +137,6 @@ export class PackDetailComponent {
         });
         this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de sauvegarder le forfait sur le serveur');
@@ -171,7 +170,6 @@ export class PackDetailComponent {
         this.snackBar.openFromComponent(PackRemovedComponent, { duration: 2000 });
         this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de supprimer le forfait sur le serveur');

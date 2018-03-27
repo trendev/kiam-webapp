@@ -113,7 +113,6 @@ export class ServiceDetailComponent {
         });
         this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de sauvegarder la prestation sur le serveur');
@@ -146,7 +145,6 @@ export class ServiceDetailComponent {
         this.snackBar.openFromComponent(ServiceRemovedComponent, { duration: 2000 });
         this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
       },
-      // TODO: handle this (check the status code, etc)
       e => {
         this.loadingOverlayService.stop();
         this.errorHandler.handle(e, 'Impossible de supprimer la prestation sur le serveur');

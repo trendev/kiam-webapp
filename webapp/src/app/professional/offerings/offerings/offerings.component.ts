@@ -89,7 +89,6 @@ export class OfferingsComponent implements OnInit {
           this.initOfferings();
           this.snackBar.openFromComponent(OfferingRefreshedComponent, { duration: 2000 });
         },
-        // TODO : handle the error
         e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des offres sur le serveur`)
       );
   }
@@ -103,7 +102,6 @@ export class OfferingsComponent implements OnInit {
           this._offerings = [...this.services, ...this.packs, ...offerings]; // spread the result with the existing offerings
           this.initOfferings();
         },
-        // TODO : handle the error
         e => this.errorHandler.handle(e, `Une erreur est survenue lors de la création automatique d'offres sur le serveur`)
       );
   }
