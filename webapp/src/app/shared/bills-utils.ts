@@ -60,9 +60,10 @@ export class BillsUtils {
      * Otherwise returns the total amount.
      * @param bill the bill
      */
-    static getAmount(bill: Bill): number {
+    static getRevenue(bill: Bill): number {
         return bill.vatInclusive
-            ? bill.purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0) - bill.discount
+            ? (bill.purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0)
+                * bill.amount) / (bill.amount + bill.discount)
             : bill.amount;
     }
 
@@ -145,7 +146,7 @@ export class BillModel {
         this.reference = bill.reference;
         this.deliveryDate = bill.deliveryDate;
         this.cltype = bill.cltype;
-        this.amount = BillsUtils.getAmount(bill);
+        this.amount = BillsUtils.getRevenue(bill);
         this.currency = bill.currency;
         this.paymentDate = bill.paymentDate;
         this.bill = bill;

@@ -28,10 +28,10 @@ export class RevenuesSumupComponent implements OnChanges {
   }
 
   initRevenues() {
-    this.currentMonthRevenue = this.currentMonthBills.map(b => BillsUtils.getAmount(b)).reduce((a, b) => a + b, 0);
-    this.previousMonthRevenue = this.previousMonthBills.map(b => BillsUtils.getAmount(b)).reduce((a, b) => a + b, 0);
-    this.currentWeekRevenue = this.currentWeekBills.map(b => BillsUtils.getAmount(b)).reduce((a, b) => a + b, 0);
-    this.previousWeekRevenue = this.previousWeekBills.map(b => BillsUtils.getAmount(b)).reduce((a, b) => a + b, 0);
+    this.currentMonthRevenue = this.currentMonthBills.map(b => BillsUtils.getRevenue(b)).reduce((a, b) => a + b, 0);
+    this.previousMonthRevenue = this.previousMonthBills.map(b => BillsUtils.getRevenue(b)).reduce((a, b) => a + b, 0);
+    this.currentWeekRevenue = this.currentWeekBills.map(b => BillsUtils.getRevenue(b)).reduce((a, b) => a + b, 0);
+    this.previousWeekRevenue = this.previousWeekBills.map(b => BillsUtils.getRevenue(b)).reduce((a, b) => a + b, 0);
 
     this.currentMonthVATAmounts = BillsUtils.reduceVATAmounts(this.currentMonthBills);
     this.previousMonthVATAmounts = BillsUtils.reduceVATAmounts(this.previousMonthBills);
