@@ -18,7 +18,7 @@ export class AmountDetailComponent implements OnInit {
 
   ngOnInit() {
     this._amount = BillsUtils.getRevenue(this.bill);
-    this._vatAmounts = BillsUtils.getVATAmounts(this.bill).sort(VatAmountDescSortFn);
+    this._vatAmounts = BillsUtils.getNetVATAmounts(this.bill).sort(VatAmountDescSortFn);
   }
 
   get amount(): number {

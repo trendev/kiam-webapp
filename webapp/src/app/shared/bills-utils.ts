@@ -71,18 +71,18 @@ export class BillsUtils {
      * Get the VAT amounts of the bill. Returns an empty array if the bill has no VAT
      * @param bill the bill
      */
-    static getVATAmounts(bill: Bill): VatAmount[] {
+    static getNetVATAmounts(bill: Bill): VatAmount[] {
         const vatAmounts: VatAmount[] = [];
 
         if (bill.vatInclusive) {
             bill.purchasedOfferings.forEach(po => {
                 const index = vatAmounts.findIndex(va => po.vatRate === va.rate);
                 if (index !== -1) {
-                    vatAmounts[index].amount += BillsUtils.getVATAmount(po);
+                    vatAmounts[index].amount += BillsUtils.getNetVATAmount(bill, po);
                 } else {
                     vatAmounts.push({
                         rate: po.vatRate,
-                        amount: BillsUtils.getVATAmount(po)
+                        amount: BillsUtils.getNetVATAmount(bill, po)
                     });
                 }
             });
@@ -93,11 +93,19 @@ export class BillsUtils {
     }
 
     /**
-     * Computes the total VAT Amount of a Purchased Offering
+     * Computes the total gross VAT Amount of a Purchased Offering
      * @param po the purchased offering
      */
-    private static getVATAmount(po: PurchasedOffering): number {
-        return po.qty * Math.round((po.offeringSnapshot.price * po.vatRate) / 100);
+    private static getGrossVATAmount(po: PurchasedOffering): number {
+        return po.qty * (po.offeringSnapshot.price * po.vatRate) / 100;
+    }
+
+    /**
+     * Computes the total net VAT Amount of a Purchased Offering
+     * @param po the purchased offering
+     */
+    private static getNetVATAmount(bill: Bill, po: PurchasedOffering): number {
+        return BillsUtils.getGrossVATAmount(po) * (1 - (bill.discount / (bill.discount + bill.amount)));
     }
 
     /**
@@ -106,7 +114,7 @@ export class BillsUtils {
      */
     static reduceVATAmounts(bills: Bill[]): VatAmount[] {
         const vatAmounts = Object.values(bills.filter(b => b.vatInclusive)
-            .map(b => BillsUtils.getVATAmounts(b))
+            .map(b => BillsUtils.getNetVATAmounts(b))
             .reduce((map, vas) => {
                 vas.forEach(va => {
                     if (map[va.rate]) {
