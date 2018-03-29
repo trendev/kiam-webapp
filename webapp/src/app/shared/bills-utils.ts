@@ -74,7 +74,7 @@ export class BillsUtils {
     static getNetVATAmounts(bill: Bill): VatAmount[] {
         const vatAmounts: VatAmount[] = [];
 
-        if (bill.vatInclusive) {
+        if (bill.vatInclusive && bill.amount > 0) {
             bill.purchasedOfferings.forEach(po => {
                 const index = vatAmounts.findIndex(va => po.vatRate === va.rate);
                 if (index !== -1) {
