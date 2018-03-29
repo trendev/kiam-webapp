@@ -195,7 +195,7 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
     const value = this.form.getRawValue();
 
     return new Bill({
-      amount: this._amount,
+      amount: Math.round(this._amount),
       discount: this._discount,
       deliveryDate: value.information.dates.deliveryDate.valueOf(),
       paymentDate: value.information.dates.paymentDate
