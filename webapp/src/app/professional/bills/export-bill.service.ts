@@ -245,32 +245,73 @@ export class ExportBillService {
 
     const purchasedOfferings = bill.purchasedOfferings;
     if (bill.vatInclusive) {
-      // TODO : add the correct algorithm for VAT
       return {
         table: {
-          widths: ['*', 'auto', 'auto', 'auto'],
+          widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
           headerRows: 1,
           body: [
             [ // header
-              { text: 'Désignation des prestations / forfaits', alignment: 'left', style: 'header' },
-              { text: 'Qté.', alignment: 'center', style: 'header' },
-              { text: 'Prix HT', alignment: 'center', style: 'header' },
-              { text: 'Montant HT', alignment: 'center', style: 'header' }
+              { text: '\nDésignation des prestations / forfaits', alignment: 'left', style: 'header' },
+              { text: '\nQté.', alignment: 'center', style: 'header' },
+              { text: '\nPrix HT', alignment: 'center', style: 'header' },
+              { text: '\nTVA (%)', alignment: 'center', style: 'header' },
+              { text: '\nPrix TTC', alignment: 'center', style: 'header' },
+              {
+                table: {
+                  widths: ['*', '*'],
+                  body: [
+                    [
+                      {
+                        text: 'Montant', alignment: 'center', style: 'header',
+                        colSpan: 2,
+                        border: [false, false, false, false]
+                      },
+                      {}// add empty cell for spaning
+                    ],
+                    [
+                      { text: 'HT', alignment: 'left', style: 'header', border: [false, false, false, false] },
+                      { text: 'TTC', alignment: 'right', style: 'header', border: [false, false, false, false] }
+                    ]
+                  ]
+                },
+                alignment: 'center',
+                style: 'header',
+                colSpan: 2
+              },
+              {} // add empty cell for spaning
             ],
             // spread the purchased offerings content
             ...purchasedOfferings.map(po => [
               { text: po.offeringSnapshot.name, alignment: 'left', style: 'smaller' },
               { text: po.qty, alignment: 'center', style: 'smaller' },
               { text: `${po.offeringSnapshot.price / 100}`, alignment: 'center', style: 'smaller' },
-              { text: `${(po.offeringSnapshot.price * po.qty) / 100}`, alignment: 'center', style: 'smaller' }
+              { text: po.vatRate, alignment: 'center', style: 'smaller' },
+              {
+                text: `${Math.round((po.offeringSnapshot.price * (100 + po.vatRate)) / 100) / 100}`,
+                alignment: 'center',
+                style: 'smaller'
+              },
+              { text: `${(po.offeringSnapshot.price * po.qty) / 100}`, alignment: 'center', style: 'smaller' },
+              {
+                text: `${(Math.round((po.offeringSnapshot.price * (100 + po.vatRate)) / 100) * po.qty) / 100}`,
+                alignment: 'center',
+                style: 'smaller'
+              }
             ]),
             [
               // compute the total amount
-              { text: 'Total', alignment: 'left', style: 'footer', colSpan: 3 },
+              { text: 'Total', alignment: 'left', style: 'footer', colSpan: 5 },
+              {}, // add empty cell for spaning
+              {}, // add empty cell for spaning
               {}, // add empty cell for spaning
               {}, // add empty cell for spaning
               {
                 text: `${purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0) / 100}`,
+                alignment: 'center', style: 'footer'
+              },
+              {
+                text: `${purchasedOfferings.map(po => po.qty * Math.round((po.offeringSnapshot.price * (100 + po.vatRate)) / 100))
+                  .reduce((a, b) => a + b, 0) / 100}`,
                 alignment: 'center', style: 'footer'
               }
             ]
