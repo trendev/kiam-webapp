@@ -259,6 +259,7 @@ export class ExportBillService {
               {
                 table: {
                   widths: ['*', '*'],
+                  margin: [0, 0, 0, 0],
                   body: [
                     [
                       {
@@ -312,7 +313,8 @@ export class ExportBillService {
               {
                 text: `${purchasedOfferings.map(po => po.qty * Math.round((po.offeringSnapshot.price * (100 + po.vatRate)) / 100))
                   .reduce((a, b) => a + b, 0) / 100}`,
-                alignment: 'center', style: 'footer'
+                alignment: 'center', style: 'footer',
+                bold: true
               }
             ]
           ]
@@ -358,13 +360,14 @@ export class ExportBillService {
    * @param bill the bill to export
    */
   private buildTotalPart(bill: Bill) {
+
     const total = {
       body: [
         [
           { text: 'Réduction (€)', border: [false, false, false, false] },
           { text: `${bill.discount / 100}`, border: [false, false, false, false], alignment: 'right' }
         ],
-        this.buildTotalDetails(bill),
+        ...this.buildTotalDetails(bill),
         [
           {
             text: 'TVA non applicable, art. 293B du CGI',
@@ -381,7 +384,14 @@ export class ExportBillService {
     if (!bill.discount) {
       total.body.shift();
     }
+
+    // remove the legal FR conditions if bill is VAT inclusive
+    if (bill.vatInclusive) {
+      total.body.pop();
+    }
+
     return total;
+
   }
 
   /**
@@ -390,26 +400,67 @@ export class ExportBillService {
    */
   private buildTotalDetails(bill: Bill) {
     if (bill.amount >= 0) {
-      return [
-        {
-          text: 'Montant Total HT (€)',
-          fillColor: '#dddddd',
-          bold: true, border: [false, false, false, false]
-        },
-        { text: `${bill.amount / 100}`, style: 'total', alignment: 'right' }
-      ];
+      if (!bill.vatInclusive) {
+        return [[
+          {
+            text: `Montant Total HT (€)`,
+            fillColor: '#dddddd',
+            bold: true, border: [false, false, false, false]
+          },
+          { text: `${bill.amount / 100}`, style: 'total', alignment: 'right' }
+        ]];
+      } else {
+        return [
+          [
+            {
+              text: `Montant Total TTC (€)`,
+              fillColor: '#dddddd',
+              bold: true, border: [false, false, false, false]
+            },
+            { text: `${bill.amount / 100}`, style: 'total', alignment: 'right' }
+          ],
+          [
+            {
+              text: `Montant Total HT (€)`,
+              fillColor: '#dddddd',
+              border: [false, false, false, false]
+            },
+            { text: `${Math.round(BillsUtils.getRevenue(bill)) / 100}`, style: 'total', alignment: 'right', bold: false }
+          ],
+          ...this.buildVATAmounts(bill)
+        ];
+      }
+
     } else { // it's a credit
-      return [
+      return [[
         {
-          text: 'Avoir HT (€)',
+          text: `Avoir ${bill.vatInclusive ? 'TTC' : 'HT'} (€)`,
           fillColor: '#dddddd',
           bold: true, border: [false, false, false, false]
         },
         { text: `${-bill.amount / 100}`, style: 'total', alignment: 'right' }
-      ];
+      ]];
     }
   }
 
+  private buildVATAmounts(bill: Bill) {
+    const vatAmounts = BillsUtils.getNetVATAmounts(bill);
+    return vatAmounts.map(va => [
+      {
+        text: `Total de TVA à ${va.rate}% (€)`,
+        italics: true, fontSize: 10,
+        bold: true,
+        border: [false, false, false, false],
+      },
+      {
+        text: `${Math.round(va.amount) / 100}`,
+        italics: true, fontSize: 10,
+        bold: true,
+        alignment: 'right',
+        border: [false, false, false, false],
+      }
+    ]);
+  }
 
   /**
    * Dispatch between closed / opened bills
