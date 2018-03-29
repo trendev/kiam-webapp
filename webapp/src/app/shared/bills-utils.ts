@@ -61,10 +61,12 @@ export class BillsUtils {
      * @param bill the bill
      */
     static getRevenue(bill: Bill): number {
-        return bill.vatInclusive
-            ? (bill.purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0)
-                * bill.amount) / (bill.amount + bill.discount)
-            : bill.amount;
+        return bill.amount <= 0
+            ? 0
+            : bill.vatInclusive
+                ? (bill.purchasedOfferings.map(po => po.qty * po.offeringSnapshot.price).reduce((a, b) => a + b, 0)
+                    * bill.amount) / (bill.amount + bill.discount)
+                : bill.amount;
     }
 
     /**

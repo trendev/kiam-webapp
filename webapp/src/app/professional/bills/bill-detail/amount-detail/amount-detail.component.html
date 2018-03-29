@@ -1,5 +1,5 @@
 <ng-container *ngIf="bill.vatInclusive;else elseBlock">
-  <p>Montant HT :
+  <p *ngIf="amount > 0">Montant HT :
     <b>{{amount / 100 | number:'.0-2':'fr'}} {{bill.currency}}</b>
   </p>
   <p *ngFor="let va of vatAmounts">
