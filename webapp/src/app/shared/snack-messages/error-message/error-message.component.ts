@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_SNACK_BAR_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-error-message',
@@ -7,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class ErrorMessageComponent {
 
-  constructor() { }
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: string) { }
 
 }

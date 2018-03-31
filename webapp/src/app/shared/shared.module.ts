@@ -48,33 +48,9 @@ import { ErrorComponent } from './error/error.component';
 import { CommentsComponent } from './comments/comments.component';
 import { PhoneComponent } from './phone/phone.component';
 import { PhonePipe } from './phone.pipe';
-import { PasswordChangedComponent } from './snack-messages/password-changed/password-changed.component';
 import { SuccessMessageComponent } from './snack-messages/success-message/success-message.component';
 import { ErrorMessageComponent } from './snack-messages/error-message/error-message.component';
-import { UnauthorizedAccessComponent } from './snack-messages/unauthorized-access/unauthorized-access.component';
-import { SlowUnstableConnectionComponent } from './snack-messages/slow-unstable-connection/slow-unstable-connection.component';
-import { ProfileRefreshedComponent } from './snack-messages/profile-refreshed/profile-refreshed.component';
-import { ProfileSavedComponent } from './snack-messages/profile-saved/profile-saved.component';
-import { ClientsListRefreshedComponent } from './snack-messages/clients-list-refreshed/clients-list-refreshed.component';
-import { ClientCreatedComponent } from './snack-messages/client-created/client-created.component';
-import { ClientUpdatedComponent } from './snack-messages/client-updated/client-updated.component';
-import { BillCreatedComponent } from './snack-messages/bill-created/bill-created.component';
-import { BillUpdatedComponent } from './snack-messages/bill-updated/bill-updated.component';
-import { BillsRefreshedComponent } from './snack-messages/bills-refreshed/bills-refreshed.component';
-import { LogoutComponent } from './snack-messages/logout/logout.component';
-import { OfferingRefreshedComponent } from './snack-messages/offering-refreshed/offering-refreshed.component';
-import { ServiceCreatedComponent } from './snack-messages/service-created/service-created.component';
-import { ServiceUpdatedComponent } from './snack-messages/service-updated/service-updated.component';
-import { ServiceRemovedComponent } from './snack-messages/service-removed/service-removed.component';
-import { PackCreatedComponent } from './snack-messages/pack-created/pack-created.component';
-import { PackUpdatedComponent } from './snack-messages/pack-updated/pack-updated.component';
-import { PackRemovedComponent } from './snack-messages/pack-removed/pack-removed.component';
-import { PaymentStatusComponent } from './payment-status/payment-status.component';
 import { UnexpectedErrorComponent } from './snack-messages/unexpected-error/unexpected-error.component';
-// tslint:disable-next-line:max-line-length
-import { CollectiveGroupsListRefreshedComponent } from './snack-messages/collective-groups-list-refreshed/collective-groups-list-refreshed.component';
-import { CollectiveGroupCreatedComponent } from './snack-messages/collective-group-created/collective-group-created.component';
-import { CollectiveGroupUpdatedComponent } from './snack-messages/collective-group-updated/collective-group-updated.component';
 import { BillsMicroListTableComponent } from './bills/bills-micro-list-table/bills-micro-list-table.component';
 import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-list.component';
 import { PeriodSelectorComponent } from './bills/period-selector/period-selector.component';
@@ -128,32 +104,9 @@ import { PeriodSelectorComponent } from './bills/period-selector/period-selector
     CommentsComponent,
     PhoneComponent,
     PhonePipe,
-    PasswordChangedComponent,
     SuccessMessageComponent,
     ErrorMessageComponent,
-    UnauthorizedAccessComponent,
-    SlowUnstableConnectionComponent,
-    ProfileRefreshedComponent,
-    ProfileSavedComponent,
-    ClientsListRefreshedComponent,
-    ClientCreatedComponent,
-    ClientUpdatedComponent,
-    BillCreatedComponent,
-    BillUpdatedComponent,
-    BillsRefreshedComponent,
-    LogoutComponent,
-    OfferingRefreshedComponent,
-    ServiceCreatedComponent,
-    ServiceUpdatedComponent,
-    ServiceRemovedComponent,
-    PackCreatedComponent,
-    PackUpdatedComponent,
-    PackRemovedComponent,
-    PaymentStatusComponent,
     UnexpectedErrorComponent,
-    CollectiveGroupsListRefreshedComponent,
-    CollectiveGroupCreatedComponent,
-    CollectiveGroupUpdatedComponent,
     BillsMicroListComponent,
     BillsMicroListTableComponent,
     PeriodSelectorComponent
@@ -202,63 +155,19 @@ import { PeriodSelectorComponent } from './bills/period-selector/period-selector
     PhoneComponent,
     PhonePipe,
     MatSnackBarModule,
-    PasswordChangedComponent,
     SuccessMessageComponent,
     ErrorMessageComponent,
-    UnauthorizedAccessComponent,
-    SlowUnstableConnectionComponent,
-    ProfileRefreshedComponent,
-    ProfileSavedComponent,
-    ClientsListRefreshedComponent,
-    ClientCreatedComponent,
-    ClientUpdatedComponent,
-    BillCreatedComponent,
-    BillUpdatedComponent,
-    BillsRefreshedComponent,
-    LogoutComponent,
-    OfferingRefreshedComponent,
-    ServiceCreatedComponent,
-    ServiceUpdatedComponent,
-    ServiceRemovedComponent,
-    PackCreatedComponent,
-    PackUpdatedComponent,
-    PackRemovedComponent,
-    MatSlideToggleModule,
-    PaymentStatusComponent,
     UnexpectedErrorComponent,
-    CollectiveGroupsListRefreshedComponent,
-    CollectiveGroupCreatedComponent,
-    CollectiveGroupUpdatedComponent,
+    MatSlideToggleModule,
     BillsMicroListComponent,
     BillsMicroListTableComponent,
     MatDialogModule,
     PeriodSelectorComponent
   ],
   entryComponents: [
-    PasswordChangedComponent,
-    UnauthorizedAccessComponent,
-    SlowUnstableConnectionComponent,
-    ProfileRefreshedComponent,
-    ProfileSavedComponent,
-    ClientsListRefreshedComponent,
-    ClientCreatedComponent,
-    ClientUpdatedComponent,
-    BillCreatedComponent,
-    BillUpdatedComponent,
-    BillsRefreshedComponent,
-    LogoutComponent,
-    OfferingRefreshedComponent,
-    ServiceCreatedComponent,
-    ServiceUpdatedComponent,
-    ServiceRemovedComponent,
-    PackCreatedComponent,
-    PackUpdatedComponent,
-    PackRemovedComponent,
-    UnexpectedErrorComponent,
-    CollectiveGroupsListRefreshedComponent,
-    CollectiveGroupCreatedComponent,
-    CollectiveGroupUpdatedComponent,
-    SuccessMessageComponent
+    SuccessMessageComponent,
+    ErrorMessageComponent,
+    UnexpectedErrorComponent
   ]
 })
 
