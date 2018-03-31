@@ -1,6 +1,5 @@
 import { UnexpectedErrorComponent } from './shared/snack-messages/unexpected-error/unexpected-error.component';
-import { SlowUnstableConnectionComponent } from './shared/snack-messages/slow-unstable-connection/slow-unstable-connection.component';
-import { UnauthorizedAccessComponent } from './shared/snack-messages/unauthorized-access/unauthorized-access.component';
+import { ErrorMessageComponent } from './shared/snack-messages/error-message/error-message.component';
 import { Injectable } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
@@ -36,12 +35,18 @@ export class ErrorHandlerService {
         console.warn('ErrorHandlerService#handle => ' + this.errmsg);
 
         if (err.status === 404 || err.status === 0 || err.status === 504) { // service is offline
-          this.snackBar.openFromComponent(SlowUnstableConnectionComponent,
-            { duration: 5000 });
+          this.snackBar.openFromComponent(ErrorMessageComponent,
+            {
+              data: `Problèmes de connexion à Internet ou Application hors ligne pour le moment`,
+              duration: 5000
+            });
         } else {
-          if (err.status === 401 || err.status === 403) { // unauthorized user
-            this.snackBar.openFromComponent(UnauthorizedAccessComponent,
-              { duration: 3000 });
+          if (err.status === 401 || err.status === 403) { // UNAUTHORIZED USER
+            this.snackBar.openFromComponent(ErrorMessageComponent,
+              {
+                data: `Accès NON Autorisé : Identification incorrecte/bloquée ou Session expirée`,
+                duration: 3000
+              });
           } else {
             this.snackBar.openFromComponent(UnexpectedErrorComponent, {
               data: message || 'une erreur est survenue',

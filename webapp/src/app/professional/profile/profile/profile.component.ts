@@ -14,8 +14,7 @@ import {
   Utils,
   compareBusinessesFn,
   comparePaymentModesFn,
-  ProfileRefreshedComponent,
-  ProfileSavedComponent
+  SuccessMessageComponent,
 } from '@app/shared';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/finally';
@@ -236,14 +235,17 @@ export class ProfileComponent implements OnInit {
     this.professionalService.put(pro)
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
-      _pro => {
-        this.pro = _pro;
-        this.authenticationService.user = _pro;
-        this.revert(); // reset the controls (pristine, untouched...)
-        this.snackBar.openFromComponent(ProfileSavedComponent, { duration: 2000 });
-      },
-      // : handle this (check the status code, etc)
-      e => this.errorHandler.handle(e, 'Impossible de sauvegarder les modifications du profile')
+        _pro => {
+          this.pro = _pro;
+          this.authenticationService.user = _pro;
+          this.revert(); // reset the controls (pristine, untouched...)
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Profil mis à jour`,
+            duration: 2000
+          });
+        },
+        // : handle this (check the status code, etc)
+        e => this.errorHandler.handle(e, 'Impossible de sauvegarder les modifications du profile')
       );
   }
 
@@ -301,13 +303,16 @@ export class ProfileComponent implements OnInit {
     this.professionalService.profile(true)
       .finally(() => this.loadingOverlayService.stop())
       .subscribe(
-      _pro => {
-        this.pro = _pro;
-        this.authenticationService.user = _pro;
-        this.revert(); // reset the controls (pristine, untouched...)
-        this.snackBar.openFromComponent(ProfileRefreshedComponent, { duration: 2000 });
-      },
-      e => this.errorHandler.handle(e, 'Impossible de rafraîchir le profil à partir du serveur')
+        _pro => {
+          this.pro = _pro;
+          this.authenticationService.user = _pro;
+          this.revert(); // reset the controls (pristine, untouched...)
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Profil rafraîchi`,
+            duration: 2000
+          });
+        },
+        e => this.errorHandler.handle(e, 'Impossible de rafraîchir le profil à partir du serveur')
       );
   }
 }

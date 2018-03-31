@@ -6,7 +6,7 @@ import {
   Utils,
   compareCollectiveGroupsFn,
   compareCategoriesFn,
-  ClientCreatedComponent
+  SuccessMessageComponent,
 } from '@app/shared';
 import { ClientService } from '@app/core';
 import { Client, Category } from '@app/entities';
@@ -203,8 +203,8 @@ export class CreateClientComponent implements OnInit {
     this.loadingOverlayService.start();
     this.clientService.create(client).subscribe(
       _client => {
-        this.snackBar.openFromComponent(ClientCreatedComponent, {
-          data: _client,
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Client ${_client.customerDetails.firstName} ${_client.customerDetails.lastName} sauvegardée`,
           duration: 2000
         });
         this.router.navigate(['../', _client.id], { relativeTo: this.route });

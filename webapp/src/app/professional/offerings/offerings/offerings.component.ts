@@ -5,8 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Offering, Service, Pack, OfferingType } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import 'rxjs/add/operator/finally';
-import { OfferingRefreshedComponent } from '@app/shared';
 import { ErrorHandlerService } from '@app/error-handler.service';
+import { SuccessMessageComponent } from '@app/shared';
 
 @Component({
   selector: 'app-offerings',
@@ -87,7 +87,10 @@ export class OfferingsComponent implements OnInit {
         offerings => {
           this._offerings = offerings;
           this.initOfferings();
-          this.snackBar.openFromComponent(OfferingRefreshedComponent, { duration: 2000 });
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Catalogue d'offres rafraîchi`,
+            duration: 2000
+          });
         },
         e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des offres sur le serveur`)
       );

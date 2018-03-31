@@ -1,3 +1,4 @@
+import { BillsUtils } from './../../../shared/bills-utils';
 import { Component, OnInit } from '@angular/core';
 import { PaymentMode, CollectiveGroupBill, Bill } from '@app/entities';
 import { CollectiveGroupBillService } from '@app/core';
@@ -5,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
 import { ErrorHandlerService } from '@app/error-handler.service';
-import { BillUpdatedComponent } from '@app/shared';
+import { SuccessMessageComponent } from '@app/shared';
 import { ExportBillService } from '../export-bill.service';
 
 @Component({
@@ -57,7 +58,10 @@ export class CollectiveGroupBillDetailComponent implements OnInit {
     // recipient cannot be changed
     this.collectiveGroupBillService.update(cgb).subscribe(
       _cgb => {
-        this.snackBar.openFromComponent(BillUpdatedComponent, { duration: 2000 });
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Facture ${BillsUtils.shrinkRef(bill.reference)} mise à jour`,
+          duration: 2000
+        });
         this.returnToDetail();
       },
       e => {

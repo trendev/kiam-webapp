@@ -5,8 +5,8 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { PaymentMode, ClientBill, Bill, Client } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
-import { BillUpdatedComponent } from '@app/shared';
 import { ExportBillService } from '../export-bill.service';
+import { SuccessMessageComponent, BillsUtils } from '@app/shared';
 
 @Component({
   selector: 'app-client-bill-detail',
@@ -54,7 +54,10 @@ export class ClientBillDetailComponent implements OnInit {
     this.loadingOverlayService.start();
     this.clientBillService.update(cb).subscribe(
       _cb => {
-        this.snackBar.openFromComponent(BillUpdatedComponent, { duration: 2000 });
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Facture ${BillsUtils.shrinkRef(bill.reference)} mise à jour`,
+          duration: 2000
+        });
         this.returnToDetail();
       },
       e => {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CollectiveGroup } from '@app/entities';
 import { MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
-import { Utils, CollectiveGroupsListRefreshedComponent, compareCollectiveGroupsFn } from '@app/shared';
+import { Utils, compareCollectiveGroupsFn, SuccessMessageComponent } from '@app/shared';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -66,7 +66,10 @@ export class CollectiveGroupsComponent implements OnInit, AfterViewInit {
         collectiveGroups => {
           this._collectiveGroups = collectiveGroups;
           this.initCollectiveGroups();
-          this.snackBar.openFromComponent(CollectiveGroupsListRefreshedComponent, { duration: 2000 });
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Liste des Groupes et Collectivités mise à jour`,
+            duration: 2000
+          });
         },
         e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des groupes et collectivités depuis le serveur`)
       );

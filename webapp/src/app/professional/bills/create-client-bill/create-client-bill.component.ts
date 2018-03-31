@@ -1,3 +1,4 @@
+import { SuccessMessageComponent, BillsUtils } from '@app/shared';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Offering, PaymentMode, Bill, ClientBill, Client, VatRates } from '@app/entities';
@@ -5,7 +6,6 @@ import { ClientBillService } from '@app/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
-import { BillCreatedComponent } from '@app/shared';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
@@ -64,7 +64,9 @@ export class CreateClientBillComponent implements OnInit {
     this.loadingOverlayService.start();
     this.clientBillService.create(cb).subscribe(
       _cb => {
-        this.snackBar.openFromComponent(BillCreatedComponent, { duration: 2000 });
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Facture ${BillsUtils.shrinkRef(_cb.reference)} enregistrée`, duration: 2000
+        });
         this.returnToClientDetail();
       },
       e => {

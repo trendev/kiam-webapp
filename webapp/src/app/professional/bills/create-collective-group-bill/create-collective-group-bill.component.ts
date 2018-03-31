@@ -1,4 +1,4 @@
-import { BillCreatedComponent } from '@app/shared';
+import { SuccessMessageComponent, BillsUtils } from '@app/shared';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Offering, PaymentMode, Bill, CollectiveGroupBill, CollectiveGroup, VatRates } from '@app/entities';
@@ -66,7 +66,10 @@ export class CreateCollectiveGroupBillComponent implements OnInit {
     this.loadingOverlayService.start();
     this.collectiveGroupBillService.create(cgb).subscribe(
       _cgb => {
-        this.snackBar.openFromComponent(BillCreatedComponent, { duration: 2000 });
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Facture ${BillsUtils.shrinkRef(_cgb.reference)} enregistrée`,
+          duration: 2000
+        });
         this.returnToCollectiveGroupsDetail();
       },
       e => {

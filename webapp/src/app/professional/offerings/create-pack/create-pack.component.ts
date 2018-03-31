@@ -9,7 +9,7 @@ import {
   Utils,
   CustomValidators,
   compareBusinessesFn,
-  PackCreatedComponent
+  SuccessMessageComponent,
 } from '@app/shared';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
@@ -120,8 +120,8 @@ export class CreatePackComponent {
     this.loadingOverlayService.start();
     this.packService.create(pack).subscribe(
       _pack => {
-        this.snackBar.openFromComponent(PackCreatedComponent, {
-          data: _pack,
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Forfait ${_pack.name} créé`,
           duration: 2000
         });
         this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route });

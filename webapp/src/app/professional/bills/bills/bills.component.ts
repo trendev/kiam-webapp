@@ -6,7 +6,7 @@ import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import * as moment from 'moment';
-import { BillsRefreshedComponent, BillModel, BillsUtils, comparePaymentModesFn, VatAmount } from '@app/shared';
+import { BillModel, BillsUtils, comparePaymentModesFn, VatAmount, SuccessMessageComponent } from '@app/shared';
 
 @Component({
   selector: 'app-bills',
@@ -119,7 +119,10 @@ export class BillsComponent implements OnInit {
           this.showFull = this._showFull;
           this.showUnpaid = this._showUnpaid;
           this.showPending = this._showPending;
-          this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Facturier rafraîchi`,
+            duration: 2000
+          });
         },
         e => this.errorHandler.handle(e, 'Une erreur est survenue lors de la collecte des factures depuis le serveur'));
   }

@@ -9,8 +9,7 @@ import {
   CustomValidators,
   Utils,
   compareBusinessesFn,
-  PackUpdatedComponent,
-  PackRemovedComponent
+  SuccessMessageComponent,
 } from '@app/shared';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
@@ -131,8 +130,8 @@ export class PackDetailComponent {
     this.loadingOverlayService.start();
     this.packService.update(pack).subscribe(
       _pack => {
-        this.snackBar.openFromComponent(PackUpdatedComponent, {
-          data: _pack,
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Forfait ${_pack.name} mis à jour`,
           duration: 2000
         });
         this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
@@ -167,7 +166,10 @@ export class PackDetailComponent {
     this.loadingOverlayService.start();
     this.packService.remove(this.pack.id).subscribe(
       resp => {
-        this.snackBar.openFromComponent(PackRemovedComponent, { duration: 2000 });
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Forfait ${this.pack.name} supprimé`,
+          duration: 2000
+        });
         this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
       },
       e => {

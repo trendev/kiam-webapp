@@ -8,10 +8,9 @@ import {
   Utils,
   compareCollectiveGroupsFn,
   compareCategoriesFn,
-  ClientUpdatedComponent,
   BillModel,
   BillsUtils,
-  BillsRefreshedComponent
+  SuccessMessageComponent,
 } from '@app/shared';
 import { ClientService } from '@app/core';
 import * as moment from 'moment';
@@ -214,7 +213,8 @@ export class ClientDetailComponent implements OnInit {
     this.loadingOverlayService.start();
     this.clientService.update(client).subscribe(
       _client => {
-        this.snackBar.openFromComponent(ClientUpdatedComponent, {
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Fiche cliente de ${_client.customerDetails.firstName} ${_client.customerDetails.firstName} sauvegardée`,
           duration: 2000
         });
         this.router.navigate(['../'], { relativeTo: this.route });
@@ -242,7 +242,9 @@ export class ClientDetailComponent implements OnInit {
       .subscribe(
         bills => {
           this.clientBills = bills.sort(BillsUtils.sortBillsFn);
-          this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Micro-facturier rafraîchi`, duration: 2000
+          });
         },
         e => this.errorHandler.handle(e, 'Une erreur est survenue lors de la collecte des factures depuis le serveur'));
   }

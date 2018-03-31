@@ -6,8 +6,7 @@ import {
   CustomValidators,
   Utils,
   compareBusinessesFn,
-  ServiceUpdatedComponent,
-  ServiceRemovedComponent
+  SuccessMessageComponent,
 } from '@app/shared';
 import { ServiceService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -107,8 +106,8 @@ export class ServiceDetailComponent {
     this.loadingOverlayService.start();
     this.serviceService.update(service).subscribe(
       _service => {
-        this.snackBar.openFromComponent(ServiceUpdatedComponent, {
-          data: _service,
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Service ${_service.name} mis à jour`,
           duration: 2000
         });
         this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
@@ -142,7 +141,10 @@ export class ServiceDetailComponent {
     this.loadingOverlayService.start();
     this.serviceService.remove(this.service.id).subscribe(
       resp => {
-        this.snackBar.openFromComponent(ServiceRemovedComponent, { duration: 2000 });
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Service ${this.service.name} supprimé`,
+          duration: 2000
+        });
         this.router.navigate(['../../', { ot: this.ot }], { relativeTo: this.route });
       },
       e => {

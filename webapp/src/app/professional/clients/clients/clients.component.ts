@@ -5,7 +5,7 @@ import { Client } from '@app/entities';
 import { MatTableDataSource, MatSort, Sort, MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { Utils, ClientsListRefreshedComponent } from '@app/shared';
+import { Utils, SuccessMessageComponent } from '@app/shared';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
@@ -81,7 +81,9 @@ export class ClientsComponent implements OnInit, AfterViewInit {
         clients => {
           this._clients = clients;
           this.initClients();
-          this.snackBar.openFromComponent(ClientsListRefreshedComponent, { duration: 2000 });
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Référentiel client rafraîchi`, duration: 2000
+          });
         },
         e => this.errorHandler.handle(e, `Une erreur est survenue lors de la collecte des clients depuis le serveur`)
       );

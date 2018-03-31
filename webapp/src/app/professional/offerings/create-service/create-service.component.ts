@@ -2,7 +2,7 @@ import { MatSnackBar } from '@angular/material';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Business, OfferingType, Service } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn, ServiceCreatedComponent } from '@app/shared';
+import { ErrorAggregatorDirective, CustomValidators, Utils, compareBusinessesFn, SuccessMessageComponent } from '@app/shared';
 import { ServiceService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -92,8 +92,8 @@ export class CreateServiceComponent {
     this.loadingOverlayService.start();
     this.serviceService.create(service).subscribe(
       _service => {
-        this.snackBar.openFromComponent(ServiceCreatedComponent, {
-          data: _service,
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Service ${_service.name} créé`,
           duration: 2000
         });
         this.router.navigate(['../', { ot: this.ot }], { relativeTo: this.route });

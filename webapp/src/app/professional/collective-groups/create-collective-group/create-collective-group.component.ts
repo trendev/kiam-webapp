@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import {
   ErrorAggregatorDirective,
   CustomValidators,
-  CollectiveGroupCreatedComponent
+  SuccessMessageComponent,
 } from '@app/shared';
 import { CollectiveGroupService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -108,8 +108,8 @@ export class CreateCollectiveGroupComponent implements OnInit {
     this.loadingOverlayService.start();
     this.collectiveGroupService.create(cg).subscribe(
       _cg => {
-        this.snackBar.openFromComponent(CollectiveGroupCreatedComponent, {
-          data: _cg,
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Groupe ${_cg.groupName} créé`,
           duration: 2000
         });
         this.router.navigate(['../', _cg.id], { relativeTo: this.route });

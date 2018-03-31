@@ -5,10 +5,9 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import {
   ErrorAggregatorDirective,
   CustomValidators,
-  CollectiveGroupUpdatedComponent,
   BillModel,
-  BillsRefreshedComponent,
-  BillsUtils
+  BillsUtils,
+  SuccessMessageComponent
 } from '@app/shared';
 import { CollectiveGroupService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -127,7 +126,8 @@ export class CollectiveGroupDetailComponent implements OnInit {
     this.loadingOverlayService.start();
     this.collectiveGroupService.update(cg).subscribe(
       _cg => {
-        this.snackBar.openFromComponent(CollectiveGroupUpdatedComponent, {
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Groupe ${_cg.groupName} mis à jour`,
           duration: 2000
         });
         this.router.navigate(['../'], { relativeTo: this.route });
@@ -166,7 +166,9 @@ export class CollectiveGroupDetailComponent implements OnInit {
       .subscribe(
         bills => {
           this.collectiveGroupBills = bills.sort(BillsUtils.sortBillsFn);
-          this.snackBar.openFromComponent(BillsRefreshedComponent, { duration: 2000 });
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Micro-facturier rafraîchi`, duration: 2000
+          });
         },
         e => this.errorHandler.handle(e, 'Une erreur est survenue lors de la collecte des factures depuis le serveur'));
   }
