@@ -214,7 +214,7 @@ export class ClientDetailComponent implements OnInit {
     this.clientService.update(client).subscribe(
       _client => {
         this.snackBar.openFromComponent(SuccessMessageComponent, {
-          data: `Fiche cliente de ${_client.customerDetails.firstName} ${_client.customerDetails.firstName} sauvegardée`,
+          data: `Fiche de ${_client.customerDetails.firstName} ${_client.customerDetails.lastName} sauvegardée`,
           duration: 2000
         });
         this.router.navigate(['../'], { relativeTo: this.route });
