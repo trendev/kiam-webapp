@@ -1,3 +1,4 @@
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
 import { CustomMatPaginatorIntlFr } from './custom-mat-paginator-intl/custom-mat-paginator-intl-fr';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -109,7 +110,8 @@ import { PeriodSelectorComponent } from './bills/period-selector/period-selector
     UnexpectedErrorComponent,
     BillsMicroListComponent,
     BillsMicroListTableComponent,
-    PeriodSelectorComponent
+    PeriodSelectorComponent,
+    PaymentStatusComponent
   ],
   exports: [
     CommonModule,
@@ -162,7 +164,8 @@ import { PeriodSelectorComponent } from './bills/period-selector/period-selector
     BillsMicroListComponent,
     BillsMicroListTableComponent,
     MatDialogModule,
-    PeriodSelectorComponent
+    PeriodSelectorComponent,
+    PaymentStatusComponent
   ],
   entryComponents: [
     SuccessMessageComponent,

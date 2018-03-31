@@ -27,3 +27,4 @@ export * from './bills/bills-micro-list/bills-micro-list.component';
 export * from './bills/period-selector/period-selector.component';
 export * from './snack-messages/success-message/success-message.component';
 export * from './snack-messages/error-message/error-message.component';
+export * from './payment-status/payment-status.component';
