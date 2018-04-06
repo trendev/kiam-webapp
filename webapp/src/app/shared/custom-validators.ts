@@ -115,6 +115,10 @@ export class CustomValidators {
         }
     }
 
+    /**
+     * Valid if a vatcode is FR compliant. The key must have 2 digits.
+     * @param control the control to test
+     */
     static validVatCode(control: AbstractControl): ValidationErrors | null {
         if (/^FR\d{11}$/i.test(control.value)) {
             const code = /^FR(\d{2})(\d{9})$/i.exec(control.value);
@@ -132,7 +136,9 @@ export class CustomValidators {
             if (companyID.length > 9) {
                 id = /^(\d{9}).*$/.exec(companyID)[1];
             }
-            code = `FR${((+id % 97) * 3 + 12) % 97}${id}`;
+            const key = ((+id % 97) * 3 + 12) % 97;
+            // always put the key with 2 digits
+            code = `FR${(key < 10) ? '0' + key : key}${id}`;
         } catch (e) {
             console.error(e);
         }
