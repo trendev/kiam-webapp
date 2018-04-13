@@ -1,3 +1,4 @@
+import { AuthenticationService } from './core/authentication.service';
 import { UnexpectedErrorComponent } from './shared/snack-messages/unexpected-error/unexpected-error.component';
 import { ErrorMessageComponent } from './shared/snack-messages/error-message/error-message.component';
 import { Injectable } from '@angular/core';
@@ -7,13 +8,16 @@ import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/observable/throw';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorHandlerService {
 
   errmsg: string;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private authenticationService: AuthenticationService,
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   /**
    * Updates errmsg, logs it on the console and returns an ErrorObservable with the message
@@ -47,6 +51,7 @@ export class ErrorHandlerService {
                 data: `Accès NON Autorisé : Identification incorrecte/bloquée ou Session expirée`,
                 duration: 3000
               });
+            this.router.navigate(['/login'], this.authenticationService.loginRequired);
           } else {
             this.snackBar.openFromComponent(UnexpectedErrorComponent, {
               data: message || 'une erreur est survenue',

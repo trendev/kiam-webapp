@@ -7,7 +7,6 @@ import { NavigationExtras } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/retry';
-import { ErrorHandlerService } from '@app/error-handler.service';
 
 
 @Injectable()
@@ -23,8 +22,7 @@ export class AuthenticationService {
 
   readonly api = `${environment.api}/Authentication`;
 
-  constructor(private http: HttpClient,
-    private errorHandler: ErrorHandlerService) { }
+  constructor(private http: HttpClient) { }
 
   get isLoggedIn(): boolean {
     return this._isLoggedIn;
