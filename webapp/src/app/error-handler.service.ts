@@ -1,12 +1,10 @@
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { AuthenticationService } from './core/authentication.service';
 import { UnexpectedErrorComponent } from './shared/snack-messages/unexpected-error/unexpected-error.component';
 import { ErrorMessageComponent } from './shared/snack-messages/error-message/error-message.component';
 import { Injectable } from '@angular/core';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import 'rxjs/add/observable/throw';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
@@ -23,7 +21,7 @@ export class ErrorHandlerService {
    * Updates errmsg, logs it on the console and returns an ErrorObservable with the message
    * @param err the error to handle
    */
-  handle(err: HttpErrorResponse | Error, message?: string): ErrorObservable {
+  handle(err: HttpErrorResponse | Error, message?: string): Observable<any> {
     if (err instanceof Error) {
       this.errmsg = err.message;
       console.error('ErrorHandlerService#handle => ' + this.errmsg);
@@ -63,7 +61,7 @@ export class ErrorHandlerService {
       }
     }
     // return Observable.throw(this.errmsg);
-    return Observable.throw(err);
+    return observableThrowError(err);
   }
 
 }

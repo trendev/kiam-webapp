@@ -1,9 +1,9 @@
 import { UserAccountType } from './../entities/user-account.model';
-import { UserAccount } from '@app/entities';
 import { AuthenticationService } from '@app/core';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AdministratorGuard implements CanActivate {
@@ -21,10 +21,10 @@ export class AdministratorGuard implements CanActivate {
     if (this.authenticationService.isLoggedIn
       && this.authenticationService.user
       && this.authenticationService.user.cltype === UserAccountType.ADMINISTRATOR) {
-      return Observable.of(true);
+      return of(true);
     } else {
-      return this.authenticationService.profile()
-        .map(u => {
+      return this.authenticationService.profile().pipe(
+        map(u => {
           if (u.cltype === UserAccountType.ADMINISTRATOR) {
             return true;
           } else {
@@ -32,12 +32,12 @@ export class AdministratorGuard implements CanActivate {
             this.router.navigate(['/login']);
             return false;
           }
-        })
-        .catch(e => {
+        }),
+        catchError(e => {
           this.authenticationService.redirectUrl = url;
           this.router.navigate(['/login']);
-          return Observable.of(false);
-        });
+          return of(false);
+        }));
     }
   }
 }

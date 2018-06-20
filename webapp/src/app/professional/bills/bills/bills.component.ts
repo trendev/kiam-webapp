@@ -1,6 +1,8 @@
+
+import { finalize } from 'rxjs/operators';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { Component, OnInit } from '@angular/core';
-import { Bill, BillType, ClientBill, CollectiveGroupBill, IndividualBill, PaymentMode } from '@app/entities';
+import { Bill, ClientBill, CollectiveGroupBill, IndividualBill, PaymentMode } from '@app/entities';
 import { MatSnackBar } from '@angular/material';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -109,22 +111,22 @@ export class BillsComponent implements OnInit {
 
   refreshBills() {
     this.loadingOverlayService.start();
-    this.professionalService.getBills()
-      .finally(() => this.loadingOverlayService.stop())
-      .subscribe(
-        bills => {
-          this.bills = bills.sort(BillsUtils.sortBillsFn);
-          this.initAll();
-          // keep the current view updated
-          this.showFull = this._showFull;
-          this.showUnpaid = this._showUnpaid;
-          this.showPending = this._showPending;
-          this.snackBar.openFromComponent(SuccessMessageComponent, {
-            data: `Facturier rafraîchi`,
-            duration: 2000
-          });
-        },
-        e => this.errorHandler.handle(e, 'Une erreur est survenue lors de la collecte des factures depuis le serveur'));
+    this.professionalService.getBills().pipe(
+      finalize(() => this.loadingOverlayService.stop())
+    ).subscribe(
+      bills => {
+        this.bills = bills.sort(BillsUtils.sortBillsFn);
+        this.initAll();
+        // keep the current view updated
+        this.showFull = this._showFull;
+        this.showUnpaid = this._showUnpaid;
+        this.showPending = this._showPending;
+        this.snackBar.openFromComponent(SuccessMessageComponent, {
+          data: `Facturier rafraîchi`,
+          duration: 2000
+        });
+      },
+      e => this.errorHandler.handle(e, 'Une erreur est survenue lors de la collecte des factures depuis le serveur'));
   }
 
   get total(): number {

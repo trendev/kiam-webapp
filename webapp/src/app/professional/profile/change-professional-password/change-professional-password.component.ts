@@ -1,7 +1,9 @@
+
+import {finalize} from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Component } from '@angular/core';
 import { AuthenticationService } from '@app/core';
-import 'rxjs/add/operator/finally';
+
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { SuccessMessageComponent } from '@app/shared';
@@ -20,8 +22,8 @@ export class ChangeProfessionalPasswordComponent {
 
   save(password: string) {
     this.loadingOverlayService.start();
-    this.authenticationService.newPassword(password)
-      .finally(() => this.loadingOverlayService.stop())
+    this.authenticationService.newPassword(password).pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         pwd => {
           this.authenticationService.user.password = pwd;

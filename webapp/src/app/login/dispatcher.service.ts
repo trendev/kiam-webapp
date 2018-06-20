@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { Router } from '@angular/router';

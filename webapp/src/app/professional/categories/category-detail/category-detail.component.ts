@@ -1,3 +1,4 @@
+import { finalize } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Category, Client } from '@app/entities';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -7,7 +8,7 @@ import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { CustomValidators, SuccessMessageComponent } from '@app/shared';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-category-detail',
@@ -163,7 +164,7 @@ export class CategoryDetailComponent implements OnInit {
     const categoryid = this.category.id;
     // apply the action callback on the category service with the specified parameters
     actionCallback.apply(this.categoryService, [categoryid, clientid])
-      .finally(() => this.loadingOverlayService.stop())
+    .pipe(finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         client => {
           this.snackBar.openFromComponent(SuccessMessageComponent, {

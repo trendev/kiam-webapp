@@ -1,3 +1,5 @@
+
+import {finalize} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Category } from '@app/entities';
@@ -58,8 +60,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
 
   refreshCategories() {
     this.loadingOverlayService.start();
-    this.professionalService.getCategories()
-      .finally(() => this.loadingOverlayService.stop())
+    this.professionalService.getCategories().pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         categories => {
           this._categories = categories;

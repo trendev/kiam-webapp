@@ -1,12 +1,14 @@
-import { Administrator, Individual, Professional, UserAccount } from '@app/entities';
+
+import { throwError as observableThrowError, Observable } from 'rxjs';
+
+import { catchError, map, retry } from 'rxjs/operators';
+import { UserAccount } from '@app/entities';
 import { environment } from '@env/environment';
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { NavigationExtras } from '@angular/router';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/retry';
 
 
 @Injectable()
@@ -40,39 +42,42 @@ export class AuthenticationService {
           .set('username', username)
           .set('password', password),
         withCredentials: true
-      })
-      .map(user => {
-        this.user = user;
-        this._isLoggedIn = true;
-        return true;
-      })
-      .catch(e => {
-        this.resetUserInformation();
-        return Observable.throw(e);
-      });
+      }).pipe(
+        map(user => {
+          this.user = user;
+          this._isLoggedIn = true;
+          return true;
+        }),
+        catchError(e => {
+          this.resetUserInformation();
+          return observableThrowError(e);
+        })
+      );
   }
 
   logout(): Observable<boolean> {
     this.resetUserInformation();
     return this.http.post<any>(`${this.api}/logout`,
       null,
-      { observe: 'response', withCredentials: true })
-      .map(resp => true)
-      .catch(e => Observable.throw(e));
+      { observe: 'response', withCredentials: true }).pipe(
+        map(() => true),
+        catchError(e => observableThrowError(e))
+      );
   }
 
   profile(): Observable<UserAccount> {
     return this.http.get<UserAccount>(`${this.api}/profile`,
-      { withCredentials: true })
-      .map(user => {
-        this.user = user;
-        this._isLoggedIn = true;
-        return this.user;
-      })
-      .catch(e => {
-        this.resetUserInformation();
-        return Observable.throw(e);
-      });
+      { withCredentials: true }).pipe(
+        map(user => {
+          this.user = user;
+          this._isLoggedIn = true;
+          return this.user;
+        }),
+        catchError(e => {
+          this.resetUserInformation();
+          return observableThrowError(e);
+        })
+      );
   }
 
   password(size: number = 10): Observable<string> {
@@ -82,12 +87,13 @@ export class AuthenticationService {
           .set('size', size + ''),
         withCredentials: true,
         responseType: 'text'
-      })
-      .retry(3)
-      .catch(e => {
-        this.resetUserInformation();
-        return Observable.throw(e);
-      });
+      }).pipe(
+        retry(3),
+        catchError(e => {
+          this.resetUserInformation();
+          return observableThrowError(e);
+        })
+      );
   }
 
   newPassword(password: string): Observable<string> {
@@ -98,9 +104,10 @@ export class AuthenticationService {
 
     return this.http.put<PasswordResponse>(`${this.api}/new-password`,
       payload,
-      { withCredentials: true })
-      .map(resp => resp.password)
-      .catch(e => Observable.throw(e));
+      { withCredentials: true }).pipe(
+        map(resp => resp.password),
+        catchError(e => observableThrowError(e))
+      );
   }
 
 }

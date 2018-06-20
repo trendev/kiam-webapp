@@ -1,3 +1,5 @@
+
+import {finalize} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CollectiveGroup } from '@app/entities';
 import { MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
@@ -60,8 +62,8 @@ export class CollectiveGroupsComponent implements OnInit, AfterViewInit {
 
   refreshCollectiveGroups() {
     this.loadingOverlayService.start();
-    this.professionalService.getCollectiveGroups()
-      .finally(() => this.loadingOverlayService.stop())
+    this.professionalService.getCollectiveGroups().pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         collectiveGroups => {
           this._collectiveGroups = collectiveGroups;

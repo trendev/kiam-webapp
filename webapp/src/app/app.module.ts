@@ -14,6 +14,11 @@ import { AppComponent } from './app.component';
 import { LoadingOverlayComponent } from './loading-overlay/loading-overlay.component';
 import { LoadingOverlayService } from './loading-overlay.service';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr, 'fr');
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,10 +1,12 @@
+
+import {finalize} from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { ProfessionalService, PackService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Offering, Service, Pack, OfferingType } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import 'rxjs/add/operator/finally';
+
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { SuccessMessageComponent } from '@app/shared';
 
@@ -81,8 +83,8 @@ export class OfferingsComponent implements OnInit {
 
   refreshOfferings() {
     this.loadingOverlayService.start();
-    this.professionalService.getOfferings()
-      .finally(() => this.loadingOverlayService.stop())
+    this.professionalService.getOfferings().pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         offerings => {
           this._offerings = offerings;
@@ -98,8 +100,8 @@ export class OfferingsComponent implements OnInit {
 
   buildModelOfferings() {
     this.loadingOverlayService.start();
-    this.packService.buildModelOfferings()
-      .finally(() => this.loadingOverlayService.stop())
+    this.packService.buildModelOfferings().pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         offerings => {
           this._offerings = [...this.services, ...this.packs, ...offerings]; // spread the result with the existing offerings

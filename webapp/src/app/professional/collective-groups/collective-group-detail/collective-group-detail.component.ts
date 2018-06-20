@@ -1,3 +1,5 @@
+
+import {finalize} from 'rxjs/operators';
 import { RecipientDialogComponent } from './../recipient-dialog/recipient-dialog.component';
 import { CollectiveGroup, CollectiveGroupBill } from '@app/entities';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -161,8 +163,8 @@ export class CollectiveGroupDetailComponent implements OnInit {
 
   refreshBills() {
     this.loadingOverlayService.start();
-    this.collectiveGroupService.getCollectiveGroupBills(this.collectiveGroup.id)
-      .finally(() => this.loadingOverlayService.stop())
+    this.collectiveGroupService.getCollectiveGroupBills(this.collectiveGroup.id).pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         bills => {
           this.collectiveGroupBills = bills.sort(BillsUtils.sortBillsFn);

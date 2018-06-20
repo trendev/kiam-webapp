@@ -1,5 +1,5 @@
+import { catchError, map } from 'rxjs/operators';
 import { UserAccountType } from './../entities/user-account.model';
-import { UserAccount } from '@app/entities';
 import { AuthenticationService } from '@app/core';
 import { Injectable } from '@angular/core';
 import {
@@ -9,7 +9,7 @@ import {
   Router,
   CanActivateChild
 } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class ProfessionalGuard implements CanActivate, CanActivateChild {
@@ -33,11 +33,11 @@ export class ProfessionalGuard implements CanActivate, CanActivateChild {
     if (this.authenticationService.isLoggedIn
       && this.authenticationService.user
       && this.authenticationService.user.cltype === UserAccountType.PROFESSIONAL) {
-      return Observable.of(true);
+      return of(true);
     } else {
       // controls if the user is already authenticate on the server
-      return this.authenticationService.profile()
-        .map(u => {
+      return this.authenticationService.profile().pipe(
+        map(u => {
           if (u.cltype === UserAccountType.PROFESSIONAL) {
             return true; // the user is authenticated
           } else {
@@ -47,13 +47,14 @@ export class ProfessionalGuard implements CanActivate, CanActivateChild {
             this.router.navigate(['/login']);
             return false;
           }
-        })
+        }),
         // the user is not authenticated and must enter its credentials on the login page
-        .catch(e => {
+        catchError(e => {
           this.authenticationService.redirectUrl = url;
           this.router.navigate(['/login']);
-          return Observable.of(false);
-        });
+          return of(false);
+        })
+      );
     }
   }
 }

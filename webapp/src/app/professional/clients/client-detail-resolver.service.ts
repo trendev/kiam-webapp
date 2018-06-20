@@ -1,8 +1,9 @@
+import { catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Client } from '@app/entities';
 import { ProfessionalService } from '@app/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Injectable()
@@ -15,8 +16,8 @@ export class ClientDetailResolverService implements Resolve<Client> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Client | Observable<Client> | Promise<Client> {
     const id = +route.paramMap.get('id');
-    return this.professionalService.getClients()
-      .map(clients => {
+    return this.professionalService.getClients().pipe(
+      map(clients => {
         const client = clients.filter(c => c.id === id).pop();
         if (client) {
           return client;
@@ -25,12 +26,13 @@ export class ClientDetailResolverService implements Resolve<Client> {
           this.router.navigate(['/professional/clients']);
           return null;
         }
-      })
-      .catch(e => {
+      }),
+      catchError(e => {
         this.errorHandler.handle(e, `Impossible de récupérer la fiche du client ${id}...`);
         this.router.navigate(['/professional/clients']);
-        return Observable.of(null);
-      });
+        return of(null);
+      })
+    );
   }
 
 }

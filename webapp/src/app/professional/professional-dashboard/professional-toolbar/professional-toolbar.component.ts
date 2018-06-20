@@ -1,10 +1,12 @@
+
+import {finalize} from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Router, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from '@app/core';
 import { environment } from '@env/environment';
 import { Component } from '@angular/core';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import 'rxjs/add/operator/finally';
+
 import { SuccessMessageComponent } from '@app/shared';
 
 @Component({
@@ -23,15 +25,15 @@ export class ProfessionalToolbarComponent {
 
   logout() {
     this.loadingOverlayService.start();
-    this.authenticationService.logout()
-      .finally(() => {
+    this.authenticationService.logout().pipe(
+      finalize(() => {
         this.loadingOverlayService.stop();
         this.snackBar.openFromComponent(SuccessMessageComponent, {
           data: `Vous êtes déconnecté(e)`,
           duration: 2000
         });
         this.router.navigate(['/login'], this.authenticationService.loginRequired);
-      })
+      }))
       .subscribe(); // TODO : handle success and failure
   }
 

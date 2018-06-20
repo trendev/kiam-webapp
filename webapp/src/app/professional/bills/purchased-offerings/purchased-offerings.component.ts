@@ -1,11 +1,12 @@
+
+import { takeUntil } from 'rxjs/operators';
 import { Component, OnInit, Input, ViewChild, OnDestroy, EventEmitter, Output, ViewContainerRef } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
-import { Offering, Service, Pack, OfferingType, PurchasedOffering, VatRates } from '@app/entities';
+import { Offering, PurchasedOffering, VatRates } from '@app/entities';
 import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/material';
 import { Utils, ErrorAggregatorDirective } from '@app/shared';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/takeUntil';
+import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-purchased-offerings',
@@ -62,10 +63,10 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
     });
 
     this.initOfferingsModel();
-    this.resetRequest$.takeUntil(this.unsubscribe).subscribe(_ => this.initOfferingsModel());
+    this.resetRequest$.pipe(takeUntil(this.unsubscribe)).subscribe(_ => this.initOfferingsModel());
 
     // recompute the total and apply/disable VAT on the purchased offerings
-    this.vatInclusive.valueChanges.takeUntil(this.unsubscribe).subscribe(_ => this.computePurchasedOfferingsValue());
+    this.vatInclusive.valueChanges.pipe(takeUntil(this.unsubscribe)).subscribe(_ => this.computePurchasedOfferingsValue());
 
   }
 

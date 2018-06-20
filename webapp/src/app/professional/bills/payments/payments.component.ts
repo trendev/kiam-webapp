@@ -1,9 +1,8 @@
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Component, ViewChild, ViewContainerRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ErrorAggregatorDirective, CustomValidators, Utils, comparePaymentModesFn } from '@app/shared';
 import { Payment, PaymentMode } from '@app/entities';
-import { MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'app-payments',

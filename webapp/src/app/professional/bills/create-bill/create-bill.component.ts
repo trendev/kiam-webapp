@@ -1,10 +1,9 @@
+import { map } from 'rxjs/operators';
 import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
 import { Component, Input, EventEmitter, Output, ViewChild, OnInit, OnChanges, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { Offering, PaymentMode, OfferingType, Bill, Payment, VatRates } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import * as moment from 'moment';
 import { MatSlideToggleChange } from '@angular/material';
 
@@ -61,26 +60,26 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
     });
 
     // compute the amount everytime the discount value is changed
-    this.form.get('information').get('discount').valueChanges
-      .map(value => +value ? value : 0)
-      .forEach(value => {
-        // this._discount = Math.round(parseFloat((value * Math.pow(10, 2)).toFixed(2)));
-        this._discount = Math.round(value * 100);
-        this.computeAmount();
-      });
+    this.form.get('information').get('discount').valueChanges.pipe(
+      map(value => +value ? value : 0)
+    ).forEach(value => {
+      // this._discount = Math.round(parseFloat((value * Math.pow(10, 2)).toFixed(2)));
+      this._discount = Math.round(value * 100);
+      this.computeAmount();
+    });
 
     // removes the payments if amount is 0 or less
-    this.form.get('information').get('amount').valueChanges
-      .map(value => +value ? value : 0)
-      .forEach(value => {
-        if (value <= 0) {
-          this.paymentsContent.reset([]);
-        }
-        this.paymentsContent.setValidators([
-          CustomValidators.validPayments(Math.round(value * 100))
-        ]);
-        this.paymentsContent.updateValueAndValidity();
-      });
+    this.form.get('information').get('amount').valueChanges.pipe(
+      map(value => +value ? value : 0)
+    ).forEach(value => {
+      if (value <= 0) {
+        this.paymentsContent.reset([]);
+      }
+      this.paymentsContent.setValidators([
+        CustomValidators.validPayments(Math.round(value * 100))
+      ]);
+      this.paymentsContent.updateValueAndValidity();
+    });
   }
 
   ngOnChanges() {

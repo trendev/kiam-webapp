@@ -1,4 +1,6 @@
-import 'rxjs/add/operator/finally';
+
+import {finalize} from 'rxjs/operators';
+
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ProfessionalService } from '@app/core';
 import { Client } from '@app/entities';
@@ -75,8 +77,8 @@ export class ClientsComponent implements OnInit, AfterViewInit {
 
   refreshClients() {
     this.loadingOverlayService.start();
-    this.professionalService.getClients()
-      .finally(() => this.loadingOverlayService.stop())
+    this.professionalService.getClients().pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         clients => {
           this._clients = clients;

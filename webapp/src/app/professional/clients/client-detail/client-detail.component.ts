@@ -1,3 +1,5 @@
+
+import {finalize} from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ClientBill, Category } from '@app/entities';
@@ -237,8 +239,8 @@ export class ClientDetailComponent implements OnInit {
 
   refreshBills() {
     this.loadingOverlayService.start();
-    this.clientService.getClientBills(this.client.id)
-      .finally(() => this.loadingOverlayService.stop())
+    this.clientService.getClientBills(this.client.id).pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         bills => {
           this.clientBills = bills.sort(BillsUtils.sortBillsFn);

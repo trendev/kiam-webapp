@@ -1,12 +1,12 @@
+
+import {finalize} from 'rxjs/operators';
 import {
   AuthenticationService,
-  BusinessService,
-  PaymentModeService,
   ProfessionalService
 } from '@app/core';
-import { Component, ViewContainerRef, ViewChild, OnInit } from '@angular/core';
-import { Professional, Address, CustomerDetails, Business, PaymentMode } from '@app/entities';
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { Professional, Business, PaymentMode } from '@app/entities';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import {
   ErrorAggregatorDirective,
@@ -17,7 +17,7 @@ import {
   SuccessMessageComponent,
 } from '@app/shared';
 import { Router, ActivatedRoute } from '@angular/router';
-import 'rxjs/add/operator/finally';
+
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
 import { ErrorHandlerService } from '@app/error-handler.service';
@@ -232,8 +232,8 @@ export class ProfileComponent implements OnInit {
     pro.blocked = this.pro.blocked;
 
     this.loadingOverlayService.start();
-    this.professionalService.put(pro)
-      .finally(() => this.loadingOverlayService.stop())
+    this.professionalService.put(pro).pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         _pro => {
           this.pro = _pro;
@@ -300,8 +300,8 @@ export class ProfileComponent implements OnInit {
 
   refresh() {
     this.loadingOverlayService.start();
-    this.professionalService.profile(true)
-      .finally(() => this.loadingOverlayService.stop())
+    this.professionalService.profile(true).pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         _pro => {
           this.pro = _pro;

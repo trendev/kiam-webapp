@@ -1,9 +1,11 @@
+
+import {finalize} from 'rxjs/operators';
 import { AuthenticationService } from './../../core/authentication.service';
 import { CustomValidators } from './../custom-validators';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import 'rxjs/add/operator/finally';
+
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
@@ -51,8 +53,8 @@ export class ChangePasswordComponent implements OnInit {
 
   generate() {
     this.loadingOverlayService.start();
-    this.authenticationService.password()
-      .finally(() => this.loadingOverlayService.stop())
+    this.authenticationService.password().pipe(
+      finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         pwd => {
           this.form.setValue({
