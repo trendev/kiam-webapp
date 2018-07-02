@@ -1,7 +1,7 @@
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 
-import {catchError, map} from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
@@ -43,8 +43,4 @@ export class PackService {
       catchError(e => observableThrowError(e)));
   }
 
-  buildModelOfferings(): Observable<Offering[]> {
-    return this.http.post<Offering[]>(`${this.api}/buildModelOfferings`, null, { withCredentials: true }).pipe(
-      catchError(e => observableThrowError(e)));
-  }
 }

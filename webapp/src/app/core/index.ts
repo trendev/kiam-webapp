@@ -23,3 +23,4 @@ export * from './collective-group.service';
 export * from './collective-group-bill.service';
 export * from './category.service';
 export * from './professional-vat-rates-resolver.service';
+export * from './offerings-model.service';

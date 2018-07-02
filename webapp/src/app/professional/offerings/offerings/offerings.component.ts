@@ -1,8 +1,7 @@
-
-import {finalize} from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
-import { ProfessionalService, PackService } from '@app/core';
+import { ProfessionalService, OfferingsModelService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Offering, Service, Pack, OfferingType } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
@@ -31,7 +30,7 @@ export class OfferingsComponent implements OnInit {
   selectedOfferingType: string;
 
   constructor(private professionalService: ProfessionalService,
-    private packService: PackService,
+    private offeringsModelService: OfferingsModelService,
     private router: Router,
     private route: ActivatedRoute,
     private loadingOverlayService: LoadingOverlayService,
@@ -100,7 +99,7 @@ export class OfferingsComponent implements OnInit {
 
   buildModelOfferings() {
     this.loadingOverlayService.start();
-    this.packService.buildModelOfferings().pipe(
+    this.offeringsModelService.build().pipe(
       finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         offerings => {
