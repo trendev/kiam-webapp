@@ -26,13 +26,11 @@
     </ng-container>
     <ng-container matColumnDef="payment-status">
       <mat-header-cell class="payment-status" *matHeaderCellDef>Statut</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <div class="payment-status">
-          <app-payment-status [bill]="element.bill"></app-payment-status>
-        </div>
+      <mat-cell *matCellDef="let element" class="payment-status">
+        <app-payment-status [bill]="element.bill"></app-payment-status>
       </mat-cell>
     </ng-container>
-    
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <!-- [matTooltip]="row.reference" matTooltipPosition="above" -->
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="gotoBill(row.reference)">

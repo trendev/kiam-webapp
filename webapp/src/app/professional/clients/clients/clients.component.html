@@ -16,8 +16,14 @@
         </div>
         <mat-table #table [dataSource]="datasource" matSort>
           <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-            <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="column.hide">{{column.headerCellDef}}</mat-header-cell>
-            <mat-cell *matCellDef="let element" [class.hide]="column.hide">
+            <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{
+              'hide': column.hide,
+              'show': !column.hide
+            }">{{column.headerCellDef}}</mat-header-cell>
+            <mat-cell *matCellDef="let element" [ngClass]="{
+              'hide': column.hide,
+              'show': !column.hide
+            }">
               {{column.cellDef(element)}}
             </mat-cell>
           </ng-container>

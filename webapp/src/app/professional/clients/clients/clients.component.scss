@@ -44,6 +44,11 @@ mat-card {
     .hide {
         display: none;
     }
+    .show {
+        // display: flex;
+        // justify-content: center;
+        margin: 0 0 0 8px;
+    }
     .list-container {
         max-height: 300px;
     }
