@@ -10,10 +10,10 @@
         </div>
         <mat-table #table [dataSource]="datasource" matSort>
             <ng-container matColumnDef="checked">
-                <mat-header-cell *matHeaderCellDef mat-sort-header class="item">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
                     <mat-icon>check_box</mat-icon>
                 </mat-header-cell>
-                <mat-cell *matCellDef="let element" class="item">
+                <mat-cell *matCellDef="let element" >
                     <mat-checkbox [checked]="element.checked" (change)="select($event,element)"></mat-checkbox>
                 </mat-cell>
             </ng-container>
@@ -26,8 +26,8 @@
                 <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="price">
-                <mat-header-cell *matHeaderCellDef mat-sort-header class="item">Prix (EUR)</mat-header-cell>
-                <mat-cell *matCellDef="let element" class="item">{{element.price / 100}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="price">Prix (EUR)</mat-header-cell>
+                <mat-cell *matCellDef="let element" class="price">{{element.price / 100}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="duration">
                 <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Durée (min)</mat-header-cell>
@@ -38,7 +38,7 @@
                 <mat-cell *matCellDef="let element" [class.hide]="true">{{element.businesses}}</mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;">
             </mat-row>
         </mat-table>

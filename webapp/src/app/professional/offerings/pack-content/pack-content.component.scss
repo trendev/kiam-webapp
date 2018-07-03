@@ -38,7 +38,7 @@ mat-cell {
     .mat-row {
         padding: 0;
     }
-    .item {
+    mat-cell.price {
         display: flex;
         justify-content: center;
         align-items: center;
