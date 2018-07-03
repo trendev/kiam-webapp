@@ -1,3 +1,17 @@
+.list-container {
+    display: flex;
+    flex-direction: column; 
+    // max-height: 500px;
+    // min-height: 350px;
+    min-width: 250px;
+    margin: 5px 0px;
+}
+
+.mat-table {
+    overflow: auto; 
+    max-height: 500px;
+}
+
 .search-header {
     display: flex;
     flex-direction: column;
@@ -5,10 +19,6 @@
     align-items: stretch;
     min-height: 64px;
     padding: 5px 20px 0;
-}
-
-.mat-table {
-    overflow: auto; // max-height: 500px;
 }
 
 .payment-status,
@@ -25,7 +35,8 @@
 @media all and (max-device-width: 720px) {
     .hide {
         display: none;
-    } // .list-container {
+    } 
+    // .list-container {
     //     max-height: 300px;
     // }
     .mat-header-row,

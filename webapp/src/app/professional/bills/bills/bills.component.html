@@ -40,9 +40,9 @@
           / 100 | currency:'EUR':'':'':'fr'}}
         </mat-chip>
       </mat-chip-list>
-      <div *ngIf="!billsModelIsEmpty()" class="list-container">
+      <ng-container *ngIf="!billsModelIsEmpty()">
         <app-bills-table [data]="data" (gotobill)="gotoBill($event)"></app-bills-table>
-      </div>
+      </ng-container>
     </mat-card-content>
     <mat-card-actions>
       <div class="form-button-container">
