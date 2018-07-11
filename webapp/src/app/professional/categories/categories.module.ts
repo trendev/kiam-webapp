@@ -8,7 +8,6 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { CategoryDetailResolverService } from './category-detail-resolver.service';
-import {  } from './clients-resolver.service';
 
 @NgModule({
   imports: [
