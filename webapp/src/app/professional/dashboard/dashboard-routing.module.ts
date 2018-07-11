@@ -1,4 +1,4 @@
-import { WelcomeComponent } from './welcome/welcome.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from '@app/shared';
@@ -6,7 +6,7 @@ import { PageNotFoundComponent } from '@app/shared';
 const routes: Routes = [
   {
     path: '',
-    component: WelcomeComponent,
+    component: DashboardComponent,
     pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent }
@@ -16,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class WelcomeRoutingModule { }
+export class DashboardRoutingModule { }

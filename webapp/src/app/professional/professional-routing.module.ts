@@ -1,4 +1,3 @@
-import { WelcomeComponent } from './welcome/welcome/welcome.component';
 import { ProfessionalGuard } from './professional.guard';
 import { ProfessionalDashboardComponent } from './professional-dashboard/professional-dashboard.component';
 import { NgModule } from '@angular/core';
@@ -13,8 +12,8 @@ const routes: Routes = [
     canActivateChild: [ProfessionalGuard],
     children: [
       {
-        path: 'welcome',
-        loadChildren: 'app/professional/welcome/welcome.module#WelcomeModule'
+        path: 'dashboard',
+        loadChildren: 'app/professional/dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'clients',
