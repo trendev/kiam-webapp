@@ -5,8 +5,12 @@ import { PageNotFoundComponent } from '@app/shared';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: '/login',
+        redirectTo: '/welcome',
         pathMatch: 'full',
+    },
+    {
+        path: 'login',
+        redirectTo: '/login'
     },
     {
         path: 'professional',
