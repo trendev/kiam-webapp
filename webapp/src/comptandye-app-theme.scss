@@ -1,0 +1,8 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+$comptandye-app-primary: mat-palette($mat-deep-purple, 500, 300, 800);
+$comptandye-app-accent: mat-palette($mat-green, A400, A200, A700);
+$comptandye-app-warn: mat-palette($mat-pink, 400, 300, 700);
+$comptandye-app-theme: mat-light-theme($comptandye-app-primary, $comptandye-app-accent, $comptandye-app-warn);
+@include angular-material-theme($comptandye-app-theme);

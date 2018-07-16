@@ -11,7 +11,7 @@ export class BillsUtils {
                 return new BillStatus('warn', 'error_outline');
             }
             if (this.isPending(bill)) {
-                return new BillStatus('accent', 'warning'); // warning more_horiz
+                return new BillStatus('accent', 'priority_high'); // warning more_horiz priority_high
             }
         }
     }
