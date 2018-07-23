@@ -1,8 +1,11 @@
 @import '~@angular/material/theming';
 @import 'src/app/welcome/banner/title/comptandye-banner-title-theme.scss';
+@import 'src/app/welcome/welcome-footer/comptandye-welcome-footer-theme.scss';
 
 @mixin comptandye-banner-theme($theme) {
   @include comptandye-banner-title-theme($theme);
+  @include comptandye-welcome-footer-theme($theme);
+
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
 
