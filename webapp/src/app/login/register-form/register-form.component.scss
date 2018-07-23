@@ -6,10 +6,18 @@
     bottom: 0px;
     display: flex;
     justify-content: center;
-    align-items: flex-start; 
+    align-items: flex-start;
 }
 
-@media all and (max-device-width : 600px) {
+.advise {
+    font-weight: bold;
+}
+
+.button {
+    border-radius: 48px;
+}
+
+@media all and (max-device-width: 600px) {
     .container {
         top: 56px;
         display: flex;
@@ -27,10 +35,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items:center;
+    align-items: center;
 }
 
-.login-actions > * {
+.login-actions>* {
     margin: 10px 0 0 0;
     padding: 0;
     width: 100%;

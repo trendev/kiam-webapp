@@ -9,6 +9,10 @@
     align-items: flex-start; 
 }
 
+.button {
+    border-radius: 48px;
+}
+
 @media all and (max-device-width : 600px) {
     .container {
         top: 56px;
