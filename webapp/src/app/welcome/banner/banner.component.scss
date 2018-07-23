@@ -1,0 +1,24 @@
+.banner {
+    padding: 12px 24px 0px 24px;
+}
+
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.register-button {
+    position: relative;
+    top: +18px; // center the button
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 200px;
+    text-align: center;
+    border-radius: 48px;
+}
+
+
+
