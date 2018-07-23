@@ -1,9 +1,6 @@
 // @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import './comptandye-app-theme';
 
-@import 'src/app/welcome/slogan/comptandye-slogan-theme.scss';
-@include comptandye-slogan-theme($comptandye-app-theme);
-
 // mat-sidenav-container must have a 100% height otherwise even if the div .dashboard is 100% height, 
 // the sidenav's content is not 100% height !
 html,
