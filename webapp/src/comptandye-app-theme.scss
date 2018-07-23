@@ -7,5 +7,5 @@ $comptandye-app-warn: mat-palette($mat-pink, 400, 300, 700);
 $comptandye-app-theme: mat-light-theme($comptandye-app-primary, $comptandye-app-accent, $comptandye-app-warn);
 @include angular-material-theme($comptandye-app-theme);
 
-@import 'src/app/welcome/slogan/comptandye-slogan-theme.scss';
-@include comptandye-slogan-theme($comptandye-app-theme);
+@import 'src/app/welcome/banner/comptandye-banner-theme.scss';
+@include comptandye-banner-theme($comptandye-app-theme);

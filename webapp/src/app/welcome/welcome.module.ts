@@ -6,9 +6,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { WelcomeToolbarComponent } from './welcome/welcome-toolbar/welcome-toolbar.component';
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { SloganComponent } from './slogan/slogan.component';
-import { TitleComponent } from './slogan/title/title.component';
-import { SentenceComponent } from './slogan/sentence/sentence.component';
+import { BannerComponent } from './banner/banner.component';
+import { TitleComponent } from './banner/title/title.component';
+import { SentenceComponent } from './banner/sentence/sentence.component';
 
 @NgModule({
   imports: [
@@ -17,6 +17,6 @@ import { SentenceComponent } from './slogan/sentence/sentence.component';
     SharedModule,
     WelcomeRoutingModule
   ],
-  declarations: [WelcomeComponent, WelcomeToolbarComponent, SloganComponent, TitleComponent, SentenceComponent]
+  declarations: [WelcomeComponent, WelcomeToolbarComponent, BannerComponent, TitleComponent, SentenceComponent]
 })
 export class WelcomeModule { }
