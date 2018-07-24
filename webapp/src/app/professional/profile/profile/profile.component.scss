@@ -33,6 +33,10 @@ mat-card {
     margin-bottom: 10px;
 }
 
+.chgpassword-button{
+    border-radius: 48px;
+}
+
 @media all and (max-device-width: 600px) {
     .top-button-container {
         flex-flow: column;
