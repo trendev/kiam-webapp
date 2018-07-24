@@ -10,6 +10,7 @@ import { BannerComponent } from './banner/banner.component';
 import { TitleComponent } from './banner/title/title.component';
 import { SentenceComponent } from './banner/sentence/sentence.component';
 import { WelcomeFooterComponent } from './welcome-footer/welcome-footer.component';
+import { WelcomeLoginComponent } from './welcome-login/welcome-login.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { WelcomeFooterComponent } from './welcome-footer/welcome-footer.componen
     SharedModule,
     WelcomeRoutingModule
   ],
-  declarations: [WelcomeComponent, WelcomeToolbarComponent, BannerComponent, TitleComponent, SentenceComponent, WelcomeFooterComponent]
+  declarations: [WelcomeComponent, WelcomeToolbarComponent, BannerComponent, TitleComponent, SentenceComponent, WelcomeFooterComponent, WelcomeLoginComponent]
 })
 export class WelcomeModule { }
