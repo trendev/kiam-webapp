@@ -1,8 +1,28 @@
-<p>
-  En cours de développement
-</p>
-<ul>
-  <li>Valider les CGU</li>
-  <li>Ajouter moyen de paiement (CB classique et 3D Secure)</li>
-</ul>
-
+<div class="container">
+  <mat-card>
+    <mat-card-title>Souscription à comptandye</mat-card-title>
+    <mat-card-subtitle class="subtitle">
+      <div>
+        <p>En cliquant sur le bouton "Souscrire", vous confirmez avoir pris connaissance des
+          <a href="/cgu2018.pdf" target="_blank">Conditions Générales d'Utilisation</a>.</p>
+        <p>Le « double clic » vaut signature électronique et équivaut à une signature manuscrite. Il constitue votre acceptation
+          pleine et entière des présentes Conditions Générales d’Utilisation.</p>
+      </div>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p style="font-style: italic">
+        En cours de développement
+      </p>
+      <ul>
+        <li style="font-style: italic">Ajouter la dernière version téléchargeable des CGU</li>
+        <li style="font-style: italic">Ajouter moyen de paiement (CB classique, 3D Secure maintenant et SEPA Direct Debit
+          dans 60 jours)</li>
+      </ul>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <a mat-button routerLink="../" routerLinkActive="active">
+      <mat-icon aria-label="Consulter/Modifier le profil">keyboard_arrow_left</mat-icon>
+      Retour au profil
+    </a>
+  </mat-card>
+</div>

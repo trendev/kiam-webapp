@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+mat-card {
+    margin: 10px; // padding: 10px 5px 10px 5px;
+    width: 450px;
+}
+
+.subtitle {
+    display: flex;
+    align-items: center;
+}
+
+a {
+    padding-left: 0px;
+}
+
+@media all and (max-device-width: 600px) {
+    mat-card {
+        width: 100%;
+    }
+    .subtitle {
+        align-items: flex-start;
+    }
+}
