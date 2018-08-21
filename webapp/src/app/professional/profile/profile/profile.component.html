@@ -4,8 +4,11 @@
       <mat-card-title>Profil</mat-card-title>
       <mat-card-subtitle>Email : {{pro.email}}</mat-card-subtitle>
       <div class="top-button-container">
-        <button class="chgpassword-button" mat-raised-button color="primary" routerLink="./change-password" routerLinkActive="active">
+        <button mat-raised-button color="primary" routerLink="./change-password" routerLinkActive="active">
           Nouveau mot de passe
+        </button>
+        <button mat-raised-button color="accent" routerLink="./subscribe" routerLinkActive="active">
+          Souscription
         </button>
       </div>
 
@@ -16,7 +19,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Compte Comptandye *
+                Compte comptandye *
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-account-info [errorAggregator]="errorAggregator"></app-account-info>
@@ -43,7 +46,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Moyens de paiement acceptés *
+                Moyens d'encaissement acceptés *
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-payment-modes [errorAggregator]="errorAggregator"></app-payment-modes>

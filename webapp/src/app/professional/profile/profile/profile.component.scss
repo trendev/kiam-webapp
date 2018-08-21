@@ -26,20 +26,21 @@ mat-card {
 }
 
 .top-button-container>* {
-    margin: 0px 0px 8px 0px;
+    margin: 0px 8px 8px 0px;
+    border-radius: 48px;
 }
 
 .mat-divider {
     margin-bottom: 10px;
 }
 
-.chgpassword-button{
-    border-radius: 48px;
-}
-
 @media all and (max-device-width: 600px) {
     .top-button-container {
         flex-flow: column;
         align-content: stretch;
+    }
+
+    .top-button-container>* {
+        margin: 0px 0px 8px 0px;
     }
 }
