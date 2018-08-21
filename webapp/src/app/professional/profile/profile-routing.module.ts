@@ -1,3 +1,4 @@
+import { SubscribeComponent } from './subscribe/subscribe.component';
 import { ChangeProfessionalPasswordComponent } from './change-professional-password/change-professional-password.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'change-password',
     component: ChangeProfessionalPasswordComponent
+  },
+  {
+    path: 'subscribe',
+    component: SubscribeComponent
   },
   { path: '**', component: PageNotFoundComponent }
 ];
