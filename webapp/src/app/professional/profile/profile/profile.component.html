@@ -11,7 +11,7 @@
           - pro.stripeCustomerId & pro.stripeSubscriptionId & pro.tos are undefined 
           - pro's data (customerDetails, address...) are all set 
         -->
-        <button type="button" mat-raised-button color="accent" routerLink="./subscribe" routerLinkActive="active">
+        <button *ngIf="subscriptionAllowed" type="button" mat-raised-button color="accent" routerLink="./subscribe" routerLinkActive="active">
           Souscription
         </button>
       </div>
@@ -23,7 +23,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Compte comptandye *
+                Compte {{appName}} *
               </mat-panel-title>
             </mat-expansion-panel-header>
             <app-account-info [errorAggregator]="errorAggregator"></app-account-info>

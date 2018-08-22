@@ -21,6 +21,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material';
 import { ErrorHandlerService } from '@app/error-handler.service';
+import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +29,8 @@ import { ErrorHandlerService } from '@app/error-handler.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+
+  appName = environment.title;
 
   pro: Professional;
   form: FormGroup;
@@ -314,5 +317,9 @@ export class ProfileComponent implements OnInit {
         },
         e => this.errorHandler.handle(e, 'Impossible de rafraîchir le profil à partir du serveur')
       );
+  }
+
+  get subscriptionAllowed(): boolean {
+    return !!this.pro.companyID;
   }
 }
