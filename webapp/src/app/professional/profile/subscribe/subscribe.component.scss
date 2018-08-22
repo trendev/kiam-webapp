@@ -5,6 +5,13 @@
     flex-wrap: wrap;
 }
 
+.offer-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
 .subscription-card {
     margin: 8px; 
     padding: 8px 24px 8px 24px;
@@ -13,7 +20,7 @@
 
 .offer-card {
     margin: 8px; // padding: 10px 5px 10px 5px;
-    width: 450px;
+    width: 400px;
 }
 
 .subtitle {
