@@ -1,5 +1,5 @@
 
-import {finalize} from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import {
   AuthenticationService,
   ProfessionalService
@@ -319,6 +319,11 @@ export class ProfileComponent implements OnInit {
       );
   }
 
+  /**
+   * Indicates if subscription is allowed or not. Professional's information must be set
+   * and the Professional must not have existing Stripe configuration.
+   * TODO : add Stripe configurtion filter
+   */
   get subscriptionAllowed(): boolean {
     return !!this.pro.companyID;
   }
