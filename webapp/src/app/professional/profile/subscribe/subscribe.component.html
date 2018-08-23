@@ -3,8 +3,8 @@
     <mat-card-title>Souscription à {{appName}}</mat-card-title>
     <mat-card-subtitle class="subtitle">
       <div>
-        <p>En cliquant sur le bouton "Souscrire", vous validez votre souscription à l'offre choisie et vous confirmez avoir
-          pris connaissance et acceptez les <a href="/cgu2018.pdf" target="_blank">Conditions Générales d'Utilisation</a>.</p>
+        <p>En cliquant sur le bouton "Souscrire" d'une offre, vous validez votre souscription à l'offre choisie, confirmez avoir
+          pris connaissance et acceptez les <a href="/cgu-01092018.pdf" target="_blank">Conditions Générales d'Utilisation</a>.</p>
         <p>La période de facturation débute dès l'acceptation de votre moyen de paiement et vous permet d'utiliser les services
           de {{appName}} pour une durée spécifique à l'offre souscrite.</p>
       </div>
@@ -22,9 +22,9 @@
         <p>Utiliser {{appName}} dès aujourd'hui pour une durée de <span style="font-weight: bold">1 mois renouvelable automatiquement</span>.</p>
       </mat-card-subtitle>
       <mat-card-content>
-        <button type="button" mat-raised-button color="primary">
-          Souscrire pour {{defaultAmount}}&#8364; TTC / mois
-        </button>
+        <app-subscription>
+            Souscrire pour {{defaultAmount}}&#8364; TTC / mois
+        </app-subscription>
       </mat-card-content>
     </mat-card>
   </div>

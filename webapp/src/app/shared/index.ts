@@ -1,5 +1,3 @@
-import { BillsUtils } from './bills-utils';
-import { Utils } from './utils';
 export * from './shared.module';
 export * from './page-not-found/page-not-found.component';
 export * from './account-info/account-info.component';
@@ -28,3 +26,5 @@ export * from './bills/period-selector/period-selector.component';
 export * from './snack-messages/success-message/success-message.component';
 export * from './snack-messages/error-message/error-message.component';
 export * from './payment-status/payment-status.component';
+export * from './card-info/card-info.component';
+export * from './subscription/subscription.component';

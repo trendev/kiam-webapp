@@ -55,6 +55,8 @@ import { UnexpectedErrorComponent } from './snack-messages/unexpected-error/unex
 import { BillsMicroListTableComponent } from './bills/bills-micro-list-table/bills-micro-list-table.component';
 import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-list.component';
 import { PeriodSelectorComponent } from './bills/period-selector/period-selector.component';
+import { CardInfoComponent } from './card-info/card-info.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 @NgModule({
   imports: [
@@ -111,7 +113,9 @@ import { PeriodSelectorComponent } from './bills/period-selector/period-selector
     BillsMicroListComponent,
     BillsMicroListTableComponent,
     PeriodSelectorComponent,
-    PaymentStatusComponent
+    PaymentStatusComponent,
+    CardInfoComponent,
+    SubscriptionComponent
   ],
   exports: [
     CommonModule,
@@ -165,7 +169,9 @@ import { PeriodSelectorComponent } from './bills/period-selector/period-selector
     BillsMicroListTableComponent,
     MatDialogModule,
     PeriodSelectorComponent,
-    PaymentStatusComponent
+    PaymentStatusComponent,
+    CardInfoComponent,
+    SubscriptionComponent
   ],
   entryComponents: [
     SuccessMessageComponent,
