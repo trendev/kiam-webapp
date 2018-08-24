@@ -56,7 +56,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
   ngOnDestroy() {
     this.card.removeEventListener('change', this.cardHandler);
     this.card.destroy();
-    if (!this.subscription.closed) {
+    if (this.subscription && !this.subscription.closed) {
       this.subscription.unsubscribe();
     }
   }
