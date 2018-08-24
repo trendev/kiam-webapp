@@ -17,4 +17,12 @@ export class SubscribeComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Handles the new Stripe Soure creation
+   * @param source A Stripe Source
+   */
+  handleNewSource(source: any) {
+    console.log(source);
+  }
+
 }

@@ -2,5 +2,5 @@
     <button *ngIf="!displayCardInfo" type="button" mat-raised-button color="primary" (click)="displayCardInfo = true">
         <ng-content></ng-content>
     </button>
-    <app-card-info *ngIf="displayCardInfo"></app-card-info>
+    <app-card-info *ngIf="displayCardInfo" (newSource)="handleNewSource($event)"></app-card-info>
 </div>

@@ -22,7 +22,7 @@
         <p>Utiliser {{appName}} dès aujourd'hui pour une durée de <span style="font-weight: bold">1 mois renouvelable automatiquement</span>.</p>
       </mat-card-subtitle>
       <mat-card-content>
-        <app-subscription>
+        <app-subscription (newSource)="handleNewSource($event)">
             Souscrire pour {{defaultAmount}}&#8364; TTC / mois
         </app-subscription>
       </mat-card-content>
