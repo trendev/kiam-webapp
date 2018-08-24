@@ -14,11 +14,4 @@ export class CardInfoComponent implements OnInit {
   ngOnInit() {
   }
 
-  doSomething() {
-    this.newSource.emit({
-      foo: 'ok',
-      bar: 'wiskey'
-    });
-  }
-
 }
