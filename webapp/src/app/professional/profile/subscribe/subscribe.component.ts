@@ -21,7 +21,7 @@ export class SubscribeComponent implements OnInit {
    * Handles the new Stripe Soure creation
    * @param source A Stripe Source
    */
-  handleNewSource(source: any) {
+  handleNewSource({source}) {
     console.log(source);
   }
 

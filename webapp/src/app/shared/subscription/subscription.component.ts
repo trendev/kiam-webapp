@@ -7,6 +7,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 })
 export class SubscriptionComponent implements OnInit {
 
+  @Input() amount: number;
   @Output() newSource = new EventEmitter<any>();
 
   displayCardInfo = false;
