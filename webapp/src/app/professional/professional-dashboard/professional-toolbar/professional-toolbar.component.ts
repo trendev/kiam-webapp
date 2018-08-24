@@ -29,7 +29,7 @@ export class ProfessionalToolbarComponent {
       finalize(() => {
         this.loadingOverlayService.stop();
         this.snackBar.openFromComponent(SuccessMessageComponent, {
-          data: `Vous êtes déconnecté(e)`,
+          data: `Tu es déconnecté(e) 👍`,
           duration: 2000
         });
         this.router.navigate(['/login'], this.authenticationService.loginRequired);

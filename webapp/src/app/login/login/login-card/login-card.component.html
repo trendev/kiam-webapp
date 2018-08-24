@@ -16,8 +16,8 @@
               #password="ngModel" required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
-          <mat-error *ngIf="errors.blocked">Identification impossible : votre compte à été bloqué</mat-error>
-          <mat-error *ngIf="errors.unauthorized">Identification incorrecte : vérifier vos identifiants ou votre connexion au serveur</mat-error>
+          <mat-error *ngIf="errors.blocked">Identification impossible : ton compte à été bloqué 🚫</mat-error>
+          <mat-error *ngIf="errors.unauthorized">Identification incorrecte : vérifie tes identifiants ou ta connexion internet 🤔</mat-error>
         </div>
         <mat-checkbox [(ngModel)]="rememberMe" name="rememberMe" style="font-size: 0.9em">Conserver mes identifiants</mat-checkbox>
       </mat-card-content>

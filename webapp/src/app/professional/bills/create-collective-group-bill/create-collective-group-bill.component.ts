@@ -77,7 +77,7 @@ export class CreateCollectiveGroupBillComponent implements OnInit {
         this.errorHandler.handle(e, 'Une erreur est survenue lors de la sauvegarde de la facture...');
         if (e instanceof HttpErrorResponse && e.status === 409) {
           this.billsRefDate = +e.error.error.deliveryDate;
-          this.errorHandler.handle(e, `Vous ne pouvez pas créer une facture antérieure à la date limite de facturation !`);
+          this.errorHandler.handle(e, `Tu ne peux pas créer une facture antérieure à la date limite de facturation !`);
         }
       }
     );

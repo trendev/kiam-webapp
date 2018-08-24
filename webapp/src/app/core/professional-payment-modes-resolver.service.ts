@@ -17,7 +17,7 @@ export class ProfessionalPaymentModesResolverService implements Resolve<PaymentM
     return this.professionalService.profile().pipe(
       map(pro => pro.paymentModes ? pro.paymentModes : []),
       catchError(e => {
-        this.errorHandler.handle(e, `Impossible de récupérer la liste de vos moyens de paiment...`);
+        this.errorHandler.handle(e, `Impossible de récupérer la liste de tes moyens de paiment...`);
         return of([]);
       })
     );
