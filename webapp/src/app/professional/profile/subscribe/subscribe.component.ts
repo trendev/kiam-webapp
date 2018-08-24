@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-subscribe',
@@ -9,6 +10,7 @@ import { environment } from '@env/environment';
 export class SubscribeComponent implements OnInit {
 
   appName = environment.title;
+  source: any;
 
   defaultAmount = 24;
 
@@ -21,8 +23,9 @@ export class SubscribeComponent implements OnInit {
    * Handles the new Stripe Soure creation
    * @param source A Stripe Source
    */
-  handleNewSource({source}) {
+  handleNewSource(source) {
     console.log(source);
+    this.source = source;
   }
 
 }

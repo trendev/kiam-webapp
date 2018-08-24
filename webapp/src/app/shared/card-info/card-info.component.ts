@@ -14,6 +14,8 @@ import { AuthenticationService } from '@app/core';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Professional } from '@app/entities';
 import { ErrorHandlerService } from '@app/error-handler.service';
+import { from } from 'rxjs';
+import { catchError, finalize, filter, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-card-info',
@@ -60,35 +62,27 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.loadingOverlayService.start();
 
-    try {
-      const { source, error } = await stripe.createSource(
-        this.card,
-        {
-          amount: this.amount * 100,
-          currency: 'EUR',
-          owner: {
-            address: {
-              city: pro.address.city,
-              country: pro.address.country,
-              line1: pro.address.street,
-              postal_code: pro.address.postalCode
-            },
-            email: pro.email,
-            name: `${pro.customerDetails.firstName} ${pro.customerDetails.lastName}`,
-            phone: pro.customerDetails.phone
-          }
-        });
-
-      if (error) {
-        this.errorHandler.handle(error, error.message);
-      } else {
-        this.newSource.emit({source});
-      }
-    } catch (e) {
-      this.errorHandler.handle(e, e.message);
-    }
-
-    this.loadingOverlayService.stop();
+    from(stripe.createSource(
+      this.card,
+      {
+        amount: this.amount * 100,
+        currency: 'EUR',
+        owner: {
+          address: {
+            city: pro.address.city,
+            country: pro.address.country,
+            line1: pro.address.street,
+            postal_code: pro.address.postalCode
+          },
+          email: pro.email,
+          name: `${pro.customerDetails.firstName} ${pro.customerDetails.lastName}`,
+          phone: pro.customerDetails.phone
+        }
+      })).pipe(
+        filter(({ source, error }) => !error && !!source),
+        finalize(() => this.loadingOverlayService.stop()),
+        catchError(e => this.errorHandler.handle(e, e.message)))
+      .subscribe(({ source }) => this.newSource.emit(source));
   }
 
 }
