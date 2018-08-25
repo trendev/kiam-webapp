@@ -24,10 +24,10 @@
       <mat-card-content>
         <!-- DEBUG -->
         <div style="margin: 12px 12px" *ngIf="source">
-            <code >Support 3D SECURE : {{source?.card?.three_d_secure}}</code>
+          <code>Replied source : {{source | async | json}}</code>
         </div>
         <app-subscription (newSource)="handleNewSource($event)" [amount]="defaultAmount">
-            Souscrire pour {{defaultAmount}}&#8364; TTC / mois
+          Souscrire pour {{defaultAmount}}&#8364; TTC / mois
         </app-subscription>
       </mat-card-content>
     </mat-card>

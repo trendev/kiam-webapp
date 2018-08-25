@@ -1,6 +1,10 @@
+import { finalize, catchError, take, filter } from 'rxjs/operators';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
-import { stringify } from 'querystring';
+import { StripeSubscriptionService } from '@app/core';
+import { Observable } from 'rxjs';
+import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({
   selector: 'app-subscribe',
@@ -10,11 +14,13 @@ import { stringify } from 'querystring';
 export class SubscribeComponent implements OnInit {
 
   appName = environment.title;
-  source: any;
+  source: Observable<any>;
 
   defaultAmount = 24;
 
-  constructor() { }
+  constructor(private loadingOverlayService: LoadingOverlayService,
+    private errorHandlerService: ErrorHandlerService,
+    private stripeSubscriptionService: StripeSubscriptionService) { }
 
   ngOnInit() {
   }
@@ -25,7 +31,12 @@ export class SubscribeComponent implements OnInit {
    */
   handleNewSource(source) {
     console.log(source);
-    this.source = source;
+    this.loadingOverlayService.start();
+    this.source = this.stripeSubscriptionService.subscription(source)
+      .pipe(
+        finalize(() => this.loadingOverlayService.stop()),
+        catchError(e => this.errorHandlerService.handle(e))
+      );
   }
 
 }

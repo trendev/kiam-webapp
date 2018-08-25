@@ -23,6 +23,7 @@ import { ProfessionalBillsResolverService } from './professional-bills-resolver.
 import { CollectiveGroupService } from './collective-group.service';
 import { CollectiveGroupBillService } from './collective-group-bill.service';
 import { ProfessionalVatRatesResolverService } from './professional-vat-rates-resolver.service';
+import { StripeSubscriptionService } from './stripe-subscription.service';
 
 @NgModule({
   imports: [
@@ -53,7 +54,9 @@ import { ProfessionalVatRatesResolverService } from './professional-vat-rates-re
     CollectiveGroupService,
     CollectiveGroupBillService,
     CategoryService,
-    ProfessionalVatRatesResolverService]
+    ProfessionalVatRatesResolverService,
+    StripeSubscriptionService
+  ]
 })
 export class CoreModule {
   /* make sure CoreModule is imported only by one NgModule the AppModule */
