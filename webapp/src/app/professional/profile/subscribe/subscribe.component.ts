@@ -14,7 +14,7 @@ import { ErrorHandlerService } from '@app/error-handler.service';
 export class SubscribeComponent implements OnInit {
 
   appName = environment.title;
-  source: Observable<any>;
+  source$: Observable<any>;
 
   defaultAmount = 24;
 
@@ -32,7 +32,7 @@ export class SubscribeComponent implements OnInit {
   handleNewSource(source) {
     console.log(source);
     this.loadingOverlayService.start();
-    this.source = this.stripeSubscriptionService.subscription(source)
+    this.source$ = this.stripeSubscriptionService.subscription(source)
       .pipe(
         finalize(() => this.loadingOverlayService.stop()),
         catchError(e => this.errorHandlerService.handle(e))
