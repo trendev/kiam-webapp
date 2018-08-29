@@ -15,7 +15,7 @@ import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Professional } from '@app/entities';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { from, Subscription } from 'rxjs';
-import { catchError, finalize, filter, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-card-info',
@@ -83,10 +83,15 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
           phone: pro.customerDetails.phone
         }
       })).pipe(
-        filter(({ source, error }) => !error && !!source),
-        finalize(() => this.loadingOverlayService.stop()),
-        catchError(e => this.errorHandler.handle(e, e.message)))
-      .subscribe(({ source }) => this.newSource.emit(source));
+        catchError(e => {
+          this.loadingOverlayService.stop();
+          return this.errorHandler.handle(e, e.message);
+        })
+      )
+      .subscribe(({ source, error }) => {
+        this.loadingOverlayService.stop();
+        if (!!source && !error) { this.newSource.emit(source); }
+      });
   }
 
 }

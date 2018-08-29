@@ -16,6 +16,8 @@ export class Professional extends Customer {
     businesses: Business[];
     paymentModes: PaymentMode[];
     vatRates: VatRates; // init during a POST/PUT if vatcode is provided
+    stripeCustomerId: string;
+    stripeSubscriptionId: string;
 
     constructor(values: Object = {}) {
         super(values);

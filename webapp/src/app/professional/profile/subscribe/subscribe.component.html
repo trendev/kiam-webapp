@@ -22,10 +22,6 @@
         <div>Utiliser {{appName}} dès aujourd'hui pour une durée de <span style="font-weight: bold">1 mois renouvelable automatiquement</span>.</div>
       </mat-card-subtitle>
       <mat-card-content>
-        <!-- DEBUG -->
-        <div style="margin: 12px 12px" *ngIf="source$">
-          <code>Replied source : {{source$ | async | json}}</code>
-        </div>
         <app-subscription (newSource)="handleNewSource($event)" [amount]="defaultAmount">
           Souscrire pour {{defaultAmount}}&#8364; TTC / mois
         </app-subscription>
