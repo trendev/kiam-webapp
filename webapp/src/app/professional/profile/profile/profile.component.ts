@@ -53,14 +53,16 @@ export class ProfileComponent implements OnInit {
     private loadingOverlayService: LoadingOverlayService,
     private snackBar: MatSnackBar,
     private errorHandler: ErrorHandlerService) {
-    this.pro = new Professional(this.authenticationService.user);
+    // this.pro = new Professional(this.authenticationService.user);
     this.route.data.subscribe(
       (data: {
         businesses: Business[],
-        paymentModes: PaymentMode[]
+        paymentModes: PaymentMode[],
+        pro: Professional
       }) => {
         this.businesses = data.businesses;
         this.paymentModes = data.paymentModes;
+        this.pro = data.pro;
         this.form = this.createForm();
       }
     );
@@ -322,9 +324,11 @@ export class ProfileComponent implements OnInit {
   /**
    * Indicates if subscription is allowed or not. Professional's information must be set
    * and the Professional must not have existing Stripe configuration.
-   * TODO : add Stripe configurtion filter
    */
   get subscriptionAllowed(): boolean {
-    return !!this.pro.companyID;
+    return !!this.pro.companyID
+      && !this.pro.stripeCustomerId
+      && !this.pro.stripeSubscriptionId
+      && !this.pro.tos;
   }
 }

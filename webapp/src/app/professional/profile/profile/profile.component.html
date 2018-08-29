@@ -7,10 +7,6 @@
         <button type="button" mat-raised-button color="primary" routerLink="./change-password" routerLinkActive="active">
           Nouveau mot de passe
         </button>
-        <!-- Should be visible if only :
-          - pro.stripeCustomerId & pro.stripeSubscriptionId & pro.tos are undefined 
-          - pro's data (customerDetails, address...) are all set 
-        -->
         <button *ngIf="subscriptionAllowed" type="button" mat-raised-button color="accent" routerLink="./subscribe" routerLinkActive="active">
           Souscription
         </button>

@@ -25,3 +25,4 @@ export * from './category.service';
 export * from './professional-vat-rates-resolver.service';
 export * from './offerings-model.service';
 export * from './stripe-subscription.service';
+export * from './professional-profile-resolver.service';
