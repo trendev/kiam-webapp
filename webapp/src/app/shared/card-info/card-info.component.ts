@@ -15,7 +15,7 @@ import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Professional } from '@app/entities';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { from, Subscription } from 'rxjs';
-import { catchError, filter, finalize, tap } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-card-info',
@@ -33,7 +33,6 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
   private card: any;
   private cardHandler: ({ error }) => void;
   error: string;
-  private subscription: Subscription;
 
   constructor(private cd: ChangeDetectorRef,
     private authenticationService: AuthenticationService,
@@ -56,9 +55,6 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
   ngOnDestroy() {
     this.card.removeEventListener('change', this.cardHandler);
     this.card.destroy();
-    if (this.subscription && !this.subscription.closed) {
-      this.subscription.unsubscribe();
-    }
   }
 
   async submit() {
@@ -66,8 +62,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.loadingOverlayService.start();
 
-    this.subscription = from(stripe.createSource(
-      this.card,
+    from(stripe.createSource(this.card,
       {
         amount: this.amount * 100,
         currency: 'EUR',
@@ -83,6 +78,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
           phone: pro.customerDetails.phone
         }
       })).pipe(
+        take(1),
         catchError(e => {
           this.loadingOverlayService.stop();
           return this.errorHandler.handle(e, e.message);
@@ -92,6 +88,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
         this.loadingOverlayService.stop();
         if (!!source && !error) { this.newSource.emit(source); }
       });
+
   }
 
 }
