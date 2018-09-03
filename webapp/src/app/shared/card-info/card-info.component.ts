@@ -57,7 +57,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
     this.card.destroy();
   }
 
-  async submit() {
+  submit() {
     const pro = new Professional(this.authenticationService.user);
 
     this.loadingOverlayService.start();
