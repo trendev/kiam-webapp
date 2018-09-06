@@ -5,12 +5,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from '@app/shared';
 import { ChangeProfessionalPasswordComponent } from './change-professional-password/change-professional-password.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
+import { SubscriptionDetailsComponent } from './subscription-details/subscription-details.component';
 
 @NgModule({
   imports: [
     SharedModule,
     ProfileRoutingModule
   ],
-  declarations: [ProfileComponent, ChangeProfessionalPasswordComponent, SubscribeComponent]
+  declarations: [ProfileComponent, ChangeProfessionalPasswordComponent, SubscribeComponent, SubscriptionDetailsComponent]
 })
 export class ProfileModule { }

@@ -1,3 +1,4 @@
+import { SubscriptionDetailsComponent } from './subscription-details/subscription-details.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { ChangeProfessionalPasswordComponent } from './change-professional-password/change-professional-password.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'subscribe',
     component: SubscribeComponent
+  },
+  {
+    path: 'subscription-details',
+    component: SubscriptionDetailsComponent
   },
   { path: '**', component: PageNotFoundComponent }
 ];
