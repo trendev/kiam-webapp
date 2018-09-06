@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { of, Observable } from 'rxjs';
 
@@ -8,7 +9,9 @@ import { PaymentMode } from '@app/entities';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class PaymentModesResolverService implements Resolve<PaymentMode[]> {
 
   constructor(private paymentModeService: PaymentModeService,

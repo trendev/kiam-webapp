@@ -1,13 +1,16 @@
+import { CoreModule } from './core.module';
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 
-import {catchError, map} from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { CollectiveGroup, CollectiveGroupBill } from '@app/entities';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class CollectiveGroupService {
 
   readonly api = `${environment.api}/CollectiveGroup`;

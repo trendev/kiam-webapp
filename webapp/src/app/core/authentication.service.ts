@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { throwError as observableThrowError, Observable } from 'rxjs';
 
@@ -11,7 +12,9 @@ import { NavigationExtras } from '@angular/router';
 
 
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class AuthenticationService {
 
   redirectUrl: string;

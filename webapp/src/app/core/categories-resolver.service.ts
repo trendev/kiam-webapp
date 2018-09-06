@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { of, Observable } from 'rxjs';
 
@@ -9,7 +10,9 @@ import { ProfessionalService } from './professional.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class CategoriesResolverService implements Resolve<Category[]> {
 
   constructor(private professionalService: ProfessionalService,

@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { of, Observable } from 'rxjs';
 
@@ -8,7 +9,9 @@ import { Bill } from '@app/entities';
 import { ProfessionalService } from './professional.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class ProfessionalBillsResolverService implements Resolve<Bill[]> {
 
   constructor(private professionalService: ProfessionalService,

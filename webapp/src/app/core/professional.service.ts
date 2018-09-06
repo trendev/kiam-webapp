@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { throwError as observableThrowError, Observable } from 'rxjs';
 
@@ -21,7 +22,9 @@ import {
   Service
 } from '@app/entities';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class ProfessionalService {
 
   readonly api = `${environment.api}/Professional`;

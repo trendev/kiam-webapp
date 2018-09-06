@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { throwError as observableThrowError, Observable } from 'rxjs';
 
@@ -7,7 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class CategoryService {
 
   readonly api = `${environment.api}/Category`;

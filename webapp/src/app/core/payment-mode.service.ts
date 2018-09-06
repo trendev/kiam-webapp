@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import {throwError as observableThrowError,  Observable } from 'rxjs';
 
@@ -7,7 +8,9 @@ import { environment } from '@env/environment';
 import { PaymentMode } from '@app/entities';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class PaymentModeService {
 
   readonly api = `${environment.api}/PaymentMode`;

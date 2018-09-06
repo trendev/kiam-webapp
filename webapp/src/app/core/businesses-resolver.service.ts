@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { of, Observable } from 'rxjs';
 
@@ -8,7 +9,9 @@ import { Injectable } from '@angular/core';
 import { Business } from '@app/entities';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class BusinessesResolverService implements Resolve<Business[]> {
   constructor(private businessService: BusinessService,
     private errorHandler: ErrorHandlerService) { }

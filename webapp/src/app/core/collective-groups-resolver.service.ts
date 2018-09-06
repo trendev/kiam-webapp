@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import {of,  Observable } from 'rxjs';
 
@@ -8,7 +9,9 @@ import { CollectiveGroup } from '@app/entities';
 import { ProfessionalService } from './professional.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class CollectiveGroupsResolverService implements Resolve<CollectiveGroup[]> {
   constructor(private professionalService: ProfessionalService,
     private errorHandler: ErrorHandlerService) { }

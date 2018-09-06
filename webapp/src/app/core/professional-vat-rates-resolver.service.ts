@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { of, Observable } from 'rxjs';
 
@@ -8,7 +9,9 @@ import { ErrorHandlerService } from '@app/error-handler.service';
 import { VatRates } from '@app/entities';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class ProfessionalVatRatesResolverService implements Resolve<VatRates> {
 
   constructor(private professionalService: ProfessionalService,

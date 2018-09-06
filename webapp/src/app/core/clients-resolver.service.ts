@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { of, Observable } from 'rxjs';
 
@@ -8,7 +9,9 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Client } from '@app/entities';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class ClientsResolverService implements Resolve<Client[]> {
 
   constructor(private professionalService: ProfessionalService,

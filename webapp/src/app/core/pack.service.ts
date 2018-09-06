@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 
 import { throwError as observableThrowError, Observable } from 'rxjs';
 
@@ -7,7 +8,9 @@ import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
 import { Offering, OfferingType, Pack } from '@app/entities';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class PackService {
 
   readonly api = `${environment.api}/Pack`;
