@@ -1,4 +1,3 @@
-import { ProfessionalProfileResolverService } from './professional-profile-resolver.service';
 import { CategoryService } from './category.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -55,9 +54,7 @@ import { StripeSubscriptionService } from './stripe-subscription.service';
     CollectiveGroupService,
     CollectiveGroupBillService,
     CategoryService,
-    ProfessionalVatRatesResolverService,
-    StripeSubscriptionService,
-    ProfessionalProfileResolverService
+    ProfessionalVatRatesResolverService
   ]
 })
 export class CoreModule {

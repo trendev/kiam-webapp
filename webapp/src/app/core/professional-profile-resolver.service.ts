@@ -1,3 +1,4 @@
+import { CoreModule } from './core.module';
 import { ProfessionalService } from './professional.service';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -7,7 +8,7 @@ import { of, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: CoreModule
 })
 export class ProfessionalProfileResolverService implements Resolve<Professional> {
 

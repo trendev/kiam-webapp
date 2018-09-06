@@ -1,10 +1,13 @@
+import { CoreModule } from './core.module';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: CoreModule
+})
 export class StripeSubscriptionService {
 
   readonly api = `${environment.api}/StripeSubscription`;
