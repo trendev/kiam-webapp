@@ -1,4 +1,6 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { StripeSubscriptionService } from '@app/core';
 
 @Component({
   selector: 'app-subscription-details',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscriptionDetailsComponent implements OnInit {
 
-  constructor() { }
+customer: Observable<any>;
+
+  constructor(private stripeSubscriptionService: StripeSubscriptionService) { }
 
   ngOnInit() {
+    this.customer = this.stripeSubscriptionService.details();
   }
 
 }

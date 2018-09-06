@@ -19,4 +19,12 @@ export class StripeSubscriptionService {
         catchError(e => throwError(e))
       );
   }
+
+  details(): Observable<any> {
+    return this.http.get<any>(`${this.api}/details`,
+      { withCredentials: true })
+      .pipe(
+        catchError(e => throwError(e))
+      );
+  }
 }
