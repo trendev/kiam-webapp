@@ -1,3 +1,4 @@
+import { StripeCustomerResolverService } from './stripe-customer-resolver.service';
 import { SubscriptionDetailsComponent } from './subscription-details/subscription-details.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { ChangeProfessionalPasswordComponent } from './change-professional-password/change-professional-password.component';
@@ -32,7 +33,10 @@ const routes: Routes = [
   },
   {
     path: 'subscription-details',
-    component: SubscriptionDetailsComponent
+    component: SubscriptionDetailsComponent,
+    resolve: {
+      stripeCustomer: StripeCustomerResolverService
+    }
   },
   { path: '**', component: PageNotFoundComponent }
 ];

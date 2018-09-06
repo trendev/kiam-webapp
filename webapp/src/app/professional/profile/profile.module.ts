@@ -1,3 +1,4 @@
+import { StripeCustomerResolverService } from './stripe-customer-resolver.service';
 import { NgModule } from '@angular/core';
 
 import { ProfileRoutingModule } from './profile-routing.module';
@@ -12,6 +13,14 @@ import { SubscriptionDetailsComponent } from './subscription-details/subscriptio
     SharedModule,
     ProfileRoutingModule
   ],
-  declarations: [ProfileComponent, ChangeProfessionalPasswordComponent, SubscribeComponent, SubscriptionDetailsComponent]
+  declarations: [
+    ProfileComponent,
+    ChangeProfessionalPasswordComponent,
+    SubscribeComponent,
+    SubscriptionDetailsComponent
+  ],
+  providers: [
+    StripeCustomerResolverService
+  ]
 })
 export class ProfileModule { }

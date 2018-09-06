@@ -1,6 +1,5 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { StripeSubscriptionService } from '@app/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-subscription-details',
@@ -9,12 +8,29 @@ import { StripeSubscriptionService } from '@app/core';
 })
 export class SubscriptionDetailsComponent implements OnInit {
 
-customer: Observable<any>;
+  stripeCustomer: any;
 
-  constructor(private stripeSubscriptionService: StripeSubscriptionService) { }
+  constructor(private route: ActivatedRoute) {
+    this.route.data.subscribe(
+      (data: {
+        stripeCustomer: any
+      }) => {
+        this.stripeCustomer = data.stripeCustomer;
+      }
+    );
+  }
 
   ngOnInit() {
-    this.customer = this.stripeSubscriptionService.details();
+
+  }
+
+  get cardinfo(): string {
+    if (this.stripeCustomer) {
+      const data = this.stripeCustomer.sources.data[0].type_data;
+      return `${data.brand} ${data.last4} expire ${data.exp_month}/${data.exp_year}`;
+    } else {
+      return 'no card';
+    }
   }
 
 }
