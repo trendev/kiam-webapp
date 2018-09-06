@@ -321,14 +321,18 @@ export class ProfileComponent implements OnInit {
       );
   }
 
+
+  get hasActiveSubscription(): boolean {
+    return !!this.pro.stripeCustomerId
+      && !!this.pro.stripeSubscriptionId;
+  }
+
   /**
-   * Indicates if subscription is allowed or not. Professional's information must be set
+   * Indicates if a new subscription is allowed or not. Professional's information must be set
    * and the Professional must not have existing Stripe configuration.
    */
-  get subscriptionAllowed(): boolean {
+  get newSubscriptionAllowed(): boolean {
     return !!this.pro.companyID
-      && !this.pro.stripeCustomerId
-      && !this.pro.stripeSubscriptionId
-      && !this.pro.tos;
+      && !this.hasActiveSubscription;
   }
 }
