@@ -1,9 +1,9 @@
-import { catchError } from 'rxjs/operators/catchError';
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { CollectiveGroupBill } from '@app/entities';
 import { CollectiveGroupService } from '@app/core';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Injectable()

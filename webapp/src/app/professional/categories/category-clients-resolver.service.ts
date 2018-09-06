@@ -1,10 +1,10 @@
-import { catchError } from 'rxjs/operators/catchError';
 import { Client } from '@app/entities';
 import { CategoryService } from '@app/core/category.service';
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class CategoryClientsResolverService implements Resolve<Client[]> {
