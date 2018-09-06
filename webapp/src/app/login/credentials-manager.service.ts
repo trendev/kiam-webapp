@@ -9,12 +9,12 @@ export class CredentialsManagerService {
   constructor() { }
 
   get credentials(): Credentials {
-    if (typeof (Storage) !== 'undefined' && localStorage.c && localStorage.d) {
+    if (typeof (Storage) !== 'undefined' && localStorage.getItem('c') && localStorage.getItem('d')) {
       try {
 
-        let bytes = CryptoJS.AES.decrypt(localStorage.d, this.p);
+        let bytes = CryptoJS.AES.decrypt(localStorage.getItem('d'), this.p);
         const d = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-        bytes = CryptoJS.AES.decrypt(localStorage.c, this.p + d);
+        bytes = CryptoJS.AES.decrypt(localStorage.getItem('c'), this.p + d);
         const c = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
         return new Credentials(c);
 
@@ -38,8 +38,8 @@ export class CredentialsManagerService {
   save(credentials: Credentials) {
     if (credentials.rememberMe) {
       const d = new Date().getTime();
-      localStorage.d = CryptoJS.AES.encrypt(d + '', this.p);
-      localStorage.c = CryptoJS.AES.encrypt(JSON.stringify(credentials), this.p + d);
+      localStorage.setItem('d', CryptoJS.AES.encrypt(d + '', this.p));
+      localStorage.setItem('c', CryptoJS.AES.encrypt(JSON.stringify(credentials), this.p + d));
     }
   }
 
