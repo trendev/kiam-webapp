@@ -8,8 +8,8 @@ import { MatIconRegistry } from '@angular/material';
   `,
   styles: [
     `.mat-icon {
-      height: 30px;
-      margin: 4px;
+      height: 40px;
+      width: 40px;
   }`  ]
 })
 export class TwitterSvgIconComponent {
