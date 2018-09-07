@@ -1,3 +1,23 @@
-<code>
-    {{cardinfo}}
-</code>
+<div class="container">
+    <mat-card>
+        <mat-card-title>{{customer.subscription.nickname}}</mat-card-title>
+        <mat-card-subtitle>
+            <app-subscription-amount [customer]="customer"></app-subscription-amount>
+            <p>Date de signature du contrat:
+                <b>{{customer.created | date:'shortDate':'':'fr'}} </b>
+            </p>
+            <p>Identifiant de facturation:
+                <b>{{customer.id}}</b>
+            </p>
+            <p>Prochaine échéance: <b>{{customer.subscription.current_period_end | date:'shortDate':'':'fr'}}</b></p>
+        </mat-card-subtitle>
+        <mat-card-content>
+
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <a mat-button routerLink="../" routerLinkActive="active">
+            <mat-icon aria-label="Consulter/Modifier le profil">keyboard_arrow_left</mat-icon>
+            Retour au profil
+        </a>
+    </mat-card>
+</div>

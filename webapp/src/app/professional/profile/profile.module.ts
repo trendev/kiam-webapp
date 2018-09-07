@@ -7,6 +7,7 @@ import { SharedModule } from '@app/shared';
 import { ChangeProfessionalPasswordComponent } from './change-professional-password/change-professional-password.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { SubscriptionDetailsComponent } from './subscription-details/subscription-details.component';
+import { SubscriptionAmountComponent } from './subscription-details/subscription-amount/subscription-amount.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { SubscriptionDetailsComponent } from './subscription-details/subscriptio
     ProfileComponent,
     ChangeProfessionalPasswordComponent,
     SubscribeComponent,
-    SubscriptionDetailsComponent
+    SubscriptionDetailsComponent,
+    SubscriptionAmountComponent
   ],
   providers: [
     StripeCustomerResolverService
