@@ -2,12 +2,12 @@
     <mat-card>
         <mat-card-title>{{customer.subscription.nickname}}</mat-card-title>
         <mat-card-subtitle>
+            <p>Identifiant de facturation:
+                <b>{{customer.id}}</b>
+            </p>
             <app-subscription-amount [customer]="customer"></app-subscription-amount>
             <p>Date de signature du contrat:
                 <b>{{customer.created | date:'shortDate':'':'fr'}} </b>
-            </p>
-            <p>Identifiant de facturation:
-                <b>{{customer.id}}</b>
             </p>
             <p>Prochaine échéance: <b>{{customer.subscription.current_period_end | date:'shortDate':'':'fr'}}</b></p>
         </mat-card-subtitle>
@@ -19,5 +19,8 @@
             <mat-icon aria-label="Consulter/Modifier le profil">keyboard_arrow_left</mat-icon>
             Retour au profil
         </a>
+    </mat-card>
+    <mat-card>
+        <mat-card-title>Moyens de paiement</mat-card-title>
     </mat-card>
 </div>

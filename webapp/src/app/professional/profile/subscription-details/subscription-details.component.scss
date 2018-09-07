@@ -2,13 +2,13 @@
     display: flex;
     width: 100%;
     justify-content: space-around;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
 }
 
 .mat-card {
     margin: 8px; // padding: 10px 5px 10px 5px;
     flex: 1;
-    // width: 400px;
+    min-width: 300px;
 }
 
 a {
@@ -19,6 +19,7 @@ a {
     mat-card {
         width: 100%;
     }
+
     .subtitle {
         align-items: flex-start;
     }
