@@ -3,6 +3,9 @@
     $primary: map-get($theme, primary);
     .footer {
         background-color: mat-color($primary);
-        ;
+    }
+
+    .footer > *{
+        color: white;
     }
 }
