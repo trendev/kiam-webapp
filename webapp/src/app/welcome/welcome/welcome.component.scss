@@ -1,6 +1,6 @@
 mat-divider {
     position: relative;
-    top: +18px;
+    // top: +18px;
     margin: 40px;
 }
 
@@ -11,6 +11,5 @@ section {
 }
 
 .glue {
-    background-color: aqua;
-    height: 100%;
+    flex: 1;
 }
