@@ -3,12 +3,11 @@
         <mat-icon class="icons">mail</mat-icon>
     </a>
 
-    <a [href]="twitterUrl" target="_blank">
-        <mat-icon svgIcon="twitter-icon"></mat-icon>
+    <a [href]="twitterUrl" target="_blank" mat-icon-button>
+        <app-twitter-svg-icon></app-twitter-svg-icon>
     </a>
 
-    <a [href]="facebookUrl" target="_blank">
-        <img class="icons" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABWUlEQVRYR2O0jpoR9O///xlMDIyiDHQE///9e8PMxJzKaBk5/RW9LYf58x/D/9eM1pEz/tPR4xhWjTqAqiHAwc7CEOKuw+BqpcIgJynAwMrKjBLkNlEzaRcFwgJcDBOrfRgUpAVxJimaOYCRkYFhWn0Ag66aON70TDMH2JsqMrQWuhHMTDRzQEuBK4ODmdLAOWDd5GgGMWEeFAe8evuFoXP2IYbz158x/Pr9F6fjqJILDi5OZWBmZkKxpLhjG8PJS48JhgpVHHBkWTqGRU7xc/D6HKaBZg7AluCwBcfQdAC2ICcU2W8/fGPwz1pMnZKQHAccPfeQobxnx8A5YN7aMwzz1p4dOAeUde9gOHb+4cA5ABT/oHSADoZmLkD3BbZEObzLgdEQGA2B0RCgaghYhU97zcjEJEKoOsUnT3ZB9JfhFaNt5MyAPwz/ZlHSQybLAX8ZXjEw/UsFANEUxfDCQfLbAAAAAElFTkSuQmCC"
-            alt="" matTooltip="Facebook" matTooltipPosition="above">
+    <a [href]="facebookUrl" target="_blank" mat-icon-button>
+        <app-facebook-svg-icon></app-facebook-svg-icon>
     </a>
 </footer>

@@ -28,3 +28,4 @@ export * from './snack-messages/error-message/error-message.component';
 export * from './payment-status/payment-status.component';
 export * from './card-info/card-info.component';
 export * from './subscription/subscription.component';
+export * from './icons/twitter-svg-icon/twitter-svg-icon.component';

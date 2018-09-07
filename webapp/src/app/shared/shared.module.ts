@@ -57,6 +57,8 @@ import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-li
 import { PeriodSelectorComponent } from './bills/period-selector/period-selector.component';
 import { CardInfoComponent } from './card-info/card-info.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { TwitterSvgIconComponent } from './icons/twitter-svg-icon/twitter-svg-icon.component';
+import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg-icon.component';
 
 @NgModule({
   imports: [
@@ -115,7 +117,9 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     PeriodSelectorComponent,
     PaymentStatusComponent,
     CardInfoComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    TwitterSvgIconComponent,
+    FacebookSvgIconComponent
   ],
   exports: [
     CommonModule,
@@ -171,7 +175,9 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     PeriodSelectorComponent,
     PaymentStatusComponent,
     CardInfoComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    TwitterSvgIconComponent,
+    FacebookSvgIconComponent
   ],
   entryComponents: [
     SuccessMessageComponent,
