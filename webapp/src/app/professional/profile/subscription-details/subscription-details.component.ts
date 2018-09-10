@@ -52,12 +52,13 @@ export class SubscriptionDetailsComponent {
             )
           )
         );
-        console.log(this.customer);
       }
     );
   }
 
-
+  get sources(): StripeSource[] {
+    return this.customer.sources;
+  }
 
 }
 

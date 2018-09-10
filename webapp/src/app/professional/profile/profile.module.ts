@@ -8,6 +8,7 @@ import { ChangeProfessionalPasswordComponent } from './change-professional-passw
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { SubscriptionDetailsComponent } from './subscription-details/subscription-details.component';
 import { SubscriptionAmountComponent } from './subscription-details/subscription-amount/subscription-amount.component';
+import { SourceDetailsComponent } from './subscription-details/source-details/source-details.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { SubscriptionAmountComponent } from './subscription-details/subscription
     ChangeProfessionalPasswordComponent,
     SubscribeComponent,
     SubscriptionDetailsComponent,
-    SubscriptionAmountComponent
+    SubscriptionAmountComponent,
+    SourceDetailsComponent
   ],
   providers: [
     StripeCustomerResolverService
