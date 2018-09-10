@@ -6,13 +6,10 @@ import { Component, OnChanges, Input } from '@angular/core';
   templateUrl: './source-details.component.html',
   styleUrls: ['./source-details.component.scss']
 })
-export class SourceDetailsComponent implements OnChanges {
+export class SourceDetailsComponent {
 
   @Input() source: StripeSource;
 
   constructor() { }
-
-  ngOnChanges() {
-  }
 
 }

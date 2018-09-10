@@ -1,3 +1,5 @@
-<p>
-  source-details works!
-</p>
+<div class="source mat-elevation-z2">
+  <p class="title mat-title"><mat-icon>credit_card</mat-icon><span class="brand">{{source.brand}}</span>****{{source.last4}}</p>
+  <p>Date d'expiration : {{source.exp_month}}/{{source.exp_year}}</p>
+  <p *ngIf="source.three_d_secure !== 'not_supported'">3D Secure </p>
+</div>

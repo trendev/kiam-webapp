@@ -9,6 +9,7 @@ export class StripeSource {
         public last4: string,
         public three_d_secure: string,
         public is_default: boolean) {
+            this.brand = brand.toUpperCase();
     }
 
     copy(): StripeSource {
