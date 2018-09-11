@@ -1,11 +1,10 @@
 <div class="source mat-elevation-z2">
   <div class="title-container">
     <p class="title mat-title">
-      <!-- TODO: display based on source.type -->
-      <mat-icon>credit_card</mat-icon>
+      <app-stripe-source-type [stype]="source.type"></app-stripe-source-type>
       <span class="brand">{{source.brand}}</span>****{{source.last4}}
     </p>
-    <mat-icon *ngIf="source.is_default" color="primary" class="default-source">check_circle</mat-icon>
+    <mat-icon *ngIf="source.is_default" color="primary" class="default-source">euro_symbol</mat-icon>
   </div>
 
   <p class="exp-date">Date d'expiration: {{source.exp_month}}/{{source.exp_year}}</p>

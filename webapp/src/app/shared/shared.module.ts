@@ -59,6 +59,7 @@ import { CardInfoComponent } from './card-info/card-info.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { TwitterSvgIconComponent } from './icons/twitter-svg-icon/twitter-svg-icon.component';
 import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg-icon.component';
+import { StripeSourceTypeComponent } from './stripe-source-type/stripe-source-type.component';
 
 @NgModule({
   imports: [
@@ -119,7 +120,8 @@ import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg
     CardInfoComponent,
     SubscriptionComponent,
     TwitterSvgIconComponent,
-    FacebookSvgIconComponent
+    FacebookSvgIconComponent,
+    StripeSourceTypeComponent
   ],
   exports: [
     CommonModule,
@@ -177,7 +179,8 @@ import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg
     CardInfoComponent,
     SubscriptionComponent,
     TwitterSvgIconComponent,
-    FacebookSvgIconComponent
+    FacebookSvgIconComponent,
+    StripeSourceTypeComponent
   ],
   entryComponents: [
     SuccessMessageComponent,
