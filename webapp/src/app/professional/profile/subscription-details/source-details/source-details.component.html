@@ -4,7 +4,7 @@
       <app-stripe-source-type [stype]="source.type"></app-stripe-source-type>
       <span class="brand">{{source.brand}}</span>****{{source.last4}}
     </p>
-    <mat-icon *ngIf="source.is_default" color="primary" class="default-source">euro_symbol</mat-icon>
+    <mat-icon *ngIf="source.is_default" color="accent" class="default-source">euro_symbol</mat-icon>
   </div>
 
   <p class="exp-date">Date d'expiration: {{source.exp_month}}/{{source.exp_year}}</p>
@@ -13,4 +13,14 @@
     <span class="three-d-secure-label">3D Secure</span>
     <mat-icon color="primary">done_all</mat-icon>
   </div>
+
+  <div *ngIf="!source.is_default" class="action-container">
+    <button mat-mini-fab color="warn" (click)="removeAction()">
+      <mat-icon aria-label="Supprimer le moyen de paiement">clear</mat-icon>
+    </button>
+    <button mat-mini-fab color="accent" (click)="defaultAction()">
+      <mat-icon aria-label="Choisir comme moyen de paiement par défaut">euro_symbol</mat-icon>
+    </button>
+  </div>
+
 </div>

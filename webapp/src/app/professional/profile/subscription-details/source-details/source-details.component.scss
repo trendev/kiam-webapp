@@ -42,3 +42,12 @@
 .three-d-secure-label {
     margin-right: 8px;
 }
+
+.action-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-container>button {
+    margin-left: 8px;
+}

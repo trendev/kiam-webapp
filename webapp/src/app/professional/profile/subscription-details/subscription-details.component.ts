@@ -60,6 +60,13 @@ export class SubscriptionDetailsComponent {
     return this.customer.sources;
   }
 
+  setAsDefaultSource(id: string) {
+    console.warn(`setting ${id} as default source`);
+  }
+
+  removeSource(id: string) {
+    console.warn(`removing ${id}`);
+  }
 }
 
 
