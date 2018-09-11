@@ -34,8 +34,10 @@ export class SubscriptionDetailsComponent {
     );
   }
 
+  // TODO : implement sort function
   get sources(): StripeSource[] {
-    return this.customer.sources;
+    return this.customer.sources.sort(
+      (s1, s2) => s1.is_default ? -1 : s1.id.localeCompare(s2.id));
   }
 
   setAsDefaultSource(id: string) {
