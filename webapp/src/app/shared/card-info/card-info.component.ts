@@ -64,7 +64,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
 
     from(stripe.createSource(this.card,
       {
-        amount: this.amount * 100,
+        amount: this.amount,
         currency: 'EUR',
         owner: {
           address: {

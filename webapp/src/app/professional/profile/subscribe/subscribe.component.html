@@ -23,7 +23,7 @@
       </mat-card-subtitle>
       <mat-card-content>
         <app-subscription (newSource)="handleNewSource($event)" [amount]="defaultAmount">
-          Souscrire pour {{defaultAmount}}&#8364; TTC / mois
+          Souscrire pour {{defaultAmount/100 | number:'.0-2':'fr'}}&#8364; TTC / mois
         </app-subscription>
       </mat-card-content>
     </mat-card>

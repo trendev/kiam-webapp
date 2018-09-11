@@ -20,11 +20,11 @@ export class SubscriptionAmountComponent {
   }
 
   get baseAmount(): number {
-    return this.customer.subscription.amount * (100 + this.customer.subscription.tax_percent) / 100;
+    return this.customer.baseAmount;
   }
 
   get amount(): number {
-    return (this.baseAmount * (100 - this.customer.subscription.discount_percent_off) / 100);
+    return this.customer.amount;
   }
 
 }

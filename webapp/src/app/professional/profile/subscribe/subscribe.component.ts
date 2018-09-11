@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 export class SubscribeComponent implements OnInit {
 
   appName = environment.title;
-  defaultAmount = 24;
+  defaultAmount = 2400;
 
   constructor(private authenticationService: AuthenticationService,
     private loadingOverlayService: LoadingOverlayService,
@@ -32,7 +32,7 @@ export class SubscribeComponent implements OnInit {
   }
 
   /**
-   * Handles the new Stripe Soure creation
+   * Handles the new Stripe Source creation
    * @param _source A Stripe Source
    */
   handleNewSource(_source) {

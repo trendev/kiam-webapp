@@ -67,6 +67,48 @@ export class SubscriptionDetailsComponent {
   removeSource(id: string) {
     console.warn(`removing ${id}`);
   }
+
+    /**
+   * Handles the new Stripe Source creation
+   * @param _source A Stripe Source
+   */
+  handleNewSource(_source) {
+    // if (_source.card.three_d_secure !== 'required') {
+    //   if (_source.status === 'chargeable') {
+    //     this.loadingOverlayService.start();
+    //     this.stripeSubscriptionService.subscription(_source)
+    //       .pipe(
+    //         filter(src => !!src),
+    //         // map(src => this.source = src),
+    //         finalize(() => this.loadingOverlayService.stop()),
+    //         catchError(e => this.errorHandlerService.handle(e))
+    //       )
+    //       .subscribe(src => {
+    //         this.snackBar.openFromComponent(SuccessMessageComponent,
+    //           {
+    //             data: `Félicitations, la souscription ${src.id} est effective 🤗`,
+    //             duration: 3000
+    //           });
+    //         this.router.navigate(['/professional/profile']);
+    //       });
+    //   } else {
+    //     this.snackBar.openFromComponent(ErrorMessageComponent,
+    //       {
+    //         data: `Echec de la souscription: la carte ne peut être débitée 🤔`,
+    //         duration: 3000
+    //       });
+    //   }
+
+    // } else {
+    //   this.snackBar.openFromComponent(ErrorMessageComponent,
+    //     {
+    //       data: `Echec de la souscription: carte 3D Secure non supportée actuellement 😓`,
+    //       duration: 3000
+    //     });
+    // }
+
+
+  }
 }
 
 
