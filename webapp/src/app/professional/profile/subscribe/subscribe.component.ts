@@ -1,11 +1,8 @@
-import { Professional } from './../../../entities/professional.model';
-import { AuthenticationService } from './../../../core/authentication.service';
-import { finalize, catchError, filter, map } from 'rxjs/operators';
+import { finalize, catchError, filter } from 'rxjs/operators';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { StripeSubscriptionService } from '@app/core';
-import { Observable } from 'rxjs';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { MatSnackBar } from '@angular/material';
 import { ErrorMessageComponent, SuccessMessageComponent } from '@app/shared';
@@ -21,8 +18,7 @@ export class SubscribeComponent implements OnInit {
   appName = environment.title;
   defaultAmount = 2400;
 
-  constructor(private authenticationService: AuthenticationService,
-    private loadingOverlayService: LoadingOverlayService,
+  constructor(private loadingOverlayService: LoadingOverlayService,
     private errorHandlerService: ErrorHandlerService,
     private stripeSubscriptionService: StripeSubscriptionService,
     private snackBar: MatSnackBar,
@@ -42,7 +38,6 @@ export class SubscribeComponent implements OnInit {
         this.stripeSubscriptionService.subscription(_source)
           .pipe(
             filter(src => !!src),
-            // map(src => this.source = src),
             finalize(() => this.loadingOverlayService.stop()),
             catchError(e => this.errorHandlerService.handle(e))
           )

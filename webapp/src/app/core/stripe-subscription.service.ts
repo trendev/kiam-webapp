@@ -30,4 +30,13 @@ export class StripeSubscriptionService {
         catchError(e => throwError(e))
       );
   }
+
+  addSource(source: any): Observable<string> {
+    return this.http.put<any>(`${this.api}/add-source`,
+      source,
+      { withCredentials: true })
+      .pipe(
+        catchError(e => throwError(e))
+      );
+  }
 }
