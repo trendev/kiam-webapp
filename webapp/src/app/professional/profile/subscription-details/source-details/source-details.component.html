@@ -1,5 +1,17 @@
 <div class="source mat-elevation-z2">
-  <p class="title mat-title"><mat-icon>credit_card</mat-icon><span class="brand">{{source.brand}}</span>****{{source.last4}}</p>
-  <p>Date d'expiration : {{source.exp_month}}/{{source.exp_year}}</p>
-  <p *ngIf="source.three_d_secure !== 'not_supported'">3D Secure </p>
+  <div class="title-container">
+    <p class="title mat-title">
+      <!-- TODO: display based on source.type -->
+      <mat-icon>credit_card</mat-icon>
+      <span class="brand">{{source.brand}}</span>****{{source.last4}}
+    </p>
+    <mat-icon *ngIf="source.is_default" color="primary" class="default-source">check_circle</mat-icon>
+  </div>
+
+  <p class="exp-date">Date d'expiration: {{source.exp_month}}/{{source.exp_year}}</p>
+
+  <div class="three-d-secure" *ngIf="source.three_d_secure !== 'not_supported'">
+    <span class="three-d-secure-label">3D Secure</span>
+    <mat-icon color="primary">done_all</mat-icon>
+  </div>
 </div>

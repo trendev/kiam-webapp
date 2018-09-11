@@ -3,13 +3,42 @@
     padding: 12px;
 }
 
-.title{
-    margin-top:0;
+.title-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    margin-top: 0;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
 }
 
-.brand{
+.brand {
     font-style: italic;
-    margin: 0px 12px;
+    font-weight: bold;
+    margin: 0px 8px;
+}
+
+.default-source {
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+}
+
+.exp-date {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.three-d-secure {
+    display: flex;
+    align-items: center;
+}
+
+.three-d-secure-label {
+    margin-right: 8px;
 }
