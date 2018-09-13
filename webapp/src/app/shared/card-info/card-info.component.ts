@@ -15,7 +15,7 @@ import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Professional } from '@app/entities';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { from } from 'rxjs';
-import { catchError, take, tap } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-card-info',
