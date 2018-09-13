@@ -1,6 +1,12 @@
 .source {
+    display: flex;
+    justify-content: space-between;
     border-radius: 8px;
     padding: 12px;
+}
+
+.info {
+    flex: 1;
 }
 
 .title-container {
@@ -43,11 +49,26 @@
     margin-right: 8px;
 }
 
-.action-container {
-    display: flex;
-    justify-content: flex-end;
+.source-id {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-style: italic;
+    font-size: 0.9em;
 }
 
-.action-container>button {
-    margin-left: 8px;
+.action-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    width: 40px;
+}
+
+.default-button {
+    margin-bottom: 4px;
+}
+
+.remove-button {
+    margin-top: 4px;
 }

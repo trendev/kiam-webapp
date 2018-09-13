@@ -1,26 +1,33 @@
 <div class="source mat-elevation-z2">
-  <div class="title-container">
-    <p class="title mat-title">
-      <app-stripe-source-type [stype]="source.type"></app-stripe-source-type>
-      <span class="brand">{{source.brand}}</span>****{{source.last4}}
-    </p>
-    <mat-icon *ngIf="source.is_default" color="accent" class="default-source">euro_symbol</mat-icon>
+  <div class="info">
+    <div class="title-container">
+      <p class="title mat-title">
+        <app-stripe-source-type [stype]="source.type"></app-stripe-source-type>
+        <span class="brand">{{source.brand}}</span>****{{source.last4}}
+      </p>
+
+    </div>
+
+    <p class="exp-date">Date d'expiration: {{source.exp_month}}/{{source.exp_year}}</p>
+
+    <div class="three-d-secure" *ngIf="source.three_d_secure !== 'not_supported'">
+      <span class="three-d-secure-label">3D Secure</span>
+      <mat-icon color="primary">done_all</mat-icon>
+    </div>
+
+    <p class="source-id">Identifiant: {{source.id}}</p>
   </div>
 
-  <p class="exp-date">Date d'expiration: {{source.exp_month}}/{{source.exp_year}}</p>
-
-  <div class="three-d-secure" *ngIf="source.three_d_secure !== 'not_supported'">
-    <span class="three-d-secure-label">3D Secure</span>
-    <mat-icon color="primary">done_all</mat-icon>
-  </div>
-
-  <div *ngIf="!source.is_default" class="action-container">
-    <button mat-mini-fab color="warn" (click)="removeAction()">
-      <mat-icon aria-label="Supprimer le moyen de paiement">clear</mat-icon>
-    </button>
-    <button mat-mini-fab color="accent" (click)="defaultAction()">
-      <mat-icon aria-label="Choisir comme moyen de paiement par défaut">euro_symbol</mat-icon>
-    </button>
+  <div class="action-container">
+    <mat-icon *ngIf="source.is_default; else default" color="accent" class="default-source">euro_symbol</mat-icon>
+    <ng-template #default>
+      <button class="default-button" mat-mini-fab color="accent" (click)="defaultAction()">
+        <mat-icon aria-label="Choisir comme moyen de paiement par défaut">euro_symbol</mat-icon>
+      </button>
+      <button class="remove-button" mat-mini-fab color="warn" (click)="removeAction()">
+        <mat-icon aria-label="Supprimer le moyen de paiement">clear</mat-icon>
+      </button>
+    </ng-template>
   </div>
 
 </div>
