@@ -34,10 +34,22 @@ export class SubscriptionDetailsComponent {
     );
   }
 
-  // TODO : implement sort function
   get sources(): StripeSource[] {
     return this.customer.sources.sort(
-      (s1, s2) => s1.is_default ? -1 : s1.id.localeCompare(s2.id));
+      (s1, s2) => {
+        if (s1.is_default) {
+          return -1;
+        } else {
+          // compares the expiration date
+          // exp_year and exp_month are string and converted to number
+          // month in date begins with index 0 and must be decrease
+          const d1 = new Date(+s1.exp_year, +s1.exp_month - 1);
+          const d2 = new Date(+s2.exp_year, +s2.exp_month - 1);
+          // sort the most recent first
+          return d2.getTime() - d1.getTime();
+        }
+      }
+    );
   }
 
   setAsDefaultSource(id: string) {
