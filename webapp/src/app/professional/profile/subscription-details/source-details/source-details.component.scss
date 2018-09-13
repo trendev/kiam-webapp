@@ -12,21 +12,15 @@
 .title-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     align-items: center;
-    justify-content: space-between;
-}
-
-.title {
-    margin-top: 0;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
+    align-content: center;
 }
 
 .brand {
     font-style: italic;
-    font-weight: bold;
-    // font-size: 0.7em;
+    font-weight: bold; // font-size: 0.7em;
     margin: 0px 8px;
 }
 

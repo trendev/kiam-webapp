@@ -1,11 +1,8 @@
 <div class="source mat-elevation-z2">
   <div class="info">
     <div class="title-container">
-      <p class="title mat-title">
-        <app-stripe-source-type [stype]="source.type"></app-stripe-source-type>
-        <span class="brand">{{source.brand}}</span>****{{source.last4}}
-      </p>
-
+      <app-stripe-source-type [stype]="source.type"></app-stripe-source-type>
+      <span class="mat-subheading-2 brand">{{source.brand}}</span>****{{source.last4}}
     </div>
 
     <p class="exp-date">Date d'expiration: {{source.exp_month}}/{{source.exp_year}}</p>
