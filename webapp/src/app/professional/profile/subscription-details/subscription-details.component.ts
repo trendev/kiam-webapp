@@ -7,8 +7,9 @@ import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { StripeSubscriptionService } from '@app/core';
 import { MatSnackBar } from '@angular/material';
-import { filter, finalize, catchError } from 'rxjs/operators';
+import { filter, finalize, catchError, map } from 'rxjs/operators';
 import { SuccessMessageComponent, ErrorMessageComponent } from '@app/shared';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-subscription-details',
@@ -37,23 +38,41 @@ export class SubscriptionDetailsComponent {
   get sources(): StripeSource[] {
     return this.customer.sources.sort(
       (s1, s2) => {
-        if (s1.is_default) {
-          return -1;
-        } else {
-          // compares the expiration date
-          // exp_year and exp_month are string and converted to number
-          // month in date begins with index 0 and must be decrease
-          const d1 = new Date(+s1.exp_year, +s1.exp_month - 1);
-          const d2 = new Date(+s2.exp_year, +s2.exp_month - 1);
-          // sort the most recent first
-          return d2.getTime() - d1.getTime();
-        }
+        // compares the expiration date
+        // exp_year and exp_month are string and converted to number
+        // month in date begins with index 0 and must be decrease
+        const d1 = new Date(+s1.exp_year, +s1.exp_month - 1);
+        const d2 = new Date(+s2.exp_year, +s2.exp_month - 1);
+        // sort the most recent first
+        return d2.getTime() - d1.getTime();
       }
     );
   }
 
+  private handleSource(source: any, fn: (s: any) => Observable<any>, msg: string) {
+    this.loadingOverlayService.start();
+    fn.apply(this.stripeSubscriptionService, [source])
+      .pipe(
+        filter(c => !!c),
+        map(c => StripeCustomer.build(c)),
+        finalize(() => this.loadingOverlayService.stop()),
+        catchError(e => this.errorHandlerService.handle(e))
+      )
+      .subscribe(c => {
+        this.snackBar.openFromComponent(SuccessMessageComponent,
+          {
+            data: msg,
+            duration: 3000
+          });
+        this.customer = c;
+      });
+  }
+
   setAsDefaultSource(id: string) {
-    console.warn(`setting ${id} as default source`);
+    this.handleSource(id,
+      this.stripeSubscriptionService.defaultSource,
+      `Félicitations, la source par défault est maitenant changée 👍`
+    );
   }
 
   removeSource(id: string) {
@@ -61,27 +80,15 @@ export class SubscriptionDetailsComponent {
   }
 
   /**
- * Handles the new Stripe Source creation
- * @param _source A Stripe Source
- */
-  handleNewSource(_source) {
+  * Handles the new Stripe Source creation
+  * @param _source A Stripe Source
+  */
+  addSource(_source) {
     if (_source.card.three_d_secure !== 'required') {
       if (_source.status === 'chargeable') {
-        this.loadingOverlayService.start();
-        this.stripeSubscriptionService.addSource(_source)
-          .pipe(
-            filter(c => !!c),
-            finalize(() => this.loadingOverlayService.stop()),
-            catchError(e => this.errorHandlerService.handle(e))
-          )
-          .subscribe(c => {
-            this.snackBar.openFromComponent(SuccessMessageComponent,
-              {
-                data: `Félicitations, la nouvelle source est ajoutée 👍`,
-                duration: 3000
-              });
-            this.customer = StripeCustomer.build(c);
-          });
+        this.handleSource(_source,
+          this.stripeSubscriptionService.addSource,
+          `Félicitations, la nouvelle source est ajoutée 👍`);
       } else {
         this.snackBar.openFromComponent(ErrorMessageComponent,
           {

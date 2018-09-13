@@ -27,7 +27,7 @@
                 (remove)="removeSource($event)"></app-source-details>
         </mat-card-content>
         <mat-card-actions>
-            <app-subscription (newSource)="handleNewSource($event)" [amount]="customer.baseAmount">Ajouter un moyen de paiement</app-subscription>
+            <app-subscription (newSource)="addSource($event)" [amount]="customer.baseAmount">Ajouter un moyen de paiement</app-subscription>
         </mat-card-actions>
 
     </mat-card>

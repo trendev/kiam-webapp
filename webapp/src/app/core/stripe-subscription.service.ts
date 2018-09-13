@@ -15,7 +15,7 @@ export class StripeSubscriptionService {
   constructor(private http: HttpClient) { }
 
   subscription(source: any): Observable<string> {
-    return this.http.put<any>(`${this.api}/std-subscription`,
+    return this.http.post<any>(`${this.api}/std-subscription`,
       source,
       { withCredentials: true })
       .pipe(
@@ -31,12 +31,21 @@ export class StripeSubscriptionService {
       );
   }
 
-  addSource(source: any): Observable<string> {
+  addSource(source: any): Observable<any> {
     return this.http.put<any>(`${this.api}/add-source`,
       source,
       { withCredentials: true })
       .pipe(
         catchError(e => throwError(e))
       );
+  }
+
+  defaultSource(id: string) {
+    return this.http.put<any>(`${this.api}/default_source/${id}`,
+    null,
+    { withCredentials: true })
+    .pipe(
+      catchError(e => throwError(e))
+    );
   }
 }
