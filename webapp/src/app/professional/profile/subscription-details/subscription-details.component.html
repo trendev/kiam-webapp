@@ -24,7 +24,7 @@
         <mat-card-title>Moyens de paiement</mat-card-title>
         <mat-card-content>
             <app-source-details *ngFor="let source of sources; let i=index;" [source]="source" (default)="setAsDefaultSource($event)"
-                (remove)="removeSource($event)"></app-source-details>
+                (detach)="detachSource($event)"></app-source-details>
         </mat-card-content>
         <mat-card-actions>
             <app-subscription (newSource)="addSource($event)" [amount]="customer.baseAmount">Ajouter un moyen de paiement</app-subscription>

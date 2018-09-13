@@ -48,4 +48,13 @@ export class StripeSubscriptionService {
       catchError(e => throwError(e))
     );
   }
+
+  detachSource(id: string) {
+    return this.http.put<any>(`${this.api}/detach/${id}`,
+    null,
+    { withCredentials: true })
+    .pipe(
+      catchError(e => throwError(e))
+    );
+  }
 }

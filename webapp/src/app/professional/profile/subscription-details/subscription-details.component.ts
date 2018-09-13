@@ -75,8 +75,11 @@ export class SubscriptionDetailsComponent {
     );
   }
 
-  removeSource(id: string) {
-    console.warn(`removing ${id}`);
+  detachSource(id: string) {
+    this.handleSource(id,
+      this.stripeSubscriptionService.detachSource,
+      `Félicitations, la source est maitenant détachée 👍`
+    );
   }
 
   /**
