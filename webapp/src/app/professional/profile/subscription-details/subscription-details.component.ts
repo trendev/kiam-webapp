@@ -71,14 +71,14 @@ export class SubscriptionDetailsComponent {
   setAsDefaultSource(id: string) {
     this.handleSource(id,
       this.stripeSubscriptionService.defaultSource,
-      `Félicitations, la source par défault est maitenant changée 👍`
+      `Félicitations, la source par défaut est maintenant changée 👍`
     );
   }
 
   detachSource(id: string) {
     this.handleSource(id,
       this.stripeSubscriptionService.detachSource,
-      `Félicitations, la source est maitenant supprimée 😉`
+      `Félicitations, la source ${id} est maintenant supprimée 😉`
     );
   }
 
