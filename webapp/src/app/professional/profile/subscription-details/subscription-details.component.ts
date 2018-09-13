@@ -78,7 +78,7 @@ export class SubscriptionDetailsComponent {
   detachSource(id: string) {
     this.handleSource(id,
       this.stripeSubscriptionService.detachSource,
-      `Félicitations, la source est maitenant détachée 👍`
+      `Félicitations, la source est maitenant supprimée 😉`
     );
   }
 
