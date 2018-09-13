@@ -4,6 +4,7 @@
       <mat-card-title>Profil</mat-card-title>
       <mat-card-subtitle>Email : {{pro.email}}</mat-card-subtitle>
       <div class="top-button-container">
+          <a href="/cgvu.pdf" target="_blank" mat-raised-button color="primary">CGV / CGU</a>
         <button type="button" mat-raised-button color="primary" routerLink="./change-password" routerLinkActive="active">
           Nouveau mot de passe
         </button>
@@ -13,7 +14,6 @@
         <button *ngIf="newSubscriptionAllowed" type="button" mat-raised-button color="accent" routerLink="./subscribe" routerLinkActive="active">
           Nouvelle souscription
         </button>
-        <a href="/cgvu.pdf" target="_blank" mat-raised-button color="primary">CGV / CGU</a>
       </div>
 
       <mat-card-content>
