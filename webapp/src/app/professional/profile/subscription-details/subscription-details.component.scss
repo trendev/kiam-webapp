@@ -6,7 +6,7 @@
     flex-flow: row wrap;
 }
 
-.mat-card {
+mat-card {
     margin: 8px; // padding: 10px 5px 10px 5px;
     flex: 1;
     min-width: 300px;
@@ -14,13 +14,4 @@
 
 a {
     padding-left: 0px;
-}
-
-@media all and (max-device-width: 600px) {
-    mat-card {
-        width: 100%;
-    }
-    .subtitle {
-        align-items: flex-start;
-    }
 }
