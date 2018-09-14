@@ -1,3 +1,4 @@
+import { StripeInvoice } from './stripe-invoice.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StripeInvoicesComponent implements OnInit {
 
-  invoices: [];
+  invoices: StripeInvoice[];
 
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe(
@@ -17,7 +18,7 @@ export class StripeInvoicesComponent implements OnInit {
       }) => {
         const _invoices = data.stripeInvoices;
         this.invoices = _invoices.data.map(
-          i => i
+          i => StripeInvoice.build(i)
         );
       }
     );

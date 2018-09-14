@@ -1,10 +1,4 @@
-<table style="border-color: blueviolet; border-style: solid">
-  <tr>
-    <th>Index</th>
-    <th>id</th>
-  </tr>
-  <tr *ngFor="let invoice of invoices; let i=index;">
-    <th>{{i}}</th>
-    <th>{{invoice | json}}</th>
-  </tr>
-</table>
+<div *ngFor="let invoice of invoices; let i=index;">
+  <p>Index: {{i}}</p>
+  <p>Invoice | Json: {{invoice | json}}</p>
+</div>
