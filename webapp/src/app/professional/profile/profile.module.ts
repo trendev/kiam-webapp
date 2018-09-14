@@ -1,3 +1,4 @@
+import { StripeInvoicesResolverService } from './stripe-invoices-resolver.service';
 import { StripeCustomerResolverService } from './stripe-customer-resolver.service';
 import { NgModule } from '@angular/core';
 
@@ -9,6 +10,7 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
 import { SubscriptionDetailsComponent } from './subscription-details/subscription-details.component';
 import { SubscriptionAmountComponent } from './subscription-details/subscription-amount/subscription-amount.component';
 import { SourceDetailsComponent } from './subscription-details/source-details/source-details.component';
+import { StripeInvoicesComponent } from './stripe-invoices/stripe-invoices.component';
 
 @NgModule({
   imports: [
@@ -21,10 +23,12 @@ import { SourceDetailsComponent } from './subscription-details/source-details/so
     SubscribeComponent,
     SubscriptionDetailsComponent,
     SubscriptionAmountComponent,
-    SourceDetailsComponent
+    SourceDetailsComponent,
+    StripeInvoicesComponent
   ],
   providers: [
-    StripeCustomerResolverService
+    StripeCustomerResolverService,
+    StripeInvoicesResolverService
   ]
 })
 export class ProfileModule { }

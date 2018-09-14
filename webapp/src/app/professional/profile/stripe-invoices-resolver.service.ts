@@ -6,18 +6,18 @@ import { catchError } from 'rxjs/operators';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Injectable()
-export class StripeCustomerResolverService implements Resolve<any> {
+export class StripeInvoicesResolverService implements Resolve<any> {
 
   constructor(private stripeSubscriptionService: StripeSubscriptionService,
     private errorHandler: ErrorHandlerService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any | Observable<any> | Promise<any> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any | Observable<any> | Promise<any> {
 
-    return this.stripeSubscriptionService.details().pipe(
-      catchError(e => {
-        this.errorHandler.handle(e, `Impossible de récupérer le détail de la souscription...`);
-        return of(null);
-      })
-    );
-  }
+      return this.stripeSubscriptionService.invoices().pipe(
+        catchError(e => {
+          this.errorHandler.handle(e, `Impossible de récupérer les factures depuis ton profil...`);
+          return of(null);
+        })
+      );
+    }
 }

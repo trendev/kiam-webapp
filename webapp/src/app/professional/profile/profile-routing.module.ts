@@ -1,3 +1,5 @@
+import { StripeInvoicesResolverService } from './stripe-invoices-resolver.service';
+import { StripeInvoicesComponent } from './stripe-invoices/stripe-invoices.component';
 import { StripeCustomerResolverService } from './stripe-customer-resolver.service';
 import { SubscriptionDetailsComponent } from './subscription-details/subscription-details.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
@@ -36,6 +38,13 @@ const routes: Routes = [
     component: SubscriptionDetailsComponent,
     resolve: {
       stripeCustomer: StripeCustomerResolverService
+    }
+  },
+  {
+    path: 'invoices',
+    component: StripeInvoicesComponent,
+    resolve: {
+      stripeInvoices: StripeInvoicesResolverService
     }
   },
   { path: '**', component: PageNotFoundComponent }
