@@ -12,7 +12,16 @@
             <p>Prochaine échéance: <b>{{customer.subscription.current_period_end | date:'shortDate':'':'fr'}}</b></p>
         </mat-card-subtitle>
         <mat-card-content>
-
+            <div class="action-container">
+                <button type="button" mat-raised-button color="primary" routerLink="../invoices" routerLinkActive="active"
+                    class="invoice-button">
+                    Mes factures
+                </button>
+                <button type="button" mat-raised-button color="warn" routerLink="../rescind" routerLinkActive="active"
+                    class="invoice-button">
+                    Résiliation
+                </button>
+            </div>
         </mat-card-content>
         <mat-divider></mat-divider>
         <a mat-button routerLink="../" routerLinkActive="active">
@@ -27,7 +36,8 @@
                 (detach)="detachSource($event)"></app-source-details>
         </mat-card-content>
         <mat-card-actions>
-            <app-subscription (newSource)="addSource($event)" [amount]="customer.baseAmount">Ajouter un moyen de
+            <app-subscription (newSource)="addSource($event)" [amount]="customer.baseAmount">Ajout d'un nouveau moyen
+                de
                 paiement</app-subscription>
         </mat-card-actions>
 

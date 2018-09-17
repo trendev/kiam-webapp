@@ -15,3 +15,20 @@ mat-card {
 a {
     padding-left: 0px;
 }
+
+.action-container {
+    display: flex;
+    // flex-direction: column;
+}
+
+.invoice-button{
+    border-radius: 48px;
+    flex: 1;
+    margin: 4px;
+}
+
+@media all and (max-device-width: 600px) {
+    .action-container {
+        flex-direction: column;
+    }
+}
