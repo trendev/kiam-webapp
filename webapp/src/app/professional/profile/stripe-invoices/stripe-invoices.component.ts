@@ -24,8 +24,10 @@ export class StripeInvoicesComponent implements AfterViewInit, OnInit {
         stripeInvoices: any
       }) => {
         this.invoices = data.stripeInvoices.data.map(
-          i => StripeInvoice.build(i));
-        // ).sort((i1, i2) => i1.date);
+          i => StripeInvoice.build(i)
+        ).sort(
+          (i1: StripeInvoice, i2: StripeInvoice) => i2.date.getTime() - i1.date.getTime()
+        );
       }
     );
   }
