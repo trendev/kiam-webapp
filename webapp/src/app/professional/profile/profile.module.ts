@@ -4,13 +4,14 @@ import { NgModule } from '@angular/core';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile/profile.component';
-import { SharedModule } from '@app/shared';
+import { SharedModule, CustomMatPaginatorIntlFr } from '@app/shared';
 import { ChangeProfessionalPasswordComponent } from './change-professional-password/change-professional-password.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { SubscriptionDetailsComponent } from './subscription-details/subscription-details.component';
 import { SubscriptionAmountComponent } from './subscription-details/subscription-amount/subscription-amount.component';
 import { SourceDetailsComponent } from './subscription-details/source-details/source-details.component';
 import { StripeInvoicesComponent } from './stripe-invoices/stripe-invoices.component';
+import { MatPaginatorIntl } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { StripeInvoicesComponent } from './stripe-invoices/stripe-invoices.compo
     StripeInvoicesComponent
   ],
   providers: [
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr },
     StripeCustomerResolverService,
     StripeInvoicesResolverService
   ]
