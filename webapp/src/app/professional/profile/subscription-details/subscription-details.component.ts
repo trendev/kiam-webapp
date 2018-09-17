@@ -71,7 +71,7 @@ export class SubscriptionDetailsComponent {
   setAsDefaultSource(id: string) {
     this.handleSource(id,
       this.stripeSubscriptionService.defaultSource,
-      `Félicitations, la source par défaut est maintenant changée 👍`
+      `Félicitations, la source ${id} est maintenant la source par défaut 👍`
     );
   }
 

@@ -1,5 +1,5 @@
 <div class="source mat-elevation-z2">
-  <div class="info debug">
+  <div class="info">
     <div class="title-container">
       <app-stripe-source-type [stype]="source.type"></app-stripe-source-type>
       <span class="mat-subheading-2 brand">{{source.brand}}</span>****{{source.last4}}
@@ -18,9 +18,10 @@
     <p class="source-id">Identifiant: {{source.id}}</p>
   </div>
 
-  <div class="action-container debug">
-    <!-- TODO: investigate why another icon generate a larger width -->
-    <mat-icon *ngIf="source.is_default; else default" color="accent" class="default-source">stars</mat-icon>
+  <div class="action-container">
+
+    <mat-icon *ngIf="source.is_default; else default" color="accent" class="default-source">star_border</mat-icon>
+
     <ng-template #default>
       <button class="default-button" mat-mini-fab color="accent" (click)="defaultAction()">
         <mat-icon aria-label="Choisir comme moyen de paiement par défaut">star_border</mat-icon>
