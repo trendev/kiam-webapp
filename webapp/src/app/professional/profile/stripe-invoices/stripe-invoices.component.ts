@@ -52,4 +52,8 @@ export class StripeInvoicesComponent implements AfterViewInit, OnInit {
     this.datasource.filter = filterValue;
   }
 
+  download(invoice_pdf: string) {
+    window.open(invoice_pdf);
+  }
+
 }
