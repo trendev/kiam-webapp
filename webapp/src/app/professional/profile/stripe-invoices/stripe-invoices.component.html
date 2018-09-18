@@ -22,9 +22,9 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header>Référence</mat-header-cell>
             <mat-cell *matCellDef="let element">{{element.invoice_number}}</mat-cell>
           </ng-container>
-          <ng-container matColumnDef="amount_paid">
+          <ng-container matColumnDef="amount_due">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Montant TTC</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.amount_paid / 100 | currency:'EUR':'symbol':'.0-2':'fr'}}</mat-cell>
+            <mat-cell *matCellDef="let element">{{element.amount_due / 100 | currency:'EUR':'symbol':'.0-2':'fr'}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="paid">
             <mat-header-cell *matHeaderCellDef class="hide">Statut</mat-header-cell>
@@ -47,5 +47,17 @@
         <mat-paginator [showFirstLastButtons]="true" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
       </div>
     </mat-card-content>
+    <mat-card-actions>
+      <div class="form-button-container">
+        <button type="button" matTooltip="Rafraîchir" mat-mini-fab color="accent" (click)="refreshInvoices()">
+          <mat-icon aria-label="Rafraîchir">refresh</mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
+    <mat-divider></mat-divider>
+    <a mat-button routerLink="../subscription-details" routerLinkActive="active">
+      <mat-icon aria-label="Retour au détail de la souscription">keyboard_arrow_left</mat-icon>
+      Retour au détail de la souscription
+    </a>
   </mat-card>
 </div>

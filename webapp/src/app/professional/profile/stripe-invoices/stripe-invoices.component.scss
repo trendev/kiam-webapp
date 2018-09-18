@@ -31,6 +31,20 @@ mat-card {
     padding: 5px 20px 0;
 }
 
+a {
+    padding-left: 0px;
+}
+
+.form-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-button-container>* {
+    margin: 5px;
+}
+
+
 @media all and (max-device-width: 720px) {
     .hide {
         display: none;
