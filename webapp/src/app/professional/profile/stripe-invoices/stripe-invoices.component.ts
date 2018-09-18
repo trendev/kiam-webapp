@@ -14,7 +14,7 @@ export class StripeInvoicesComponent implements AfterViewInit, OnInit {
 
   datasource: MatTableDataSource<StripeInvoice> = new MatTableDataSource<StripeInvoice>();
   displayedColumns = [
-    'invoice_number', 'date', 'amount_paid', 'paid', 'id'];
+    'date', 'invoice_number', 'amount_paid', 'paid', 'id'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
