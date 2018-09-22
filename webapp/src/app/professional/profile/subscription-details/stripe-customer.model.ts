@@ -17,36 +17,37 @@ export class StripeCustomer {
         const inputSub = inputCust.subscriptions.data[0];
 
         return new StripeCustomer(
-          inputCust.id,
-          inputCust.created,
-          inputCust.default_source,
-          new StripeSubscription(
-            inputSub.id,
-            inputSub.billing_cycle_anchor,
-            inputSub.cancel_at_period_end,
-            inputSub.canceled_at,
-            inputSub.created,
-            inputSub.current_period_end,
-            inputSub.current_period_start,
-            inputSub.plan.nickname,
-            inputSub.plan.amount,
-            inputSub.tax_percent,
-            !!inputSub.discount,
-            inputSub.discount ? inputSub.discount.coupon.percent_off : undefined
-          ),
-          inputCust.sources.data.map(s =>
-            new StripeSource(
-              s.id,
-              s.status,
-              s.type,
-              s.type_data.brand,
-              s.type_data.exp_month,
-              s.type_data.exp_year,
-              s.type_data.last4,
-              s.type_data.three_d_secure,
-              s.id === inputCust.default_source
+            inputCust.id,
+            inputCust.created,
+            inputCust.default_source,
+            new StripeSubscription(
+                inputSub.id,
+                inputSub.billing_cycle_anchor,
+                inputSub.cancel_at_period_end,
+                inputSub.canceled_at,
+                inputSub.created,
+                inputSub.current_period_end,
+                inputSub.current_period_start,
+                inputSub.plan.nickname,
+                inputSub.plan.amount,
+                inputSub.tax_percent,
+                !!inputSub.discount,
+                inputSub.discount ? inputSub.discount.coupon.percent_off : undefined
+            ),
+            inputCust.sources.data.map(s =>
+                new StripeSource({
+                    id: s.id,
+                    status: s.status,
+                    type: s.type,
+                    brand: s.type_data.brand,
+                    exp_month: s.type_data.exp_month,
+                    exp_year: s.type_data.exp_year,
+                    last4: s.type_data.last4,
+                    three_d_secure: s.type_data.three_d_secure,
+                    is_default: s.id === inputCust.default_source
+                }
+                )
             )
-          )
         );
     }
 
