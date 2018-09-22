@@ -1,1 +1,11 @@
-<p>Prochaine échéance: <b>{{subscription.current_period_end | date:'shortDate':'':'fr'}}</b></p>
+<p *ngIf="!isRescinded; else rescindedBlock">Prochaine échéance: <b>{{current_period_end}}</b> le <b>{{subscription.current_period_end |
+    date:'shortDate':'':'fr'}}</b></p>
+<ng-template #rescindedBlock>
+  <div>
+    <mat-error>L'abonnement a été <b>résilié le {{canceled_at | date:'medium':'':'fr'}}</b>.</mat-error>
+  </div>
+  <div>
+    <mat-error>Le compte sera <b>suspendu {{current_period_end}}</b> et <b>définitivement supprimé 14 jours plus tard le {{removal_date|
+        date:'shortDate':'':'fr'}}.</b></mat-error>
+  </div>
+</ng-template>
