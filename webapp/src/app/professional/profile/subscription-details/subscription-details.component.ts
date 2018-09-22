@@ -31,7 +31,6 @@ export class SubscriptionDetailsComponent {
       }) => {
         const inputCust = data.stripeCustomer;
         this.customer = StripeCustomer.build(inputCust);
-        console.log(this.customer);
       }
     );
   }
@@ -141,7 +140,10 @@ export class SubscriptionDetailsComponent {
   }
 
   reactivate() {
-
+    this.manageRescission(
+      this.stripeSubscriptionService.reactivate,
+      `L'abonnement est réactivé 👏 😇`
+    );
   }
 }
 
