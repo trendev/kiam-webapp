@@ -17,8 +17,8 @@
                     class="invoice-button">
                     Mes factures
                 </button>
-                <button type="button" mat-raised-button color="warn" routerLink="../rescind" routerLinkActive="active"
-                    class="invoice-button" [disabled]="true">
+                <button type="button" mat-raised-button color="warn" (click)="rescind()"
+                    class="invoice-button" [disabled]="isRescinded">
                     Résiliation
                 </button>
             </div>

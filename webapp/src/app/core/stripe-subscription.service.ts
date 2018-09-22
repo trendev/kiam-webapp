@@ -40,7 +40,7 @@ export class StripeSubscriptionService {
       );
   }
 
-  defaultSource(id: string) {
+  defaultSource(id: string): Observable<any> {
     return this.http.put<any>(`${this.api}/default_source/${id}`,
     null,
     { withCredentials: true })
@@ -49,7 +49,7 @@ export class StripeSubscriptionService {
     );
   }
 
-  detachSource(id: string) {
+  detachSource(id: string): Observable<any> {
     return this.http.put<any>(`${this.api}/detach/${id}`,
     null,
     { withCredentials: true })
@@ -66,7 +66,7 @@ export class StripeSubscriptionService {
       );
   }
 
-  rescind() {
+  rescind(): Observable<any> {
     return this.http.put<any>(`${this.api}/rescind`,
     null,
     { withCredentials: true })

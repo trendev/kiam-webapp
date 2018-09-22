@@ -108,7 +108,13 @@ export class SubscriptionDetailsComponent {
           duration: 3000
         });
     }
+  }
 
+  get isRescinded(): boolean {
+    return !!this.customer.subscription.canceled_at;
+  }
+
+  rescind() {
 
   }
 }
