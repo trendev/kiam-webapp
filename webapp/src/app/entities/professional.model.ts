@@ -19,6 +19,7 @@ export class Professional extends Customer {
     stripeCustomerId: string;
     stripeSubscriptionId: string;
     tos: boolean;
+    rescissionDate: number;
 
     constructor(values: Object = {}) {
         super(values);
