@@ -7,18 +7,16 @@
             </p>
             <app-subscription-amount [customer]="customer"></app-subscription-amount>
             <p>Date de signature du contrat:
-                <b>{{customer.created | date:'shortDate':'':'fr'}} </b>
+                <b>{{customer.created | date:'shortDate':'':'fr'}}</b>
             </p>
             <app-subscription-status [subscription]="customer.subscription"></app-subscription-status>
         </mat-card-subtitle>
         <mat-card-content>
             <div class="action-container">
-                <button type="button" mat-raised-button color="primary" routerLink="../invoices" routerLinkActive="active"
-                    class="invoice-button">
+                <button type="button" mat-raised-button color="primary" routerLink="../invoices" routerLinkActive="active">
                     Mes factures
                 </button>
-                <button type="button" mat-raised-button color="warn" (click)="rescind()"
-                    class="invoice-button" [disabled]="isRescinded">
+                <button type="button" mat-raised-button color="warn" (click)="rescind()" [disabled]="isRescinded">
                     Résiliation
                 </button>
             </div>

@@ -114,8 +114,30 @@ export class SubscriptionDetailsComponent {
     return !!this.customer.subscription.canceled_at;
   }
 
+  private manageRescission(fn: (s: any) => Observable<any>, msg: string) {
+    this.loadingOverlayService.start();
+    fn.apply(this.stripeSubscriptionService)
+      .pipe(
+        filter(s => !!s),
+        map(s => new StripeSubscription(s)),
+        finalize(() => this.loadingOverlayService.stop()),
+        catchError(e => this.errorHandlerService.handle(e))
+      )
+      .subscribe(s => {
+        this.snackBar.openFromComponent(SuccessMessageComponent,
+          {
+            data: msg,
+            duration: 3000
+          });
+        this.customer.subscription = s;
+      });
+  }
+
   rescind() {
-    // TODO: call the stripeSubscriptionService
+    this.manageRescission(
+      this.stripeSubscriptionService.rescind,
+      `Et voilà, l'abonnement est maintenant suspendu 😢`
+    );
   }
 }
 
