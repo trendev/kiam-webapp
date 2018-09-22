@@ -139,6 +139,10 @@ export class SubscriptionDetailsComponent {
       `Et voilà, l'abonnement est maintenant suspendu 😢`
     );
   }
+
+  reactivate() {
+
+  }
 }
 
 

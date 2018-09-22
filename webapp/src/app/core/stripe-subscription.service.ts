@@ -74,4 +74,13 @@ export class StripeSubscriptionService {
       catchError(e => throwError(e))
     );
   }
+
+  reactivate(): Observable<any> {
+    return this.http.put<any>(`${this.api}/reactivate`,
+    null,
+    { withCredentials: true })
+    .pipe(
+      catchError(e => throwError(e))
+    );
+  }
 }

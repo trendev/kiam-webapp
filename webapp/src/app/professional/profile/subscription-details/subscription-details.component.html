@@ -16,9 +16,14 @@
                 <button type="button" mat-raised-button color="primary" routerLink="../invoices" routerLinkActive="active">
                     Mes factures
                 </button>
-                <button type="button" mat-raised-button color="warn" (click)="rescind()" [disabled]="isRescinded">
+                <button *ngIf="!isRescinded; else reactivateBlock" type="button" mat-raised-button color="warn" (click)="rescind()">
                     Résiliation
                 </button>
+                <ng-template #reactivateBlock>
+                    <button type="button" mat-raised-button color="accent" (click)="reactivate()">
+                        Réactivation
+                    </button>
+                </ng-template>
             </div>
         </mat-card-content>
         <mat-divider></mat-divider>
