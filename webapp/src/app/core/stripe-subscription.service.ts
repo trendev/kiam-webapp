@@ -65,4 +65,13 @@ export class StripeSubscriptionService {
         catchError(e => throwError(e))
       );
   }
+
+  rescind() {
+    return this.http.put<any>(`${this.api}/rescind`,
+    null,
+    { withCredentials: true })
+    .pipe(
+      catchError(e => throwError(e))
+    );
+  }
 }
