@@ -3,38 +3,40 @@ import { StripeSubscription } from './stripe-subscription.model';
 
 export class StripeCustomer {
 
-    constructor(
-        public id: string,
-        public created: number,
-        public default_source: string,
-        public subscription: StripeSubscription,
-        public sources: StripeSource[]) {
-        this.created = StripeSubscription.convertIntoMilliseconds(created);
+    public id: string;
+    public created: number;
+    public default_source: string;
+    public subscription: StripeSubscription;
+    public sources: StripeSource[];
+
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+        this.created = StripeSubscription.convertIntoMilliseconds(this.created);
     }
 
     static build(inputCust: any): StripeCustomer {
 
         const inputSub = inputCust.subscriptions.data[0];
 
-        return new StripeCustomer(
-            inputCust.id,
-            inputCust.created,
-            inputCust.default_source,
-            new StripeSubscription(
-                inputSub.id,
-                inputSub.billing_cycle_anchor,
-                inputSub.cancel_at_period_end,
-                inputSub.canceled_at,
-                inputSub.created,
-                inputSub.current_period_end,
-                inputSub.current_period_start,
-                inputSub.plan.nickname,
-                inputSub.plan.amount,
-                inputSub.tax_percent,
-                !!inputSub.discount,
-                inputSub.discount ? inputSub.discount.coupon.percent_off : undefined
-            ),
-            inputCust.sources.data.map(s =>
+        return new StripeCustomer({
+            id: inputCust.id,
+            created: inputCust.created,
+            default_source: inputCust.default_source,
+            subscription: new StripeSubscription({
+                id: inputSub.id,
+                billing_cycle_anchor: inputSub.billing_cycle_anchor,
+                cancel_at_period_end: inputSub.cancel_at_period_end,
+                canceled_at: inputSub.canceled_at,
+                created: inputSub.created,
+                current_period_end: inputSub.current_period_end,
+                current_period_start: inputSub.current_period_start,
+                nickname: inputSub.plan.nickname,
+                amount: inputSub.plan.amount,
+                tax_percent: inputSub.tax_percent,
+                discount_applied: !!inputSub.discount,
+                discount_percent_off: inputSub.discount ? inputSub.discount.coupon.percent_off : undefined
+            }),
+            sources: inputCust.sources.data.map(s =>
                 new StripeSource({
                     id: s.id,
                     status: s.status,
@@ -48,6 +50,7 @@ export class StripeCustomer {
                 }
                 )
             )
+        }
         );
     }
 
