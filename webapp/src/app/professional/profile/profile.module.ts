@@ -13,6 +13,9 @@ import { SourceDetailsComponent } from './subscription-details/source-details/so
 import { StripeInvoicesComponent } from './stripe-invoices/stripe-invoices.component';
 import { MatPaginatorIntl } from '@angular/material';
 import { SubscriptionStatusComponent } from './subscription-details/subscription-status/subscription-status.component';
+import {
+  RescissionConfirmationDialogComponent
+} from './subscription-details/rescission-confirmation-dialog/rescission-confirmation-dialog.component';
 
 @NgModule({
   imports: [
@@ -27,12 +30,16 @@ import { SubscriptionStatusComponent } from './subscription-details/subscription
     SubscriptionAmountComponent,
     SourceDetailsComponent,
     StripeInvoicesComponent,
-    SubscriptionStatusComponent
+    SubscriptionStatusComponent,
+    RescissionConfirmationDialogComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr },
     StripeCustomerResolverService,
     StripeInvoicesResolverService
+  ],
+  entryComponents: [
+    RescissionConfirmationDialogComponent
   ]
 })
 export class ProfileModule { }

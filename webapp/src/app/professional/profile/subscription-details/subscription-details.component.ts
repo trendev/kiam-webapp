@@ -1,3 +1,6 @@
+import {
+  RescissionConfirmationDialogComponent
+} from './rescission-confirmation-dialog/rescission-confirmation-dialog.component';
 import { StripeSource } from './stripe-source.model';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -6,7 +9,7 @@ import { StripeSubscription } from './stripe-subscription.model';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { StripeSubscriptionService } from '@app/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { filter, finalize, catchError, map } from 'rxjs/operators';
 import { SuccessMessageComponent, ErrorMessageComponent } from '@app/shared';
 import { Observable } from 'rxjs';
@@ -24,7 +27,8 @@ export class SubscriptionDetailsComponent {
     private errorHandlerService: ErrorHandlerService,
     private stripeSubscriptionService: StripeSubscriptionService,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    public dialog: MatDialog) {
     this.route.data.subscribe(
       (data: {
         stripeCustomer: any
@@ -133,10 +137,19 @@ export class SubscriptionDetailsComponent {
   }
 
   rescind() {
-    this.manageRescission(
-      this.stripeSubscriptionService.rescind,
-      `Et voilà, l'abonnement est maintenant suspendu 😢`
-    );
+    const dialogRef = this.dialog.open(RescissionConfirmationDialogComponent, {
+      disableClose: false // if true backdrop click or ESC won't close
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if (!!result) { // result = empty string if user click OK / undefined otherwise
+          this.manageRescission(
+            this.stripeSubscriptionService.rescind,
+            `Et voilà, l'abonnement est maintenant suspendu 😢`
+          );
+        }
+      });
   }
 
   reactivate() {

@@ -151,7 +151,7 @@ export class CollectiveGroupDetailComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) { // result = empty string if user click OK / undefined otherwise
+      if (!!result) { // result = empty string if user click OK / undefined otherwise
         const id = this.collectiveGroup.id;
         const name = this.collectiveGroup.groupName;
         const rpt = result;

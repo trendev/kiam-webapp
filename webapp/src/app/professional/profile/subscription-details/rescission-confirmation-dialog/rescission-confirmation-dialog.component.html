@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Es-tu vraiment sûr de vouloir résilier ton abonnement à {{title}} ???</h2>
+<mat-dialog-content>
+  <p class="mat-subheading-2">
+    Si tu résilies ton abonnement, <b>n'oublie pas de sauvegarder tes données (factures, etc) !!!</b></p>
+  <p class="mat-subheading-2">Tu en auras certainement besoin plus tard et <mat-error><b>nous ne pourrons plus te les
+        fournir après avoir supprimé
+        ton compte 😔</b></mat-error>
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true">Oui 😱</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Non c'est bon 👍</button>
+</mat-dialog-actions>
