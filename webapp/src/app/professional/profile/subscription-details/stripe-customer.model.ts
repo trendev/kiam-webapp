@@ -22,20 +22,7 @@ export class StripeCustomer {
             id: inputCust.id,
             created: inputCust.created,
             default_source: inputCust.default_source,
-            subscription: new StripeSubscription({
-                id: inputSub.id,
-                billing_cycle_anchor: inputSub.billing_cycle_anchor,
-                cancel_at_period_end: inputSub.cancel_at_period_end,
-                canceled_at: inputSub.canceled_at,
-                created: inputSub.created,
-                current_period_end: inputSub.current_period_end,
-                current_period_start: inputSub.current_period_start,
-                nickname: inputSub.plan.nickname,
-                amount: inputSub.plan.amount,
-                tax_percent: inputSub.tax_percent,
-                discount_applied: !!inputSub.discount,
-                discount_percent_off: inputSub.discount ? inputSub.discount.coupon.percent_off : undefined
-            }),
+            subscription: StripeSubscription.build(inputSub),
             sources: inputCust.sources.data.map(s =>
                 new StripeSource({
                     id: s.id,

@@ -28,6 +28,23 @@ export class StripeSubscription {
         return value ? value * 1000 : undefined;
     }
 
+    static build(inputSub: any): StripeSubscription {
+        return new StripeSubscription({
+            id: inputSub.id,
+            billing_cycle_anchor: inputSub.billing_cycle_anchor,
+            cancel_at_period_end: inputSub.cancel_at_period_end,
+            canceled_at: inputSub.canceled_at,
+            created: inputSub.created,
+            current_period_end: inputSub.current_period_end,
+            current_period_start: inputSub.current_period_start,
+            nickname: inputSub.plan.nickname,
+            amount: inputSub.plan.amount,
+            tax_percent: inputSub.tax_percent,
+            discount_applied: !!inputSub.discount,
+            discount_percent_off: inputSub.discount ? inputSub.discount.coupon.percent_off : undefined
+        });
+    }
+
     copy(): StripeSubscription {
         return Object.assign({}, this);
     }

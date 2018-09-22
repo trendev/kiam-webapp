@@ -122,7 +122,7 @@ export class SubscriptionDetailsComponent {
     fn.apply(this.stripeSubscriptionService)
       .pipe(
         filter(s => !!s),
-        map(s => new StripeSubscription(s)),
+        map(s => StripeSubscription.build(s)),
         finalize(() => this.loadingOverlayService.stop()),
         catchError(e => this.errorHandlerService.handle(e))
       )
