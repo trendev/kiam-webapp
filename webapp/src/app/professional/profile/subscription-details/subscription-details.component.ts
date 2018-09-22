@@ -31,6 +31,7 @@ export class SubscriptionDetailsComponent {
       }) => {
         const inputCust = data.stripeCustomer;
         this.customer = StripeCustomer.build(inputCust);
+        console.log(this.customer);
       }
     );
   }
