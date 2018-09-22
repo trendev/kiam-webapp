@@ -12,6 +12,7 @@ import { SubscriptionAmountComponent } from './subscription-details/subscription
 import { SourceDetailsComponent } from './subscription-details/source-details/source-details.component';
 import { StripeInvoicesComponent } from './stripe-invoices/stripe-invoices.component';
 import { MatPaginatorIntl } from '@angular/material';
+import { SubscriptionStatusComponent } from './subscription-details/subscription-status/subscription-status.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { MatPaginatorIntl } from '@angular/material';
     SubscriptionDetailsComponent,
     SubscriptionAmountComponent,
     SourceDetailsComponent,
-    StripeInvoicesComponent
+    StripeInvoicesComponent,
+    SubscriptionStatusComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr },

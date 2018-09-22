@@ -9,7 +9,7 @@
             <p>Date de signature du contrat:
                 <b>{{customer.created | date:'shortDate':'':'fr'}} </b>
             </p>
-            <p>Prochaine échéance: <b>{{customer.subscription.current_period_end | date:'shortDate':'':'fr'}}</b></p>
+            <app-subscription-status [subscription]="customer.subscription"></app-subscription-status>
         </mat-card-subtitle>
         <mat-card-content>
             <div class="action-container">
