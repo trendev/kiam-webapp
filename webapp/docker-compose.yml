@@ -1,9 +1,0 @@
-version: '3'
-services:
-  webapp:
-    build: .
-    image: trendevfr/comptandye_webapp
-    container_name: comptandye_webapp
-    ports:
-      - "3000:80"
-    
