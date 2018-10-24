@@ -4,6 +4,10 @@ services:
     build: .
     image: trendevfr/comptandye_webapp
     container_name: comptandye_webapp
+    networks:
+      - frontend
     ports:
       - "3000:80"
-    
+
+networks:
+  frontend:
