@@ -19,21 +19,21 @@ Source of the Frontend code (Angular) + Docker configuration of the Frontend Web
 ### :recycle: *Image is automatically build on Docker Hub*
 
 ### Build the image
-`docker-compose build -t trendevfr/comptandye_webapp`
+`docker-compose build -t trendev/comptandye_webapp`
 
 ### Push the image into Docker Hub
-`docker push trendevfr/comptandye_webapp`
+`docker push trendev/comptandye_webapp`
 
 ## Redeployment (with docker running with sudo user)
 #### 1. stop previous container
 `sudo docker stop comptandye_webapp`
 
 #### 2. remove previous image
-`sudo docker rmi trendevfr/comptandye_webapp`
+`sudo docker rmi trendev/comptandye_webapp`
 
 #### 3. run a new container from the new image
-`sudo docker run -d --rm -p 3000:80 --name comptandye_webapp trendevfr/comptandye_webapp`
+`sudo docker run -d --rm -p 3000:80 --name comptandye_webapp trendev/comptandye_webapp`
 
 ### :dizzy: Execute all steps
-`sudo docker stop comptandye_webapp && sudo docker rmi trendevfr/comptandye_webapp && sudo docker run -d --rm -p 3000:80 --name comptandye_webapp trendevfr/comptandye_webapp`
+`sudo docker stop comptandye_webapp && sudo docker rmi trendev/comptandye_webapp && sudo docker run -d --rm -p 3000:80 --name comptandye_webapp trendev/comptandye_webapp`
 
