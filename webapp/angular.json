@@ -68,6 +68,25 @@
                   "with": "src/environments/environment.mobile.ts"
                 }
               ]
+            },
+            "dev": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "src/ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
             }
           }
         },
@@ -82,6 +101,9 @@
             },
             "mobile": {
               "browserTarget": "webapp:build:mobile"
+            },
+            "dev": {
+              "browserTarget": "webapp:build:dev"
             }
           }
         },
