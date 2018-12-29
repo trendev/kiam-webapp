@@ -529,7 +529,7 @@ export class ExportBillService {
               body: [
                 [
                   {
-                    text: `${bill.payments ? 'Reste' : 'Montant'} à régler HT (€):`,
+                    text: `${bill.payments ? 'Reste' : 'Montant'} à régler ${bill.vatInclusive ? 'TTC' : 'HT'} (€):`,
                     bold: true,
                     color: 'white',
                     fillColor: 'black'
