@@ -19,7 +19,7 @@ Source of the Frontend code (Angular) + Docker configuration of the Frontend Web
 ### :recycle: *Image is automatically build on Docker Hub*
 
 ### Build the image
-`docker-compose build -t trendev/comptandye_webapp`
+`docker build -t trendev/comptandye_webapp .`
 
 ### Push the image into Docker Hub
 `docker push trendev/comptandye_webapp`
