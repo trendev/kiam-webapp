@@ -19,6 +19,13 @@ import { WelcomeLoginComponent } from './welcome-login/welcome-login.component';
     SharedModule,
     WelcomeRoutingModule
   ],
-  declarations: [WelcomeComponent, WelcomeToolbarComponent, BannerComponent, TitleComponent, SentenceComponent, WelcomeFooterComponent, WelcomeLoginComponent]
+  declarations: [
+    WelcomeComponent,
+    WelcomeToolbarComponent,
+    BannerComponent,
+    TitleComponent,
+    SentenceComponent,
+    WelcomeFooterComponent,
+    WelcomeLoginComponent]
 })
 export class WelcomeModule { }

@@ -3,7 +3,6 @@ import { ErrorHandlerService } from './error-handler.service';
 import { LogUpdateService } from './log-update.service';
 import { SharedModule } from '@app/shared';
 import { CoreModule } from '@app/core';
-import { WelcomeModule } from '@app/welcome';
 import { LoginModule } from '@app/login';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,7 +32,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
-    WelcomeModule,
+    // WelcomeModule,
     LoginModule, // must be before AppRoutingModule or won't be loaded as expected
     AppRoutingModule
   ],
