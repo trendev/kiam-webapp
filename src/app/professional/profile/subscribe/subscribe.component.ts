@@ -16,7 +16,9 @@ import { Router } from '@angular/router';
 export class SubscribeComponent implements OnInit {
 
   appName = environment.title;
-  defaultAmount = 2400;
+
+  // default subscription amount (18 euros all taxes included)
+  defaultAmount = 1800;
 
   constructor(private loadingOverlayService: LoadingOverlayService,
     private errorHandlerService: ErrorHandlerService,

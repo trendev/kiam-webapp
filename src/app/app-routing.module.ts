@@ -3,14 +3,20 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { PageNotFoundComponent } from '@app/shared';
 
 export const routes: Routes = [
+    // Uncomment the following paths if the welcome module is the default one
+    // {
+    //     path: '',
+    //     redirectTo: '/welcome',
+    //     pathMatch: 'full',
+    // },
+    // {
+    //     path: 'login',
+    //     redirectTo: '/login'
+    // },
     {
         path: '',
-        redirectTo: '/welcome',
+        redirectTo: '/login',
         pathMatch: 'full',
-    },
-    {
-        path: 'login',
-        redirectTo: '/login'
     },
     {
         path: 'professional',
