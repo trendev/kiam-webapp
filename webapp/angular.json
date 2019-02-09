@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "webapp": {
+    "comptandye-webapp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -93,24 +93,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "webapp:build"
+            "browserTarget": "comptandye-webapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "webapp:build:production"
+              "browserTarget": "comptandye-webapp:build:production"
             },
             "mobile": {
-              "browserTarget": "webapp:build:mobile"
+              "browserTarget": "comptandye-webapp:build:mobile"
             },
             "dev": {
-              "browserTarget": "webapp:build:dev"
+              "browserTarget": "comptandye-webapp:build:dev"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "webapp:build"
+            "browserTarget": "comptandye-webapp:build"
           }
         },
         "test": {
@@ -145,7 +145,7 @@
         }
       }
     },
-    "webapp-e2e": {
+    "comptandye-webapp-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -154,7 +154,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "webapp:serve"
+            "devServerTarget": "comptandye-webapp:serve"
           }
         },
         "lint": {
@@ -171,7 +171,7 @@
       }
     }
   },
-  "defaultProject": "webapp",
+  "defaultProject": "comptandye-webapp",
   "schematics": {
     "@schematics/angular:class": {
       "spec": false
