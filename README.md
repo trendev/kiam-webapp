@@ -6,13 +6,16 @@ Source of the Frontend code (Angular) + Docker configuration of the Frontend Web
 > requirement for Stripe : valid HTTPS only
 
 ## Build the webapp
-> ✋ Remove the --base-href if webapp must be accessed from https://www.comptandye.fr/
 
-`ng build --prod`
+### Production
 
 > Set the --base-href if webapp must be accessed from https://www.comptandye.fr/dist/
 
 `ng build --prod --base-href "/dist/"`
+
+> ✋ Remove the --base-href if webapp must be accessed from https://www.comptandye.fr/
+
+`ng build --prod`
 
 ## Build the docker image
 
