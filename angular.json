@@ -69,7 +69,7 @@
                 }
               ]
             },
-            "dev": {
+            "preprod": {
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -84,7 +84,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
+                  "with": "src/environments/environment.preprod.ts"
                 }
               ]
             }
@@ -102,8 +102,8 @@
             "mobile": {
               "browserTarget": "comptandye-webapp:build:mobile"
             },
-            "dev": {
-              "browserTarget": "comptandye-webapp:build:dev"
+            "preprod": {
+              "browserTarget": "comptandye-webapp:build:preprod"
             }
           }
         },
