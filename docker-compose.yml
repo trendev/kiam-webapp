@@ -2,7 +2,7 @@ version: '3'
 services:
   webapp:
     build: .
-    image: trendev/comptandye-webapp:preprod
+    image: trendev/comptandye-webapp
     container_name: comptandye-webapp
     networks:
       - frontend
