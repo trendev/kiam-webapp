@@ -1,0 +1,13 @@
+version: '3'
+services:
+  webapp:
+    build: .
+    image: trendev/comptandye-webapp:preprod
+    container_name: comptandye-webapp
+    networks:
+      - frontend
+    ports:
+      - "3000:80"
+
+networks:
+  frontend:
