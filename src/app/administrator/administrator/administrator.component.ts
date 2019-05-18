@@ -10,8 +10,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministratorComponent implements OnInit {
 
-  readonly adminUrl = `${environment.base_url}/admin/index.xhtml`;
-
   admin: Administrator;
 
   constructor(private authenticationService: AuthenticationService) { }
