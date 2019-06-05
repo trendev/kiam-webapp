@@ -17,6 +17,7 @@ import { LoadingOverlayService } from './loading-overlay.service';
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { httpInterceptorProviders } from './http-interceptors';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -38,6 +39,7 @@ registerLocaleData(localeFr, 'fr');
   ],
   bootstrap: [AppComponent],
   providers: [
+    httpInterceptorProviders,
     LoadingOverlayService,
     LogUpdateService,
     ErrorHandlerService
