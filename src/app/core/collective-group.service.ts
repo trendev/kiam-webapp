@@ -18,28 +18,28 @@ export class CollectiveGroupService {
   constructor(private http: HttpClient) { }
 
   create(payload: CollectiveGroup): Observable<CollectiveGroup> {
-    return this.http.post<CollectiveGroup>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.post<CollectiveGroup>(`${this.api}`, payload).pipe(
       map(cg => new CollectiveGroup(cg)),
       catchError(e => observableThrowError(e))
     );
   }
 
   update(payload: CollectiveGroup): Observable<CollectiveGroup> {
-    return this.http.put<CollectiveGroup>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.put<CollectiveGroup>(`${this.api}`, payload).pipe(
       map(cg => new CollectiveGroup(cg)),
       catchError(e => observableThrowError(e))
     );
   }
 
   getCollectiveGroupBills(id: number): Observable<CollectiveGroupBill[]> {
-    return this.http.get<CollectiveGroupBill[]>(`${this.api}/${id}/collectiveGroupBills`, { withCredentials: true }).pipe(
+    return this.http.get<CollectiveGroupBill[]>(`${this.api}/${id}/collectiveGroupBills`).pipe(
       map(cgbills => cgbills.map(cgb => new CollectiveGroupBill(cgb))),
       catchError(e => observableThrowError(e))
     );
   }
 
   getCollectiveGroupBill(id: number, ref: string): Observable<CollectiveGroupBill> {
-    return this.http.get<CollectiveGroupBill[]>(`${this.api}/${id}/collectiveGroupBills`, { withCredentials: true }).pipe(
+    return this.http.get<CollectiveGroupBill[]>(`${this.api}/${id}/collectiveGroupBills`).pipe(
       map(cgbills => {
         const bills = cgbills.filter(cgb => cgb.reference === ref);
         switch (bills.length) {

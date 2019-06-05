@@ -18,7 +18,7 @@ export class OfferingsModelService {
   constructor(private http: HttpClient) { }
 
   build(): Observable<Offering[]> {
-    return this.http.post<Offering[]>(`${this.api}/build`, null, { withCredentials: true }).pipe(
+    return this.http.post<Offering[]>(`${this.api}/build`, null).pipe(
       catchError(e => observableThrowError(e)));
   }
 }

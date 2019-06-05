@@ -39,48 +39,45 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.get<UserAccount>(`${this.api}/login`,
-      {
-        params: new HttpParams()
-          .set('username', username)
-          .set('password', password),
-        withCredentials: true
-      }).pipe(
-        map(user => {
-          this.user = user;
-          this._isLoggedIn = true;
-          return true;
-        }),
-        catchError(e => {
-          this.resetUserInformation();
-          return observableThrowError(e);
-        })
-      );
+    return this.http.get<UserAccount>(`${this.api}/login`, {
+      params: new HttpParams()
+        .set('username', username)
+        .set('password', password)
+    }).pipe(
+      map(user => {
+        this.user = user;
+        this._isLoggedIn = true;
+        return true;
+      }),
+      catchError(e => {
+        this.resetUserInformation();
+        return observableThrowError(e);
+      })
+    );
   }
 
   logout(): Observable<boolean> {
     this.resetUserInformation();
     return this.http.post<any>(`${this.api}/logout`,
       null,
-      { observe: 'response', withCredentials: true }).pipe(
+      { observe: 'response' }).pipe(
         map(() => true),
         catchError(e => observableThrowError(e))
       );
   }
 
   profile(): Observable<UserAccount> {
-    return this.http.get<UserAccount>(`${this.api}/profile`,
-      { withCredentials: true }).pipe(
-        map(user => {
-          this.user = user;
-          this._isLoggedIn = true;
-          return this.user;
-        }),
-        catchError(e => {
-          this.resetUserInformation();
-          return observableThrowError(e);
-        })
-      );
+    return this.http.get<UserAccount>(`${this.api}/profile`).pipe(
+      map(user => {
+        this.user = user;
+        this._isLoggedIn = true;
+        return this.user;
+      }),
+      catchError(e => {
+        this.resetUserInformation();
+        return observableThrowError(e);
+      })
+    );
   }
 
   password(size: number = 10): Observable<string> {
@@ -88,7 +85,6 @@ export class AuthenticationService {
       {
         params: new HttpParams()
           .set('size', size + ''),
-        withCredentials: true,
         responseType: 'text'
       }).pipe(
         retry(3),
@@ -106,8 +102,7 @@ export class AuthenticationService {
     };
 
     return this.http.put<PasswordResponse>(`${this.api}/new-password`,
-      payload,
-      { withCredentials: true }).pipe(
+      payload).pipe(
         map(resp => resp.password),
         catchError(e => observableThrowError(e))
       );

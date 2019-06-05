@@ -19,10 +19,7 @@ export class BusinessService {
   constructor(private http: HttpClient) { }
 
   get businesses(): Observable<Business[]> {
-    return this.http.get<Business[]>(`${this.api}`,
-      {
-        withCredentials: true
-      }).pipe(
+    return this.http.get<Business[]>(`${this.api}`).pipe(
         map(result => result.map(r => new Business(r))),
         catchError(e => observableThrowError(e))
       );

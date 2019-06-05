@@ -34,8 +34,7 @@ export class ProfessionalService {
   profile(refresh: boolean = false): Observable<Professional> {
     return this.http.get<Professional>(`${this.api}/profile`,
       {
-        params: new HttpParams().set('refresh', `${refresh}`),
-        withCredentials: true
+        params: new HttpParams().set('refresh', `${refresh}`)
       }).pipe(
         map(pro => new Professional(pro)),
         catchError(e => observableThrowError(e))
@@ -43,76 +42,61 @@ export class ProfessionalService {
   }
 
   put(payload: Professional): Observable<Professional> {
-    return this.http.put<Professional>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.put<Professional>(`${this.api}`, payload).pipe(
       map(_pro => new Professional(_pro)),
       catchError(e => observableThrowError(e))
     );
   }
 
   getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.api}/clients`,
-      {
-        withCredentials: true
-      }).pipe(
-        map(result => result.map(r => new Client(r))),
-        catchError(e => observableThrowError(e))
-      );
+    return this.http.get<Client[]>(`${this.api}/clients`).pipe(
+      map(result => result.map(r => new Client(r))),
+      catchError(e => observableThrowError(e))
+    );
   }
 
   getCollectiveGroups(): Observable<CollectiveGroup[]> {
-    return this.http.get<CollectiveGroup[]>(`${this.api}/collectiveGroups`,
-      {
-        withCredentials: true
-      }).pipe(
-        map(result => result.map(r => new CollectiveGroup(r))),
-        catchError(e => observableThrowError(e))
-      );
+    return this.http.get<CollectiveGroup[]>(`${this.api}/collectiveGroups`).pipe(
+      map(result => result.map(r => new CollectiveGroup(r))),
+      catchError(e => observableThrowError(e))
+    );
   }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.api}/categories`,
-      {
-        withCredentials: true
-      }).pipe(
-        map(result => result.map(r => new Category(r))),
-        catchError(e => observableThrowError(e))
-      );
+    return this.http.get<Category[]>(`${this.api}/categories`).pipe(
+      map(result => result.map(r => new Category(r))),
+      catchError(e => observableThrowError(e))
+    );
   }
 
   getBills(): Observable<Bill[]> {
-    return this.http.get<Bill[]>(`${this.api}/bills`,
-      {
-        withCredentials: true
-      }).pipe(
-        map(result => result.map(r => {
-          switch (r.cltype) {
-            case BillType.CLIENT_BILL:
-              return new ClientBill(r);
-            case BillType.COLLECTIVE_GROUP_BILL:
-              return new CollectiveGroupBill(r);
-            case BillType.INDIVIDUAL_BILL:
-              return new IndividualBill(r);
-          }
-        })),
-        catchError(e => observableThrowError(e))
-      );
+    return this.http.get<Bill[]>(`${this.api}/bills`).pipe(
+      map(result => result.map(r => {
+        switch (r.cltype) {
+          case BillType.CLIENT_BILL:
+            return new ClientBill(r);
+          case BillType.COLLECTIVE_GROUP_BILL:
+            return new CollectiveGroupBill(r);
+          case BillType.INDIVIDUAL_BILL:
+            return new IndividualBill(r);
+        }
+      })),
+      catchError(e => observableThrowError(e))
+    );
   }
 
   getOfferings(): Observable<Offering[]> {
-    return this.http.get<Offering[]>(`${this.api}/offerings`,
-      {
-        withCredentials: true
-      }).pipe(
-        map(result => result.map(r => {
-          switch (r.cltype) {
-            case OfferingType.SERVICE:
-              return new Service(r);
-            case OfferingType.PACK:
-              return new Pack(r);
-          }
-        })),
-        catchError(e => observableThrowError(e))
-      );
+    return this.http.get<Offering[]>(`${this.api}/offerings`).pipe(
+      map(result => result.map(r => {
+        switch (r.cltype) {
+          case OfferingType.SERVICE:
+            return new Service(r);
+          case OfferingType.PACK:
+            return new Pack(r);
+        }
+      })),
+      catchError(e => observableThrowError(e))
+    );
   }
 
 }

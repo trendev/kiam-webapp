@@ -18,14 +18,14 @@ export class CollectiveGroupBillService {
   constructor(private http: HttpClient) { }
 
   create(payload: CollectiveGroupBill): Observable<CollectiveGroupBill> {
-    return this.http.post<CollectiveGroupBill>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.post<CollectiveGroupBill>(`${this.api}`, payload).pipe(
       map(bill => new CollectiveGroupBill(bill)),
       catchError(e => observableThrowError(e))
     );
   }
 
   update(payload: CollectiveGroupBill): Observable<CollectiveGroupBill> {
-    return this.http.put<CollectiveGroupBill>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.put<CollectiveGroupBill>(`${this.api}`, payload).pipe(
       map(bill => new CollectiveGroupBill(bill)),
       catchError(e => observableThrowError(e))
     );

@@ -15,72 +15,58 @@ export class StripeSubscriptionService {
   constructor(private http: HttpClient) { }
 
   subscription(source: any): Observable<string> {
-    return this.http.post<any>(`${this.api}/std-subscription`,
-      source,
-      { withCredentials: true })
+    return this.http.post<any>(`${this.api}/std-subscription`, source)
       .pipe(
         catchError(e => throwError(e))
       );
   }
 
   details(): Observable<any> {
-    return this.http.get<any>(`${this.api}/details`,
-      { withCredentials: true })
+    return this.http.get<any>(`${this.api}/details`)
       .pipe(
         catchError(e => throwError(e))
       );
   }
 
   addSource(source: any): Observable<any> {
-    return this.http.put<any>(`${this.api}/add-source`,
-      source,
-      { withCredentials: true })
+    return this.http.put<any>(`${this.api}/add-source`, source)
       .pipe(
         catchError(e => throwError(e))
       );
   }
 
   defaultSource(id: string): Observable<any> {
-    return this.http.put<any>(`${this.api}/default_source/${id}`,
-    null,
-    { withCredentials: true })
-    .pipe(
-      catchError(e => throwError(e))
-    );
+    return this.http.put<any>(`${this.api}/default_source/${id}`, null)
+      .pipe(
+        catchError(e => throwError(e))
+      );
   }
 
   detachSource(id: string): Observable<any> {
-    return this.http.put<any>(`${this.api}/detach/${id}`,
-    null,
-    { withCredentials: true })
-    .pipe(
-      catchError(e => throwError(e))
-    );
+    return this.http.put<any>(`${this.api}/detach/${id}`, null)
+      .pipe(
+        catchError(e => throwError(e))
+      );
   }
 
   invoices(): Observable<any> {
-    return this.http.get<any>(`${this.api}/invoices`,
-      { withCredentials: true })
+    return this.http.get<any>(`${this.api}/invoices`)
       .pipe(
         catchError(e => throwError(e))
       );
   }
 
   rescind(): Observable<any> {
-    return this.http.put<any>(`${this.api}/rescind`,
-    null,
-    { withCredentials: true })
-    .pipe(
-      catchError(e => throwError(e))
-    );
+    return this.http.put<any>(`${this.api}/rescind`, null)
+      .pipe(
+        catchError(e => throwError(e))
+      );
   }
 
   reactivate(): Observable<any> {
-    return this.http.put<any>(`${this.api}/reactivate`,
-    null,
-    { withCredentials: true })
-    .pipe(
-      catchError(e => throwError(e))
-    );
+    return this.http.put<any>(`${this.api}/reactivate`, null)
+      .pipe(
+        catchError(e => throwError(e))
+      );
   }
 }

@@ -18,14 +18,14 @@ export class ClientBillService {
   constructor(private http: HttpClient) { }
 
   create(payload: ClientBill): Observable<ClientBill> {
-    return this.http.post<ClientBill>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.post<ClientBill>(`${this.api}`, payload).pipe(
       map(bill => new ClientBill(bill)),
       catchError(e => observableThrowError(e))
     );
   }
 
   update(payload: ClientBill): Observable<ClientBill> {
-    return this.http.put<ClientBill>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.put<ClientBill>(`${this.api}`, payload).pipe(
       map(bill => new ClientBill(bill)),
       catchError(e => observableThrowError(e))
     );

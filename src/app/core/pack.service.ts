@@ -18,7 +18,7 @@ export class PackService {
   constructor(private http: HttpClient) { }
 
   getParentPacks(id: number): Observable<Pack[]> {
-    return this.http.get<Offering[]>(`${this.api}/${id}/parentPacks`, { withCredentials: true }).pipe(
+    return this.http.get<Offering[]>(`${this.api}/${id}/parentPacks`).pipe(
       map(offerings => offerings
         .filter(o => o.cltype === OfferingType.PACK)
         .map(o => new Pack(o))
@@ -28,21 +28,21 @@ export class PackService {
   }
 
   create(payload: Pack): Observable<Pack> {
-    return this.http.post<Pack>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.post<Pack>(`${this.api}`, payload).pipe(
       map(pack => new Pack(pack)),
       catchError(e => observableThrowError(e))
     );
   }
 
   update(payload: Pack): Observable<Pack> {
-    return this.http.put<Pack>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.put<Pack>(`${this.api}`, payload).pipe(
       map(pack => new Pack(pack)),
       catchError(e => observableThrowError(e))
     );
   }
 
   remove(id: number): Observable<string> {
-    return this.http.delete(`${this.api}/${id}`, { responseType: 'text', withCredentials: true }).pipe(
+    return this.http.delete(`${this.api}/${id}`, { responseType: 'text' }).pipe(
       catchError(e => observableThrowError(e)));
   }
 

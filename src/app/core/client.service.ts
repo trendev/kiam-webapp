@@ -18,28 +18,28 @@ export class ClientService {
   constructor(private http: HttpClient) { }
 
   create(payload: Client): Observable<Client> {
-    return this.http.post<Client>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.post<Client>(`${this.api}`, payload).pipe(
       map(client => new Client(client)),
       catchError(e => observableThrowError(e))
     );
   }
 
   update(payload: Client): Observable<Client> {
-    return this.http.put<Client>(`${this.api}`, payload, { withCredentials: true }).pipe(
+    return this.http.put<Client>(`${this.api}`, payload).pipe(
       map(client => new Client(client)),
       catchError(e => observableThrowError(e))
     );
   }
 
   getClientBills(id: number): Observable<ClientBill[]> {
-    return this.http.get<ClientBill[]>(`${this.api}/${id}/clientBills`, { withCredentials: true }).pipe(
+    return this.http.get<ClientBill[]>(`${this.api}/${id}/clientBills`).pipe(
       map(clientBills => clientBills.map(cb => new ClientBill(cb))),
       catchError(e => observableThrowError(e))
     );
   }
 
   getClientBill(id: number, ref: string): Observable<ClientBill> {
-    return this.http.get<ClientBill[]>(`${this.api}/${id}/clientBills`, { withCredentials: true }).pipe(
+    return this.http.get<ClientBill[]>(`${this.api}/${id}/clientBills`).pipe(
       map(clientBills => {
         const bills = clientBills.filter(cb => cb.reference === ref);
         switch (bills.length) {
