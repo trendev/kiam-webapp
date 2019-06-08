@@ -9,15 +9,24 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class JWTInterceptor implements HttpInterceptor {
 
+    // should be equivalent on the Backend side
     private readonly JWT_HEADER = 'JWT';
 
     constructor() { }
 
+    /**
+     * Intercept:
+     * - an outgoing request and add the security token (JWT) in the "Authorization" header.
+     * - incoming request with header JWT, extract the security token and store it in the local storage.
+     * @param req the requets to intercept
+     * @param next the next interceptors
+     */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         const jwt = this.loadJWT();
 
         if (jwt) {
+            // request are non mutable and must be cloned
             const authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + jwt } });
             return this.handle(authReq, next);
 
@@ -26,24 +35,30 @@ export class JWTInterceptor implements HttpInterceptor {
         }
     }
 
+    /**
+     * Load the JWT from the local storage
+     */
     private loadJWT(): string {
         return localStorage.getItem(this.JWT_HEADER);
     }
 
+    /**
+     * Save the JWT in the local storage
+     * @param jwt the JWT to save
+     */
     private saveJWT(jwt: string) {
-        if (jwt) {
-            localStorage.setItem(this.JWT_HEADER, jwt);
-        }
+        localStorage.setItem(this.JWT_HEADER, jwt);
     }
 
     private handle(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req)
             .pipe(
                 tap(event => {
-                    console.log(`event = ${JSON.stringify(event, null, 2)}`);
                     if (event instanceof HttpResponse) {
                         const jwt = event.headers.get(this.JWT_HEADER);
-                        this.saveJWT(jwt);
+                        if (jwt) { // the Backend responses providing the security token
+                            this.saveJWT(jwt);
+                        }
                     }
                 })
             );
