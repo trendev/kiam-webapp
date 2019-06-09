@@ -1,5 +1,4 @@
-# comptandye-webapp
-[![CircleCI](https://circleci.com/gh/trendev/comptandye-webapp.svg?style=svg&circle-token=82ea9668f823633d1e05e07136241d0e935815dc)](https://circleci.com/gh/trendev/comptandye-webapp)
+# comptandye-webapp [![CircleCI](https://circleci.com/gh/trendev/comptandye-webapp.svg?style=svg&circle-token=82ea9668f823633d1e05e07136241d0e935815dc)](https://circleci.com/gh/trendev/comptandye-webapp)
 Source of the Frontend code (Angular) + Docker configuration of the Frontend Webapp
 
 ## Serve the webapp HTTPS (localhost)
