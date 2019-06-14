@@ -38,9 +38,10 @@ export class AuthenticationService {
     this._isLoggedIn = false;
   }
 
-  login(username: string, password: string): Observable<boolean> {
+  login(username: string, password: string, rmbme?: boolean): Observable<boolean> {
     return this.http.get<UserAccount>(`${this.api}/login`, {
       params: new HttpParams()
+        .set('rmbme', rmbme ? 'true' : 'false')
         .set('username', username)
         .set('password', password)
     }).pipe(

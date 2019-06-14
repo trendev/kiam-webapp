@@ -41,7 +41,7 @@ export class LoginCardComponent {
   login() {
     this.loadingOverlayService.start();
     this.errors = {};
-    this.authenticationService.login(this.username, this.password)
+    this.authenticationService.login(this.username, this.password, this.rmbme)
       .subscribe(
         r => this.dispatcher.redirect(),
         e => {
