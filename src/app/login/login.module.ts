@@ -9,7 +9,6 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { LoginGuard } from './login.guard';
 import { DispatcherService } from './dispatcher.service';
 import { UnsupportedUserTypeComponent } from './unsupported-user-type/unsupported-user-type.component';
-import { CredentialsManagerService } from './credentials-manager.service';
 import { LoginToolbarComponent } from './login/login-toolbar/login-toolbar.component';
 import { LoginCardComponent } from './login/login-card/login-card.component';
 
@@ -22,6 +21,6 @@ import { LoginCardComponent } from './login/login-card/login-card.component';
   ],
   declarations: [LoginComponent, RegisterFormComponent, UnsupportedUserTypeComponent, LoginToolbarComponent, LoginCardComponent],
   exports: [LoginComponent, RegisterFormComponent],
-  providers: [LoginGuard, DispatcherService, CredentialsManagerService]
+  providers: [LoginGuard, DispatcherService]
 })
 export class LoginModule { }

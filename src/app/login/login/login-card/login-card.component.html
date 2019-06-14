@@ -8,22 +8,24 @@
       <mat-card-content>
         <div class="login-items">
           <mat-form-field [hideRequiredMarker]="true">
-            <input matInput type="email" autocomplete="off" placeholder="Email" name="username" [(ngModel)]="credentials.username" #username="ngModel"
+            <input matInput type="email" autocomplete="on" placeholder="Email" name="username" [(ngModel)]="username"
               required>
           </mat-form-field>
           <mat-form-field [hideRequiredMarker]="true">
-            <input matInput [type]="hide ? 'password' : 'text'" autocomplete="off" placeholder="Mot de passe" name="password" [(ngModel)]="credentials.password"
-              #password="ngModel" required>
+            <input matInput [type]="hide ? 'password' : 'text'" autocomplete="on" placeholder="Mot de passe"
+              name="password" [(ngModel)]="password" required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
           <mat-error *ngIf="errors.blocked">Identification impossible : ton compte à été bloqué 🚫</mat-error>
-          <mat-error *ngIf="errors.unauthorized">Identification incorrecte : vérifie tes identifiants ou ta connexion internet 🤔</mat-error>
+          <mat-error *ngIf="errors.unauthorized">Identification incorrecte : vérifie tes identifiants ou ta connexion
+            internet 🤔</mat-error>
         </div>
-        <mat-checkbox [(ngModel)]="rememberMe" name="rememberMe" style="font-size: 0.9em">Se souvenir de moi</mat-checkbox>
+        <mat-checkbox [(ngModel)]="rmbme" name="rmbme" style="font-size: 0.9em">Se souvenir de moi</mat-checkbox>
       </mat-card-content>
       <mat-card-actions>
         <div class="login-actions">
-          <button type="submit" class="button" mat-raised-button color="primary" [disabled]="!loginForm.form.valid || !username || !password">Identification</button>
+          <button type="submit" class="button" mat-raised-button color="primary"
+            [disabled]="!loginForm.form.valid || !username || !password">Identification</button>
           <!-- <button type="button" class="button" mat-button routerLink="/welcome">Accueil</button> -->
           <a href="/" class="button" type="button" mat-button>Accueil</a>
         </div>

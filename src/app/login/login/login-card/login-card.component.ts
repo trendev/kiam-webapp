@@ -4,7 +4,6 @@ import { environment } from '@env/environment';
 import { Component } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 import { DispatcherService } from '@app/login/dispatcher.service';
-import { CredentialsManagerService, Credentials } from '@app/login/credentials-manager.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +12,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-card.component.scss']
 })
 export class LoginCardComponent {
-  credentials: Credentials;
 
   errors: any = {};
 
@@ -24,49 +22,38 @@ export class LoginCardComponent {
   // hide/show password
   hide = true;
 
+  // remember me : flag used for long term connections
+  rmbme = false;
+
+  username: string;
+  password: string;
+
   constructor(private authenticationService: AuthenticationService,
     private dispatcher: DispatcherService,
     private router: Router,
-    private credentialsManagerService: CredentialsManagerService,
     private loadingOverlayService: LoadingOverlayService) {
-
-    this.credentials = this.credentialsManagerService.credentials;
   }
 
   get isLoggedIn(): boolean {
     return this.authenticationService.isLoggedIn;
   }
 
-  get rememberMe(): boolean {
-    return this.credentials.rememberMe;
-  }
-
-  set rememberMe(value: boolean) {
-    if (!value) {
-      this.credentialsManagerService.clear();
-    }
-    this.credentials.rememberMe = value;
-  }
-
   login() {
     this.loadingOverlayService.start();
     this.errors = {};
-    this.authenticationService.login(this.credentials.username, this.credentials.password)
+    this.authenticationService.login(this.username, this.password)
       .subscribe(
-      r => {
-        this.credentialsManagerService.save(this.credentials);
-        this.dispatcher.redirect();
-      },
-      e => {
-        this.loadingOverlayService.stop();
-        if (e instanceof HttpErrorResponse
-          && e.error.error
-          && e.error.error.match(/Blocked/)) {
-          this.errors.blocked = `User has been blocked`;
-        } else {
-          this.errors.unauthorized = `Unauthorized or network issues or server down`;
-        }
-      });
+        r => this.dispatcher.redirect(),
+        e => {
+          this.loadingOverlayService.stop();
+          if (e instanceof HttpErrorResponse
+            && e.error.error
+            && e.error.error.match(/Blocked/)) {
+            this.errors.blocked = `User has been blocked`;
+          } else {
+            this.errors.unauthorized = `Unauthorized or Network issues or Server Down`;
+          }
+        });
   }
 
   register() {
