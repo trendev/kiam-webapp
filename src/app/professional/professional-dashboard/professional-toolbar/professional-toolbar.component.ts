@@ -1,5 +1,5 @@
 
-import {finalize} from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Router, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from '@app/core';
@@ -20,14 +20,11 @@ export class ProfessionalToolbarComponent {
 
   constructor(private authenticationService: AuthenticationService,
     private router: Router,
-    private loadingOverlayService: LoadingOverlayService,
     private snackBar: MatSnackBar) { }
 
   logout() {
-    this.loadingOverlayService.start();
     this.authenticationService.logout().pipe(
       finalize(() => {
-        this.loadingOverlayService.stop();
         this.snackBar.openFromComponent(SuccessMessageComponent, {
           data: `Tu es déconnecté(e) 👍`,
           duration: 2000
