@@ -35,7 +35,6 @@ export class AuthenticationService {
   resetUserInformation() {
     this.user = undefined;
     this._isLoggedIn = false;
-    localStorage.setItem(JWTInterceptor.JWT_HEADER, undefined);
   }
 
   login(username: string, password: string, rmbme?: boolean): Observable<boolean> {
