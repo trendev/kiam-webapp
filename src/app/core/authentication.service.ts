@@ -61,7 +61,10 @@ export class AuthenticationService {
     return this.http.post<any>(`${this.api}/logout`,
       null,
       { observe: 'response' }).pipe(
-        map(() => true),
+        map(() => {
+          localStorage.clear(); // TODO : should be removed in future version using the local storage
+          return true;
+        }),
         catchError(e => observableThrowError(e))
       );
   }
