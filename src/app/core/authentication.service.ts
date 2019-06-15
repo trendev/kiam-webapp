@@ -9,8 +9,7 @@ import { environment } from '@env/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { NavigationExtras } from '@angular/router';
-
-
+import { JWTInterceptor } from '@app/http-interceptors/jwt-interceptor';
 
 @Injectable({
   providedIn: CoreModule
@@ -36,6 +35,7 @@ export class AuthenticationService {
   resetUserInformation() {
     this.user = undefined;
     this._isLoggedIn = false;
+    localStorage.setItem(JWTInterceptor.JWT_HEADER, undefined);
   }
 
   login(username: string, password: string, rmbme?: boolean): Observable<boolean> {

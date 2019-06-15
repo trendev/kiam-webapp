@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators';
 export class JWTInterceptor implements HttpInterceptor {
 
     // should be equivalent on the Backend side
-    private readonly JWT_HEADER = 'JWT';
+    public static readonly JWT_HEADER = 'JWT';
 
     constructor() { }
 
@@ -39,7 +39,7 @@ export class JWTInterceptor implements HttpInterceptor {
      * Load the JWT from the local storage
      */
     private loadJWT(): string {
-        return localStorage.getItem(this.JWT_HEADER);
+        return localStorage.getItem(JWTInterceptor.JWT_HEADER);
     }
 
     /**
@@ -47,7 +47,7 @@ export class JWTInterceptor implements HttpInterceptor {
      * @param jwt the JWT to save
      */
     private saveJWT(jwt: string) {
-        localStorage.setItem(this.JWT_HEADER, jwt);
+        localStorage.setItem(JWTInterceptor.JWT_HEADER, jwt);
     }
 
     private handle(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -55,7 +55,7 @@ export class JWTInterceptor implements HttpInterceptor {
             .pipe(
                 tap(event => {
                     if (event instanceof HttpResponse) {
-                        const jwt = event.headers.get(this.JWT_HEADER);
+                        const jwt = event.headers.get(JWTInterceptor.JWT_HEADER);
                         if (jwt) { // the Backend responses providing the security token
                             this.saveJWT(jwt);
                         }
