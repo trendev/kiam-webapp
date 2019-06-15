@@ -23,7 +23,7 @@ export class LoginCardComponent {
   hide = true;
 
   // remember me : flag used for long term connections
-  rmbme = false;
+  rmbme = true;
 
   username: string;
   password: string;
