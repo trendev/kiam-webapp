@@ -49,7 +49,6 @@ export class ErrorHandlerService {
 
       }
     }
-    // return Observable.throw(this.errmsg);
     return observableThrowError(err);
   }
 
