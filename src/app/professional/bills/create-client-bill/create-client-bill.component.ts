@@ -5,7 +5,7 @@ import { Offering, PaymentMode, Bill, ClientBill, Client, VatRates } from '@app/
 import { ClientBillService } from '@app/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({

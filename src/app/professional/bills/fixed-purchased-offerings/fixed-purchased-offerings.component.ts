@@ -1,7 +1,8 @@
 import { PurchasedOffering } from '@app/entities';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Utils } from '@app/shared';
 
 @Component({

@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, ViewChild, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator, PageEvent } from '@angular/material';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { BillModel, BillsUtils } from '@app/shared';
 import { tap } from 'rxjs/operators';
 

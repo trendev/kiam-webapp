@@ -5,7 +5,7 @@ import { Offering, PaymentMode, OfferingType, Bill, Payment, VatRates } from '@a
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import * as moment from 'moment';
-import { MatSlideToggleChange } from '@angular/material';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-create-bill',

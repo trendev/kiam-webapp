@@ -14,7 +14,8 @@ import {
 import { CollectiveGroupService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({

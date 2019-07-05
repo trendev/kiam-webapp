@@ -1,7 +1,7 @@
 import { comparePaymentModesFn } from '@app/shared';
 import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { PaymentMode } from '@app/entities';
-import { MatSelectionListChange } from '@angular/material';
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-payment-mode-selector',

@@ -1,7 +1,10 @@
 import { StripeInvoice } from './stripe-invoice.model';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { StripeSubscriptionService } from '@app/core';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { catchError, finalize } from 'rxjs/operators';

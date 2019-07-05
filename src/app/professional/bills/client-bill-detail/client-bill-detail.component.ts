@@ -4,7 +4,7 @@ import { ClientBillService } from '@app/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { PaymentMode, ClientBill, Bill, Client } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExportBillService } from '../export-bill.service';
 import { SuccessMessageComponent, BillsUtils } from '@app/shared';
 

@@ -17,7 +17,7 @@ import {
 import { ClientService } from '@app/core';
 import * as moment from 'moment';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({

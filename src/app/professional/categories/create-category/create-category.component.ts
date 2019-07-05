@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ErrorAggregatorDirective, CustomValidators, SuccessMessageComponent } from '@app/shared';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { Category } from '@app/entities';
 import { CategoryService } from '@app/core';

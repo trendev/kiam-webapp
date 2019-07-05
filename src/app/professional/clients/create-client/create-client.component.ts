@@ -12,7 +12,7 @@ import { ClientService } from '@app/core';
 import { Client, Category } from '@app/entities';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from '@app/error-handler.service';
 
 @Component({

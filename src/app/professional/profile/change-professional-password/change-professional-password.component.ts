@@ -1,6 +1,6 @@
 
 import {finalize} from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component } from '@angular/core';
 import { AuthenticationService } from '@app/core';
 

@@ -1,6 +1,7 @@
 import { Component, OnChanges, ViewChild, Input, ViewContainerRef, OnInit } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
-import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS, MatSlideToggleChange } from '@angular/material';
+import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { ErrorAggregatorDirective } from '@app/shared';
 import * as moment from 'moment';

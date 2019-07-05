@@ -1,5 +1,5 @@
 import { finalize } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { ProfessionalService, OfferingsModelService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';

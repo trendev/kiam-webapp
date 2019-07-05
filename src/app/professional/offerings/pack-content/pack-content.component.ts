@@ -2,7 +2,9 @@ import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
 import { Offering, Business } from '@app/entities';
 import { Utils } from '@app/shared';
-import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/material';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-pack-content',

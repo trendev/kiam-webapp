@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
 import { StripeSubscriptionService } from '@app/core';
 import { ErrorHandlerService } from '@app/error-handler.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessageComponent, SuccessMessageComponent } from '@app/shared';
 import { Router } from '@angular/router';
 

@@ -4,7 +4,7 @@ import { PaymentMode, CollectiveGroupBill, Bill } from '@app/entities';
 import { CollectiveGroupBillService } from '@app/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { SuccessMessageComponent } from '@app/shared';
 import { ExportBillService } from '../export-bill.service';

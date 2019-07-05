@@ -1,4 +1,4 @@
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Business, OfferingType, Service } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';

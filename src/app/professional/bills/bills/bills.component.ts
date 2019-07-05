@@ -3,7 +3,7 @@ import { finalize } from 'rxjs/operators';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { Component, OnInit } from '@angular/core';
 import { Bill, ClientBill, CollectiveGroupBill, IndividualBill, PaymentMode } from '@app/entities';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';

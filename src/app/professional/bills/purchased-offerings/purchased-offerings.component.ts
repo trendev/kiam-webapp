@@ -3,7 +3,9 @@ import { takeUntil } from 'rxjs/operators';
 import { Component, OnInit, Input, ViewChild, OnDestroy, EventEmitter, Output, ViewContainerRef } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
 import { Offering, PurchasedOffering, VatRates } from '@app/entities';
-import { MatTableDataSource, MatSort, MatCheckboxChange } from '@angular/material';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Utils, ErrorAggregatorDirective } from '@app/shared';
 import { Subject } from 'rxjs';
 

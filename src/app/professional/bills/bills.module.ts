@@ -1,4 +1,4 @@
-import { MatPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { SharedModule, CustomMatPaginatorIntlFr } from '@app/shared';
 import { NgModule } from '@angular/core';
 

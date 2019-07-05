@@ -2,7 +2,7 @@ import { CustomValidators } from './../custom-validators';
 import { ErrorAggregatorDirective } from './../error-aggregator.directive';
 import { Component, OnInit, ViewChild, Input, ViewContainerRef } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup } from '@angular/forms';
-import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
 @Component({

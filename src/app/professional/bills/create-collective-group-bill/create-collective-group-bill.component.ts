@@ -4,7 +4,7 @@ import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Offering, PaymentMode, Bill, CollectiveGroupBill, CollectiveGroup, VatRates } from '@app/entities';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CollectiveGroupBillService } from '@app/core';
 import { HttpErrorResponse } from '@angular/common/http';
 

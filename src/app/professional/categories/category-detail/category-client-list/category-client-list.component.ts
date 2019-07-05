@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Client } from '@app/entities';
-import { MatTableDataSource, MatSort, MatPaginator, MatCheckboxChange } from '@angular/material';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-category-client-list',

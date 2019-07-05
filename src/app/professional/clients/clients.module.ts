@@ -1,4 +1,4 @@
-import { MatPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { NgModule } from '@angular/core';
 
 import { ClientsRoutingModule } from './clients-routing.module';
