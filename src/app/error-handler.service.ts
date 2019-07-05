@@ -43,19 +43,10 @@ export class ErrorHandlerService {
               duration: 5000
             });
         } else {
-          if (err.status === 401 || err.status === 403) { // UNAUTHORIZED USER
-            this.snackBar.openFromComponent(ErrorMessageComponent,
-              {
-                data: `Accès NON Autorisé : Identification incorrecte/bloquée ou Session expirée`,
-                duration: 3000
-              });
-            this.router.navigate(['/login'], this.authenticationService.loginRequired);
-          } else {
-            this.snackBar.openFromComponent(UnexpectedErrorComponent, {
-              data: message || 'une erreur est survenue',
-              duration: 5000
-            });
-          }
+          this.snackBar.openFromComponent(UnexpectedErrorComponent, {
+            data: message || 'une erreur est survenue',
+            duration: 5000
+          });
         }
 
       }
