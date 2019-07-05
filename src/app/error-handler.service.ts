@@ -1,21 +1,17 @@
-import {throwError as observableThrowError,  Observable } from 'rxjs';
-import { AuthenticationService } from './core/authentication.service';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 import { UnexpectedErrorComponent } from './shared/snack-messages/unexpected-error/unexpected-error.component';
 import { ErrorMessageComponent } from './shared/snack-messages/error-message/error-message.component';
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorHandlerService {
 
   errmsg: string;
 
-  constructor(private authenticationService: AuthenticationService,
-    private router: Router,
-    private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) { }
 
   /**
    * Updates errmsg, logs it on the console and returns an ErrorObservable with the message
@@ -42,7 +38,9 @@ export class ErrorHandlerService {
               data: `Problèmes de connexion à Internet ou Application hors ligne pour le moment`,
               duration: 5000
             });
-        } else {
+        }
+
+        if (err.status !== 401 && err.status !== 403) { // UNAUTHORIZED ACCESS is managed in a dedicated interceptor
           this.snackBar.openFromComponent(UnexpectedErrorComponent, {
             data: message || 'une erreur est survenue',
             duration: 5000

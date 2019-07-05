@@ -20,18 +20,24 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {
+
         return next.handle(req).pipe(
             catchError(err => {
-                if (err.status === 401 || err.status === 403) {
-                    if (!req.url.endsWith('/api/Authentication/profile')) {
+                if (err.status === 401 || err.status === 403) { // UNAUTHORIZED ACCESS
+                    // control if the route is the root or the login page
+                    if (this.router.url !== '/' && this.router.url !== '/login') {
                         this.snackBar.openFromComponent(ErrorMessageComponent,
                             {
                                 data: `Accès NON Autorisé : Identification incorrecte/bloquée ou Session expirée`,
-                                duration: 3000
+                                duration: 5000
                             });
+                        // auto-redirect to login page
+                        // AND prevent testing if user is authenticated
+                        this.router.navigate(['/login'], this.authenticationService.loginRequired);
                     }
-                    this.router.navigate(['/login'], this.authenticationService.loginRequired);
                 }
+                // all errors are propagated and should be caught in error handler
+                // even 401/403 HTTP errors which will be ignored in error handler
                 return throwError(err);
             })
         );
