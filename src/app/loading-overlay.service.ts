@@ -32,15 +32,20 @@ export class LoadingOverlayService {
     }
   }
 
+  // prevent handling the loading overlay if the URL is the login page
   checkRouterEvent(routerEvent: Event): void {
     if (routerEvent instanceof NavigationStart) {
-      this.start();
+      if (!routerEvent.url.startsWith('/login')) {
+        this.start();
+      }
     }
 
     if (routerEvent instanceof NavigationEnd ||
       routerEvent instanceof NavigationCancel ||
       routerEvent instanceof NavigationError) {
-      this.stop();
+      if (!routerEvent.url.startsWith('/login')) {
+        this.stop();
+      }
     }
   }
 
