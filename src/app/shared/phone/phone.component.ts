@@ -44,7 +44,7 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   private _required = false;
   private _placeholder: string;
 
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('input', { static: true }) input: ElementRef;
   @HostBinding() id = `${this.controlType}-${PhoneComponent.nextId++}`;
   @HostBinding('attr.aria-describedby') describedBy = '';
 

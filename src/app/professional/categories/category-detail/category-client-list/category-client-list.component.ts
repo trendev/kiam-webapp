@@ -17,8 +17,8 @@ export class CategoryClientListComponent implements OnInit, OnChanges, AfterView
     'checked', 'lastname', 'firstname'];
   datasource: MatTableDataSource<ClientModel> = new MatTableDataSource<ClientModel>();
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   @Output() add = new EventEmitter<number>();
   @Output() remove = new EventEmitter<number>();

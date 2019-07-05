@@ -16,7 +16,7 @@ export class ParentPacksComponent implements OnChanges {
     'id', 'name', 'price'];
   datasource: MatTableDataSource<OfferingModel>;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private router: Router,
     private route: ActivatedRoute) { }

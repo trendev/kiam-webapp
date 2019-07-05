@@ -28,7 +28,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @Output() newSource = new EventEmitter<any>();
 
-  @ViewChild('cardInfo') private cardInfo: ElementRef;
+  @ViewChild('cardInfo', { static: true }) private cardInfo: ElementRef;
 
   private card: any;
   private cardHandler: ({ error }) => void;

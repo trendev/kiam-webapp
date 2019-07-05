@@ -35,8 +35,8 @@ export const REGISTRATION_DATE_FORMATS = {
 export class AccountInfoComponent implements OnInit {
 
   form: FormGroup;
-  @ViewChild('errorsTemplate') errorsTemplate;
-  @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
+  @ViewChild('errorsTemplate', { static: true }) errorsTemplate;
+  @ViewChild('errorContainer', { read: ViewContainerRef, static: true }) errorContainer;
   @Input() errorAggregator: ErrorAggregatorDirective;
 
   constructor(private parent: FormGroupDirective) {

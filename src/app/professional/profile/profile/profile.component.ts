@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
     Validators.maxLength(200)
   ];
 
-  @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
+  @ViewChild(ErrorAggregatorDirective, { static: true }) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private authenticationService: AuthenticationService,
     private professionalService: ProfessionalService,

@@ -31,7 +31,7 @@ export class ProfessionalToolbarComponent {
         });
         this.router.navigate(['/login'], this.authenticationService.loginRequired);
       }))
-      .subscribe(); // TODO : handle success and failure
+      .subscribe();
   }
 
 }

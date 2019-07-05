@@ -24,8 +24,8 @@ import { Moment } from 'moment';
 })
 export class InformationComponent implements OnChanges, OnInit {
   form: FormGroup;
-  @ViewChild('errorsTemplate') errorsTemplate;
-  @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
+  @ViewChild('errorsTemplate', { static: true }) errorsTemplate;
+  @ViewChild('errorContainer', { read: ViewContainerRef, static: true }) errorContainer;
   @Input() errorAggregator: ErrorAggregatorDirective;
   @Input() billsRefDate: number;
 

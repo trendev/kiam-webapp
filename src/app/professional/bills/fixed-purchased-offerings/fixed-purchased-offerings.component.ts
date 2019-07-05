@@ -24,7 +24,7 @@ export class FixedPurchasedOfferingsComponent implements OnInit {
   purchasedOfferingsModel: PurchasedOfferingModel[];
   datasource: MatTableDataSource<PurchasedOfferingModel>;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   pomSortFn = (pom1, pom2) => pom1.name.localeCompare(pom2.name);
 

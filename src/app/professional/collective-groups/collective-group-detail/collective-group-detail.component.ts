@@ -29,7 +29,7 @@ export class CollectiveGroupDetailComponent implements OnInit {
 
   form: FormGroup;
 
-  @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
+  @ViewChild(ErrorAggregatorDirective, { static: true }) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private fb: FormBuilder,
     private collectiveGroupService: CollectiveGroupService,

@@ -22,7 +22,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   displayedColumns = ['id', 'name'];
   datasource: MatTableDataSource<CategoryModel>;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private professionalService: ProfessionalService,
     private router: Router,

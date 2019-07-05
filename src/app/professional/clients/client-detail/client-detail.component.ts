@@ -39,7 +39,7 @@ export class ClientDetailComponent implements OnInit {
     Validators.maxLength(200)
   ];
 
-  @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
+  @ViewChild(ErrorAggregatorDirective, { static: true }) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private fb: FormBuilder,
     private clientService: ClientService,

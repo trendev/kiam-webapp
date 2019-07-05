@@ -34,9 +34,9 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
 
   datasource: MatTableDataSource<PurchasedOfferingModel>;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('errorsTemplate') errorsTemplate;
-  @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('errorsTemplate', { static: true }) errorsTemplate;
+  @ViewChild('errorContainer', { read: ViewContainerRef, static: true }) errorContainer;
   @Input() errorAggregator: ErrorAggregatorDirective;
 
   @Output() total = new EventEmitter<number>();

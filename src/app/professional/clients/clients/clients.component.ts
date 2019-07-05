@@ -32,7 +32,7 @@ export class ClientsComponent implements OnInit, AfterViewInit {
     { columnDef: 'email', headerCellDef: 'Email', cellDef: (client: ClientModel) => client.email, hide: true },
   ];
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private professionalService: ProfessionalService,
     private router: Router,

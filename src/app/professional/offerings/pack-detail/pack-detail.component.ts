@@ -31,7 +31,7 @@ export class PackDetailComponent {
 
   readonly ot = OfferingType.PACK;
 
-  @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
+  @ViewChild(ErrorAggregatorDirective, { static: true }) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private fb: FormBuilder,
     private packService: PackService,

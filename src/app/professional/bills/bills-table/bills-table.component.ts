@@ -15,8 +15,8 @@ export class BillsTableComponent implements AfterViewInit, OnChanges {
   datasource: MatTableDataSource<BillModel> = new MatTableDataSource<BillModel>();
   displayedColumns = [
     'deliveryDate', 'reference', 'name', 'amount', 'payment-status'];
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   @Output() gotobill = new EventEmitter<string>();
 

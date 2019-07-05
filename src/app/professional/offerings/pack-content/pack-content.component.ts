@@ -25,7 +25,7 @@ export class PackContentComponent implements OnChanges {
     'checked', 'id', 'name', 'price', 'duration', 'businesses'];
   datasource: MatTableDataSource<OfferingModel>;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   omSortFn: (om1: OfferingModel, om2: OfferingModel) => number
     = (om1, om2) => {

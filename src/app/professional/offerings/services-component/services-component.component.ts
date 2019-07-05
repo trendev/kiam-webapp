@@ -18,7 +18,7 @@ export class ServicesComponentComponent implements OnChanges {
     'id', 'name', 'shortname', 'price', 'duration', 'businesses'];
   datasource: MatTableDataSource<OfferingModel>;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private router: Router,
     private route: ActivatedRoute) { }

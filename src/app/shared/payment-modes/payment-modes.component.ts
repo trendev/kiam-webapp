@@ -16,8 +16,8 @@ import { ControlContainer, FormGroupDirective, FormGroup, FormArray } from '@ang
 export class PaymentModesComponent implements OnInit {
 
   form: FormGroup;
-  @ViewChild('errorsTemplate') errorsTemplate;
-  @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
+  @ViewChild('errorsTemplate', { static: true }) errorsTemplate;
+  @ViewChild('errorContainer', { read: ViewContainerRef, static: true }) errorContainer;
   @Input() errorAggregator: ErrorAggregatorDirective;
   constructor(private parent: FormGroupDirective) { }
 

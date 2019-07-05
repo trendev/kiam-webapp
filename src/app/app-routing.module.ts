@@ -20,15 +20,15 @@ export const routes: Routes = [
     },
     {
         path: 'professional',
-        loadChildren: 'app/professional/professional.module#ProfessionalModule'
+        loadChildren: () => import('app/professional/professional.module').then(m => m.ProfessionalModule)
     },
     {
         path: 'individual',
-        loadChildren: 'app/individual/individual.module#IndividualModule'
+        loadChildren: () => import('app/individual/individual.module').then(m => m.IndividualModule)
     },
     {
         path: 'administrator',
-        loadChildren: 'app/administrator/administrator.module#AdministratorModule'
+        loadChildren: () => import('app/administrator/administrator.module').then(m => m.AdministratorModule)
     },
     { path: '**', component: PageNotFoundComponent }
 ];

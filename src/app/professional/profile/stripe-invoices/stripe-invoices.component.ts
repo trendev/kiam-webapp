@@ -20,8 +20,8 @@ export class StripeInvoicesComponent implements AfterViewInit, OnInit {
   datasource: MatTableDataSource<StripeInvoice> = new MatTableDataSource<StripeInvoice>();
   displayedColumns = [
     'date', 'invoice_number', 'amount_due', 'paid', 'id'];
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private route: ActivatedRoute,
     private stripeSubscriptionService: StripeSubscriptionService,

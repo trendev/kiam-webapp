@@ -13,35 +13,35 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: 'app/professional/dashboard/dashboard.module#DashboardModule'
+        loadChildren: () => import('app/professional/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'clients',
-        loadChildren: 'app/professional/clients/clients.module#ClientsModule'
+        loadChildren: () => import('app/professional/clients/clients.module').then(m => m.ClientsModule)
       },
       {
         path: 'bills',
-        loadChildren: 'app/professional/bills/bills.module#BillsModule'
+        loadChildren: () => import('app/professional/bills/bills.module').then(m => m.BillsModule)
       },
       {
         path: 'expenses',
-        loadChildren: 'app/professional/expenses/expenses.module#ExpensesModule'
+        loadChildren: () => import('app/professional/expenses/expenses.module').then(m => m.ExpensesModule)
       },
       {
         path: 'categories',
-        loadChildren: 'app/professional/categories/categories.module#CategoriesModule'
+        loadChildren: () => import('app/professional/categories/categories.module').then(m => m.CategoriesModule)
       },
       {
         path: 'collective-groups',
-        loadChildren: 'app/professional/collective-groups/collective-groups.module#CollectiveGroupsModule'
+        loadChildren: () => import('app/professional/collective-groups/collective-groups.module').then(m => m.CollectiveGroupsModule)
       },
       {
         path: 'profile',
-        loadChildren: 'app/professional/profile/profile.module#ProfileModule'
+        loadChildren: () => import('app/professional/profile/profile.module').then(m => m.ProfileModule)
       },
       {
         path: 'offerings',
-        loadChildren: 'app/professional/offerings/offerings.module#OfferingsModule'
+        loadChildren: () => import('app/professional/offerings/offerings.module').then(m => m.OfferingsModule)
       },
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }

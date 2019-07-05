@@ -21,7 +21,7 @@ export class CreateServiceComponent {
 
   readonly ot = OfferingType.SERVICE;
 
-  @ViewChild(ErrorAggregatorDirective) errorAggregator: ErrorAggregatorDirective;
+  @ViewChild(ErrorAggregatorDirective, { static: true }) errorAggregator: ErrorAggregatorDirective;
 
   constructor(private fb: FormBuilder,
     private serviceService: ServiceService,

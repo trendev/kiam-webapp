@@ -17,7 +17,7 @@ import { Payment, PaymentMode } from '@app/entities';
 })
 export class PaymentsComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  @ViewChild('errorsTemplate') errorsTemplate;
+  @ViewChild('errorsTemplate', {static: true}) errorsTemplate;
   @Input() errorAggregator: ErrorAggregatorDirective;
 
   @Input() amount: number;
