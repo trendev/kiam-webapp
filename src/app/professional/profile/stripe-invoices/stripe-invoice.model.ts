@@ -15,7 +15,7 @@ export class StripeInvoice {
         return new StripeInvoice({
             id: invoice.id,
             amount_due: invoice.amount_due,
-            date: new Date(invoice.date * 1000), // converts epoch time to ms
+            date: new Date(invoice.created * 1000), // converts epoch time to ms
             invoice_pdf: invoice.invoice_pdf,
             invoice_number: invoice.number,
             paid: invoice.paid
