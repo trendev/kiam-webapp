@@ -28,11 +28,11 @@ export class StripeCustomer {
                     id: s.id,
                     status: s.status,
                     type: s.type,
-                    brand: s.type_data.brand,
-                    exp_month: s.type_data.exp_month,
-                    exp_year: s.type_data.exp_year,
-                    last4: s.type_data.last4,
-                    three_d_secure: s.type_data.three_d_secure,
+                    brand: s[s.type].brand,
+                    exp_month: s[s.type].exp_month,
+                    exp_year: s[s.type].exp_year,
+                    last4: s[s.type].last4,
+                    three_d_secure: s[s.type].three_d_secure,
                     is_default: s.id === inputCust.default_source
                 }
                 )
