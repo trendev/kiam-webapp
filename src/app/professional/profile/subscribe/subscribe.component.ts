@@ -17,7 +17,7 @@ export class SubscribeComponent implements OnInit {
 
   appName = environment.title;
 
-  // default subscription amount (18 euros all taxes included)
+  // basic subscription amount (6 euros - all taxes included)
   defaultAmount = 600;
 
   constructor(private loadingOverlayService: LoadingOverlayService,
