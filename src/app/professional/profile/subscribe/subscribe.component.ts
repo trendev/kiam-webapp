@@ -41,7 +41,7 @@ export class SubscribeComponent implements OnInit {
         this.stripeSubscriptionService.subscription(_source)
           .pipe(
             filter(subscription => !!subscription),
-            finalize(() => this.loadingOverlayService.stop()),
+            finalize(() => this.loadingOverlayService.stop()), // TODO : stripe.handleCardPayment may take several seconds to complete
             catchError(e => this.errorHandlerService.handle(e, `Une erreur est survenue durant la création de l'abonnement`))
           )
           .subscribe(subscription => {
