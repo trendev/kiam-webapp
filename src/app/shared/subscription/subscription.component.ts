@@ -8,7 +8,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 export class SubscriptionComponent implements OnInit {
 
   @Input() amount: number;
-  @Output() newSource = new EventEmitter<any>();
+  @Output() newToken = new EventEmitter<any>();
 
   displayCardInfo = false;
 
@@ -17,9 +17,9 @@ export class SubscriptionComponent implements OnInit {
   ngOnInit() {
   }
 
-  handleNewSource(source: any) {
+  handleNewToken(source: any) {
     this.displayCardInfo = false;
-    this.newSource.emit(source);
+    this.newToken.emit(source);
   }
 
 }

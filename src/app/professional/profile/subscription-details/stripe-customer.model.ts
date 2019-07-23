@@ -24,15 +24,15 @@ export class StripeCustomer {
             default_source: inputCust.default_source,
             subscription: StripeSubscription.build(inputSub),
             sources: inputCust.sources.data.map(s =>
-                new StripeSource({
+                new StripeSource({ // TODO : should be refactored if Source is removed
                     id: s.id,
                     status: s.status,
-                    type: s.type,
-                    brand: s[s.type].brand,
-                    exp_month: s[s.type].exp_month,
-                    exp_year: s[s.type].exp_year,
-                    last4: s[s.type].last4,
-                    three_d_secure: s[s.type].three_d_secure,
+                    type: 'card',
+                    brand: s.brand,
+                    exp_month: s.exp_month,
+                    exp_year: s.exp_year,
+                    last4: s.last4,
+                    three_d_secure: 'not_supported', // s[s.type].three_d_secure,
                     is_default: s.id === inputCust.default_source
                 }
                 )

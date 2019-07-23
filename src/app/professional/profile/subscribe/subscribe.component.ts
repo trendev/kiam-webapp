@@ -30,42 +30,47 @@ export class SubscribeComponent implements OnInit {
   }
 
   /**
-   * Handles the new Stripe Source creation
-   * @param _source A Stripe Source
+   * Handles the new Stripe Token creation
+   * @param token A Stripe Token
    */
-  // TODO : Add 3D secure authentication flow
-  handleNewSource(_source) {
-    if (_source.card.three_d_secure !== 'required') { // TODO : control based on subscription() response
-      if (_source.status === 'chargeable') {
-        this.loadingOverlayService.start();
-        this.stripeSubscriptionService.subscription(_source)
-          .pipe(
-            filter(subscription => !!subscription),
-            finalize(() => this.loadingOverlayService.stop()), // TODO : stripe.handleCardPayment may take several seconds to complete
-            catchError(e => this.errorHandlerService.handle(e, `Une erreur est survenue durant la création de l'abonnement`))
-          )
-          .subscribe(subscription => {
-            // TODO : control subscription.status
-            // https://stripe.com/docs/billing/migration/strong-customer-authentication#scenario-1
+  handleNewToken(token: any) {
+    console.log(token);
+    if (token.type === 'card') {
+      this.loadingOverlayService.start();
+      this.stripeSubscriptionService.subscription(token)
+        .pipe(
+          filter(subscription => !!subscription),
+          catchError(e => this.errorHandlerService.handle(e, `Une erreur est survenue durant la création de l'abonnement 🤔`))
+        )
+        .subscribe(subscription => {
+          this.loadingOverlayService.stop();
+          console.log(subscription);
+          if (subscription
+            && subscription.status === 'active'
+            && subscription.latest_invoice
+            && subscription.latest_invoice.payment_intent
+            && subscription.latest_invoice.payment_intent.status === 'succeeded') {
             this.snackBar.openFromComponent(SuccessMessageComponent,
               {
                 data: `Félicitations, la souscription ${subscription.id} est effective 🤗`,
-                duration: 3000
+                duration: 2000
               });
             this.router.navigate(['/professional/profile']);
-          });
-      } else {
-        this.snackBar.openFromComponent(ErrorMessageComponent,
-          {
-            data: `Echec de la souscription: la carte ne peut être débitée 🤔`,
-            duration: 3000
-          });
-      }
+          } else {
+            // TODO : handle 3D Secure here
+            this.snackBar.openFromComponent(ErrorMessageComponent,
+              {
+                data: `Echec de la souscription: la carte ne peut être débitée 🤔`,
+                duration: 3000
+              });
+          }
 
-    } else { // TODO : should be removed when 3D Secure will be supported
+        });
+
+    } else {
       this.snackBar.openFromComponent(ErrorMessageComponent,
         {
-          data: `Echec de la souscription: carte 3D Secure non supportée actuellement 😓`,
+          data: `Echec de la souscription: ne supportons que les carte de crédit 3D Secure😓`,
           duration: 3000
         });
     }
