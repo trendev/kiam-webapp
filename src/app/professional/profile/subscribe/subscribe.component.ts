@@ -1,4 +1,4 @@
-import { catchError, filter, take, finalize } from 'rxjs/operators';
+import { catchError, filter, take, finalize, tap } from 'rxjs/operators';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '@env/environment';
@@ -7,7 +7,7 @@ import { ErrorHandlerService } from '@app/error-handler.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessageComponent, SuccessMessageComponent } from '@app/shared';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
+import { from, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-subscribe',
@@ -17,6 +17,9 @@ import { from } from 'rxjs';
 export class SubscribeComponent implements OnInit {
 
   appName = environment.title;
+
+  private control = new Subject<string>();
+  private paymentControllers: ((subscription: any) => void)[] = [];
 
   // basic subscription amount (6 euros - all taxes included)
   defaultAmount = 600;
@@ -28,6 +31,14 @@ export class SubscribeComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.paymentControllers.push((s) => this.controlPaymentSuccess(s));
+    this.paymentControllers.push((s) => this.controlPaymentRequiredCustomerAction(s));
+    this.paymentControllers.push((s) => this.controlPaymentFailure(s));
+
+    this.control.pipe(
+      take(1),
+      tap(m => console.log(m))
+    ).subscribe(m => this.router.navigate(['/professional/profile']));
   }
 
   /**
@@ -47,18 +58,20 @@ export class SubscribeComponent implements OnInit {
         )
         .subscribe(subscription => {
           this.loadingOverlayService.stop();
-          this.controlPaymentSuccess(subscription);
-          this.controlPaymentRequiredCustomerAction(subscription);
-          this.controlPaymentFailure(subscription);
+          this.controlPayment(subscription);
         });
 
     } else {
       this.snackBar.openFromComponent(ErrorMessageComponent,
         {
-          data: `Echec de la souscription: nous ne supportons que les cartes de paiement 3D Secure 😓`,
+          data: `Echec de la souscription: nous ne supportons qu les cartes de paiement 3D Secure 😓`,
           duration: 3000
         });
     }
+  }
+
+  private controlPayment(subscription: any) {
+    this.paymentControllers.forEach(controller => controller(subscription));
   }
 
   private controlPaymentSuccess(subscription: any) {
@@ -72,7 +85,7 @@ export class SubscribeComponent implements OnInit {
           data: `Félicitations, la souscription ${subscription.id} est effective 🤗`,
           duration: 3000
         });
-      this.router.navigate(['/professional/profile']);
+      this.control.next('controlPaymentSuccess');
     }
   }
 
@@ -88,7 +101,7 @@ export class SubscribeComponent implements OnInit {
           Merci de renseigner un nouveau moyen de paiement.`,
           duration: 3000
         });
-      this.router.navigate(['/professional/profile']);
+      this.control.next('controlPaymentFailure');
     }
   }
 
@@ -112,7 +125,7 @@ export class SubscribeComponent implements OnInit {
       from(stripe.handleCardPayment(paymentIntentSecret))
         .pipe(
           take(1),
-          finalize(() => this.router.navigate(['/professional/profile'])),
+          finalize(() => this.control.next('controlPaymentRequiredCustomerAction')),
           catchError(e => {
             this.loadingOverlayService.stop();
             return this.errorHandlerService.handle(e, `Une erreur est survenue lors de la validation de la carte 🤔`);
@@ -133,8 +146,6 @@ export class SubscribeComponent implements OnInit {
               });
           }
         });
-
     }
-
   }
 }
