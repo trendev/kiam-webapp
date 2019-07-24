@@ -78,7 +78,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
           return this.errorHandler.handle(e, e.message);
         })
       )
-      .subscribe(({ token: token, error }) => {
+      .subscribe(({ token, error }) => {
         this.loadingOverlayService.stop();
         if (!!token && !error) { this.newToken.emit(token); }
         if (!!error) { this.cardHandler({ error }); }
