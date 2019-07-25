@@ -16,7 +16,7 @@ export class StripePaymentMethodResolver implements Resolve<any> {
     return this.stripePaymentMethodService.getPaymentMethods().pipe(
       tap(c => console.log(c)),
       catchError(e => {
-        this.errorHandler.handle(e, `Impossible de récupérer le détail de la souscription...`);
+        this.errorHandler.handle(e, `Impossible de récupérer tes moyens de paiement...`);
         return of(null);
       })
     );
