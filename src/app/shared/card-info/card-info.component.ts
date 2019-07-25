@@ -26,7 +26,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @Input() amount: number;
 
-  @Output() newToken = new EventEmitter<any>();
+  @Output() newStripePaymentMethod = new EventEmitter<any>();
 
   @ViewChild('cardInfo', { static: true }) private cardInfo: ElementRef;
 
@@ -86,8 +86,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
       .subscribe(({ paymentMethod, error }) => {
         this.loadingOverlayService.stop();
         if (!!paymentMethod && !error) {
-          console.log(paymentMethod);
-          this.newToken.emit(paymentMethod);
+          this.newStripePaymentMethod.emit(paymentMethod);
         }
         if (!!error) { this.cardHandler({ error }); }
       });

@@ -42,13 +42,13 @@ export class SubscribeComponent implements OnInit {
   }
 
   /**
-   * Handles the new Stripe Token creation
-   * @param token A Stripe Token
+   * Handles the new Stripe PaymentMethod creation
+   * @param newStripePaymentMethod A Stripe Payment Method
    */
-  handleNewToken(token: any) {
-    if (token.type === 'card') {
+  handleNewStripePaymentMethod(newStripePaymentMethod: any) {
+    if (newStripePaymentMethod.type === 'card') {
       this.loadingOverlayService.start();
-      this.stripeSubscriptionService.subscription(token)
+      this.stripeSubscriptionService.subscription(newStripePaymentMethod)
         .pipe(
           filter(subscription => !!subscription),
           catchError(e => {
