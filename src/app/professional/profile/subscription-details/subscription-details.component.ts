@@ -118,10 +118,9 @@ export class SubscriptionDetailsComponent {
     return !!this.customer.subscription.canceled_at;
   }
 
-  private manageRescission(fn: (s: any) => Observable<any>, msg: string) {
+  private manageRescission(fn: () => Observable<any>, msg: string) {
     this.loadingOverlayService.start();
-    fn.apply(this.stripeSubscriptionService)
-      .pipe(
+    fn().pipe(
         filter(s => !!s),
         map(s => StripeSubscription.build(s)),
         finalize(() => this.loadingOverlayService.stop()),
@@ -146,7 +145,7 @@ export class SubscriptionDetailsComponent {
       .subscribe(result => {
         if (!!result) { // result = empty string if user click OK / undefined otherwise
           this.manageRescission(
-            this.stripeSubscriptionService.rescind,
+            () => this.stripeSubscriptionService.rescind(),
             `Et voilà, l'abonnement est maintenant suspendu 😢`
           );
         }
@@ -155,7 +154,7 @@ export class SubscriptionDetailsComponent {
 
   reactivate() {
     this.manageRescission(
-      this.stripeSubscriptionService.reactivate,
+      () => this.stripeSubscriptionService.reactivate(),
       `L'abonnement est réactivé 👏 😇`
     );
   }
