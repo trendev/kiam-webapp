@@ -32,7 +32,8 @@ export class SubscriptionDetailsComponent {
     public dialog: MatDialog) {
     this.route.data.subscribe(
       (data: {
-        stripeCustomer: any
+        stripeCustomer: any,
+        stripePaymentMethods: any // TODO : use them
       }) => {
         const inputCust = data.stripeCustomer;
         this.customer = StripeCustomer.build(inputCust);
