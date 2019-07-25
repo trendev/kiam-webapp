@@ -27,3 +27,4 @@ export * from './offerings-model.service';
 export * from './stripe-subscription.service';
 export * from './professional-profile-resolver.service';
 export * from './stripe-setup-intent.service';
+export * from './stripe-payment-method.service';
