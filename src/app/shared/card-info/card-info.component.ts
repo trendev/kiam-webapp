@@ -62,28 +62,34 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
 
     this.loadingOverlayService.start();
 
-    from(stripe.createToken(this.card,
+    from(stripe.createPaymentMethod('card', this.card,
       {
-        currency: 'EUR',
-        address_city: pro.address.city,
-        address_country: pro.address.country,
-        address_line1: pro.address.street,
-        address_zip: pro.address.postalCode,
-        email: pro.email,
-        name: (`${pro.customerDetails.firstName} ${pro.customerDetails.lastName}`).trim(),
-      })).pipe(
-        take(1),
-        catchError(e => {
-          this.loadingOverlayService.stop();
-          return this.errorHandler.handle(e, e.message);
-        })
-      )
-      .subscribe(({ token, error }) => {
+        billing_details: {
+          address: {
+            city: pro.address.city,
+            country: pro.address.country ? pro.address.country.toLocaleUpperCase().substring(0, 2) : 'FR',
+            line1: pro.address.street,
+            line2: pro.address.optional,
+            postal_code: pro.address.postalCode,
+          },
+          email: pro.email,
+          name: (`${pro.customerDetails.firstName} ${pro.customerDetails.lastName}`).trim(),
+        },
+      }
+    )).pipe(
+      take(1),
+      catchError(e => {
         this.loadingOverlayService.stop();
-        if (!!token && !error) { this.newToken.emit(token); }
+        return this.errorHandler.handle(e, e.message);
+      })
+    )
+      .subscribe(({ paymentMethod, error }) => {
+        this.loadingOverlayService.stop();
+        if (!!paymentMethod && !error) {
+          console.log(paymentMethod);
+          this.newToken.emit(paymentMethod);
+        }
         if (!!error) { this.cardHandler({ error }); }
       });
-
   }
-
 }
