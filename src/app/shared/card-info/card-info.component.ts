@@ -74,6 +74,7 @@ export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
           },
           email: pro.email,
           name: (`${pro.customerDetails.firstName} ${pro.customerDetails.lastName}`).trim(),
+          phone: pro.customerDetails.phone
         },
       }
     )).pipe(
