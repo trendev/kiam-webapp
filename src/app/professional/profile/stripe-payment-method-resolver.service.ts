@@ -1,7 +1,7 @@
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { StripePaymentMethodService } from '@app/core';
 
@@ -14,7 +14,6 @@ export class StripePaymentMethodResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any | Observable<any> | Promise<any> {
 
     return this.stripePaymentMethodService.getPaymentMethods().pipe(
-      tap(c => console.log(c)),
       catchError(e => {
         this.errorHandler.handle(e, `Impossible de récupérer tes moyens de paiement...`);
         return of(null);
