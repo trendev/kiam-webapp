@@ -39,7 +39,7 @@ export class StripeSubscription {
             current_period_start: inputSub.current_period_start,
             nickname: inputSub.plan.nickname,
             amount: inputSub.plan.amount,
-            tax_percent: inputSub.tax_percent,
+            tax_percent: inputSub.default_tax_rates[0].percentage,
             discount_applied: !!inputSub.discount,
             discount_percent_off: inputSub.discount ? inputSub.discount.coupon.percent_off : undefined
         });
