@@ -20,4 +20,25 @@ export class StripePaymentMethodService {
         catchError(e => throwError(e))
       );
   }
+
+  add(payload: any): Observable<any> {
+    return this.http.put<any>(`${this.api}/add`, payload)
+      .pipe(
+        catchError(e => throwError(e))
+      );
+  }
+
+  default(id: string): Observable<any> {
+    return this.http.put<any>(`${this.api}/default/${id}`, null)
+      .pipe(
+        catchError(e => throwError(e))
+      );
+  }
+
+  detach(id: string): Observable<any> {
+    return this.http.put<any>(`${this.api}/detach/${id}`, null)
+      .pipe(
+        catchError(e => throwError(e))
+      );
+  }
 }

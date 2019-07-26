@@ -28,27 +28,6 @@ export class StripeSubscriptionService {
       );
   }
 
-  addSource(source: any): Observable<any> {
-    return this.http.put<any>(`${this.api}/add-source`, source)
-      .pipe(
-        catchError(e => throwError(e))
-      );
-  }
-
-  defaultSource(id: string): Observable<any> {
-    return this.http.put<any>(`${this.api}/default_source/${id}`, null)
-      .pipe(
-        catchError(e => throwError(e))
-      );
-  }
-
-  detachSource(id: string): Observable<any> {
-    return this.http.put<any>(`${this.api}/detach/${id}`, null)
-      .pipe(
-        catchError(e => throwError(e))
-      );
-  }
-
   invoices(): Observable<any> {
     return this.http.get<any>(`${this.api}/invoices`)
       .pipe(
