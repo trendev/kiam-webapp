@@ -5,7 +5,7 @@ export class StripePaymentMethod {
     public exp_month: string;
     public exp_year: string;
     public last4: string;
-    public three_d_secure: string;
+    public three_d_secure: boolean;
     public is_default: boolean;
 
     constructor(values: Object = {}) {

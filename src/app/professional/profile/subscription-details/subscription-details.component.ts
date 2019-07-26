@@ -1,7 +1,5 @@
-import {
-  RescissionConfirmationDialogComponent
-} from './rescission-confirmation-dialog/rescission-confirmation-dialog.component';
-import { StripeSource } from './stripe-source.model';
+import { RescissionConfirmationDialogComponent } from './rescission-confirmation-dialog/rescission-confirmation-dialog.component';
+import { StripePaymentMethod } from './stripe-payment-method.model';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StripeCustomer } from './stripe-customer.model';
@@ -23,6 +21,7 @@ import { Observable } from 'rxjs';
 export class SubscriptionDetailsComponent {
 
   customer: StripeCustomer;
+  paymentMethods: StripePaymentMethod[];
 
   constructor(private loadingOverlayService: LoadingOverlayService,
     private errorHandlerService: ErrorHandlerService,
@@ -33,16 +32,26 @@ export class SubscriptionDetailsComponent {
     this.route.data.subscribe(
       (data: {
         stripeCustomer: any,
-        stripePaymentMethods: any // TODO : use them
+        stripePaymentMethods: any
       }) => {
         const inputCust = data.stripeCustomer;
         this.customer = StripeCustomer.build(inputCust);
+        this.paymentMethods = data.stripePaymentMethods.data.map(pm => new StripePaymentMethod({
+          id: pm.id,
+          type: pm.type,
+          brand: pm[pm.type].brand,
+          exp_month: pm[pm.type].exp_month,
+          exp_year: pm[pm.type].exp_year,
+          last4: pm[pm.type].last4,
+          three_d_secure: pm[pm.type].three_d_secure_usage.supported,
+          is_default: this.customer.default_payment_method === pm.id
+        }));
       }
     );
   }
 
-  get sources(): StripeSource[] {
-    return this.customer.sources.sort(
+  get sources(): StripePaymentMethod[] {
+    return this.paymentMethods.sort(
       (s1, s2) => {
         // compares the expiration date
         // exp_year and exp_month are string and converted to number
@@ -122,11 +131,11 @@ export class SubscriptionDetailsComponent {
   private manageRescission(fn: () => Observable<any>, msg: string) {
     this.loadingOverlayService.start();
     fn().pipe(
-        filter(s => !!s),
-        map(s => StripeSubscription.build(s)),
-        finalize(() => this.loadingOverlayService.stop()),
-        catchError(e => this.errorHandlerService.handle(e))
-      )
+      filter(s => !!s),
+      map(s => StripeSubscription.build(s)),
+      finalize(() => this.loadingOverlayService.stop()),
+      catchError(e => this.errorHandlerService.handle(e))
+    )
       .subscribe(s => {
         this.snackBar.openFromComponent(SuccessMessageComponent,
           {

@@ -9,13 +9,13 @@
 
     <div class="three-d-secure">
       <span class="three-d-secure-label">3D Secure</span>
-      <mat-icon *ngIf="source.three_d_secure !== 'not_supported'; else three_d_not_supported" color="primary">done_all</mat-icon>
-      <ng-template #three_d_not_supported>
+      <mat-icon *ngIf="source.three_d_secure === false; else three_d_secure_not_supported" color="primary">done_all</mat-icon>
+      <ng-template #three_d_secure_not_supported>
         <mat-icon color="warn">close</mat-icon>
       </ng-template>
     </div>
 
-    <p class="source-id">Identifiant: {{source.id}}</p>
+    <p class="source-id">ID: {{source.id}}</p>
   </div>
 
   <div class="action-container">

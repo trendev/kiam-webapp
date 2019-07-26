@@ -1,13 +1,11 @@
-import { StripeSource } from './stripe-source.model';
 import { StripeSubscription } from './stripe-subscription.model';
 
 export class StripeCustomer {
 
     public id: string;
     public created: number;
-    public default_source: string;
+    public default_payment_method: string;
     public subscription: StripeSubscription;
-    public sources: StripeSource[];
 
     constructor(values: Object = {}) {
         Object.assign(this, values);
@@ -21,24 +19,9 @@ export class StripeCustomer {
         return new StripeCustomer({
             id: inputCust.id,
             created: inputCust.created,
-            default_source: inputCust.default_source,
+            default_payment_method: inputCust.invoice_settings.default_payment_method,
             subscription: StripeSubscription.build(inputSub),
-            sources: inputCust.sources.data.map(s =>
-                new StripeSource({ // TODO : should be refactored if Source is removed
-                    id: s.id,
-                    status: s.status,
-                    type: 'card',
-                    brand: s.brand,
-                    exp_month: s.exp_month,
-                    exp_year: s.exp_year,
-                    last4: s.last4,
-                    three_d_secure: 'not_supported', // s[s.type].three_d_secure,
-                    is_default: s.id === inputCust.default_source
-                }
-                )
-            )
-        }
-        );
+        });
     }
 
     copy(): StripeCustomer {
