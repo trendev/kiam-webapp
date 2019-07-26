@@ -6,7 +6,7 @@ import { StripeCustomer } from './stripe-customer.model';
 import { StripeSubscription } from './stripe-subscription.model';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { ErrorHandlerService } from '@app/error-handler.service';
-import { StripeSubscriptionService } from '@app/core';
+import { StripeSubscriptionService, StripePaymentMethodService } from '@app/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { filter, finalize, catchError, map } from 'rxjs/operators';
@@ -21,11 +21,12 @@ import { Observable } from 'rxjs';
 export class SubscriptionDetailsComponent {
 
   customer: StripeCustomer;
-  paymentMethods: StripePaymentMethod[];
+  private _paymentMethods: StripePaymentMethod[];
 
   constructor(private loadingOverlayService: LoadingOverlayService,
     private errorHandlerService: ErrorHandlerService,
     private stripeSubscriptionService: StripeSubscriptionService,
+    private stripePaymentMethodService: StripePaymentMethodService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     public dialog: MatDialog) {
@@ -36,7 +37,7 @@ export class SubscriptionDetailsComponent {
       }) => {
         const inputCust = data.stripeCustomer;
         this.customer = StripeCustomer.build(inputCust);
-        this.paymentMethods = data.stripePaymentMethods.data.map(pm => new StripePaymentMethod({
+        this._paymentMethods = data.stripePaymentMethods.data.map(pm => new StripePaymentMethod({
           id: pm.id,
           type: pm.type,
           brand: pm[pm.type].brand,
@@ -50,23 +51,23 @@ export class SubscriptionDetailsComponent {
     );
   }
 
-  get sources(): StripePaymentMethod[] {
-    return this.paymentMethods.sort(
-      (s1, s2) => {
+  get paymentMethods(): StripePaymentMethod[] {
+    return this._paymentMethods.sort(
+      (pm1, pm2) => {
         // compares the expiration date
         // exp_year and exp_month are string and converted to number
         // month in date begins with index 0 and must be decrease
-        const d1 = new Date(+s1.exp_year, +s1.exp_month - 1);
-        const d2 = new Date(+s2.exp_year, +s2.exp_month - 1);
+        const d1 = new Date(+pm1.exp_year, +pm1.exp_month - 1);
+        const d2 = new Date(+pm2.exp_year, +pm2.exp_month - 1);
         // sort the most recent first
         return d2.getTime() - d1.getTime();
       }
     );
   }
 
-  private handleSource(source: any, fn: (s: any) => Observable<any>, msg: string) {
+  private handlePaymentMethod(paymentMethod: any, fn: (a: any) => Observable<any>, msg: string) {
     this.loadingOverlayService.start();
-    fn.apply(this.stripeSubscriptionService, [source])
+    fn(paymentMethod)
       .pipe(
         filter(c => !!c),
         map(c => StripeCustomer.build(c)),
@@ -83,34 +84,30 @@ export class SubscriptionDetailsComponent {
       });
   }
 
-  setAsDefaultSource(id: string) {
-    this.handleSource(id,
-      this.stripeSubscriptionService.defaultSource,
-      `Félicitations, la source ${id} est maintenant la source par défaut 👍`
+  setAsDefaultPaymentMethod(id: string) {
+    this.handlePaymentMethod(id,
+      (_id) => this.stripePaymentMethodService.default(_id),
+      `Félicitations, le moyen de paiement ${id} est maintenant le moyen de paiement par défaut 👍`
     );
   }
 
-  detachSource(id: string) {
-    this.handleSource(id,
-      this.stripeSubscriptionService.detachSource,
-      `Félicitations, la source ${id} est maintenant supprimée 😉`
+  detachPaymentMethod(id: string) {
+    this.handlePaymentMethod(id,
+      (_id) => this.stripePaymentMethodService.detach(_id),
+      `Félicitations, le moyen de paiement ${id} est maintenant supprimée 😉`
     );
   }
 
-  /**
-  * Handles the new Stripe Source creation
-  * @param _source A Stripe Source
-  */
-  addSource(_source) {
-    if (_source.card.three_d_secure !== 'required') {
-      if (_source.status === 'chargeable') {
-        this.handleSource(_source,
-          this.stripeSubscriptionService.addSource,
-          `Félicitations, la nouvelle source est ajoutée 👍`);
+  addPaymentMethod(pm) {
+    if (pm.card.three_d_secure !== 'required') {
+      if (pm.status === 'chargeable') {
+        this.handlePaymentMethod(pm,
+          (_pm) => this.stripePaymentMethodService.add(_pm),
+          `Félicitations, le nouveau moyen de paiement est ajouté 👍`);
       } else {
         this.snackBar.openFromComponent(ErrorMessageComponent,
           {
-            data: `Echec d'ajout d'une source: la carte ne peut être débitée 🤔`,
+            data: `Echec d'ajout d'un moyen de paiement: la carte ne peut être débitée 🤔`,
             duration: 3000
           });
       }
@@ -118,7 +115,7 @@ export class SubscriptionDetailsComponent {
     } else {
       this.snackBar.openFromComponent(ErrorMessageComponent,
         {
-          data: `Echec d'ajout d'une source: carte 3D Secure non supportée actuellement 😓`,
+          data: `Echec d'ajout d'un moyen de paiement: carte 3D Secure non supportée actuellement 😓`,
           duration: 3000
         });
     }
