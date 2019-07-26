@@ -18,9 +18,14 @@ export class SubscriptionComponent implements OnInit {
   ngOnInit() {
   }
 
-  handleNewStripePaymentMethod(source: any) {
+  handleNewStripePaymentMethod(pm: any) {
     this.displayCardInfo = false;
-    this.newStripePaymentMethod.emit(source);
+    this.newStripePaymentMethod.emit(pm);
+  }
+
+  handleNewStripeSetupIntent(si: any) {
+    this.displayCardInfo = false;
+    this.newStripeSetupIntent.emit(si);
   }
 
 }

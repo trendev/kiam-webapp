@@ -1,7 +1,11 @@
 <div class="container">
-    <button *ngIf="!displayCardInfo" type="button" mat-raised-button color="primary" (click)="displayCardInfo = true">
+    <button *ngIf="!displayCardInfo; else cardInfo" type="button" mat-raised-button color="primary"
+        (click)="displayCardInfo = true">
         <ng-content></ng-content>
     </button>
-    <app-card-info *ngIf="displayCardInfo" (newStripePaymentMethod)="handleNewStripePaymentMethod($event)" [amount]="amount">
-    </app-card-info>
+    <ng-template #cardInfo>
+        <app-card-info *ngIf="displayCardInfo" (newStripePaymentMethod)="handleNewStripePaymentMethod($event)"
+            (newStripeSetupIntent)="handleNewStripeSetupIntent($event)" [amount]="amount">
+        </app-card-info>
+    </ng-template>
 </div>
