@@ -1,6 +1,5 @@
-export class StripeSource {
+export class StripePaymentMethod {
     public id: string;
-    public status: string;
     public type: string;
     public brand: string;
     public exp_month: string;
@@ -11,9 +10,5 @@ export class StripeSource {
 
     constructor(values: Object = {}) {
         Object.assign(this, values);
-    }
-
-    copy(): StripeSource {
-        return Object.assign({}, this);
     }
 }
