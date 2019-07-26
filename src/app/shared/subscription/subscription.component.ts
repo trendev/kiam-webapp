@@ -9,6 +9,7 @@ export class SubscriptionComponent implements OnInit {
 
   @Input() amount: number;
   @Output() newStripePaymentMethod = new EventEmitter<any>();
+  @Output() newStripeSetupIntent = new EventEmitter<any>();
 
   displayCardInfo = false;
 

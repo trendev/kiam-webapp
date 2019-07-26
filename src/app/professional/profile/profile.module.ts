@@ -9,7 +9,7 @@ import { ChangeProfessionalPasswordComponent } from './change-professional-passw
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { SubscriptionDetailsComponent } from './subscription-details/subscription-details.component';
 import { SubscriptionAmountComponent } from './subscription-details/subscription-amount/subscription-amount.component';
-import { SourceDetailsComponent } from './subscription-details/source-details/source-details.component';
+import { PaymentMethodDetailsComponent } from './subscription-details/payment-method-details/payment-method-details.component';
 import { StripeInvoicesComponent } from './stripe-invoices/stripe-invoices.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { SubscriptionStatusComponent } from './subscription-details/subscription-status/subscription-status.component';
@@ -29,7 +29,7 @@ import { StripePaymentMethodResolver } from './stripe-payment-method-resolver.se
     SubscribeComponent,
     SubscriptionDetailsComponent,
     SubscriptionAmountComponent,
-    SourceDetailsComponent,
+    PaymentMethodDetailsComponent,
     StripeInvoicesComponent,
     SubscriptionStatusComponent,
     RescissionConfirmationDialogComponent

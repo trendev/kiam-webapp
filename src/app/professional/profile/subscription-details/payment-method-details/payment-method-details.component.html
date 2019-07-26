@@ -1,26 +1,26 @@
-<div class="source mat-elevation-z2">
+<div class="pm mat-elevation-z2">
   <div class="info">
     <div class="title-container">
-      <app-stripe-source-type [stype]="source.type"></app-stripe-source-type>
-      <span class="mat-subheading-2 brand">{{source.brand}}</span>****{{source.last4}}
+      <app-stripe-payment-method-type [type]="pm.type"></app-stripe-payment-method-type>
+      <span class="mat-subheading-2 brand">{{pm.brand}}</span>**** {{pm.last4}}
     </div>
 
-    <p class="exp-date">Date d'expiration: {{source.exp_month}}/{{source.exp_year}}</p>
+    <p class="exp-date">Date d'expiration: {{pm.exp_month}}/{{pm.exp_year}}</p>
 
     <div class="three-d-secure">
       <span class="three-d-secure-label">3D Secure</span>
-      <mat-icon *ngIf="source.three_d_secure === true; else three_d_secure_not_supported" color="primary">done_all</mat-icon>
+      <mat-icon *ngIf="pm.three_d_secure === true; else three_d_secure_not_supported" color="primary">done_all</mat-icon>
       <ng-template #three_d_secure_not_supported>
         <mat-icon color="warn">close</mat-icon>
       </ng-template>
     </div>
 
-    <p class="source-id">ID: {{source.id}}</p>
+    <p class="pm-id">ID: {{pm.id}}</p>
   </div>
 
   <div class="action-container">
 
-    <mat-icon *ngIf="source.is_default; else default" color="accent" class="default-source">star_border</mat-icon>
+    <mat-icon *ngIf="pm.is_default; else default" color="accent" class="default-pm">star_border</mat-icon>
 
     <ng-template #default>
       <button class="default-button" mat-mini-fab color="accent" (click)="defaultAction()">

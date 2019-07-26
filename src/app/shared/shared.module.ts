@@ -1,3 +1,4 @@
+import { StripePaymentMethodTypeComponent } from './stripe-payment-method-type/stripe-payment-method-type.component';
 import { PaymentStatusComponent } from './payment-status/payment-status.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -55,7 +56,6 @@ import { CardInfoComponent } from './card-info/card-info.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { TwitterSvgIconComponent } from './icons/twitter-svg-icon/twitter-svg-icon.component';
 import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg-icon.component';
-import { StripeSourceTypeComponent } from './stripe-source-type/stripe-source-type.component';
 
 @NgModule({
   imports: [
@@ -117,7 +117,7 @@ import { StripeSourceTypeComponent } from './stripe-source-type/stripe-source-ty
     SubscriptionComponent,
     TwitterSvgIconComponent,
     FacebookSvgIconComponent,
-    StripeSourceTypeComponent
+    StripePaymentMethodTypeComponent
   ],
   exports: [
     CommonModule,
@@ -176,7 +176,7 @@ import { StripeSourceTypeComponent } from './stripe-source-type/stripe-source-ty
     SubscriptionComponent,
     TwitterSvgIconComponent,
     FacebookSvgIconComponent,
-    StripeSourceTypeComponent
+    StripePaymentMethodTypeComponent
   ],
   entryComponents: [
     SuccessMessageComponent,

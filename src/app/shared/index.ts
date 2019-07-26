@@ -29,3 +29,4 @@ export * from './payment-status/payment-status.component';
 export * from './card-info/card-info.component';
 export * from './subscription/subscription.component';
 export * from './icons/twitter-svg-icon/twitter-svg-icon.component';
+export * from './stripe-payment-method-type/stripe-payment-method-type.component';
