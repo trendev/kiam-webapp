@@ -65,7 +65,10 @@ export class SubscriptionDetailsComponent {
     );
   }
 
-  private handlePaymentMethod(paymentMethod: any, fn: (a: any) => Observable<any>, msg: string) {
+  private handlePaymentMethod(paymentMethod: any,
+    fn: (a: any) => Observable<any>,
+    msg: string,
+    postAction: (_customer: StripeCustomer, a: any) => void) {
     this.loadingOverlayService.start();
     fn(paymentMethod)
       .pipe(
@@ -81,20 +84,31 @@ export class SubscriptionDetailsComponent {
             duration: 3000
           });
         this.customer = c;
+        postAction(this.customer, paymentMethod);
       });
   }
 
   setAsDefaultPaymentMethod(id: string) {
     this.handlePaymentMethod(id,
       (_id) => this.stripePaymentMethodService.default(_id),
-      `Félicitations, le moyen de paiement ${id} est maintenant le moyen de paiement par défaut 👍`
+      `Félicitations, le moyen de paiement ${id} est maintenant le moyen de paiement par défaut 👍`,
+      (_c, _id) => { }
     );
   }
 
   detachPaymentMethod(id: string) {
     this.handlePaymentMethod(id,
       (_id) => this.stripePaymentMethodService.detach(_id),
-      `Félicitations, le moyen de paiement ${id} est maintenant supprimée 😉`
+      `Félicitations, le moyen de paiement ${id} est maintenant supprimée 😉`,
+      (_c, _id) => {
+        this._paymentMethods = this._paymentMethods
+          .filter(_pm => _pm.id !== _id)
+          .map(_pm => {
+            const pm = {..._pm};
+            pm.is_default = pm.id === _c.default_payment_method;
+            return pm;
+          });
+      }
     );
   }
 
@@ -103,7 +117,8 @@ export class SubscriptionDetailsComponent {
       if (pm.status === 'chargeable') {
         this.handlePaymentMethod(pm,
           (_pm) => this.stripePaymentMethodService.add(_pm),
-          `Félicitations, le nouveau moyen de paiement est ajouté 👍`);
+          `Félicitations, le nouveau moyen de paiement est ajouté 👍`,
+          (_c, _pm) => { });
       } else {
         this.snackBar.openFromComponent(ErrorMessageComponent,
           {
