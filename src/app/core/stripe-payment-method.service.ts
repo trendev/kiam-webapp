@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: CoreModule
@@ -17,6 +17,7 @@ export class StripePaymentMethodService {
   getPaymentMethods(): Observable<any> {
     return this.http.get<any>(`${this.api}`)
       .pipe(
+        tap(pms => console.log(pms)),
         catchError(e => throwError(e))
       );
   }
