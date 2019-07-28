@@ -16,6 +16,7 @@ import { Professional } from '@app/entities';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { from } from 'rxjs';
 import { catchError, take, tap, switchMap } from 'rxjs/operators';
+import { stripe, elements } from '@app/app.component';
 
 @Component({
   selector: 'app-card-info',

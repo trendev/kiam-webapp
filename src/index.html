@@ -6,7 +6,8 @@
   <title>comptandye</title>
   <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- <link href="https://fonts.googleapis.com/css?family=Arapey:400,400i" rel="stylesheet"> -->
@@ -15,17 +16,10 @@
 </head>
 
 <body class="mat-app-background">
+  <script src="https://js.stripe.com/v3/"></script>
   <app-root>
     <p>Chargement en cours... 🤗</p>
   </app-root>
-  <script src="https://js.stripe.com/v3/"></script>
-  <script type="text/javascript">
-    // TEST
-    var stripe = Stripe('pk_test_zw5JuBUOmXxIsi55rTtDDQG9');
-    // LIVE
-    // var stripe = Stripe('pk_live_r69TK4H6ByEpqqbxYRf3rMZ1');
-    var elements = stripe.elements({ locale: 'fr' });
-  </script>
 </body>
 
 </html>

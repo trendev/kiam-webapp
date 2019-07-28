@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessageComponent, SuccessMessageComponent } from '@app/shared';
 import { Router } from '@angular/router';
 import { from, Subject } from 'rxjs';
+import { stripe } from '@app/app.component';
 
 @Component({
   selector: 'app-subscribe',

@@ -12,3 +12,6 @@ export class AppComponent {
     private logUpdateService: LogUpdateService) {
   }
 }
+
+export const stripe: any = Stripe('pk_test_zw5JuBUOmXxIsi55rTtDDQG9');
+export const elements: any = stripe.elements({ locale: 'fr' });
