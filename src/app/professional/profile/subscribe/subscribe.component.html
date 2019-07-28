@@ -22,9 +22,9 @@
         <div>Utiliser {{appName}} dès aujourd'hui pour une durée de <span style="font-weight: bold">1 mois renouvelable automatiquement</span>.</div>
       </mat-card-subtitle>
       <mat-card-content>
-        <app-subscription (newStripePaymentMethod)="handleNewStripePaymentMethod($event)" [amount]="defaultAmount">
+        <app-card-info-wrapper (newStripePaymentMethod)="handleNewStripePaymentMethod($event)" [amount]="defaultAmount" [isFirst]="true">
           Souscrire pour {{defaultAmount/100 | number:'.0-2':'fr'}}&#8364; TTC / mois
-        </app-subscription>
+        </app-card-info-wrapper>
       </mat-card-content>
     </mat-card>
   </div>

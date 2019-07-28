@@ -1,0 +1,17 @@
+<div class="container">
+    <button *ngIf="!displayCardInfo; else cardInfo" type="button" mat-raised-button color="primary"
+        (click)="displayCardInfo = true">
+        <ng-content></ng-content>
+    </button>
+    <ng-template #cardInfo>
+        <app-card-info *ngIf="isFirst; else add" (newStripePaymentMethod)="handle($event)"
+            [isFirst]="isFirst">
+            Valider pour {{amount/100 | number:'.0-2':'fr'}}&#8364; TTC / mois
+        </app-card-info>
+        <ng-template #add>
+            <app-card-info (newStripeSetupIntent)="handle($event)" [isFirst]="isFirst">
+                Valider
+            </app-card-info>
+        </ng-template>
+    </ng-template>
+</div>

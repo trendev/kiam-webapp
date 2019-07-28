@@ -24,7 +24,7 @@ import { catchError, take } from 'rxjs/operators';
 })
 export class CardInfoComponent implements AfterViewInit, OnDestroy, OnInit {
 
-  @Input() amount: number;
+  @Input() isFirst = true;
 
   @Output() newStripePaymentMethod = new EventEmitter<any>();
 

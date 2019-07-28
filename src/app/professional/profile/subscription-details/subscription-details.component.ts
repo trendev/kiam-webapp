@@ -104,7 +104,7 @@ export class SubscriptionDetailsComponent {
         this._paymentMethods = this._paymentMethods
           .filter(_pm => _pm.id !== _id)
           .map(_pm => {
-            const pm = {..._pm};
+            const pm = { ..._pm };
             pm.is_default = pm.id === _c.default_payment_method;
             return pm;
           });

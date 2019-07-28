@@ -53,7 +53,7 @@ import { BillsMicroListTableComponent } from './bills/bills-micro-list-table/bil
 import { BillsMicroListComponent } from './bills/bills-micro-list/bills-micro-list.component';
 import { PeriodSelectorComponent } from './bills/period-selector/period-selector.component';
 import { CardInfoComponent } from './card-info/card-info.component';
-import { SubscriptionComponent } from './subscription/subscription.component';
+import { CardInfoWrapperComponent } from './card-info-wrapper/card-info-wrapper.component';
 import { TwitterSvgIconComponent } from './icons/twitter-svg-icon/twitter-svg-icon.component';
 import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg-icon.component';
 
@@ -114,7 +114,7 @@ import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg
     PeriodSelectorComponent,
     PaymentStatusComponent,
     CardInfoComponent,
-    SubscriptionComponent,
+    CardInfoWrapperComponent,
     TwitterSvgIconComponent,
     FacebookSvgIconComponent,
     StripePaymentMethodTypeComponent
@@ -173,7 +173,7 @@ import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg
     PeriodSelectorComponent,
     PaymentStatusComponent,
     CardInfoComponent,
-    SubscriptionComponent,
+    CardInfoWrapperComponent,
     TwitterSvgIconComponent,
     FacebookSvgIconComponent,
     StripePaymentMethodTypeComponent

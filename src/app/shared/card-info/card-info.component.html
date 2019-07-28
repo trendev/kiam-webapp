@@ -5,6 +5,6 @@
     <mat-error *ngIf="error">{{ error }}</mat-error>
   </div>
   <button type="button" mat-raised-button color="primary" (click)="submit()">
-    Valider pour {{amount/100 | number:'.0-2':'fr'}}&#8364; TTC / mois
+      <ng-content></ng-content>
   </button>
 </div>
