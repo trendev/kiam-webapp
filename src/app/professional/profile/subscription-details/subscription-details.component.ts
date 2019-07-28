@@ -9,7 +9,7 @@ import { ErrorHandlerService } from '@app/error-handler.service';
 import { StripeSubscriptionService, StripePaymentMethodService } from '@app/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { filter, finalize, catchError, map } from 'rxjs/operators';
+import { filter, finalize, catchError, map, switchMap } from 'rxjs/operators';
 import { SuccessMessageComponent, ErrorMessageComponent } from '@app/shared';
 import { Observable } from 'rxjs';
 
@@ -37,18 +37,22 @@ export class SubscriptionDetailsComponent {
       }) => {
         const inputCust = data.stripeCustomer;
         this.customer = StripeCustomer.build(inputCust);
-        this._paymentMethods = data.stripePaymentMethods.data.map(pm => new StripePaymentMethod({
-          id: pm.id,
-          type: pm.type,
-          brand: pm[pm.type].brand,
-          exp_month: pm[pm.type].exp_month,
-          exp_year: pm[pm.type].exp_year,
-          last4: pm[pm.type].last4,
-          three_d_secure: pm[pm.type].three_d_secure_usage.supported,
-          is_default: this.customer.default_payment_method === pm.id
-        }));
+        this.formatStripePaymentMethod(data.stripePaymentMethods.data);
       }
     );
+  }
+
+  private formatStripePaymentMethod(data: any) {
+    this._paymentMethods = data.map(pm => new StripePaymentMethod({
+      id: pm.id,
+      type: pm.type,
+      brand: pm[pm.type].brand,
+      exp_month: pm[pm.type].exp_month,
+      exp_year: pm[pm.type].exp_year,
+      last4: pm[pm.type].last4,
+      three_d_secure: pm[pm.type].three_d_secure_usage.supported,
+      is_default: this.customer.default_payment_method === pm.id
+    }));
   }
 
   get paymentMethods(): StripePaymentMethod[] {
@@ -67,73 +71,51 @@ export class SubscriptionDetailsComponent {
 
   private handlePaymentMethod(paymentMethod: any,
     fn: (a: any) => Observable<any>,
-    msg: string,
-    postAction: (_customer: StripeCustomer, a: any) => void) {
+    successMsg: string,
+    errMsg: string) {
     this.loadingOverlayService.start();
     fn(paymentMethod)
       .pipe(
         filter(c => !!c),
         map(c => StripeCustomer.build(c)),
+        switchMap(c => {
+          this.customer = c;
+          return this.stripePaymentMethodService.getPaymentMethods();
+        }),
         finalize(() => this.loadingOverlayService.stop()),
-        catchError(e => this.errorHandlerService.handle(e))
+        catchError(e => this.errorHandlerService.handle(e, errMsg))
       )
-      .subscribe(c => {
+      .subscribe(paymentMethods => {
+        this.formatStripePaymentMethod(paymentMethods.data);
         this.snackBar.openFromComponent(SuccessMessageComponent,
           {
-            data: msg,
+            data: successMsg,
             duration: 3000
           });
-        this.customer = c;
-        postAction(this.customer, paymentMethod);
       });
-  }
-
-  setAsDefaultPaymentMethod(id: string) {
-    this.handlePaymentMethod(id,
-      (_id) => this.stripePaymentMethodService.default(_id),
-      `Félicitations, le moyen de paiement ${id} est maintenant le moyen de paiement par défaut 👍`,
-      (_c, _id) => { }
-    );
   }
 
   detachPaymentMethod(id: string) {
     this.handlePaymentMethod(id,
-      (_id) => this.stripePaymentMethodService.detach(_id),
+      (_id: string) => this.stripePaymentMethodService.detach(_id),
       `Félicitations, le moyen de paiement ${id} est maintenant supprimée 😉`,
-      (_c, _id) => {
-        this._paymentMethods = this._paymentMethods
-          .filter(_pm => _pm.id !== _id)
-          .map(_pm => {
-            const pm = { ..._pm };
-            pm.is_default = pm.id === _c.default_payment_method;
-            return pm;
-          });
-      }
+      `Impossible de supprimer ce moyen de paiement...`
     );
   }
 
-  addPaymentMethod(pm) {
-    if (pm.card.three_d_secure !== 'required') {
-      if (pm.status === 'chargeable') {
-        this.handlePaymentMethod(pm,
-          (_pm) => this.stripePaymentMethodService.add(_pm),
-          `Félicitations, le nouveau moyen de paiement est ajouté 👍`,
-          (_c, _pm) => { });
-      } else {
-        this.snackBar.openFromComponent(ErrorMessageComponent,
-          {
-            data: `Echec d'ajout d'un moyen de paiement: la carte ne peut être débitée 🤔`,
-            duration: 3000
-          });
-      }
+  addPaymentMethod(seti: any) {
+    this.handlePaymentMethod(seti.payment_method,
+      (_id: string) => this.stripePaymentMethodService.add(_id),
+      `Félicitations, le nouveau moyen de paiement est ajouté 👍`,
+      `Impossible d'ajouter ce moyen de paiement...`);
+  }
 
-    } else {
-      this.snackBar.openFromComponent(ErrorMessageComponent,
-        {
-          data: `Echec d'ajout d'un moyen de paiement: carte 3D Secure non supportée actuellement 😓`,
-          duration: 3000
-        });
-    }
+  setAsDefaultPaymentMethod(id: string) {
+    this.handlePaymentMethod(id,
+      (_id: string) => this.stripePaymentMethodService.default(_id),
+      `Félicitations, le moyen de paiement ${id} est maintenant le moyen de paiement par défaut 👍`,
+      `Impossible de choisir ce moyen de paiment comme moyen par défaut...`
+    );
   }
 
   get isRescinded(): boolean {

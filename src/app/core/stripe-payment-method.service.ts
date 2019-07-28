@@ -22,8 +22,8 @@ export class StripePaymentMethodService {
       );
   }
 
-  add(payload: any): Observable<any> {
-    return this.http.put<any>(`${this.api}/add`, payload)
+  add(id: string): Observable<any> {
+    return this.http.put<any>(`${this.api}/add/${id}`, null)
       .pipe(
         catchError(e => throwError(e))
       );
