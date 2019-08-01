@@ -14,6 +14,7 @@ import {
   PaymentModesResolverService,
   ProfessionalProfileResolverService
 } from '@app/core';
+import { StripePlanResolver } from './stripe-plan-resolver.service';
 
 const routes: Routes = [
   {
@@ -32,7 +33,10 @@ const routes: Routes = [
   },
   {
     path: 'subscribe',
-    component: SubscribeComponent
+    component: SubscribeComponent,
+    resolve: {
+      stripePlans : StripePlanResolver
+    }
   },
   {
     path: 'subscription-details',

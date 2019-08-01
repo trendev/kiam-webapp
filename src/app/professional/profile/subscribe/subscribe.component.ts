@@ -22,7 +22,7 @@ export class SubscribeComponent implements OnInit {
   private control = new Subject<string>();
   private paymentControllers: ((subscription: any) => void)[] = [];
 
-  // basic subscription amount (6 euros - all taxes included)
+  // TODO : change this amount considering the Subscription's price
   defaultAmount = 600;
 
   constructor(private loadingOverlayService: LoadingOverlayService,
