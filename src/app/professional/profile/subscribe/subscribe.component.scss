@@ -5,7 +5,7 @@
     flex-wrap: wrap;
 }
 
-.offer-container{
+.offer-container {
     display: flex;
     width: 100%;
     justify-content: space-around;
@@ -13,7 +13,7 @@
 }
 
 .subscription-card {
-    margin: 8px; 
+    margin: 8px;
     padding: 8px 24px 8px 24px;
     flex: 1 100%;
 }
@@ -23,7 +23,7 @@
     width: 400px;
 }
 
-.subtitle {
+.offer-subtitle {
     display: flex;
     align-items: center;
 }
@@ -36,7 +36,8 @@ a {
     mat-card {
         width: 100%;
     }
-    .subtitle {
+
+    .offer-subtitle {
         align-items: flex-start;
     }
 }

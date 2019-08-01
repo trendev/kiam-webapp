@@ -6,9 +6,11 @@ import { StripeSubscriptionService } from '@app/core';
 import { ErrorHandlerService } from '@app/error-handler.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessageComponent, SuccessMessageComponent } from '@app/shared';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { from, Subject } from 'rxjs';
 import { stripe } from '@app/app.component';
+import { StripePlan } from './stripe-plan.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-subscribe',
@@ -25,11 +27,28 @@ export class SubscribeComponent implements OnInit {
   // TODO : change this amount considering the Subscription's price
   defaultAmount = 600;
 
+  plans: any;
+
   constructor(private loadingOverlayService: LoadingOverlayService,
     private errorHandlerService: ErrorHandlerService,
     private stripeSubscriptionService: StripeSubscriptionService,
     private snackBar: MatSnackBar,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) {
+    this.route.data.subscribe(
+      (data: {
+        stripePlans: any,
+        stripePaymentMethods: any
+      }) => {
+        this.plans = data.stripePlans.data.map(_pl => new StripePlan({
+          title: _pl.nickname,
+          amount: _pl.amount * 1.2,
+          interval: _pl.interval,
+          interval_count: _pl.interval_count
+        }));
+      }
+    );
+  }
 
   ngOnInit() {
     this.paymentControllers.push((s) => this.controlPaymentSuccess(s));
@@ -148,5 +167,14 @@ export class SubscribeComponent implements OnInit {
           }
         });
     }
+  }
+
+  private computeDuration(plan: StripePlan): moment.Duration {
+    return moment.duration(plan.interval_count, plan.interval as moment.DurationInputArg2);
+  }
+
+  displayRenewalPeriod(plan: StripePlan, humanize = true): string {
+    moment.locale('fr');
+    return this.computeDuration(plan).humanize(humanize);
   }
 }
