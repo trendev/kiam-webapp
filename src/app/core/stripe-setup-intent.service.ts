@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class StripeSetupIntentService {
 
-  readonly api = `${environment.api}/setup-intent`;
+  readonly api = `${environment.api}/stripe-setup-intent`;
 
   constructor(private http: HttpClient) { }
 
