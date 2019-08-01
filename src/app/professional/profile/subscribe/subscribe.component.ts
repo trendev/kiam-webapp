@@ -24,9 +24,6 @@ export class SubscribeComponent implements OnInit {
   private control = new Subject<string>();
   private paymentControllers: ((subscription: any) => void)[] = [];
 
-  // TODO : change this amount considering the Subscription's price
-  defaultAmount = 600;
-
   plans: any;
 
   constructor(private loadingOverlayService: LoadingOverlayService,
