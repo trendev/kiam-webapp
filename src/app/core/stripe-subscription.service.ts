@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class StripeSubscriptionService {
 
-  readonly api = `${environment.api}/stipe-subscription`;
+  readonly api = `${environment.api}/stripe-subscription`;
 
   constructor(private http: HttpClient) { }
 
