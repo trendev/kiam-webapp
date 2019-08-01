@@ -170,8 +170,22 @@ export class SubscribeComponent implements OnInit {
     return moment.duration(plan.interval_count, plan.interval as moment.DurationInputArg2);
   }
 
-  displayRenewalPeriod(plan: StripePlan, humanize = true): string {
+  displayRenewalInterval(plan: StripePlan): string {
     moment.locale('fr');
-    return this.computeDuration(plan).humanize(humanize);
+    return this.computeDuration(plan).humanize(true);
   }
+
+  displayRenewalUnit(plan: StripePlan): string {
+    moment.defineLocale('fr-subscription', {
+      parentLocale: 'fr'
+    });
+    moment.updateLocale('fr-subscription', {
+      relativeTime: {
+        M: 'mois',
+        y: 'an'
+      }
+    });
+    return this.computeDuration(plan).humanize(false);
+  }
+
 }

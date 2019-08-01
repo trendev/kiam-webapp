@@ -26,12 +26,12 @@
       </mat-card-title>
       <mat-card-subtitle class="offer-subtitle">
         <div>Utiliser {{appName}} dès aujourd'hui et bénéficier d'un <span style="font-weight: bold">renouvellement
-            automatique {{displayRenewalPeriod(pl)}}</span>.</div>
+            automatique {{displayRenewalInterval(pl)}}</span>.</div>
       </mat-card-subtitle>
       <mat-card-content>
         <app-card-info-wrapper (newStripePaymentMethod)="handleNewStripePaymentMethod($event)" [amount]="pl.amount"
           [isFirst]="true">
-          Souscrire à {{pl.amount/100 | number:'.0-2':'fr'}}&#8364; TTC pour {{displayRenewalPeriod(pl,false)}}
+          Souscrire pour {{pl.amount/100 | number:'.0-2':'fr'}}&#8364; TTC / {{displayRenewalUnit(pl)}}
         </app-card-info-wrapper>
       </mat-card-content>
     </mat-card>
