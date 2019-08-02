@@ -9,8 +9,9 @@ import { ErrorMessageComponent, SuccessMessageComponent } from '@app/shared';
 import { Router, ActivatedRoute } from '@angular/router';
 import { from, Subject } from 'rxjs';
 import { stripe } from '@app/app.component';
-import { StripePlan } from './stripe-plan.model';
-import * as moment from 'moment';
+
+import { StripePlan } from '../stripe-plan.model';
+import { MomentJSHelper } from '../moment-js-helper';
 
 @Component({
   selector: 'app-subscribe',
@@ -168,35 +169,12 @@ export class SubscribeComponent implements OnInit {
     }
   }
 
-  private computeDuration(plan: StripePlan): moment.Duration {
-    return moment.duration(plan.interval_count, plan.interval as moment.DurationInputArg2);
-  }
-
   displayRenewalInterval(plan: StripePlan): string {
-    moment.locale('fr');
-    return this.computeDuration(plan).humanize(true);
+    return MomentJSHelper.displayRenewalInterval(plan);
   }
 
   displayRenewalUnit(plan: StripePlan): string {
-    const locale = 'fr-subscribe';
-    const options = {
-      M: 'mois',
-      y: 'an'
-    };
-
-    if (moment.locales().indexOf(locale) === -1) {
-      moment.defineLocale(locale, {
-        parentLocale: 'fr',
-        relativeTime: options
-      });
-    } else {
-      moment.updateLocale(locale, {
-        relativeTime: options
-      });
-    }
-
-
-    return this.computeDuration(plan).humanize(false);
+    return MomentJSHelper.displayRenewalUnit(plan);
   }
 
   controlPlansDisplay(id: string) {
