@@ -177,15 +177,24 @@ export class SubscribeComponent implements OnInit {
   }
 
   displayRenewalUnit(plan: StripePlan): string {
-    moment.defineLocale('fr-subscription', {
-      parentLocale: 'fr'
-    });
-    moment.updateLocale('fr-subscription', {
-      relativeTime: {
-        M: 'mois',
-        y: 'an'
-      }
-    });
+    const locale = 'fr-subscribe';
+    const options = {
+      M: 'mois',
+      y: 'an'
+    };
+
+    if (moment.locales().indexOf(locale) === -1) {
+      moment.defineLocale(locale, {
+        parentLocale: 'fr',
+        relativeTime: options
+      });
+    } else {
+      moment.updateLocale(locale, {
+        relativeTime: options
+      });
+    }
+
+
     return this.computeDuration(plan).humanize(false);
   }
 
