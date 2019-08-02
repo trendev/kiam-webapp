@@ -27,4 +27,9 @@ export class SubscriptionAmountComponent {
     return this.customer.amount;
   }
 
+  // TODO : complete using a moment.js helper
+  displayRenewalUnit(): string {
+    return 'interval';
+  }
+
 }

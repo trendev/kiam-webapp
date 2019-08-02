@@ -1,9 +1,11 @@
-<p *ngIf="discount_applied; else no_discount">
-  Montant TTC mensuel:
-  <span style="text-decoration: line-through; font-style: italic">{{baseAmount/100 | number:'1.0-2':'fr'}}&#8364;</span>
-  <span style="font-weight: bold"> {{amount/100 | number:'1.0-2':'fr'}}&#8364;</span>
-</p>
-<ng-template #no_discount>
-    Montant TTC mensuel:
+<p>
+  Montant TTC / {{displayRenewalUnit()}}:
+  <ng-template *ngIf="discount_applied; else no_discount">
+    <span
+      style="text-decoration: line-through; font-style: italic">{{baseAmount/100 | number:'1.0-2':'fr'}}&#8364;</span>
+    <span style="font-weight: bold"> {{amount/100 | number:'1.0-2':'fr'}}&#8364;</span>
+  </ng-template>
+  <ng-template #no_discount>
     <span style="font-weight: bold">{{baseAmount/100 | number:'1.0-2':'fr'}}&#8364;</span>
-</ng-template>
+  </ng-template>
+</p>
