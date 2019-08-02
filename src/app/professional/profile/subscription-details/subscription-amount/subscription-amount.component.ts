@@ -23,11 +23,11 @@ export class SubscriptionAmountComponent {
   }
 
   get baseAmount(): number {
-    return this.customer.baseAmount;
+    return this.plan.amount * (100 + this.customer.subscription.tax_percent) / 100;
   }
 
   get amount(): number {
-    return this.customer.amount;
+    return (this.baseAmount * (100 - this.customer.subscription.discount_percent_off) / 100);
   }
 
   displayRenewalUnit(): string {

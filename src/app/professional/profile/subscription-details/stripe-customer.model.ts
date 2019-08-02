@@ -28,13 +28,4 @@ export class StripeCustomer {
         return Object.assign({}, this);
     }
 
-    get baseAmount(): number {
-        return this.subscription.amount * (100 + this.subscription.tax_percent) / 100;
-    }
-
-    get amount(): number {
-        return (this.baseAmount * (100 - this.subscription.discount_percent_off) / 100);
-    }
-
-
 }
