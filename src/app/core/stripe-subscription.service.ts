@@ -14,8 +14,8 @@ export class StripeSubscriptionService {
 
   constructor(private http: HttpClient) { }
 
-  subscription(token: any): Observable<string> {
-    return this.http.post<any>(`${this.api}/std-subscription`, token)
+  subscription(token: any, plan_id: string): Observable<string> {
+    return this.http.post<any>(`${this.api}/subscribe/${plan_id}`, token)
       .pipe(
         catchError(e => throwError(e))
       );

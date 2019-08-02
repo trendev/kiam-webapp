@@ -63,10 +63,11 @@ export class SubscribeComponent implements OnInit {
    * Handles the new Stripe PaymentMethod creation
    * @param newStripePaymentMethod A Stripe Payment Method
    */
-  handleNewStripePaymentMethod(newStripePaymentMethod: any) {
+  handleNewStripePaymentMethod(newStripePaymentMethod: any, plan_id: string) {
+
     if (newStripePaymentMethod.type === 'card') {
       this.loadingOverlayService.start();
-      this.stripeSubscriptionService.subscription(newStripePaymentMethod)
+      this.stripeSubscriptionService.subscription(newStripePaymentMethod, plan_id)
         .pipe(
           filter(subscription => !!subscription),
           catchError(e => {
