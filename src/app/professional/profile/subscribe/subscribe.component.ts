@@ -24,7 +24,7 @@ export class SubscribeComponent implements OnInit {
   private control = new Subject<string>();
   private paymentControllers: ((subscription: any) => void)[] = [];
 
-  plans: any;
+  plans: StripePlan[] = [];
 
   constructor(private loadingOverlayService: LoadingOverlayService,
     private errorHandlerService: ErrorHandlerService,
@@ -37,11 +37,12 @@ export class SubscribeComponent implements OnInit {
         stripePlans: any,
         stripePaymentMethods: any
       }) => {
-        this.plans = data.stripePlans.data.map(_pl => new StripePlan({
-          title: _pl.nickname,
-          amount: _pl.amount * 1.2,
-          interval: _pl.interval,
-          interval_count: _pl.interval_count
+        this.plans = data.stripePlans.data.map(p => new StripePlan({
+          id: p.id,
+          title: p.nickname,
+          amount: p.amount * 1.2,
+          interval: p.interval,
+          interval_count: p.interval_count
         }));
       }
     );
@@ -186,6 +187,15 @@ export class SubscribeComponent implements OnInit {
       }
     });
     return this.computeDuration(plan).humanize(false);
+  }
+
+  controlPlansDisplay(id: string) {
+    console.log(`should refresh for ${id}`);
+    this.plans = this.plans.map(p => {
+      const p_ = { ...p };
+      p_.display = (p_.id === id);
+      return p_;
+    });
   }
 
 }

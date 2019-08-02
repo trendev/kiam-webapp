@@ -3,7 +3,7 @@
 <!-- 2: Output emit + refresh all payment methods with a display flag -->
 <div class="container">
     <button *ngIf="!displayCardInfo; else cardInfo" type="button" mat-raised-button color="primary"
-        (click)="displayCardInfo = true">
+        (click)="show()">
         <ng-content></ng-content>
     </button>
     <ng-template #cardInfo>

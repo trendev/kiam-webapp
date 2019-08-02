@@ -12,7 +12,8 @@ export class CardInfoWrapperComponent implements OnInit {
   @Output() newStripePaymentMethod = new EventEmitter<any>();
   @Output() newStripeSetupIntent = new EventEmitter<any>();
 
-  displayCardInfo = false;
+  @Input() displayCardInfo = false;
+  @Output() display = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -27,5 +28,11 @@ export class CardInfoWrapperComponent implements OnInit {
       this.newStripeSetupIntent.emit(event); // emits a SetupIntent -> add payment method
     }
   }
+
+  show() {
+    this.displayCardInfo = true; // forces the element to display the card-info if the display event is not caught
+    this.display.emit(true); // used only when multiple wrapper are used/displayed
+  }
+
 
 }

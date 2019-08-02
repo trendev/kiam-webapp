@@ -30,7 +30,7 @@
       </mat-card-subtitle>
       <mat-card-content>
         <app-card-info-wrapper (newStripePaymentMethod)="handleNewStripePaymentMethod($event)" [amount]="pl.amount"
-          [isFirst]="true">
+          [isFirst]="true" [displayCardInfo]="pl.display" (display)=controlPlansDisplay(pl.id)>
           Souscrire pour {{pl.amount/100 | number:'.0-2':'fr'}}&#8364; TTC / {{displayRenewalUnit(pl)}}
         </app-card-info-wrapper>
       </mat-card-content>
