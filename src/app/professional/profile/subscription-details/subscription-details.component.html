@@ -5,7 +5,7 @@
             <p>Identifiant de facturation:
                 <b>{{customer.id}}</b>
             </p>
-            <app-subscription-amount [customer]="customer"></app-subscription-amount>
+            <app-subscription-amount [customer]="customer" [plan]="plan"></app-subscription-amount>
             <p>Date de signature du contrat:
                 <b>{{customer.created | date:'shortDate':'':'fr'}}</b>
             </p>

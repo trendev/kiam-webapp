@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { filter, finalize, catchError, map, switchMap } from 'rxjs/operators';
 import { SuccessMessageComponent, ErrorMessageComponent } from '@app/shared';
 import { Observable } from 'rxjs';
+import { StripePlan } from '@app/entities';
 
 @Component({
   selector: 'app-subscription-details',
@@ -21,6 +22,7 @@ import { Observable } from 'rxjs';
 export class SubscriptionDetailsComponent {
 
   customer: StripeCustomer;
+  plan: StripePlan;
   private _paymentMethods: StripePaymentMethod[];
 
   constructor(private loadingOverlayService: LoadingOverlayService,
@@ -38,6 +40,14 @@ export class SubscriptionDetailsComponent {
         const inputCust = data.stripeCustomer;
         this.customer = StripeCustomer.build(inputCust);
         this.formatStripePaymentMethod(data.stripePaymentMethods.data);
+        const inputPlan = inputCust.subscriptions.data[0].plan;
+        this.plan = new StripePlan({
+          id: inputPlan.id,
+          title: inputPlan.nickname,
+          amount: inputPlan.amount,
+          interval: inputPlan.interval,
+          interval_count: inputPlan.interval_count
+        });
       }
     );
   }

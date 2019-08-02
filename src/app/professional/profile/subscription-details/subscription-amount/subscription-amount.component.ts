@@ -1,3 +1,4 @@
+import { MomentJSHelper } from './../../moment-js-helper';
 import { Component, Input } from '@angular/core';
 import { StripeCustomer } from '@app/professional/profile/subscription-details/stripe-customer.model';
 import { StripePlan } from '@app/entities';
@@ -29,9 +30,8 @@ export class SubscriptionAmountComponent {
     return this.customer.amount;
   }
 
-  // TODO : complete using a moment.js helper
   displayRenewalUnit(): string {
-    return 'interval';
+    return MomentJSHelper.displayRenewalUnit(this.plan);
   }
 
 }
