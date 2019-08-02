@@ -190,7 +190,6 @@ export class SubscribeComponent implements OnInit {
   }
 
   controlPlansDisplay(id: string) {
-    console.log(`should refresh for ${id}`);
     this.plans = this.plans.map(p => {
       const p_ = { ...p };
       p_.display = (p_.id === id);
