@@ -10,8 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { from, Subject } from 'rxjs';
 import { stripe } from '@app/app.component';
 
-import { StripePlan } from '../stripe-plan.model';
 import { MomentJSHelper } from '../moment-js-helper';
+import { StripePlan } from '@app/entities';
 
 @Component({
   selector: 'app-subscribe',

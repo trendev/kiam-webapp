@@ -24,3 +24,4 @@ export * from './professional.model';
 export * from './user-group.model';
 export * from './offering-snapshot.model';
 export * from './vat-rates.model';
+export * from './stripe-plan.model';

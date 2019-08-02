@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { StripeCustomer } from '@app/professional/profile/subscription-details/stripe-customer.model';
+import { StripePlan } from '@app/entities';
 
 @Component({
   selector: 'app-subscription-amount',
@@ -12,6 +13,7 @@ import { StripeCustomer } from '@app/professional/profile/subscription-details/s
 export class SubscriptionAmountComponent {
 
   @Input() customer: StripeCustomer;
+  @Input() plan: StripePlan;
 
   constructor() { }
 

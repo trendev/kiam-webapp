@@ -1,5 +1,5 @@
-import { StripePlan } from './stripe-plan.model';
 import * as moment from 'moment';
+import { StripePlan } from '@app/entities';
 
 export class MomentJSHelper {
     private static computeDuration(plan: StripePlan): moment.Duration {
