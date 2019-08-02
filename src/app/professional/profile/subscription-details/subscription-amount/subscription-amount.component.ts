@@ -30,7 +30,7 @@ export class SubscriptionAmountComponent {
     return (this.baseAmount * (100 - this.customer.subscription.discount_percent_off) / 100);
   }
 
-  displayRenewalUnit(): string {
+  get displayRenewalUnit(): string {
     return MomentJSHelper.displayRenewalUnit(this.plan);
   }
 
