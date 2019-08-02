@@ -42,7 +42,7 @@
             </app-payment-method-details>
         </mat-card-content>
         <mat-card-actions>
-            <app-card-info-wrapper (newStripeSetupIntent)="addPaymentMethod($event)" [amount]="customer.baseAmount" [isFirst]="false">
+            <app-card-info-wrapper (newStripeSetupIntent)="addPaymentMethod($event)" [amount]="baseAmount" [isFirst]="false">
                 Ajouter une carte
             </app-card-info-wrapper>
         </mat-card-actions>

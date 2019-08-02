@@ -1,3 +1,4 @@
+import { AmountHelper } from './amount-helper';
 import { RescissionConfirmationDialogComponent } from './rescission-confirmation-dialog/rescission-confirmation-dialog.component';
 import { StripePaymentMethod } from './stripe-payment-method.model';
 import { Component } from '@angular/core';
@@ -63,6 +64,10 @@ export class SubscriptionDetailsComponent {
       three_d_secure: pm[pm.type].three_d_secure_usage.supported,
       is_default: this.customer.default_payment_method === pm.id
     }));
+  }
+
+  get baseAmount(): number {
+    return AmountHelper.computeBaseAmount(this.customer, this.plan);
   }
 
   get paymentMethods(): StripePaymentMethod[] {

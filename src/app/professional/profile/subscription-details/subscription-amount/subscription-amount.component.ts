@@ -1,3 +1,4 @@
+import { AmountHelper } from './../amount-helper';
 import { MomentJSHelper } from './../../moment-js-helper';
 import { Component, Input } from '@angular/core';
 import { StripeCustomer } from '@app/professional/profile/subscription-details/stripe-customer.model';
@@ -23,11 +24,11 @@ export class SubscriptionAmountComponent {
   }
 
   get baseAmount(): number {
-    return this.plan.amount * (100 + this.customer.subscription.tax_percent) / 100;
+    return AmountHelper.computeBaseAmount(this.customer, this.plan);
   }
 
   get amount(): number {
-    return (this.baseAmount * (100 - this.customer.subscription.discount_percent_off) / 100);
+    return AmountHelper.computeAmount(this.customer, this.plan);
   }
 
   get displayRenewalUnit(): string {
