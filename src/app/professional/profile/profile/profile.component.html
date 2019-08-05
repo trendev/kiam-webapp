@@ -3,6 +3,7 @@
     <form [formGroup]="form" novalidate>
       <mat-card-title>Profil</mat-card-title>
       <mat-card-subtitle>Email : {{pro.email}}</mat-card-subtitle>
+      <app-subscription-state *ngIf="!hasActiveSubscription" [pro]="pro"></app-subscription-state>
       <div class="top-button-container">
           <a href="https://firebasestorage.googleapis.com/v0/b/comptandye-4c50d.appspot.com/o/cgvu.pdf?alt=media&token=7516b20d-0872-4eae-b5fb-23b3b8a9360d" target="_blank" mat-raised-button color="primary">CGV / CGU</a>
         <button type="button" mat-raised-button color="primary" routerLink="./change-password" routerLinkActive="active">

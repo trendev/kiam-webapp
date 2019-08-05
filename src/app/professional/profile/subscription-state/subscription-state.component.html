@@ -1,0 +1,4 @@
+<p *ngIf="isOverdue;else ontime">Votre période d'essai a expirée depuis {{remains()}}... </p>
+<ng-template #ontime>
+    <p>Votre période d'essai expire dans {{remains()}}</p>
+</ng-template>

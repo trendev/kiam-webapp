@@ -18,6 +18,7 @@ import {
 } from './subscription-details/rescission-confirmation-dialog/rescission-confirmation-dialog.component';
 import { StripePaymentMethodResolver } from './stripe-payment-method-resolver.service';
 import { StripePlanResolver } from './stripe-plan-resolver.service';
+import { SubscriptionStateComponent } from './subscription-state/subscription-state.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { StripePlanResolver } from './stripe-plan-resolver.service';
     PaymentMethodDetailsComponent,
     StripeInvoicesComponent,
     SubscriptionStatusComponent,
-    RescissionConfirmationDialogComponent
+    RescissionConfirmationDialogComponent,
+    SubscriptionStateComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr },
