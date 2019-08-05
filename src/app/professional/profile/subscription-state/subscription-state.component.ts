@@ -15,7 +15,6 @@ export class SubscriptionStateComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.pro);
   }
 
   get isOverdue(): boolean {

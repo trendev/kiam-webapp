@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.overdue {
+    @extend .container;
+    color: lightcoral;
+}
+
+.ontime {
+    @extend .container;
+}
+
+p {
+    display: inline-block;
+    margin: 0px 0px 0px 8px;
+}
