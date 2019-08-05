@@ -78,6 +78,7 @@ export class SubscribeComponent implements OnInit {
         )
         .subscribe(subscription => {
           this.loadingOverlayService.stop();
+          console.log(subscription);
           this.controlPayment(subscription);
         });
 
@@ -97,15 +98,24 @@ export class SubscribeComponent implements OnInit {
   private controlPaymentSuccess(subscription: any) {
     if (subscription.status === 'active'
       && subscription.latest_invoice
-      && subscription.latest_invoice.status === 'paid'
-      && subscription.latest_invoice.payment_intent
-      && subscription.latest_invoice.payment_intent.status === 'succeeded') {
-      this.snackBar.openFromComponent(SuccessMessageComponent,
-        {
-          data: `Félicitations, la souscription ${subscription.id} est effective 🤗`,
-          duration: 3000
-        });
-      this.control.next('controlPaymentSuccess');
+      && subscription.latest_invoice.status === 'paid') {
+      // controls with a payment is succeeded
+      if (subscription.latest_invoice.payment_intent
+        && subscription.latest_invoice.payment_intent.status === 'succeeded') {
+        this.snackBar.openFromComponent(SuccessMessageComponent,
+          {
+            data: `Félicitations, la souscription ${subscription.id} est effective et le premier paiement est effectué 🤗`,
+            duration: 3000
+          });
+        this.control.next('controlPaymentSuccess-payment_intent');
+      } else { // no payment required (ex: use of an Ambassador Coupon)
+        this.snackBar.openFromComponent(SuccessMessageComponent,
+          {
+            data: `Félicitations, la souscription ${subscription.id} est effective 🤗`,
+            duration: 3000
+          });
+        this.control.next('controlPaymentSuccess');
+      }
     }
   }
 
