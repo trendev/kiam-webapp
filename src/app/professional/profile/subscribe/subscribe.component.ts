@@ -78,7 +78,6 @@ export class SubscribeComponent implements OnInit {
         )
         .subscribe(subscription => {
           this.loadingOverlayService.stop();
-          console.log(subscription);
           this.controlPayment(subscription);
         });
 
