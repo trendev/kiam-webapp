@@ -46,7 +46,7 @@ export class ErrorHandlerService {
         if (err.status === 429) { // service is offline
           this.snackBar.openFromComponent(ErrorMessageComponent,
             {
-              data: `👮🏻‍ Tu as effectué trop de requêtes à la minute ❌`,
+              data: `👮🏻👮🏽‍ Attention, tu as effectué trop de requêtes à la minute ❌`,
               duration: 5000
             });
           return observableThrowError(err);
