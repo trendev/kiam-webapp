@@ -32,12 +32,24 @@ export class ErrorHandlerService {
         this.errmsg += JSON.stringify(err.error) || '';
         console.warn('ErrorHandlerService#handle => ' + this.errmsg);
 
-        if (err.status === 404 || err.status === 0 || err.status === 504) { // service is offline
+        // connection issues
+        if (err.status === 404 || err.status === 0 || err.status >= 500) { // service is offline
           this.snackBar.openFromComponent(ErrorMessageComponent,
             {
               data: `Problèmes de connexion à Internet ou Application hors ligne pour le moment`,
               duration: 5000
             });
+          return observableThrowError(err);
+        }
+
+        // too many requests
+        if (err.status === 429) { // service is offline
+          this.snackBar.openFromComponent(ErrorMessageComponent,
+            {
+              data: `👮🏻‍ Tu as effectué trop de requêtes à la minute ❌`,
+              duration: 5000
+            });
+          return observableThrowError(err);
         }
 
         if (err.status !== 401 && err.status !== 403) { // UNAUTHORIZED ACCESS is managed in a dedicated interceptor
@@ -45,11 +57,10 @@ export class ErrorHandlerService {
             data: message || 'une erreur est survenue',
             duration: 5000
           });
+          return observableThrowError(err);
         }
-
       }
     }
-    return observableThrowError(err);
   }
 
 }
