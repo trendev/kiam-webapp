@@ -1,6 +1,5 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { environment } from '@env/environment';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,8 +9,8 @@ import { environment } from '@env/environment';
 
 export class SignUpComponent implements OnInit {
 
-  readonly main_title = `${environment.title}`;
   form: FormGroup;
+  email: string;
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -31,7 +30,7 @@ export class SignUpComponent implements OnInit {
   }
 
   createAccount() {
-    // TODO : use userAccountService
+    this.email = this.form.get('email').value;
   }
 
 }

@@ -3,8 +3,17 @@
   <mat-card class="login-card">
     <form [formGroup]="form" (ngSubmit)="createAccount()">
       <mat-card-title>Inscription</mat-card-title>
+      <mat-card-subtitle>Tu peux désormais <strong>créer un compte automatiquement</strong> et ce, en
+        renseignant simplement ton addresse email 😊</mat-card-subtitle>
       <mat-card-content>
-        <p>Tu peux désormais créer un compte <strong>automatiquement</strong> sur {{main_title}} et ce, en renseignant simplement ton addresse email ✉️</p>
+        <div>
+          <label for="email">
+            Email
+          </label>
+          <input id="email" type="text" formControlName="email">
+          <!-- debug purpose -->
+          <p><code>{{email}}</code></p>
+        </div>
       </mat-card-content>
       <mat-card-actions>
         <div class="login-actions">
