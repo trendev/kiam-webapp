@@ -5,12 +5,12 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login/login.component';
-import { RegisterFormComponent } from './register-form/register-form.component';
 import { LoginGuard } from './login.guard';
 import { DispatcherService } from './dispatcher.service';
 import { UnsupportedUserTypeComponent } from './unsupported-user-type/unsupported-user-type.component';
 import { LoginToolbarComponent } from './login/login-toolbar/login-toolbar.component';
 import { LoginCardComponent } from './login/login-card/login-card.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   imports: [
@@ -19,8 +19,8 @@ import { LoginCardComponent } from './login/login-card/login-card.component';
     SharedModule,
     LoginRoutingModule
   ],
-  declarations: [LoginComponent, RegisterFormComponent, UnsupportedUserTypeComponent, LoginToolbarComponent, LoginCardComponent],
-  exports: [LoginComponent, RegisterFormComponent],
+  declarations: [LoginComponent, SignUpComponent, UnsupportedUserTypeComponent, LoginToolbarComponent, LoginCardComponent],
+  exports: [LoginComponent, SignUpComponent],
   providers: [LoginGuard, DispatcherService]
 })
 export class LoginModule { }

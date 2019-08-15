@@ -1,0 +1,18 @@
+<app-login-toolbar></app-login-toolbar>
+<div class="container">
+  <mat-card class="login-card">
+    <form>
+      <mat-card-title>Inscription</mat-card-title>
+      <mat-card-content>
+        <p>Tu peux désormais créer un compte <strong>automatiquement</strong> sur {{main_title}} 🤗</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="login-actions">
+          <button type="button" class="button" mat-raised-button color="primary">Valider</button>
+          <button type="button" mat-button [routerLink]="['/login']"
+            [queryParams]="{'login-required': 'true'}">Identification</button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
