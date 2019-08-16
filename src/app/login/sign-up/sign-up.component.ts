@@ -11,6 +11,7 @@ import { CustomValidators } from '@app/shared';
 export class SignUpComponent implements OnInit {
 
   form: FormGroup;
+  success = false;
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -34,7 +35,8 @@ export class SignUpComponent implements OnInit {
     const payload = {
       email: email
     };
-    console.warn(payload);
+
+    this.success = true;
   }
 
 }
