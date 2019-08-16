@@ -1,6 +1,7 @@
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { CustomValidators } from '@app/shared';
+import { UserAccountService } from '@app/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,8 +13,10 @@ export class SignUpComponent implements OnInit {
 
   form: FormGroup;
   success = false;
+  signUpError = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private userAccountService: UserAccountService) {
     this.createForm();
   }
 
@@ -31,12 +34,15 @@ export class SignUpComponent implements OnInit {
   }
 
   createAccount() {
-    const email = this.form.get('email').value;
-    const payload = {
-      email: email
-    };
+    this.success = false;
+    this.signUpError = false;
 
-    this.success = true;
+    this.userAccountService.createProfessional({ email: this.form.get('email').value })
+      .subscribe(
+        resp => { this.success = true; },
+        err => { this.signUpError = true; }
+      );
+
   }
 
 }
