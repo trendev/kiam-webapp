@@ -7,10 +7,9 @@
         renseignant simplement ton addresse email 😊</mat-card-subtitle>
       <mat-card-content>
         <div>
-          <label for="email">
-            Email
-          </label>
-          <input id="email" type="text" formControlName="email">
+          <mat-form-field>
+            <input matInput placeholder="email" id="email" type="email" formControlName="email">
+          </mat-form-field>
           <!-- debug purpose -->
           <p><code>{{email}}</code></p>
         </div>
