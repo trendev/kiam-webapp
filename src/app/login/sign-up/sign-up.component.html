@@ -8,8 +8,14 @@
       <mat-card-content>
         <div>
           <mat-form-field>
-            <input matInput placeholder="email" id="email" type="email" formControlName="email">
+            <input matInput placeholder="email" id="email" type="email" formControlName="email" required>
           </mat-form-field>
+          <mat-error *ngIf="form.get('email').hasError('email') && !form.hasError('required')">
+            Merci de renseigner une adresse email valide...
+          </mat-error>
+          <mat-error *ngIf="form.get('email').hasError('required')">
+            Il est nécessaire de renseigner une adresse email...
+          </mat-error>
           <!-- debug purpose -->
           <p><code>{{email}}</code></p>
         </div>

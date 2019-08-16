@@ -1,5 +1,6 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { CustomValidators } from '@app/shared';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,7 +22,7 @@ export class SignUpComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      email: '', // TODO : add email validator
+      email: new FormControl('', [CustomValidators.email]),
     });
   }
 
