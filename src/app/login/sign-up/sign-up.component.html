@@ -1,18 +1,12 @@
 <app-login-toolbar></app-login-toolbar>
 <div class="container">
   <mat-card class="login-card">
-    <form [formGroup]="form" (ngSubmit)="createAccount()">
-      <mat-card-title *ngIf="!success">Inscription</mat-card-title>
-      <mat-card-title *ngIf="success">🥳 Félicitations 🎉</mat-card-title>
-      <mat-card-subtitle *ngIf="success">Jette un oeil à tes emails...</mat-card-subtitle>
-      <mat-card-subtitle *ngIf="!success">Tu peux désormais <strong>créer un compte automatiquement</strong> 😊
+    <form *ngIf="!success; else ok" [formGroup]="form" (ngSubmit)="createAccount()">
+      <mat-card-title>Inscription</mat-card-title>
+      <mat-card-subtitle>Tu peux désormais <strong>créer un compte automatiquement</strong> 😊
       </mat-card-subtitle>
       <mat-card-content>
-        <div *ngIf="success">
-          <p><strong>Tu as certainement déjà reçu tes identifiants</strong> et tu peux dès maintenant <strong>profiter d'un mois d'essai gratuit</strong> 🤗
-          </p>
-        </div>
-        <div *ngIf="!success">
+        <div>
           <mat-form-field style="width: 100%">
             <input matInput placeholder="ton adresse email" id="email" type="email" formControlName="email" required>
           </mat-form-field>
@@ -31,13 +25,29 @@
       </mat-card-content>
       <mat-card-actions>
         <div class="login-actions">
-          <button *ngIf="!success" type="submit" class="button" mat-raised-button color="primary"
-            [disabled]="!form.valid">Créer un
+          <button type="submit" class="button" mat-raised-button color="primary" [disabled]="!form.valid">Créer un
             compte</button>
           <button type="button" mat-button [routerLink]="['/login']"
             [queryParams]="{'login-required': 'true'}">Retour</button>
         </div>
       </mat-card-actions>
     </form>
+    <ng-template #ok>
+      <mat-card-title>🥳 Félicitations 🎉</mat-card-title>
+      <mat-card-subtitle>Jette un oeil à tes emails...</mat-card-subtitle>
+      <mat-card-content>
+        <div *ngIf="success">
+          <p><strong>Tu as certainement déjà reçu tes identifiants</strong> et tu peux dès maintenant <strong>profiter
+              d'un mois d'essai gratuit</strong> 🤗
+          </p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="login-actions">
+          <button type="button" mat-button [routerLink]="['/login']"
+            [queryParams]="{'login-required': 'true'}">Identification</button>
+        </div>
+      </mat-card-actions>
+    </ng-template>
   </mat-card>
 </div>
