@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { CustomValidators } from '@app/shared';
 
@@ -11,7 +11,6 @@ import { CustomValidators } from '@app/shared';
 export class SignUpComponent implements OnInit {
 
   form: FormGroup;
-  email: string;
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -22,16 +21,20 @@ export class SignUpComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      email: new FormControl('', [CustomValidators.email]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(100),
+        CustomValidators.email
+      ]),
     });
   }
 
-  reset() {
-    this.form.reset();
-  }
-
   createAccount() {
-    this.email = this.form.get('email').value;
+    const email = this.form.get('email').value;
+    const payload = {
+      email: email
+    };
+    console.warn(payload);
   }
 
 }

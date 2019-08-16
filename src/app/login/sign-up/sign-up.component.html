@@ -9,21 +9,25 @@
           <mat-form-field style="width: 100%">
             <input matInput placeholder="ton adresse email" id="email" type="email" formControlName="email" required>
           </mat-form-field>
-          <mat-error *ngIf="form.get('email').hasError('email') && !form.hasError('required')">
-            Merci de renseigner une adresse email valide...
-          </mat-error>
-          <mat-error *ngIf="form.get('email').hasError('required')">
-            Il est nécessaire de renseigner une adresse email...
-          </mat-error>
-          <!-- debug purpose -->
-          <p><code>{{email}}</code></p>
+          <div *ngIf="form.invalid && (form.dirty || form.touched)">
+            <mat-error *ngIf="form.get('email').hasError('required')">
+              Il est nécessaire de renseigner une adresse email...
+            </mat-error>
+            <mat-error *ngIf="form.get('email').hasError('email') && !form.hasError('required')">
+              Merci de renseigner une adresse email valide...
+            </mat-error>
+            <mat-error *ngIf="form.get('email').hasError('maxlength') && !form.hasError('required')">
+              C'est un peu long comme adresse email, non?
+            </mat-error>
+          </div>
         </div>
       </mat-card-content>
       <mat-card-actions>
         <div class="login-actions">
-          <button type="submit" class="button" mat-raised-button color="primary">Valider</button>
+          <button type="submit" class="button" mat-raised-button color="primary" [disabled]="!form.valid">Créer un
+            compte</button>
           <button type="button" mat-button [routerLink]="['/login']"
-            [queryParams]="{'login-required': 'true'}">Identification</button>
+            [queryParams]="{'login-required': 'true'}">Retour</button>
         </div>
       </mat-card-actions>
     </form>
