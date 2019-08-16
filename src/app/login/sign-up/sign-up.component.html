@@ -3,12 +3,11 @@
   <mat-card class="login-card">
     <form [formGroup]="form" (ngSubmit)="createAccount()">
       <mat-card-title>Inscription</mat-card-title>
-      <mat-card-subtitle>Tu peux désormais <strong>créer un compte automatiquement</strong> et ce, en
-        renseignant simplement ton addresse email 😊</mat-card-subtitle>
+      <mat-card-subtitle>Tu peux désormais <strong>créer un compte automatiquement</strong> 😊</mat-card-subtitle>
       <mat-card-content>
         <div>
-          <mat-form-field>
-            <input matInput placeholder="email" id="email" type="email" formControlName="email" required>
+          <mat-form-field style="width: 100%">
+            <input matInput placeholder="ton adresse email" id="email" type="email" formControlName="email" required>
           </mat-form-field>
           <mat-error *ngIf="form.get('email').hasError('email') && !form.hasError('required')">
             Merci de renseigner une adresse email valide...
