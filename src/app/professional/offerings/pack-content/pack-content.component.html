@@ -17,10 +17,6 @@
                     <mat-checkbox [checked]="element.checked" (change)="select($event,element)"></mat-checkbox>
                 </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">#</mat-header-cell>
-                <mat-cell *matCellDef="let element" [class.hide]="true">{{element.id}}</mat-cell>
-            </ng-container>
             <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Nom</mat-header-cell>
                 <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>
