@@ -15,7 +15,7 @@ export class CollectiveGroupBillResolverService implements Resolve<CollectiveGro
 
   resolve(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): CollectiveGroupBill | Observable<CollectiveGroupBill> | Promise<CollectiveGroupBill> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     const ref = route.paramMap.get('ref');
     return this.collectiveGroupService.getCollectiveGroupBill(id, ref).pipe(
       catchError(e => {

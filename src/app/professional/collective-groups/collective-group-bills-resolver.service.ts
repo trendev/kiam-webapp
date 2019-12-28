@@ -15,7 +15,7 @@ export class CollectiveGroupBillsResolverService implements Resolve<CollectiveGr
 
   resolve(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): CollectiveGroupBill[] | Observable<CollectiveGroupBill[]> | Promise<CollectiveGroupBill[]> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     return this.collectiveGroupService.getCollectiveGroupBills(id).pipe(
       catchError(e => {
         this.errorHandler.handle(e, `Impossible de récupérer les factures du groupe ${id}...`);

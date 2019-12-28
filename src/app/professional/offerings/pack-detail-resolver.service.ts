@@ -14,7 +14,7 @@ export class PackDetailResolverService implements Resolve<Pack> {
     private errorHandler: ErrorHandlerService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Pack | Observable<Pack> | Promise<Pack> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     return this.professionalService.getOfferings().pipe(
       map(offerings => {
         const pack = offerings.filter(c => c.id === id).pop();

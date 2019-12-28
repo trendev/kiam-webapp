@@ -23,8 +23,8 @@ export class CategoryClientListComponent implements OnInit, OnChanges, AfterView
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  @Output() add = new EventEmitter<number>();
-  @Output() remove = new EventEmitter<number>();
+  @Output() add = new EventEmitter<string>();
+  @Output() remove = new EventEmitter<string>();
 
   private clientSortFn: (cl1: ClientModel, cl2: ClientModel) => number
     = (cl1, cl2) => {
@@ -102,5 +102,5 @@ interface ClientModel {
   checked: boolean;
   firstname: string;
   lastname: string;
-  id: number;
+  id: string;
 }

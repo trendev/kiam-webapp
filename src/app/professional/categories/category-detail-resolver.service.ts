@@ -14,7 +14,7 @@ export class CategoryDetailResolverService implements Resolve<Category> {
     private errorHandler: ErrorHandlerService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Category | Observable<Category> | Promise<Category> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     return this.professionalService.getCategories()
       .pipe(
         map(categories => {

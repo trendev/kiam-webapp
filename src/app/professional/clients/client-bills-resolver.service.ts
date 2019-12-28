@@ -14,7 +14,7 @@ export class ClientBillsResolverService implements Resolve<ClientBill[]> {
     private errorHandler: ErrorHandlerService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): ClientBill[] | Observable<ClientBill[]> | Promise<ClientBill[]> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     return this.clientService.getClientBills(id).pipe(
       catchError(e => {
         this.errorHandler.handle(e, `Impossible de récupérer les factures du client ${id}...`);

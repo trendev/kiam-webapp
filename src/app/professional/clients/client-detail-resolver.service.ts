@@ -15,7 +15,7 @@ export class ClientDetailResolverService implements Resolve<Client> {
     private errorHandler: ErrorHandlerService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Client | Observable<Client> | Promise<Client> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     return this.professionalService.getClients().pipe(
       map(clients => {
         const client = clients.filter(c => c.id === id).pop();

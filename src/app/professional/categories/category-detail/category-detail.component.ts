@@ -119,7 +119,7 @@ export class CategoryDetailComponent implements OnInit {
    * Add a client in the category
    * @param clientid the client's id
    */
-  addClient(clientid: number) {
+  addClient(clientid: string) {
     this.manageAssociation(clientid,
       this.categoryService.addClient,
       `a été ajouté à`,
@@ -131,7 +131,7 @@ export class CategoryDetailComponent implements OnInit {
    * Remove a client from the category
    * @param clientid the client's id
    */
-  removeClient(clientid: number) {
+  removeClient(clientid: string) {
     this.manageAssociation(clientid,
       this.categoryService.removeClient,
       `a été supprimé de`,
@@ -154,8 +154,8 @@ export class CategoryDetailComponent implements OnInit {
    * @param errmsg the error message to display
    * @param updateCategoryClients operations to perform on the client list of the category, use to update the model if an error occurs
    */
-  private manageAssociation(clientid: number,
-    actionCallback: (categoryid: number, clientid: number) => Observable<Client>,
+  private manageAssociation(clientid: string,
+    actionCallback: (categoryid: string, clientid: string) => Observable<Client>,
     successmsg: string,
     errmsg: string,
     updateCategoryClients: (client: Client) => void) {

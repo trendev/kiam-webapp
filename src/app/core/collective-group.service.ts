@@ -31,14 +31,14 @@ export class CollectiveGroupService {
     );
   }
 
-  getCollectiveGroupBills(id: number): Observable<CollectiveGroupBill[]> {
+  getCollectiveGroupBills(id: string): Observable<CollectiveGroupBill[]> {
     return this.http.get<CollectiveGroupBill[]>(`${this.api}/${id}/collectiveGroupBills`).pipe(
       map(cgbills => cgbills.map(cgb => new CollectiveGroupBill(cgb))),
       catchError(e => observableThrowError(e))
     );
   }
 
-  getCollectiveGroupBill(id: number, ref: string): Observable<CollectiveGroupBill> {
+  getCollectiveGroupBill(id: string, ref: string): Observable<CollectiveGroupBill> {
     return this.http.get<CollectiveGroupBill[]>(`${this.api}/${id}/collectiveGroupBills`).pipe(
       map(cgbills => {
         const bills = cgbills.filter(cgb => cgb.reference === ref);

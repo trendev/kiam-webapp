@@ -31,27 +31,27 @@ export class CategoryService {
     );
   }
 
-  remove(id: number): Observable<string> {
+  remove(id: string): Observable<string> {
     return this.http.delete(`${this.api}/${id}`, { responseType: 'text' }).pipe(
       catchError(e => observableThrowError(e))
     );
   }
 
-  getClients(id: number): Observable<Client[]> {
+  getClients(id: string): Observable<Client[]> {
     return this.http.get<Client[]>(`${this.api}/${id}/clients`).pipe(
       map(clients => clients.map(c => new Client(c))),
       catchError(e => observableThrowError(e))
     );
   }
 
-  addClient(categoryid: number, clientid: number): Observable<Client> {
+  addClient(categoryid: string, clientid: string): Observable<Client> {
     return this.http.put<Client>(`${this.api}/${categoryid}/addClient/${clientid}`, null).pipe(
       map(cl => new Client(cl)),
       catchError(e => observableThrowError(e))
     );
   }
 
-  removeClient(categoryid: number, clientid: number): Observable<Client> {
+  removeClient(categoryid: string, clientid: string): Observable<Client> {
     return this.http.put<Client>(`${this.api}/${categoryid}/removeClient/${clientid}`, null).pipe(
       map(cl => new Client(cl)),
       catchError(e => observableThrowError(e))

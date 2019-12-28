@@ -14,7 +14,7 @@ export class ClientBillResolverService implements Resolve<ClientBill> {
     private errorHandler: ErrorHandlerService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): ClientBill | Observable<ClientBill> | Promise<ClientBill> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     const ref = route.paramMap.get('ref');
     return this.clientService.getClientBill(id, ref).pipe(
       catchError(e => {

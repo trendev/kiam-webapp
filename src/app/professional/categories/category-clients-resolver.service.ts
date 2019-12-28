@@ -13,7 +13,7 @@ export class CategoryClientsResolverService implements Resolve<Client[]> {
     private errorHandler: ErrorHandlerService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Client[] | Observable<Client[]> | Promise<Client[]> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     return this.categoryService.getClients(id).pipe(
       catchError(e => {
         this.errorHandler.handle(e, `Impossible de récupérer la liste des clients de la catégorie ${id}...`);

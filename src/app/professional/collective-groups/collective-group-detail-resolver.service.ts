@@ -15,7 +15,7 @@ export class CollectiveGroupDetailResolverService implements Resolve<CollectiveG
 
   resolve(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): CollectiveGroup | Observable<CollectiveGroup> | Promise<CollectiveGroup> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     return this.professionalService.getCollectiveGroups().pipe(
       map(collectiveGroups => {
         const cg = collectiveGroups.filter(c => c.id === id).pop();
