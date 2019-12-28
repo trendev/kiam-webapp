@@ -24,7 +24,7 @@ export class PackContentComponent implements OnChanges {
   offeringsModel: OfferingModel[];
 
   displayedColumns = [
-    'checked', 'id', 'name', 'price', 'duration', 'businesses'];
+    'checked', 'name', 'price', 'duration', 'businesses'];
   datasource: MatTableDataSource<OfferingModel>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -53,18 +53,18 @@ export class PackContentComponent implements OnChanges {
   initOfferingsModel() {
     this.offeringsModel = this.professionalOfferings
       .map(
-      o => {
-        return {
-          // check if the offering is in the pack
-          checked: (this.contentOfferingsValue.findIndex(_o => _o.id === o.id) === -1) ? false : true,
-          id: o.id,
-          name: o.shortname || o.name,
-          price: o.price,
-          duration: o.duration,
-          businesses: Utils.getBusinesses(o.businesses), // display businesses as a string
-          offering: o
-        };
-      }
+        o => {
+          return {
+            // check if the offering is in the pack
+            checked: (this.contentOfferingsValue.findIndex(_o => _o.id === o.id) === -1) ? false : true,
+            id: o.id,
+            name: o.shortname || o.name,
+            price: o.price,
+            duration: o.duration,
+            businesses: Utils.getBusinesses(o.businesses), // display businesses as a string
+            offering: o
+          };
+        }
       )
       // filter checked
       // + businesses in the active businesses selection of the pack
