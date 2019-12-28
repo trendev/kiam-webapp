@@ -13,8 +13,7 @@ export class ParentPacksComponent implements OnChanges {
 
   @Input() parentPacks: Pack[];
   offeringsModel: OfferingModel[];
-  displayedColumns = [
-    'id', 'name', 'price'];
+  displayedColumns = ['name', 'price'];
   datasource: MatTableDataSource<OfferingModel>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
