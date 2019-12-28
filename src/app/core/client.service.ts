@@ -31,14 +31,14 @@ export class ClientService {
     );
   }
 
-  getClientBills(id: number): Observable<ClientBill[]> {
+  getClientBills(id: string): Observable<ClientBill[]> {
     return this.http.get<ClientBill[]>(`${this.api}/${id}/clientBills`).pipe(
       map(clientBills => clientBills.map(cb => new ClientBill(cb))),
       catchError(e => observableThrowError(e))
     );
   }
 
-  getClientBill(id: number, ref: string): Observable<ClientBill> {
+  getClientBill(id: string, ref: string): Observable<ClientBill> {
     return this.http.get<ClientBill[]>(`${this.api}/${id}/clientBills`).pipe(
       map(clientBills => {
         const bills = clientBills.filter(cb => cb.reference === ref);

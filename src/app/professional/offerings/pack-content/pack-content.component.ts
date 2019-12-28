@@ -125,7 +125,7 @@ export class PackContentComponent implements OnChanges {
 
 interface OfferingModel {
   checked: boolean;
-  id: number;
+  id: string;
   name: string;
   price: number;
   duration: number;

@@ -13,7 +13,7 @@ export class ServiceParentPacksResolverService implements Resolve<Pack[]> {
     private errorHandler: ErrorHandlerService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Pack[] | Observable<Pack[]> | Promise<Pack[]> {
-    const id = +route.paramMap.get('id');
+    const id = route.paramMap.get('id');
     return this.serviceService.getParentPacks(id).pipe(
       catchError(e => {
         this.errorHandler.handle(e, `Impossible de récupérer la liste des forfaits qui incluent le service ${id}...`);

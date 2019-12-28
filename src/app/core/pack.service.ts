@@ -17,7 +17,7 @@ export class PackService {
 
   constructor(private http: HttpClient) { }
 
-  getParentPacks(id: number): Observable<Pack[]> {
+  getParentPacks(id: string): Observable<Pack[]> {
     return this.http.get<Offering[]>(`${this.api}/${id}/parentPacks`).pipe(
       map(offerings => offerings
         .filter(o => o.cltype === OfferingType.PACK)
@@ -41,7 +41,7 @@ export class PackService {
     );
   }
 
-  remove(id: number): Observable<string> {
+  remove(id: string): Observable<string> {
     return this.http.delete(`${this.api}/${id}`, { responseType: 'text' }).pipe(
       catchError(e => observableThrowError(e)));
   }

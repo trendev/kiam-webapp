@@ -35,7 +35,7 @@ export class ParentPacksComponent implements OnChanges {
       }
     ).map(o => {
       return {
-        id: o.id || 0,
+        id: o.id,
         name: o.shortname || o.name,
         price: o.price || 0
       };
@@ -58,7 +58,7 @@ export class ParentPacksComponent implements OnChanges {
 }
 
 interface OfferingModel {
-  id: number;
+  id: string;
   name: string;
   price: number;
 }

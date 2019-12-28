@@ -16,7 +16,7 @@ import { ExportBillService } from '../export-bill.service';
 })
 export class CollectiveGroupBillDetailComponent implements OnInit {
 
-  id: number;
+  id: string;
   name: string;
   rpt: string;
   paymentModes: PaymentMode[];
