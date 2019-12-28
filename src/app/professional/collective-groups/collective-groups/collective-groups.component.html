@@ -16,11 +16,6 @@
         </div>
         <mat-table #table [dataSource]="datasource" matSort>
 
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Code</mat-header-cell>
-            <mat-cell *matCellDef="let element" class="hide">{{element.id}}</mat-cell>
-          </ng-container>
-
           <ng-container matColumnDef="groupName">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Nom</mat-header-cell>
             <mat-cell *matCellDef="let element" class="name">{{element.groupName}}</mat-cell>

@@ -21,7 +21,7 @@ export class CollectiveGroupsComponent implements OnInit, AfterViewInit {
   collectiveGroups: CollectiveGroupModel[] = [];
   private _collectiveGroups: CollectiveGroup[] = [];
 
-  displayedColumns = ['id', 'groupName', 'city', 'phone'];
+  displayedColumns = ['groupName', 'city', 'phone'];
   datasource: MatTableDataSource<CollectiveGroupModel>;
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
