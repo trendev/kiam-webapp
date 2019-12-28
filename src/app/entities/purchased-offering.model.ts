@@ -2,7 +2,7 @@ import { Offering } from './offering.model';
 import { OfferingSnapshot } from './offering-snapshot.model';
 
 export class PurchasedOffering {
-    id: number;
+    id: string;
     qty: number;
     vatRate: number;
     offeringSnapshot: OfferingSnapshot;

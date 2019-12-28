@@ -1,7 +1,7 @@
 import { PaymentMode } from './payment-mode.model';
 
 export class Payment {
-    id: number;
+    id: string;
     amount: number;
     paymentMode: PaymentMode;
 

@@ -2,7 +2,7 @@ import { Payment } from './payment.model';
 import { Business } from './business.model';
 
 export class Expense {
-    id: number;
+    id: string;
     name: string;
     amount: number;
     currency: string;

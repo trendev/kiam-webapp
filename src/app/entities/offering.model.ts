@@ -6,7 +6,7 @@ export class OfferingType {
 }
 
 export abstract class Offering {
-    id: number;
+    id: string;
     cltype: string;
     name: string;
     shortname: string;
