@@ -1,7 +1,7 @@
 import { Address } from './address.model';
 
 export class CollectiveGroup {
-    id: number;
+    id: string;
     groupName: string;
     phone: string;
     address: Address;

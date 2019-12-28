@@ -1,5 +1,5 @@
 export class SocialNetworkAccounts {
-    id: number;
+    id: string;
     facebook: string;
     twitter: string;
     instagram: string;

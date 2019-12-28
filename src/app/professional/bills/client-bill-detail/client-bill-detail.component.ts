@@ -15,7 +15,7 @@ import { SuccessMessageComponent, BillsUtils } from '@app/shared';
 })
 export class ClientBillDetailComponent implements OnInit {
 
-  id: number;
+  id: string;
   name: string;
   paymentModes: PaymentMode[];
   clientBill: ClientBill;

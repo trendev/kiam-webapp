@@ -1,6 +1,6 @@
 export class Address {
 
-    id: number;
+    id: string;
     street: string;
     optional: string;
     postalCode: string;

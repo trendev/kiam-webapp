@@ -5,7 +5,7 @@ import { SocialNetworkAccounts } from './social-network-accounts.model';
 import { Address } from './address.model';
 
 export class Client {
-    id: number;
+    id: string;
     email: string;
     socialNetworkAccounts: SocialNetworkAccounts;
     customerDetails: CustomerDetails;
