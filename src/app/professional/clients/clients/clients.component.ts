@@ -26,7 +26,6 @@ export class ClientsComponent implements OnInit, AfterViewInit {
   datasource: MatTableDataSource<ClientModel>;
 
   columns: ClientColumnDef[] = [
-    { columnDef: 'id', headerCellDef: 'Code client', cellDef: (client: ClientModel) => client.id, hide: true },
     { columnDef: 'lastName', headerCellDef: 'Nom', cellDef: (client: ClientModel) => client.lastName, hide: false },
     { columnDef: 'firstName', headerCellDef: 'Prénom', cellDef: (client: ClientModel) => client.firstName, hide: false },
     { columnDef: 'nickname', headerCellDef: 'Surnom', cellDef: (client: ClientModel) => client.nickname, hide: true },
