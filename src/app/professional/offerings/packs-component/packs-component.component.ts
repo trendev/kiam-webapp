@@ -15,8 +15,7 @@ export class PacksComponentComponent implements OnChanges {
   @Input() offerings: Pack[];
   offeringsModel: OfferingModel[];
 
-  displayedColumns = [
-    'id', 'name', 'shortname', 'price', 'duration', 'businesses', 'content'];
+  displayedColumns = ['name', 'shortname', 'price', 'duration', 'businesses', 'content'];
   datasource: MatTableDataSource<OfferingModel>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;

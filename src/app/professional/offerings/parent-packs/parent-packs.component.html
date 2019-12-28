@@ -1,9 +1,5 @@
 <div class="list-container">
   <mat-table #table [dataSource]="datasource" matSort>
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">#</mat-header-cell>
-      <mat-cell *matCellDef="let element" class="hide">{{element.id}}</mat-cell>
-    </ng-container>
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header class="name">Nom</mat-header-cell>
       <mat-cell *matCellDef="let element" class="name">{{element.name}}</mat-cell>

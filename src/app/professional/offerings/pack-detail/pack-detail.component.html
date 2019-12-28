@@ -1,7 +1,8 @@
 <div class="container">
   <mat-card>
     <form [formGroup]="form" novalidate>
-      <mat-card-title>{{pack.name}} - {{pack.id}}</mat-card-title>
+      <mat-card-title>{{pack.name}}</mat-card-title>
+      <mat-card-subtitle>Code du forfait : {{pack.id}}</mat-card-subtitle>
       <mat-card-content>
         <div>
           <mat-form-field class="names">
