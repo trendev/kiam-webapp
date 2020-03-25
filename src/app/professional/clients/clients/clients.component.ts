@@ -98,7 +98,7 @@ export class ClientsComponent implements OnInit, AfterViewInit {
     this.datasource.filter = filterValue;
   }
 
-  gotoClientDetails(id: number) {
+  gotoClientDetails(id: string) {
     this.router.navigate([id], { relativeTo: this.route });
   }
 

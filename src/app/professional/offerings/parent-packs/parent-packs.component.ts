@@ -50,7 +50,7 @@ export class ParentPacksComponent implements OnChanges {
     this.datasource.filter = filterValue;
   }
 
-  gotoPack(id: number) {
+  gotoPack(id: string) {
     this.router.navigate(['../../pack/' + id], { relativeTo: this.route });
   }
 

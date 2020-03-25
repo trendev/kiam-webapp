@@ -15,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CreateCollectiveGroupBillComponent implements OnInit {
 
-  id: number;
+  id: string;
   name: string;
   rpt: string;
   offerings: Offering[];
@@ -30,7 +30,7 @@ export class CreateCollectiveGroupBillComponent implements OnInit {
     private snackBar: MatSnackBar,
     private errorHandler: ErrorHandlerService) {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.id = +params.get('id');
+      this.id = params.get('id');
       this.name = params.get('name');
       this.rpt = params.get('rpt') || undefined;
     });

@@ -85,7 +85,7 @@ export class CollectiveGroupsComponent implements OnInit, AfterViewInit {
     this.datasource.filter = filterValue;
   }
 
-  gotoCollectiveGroupDetails(id: number) {
+  gotoCollectiveGroupDetails(id: string) {
     this.router.navigate([id], { relativeTo: this.route });
   }
 

@@ -15,7 +15,7 @@ import { ErrorHandlerService } from '@app/error-handler.service';
 })
 export class CreateClientBillComponent implements OnInit {
 
-  id: number;
+  id: string;
   name: string;
   offerings: Offering[];
   paymentModes: PaymentMode[];
@@ -30,7 +30,7 @@ export class CreateClientBillComponent implements OnInit {
     private errorHandler: ErrorHandlerService) {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.id = +params.get('id');
+      this.id = params.get('id');
       this.name = params.get('name');
     });
 

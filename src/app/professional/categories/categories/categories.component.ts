@@ -83,7 +83,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
     this.datasource.filter = filterValue;
   }
 
-  gotoCategoryDetails(id: number) {
+  gotoCategoryDetails(id: string) {
     this.router.navigate([id], { relativeTo: this.route });
   }
 

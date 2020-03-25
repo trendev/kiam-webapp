@@ -55,7 +55,7 @@ export class ServicesComponentComponent implements OnChanges {
     this.datasource.filter = filterValue;
   }
 
-  gotoService(id: number) {
+  gotoService(id: string) {
     this.router.navigate(['service/' + id], { relativeTo: this.route });
   }
 

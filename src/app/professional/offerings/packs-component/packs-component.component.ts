@@ -86,7 +86,7 @@ export class PacksComponentComponent implements OnChanges {
     };
   }
 
-  gotoPack(id: number) {
+  gotoPack(id: string) {
     this.router.navigate(['pack/' + id], { relativeTo: this.route });
   }
 
