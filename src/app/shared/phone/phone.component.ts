@@ -21,7 +21,7 @@ import {
 } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Observable ,  Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
 @Component({
@@ -129,14 +129,17 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   registerOnChange(fn: any): void {
     this.onChange = (value: string) => {
 
-      const newValue = this.updateInput(value);
-      this.value = newValue;
-      this.stateChanges.next();
+      if (value) {
+        console.warn(`value = ${value}`);
+        const newValue = this.updateInput(value);
+        this.value = newValue;
+        this.stateChanges.next();
 
-      if (Utils.isValidPhoneNumber(newValue)) {
-        fn(Utils.shrinkPhoneNumber(newValue));
-      } else {
-        fn(newValue);
+        if (Utils.isValidPhoneNumber(newValue)) {
+          fn(Utils.shrinkPhoneNumber(newValue));
+        } else {
+          fn(newValue);
+        }
       }
     };
   }
@@ -185,7 +188,9 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
   controlWhitespace(inputValue: string): string {
     const caretStart = this.input.nativeElement.selectionStart;
 
-    if (inputValue.length - this.value.length === -1
+    if (inputValue
+      && this.value
+      && inputValue.length - this.value.length === -1
       && /\s/.test(`${this.value.charAt(caretStart)}`)) {
 
       // set the new offset
