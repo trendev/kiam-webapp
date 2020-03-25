@@ -130,7 +130,6 @@ export class PhoneComponent implements ControlValueAccessor, MatFormFieldControl
     this.onChange = (value: string) => {
 
       if (value) {
-        console.warn(`value = ${value}`);
         const newValue = this.updateInput(value);
         this.value = newValue;
         this.stateChanges.next();
