@@ -14,7 +14,7 @@
             Une erreur est survenue lors de l'inscription. Merci de prendre contact avec le support de comptandye en
             envoyant un email à support@comptandye.fr
           </mat-error>
-          <div *ngIf="form.invalid && (form.dirty || form.touched)">
+          <div *ngIf="form.invalid && form.dirty && form.touched">
             <mat-error *ngIf="form.get('email').hasError('required')">
               Il est nécessaire de renseigner une adresse email...
             </mat-error>
