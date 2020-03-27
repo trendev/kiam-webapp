@@ -18,7 +18,8 @@ const routes: Routes = [
     component: OfferingsComponent,
     pathMatch: 'full',
     resolve: {
-      offerings: OfferingsResolverService
+      offerings: OfferingsResolverService,
+      businesses: ProfessionalBusinessesResolverService,
     }
   },
   {

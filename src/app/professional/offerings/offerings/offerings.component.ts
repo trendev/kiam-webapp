@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { ProfessionalService, OfferingsModelService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Offering, Service, Pack, OfferingType } from '@app/entities';
+import { Offering, Service, Pack, OfferingType, Business } from '@app/entities';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 import { ErrorHandlerService } from '@app/error-handler.service';
@@ -17,6 +17,7 @@ import { SuccessMessageComponent } from '@app/shared';
 export class OfferingsComponent implements OnInit {
 
   private _offerings: Offering[];
+  private _businesses: Business[];
   services: Service[] = [];
   packs: Pack[] = [];
 
@@ -38,9 +39,11 @@ export class OfferingsComponent implements OnInit {
     private errorHandler: ErrorHandlerService) {
     this.route.data.subscribe(
       (data: {
-        offerings: Offering[]
+        offerings: Offering[],
+        businesses: Business[],
       }) => {
         this._offerings = data.offerings;
+        this._businesses = data.businesses;
       }
     );
   }
