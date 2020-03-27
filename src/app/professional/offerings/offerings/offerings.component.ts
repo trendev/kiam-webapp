@@ -113,4 +113,9 @@ export class OfferingsComponent implements OnInit {
       );
   }
 
+  // TODO : improve filtering from a specific field in Business class
+  get offeringsModelAutoCreationSupported() {
+    return this._businesses.filter(b => b.designation === 'Coiffure').length !== 0;
+  }
+
 }
