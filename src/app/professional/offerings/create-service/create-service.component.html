@@ -17,7 +17,7 @@
           <input type="number" matInput placeholder="Prix (EUR)" formControlName="price" min="0" required>
         </mat-form-field>
         <mat-form-field>
-          <input type="number" matInput placeholder="Durée (minutes)" formControlName="duration" min="1" required>
+          <input type="number" matInput placeholder="Durée" formControlName="duration" min="1" required>
         </mat-form-field>
 
         <app-error [control]="form.get('name')" [error]="'required'">

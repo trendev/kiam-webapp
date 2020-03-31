@@ -26,7 +26,7 @@
                 <mat-cell *matCellDef="let element" class="price">{{element.price / 100}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="duration">
-                <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Durée (min)</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header [class.hide]="true">Durée</mat-header-cell>
                 <mat-cell *matCellDef="let element" [class.hide]="true">{{element.duration}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="businesses">
