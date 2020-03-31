@@ -24,7 +24,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   displayedColumns = ['name'];
   datasource: MatTableDataSource<CategoryModel>;
 
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private professionalService: ProfessionalService,
     private router: Router,

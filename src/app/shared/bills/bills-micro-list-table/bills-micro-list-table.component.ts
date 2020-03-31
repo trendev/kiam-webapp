@@ -18,7 +18,7 @@ export class BillsMicroListTableComponent implements OnChanges, AfterViewInit {
     'deliveryDate', 'amount', 'payment-status'];
   datasource: MatTableDataSource<BillModel> = new MatTableDataSource<BillModel>();
 
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   @Output() gotobill = new EventEmitter<BillModel>();

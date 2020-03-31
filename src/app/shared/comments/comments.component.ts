@@ -17,8 +17,8 @@ export class CommentsComponent implements OnInit {
 
   form: FormGroup;
   @Input() comments: FormArray;
-  @ViewChild('errorsTemplate', { static: false }) errorsTemplate;
-  @ViewChild('errorContainer', { read: ViewContainerRef, static: false }) errorContainer;
+  @ViewChild('errorsTemplate') errorsTemplate;
+  @ViewChild('errorContainer', { read: ViewContainerRef }) errorContainer;
   @Input() errorAggregator: ErrorAggregatorDirective;
 
   constructor(private parent: FormGroupDirective) {
