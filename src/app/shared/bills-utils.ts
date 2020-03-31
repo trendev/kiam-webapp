@@ -1,4 +1,3 @@
-import { VatAmount } from '@app/shared';
 import { Bill, ClientBill, CollectiveGroupBill, IndividualBill, BillType, PurchasedOffering } from '@app/entities';
 import * as moment from 'moment';
 
