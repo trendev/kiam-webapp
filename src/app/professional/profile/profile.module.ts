@@ -43,9 +43,6 @@ import { SubscriptionStateComponent } from './subscription-state/subscription-st
     StripeInvoicesResolverService,
     StripePaymentMethodResolver,
     StripePlanResolver
-  ],
-  entryComponents: [
-    RescissionConfirmationDialogComponent
   ]
 })
 export class ProfileModule { }

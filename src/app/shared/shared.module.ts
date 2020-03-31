@@ -177,11 +177,6 @@ import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg
     TwitterSvgIconComponent,
     FacebookSvgIconComponent,
     StripePaymentMethodTypeComponent
-  ],
-  entryComponents: [
-    SuccessMessageComponent,
-    ErrorMessageComponent,
-    UnexpectedErrorComponent
   ]
 })
 

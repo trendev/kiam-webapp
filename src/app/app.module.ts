@@ -26,7 +26,6 @@ registerLocaleData(localeFr, 'fr');
     AppComponent,
     LoadingOverlayComponent
   ],
-  entryComponents: [LoadingOverlayComponent],
   imports: [
     BrowserModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),

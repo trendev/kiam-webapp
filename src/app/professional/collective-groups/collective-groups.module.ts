@@ -26,8 +26,5 @@ import { RecipientDialogComponent } from './recipient-dialog/recipient-dialog.co
     CollectiveGroupBillsResolverService,
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlFr }
   ],
-  entryComponents: [
-    RecipientDialogComponent
-  ]
 })
 export class CollectiveGroupsModule { }
