@@ -1,9 +1,5 @@
 <section formGroupName="companyInformation" class="company-information">
   <mat-form-field>
-    <input matInput #website maxlength="150" placeholder="Site web" formControlName="website">
-    <mat-hint align="end">{{website.value?.length || 0}}/150</mat-hint>
-  </mat-form-field>
-  <mat-form-field>
     <input matInput #companyName maxlength="50" placeholder="Dénomination" formControlName="companyName" required>
     <mat-hint align="end">{{companyName.value?.length || 0}}/50</mat-hint>
   </mat-form-field>
@@ -23,14 +19,12 @@
     <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
     <mat-datepicker #dp></mat-datepicker>
   </mat-form-field>
+  <mat-form-field>
+    <input matInput #website maxlength="150" placeholder="Site web" formControlName="website">
+    <mat-hint align="end">{{website.value?.length || 0}}/150</mat-hint>
+  </mat-form-field>
   <ng-container #errorContainer></ng-container>
   <ng-template #errorsTemplate>
-    <app-error [control]="form.get('companyInformation').get('website')" [error]="'blankStringForbidden'">
-      L'adresse du site web ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
-    </app-error>
-    <app-error [control]="form.get('companyInformation').get('website')" [error]="'maxlength'">
-      L'adresse du site web ne doit pas excéder 150 caractères.
-    </app-error>
     <app-error [control]="form.get('companyInformation').get('companyName')" [error]="'required'">
       La dénomination de la société doit être renseignée.
     </app-error>
@@ -38,12 +32,14 @@
       La dénomination de la société ne doit pas excéder 50 caractères.
     </app-error>
     <app-error [control]="form.get('companyInformation').get('companyName')" [error]="'blankStringForbidden'">
-      La dénomination de la société ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+      La dénomination de la société ne doit pas contenir que des caractères d'espacement ou commencer par un caractère
+      d'espacement.
     </app-error>
     <app-error [control]="form.get('companyInformation').get('companyCodes').get('companyID')" [error]="'required'">
       L'identifiant de la société doit être renseigné.
     </app-error>
-    <app-error [control]="form.get('companyInformation').get('companyCodes').get('companyID')" [error]="'validCompanyID'">
+    <app-error [control]="form.get('companyInformation').get('companyCodes').get('companyID')"
+      [error]="'validCompanyID'">
       L'identifiant de la société doit être un identifiant (SIRET) valide.
     </app-error>
     <app-error [control]="form.get('companyInformation').get('companyCodes').get('vatcode')" [error]="'validVatCode'">
@@ -57,6 +53,13 @@
     </app-error>
     <app-error [control]="form.get('companyInformation').get('creationDate')" [error]="'past'">
       La date d'immatriculation ne peut correspondre à une date future.
+    </app-error>
+    <app-error [control]="form.get('companyInformation').get('website')" [error]="'blankStringForbidden'">
+      L'adresse du site web ne doit pas contenir que des caractères d'espacement ou commencer par un caractère
+      d'espacement.
+    </app-error>
+    <app-error [control]="form.get('companyInformation').get('website')" [error]="'maxlength'">
+      L'adresse du site web ne doit pas excéder 150 caractères.
     </app-error>
   </ng-template>
 </section>

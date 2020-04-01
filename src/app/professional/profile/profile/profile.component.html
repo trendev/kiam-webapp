@@ -5,14 +5,18 @@
       <mat-card-subtitle>Email : {{pro.email}}</mat-card-subtitle>
       <app-subscription-state *ngIf="!hasActiveSubscription" [pro]="pro"></app-subscription-state>
       <div class="top-button-container">
-          <a href="https://firebasestorage.googleapis.com/v0/b/comptandye-4c50d.appspot.com/o/cgvu.pdf?alt=media&token=7516b20d-0872-4eae-b5fb-23b3b8a9360d" target="_blank" mat-raised-button color="primary">CGV / CGU</a>
-        <button type="button" mat-raised-button color="primary" routerLink="./change-password" routerLinkActive="active">
+        <a href="https://firebasestorage.googleapis.com/v0/b/comptandye-4c50d.appspot.com/o/cgvu.pdf?alt=media&token=7516b20d-0872-4eae-b5fb-23b3b8a9360d"
+          target="_blank" mat-raised-button color="primary">CGV / CGU</a>
+        <button type="button" mat-raised-button color="primary" routerLink="./change-password"
+          routerLinkActive="active">
           Nouveau mot de passe
         </button>
-        <button *ngIf="hasActiveSubscription" type="button" mat-raised-button color="primary" routerLink="./subscription-details" routerLinkActive="active">
+        <button *ngIf="hasActiveSubscription" type="button" mat-raised-button color="primary"
+          routerLink="./subscription-details" routerLinkActive="active">
           Gestion de la souscription
         </button>
-        <button *ngIf="newSubscriptionAllowed" type="button" mat-raised-button color="accent" routerLink="./subscribe" routerLinkActive="active">
+        <button *ngIf="newSubscriptionAllowed" type="button" mat-raised-button color="accent" routerLink="./subscribe"
+          routerLinkActive="active">
           Nouvelle souscription
         </button>
       </div>
@@ -33,15 +37,6 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Société / Entreprise *
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-company-information [errorAggregator]="errorAggregator"></app-company-information>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
                 Activités *
               </mat-panel-title>
             </mat-expansion-panel-header>
@@ -51,10 +46,19 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Moyens d'encaissement acceptés *
+                Société / Entreprise *
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-payment-modes [errorAggregator]="errorAggregator"></app-payment-modes>
+            <app-company-information [errorAggregator]="errorAggregator"></app-company-information>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Adresse de l'entreprise *
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-address [errorAggregator]="errorAggregator"></app-address>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
@@ -69,10 +73,10 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Adresse de l'entreprise *
+                Moyens d'encaissement acceptés *
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <app-address [errorAggregator]="errorAggregator"></app-address>
+            <app-payment-modes [errorAggregator]="errorAggregator"></app-payment-modes>
           </mat-expansion-panel>
 
           <mat-expansion-panel>
@@ -89,13 +93,16 @@
       <ng-container appErrorAggregator></ng-container>
       <mat-card-actions>
         <div class="form-button-container">
-          <button type="button" matTooltip="Annuler les modification" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
+          <button type="button" matTooltip="Annuler les modification" mat-mini-fab color="accent" (click)="revert()"
+            [disabled]="form.pristine">
             <mat-icon aria-label="Annuler les modification">undo</mat-icon>
           </button>
-          <button type="button" matTooltip="Rafraîchir le profil avec les données du serveur" mat-mini-fab color="accent" (click)="refresh()">
+          <button type="button" matTooltip="Rafraîchir le profil avec les données du serveur" mat-mini-fab
+            color="accent" (click)="refresh()">
             <mat-icon aria-label="Rafraîchir le profil avec les données du serveur">refresh</mat-icon>
           </button>
-          <button type="button" matTooltip="Valider la mise à jour du profil" mat-mini-fab color="primary" (click)="save()" [disabled]="form.pristine || form.invalid">
+          <button type="button" matTooltip="Valider la mise à jour du profil" mat-mini-fab color="primary"
+            (click)="save()" [disabled]="form.pristine || form.invalid">
             <mat-icon aria-label="Valider la mise à jour du profil">done</mat-icon>
           </button>
         </div>
