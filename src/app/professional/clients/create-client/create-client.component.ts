@@ -91,6 +91,10 @@ export class CreateClientComponent implements OnInit {
           CustomValidators.blankStringForbidden,
           Validators.maxLength(50)
         ]),
+        jobrole: new FormControl('', [
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(100)
+        ]),
         nickname: new FormControl('', [
           CustomValidators.blankStringForbidden,
           Validators.maxLength(50)
@@ -174,6 +178,7 @@ export class CreateClientComponent implements OnInit {
       customerDetails: {
         firstName: value.customerDetails.firstName || undefined,
         lastName: value.customerDetails.lastName || undefined,
+        jobrole: value.customerDetails.jobrole || undefined,
         nickname: value.customerDetails.nickname || undefined,
         phone: value.customerDetails.phone || undefined,
         birthdate: value.customerDetails.birthdate ? value.customerDetails.birthdate.valueOf() : undefined,

@@ -65,6 +65,7 @@ export class ClientsComponent implements OnInit, AfterViewInit {
         id: client.id + '',
         lastName: client.customerDetails.lastName || '',
         firstName: client.customerDetails.firstName || '',
+        jobrole: client.customerDetails.jobrole || '',
         nickname: client.customerDetails.nickname || '',
         phone: client.customerDetails.phone || '',
         email: client.email || ''
