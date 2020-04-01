@@ -1,3 +1,4 @@
+import { CustomerDetails } from './../../../entities/customer-details.model';
 
 import { finalize } from 'rxjs/operators';
 import {
@@ -124,6 +125,10 @@ export class ProfileComponent implements OnInit {
           Validators.required,
           CustomValidators.blankStringForbidden,
           Validators.maxLength(50)
+        ]),
+        jobrole: new FormControl(this.pro.customerDetails.jobrole, [
+          CustomValidators.blankStringForbidden,
+          Validators.maxLength(100)
         ]),
         nickname: new FormControl(this.pro.customerDetails.nickname, [
           CustomValidators.blankStringForbidden,
@@ -275,6 +280,7 @@ export class ProfileComponent implements OnInit {
       customerDetails: {
         firstName: value.customerDetails.firstName || undefined,
         lastName: value.customerDetails.lastName || undefined,
+        jobrole: value.customerDetails.jobrole || undefined,
         nickname: value.customerDetails.nickname || undefined,
         phone: value.customerDetails.phone || undefined,
         birthdate: value.customerDetails.birthdate ? value.customerDetails.birthdate.valueOf() : undefined,

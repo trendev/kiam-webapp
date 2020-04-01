@@ -2,6 +2,7 @@ export class CustomerDetails {
     id: string;
     firstName: string;
     lastName: string;
+    jobrole: string;
     nickname: string;
     phone: string;
     birthdate: number;

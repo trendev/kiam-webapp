@@ -8,6 +8,10 @@
     <mat-hint align="end">{{firstName.value?.length || 0}}/50</mat-hint>
   </mat-form-field>
   <mat-form-field>
+    <input matInput #jobrole maxlength="100" placeholder="Profession" formControlName="jobrole">
+    <mat-hint align="end">{{jobrole.value?.length || 0}}/100</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
     <input matInput #nickname maxlength="50" placeholder="Surnom" formControlName="nickname">
     <mat-hint align="end">{{nickname.value?.length || 0}}/50</mat-hint>
   </mat-form-field>
@@ -52,6 +56,12 @@
     </app-error>
     <app-error [control]="form.get('customerDetails').get('lastName')" [error]="'maxlength'">
       Le nom ne doit pas excéder 50 caractères.
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('jobrole')" [error]="'blankStringForbidden'">
+      La profession ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
+    </app-error>
+    <app-error [control]="form.get('customerDetails').get('jobrole')" [error]="'maxlength'">
+      Le profession ne doit pas excéder 100 caractères.
     </app-error>
     <app-error [control]="form.get('customerDetails').get('nickname')" [error]="'blankStringForbidden'">
       Le surnom ne doit pas contenir que des caractères d'espacement ou commencer par un caractère d'espacement.
