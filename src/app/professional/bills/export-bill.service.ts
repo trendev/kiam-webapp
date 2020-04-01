@@ -8,6 +8,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import * as moment from 'moment';
 import { AuthenticationService } from '@app/core';
+import { environment } from '@env/environment';
 
 @Injectable()
 export class ExportBillService {
@@ -81,7 +82,7 @@ export class ExportBillService {
     // docDefinition
     const dd = {
       footer: {
-        text: `Facture générée et protégée par Comptandye`,
+        text: `Facture générée et protégée par ${environment.title}`,
         italics: true,
         fontSize: 9,
         margin: [0, 10, 0, 0],
