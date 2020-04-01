@@ -33,3 +33,6 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
  * Need to import at least one locale-data with intl.
  */
 // import 'intl/locale-data/jsonp/en';
+
+// tempory fix https://github.com/angular/angular-cli/issues/17320
+window['_rollupMoment__default'] = null;
