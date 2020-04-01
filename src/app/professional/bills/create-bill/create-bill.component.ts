@@ -4,7 +4,11 @@ import { Component, Input, EventEmitter, Output, ViewChild, OnInit, OnChanges, D
 import { Offering, PaymentMode, OfferingType, Bill, Payment, VatRates } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Subject } from 'rxjs';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({

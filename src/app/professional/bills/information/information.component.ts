@@ -4,8 +4,11 @@ import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/materia
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { ErrorAggregatorDirective } from '@app/shared';
-import * as moment from 'moment';
-import { Moment } from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'app-information',

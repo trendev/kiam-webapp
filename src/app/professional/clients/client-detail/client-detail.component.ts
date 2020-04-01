@@ -1,5 +1,5 @@
 
-import {finalize} from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ClientBill, Category } from '@app/entities';
@@ -15,7 +15,11 @@ import {
   SuccessMessageComponent,
 } from '@app/shared';
 import { ClientService } from '@app/core';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from '@app/error-handler.service';
@@ -112,8 +116,8 @@ export class ClientDetailComponent implements OnInit {
         ),
         birthdate: new FormControl(
           this.client.customerDetails.birthdate ? moment(this.client.customerDetails.birthdate) : undefined, [
-            CustomValidators.past
-          ]),
+          CustomValidators.past
+        ]),
         sex: this.client.customerDetails.sex,
         picturePath: new FormControl({ value: this.client.customerDetails.picturePath, disabled: true }),
         comments: this.fb.array(

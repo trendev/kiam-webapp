@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Professional } from '@app/entities';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'app-subscription-state',

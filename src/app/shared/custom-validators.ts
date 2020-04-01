@@ -1,5 +1,9 @@
 import { Utils } from './utils';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 import { ValidatorFn, AbstractControl, ValidationErrors, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PurchasedOffering, Payment } from '@app/entities';
 

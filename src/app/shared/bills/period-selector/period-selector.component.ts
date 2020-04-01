@@ -3,7 +3,11 @@ import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
 import { Component, OnInit, Input, OnChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 import { FormControl } from '@angular/forms';
 
 
@@ -28,9 +32,9 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
   @Output() maxDateChange = new EventEmitter<number>();
 
   @Input() minBound: number;
-  firstBound: moment.Moment;
+  firstBound: Moment;
   @Input() maxBound: number;
-  lastBound: moment.Moment;
+  lastBound: Moment;
 
   first = new FormControl(moment(), { updateOn: 'blur' });
   last = new FormControl(moment(), { updateOn: 'blur' });
@@ -46,7 +50,7 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
         if (!value) {
           return this.firstBound;
         }
-        const val = value as moment.Moment;
+        const val = value as Moment;
         return (val.isBefore(this.firstBound) || val.isAfter(this.last.value)) ? this.firstBound : value;
       })
     )
@@ -57,7 +61,7 @@ export class PeriodSelectorComponent implements OnInit, OnChanges, OnDestroy {
         if (!value) {
           return this.lastBound;
         }
-        const val = value as moment.Moment;
+        const val = value as Moment;
         return (val.isBefore(this.first.value) || val.isAfter(this.lastBound)) ? this.lastBound : value;
       })
     )

@@ -1,7 +1,11 @@
 import { BillModel, BillsUtils } from '../../bills-utils';
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { Bill } from '@app/entities';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'app-bills-micro-list',
