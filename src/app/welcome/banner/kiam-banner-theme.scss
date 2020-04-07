@@ -1,0 +1,17 @@
+
+@import '~@angular/material/theming';
+@import 'src/app/welcome/banner/title/kiam-banner-title-theme.scss';
+@import 'src/app/welcome/welcome-footer/kiam-welcome-footer-theme.scss';
+
+@mixin kiam-banner-theme($theme) {
+  @include kiam-banner-title-theme($theme);
+  @include kiam-welcome-footer-theme($theme);
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .banner {
+    background-color: mat-color($primary);
+    color: mat-color($accent, A400);
+  }
+}

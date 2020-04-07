@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+$kiam-app-primary: mat-palette($mat-deep-purple, 500, 300, 800);
+$kiam-app-accent: mat-palette($mat-green, A400, A200, A700);
+$kiam-app-warn: mat-palette($mat-pink, 400, 300, 700);
+$kiam-app-theme: mat-light-theme($kiam-app-primary, $kiam-app-accent, $kiam-app-warn);
+@include angular-material-theme($kiam-app-theme);
+
+@import 'src/app/welcome/banner/kiam-banner-theme.scss';
+@include kiam-banner-theme($kiam-app-theme);

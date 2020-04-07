@@ -2,8 +2,8 @@ version: '3'
 services:
   webapp:
     build: .
-    image: trendev/comptandye-webapp
-    container_name: comptandye-webapp
+    image: trendev/kiam-webapp
+    container_name: kiam-webapp
     networks:
       - frontend
     ports:

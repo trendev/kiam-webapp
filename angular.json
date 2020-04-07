@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "comptandye-webapp": {
+    "kiam-webapp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -112,24 +112,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "comptandye-webapp:build"
+            "browserTarget": "kiam-webapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "comptandye-webapp:build:production"
+              "browserTarget": "kiam-webapp:build:production"
             },
             "mobile": {
-              "browserTarget": "comptandye-webapp:build:mobile"
+              "browserTarget": "kiam-webapp:build:mobile"
             },
             "preprod": {
-              "browserTarget": "comptandye-webapp:build:preprod"
+              "browserTarget": "kiam-webapp:build:preprod"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "comptandye-webapp:build"
+            "browserTarget": "kiam-webapp:build"
           }
         },
         "test": {
@@ -164,7 +164,7 @@
         }
       }
     },
-    "comptandye-webapp-e2e": {
+    "kiam-webapp-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -173,7 +173,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "comptandye-webapp:serve"
+            "devServerTarget": "kiam-webapp:serve"
           }
         },
         "lint": {
@@ -190,7 +190,7 @@
       }
     }
   },
-  "defaultProject": "comptandye-webapp",
+  "defaultProject": "kiam-webapp",
   "schematics": {
     "@schematics/angular:class": {
       "skipTests": true

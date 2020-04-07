@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('comptandye-webapp App', () => {
+describe('kiam-webapp App', () => {
   let page: AppPage;
 
   beforeEach(() => {

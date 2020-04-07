@@ -11,8 +11,8 @@
             <input matInput placeholder="ton adresse email" id="email" type="email" formControlName="email" required>
           </mat-form-field>
           <mat-error *ngIf="signUpError">
-            Une erreur est survenue lors de l'inscription. Merci de prendre contact avec le support de comptandye en
-            envoyant un email à support@comptandye.fr
+            Une erreur est survenue lors de l'inscription. Merci de prendre contact avec le support de kiam en
+            envoyant un email à support@kiam.fr
           </mat-error>
           <div *ngIf="form.invalid && form.dirty && form.touched">
             <mat-error *ngIf="form.get('email').hasError('required')">

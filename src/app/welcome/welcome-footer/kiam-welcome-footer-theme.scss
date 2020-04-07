@@ -1,5 +1,5 @@
 @import '~@angular/material/theming';
-@mixin comptandye-welcome-footer-theme($theme) {
+@mixin kiam-welcome-footer-theme($theme) {
     $primary: map-get($theme, primary);
     .footer {
         background-color: mat-color($primary);

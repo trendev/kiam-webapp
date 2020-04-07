@@ -6,6 +6,6 @@ COPY . .
 RUN npm run build --  --configuration=preprod --base-href /preprod/
 
 FROM nginx:alpine
-LABEL maintainer="julien.sie@comptandye.fr"
+LABEL maintainer="julien.sie@kiam.fr"
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=node /app/dist/ /usr/share/nginx/html/
