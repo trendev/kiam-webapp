@@ -15,7 +15,7 @@
             <div class="action-container">
                 <button type="button" mat-raised-button color="primary" routerLink="../invoices"
                     routerLinkActive="active">
-                    Mes factures
+                    Factures 
                 </button>
                 <button *ngIf="!isRescinded; else reactivateBlock" type="button" mat-raised-button color="warn"
                     (click)="rescind()">
