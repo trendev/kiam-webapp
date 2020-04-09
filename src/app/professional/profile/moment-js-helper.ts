@@ -1,9 +1,13 @@
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Duration, DurationInputArg2 } from 'moment';
+
+const moment = _rollupMoment || _moment;
 import { StripePlan } from '@app/entities';
 
 export class MomentJSHelper {
-    private static computeDuration(plan: StripePlan): moment.Duration {
-        return moment.duration(plan.interval_count, plan.interval as moment.DurationInputArg2);
+    private static computeDuration(plan: StripePlan): Duration {
+        return moment.duration(plan.interval_count, plan.interval as DurationInputArg2);
     }
 
     static displayRenewalInterval(plan: StripePlan): string {

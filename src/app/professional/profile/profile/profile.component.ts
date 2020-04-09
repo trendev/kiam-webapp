@@ -8,7 +8,11 @@ import {
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Professional, Business, PaymentMode } from '@app/entities';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 import {
   ErrorAggregatorDirective,
   CustomValidators,
@@ -141,8 +145,8 @@ export class ProfileComponent implements OnInit {
         ),
         birthdate: new FormControl(
           this.pro.customerDetails.birthdate ? moment(this.pro.customerDetails.birthdate) : undefined, [
-            CustomValidators.adultOnly
-          ]),
+          CustomValidators.adultOnly
+        ]),
         sex: this.pro.customerDetails.sex,
         picturePath: new FormControl({ value: this.pro.customerDetails.picturePath, disabled: true }),
         comments: this.fb.array(

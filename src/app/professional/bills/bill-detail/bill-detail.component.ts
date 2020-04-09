@@ -2,7 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ChangeDetect
 import { PaymentMode, Bill, Payment } from '@app/entities';
 import { FormGroup, Validators, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
 import { CustomValidators, ErrorAggregatorDirective, Utils } from '@app/shared';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'app-bill-detail',
@@ -103,7 +107,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
   isCloseable(): boolean {
     return this._amount <= 0
       ? this.form.get('information').get('dates').get('paymentDate').value
-      : (( Math.round(Utils.totalPayments(this.paymentsContent.value) * 100) === this._amount)
+      : ((Math.round(Utils.totalPayments(this.paymentsContent.value) * 100) === this._amount)
         && this.form.get('information').get('dates').get('paymentDate').value);
   }
 

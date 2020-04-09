@@ -7,7 +7,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfessionalService } from '@app/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 import { BillModel, BillsUtils, comparePaymentModesFn, VatAmount, SuccessMessageComponent } from '@app/shared';
 
 @Component({

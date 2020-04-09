@@ -1,6 +1,10 @@
 import { StripeSubscription } from './../stripe-subscription.model';
 import { Component, OnInit, Input } from '@angular/core';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from 'moment';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'app-subscription-status',
