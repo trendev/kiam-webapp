@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build --  --configuration=preprod --base-href /preprod/
+RUN npm run build --  --configuration=preprod --base-href /preprod/app/
 
 FROM nginx:alpine
 LABEL maintainer="julien.sie@kiam.fr"
