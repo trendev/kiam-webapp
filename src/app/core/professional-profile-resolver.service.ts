@@ -18,7 +18,7 @@ export class ProfessionalProfileResolverService implements Resolve<Professional>
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Professional | Observable<Professional> | Promise<Professional> {
     return this.professionalService.profile().pipe(
       catchError(e => {
-        this.errorHandler.handle(e, `Impossible de récupérer ton profil...`);
+        this.errorHandler.handle(e, `Impossible de récupérer votre profil...`);
         return of(null);
       }));
   }
