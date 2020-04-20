@@ -8,7 +8,7 @@
       <mat-card-content>
         <div>
           <mat-form-field style="width: 100%">
-            <input matInput placeholder="ton adresse email" id="email" type="email" formControlName="email" required>
+            <input matInput placeholder="votre adresse email" id="email" type="email" formControlName="email" required>
           </mat-form-field>
           <mat-error *ngIf="signUpError">
             Une erreur est survenue lors de l'inscription. Merci de prendre contact avec le support de kiam en
@@ -38,18 +38,18 @@
     </form>
     <ng-template #ok>
       <mat-card-title>🥳 Félicitations 🎉</mat-card-title>
-      <mat-card-subtitle>Jette un oeil à tes emails...</mat-card-subtitle>
+      <mat-card-subtitle>Jetez un oeil à vos emails...</mat-card-subtitle>
       <mat-card-content>
         <div *ngIf="success">
           <p><strong>Vous avez certainement déjà reçu vos identifiants</strong> et vous pouvez dès maintenant <strong>profiter
-              d'un mois d'utilisation gratuit</strong> 🤗
+              d'un mois d'utilisation gratuite</strong> 🤗
           </p>
         </div>
       </mat-card-content>
       <mat-card-actions>
         <div class="login-actions">
           <button type="button" mat-button [routerLink]="['/login']"
-            [queryParams]="{'login-required': 'true'}">Identification</button>
+            [queryParams]="{'login-required': 'true'}">Se connecter</button>
         </div>
       </mat-card-actions>
     </ng-template>

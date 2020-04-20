@@ -15,7 +15,7 @@ export class StripeInvoicesResolverService implements Resolve<any> {
 
       return this.stripeSubscriptionService.invoices().pipe(
         catchError(e => {
-          this.errorHandler.handle(e, `Impossible de récupérer les factures depuis ton profil...`);
+          this.errorHandler.handle(e, `Impossible de récupérer les factures depuis votre profil...`);
           return of(null);
         })
       );

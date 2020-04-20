@@ -59,7 +59,7 @@
           <ng-container *ngIf="paymentModes.length === 0;else elseBlock">
             <mat-error>Pour le moment, vous n'avez sélectionné aucun moyen de paiement et vous êtes donc dans l'incapacité de pouvoir
               éditer une facture avec des paiements...</mat-error>
-            <mat-error>Configure tes moyens de paiement depuis ton profil.</mat-error>
+            <mat-error>Configurez vos moyens de paiement depuis votre profil.</mat-error>
           </ng-container>
           <ng-template #elseBlock>
             <mat-expansion-panel *ngIf="amount > 0">

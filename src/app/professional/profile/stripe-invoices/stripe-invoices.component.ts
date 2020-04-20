@@ -79,7 +79,7 @@ export class StripeInvoicesComponent implements AfterViewInit, OnInit {
     this.stripeSubscriptionService.invoices()
       .pipe(
         finalize(() => this.loadingOverlayService.stop()),
-        catchError(e => this.errorHandler.handle(e, `Impossible de récupérer les factures depuis ton profil...`))
+        catchError(e => this.errorHandler.handle(e, `Impossible de récupérer les factures depuis votre profil...`))
       )
       .subscribe(invoices => {
         this.formatInvoices(invoices.data);

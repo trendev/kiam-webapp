@@ -16,7 +16,7 @@
               name="password" [(ngModel)]="password" required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
-          <mat-error *ngIf="errors.blocked">Identification impossible : ton compte à été bloqué 🚫</mat-error>
+          <mat-error *ngIf="errors.blocked">Identification impossible : votre compte à été bloqué 🚫</mat-error>
           <mat-error *ngIf="errors.unauthorized">Identification incorrecte : vérifie tes identifiants ou ta connexion
             internet 🤔</mat-error>
         </div>
@@ -25,8 +25,8 @@
       <mat-card-actions>
         <div class="login-actions">
           <button type="submit" class="button" mat-raised-button color="primary"
-            [disabled]="!loginForm.form.valid || !username || !password">Identification</button>
-          <button type="button" class="button" mat-button routerLink="/sign-up">Inscription</button>
+            [disabled]="!loginForm.form.valid || !username || !password">Se connecter</button>
+          <button type="button" class="button" mat-button routerLink="/sign-up">S'inscrire</button>
           <!-- <button type="button" class="button" mat-button routerLink="/welcome">Accueil</button> -->
           <!-- <a href="/" class="button" type="button" mat-button>Accueil</a> -->
         </div>
