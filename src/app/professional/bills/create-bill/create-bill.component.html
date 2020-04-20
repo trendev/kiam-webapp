@@ -28,7 +28,7 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <ng-container *ngIf="offerings.length === 0;else elseOfferingsBlock">
-              <mat-error>Tu dois générer tes offres avant de créer des factures...</mat-error>
+              <mat-error>Vous devez générer vos offres avant de créer des factures...</mat-error>
               <br>
               <a mat-raised-button color="primary" routerLink="/professional/offerings" routerLinkActive="active">
                 <div class="manage-offering">
@@ -57,7 +57,7 @@
 
 
           <ng-container *ngIf="paymentModes.length === 0;else elseBlock">
-            <mat-error>Pour le moment, tu n'as sélectionné aucun moyen de paiement et tu es donc dans l'incapacité de pouvoir
+            <mat-error>Pour le moment, vous n'avez sélectionné aucun moyen de paiement et vous êtes donc dans l'incapacité de pouvoir
               éditer une facture avec des paiements...</mat-error>
             <mat-error>Configure tes moyens de paiement depuis ton profil.</mat-error>
           </ng-container>

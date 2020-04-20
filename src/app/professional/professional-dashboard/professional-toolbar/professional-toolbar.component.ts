@@ -26,7 +26,7 @@ export class ProfessionalToolbarComponent {
     this.authenticationService.logout().pipe(
       finalize(() => {
         this.snackBar.openFromComponent(SuccessMessageComponent, {
-          data: `Tu es déconnecté(e) 👍`,
+          data: `Vous êtes déconnecté(e) 👍`,
           duration: 2000
         });
         this.router.navigate(['/login'], this.authenticationService.loginRequired);

@@ -66,7 +66,7 @@
             </mat-expansion-panel-header>
             <app-pack-content *ngIf="businesses.length;else elseBlock" [professionalOfferings]="professionalOfferings" [businesses]="businesses"></app-pack-content>
             <ng-template #elseBlock>
-              <mat-error>Tu dois choisir au moins une activité pour modifier le contenu du forfait</mat-error>
+              <mat-error>Vous devez choisir au moins une activité pour modifier le contenu du forfait</mat-error>
             </ng-template>
           </mat-expansion-panel>
 

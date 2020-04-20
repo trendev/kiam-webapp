@@ -3,7 +3,7 @@
   <mat-card class="login-card">
     <form *ngIf="!success; else ok" [formGroup]="form" (ngSubmit)="createAccount()">
       <mat-card-title>Inscription</mat-card-title>
-      <mat-card-subtitle>Tu peux désormais <strong>créer un compte automatiquement</strong> 😊
+      <mat-card-subtitle>Vous pouvez désormais <strong>créer un compte automatiquement</strong> 😊
       </mat-card-subtitle>
       <mat-card-content>
         <div>
@@ -41,8 +41,8 @@
       <mat-card-subtitle>Jette un oeil à tes emails...</mat-card-subtitle>
       <mat-card-content>
         <div *ngIf="success">
-          <p><strong>Tu as certainement déjà reçu tes identifiants</strong> et tu peux dès maintenant <strong>profiter
-              d'un mois d'essai gratuit</strong> 🤗
+          <p><strong>Vous avez certainement déjà reçu vos identifiants</strong> et vous pouvez dès maintenant <strong>profiter
+              d'un mois d'utilisation gratuit</strong> 🤗
           </p>
         </div>
       </mat-card-content>
