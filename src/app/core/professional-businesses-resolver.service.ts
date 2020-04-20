@@ -20,7 +20,7 @@ export class ProfessionalBusinessesResolverService implements Resolve<Business[]
     return this.professionalService.profile().pipe(
       map(pro => pro.businesses ? pro.businesses : []),
       catchError(e => {
-        this.errorHandler.handle(e, `Impossible de récupérer la liste de tes activités...`);
+        this.errorHandler.handle(e, `Impossible de récupérer la liste de vos activités...`);
         return of([]);
       })
     );

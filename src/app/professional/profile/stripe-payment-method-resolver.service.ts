@@ -15,7 +15,7 @@ export class StripePaymentMethodResolver implements Resolve<any> {
 
     return this.stripePaymentMethodService.getPaymentMethods().pipe(
       catchError(e => {
-        this.errorHandler.handle(e, `Impossible de récupérer tes moyens de paiement...`);
+        this.errorHandler.handle(e, `Impossible de récupérer vos moyens de paiement...`);
         return of(null);
       })
     );
