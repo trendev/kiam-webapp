@@ -5,7 +5,7 @@
 </app-professional-toolbar>
 <div class="dashboard">
   <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="over" class="sidenav" mode="push">
+    <mat-sidenav #sidenav class="sidenav" mode="push">
       <app-professional-sidenav [email]="professional.email" [sidenav]="sidenav"></app-professional-sidenav>
     </mat-sidenav>
     <router-outlet></router-outlet>
