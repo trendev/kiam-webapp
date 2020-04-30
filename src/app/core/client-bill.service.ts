@@ -30,5 +30,13 @@ export class ClientBillService {
       catchError(e => observableThrowError(e))
     );
   }
+  
+  //TODO : correct this function before use
+  cancel(bill: ClientBill): Observable<ClientBill> {
+    return this.http.put<ClientBill>(`${this.api}/cancel/${bill.reference}/${bill.deliveryDate}`, bill).pipe(
+      map(bill => new ClientBill(bill)),
+      catchError(e => observableThrowError(e))
+    );
+  }
 
 }
