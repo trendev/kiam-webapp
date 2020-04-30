@@ -1,4 +1,4 @@
-<app-bill-detail [paymentModes]="paymentModes" [bill]="clientBill" (cancel)="returnToDetail()" (save)="save($event)" (export)="exportBill()">
+<app-bill-detail [paymentModes]="paymentModes" [bill]="clientBill" (back)="returnToDetail()" (save)="save($event)" (export)="exportBill()">
   <p>
     Client :
     <b>{{name}}</b>

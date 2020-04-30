@@ -22,7 +22,7 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
   @Input() billsRefDate: number;
   @Input() vatRates: VatRates;
 
-  @Output() cancel = new EventEmitter<any>();
+  @Output() back = new EventEmitter<any>();
   @Output() save = new EventEmitter<Bill>();
 
   private _total: number;
@@ -216,8 +216,8 @@ export class CreateBillComponent implements OnInit, OnChanges, DoCheck {
     });
   }
 
-  cancelBillCreation() {
-    this.cancel.emit();
+  goBack() {
+    this.back.emit();
   }
 
   get vatInclusive(): AbstractControl {
