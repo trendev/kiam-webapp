@@ -16,7 +16,7 @@ const moment = _rollupMoment || _moment;
 export class BillDetailComponent implements OnInit, DoCheck {
   @Input() paymentModes: PaymentMode[];
   @Input() bill: Bill;
-  @Output() cancel = new EventEmitter<any>();
+  @Output() back = new EventEmitter<any>();
   @Output() save = new EventEmitter<Bill>();
   @Output() export = new EventEmitter<any>();
 
@@ -124,8 +124,8 @@ export class BillDetailComponent implements OnInit, DoCheck {
     information.setControl('comments', this.fb.array(this.bill.comments || [], CustomValidators.validComments(this.commentsValidators)));
   }
 
-  cancelBillCreation() {
-    this.cancel.emit();
+  goBack() {
+    this.back.emit();
   }
 
   saveBill() {
