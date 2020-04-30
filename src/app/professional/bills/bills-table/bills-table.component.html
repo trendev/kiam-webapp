@@ -9,8 +9,8 @@
   </div>
   <mat-table #table [dataSource]="datasource" matSort>
     <ng-container matColumnDef="deliveryDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.deliveryDate | date:'shortDate':'':'fr'}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="date">Date</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="date">{{element.deliveryDate | date:'shortDate':'':'fr'}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="reference">
       <mat-header-cell *matHeaderCellDef mat-sort-header class="hide">Référence courte</mat-header-cell>

@@ -1,6 +1,6 @@
 .list-container {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     // max-height: 500px;
     // min-height: 350px;
     min-width: 250px;
@@ -8,7 +8,7 @@
 }
 
 .mat-table {
-    overflow: auto; 
+    overflow: auto;
     max-height: 500px;
 }
 
@@ -35,7 +35,8 @@
 @media all and (max-device-width: 720px) {
     .hide {
         display: none;
-    } 
+    }
+
     // .list-container {
     //     max-height: 300px;
     // }
@@ -43,15 +44,23 @@
     .mat-row {
         padding: 0;
     }
+
     .mat-cell {
         font-size: 0.8em;
     }
+
+    .date {
+        padding: 0;
+        font-size: 0.7em;
+    }
+
     .price {
         display: flex;
         justify-content: center;
         align-items: center;
         min-width: 65px;
     }
+
     .name {
         flex-grow: 1;
     }
