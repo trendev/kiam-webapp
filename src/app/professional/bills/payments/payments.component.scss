@@ -2,7 +2,7 @@
     transform: scale(0.7);
 }
 
-.amount{
+.amount {
     max-width: 75px;
 }
 
@@ -11,10 +11,12 @@
 }
 
 .payments {
-    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
-.valid_payment{
+.valid_payment {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,14 +24,18 @@
 }
 
 @media all and (max-device-width: 720px) {
-    .amount{
+    .amount {
         padding-left: 4px;
     }
 
-    .payments{
+    .payments {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+    }
+
+    .payment_mode {
+        width: 100px;
     }
 }
