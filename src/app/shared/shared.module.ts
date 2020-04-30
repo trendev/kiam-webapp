@@ -38,7 +38,6 @@ import { BusinessesComponent } from './businesses/businesses.component';
 import { PaymentModesComponent } from './payment-modes/payment-modes.component';
 import { CompanyInformationComponent } from './company-information/company-information.component';
 import { SocialNetworkAccountsComponent } from './social-network-accounts/social-network-accounts.component';
-import { LoremIpsumComponent } from './lorem-ipsum/lorem-ipsum.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ErrorAggregatorDirective } from './error-aggregator.directive';
 import { CategoriesComponent } from './categories/categories.component';
@@ -98,7 +97,6 @@ import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg
     PaymentModesComponent,
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,
-    LoremIpsumComponent,
     ChangePasswordComponent,
     ErrorAggregatorDirective,
     CategoriesComponent,
@@ -147,7 +145,6 @@ import { FacebookSvgIconComponent } from './icons/facebook-svg-icon/facebook-svg
     PaymentModesComponent,
     CompanyInformationComponent,
     SocialNetworkAccountsComponent,
-    LoremIpsumComponent,
     ChangePasswordComponent,
     ErrorAggregatorDirective,
     MatTableModule,

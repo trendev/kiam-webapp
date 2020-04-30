@@ -5,7 +5,7 @@ import { CreateClientComponent } from './create-client/create-client.component';
 import { ClientsComponent } from './clients/clients.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent, LoremIpsumComponent } from '@app/shared';
+import { PageNotFoundComponent } from '@app/shared';
 import { CategoriesResolverService, ClientsResolverService } from '@app/core';
 
 const routes: Routes = [
