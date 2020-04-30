@@ -6,7 +6,6 @@ export * from './customer-details/customer-details.component';
 export * from './businesses/businesses.component';
 export * from './company-information/company-information.component';
 export * from './social-network-accounts/social-network-accounts.component';
-export * from './lorem-ipsum/lorem-ipsum.component';
 export * from './payment-modes/payment-modes.component';
 export * from './change-password/change-password.component';
 export * from './error-aggregator.directive';
