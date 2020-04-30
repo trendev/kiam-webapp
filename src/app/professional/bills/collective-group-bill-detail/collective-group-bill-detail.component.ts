@@ -74,4 +74,8 @@ export class CollectiveGroupBillDetailComponent implements OnInit {
     this.exportBillService.exportCollectiveGroupBill(this.collectiveGroupBill);
   }
 
+  cancelBill() {
+    console.warn('client bill canceled');
+  }
+
 }
