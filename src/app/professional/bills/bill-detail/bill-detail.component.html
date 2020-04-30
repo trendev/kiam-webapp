@@ -64,6 +64,9 @@
           <button type="button" matTooltip="Annuler les modifications sur la facture" mat-mini-fab color="accent" (click)="goBack()">
             <mat-icon aria-label="Annuler les modifications sur la facture">list</mat-icon>
           </button>
+          <button type="button" matTooltip="Annuler la facture" mat-mini-fab color="warn" (click)="cancelBill()">
+            <mat-icon aria-label="Annuler la facture">close</mat-icon>
+          </button>
           <button type="button" matTooltip="Sauvegarder/Clore la facture" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
             <mat-icon aria-label="Sauvegarder/Clore la facture">{{isCloseable()?'done':'save'}}</mat-icon>
           </button>
