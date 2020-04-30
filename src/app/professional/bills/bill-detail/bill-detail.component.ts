@@ -17,7 +17,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
   @Input() paymentModes: PaymentMode[];
   @Input() bill: Bill;
   @Output() back = new EventEmitter<any>();
-  @Output() cancel = new EventEmitter<Bill>();
+  @Output() cancel = new EventEmitter<any>();
   @Output() save = new EventEmitter<Bill>();
   @Output() export = new EventEmitter<any>();
 
@@ -130,7 +130,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
   }
 
   cancelBill() {
-    this.cancel.emit(this.bill);
+    this.cancel.emit();
   }
 
   saveBill() {

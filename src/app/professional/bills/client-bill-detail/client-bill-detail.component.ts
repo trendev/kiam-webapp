@@ -70,4 +70,8 @@ export class ClientBillDetailComponent implements OnInit {
     this.exportBillService.exportClientBill(this.clientBill);
   }
 
+  cancelBill() {
+    console.warn('client bill canceled');
+  }
+
 }
