@@ -29,7 +29,7 @@
   </div>
   <div class="payments" *ngFor="let payment of payments; let i=index;">
     <mat-form-field  class="payment_mode">
-      <mat-select placeholder="Moyen de paiement" [(value)]="payment.paymentMode" [compareWith]="comparePaymentModes">
+      <mat-select placeholder="Moyen de paiement" [(value)]="payment.paymentMode" [compareWith]="comparePaymentModes" (selectionChange)="checkPayments()">
         <mat-option *ngFor="let pm of paymentModes" [value]="pm">
           {{ pm.name }}
         </mat-option>
