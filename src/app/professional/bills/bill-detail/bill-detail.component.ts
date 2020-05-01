@@ -61,7 +61,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
   }
 
   get isClosedBill() {
-    return this.bill.paymentDate ? true : false;
+    return !!this.bill.paymentDate;
   }
 
   get isCancelled() {
@@ -82,7 +82,7 @@ export class BillDetailComponent implements OnInit, DoCheck {
         }, { validator: CustomValidators.validDeliveryPaymentDates }),
         closeable: new FormControl({
           value: this.isClosedBill,
-          disabled: this.isClosedBill
+          disabled: this.isClosedBill || this.isCancelled // cancelled bill cannot be closed
         }),
         comments: this.fb.array(this.bill.comments || [],
           CustomValidators.validComments(this.commentsValidators))
