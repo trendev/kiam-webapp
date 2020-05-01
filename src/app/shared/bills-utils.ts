@@ -5,6 +5,15 @@ import { default as _rollupMoment, Moment } from 'moment';
 
 const moment = _rollupMoment || _moment;
 
+export class BillStatus {
+    constructor(public color: string,
+        public icon: string) {
+    }
+}
+
+export const VatAmountDescSortFn =
+    (va1: VatAmount, va2: VatAmount) => va2.rate - va1.rate;
+
 export class BillsUtils {
     static getStatus(bill: Bill): BillStatus {
         if (bill.paymentDate) {
@@ -139,11 +148,7 @@ export class BillsUtils {
 
 }
 
-export class BillStatus {
-    constructor(public color: string,
-        public icon: string) {
-    }
-}
+
 
 export class BillModel {
     reference: string;
@@ -187,5 +192,4 @@ export interface VatAmount {
     amount: number;
 }
 
-export const VatAmountDescSortFn =
-    (va1: VatAmount, va2: VatAmount) => va2.rate - va1.rate;
+
