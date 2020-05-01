@@ -1,8 +1,8 @@
 import { CoreModule } from './core.module';
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 
-import {catchError, map} from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
@@ -30,10 +30,9 @@ export class ClientBillService {
       catchError(e => observableThrowError(e))
     );
   }
-  
-  //TODO : correct this function before use
-  cancel(bill: ClientBill): Observable<ClientBill> {
-    return this.http.put<ClientBill>(`${this.api}/cancel/${bill.reference}/${bill.deliveryDate}`, bill).pipe(
+
+  cancel(reference: string, deliveryDate: number): Observable<ClientBill> {
+    return this.http.put<ClientBill>(`${this.api}/cancel/${reference}/${deliveryDate}`, null).pipe(
       map(bill => new ClientBill(bill)),
       catchError(e => observableThrowError(e))
     );

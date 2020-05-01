@@ -31,4 +31,11 @@ export class CollectiveGroupBillService {
     );
   }
 
+  cancel(reference: string, deliveryDate: number): Observable<CollectiveGroupBill> {
+    return this.http.put<CollectiveGroupBill>(`${this.api}/cancel/${reference}/${deliveryDate}`, null).pipe(
+      map(bill => new CollectiveGroupBill(bill)),
+      catchError(e => observableThrowError(e))
+    );
+  }
+
 }

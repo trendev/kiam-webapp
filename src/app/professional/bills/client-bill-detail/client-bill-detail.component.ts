@@ -71,7 +71,20 @@ export class ClientBillDetailComponent implements OnInit {
   }
 
   cancelBill() {
-    console.warn('client bill canceled');
+    this.loadingOverlayService.start();
+    this.clientBillService.cancel(this.clientBill.reference, this.clientBill.deliveryDate)
+      .subscribe(
+        _cb => {
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Facture annulée 🙅🏻‍♂️`,
+            duration: 2000
+          });
+          this.returnToDetail();
+        },
+        e => {
+          this.loadingOverlayService.stop();
+          this.errorHandler.handle(e, `Une erreur est survenue lors de l'annulation de la facture...`);
+        });
   }
 
 }

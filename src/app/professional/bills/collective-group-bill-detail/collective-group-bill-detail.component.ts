@@ -75,7 +75,20 @@ export class CollectiveGroupBillDetailComponent implements OnInit {
   }
 
   cancelBill() {
-    console.warn('client bill canceled');
+    this.loadingOverlayService.start();
+    this.collectiveGroupBillService.cancel(this.collectiveGroupBill.reference, this.collectiveGroupBill.deliveryDate)
+      .subscribe(
+        _cb => {
+          this.snackBar.openFromComponent(SuccessMessageComponent, {
+            data: `Facture annulée 🙅🏻‍♂️`,
+            duration: 2000
+          });
+          this.returnToDetail();
+        },
+        e => {
+          this.loadingOverlayService.stop();
+          this.errorHandler.handle(e, `Une erreur est survenue lors de l'annulation de la facture...`);
+        });
   }
 
 }
