@@ -198,6 +198,16 @@ export class ExportBillService {
       },
     };
 
+    if (BillsUtils.isCancelled(bill)) {
+      dd['watermark'] = {
+        text: `Annulée le ${moment(bill.cancellationDate).locale('fr').format('L')}`,
+        color: 'red',
+        opacity: 0.3,
+        bold: true,
+        italics: false
+      };
+    }
+
     pdfMake.createPdf(dd).download(`${bill.reference}.pdf`);
   }
 
