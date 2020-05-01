@@ -1,80 +1,91 @@
-  <mat-card>
-    <form [formGroup]="form" novalidate>
-      <mat-card-title>
-        <div class="title">
-          <span>Facture&nbsp;</span>
-          <app-payment-status [bill]="bill"></app-payment-status>
-        </div>
-      </mat-card-title>
-      <mat-card-subtitle>
-        <p>Référence:
-          <b>{{bill.reference}}</b>
-        </p>
-        <ng-content></ng-content>
-        <app-amount-detail [bill]="bill"></app-amount-detail>
-        <p>Date de réalisation: {{bill.deliveryDate | date:'mediumDate':'':'fr'}}</p>
-        <p>Date d'émission: {{bill.issueDate | date:'medium':'':'fr'}}</p>
-        <p *ngIf="isClosedBill">Facture réglée le: {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
-      </mat-card-subtitle>
+<mat-card>
+  <form [formGroup]="form" novalidate>
+    <mat-card-title>
+      <div class="title">
+        <span>Facture&nbsp;</span>
+        <app-payment-status [bill]="bill"></app-payment-status>
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <p>Référence:
+        <b>{{bill.reference}}</b>
+      </p>
+      <ng-content></ng-content>
+      <app-amount-detail [bill]="bill"></app-amount-detail>
+      <p>Date de réalisation: {{bill.deliveryDate | date:'mediumDate':'':'fr'}}</p>
+      <p>Date d'émission: {{bill.issueDate | date:'medium':'':'fr'}}</p>
+      <p *ngIf="isClosedBill">Facture réglée le: {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
+    </mat-card-subtitle>
 
-      <mat-card-content>
-        <mat-accordion multi="false">
+    <mat-card-content>
+      <mat-accordion multi="false">
 
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Offres souscrites
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-fixed-purchased-offerings [vatInclusive]="bill.vatInclusive"></app-fixed-purchased-offerings>
-          </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Offres souscrites
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-fixed-purchased-offerings [vatInclusive]="bill.vatInclusive"></app-fixed-purchased-offerings>
+        </mat-expansion-panel>
 
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Détail
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <app-information [errorAggregator]="errorAggregator"></app-information>
-          </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Détail
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-information [errorAggregator]="errorAggregator"></app-information>
+        </mat-expansion-panel>
 
-          <mat-expansion-panel *ngIf="amount > 0">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Paiement
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ng-container *ngIf="isClosedBill;else elseBlock">
-              <app-fixed-payments></app-fixed-payments>
+        <mat-expansion-panel *ngIf="amount > 0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Paiement
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ng-container *ngIf="isClosedBill;else elseBlock">
+            <app-fixed-payments></app-fixed-payments>
+          </ng-container>
+          <ng-template #elseBlock>
+            <ng-container *ngIf="!isCancelled;else elseCancelledBlock">
+              <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator">
+              </app-payments>
             </ng-container>
-            <ng-template #elseBlock>
-              <app-payments [amount]="amount" [paymentModes]="paymentModes" [errorAggregator]="errorAggregator"></app-payments>
+            <ng-template #elseCancelledBlock>
+              <mat-error>Facture annulée</mat-error>
             </ng-template>
-          </mat-expansion-panel>
+          </ng-template>
+        </mat-expansion-panel>
 
-        </mat-accordion>
+      </mat-accordion>
 
-      </mat-card-content>
-      <ng-container appErrorAggregator></ng-container>
-      <mat-card-actions>
-        <div class="form-button-container">
-          <button type="button" matTooltip="Annuler les modifications" mat-mini-fab color="accent" (click)="revert()" [disabled]="form.pristine">
-            <mat-icon aria-label="Annuler les modifications">undo</mat-icon>
-          </button>
-          <button type="button" matTooltip="Annuler les modifications sur la facture" mat-mini-fab color="accent" (click)="goBack()">
-            <mat-icon aria-label="Annuler les modifications sur la facture">list</mat-icon>
-          </button>
-          <!-- TODO : control bill isClosedBill is false as well -->
-          <button *ngIf="!isCancelled && !isClosedBill" type="button" matTooltip="Annuler la facture" mat-mini-fab color="warn" (click)="cancelBill()">
-            <mat-icon aria-label="Annuler la facture">close</mat-icon>
-          </button>
-          <button type="button" matTooltip="Sauvegarder/Clore la facture" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
-            <mat-icon aria-label="Sauvegarder/Clore la facture">{{isCloseable()?'done':'save'}}</mat-icon>
-          </button>
-          <button type="button" matTooltip="Exporter" mat-mini-fab color="primary" (click)="exportBill()" [disabled]="!form.pristine">
-            <mat-icon aria-label="Exporter la facture">description</mat-icon>
-          </button>
-        </div>
-      </mat-card-actions>
-    </form>
-  </mat-card>
+    </mat-card-content>
+    <ng-container appErrorAggregator></ng-container>
+    <mat-card-actions>
+      <div class="form-button-container">
+        <button type="button" matTooltip="Annuler les modifications" mat-mini-fab color="accent" (click)="revert()"
+          [disabled]="form.pristine">
+          <mat-icon aria-label="Annuler les modifications">undo</mat-icon>
+        </button>
+        <button type="button" matTooltip="Annuler les modifications sur la facture" mat-mini-fab color="accent"
+          (click)="goBack()">
+          <mat-icon aria-label="Annuler les modifications sur la facture">list</mat-icon>
+        </button>
+        <!-- TODO : control bill isClosedBill is false as well -->
+        <button *ngIf="!isCancelled && !isClosedBill" type="button" matTooltip="Annuler la facture" mat-mini-fab
+          color="warn" (click)="cancelBill()">
+          <mat-icon aria-label="Annuler la facture">close</mat-icon>
+        </button>
+        <button *ngIf="!isCancelled && !isClosedBill" type="button" matTooltip="Sauvegarder/Clore la facture"
+          mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
+          <mat-icon aria-label="Sauvegarder/Clore la facture">{{isCloseable()?'done':'save'}}</mat-icon>
+        </button>
+        <button type="button" matTooltip="Exporter" mat-mini-fab color="primary" (click)="exportBill()"
+          [disabled]="!form.pristine">
+          <mat-icon aria-label="Exporter la facture">description</mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>
