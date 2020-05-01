@@ -14,7 +14,7 @@
         <app-amount-detail [bill]="bill"></app-amount-detail>
         <p>Date de réalisation: {{bill.deliveryDate | date:'mediumDate':'':'fr'}}</p>
         <p>Date d'émission: {{bill.issueDate | date:'medium':'':'fr'}}</p>
-        <p *ngIf="isClosedBill()">Facture réglée le: {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
+        <p *ngIf="isClosedBill">Facture réglée le: {{bill.paymentDate | date:'mediumDate':'':'fr'}}</p>
       </mat-card-subtitle>
 
       <mat-card-content>
@@ -44,7 +44,7 @@
                 Paiement
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <ng-container *ngIf="isClosedBill();else elseBlock">
+            <ng-container *ngIf="isClosedBill;else elseBlock">
               <app-fixed-payments></app-fixed-payments>
             </ng-container>
             <ng-template #elseBlock>
@@ -64,7 +64,8 @@
           <button type="button" matTooltip="Annuler les modifications sur la facture" mat-mini-fab color="accent" (click)="goBack()">
             <mat-icon aria-label="Annuler les modifications sur la facture">list</mat-icon>
           </button>
-          <button type="button" matTooltip="Annuler la facture" mat-mini-fab color="warn" (click)="cancelBill()">
+          <!-- TODO : control bill isClosedBill is false as well -->
+          <button *ngIf="!isCancelled && !isClosedBill" type="button" matTooltip="Annuler la facture" mat-mini-fab color="warn" (click)="cancelBill()">
             <mat-icon aria-label="Annuler la facture">close</mat-icon>
           </button>
           <button type="button" matTooltip="Sauvegarder/Clore la facture" mat-mini-fab color="primary" (click)="saveBill()" [disabled]="!isValid()">
