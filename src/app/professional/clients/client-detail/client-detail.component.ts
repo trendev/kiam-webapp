@@ -8,7 +8,6 @@ import {
   CustomValidators,
   ErrorAggregatorDirective,
   Utils,
-  compareCollectiveGroupsFn,
   compareCategoriesFn,
   BillModel,
   BillsUtils,
