@@ -19,6 +19,9 @@ export class BillsUtils {
         if (bill.paymentDate) {
             return new BillStatus('primary', 'done_all');
         } else {
+            if (this.isCancelled(bill)) {
+                return new BillStatus(undefined, 'close');
+            }
             if (this.isUnPaid(bill)) {
                 return new BillStatus('warn', 'error_outline');
             }
@@ -28,13 +31,19 @@ export class BillsUtils {
         }
     }
 
+    static isCancelled(b: Bill) {
+        return b.cancelled && !!b.cancellationDate;
+    }
+
     static isUnPaid(b: Bill) {
         return !b.paymentDate
+            && !BillsUtils.isCancelled(b)
             && moment(b.deliveryDate).isBefore(moment().locale('fr').subtract(2, 'week'));
     }
 
     static isPending(b: Bill) {
         return !b.paymentDate
+            && !BillsUtils.isCancelled(b)
             && moment(b.deliveryDate).isSameOrAfter(moment().locale('fr').subtract(2, 'week'));
     }
 
