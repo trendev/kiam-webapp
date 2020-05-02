@@ -2,6 +2,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Component, OnInit } from '@angular/core';
 import { CustomValidators } from '@app/shared';
 import { UserAccountService } from '@app/core';
+import { LoadingOverlayService } from '@app/loading-overlay.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +18,8 @@ export class SignUpComponent implements OnInit {
   signUpError = false;
 
   constructor(private fb: FormBuilder,
-    private userAccountService: UserAccountService) {
+    private userAccountService: UserAccountService,
+    private loadingOverlayService: LoadingOverlayService) {
     this.createForm();
   }
 
@@ -34,10 +37,14 @@ export class SignUpComponent implements OnInit {
   }
 
   createAccount() {
+    this.loadingOverlayService.start();
+
     this.success = false;
     this.signUpError = false;
 
     this.userAccountService.createProfessional({ email: this.form.get('email').value })
+      .pipe(
+        finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         resp => { this.success = true; },
         err => { this.signUpError = true; }
