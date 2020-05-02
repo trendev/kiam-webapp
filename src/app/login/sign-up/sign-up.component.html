@@ -2,16 +2,20 @@
 <div class="container">
   <mat-card class="login-card">
     <form *ngIf="!success; else ok" [formGroup]="form" (ngSubmit)="createAccount()">
-      <mat-card-title>Inscription</mat-card-title>
-      <mat-card-subtitle>Vous pouvez désormais <strong>créer un compte automatiquement</strong> 😊
-      </mat-card-subtitle>
+      <mat-card-header>
+        <mat-card-title>Inscription rapide</mat-card-title>
+        <mat-card-subtitle>
+          <p>Vous pouvez <strong>créer un compte automatiquement</strong> en renseignant simplement votre
+            adresse email.</p>
+        </mat-card-subtitle>
+      </mat-card-header>
       <mat-card-content>
         <div>
           <mat-form-field style="width: 100%">
-            <input matInput placeholder="votre adresse email" id="email" type="email" formControlName="email" required>
+            <input matInput placeholder="email" id="email" type="email" formControlName="email" required>
           </mat-form-field>
           <mat-error *ngIf="signUpError">
-            Une erreur est survenue lors de l'inscription. Merci de prendre contact avec le support de kiam en
+            <b>Une erreur est survenue lors de l'inscription.</b> Merci de prendre contact avec le support de kiam en
             envoyant un email à support@kiam.fr
           </mat-error>
           <div *ngIf="form.invalid && form.dirty && form.touched">
@@ -38,18 +42,23 @@
     </form>
     <ng-template #ok>
       <mat-card-title>🥳 Félicitations 🎉</mat-card-title>
-      <mat-card-subtitle>Jetez un oeil à vos emails...</mat-card-subtitle>
+      <mat-card-subtitle>
+        <p>C'est parti !!! <b>Jetez un oeil à vos emails...</b></p>
+      </mat-card-subtitle>
       <mat-card-content>
         <div *ngIf="success">
-          <p><strong>Vous avez certainement déjà reçu vos identifiants</strong> et vous pouvez dès maintenant <strong>profiter
+          <p><strong>Vous avez certainement déjà reçu vos identifiants</strong> et vous pouvez dès maintenant
+            <strong>profiter
               d'un mois d'utilisation gratuite</strong> 🤗
           </p>
+          <p>Si vous ne trouvez pas notre email dans votre boîte de réception, jetez également un oeil dans vos
+            courriers indésirables.</p>
         </div>
       </mat-card-content>
       <mat-card-actions>
         <div class="login-actions">
-          <button type="button" mat-button [routerLink]="['/login']"
-            [queryParams]="{'login-required': 'true'}">Se connecter</button>
+          <button type="button" mat-button [routerLink]="['/login']" [queryParams]="{'login-required': 'true'}">Se
+            connecter</button>
         </div>
       </mat-card-actions>
     </ng-template>
