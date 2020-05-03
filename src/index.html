@@ -12,28 +12,178 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
+  <!-- loading spin for startup -->
+  <style>
+    #loader-startup {
+      bottom: 0;
+      height: 175px;
+      left: 0;
+      margin: auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 175px;
+    }
+
+    #loader-startup .dot-startup {
+      bottom: 0;
+      height: 100%;
+      left: 0;
+      margin: auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 87.5px;
+    }
+
+    #loader-startup .dot-startup::before {
+      border-radius: 100%;
+      content: "";
+      height: 87.5px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: scale(0);
+      width: 87.5px;
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+1) {
+      transform: rotate(45deg);
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+1)::before {
+      animation: 0.8s linear 0.1s normal none infinite running load;
+      background: #00ff80 none repeat scroll 0 0;
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+2) {
+      transform: rotate(90deg);
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+2)::before {
+      animation: 0.8s linear 0.2s normal none infinite running load;
+      background: #00ffea none repeat scroll 0 0;
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+3) {
+      transform: rotate(135deg);
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+3)::before {
+      animation: 0.8s linear 0.3s normal none infinite running load;
+      background: #00aaff none repeat scroll 0 0;
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+4) {
+      transform: rotate(180deg);
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+4)::before {
+      animation: 0.8s linear 0.4s normal none infinite running load;
+      background: #0040ff none repeat scroll 0 0;
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+5) {
+      transform: rotate(225deg);
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+5)::before {
+      animation: 0.8s linear 0.5s normal none infinite running load;
+      background: #2a00ff none repeat scroll 0 0;
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+6) {
+      transform: rotate(270deg);
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+6)::before {
+      animation: 0.8s linear 0.6s normal none infinite running load;
+      background: #9500ff none repeat scroll 0 0;
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+7) {
+      transform: rotate(315deg);
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+7)::before {
+      animation: 0.8s linear 0.7s normal none infinite running load;
+      background: magenta none repeat scroll 0 0;
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+8) {
+      transform: rotate(360deg);
+    }
+
+    #loader-startup .dot-startup:nth-child(7n+8)::before {
+      animation: 0.8s linear 0.8s normal none infinite running load;
+      background: #ff0095 none repeat scroll 0 0;
+    }
+
+    #loader-startup .loading-startup {
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      bottom: -40px;
+      height: 20px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      width: 180px;
+    }
+
+    @keyframes load {
+      100% {
+        opacity: 0;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes load {
+      100% {
+        opacity: 0;
+        transform: scale(1);
+      }
+    }
+
+    .loading-message-startup {
+      text-align: center;
+      background-color: lightgray;
+    }
+
+    .loading-footer-startup {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body class="mat-app-background">
   <script src="https://js.stripe.com/v3/"></script>
   <app-root>
-    <p>Chargement en cours...</p>
-    <div class="container">
-      <div class="row">
-        <div id="loader">
-            <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="loading"></div>
-        </div>
-      </div>
+    <div>
+      <p class="loading-message-startup">Chargement en cours...</p>
     </div>
-    <p><a href="/app?ngsw-bypass">Forcer le rechargement de l'application</a></p>
+    <div id="loader-startup">
+      <div class="dot-startup"></div>
+      <div class="dot-startup"></div>
+      <div class="dot-startup"></div>
+      <div class="dot-startup"></div>
+      <div class="dot-startup"></div>
+      <div class="dot-startup"></div>
+      <div class="dot-startup"></div>
+      <div class="dot-startup"></div>
+      <div class="loading-startup"></div>
+    </div>
+    <div class="loading-footer-startup">
+      <p class="loading-message-startup">
+        <a href="/app?ngsw-bypass">
+          Cliquez pour recharger l'application si elle n'est pas chargée après 4 ou 5 secondes 🤗
+        </a>
+      </p>
+    </div>
   </app-root>
 </body>
 
