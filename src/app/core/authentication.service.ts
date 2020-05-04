@@ -62,7 +62,7 @@ export class AuthenticationService {
       null,
       { observe: 'response' }).pipe(
         map(() => {
-          localStorage.removeItem(JWTInterceptor.JWT_HEADER);
+          JWTInterceptor.removeJWT();
           return true;
         }),
         catchError(e => observableThrowError(e))

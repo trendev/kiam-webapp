@@ -12,6 +12,10 @@ export class JWTInterceptor implements HttpInterceptor {
     // should be equivalent on the Backend side
     public static readonly JWT_HEADER = 'JWT';
 
+    public static removeJWT() {
+        localStorage.removeItem(JWTInterceptor.JWT_HEADER);
+    }
+
     constructor() { }
 
     /**
