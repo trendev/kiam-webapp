@@ -12,8 +12,12 @@ export class JWTInterceptor implements HttpInterceptor {
     // should be equivalent on the Backend side
     public static readonly JWT_HEADER = 'JWT';
 
+    private static getKey(): string {
+        return btoa(JWTInterceptor.JWT_HEADER);
+    }
+
     public static removeJWT() {
-        localStorage.removeItem(JWTInterceptor.JWT_HEADER);
+        localStorage.removeItem(JWTInterceptor.getKey());
     }
 
     constructor() { }
@@ -43,7 +47,7 @@ export class JWTInterceptor implements HttpInterceptor {
      * Load the JWT from the local storage
      */
     private loadJWT(): string {
-        return localStorage.getItem(JWTInterceptor.JWT_HEADER);
+        return localStorage.getItem(JWTInterceptor.getKey());
     }
 
     /**
@@ -51,7 +55,7 @@ export class JWTInterceptor implements HttpInterceptor {
      * @param jwt the JWT to save
      */
     private saveJWT(jwt: string) {
-        localStorage.setItem(JWTInterceptor.JWT_HEADER, jwt);
+        localStorage.setItem(JWTInterceptor.getKey(), jwt);
     }
 
     private handle(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
