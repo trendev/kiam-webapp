@@ -9,11 +9,16 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class JWTInterceptor implements HttpInterceptor {
 
-    // should be equivalent on the Backend side
+    // must be equivalent on the Backend side...
     public static readonly JWT_HEADER = 'JWT';
 
+    private static KEY: string;
+
     private static getKey(): string {
-        return btoa(JWTInterceptor.JWT_HEADER);
+        if (!JWTInterceptor.KEY) {
+            JWTInterceptor.KEY = btoa(JWTInterceptor.JWT_HEADER);
+        }
+        return JWTInterceptor.KEY;
     }
 
     public static removeJWT() {
