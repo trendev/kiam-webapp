@@ -42,7 +42,9 @@ export class SignUpComponent implements OnInit {
     this.success = false;
     this.signUpError = false;
 
-    this.userAccountService.createProfessional({ email: this.form.get('email').value })
+    const email = this.form.get('email').value as string;
+
+    this.userAccountService.createProfessional({ email: email.trim() })
       .pipe(
         finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
