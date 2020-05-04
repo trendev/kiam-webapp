@@ -41,8 +41,8 @@ export class AuthenticationService {
     return this.http.get<UserAccount>(`${this.api}/login`, {
       params: new HttpParams()
         .set('rmbme', rmbme ? 'true' : 'false')
-        .set('username', username)
-        .set('password', password)
+        .set('username', username.trim())
+        .set('password', password.trim())
     }).pipe(
       map(user => {
         this.user = user;
@@ -101,7 +101,7 @@ export class AuthenticationService {
   newPassword(password: string): Observable<string> {
 
     const payload = {
-      newpassword: password
+      newpassword: password.trim()
     };
 
     return this.http.put<PasswordResponse>(`${this.api}/new-password`,
