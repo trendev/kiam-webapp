@@ -17,8 +17,14 @@
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
           <mat-error *ngIf="errors.blocked">Identification impossible : votre compte à été bloqué 🚫</mat-error>
-          <mat-error *ngIf="errors.unauthorized">Identification incorrecte : vérifiez vos identifiants ou ta connexion
-            internet 🤔</mat-error>
+          <mat-error *ngIf="errors.unauthorized">
+            <p>Identification incorrecte : vérifiez vos identifiants ou votre connexion
+              internet 🤔</p>
+            <p>
+              Si il s'agit de votre première utilisation, merci d'utiliser les identifiants qui vous ont été
+              communiqués.
+            </p>
+          </mat-error>
         </div>
         <mat-checkbox [(ngModel)]="rmbme" name="rmbme" style="font-size: 0.9em">Rester connecté</mat-checkbox>
       </mat-card-content>
@@ -26,7 +32,8 @@
         <div class="login-actions">
           <button type="submit" class="button" mat-raised-button color="primary"
             [disabled]="!loginForm.form.valid || !username || !password">Se connecter</button>
-          <button type="button" class="button" mat-raised-button color="accent" routerLink="/sign-up">S'inscrire</button>
+          <button type="button" class="button" mat-raised-button color="accent"
+            routerLink="/sign-up">S'inscrire</button>
           <a type="button" class="button" mat-button href="/">Accueil</a>
         </div>
       </mat-card-actions>
