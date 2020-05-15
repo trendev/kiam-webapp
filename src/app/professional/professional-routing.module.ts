@@ -43,7 +43,7 @@ const routes: Routes = [
         path: 'offerings',
         loadChildren: () => import('app/professional/offerings/offerings.module').then(m => m.OfferingsModule)
       },
-      { path: '', redirectTo: 'bills', pathMatch: 'full' },
+      { path: '', redirectTo: 'clients', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]
   }
