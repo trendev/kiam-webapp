@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { CustomValidators } from '@app/shared';
@@ -16,6 +17,7 @@ export class SignUpComponent implements OnInit {
   form: FormGroup;
   success = false;
   signUpError = false;
+  signUpConflict = false;
 
   constructor(private fb: FormBuilder,
     private userAccountService: UserAccountService,
@@ -36,11 +38,14 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+  getInputEmail(): string {
+    return `${this.form.get('email').value}`;
+  }
+
   createAccount() {
     this.loadingOverlayService.start();
 
-    this.success = false;
-    this.signUpError = false;
+    this.success = this.signUpError = this.signUpConflict = false;
 
     const email = this.form.get('email').value as string;
 
@@ -49,7 +54,15 @@ export class SignUpComponent implements OnInit {
         finalize(() => this.loadingOverlayService.stop()))
       .subscribe(
         resp => { this.success = true; },
-        err => { this.signUpError = true; }
+        err => {
+          if (err instanceof HttpErrorResponse
+            && err.status === 409
+            && err.statusText === 'Conflict') {
+            this.signUpConflict = true;
+          } else {
+            this.signUpError = true;
+          }
+        }
       );
 
   }

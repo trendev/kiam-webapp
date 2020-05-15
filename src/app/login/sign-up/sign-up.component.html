@@ -18,6 +18,11 @@
             <b>Une erreur est survenue lors de l'inscription.</b> Merci de prendre contact avec le support de kiam en
             envoyant un email à support@kiam.fr
           </mat-error>
+          <mat-error *ngIf="signUpConflict">
+            <p><b>L'adresse {{getInputEmail()}} est déjà utilisée !</b></p>
+            <p>Si vous n'avez pas reçu votre mail de confirmation, merci de prendre contact avec le support de kiam en
+              envoyant un email à support@kiam.fr</p>
+          </mat-error>
           <div *ngIf="form.invalid && form.dirty && form.touched">
             <mat-error *ngIf="form.get('email').hasError('required')">
               Il est nécessaire de renseigner une adresse email...
