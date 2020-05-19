@@ -18,11 +18,13 @@
           </mat-form-field>
           <mat-error *ngIf="errors.blocked">Identification impossible : votre compte à été bloqué 🚫</mat-error>
           <mat-error *ngIf="errors.unauthorized">
-            <p>Identification incorrecte : vérifiez vos identifiants ou votre connexion
-              internet 🤔</p>
+            <p><b>Identification incorrecte 🤔</b></p>
+            <p>Vérifiez vos identifiants et votre connexion internet</p>
             <p>
-              Si il s'agit de votre première utilisation, merci d'utiliser les identifiants qui vous ont été
-              communiqués.
+              <i>
+                Si il s'agit de votre première utilisation, merci d'utiliser les identifiants qui vous ont été
+                communiqués par email.
+              </i>
             </p>
           </mat-error>
         </div>
