@@ -1,4 +1,7 @@
 <section formGroupName="businesses">
+  <ng-container *ngIf="isEmpty">
+    <mat-error>Vous devez spécifier votre secteur d'activité depuis votre profil avant de créer des offres...</mat-error>
+  </ng-container>
   <div *ngFor="let business of businesses.controls; let i=index" [formGroupName]="i">
     <mat-checkbox formControlName="value">{{business.get('designation').value}}</mat-checkbox>
   </div>

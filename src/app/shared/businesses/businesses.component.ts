@@ -44,4 +44,8 @@ export class BusinessesComponent implements OnInit {
     return this.form.get('businesses') as FormArray;
   }
 
+  get isEmpty(): boolean {
+    return this.businesses.length === 0;
+  }
+
 }
