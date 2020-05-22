@@ -16,16 +16,17 @@ export const VatAmountDescSortFn =
 
 export class BillsUtils {
     static getStatus(bill: Bill): BillStatus {
-        if (bill.paymentDate) {
-            return new BillStatus('primary', 'done_all');
+
+        if (BillsUtils.isCancelled(bill)) {
+            return new BillStatus(undefined, 'close');
         } else {
-            if (this.isCancelled(bill)) {
-                return new BillStatus(undefined, 'close');
+            if (bill.paymentDate) {
+                return new BillStatus('primary', 'done_all');
             }
-            if (this.isUnPaid(bill)) {
+            if (BillsUtils.isUnPaid(bill)) {
                 return new BillStatus('warn', 'error_outline');
             }
-            if (this.isPending(bill)) {
+            if (BillsUtils.isPending(bill)) {
                 return new BillStatus('accent', 'priority_high'); // warning more_horiz priority_high
             }
         }
