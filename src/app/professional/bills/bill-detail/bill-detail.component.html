@@ -72,8 +72,7 @@
           (click)="goBack()">
           <mat-icon aria-label="Annuler les modifications sur la facture">list</mat-icon>
         </button>
-        <!-- TODO : control bill isClosedBill is false as well -->
-        <button *ngIf="!isCancelled && !isClosedBill" type="button" matTooltip="Annuler la facture" mat-mini-fab
+        <button *ngIf="!isCancelled" type="button" matTooltip="Annuler la facture" mat-mini-fab
           color="warn" (click)="cancelBill()">
           <mat-icon aria-label="Annuler la facture">close</mat-icon>
         </button>
