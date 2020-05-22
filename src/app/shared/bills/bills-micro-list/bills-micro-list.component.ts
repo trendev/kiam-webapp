@@ -122,7 +122,7 @@ export class BillsMicroListComponent implements OnChanges {
 
   get selectionRevenue(): number {
     return this.full
-      .filter(b => !!b.paymentDate
+      .filter(b => BillsUtils.isPaid(b)
         && moment(b.paymentDate).isSameOrBefore(moment(this.maxDate)))
       .map(b => BillsUtils.getRevenue(b))
       .reduce((a, b) => a + b, 0);
