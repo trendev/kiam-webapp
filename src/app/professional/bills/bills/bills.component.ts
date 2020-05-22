@@ -66,7 +66,7 @@ export class BillsComponent implements OnInit {
   initPaymentModes() {
     this.paymentModes = Array.from(new Set( // use a set to remove duplicated payment mode
       this._billsModel.map(bm => bm.bill)
-        .filter(b => !!b.paymentDate && !!b.payments) // get payment modes from closed & payed bills only
+        .filter(b => b.payments?.length) // get payment modes from closed & payed bills only
         .map(b => b.payments.map(p => p.paymentMode.name)) // convert bills stream into a stream of names of payment modes
         .reduce((a, b) => [...a, ...b], [])
     ))
@@ -94,9 +94,10 @@ export class BillsComponent implements OnInit {
   initBillsPeriodFilterFn() {
     if (this.bills.length > 0) {
       this.billsPeriodFilterFn = (b: Bill) => (
+        // get all bills between the start/end delivery dates
         (moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
           && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate)))
-        || (!!b.paymentDate
+        || (BillsUtils.isPaid(b) // get all paid bills during the period
           && moment(b.paymentDate).isSameOrAfter(moment(this.minDate))
           && moment(b.paymentDate).isSameOrBefore(moment(this.maxDate))
         )
@@ -147,7 +148,7 @@ export class BillsComponent implements OnInit {
 
   get selectionRevenue(): number {
     return this._billsModel
-      .filter(bm => !!bm.paymentDate
+      .filter(bm => BillsUtils.isPaid(bm.bill)
         && moment(bm.paymentDate).isSameOrBefore(moment(this.maxDate)))
       .map(bm => bm.amount)
       .reduce((a, b) => a + b, 0);
@@ -229,8 +230,6 @@ export class BillsComponent implements OnInit {
     }
   }
 
-
-
   updateMinDate(minDate: number) {
     if (this.minDate !== minDate) {
       this.minDate = minDate;
@@ -253,23 +252,18 @@ export class BillsComponent implements OnInit {
     this._selectedPaymentModes = pms.slice();
 
     this.setBillsModel((bill: Bill) => {
-
-      if (!!bill.paymentDate) {
-        return bill.payments ?
-          (bill.payments.map(p => p.paymentMode)
-            .findIndex(pm =>
-              this._selectedPaymentModes.findIndex(_pm => _pm.name === pm.name) !== -1)
-            !== -1)
-          : false; // can be a bill with an amount <= 0
-      } else {
-        return false;
-      }
+      return bill.payments ?
+        (bill.payments.map(p => p.paymentMode)
+          .findIndex(pm =>
+            this._selectedPaymentModes.findIndex(_pm => _pm.name === pm.name) !== -1)
+          !== -1)
+        : false;
     });
   }
 
 
   private initVATAmounts() {
-    this._vatAmounts = BillsUtils.reduceVATAmounts(this._billsModel.filter(bm => bm.paymentDate).map(bm => bm.bill));
+    this._vatAmounts = BillsUtils.reduceVATAmounts(this._billsModel.filter(bm => BillsUtils.isPaid(bm.bill)).map(bm => bm.bill));
   }
 
   get vatAmounts(): VatAmount[] {
