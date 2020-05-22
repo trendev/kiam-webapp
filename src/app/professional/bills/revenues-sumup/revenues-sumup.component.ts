@@ -15,6 +15,7 @@ import { BillsUtils, VatAmount } from '@app/shared';
 export class RevenuesSumupComponent implements OnChanges {
 
   @Input() bills: Bill[];
+  private _bills: Bill[];
 
   currentMonthRevenue = 0;
   previousMonthRevenue = 0;
@@ -29,6 +30,8 @@ export class RevenuesSumupComponent implements OnChanges {
   }
 
   initRevenues() {
+    this._bills = this.bills.filter(b => BillsUtils.isPaid(b));
+    console.log(this.currentMonthBills);
     this.currentMonthRevenue = this.currentMonthBills.map(b => BillsUtils.getRevenue(b)).reduce((a, b) => a + b, 0);
     this.previousMonthRevenue = this.previousMonthBills.map(b => BillsUtils.getRevenue(b)).reduce((a, b) => a + b, 0);
 
@@ -37,15 +40,13 @@ export class RevenuesSumupComponent implements OnChanges {
   }
 
   private get currentMonthBills(): Bill[] {
-    return this.bills
-      .filter(b => !!b.paymentDate)
+    return this._bills
       .filter(b => moment(b.paymentDate).isSameOrAfter(moment().startOf('month'))
         && moment(b.paymentDate).isSameOrBefore(moment()));
   }
 
   private get previousMonthBills(): Bill[] {
-    return this.bills
-      .filter(b => !!b.paymentDate)
+    return this._bills
       .filter(b => moment(b.paymentDate).isSameOrAfter(moment().startOf('month').subtract(1, 'month'))
         && moment(b.paymentDate).isSameOrBefore(moment().startOf('month').subtract(1, 'month').endOf('month')));
   }
