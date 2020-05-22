@@ -13,12 +13,4 @@
       TVA {{va.rate}} % : {{va.amount / 100 | currency:'EUR':'':'.0-0':'fr'}} / base : {{getTaxBase(va) / 100| currency:'EUR':'':'.0-0':'fr'}}
     </p>
   </mat-card-subtitle>
-  <mat-card-subtitle>
-    <span>
-      <b>CA hebdomadaire : {{currentWeekRevenue / 100 | currency:'EUR':'':'.0-0':'fr'}}</b>
-    </span>
-  </mat-card-subtitle>
-  <mat-card-subtitle>
-    <span class="mat-caption">CA hebdomadaire précédent : {{previousWeekRevenue / 100 | currency:'EUR':'':'.0-0':'fr'}}</span>
-  </mat-card-subtitle>
 </ng-container>
