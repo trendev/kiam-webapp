@@ -58,7 +58,7 @@ export class BillsMicroListComponent implements OnChanges {
       this.billsPeriodFilterFn = (b: Bill) => (
         (moment(b.deliveryDate).isSameOrAfter(moment(this.minDate))
           && moment(b.deliveryDate).isSameOrBefore(moment(this.maxDate)))
-        || (!!b.paymentDate
+        || (BillsUtils.isPaid(b) // get all paid bills during the period
           && moment(b.paymentDate).isSameOrAfter(moment(this.minDate))
           && moment(b.paymentDate).isSameOrBefore(moment(this.maxDate))
         )
