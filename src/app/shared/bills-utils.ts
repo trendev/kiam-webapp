@@ -31,6 +31,9 @@ export class BillsUtils {
             }
         }
     }
+    static isPaid(b: Bill) {
+        return !!b.paymentDate && !BillsUtils.isCancelled(b);
+    }
 
     static isCancelled(b: Bill) {
         return b.cancelled && !!b.cancellationDate;
