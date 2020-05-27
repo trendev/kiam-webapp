@@ -5,7 +5,7 @@
     <mat-icon matListIcon>home</mat-icon>Accueil
   </a>
   <a mat-list-item routerLink="profile" routerLinkActive="active" (click)="sidenav.close()">
-    <mat-icon matListIcon>account_circle</mat-icon>{{email}}
+    <mat-icon matListIcon>account_circle</mat-icon>Profil
   </a>
   <div *ngFor="let l of links">
     <a mat-list-item routerLink="{{l.url}}" routerLinkActive="active" (click)="sidenav.close()">
