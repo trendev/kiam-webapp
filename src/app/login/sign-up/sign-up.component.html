@@ -48,11 +48,12 @@
     <ng-template #ok>
       <mat-card-title>🥳 Félicitations 🎉</mat-card-title>
       <mat-card-subtitle>
-        <p><b>Vous avez reçu un email avec votre mot de passe 👌</b></p>
+        <p><b>Vous vous êtes inscrit avec l'adresse {{getInputEmail()}} et vous venez certainement de recevoir un email avec votre mot de passe 👌</b></p>
       </mat-card-subtitle>
       <mat-card-content>
         <div *ngIf="success">
-          <p><i>Il est important que vous utilisiez <b>les identifiants fournis dans cet email</b> pour pouvoir activer votre compte et bénéficier d'un mois d'essai gratuit...</i></p>
+          <p><i>Il est important que vous utilisiez <b>les identifiants fournis dans cet email</b> pour pouvoir activer votre compte ✅</i></p>
+          <p><i>Consulter rapidement votre boîte de réception, vos spams/indésirables, etc.</i></p>
         </div>
       </mat-card-content>
       <!-- <mat-card-actions>
