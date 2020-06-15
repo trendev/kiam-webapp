@@ -3,7 +3,7 @@
     <form [formGroup]="form" novalidate>
       <mat-card-title>Profil</mat-card-title>
       <mat-card-subtitle>Email : {{pro.email}}</mat-card-subtitle>
-      <!-- <app-subscription-state *ngIf="!hasActiveSubscription" [pro]="pro"></app-subscription-state> -->
+      <app-subscription-state *ngIf="!hasActiveSubscription" [pro]="pro"></app-subscription-state>
       <div class="top-button-container">
         <a href="https://firebasestorage.googleapis.com/v0/b/comptandye-4c50d.appspot.com/o/cgvu%2Fcgvu.pdf?alt=media&token=38dd0f4c-0045-4ad6-9b9a-41dd11842b06"
           target="_blank" mat-raised-button color="primary">CGV / CGU</a>
@@ -15,10 +15,10 @@
           routerLink="./subscription-details" routerLinkActive="active">
           Gestion de la souscription
         </button>
-        <!-- <button *ngIf="newSubscriptionAllowed" type="button" mat-raised-button color="accent" routerLink="./subscribe"
+        <button *ngIf="newSubscriptionAllowed" type="button" mat-raised-button color="accent" routerLink="./subscribe"
           routerLinkActive="active">
           Nouvelle souscription
-        </button> -->
+        </button>
       </div>
 
       <mat-card-content>
