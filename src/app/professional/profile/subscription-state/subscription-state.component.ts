@@ -32,4 +32,8 @@ export class SubscriptionStateComponent implements OnInit {
     return moment.duration(delta, 'day').humanize(false);
   }
 
+  profileIsCompleted() {
+    return !!this.pro.companyID;
+  }
+
 }

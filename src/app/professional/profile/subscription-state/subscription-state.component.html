@@ -8,3 +8,7 @@
         <p>Votre période d'essai expire dans {{remains()}}...</p>
     </mat-card-subtitle>
 </ng-template>
+<div class="container" *ngIf="!profileIsCompleted()">
+    <p><i>Vous ne pouvez pas souscrire à un abonnement tant que votre profil n'est pas complet...</i></p>
+</div>
+    
