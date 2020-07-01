@@ -1,11 +1,11 @@
 <div *ngIf="isOverdue;else ontime" class="overdue">
     <mat-icon>error</mat-icon>
-    <p>Votre période d'essai a expirée depuis {{remains()}}...</p>
+    <p>Votre période d'essai a expirée depuis {remains, plural, =0 {aujourd'hui} =1 {hier} other {{{remains}} jours}}... </p>
 </div>
 <ng-template #ontime>
     <mat-card-subtitle class="ontime">
         <mat-icon>error_outline</mat-icon>
-        <p>Votre période d'essai expire dans {{remains()}}...</p>
+        <p>Votre période d'essai expire {remains, plural, =0 {aujourd'hui} =1 {demain} other {dans {{remains}} jours}}...</p>
     </mat-card-subtitle>
 </ng-template>
 <div class="container" *ngIf="!companyIdIsDefined()">

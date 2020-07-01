@@ -23,13 +23,13 @@ export class SubscriptionStateComponent implements OnInit {
 
   get isOverdue(): boolean {
     const diff = moment().diff(moment(this.pro.registrationDate), 'days');
-    return diff >= 30;
+    return diff > 30;
   }
 
-  remains(): string {
+  get remains(): number {
     moment.locale('fr');
     const delta = Math.abs(30 - moment().diff(moment(this.pro.registrationDate), 'days'));
-    return moment.duration(delta, 'day').humanize(false);
+    return moment.duration(delta, 'days').asDays();
   }
 
   companyIdIsDefined() {
