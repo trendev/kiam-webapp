@@ -31,7 +31,6 @@ export class RevenuesSumupComponent implements OnChanges {
 
   initRevenues() {
     this._bills = this.bills.filter(b => BillsUtils.isPaid(b));
-    console.log(this.currentMonthBills);
     this.currentMonthRevenue = this.currentMonthBills.map(b => BillsUtils.getRevenue(b)).reduce((a, b) => a + b, 0);
     this.previousMonthRevenue = this.previousMonthBills.map(b => BillsUtils.getRevenue(b)).reduce((a, b) => a + b, 0);
 
