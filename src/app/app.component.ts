@@ -24,6 +24,8 @@ export class AppComponent {
           });
       }
     });
+
+    console.log(`Stripe Key = ${environment.stripe_pk}`);
   }
 }
 
