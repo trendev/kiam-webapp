@@ -27,5 +27,5 @@ export class AppComponent {
   }
 }
 
-export const stripe: any = Stripe('pk_test_zw5JuBUOmXxIsi55rTtDDQG9');
+export const stripe = Stripe(environment.stripe_pk);
 export const elements: any = stripe.elements({ locale: 'fr' });
