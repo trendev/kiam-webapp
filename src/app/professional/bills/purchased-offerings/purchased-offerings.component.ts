@@ -2,7 +2,7 @@
 import { takeUntil } from 'rxjs/operators';
 import { Component, OnInit, Input, ViewChild, OnDestroy, EventEmitter, Output, ViewContainerRef } from '@angular/core';
 import { ControlContainer, FormGroupDirective, FormGroup, AbstractControl } from '@angular/forms';
-import { Offering, PurchasedOffering, VatRates } from '@app/entities';
+import { Offering, PurchasedOffering, VatRates, Pack } from '@app/entities';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -83,6 +83,13 @@ export class PurchasedOfferingsComponent implements OnInit, OnDestroy {
 
   initOfferingsModel() {
     this.offeringsModel = this.offerings
+      .filter(o => {
+        if (o instanceof Pack) {
+          return o.offerings && o.offerings.length > 0;
+        } else {
+          return true;
+        }
+      })
       .map(
         o => {
           return {
