@@ -28,7 +28,7 @@
     "@angular/service-worker": "^10.1.0",
     "moment": "^2.26.0",
     "pdfmake": "^0.1.65",
-    "rxjs": "^6.5.5",
+    "rxjs": "^6.6.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
