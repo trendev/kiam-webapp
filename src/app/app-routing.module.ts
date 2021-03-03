@@ -40,7 +40,7 @@ export const routes: Routes = [
             {
     // enableTracing: true, // <-- debugging purposes only
     preloadingStrategy: PreloadAllModules,
-    relativeLinkResolution: 'legacy'
+    relativeLinkResolution: 'corrected'
 }
         )],
     exports: [RouterModule]
