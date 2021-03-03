@@ -38,10 +38,10 @@ export const routes: Routes = [
         RouterModule.forRoot(
             routes,
             {
-                // enableTracing: true, // <-- debugging purposes only
-                preloadingStrategy: PreloadAllModules,
-                // useHash: true
-            }
+    // enableTracing: true, // <-- debugging purposes only
+    preloadingStrategy: PreloadAllModules,
+    relativeLinkResolution: 'legacy'
+}
         )],
     exports: [RouterModule]
 })
