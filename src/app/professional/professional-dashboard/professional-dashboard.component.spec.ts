@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ProfessionalDashboardComponent } from './professional-dashboard.component';
 import { SharedModule } from '@app/shared';
@@ -12,7 +12,7 @@ describe('ProfessionalDashboardComponent', () => {
   let component: ProfessionalDashboardComponent;
   let fixture: ComponentFixture<ProfessionalDashboardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, CoreModule, ProfessionalModule, AppRoutingModule, AppModule],
       providers: [

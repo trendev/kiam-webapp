@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { UnsupportedUserTypeComponent } from './unsupported-user-type.component';
 import { SharedModule } from '@app/shared';
@@ -10,7 +10,7 @@ describe('UnsupportedUserTypeComponent', () => {
   let component: UnsupportedUserTypeComponent;
   let fixture: ComponentFixture<UnsupportedUserTypeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, CoreModule, AppRoutingModule],
       providers: [

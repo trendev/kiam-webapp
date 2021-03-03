@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ProfessionalToolbarComponent } from './professional-toolbar.component';
 import { SharedModule } from '@app/shared';
@@ -10,7 +10,7 @@ describe('ProfessionalToolbarComponent', () => {
   let component: ProfessionalToolbarComponent;
   let fixture: ComponentFixture<ProfessionalToolbarComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, CoreModule, AppRoutingModule],
       providers: [
