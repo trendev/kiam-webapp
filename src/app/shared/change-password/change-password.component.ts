@@ -1,9 +1,9 @@
 
-import {finalize} from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { AuthenticationService } from './../../core/authentication.service';
 import { CustomValidators } from './../custom-validators';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { LoadingOverlayService } from '@app/loading-overlay.service';
 
 import { ErrorHandlerService } from '@app/error-handler.service';
@@ -47,7 +47,7 @@ export class ChangePasswordComponent implements OnInit {
       confirmation: new FormControl('', this.validators)
     },
       {
-        validator: passwordMatchValidator()
+        validators: passwordMatchValidator
       });
   }
 
@@ -88,17 +88,16 @@ export class ChangePasswordComponent implements OnInit {
 
 }
 
-export function passwordMatchValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } => {
-    if (control.get('password').value !== control.get('confirmation').value) {
-      return {
-        passwordMatchValidator: {
-          password: control.get('password').value,
-          confirmation: control.get('confirmation').value
-        }
-      };
-    } else {
-      return null;
-    }
-  };
-}
+export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  if (control.get('password').value !== control.get('confirmation').value) {
+    return {
+      passwordMatchValidator: {
+        password: control.get('password').value,
+        confirmation: control.get('confirmation').value
+      }
+    };
+  } else {
+    return null;
+  }
+};
+
